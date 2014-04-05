@@ -1,0 +1,87 @@
+##Title:30##
+Quick Dice Roller
+
+##Description:4000##
+Quick Dice Roller is an app made for the tabletop RPG Geek. It make possible to emulate almost all the complex dice rolls required by those games.
+
+The dice can be added at will, using common expressions as "2d6+5" as well as special functions like "rak(1d6,4,3)" that emulates the most complex game systems. An handy expression builder simplifies the process, and allow to access to an online help.
+
+Quick Dice Roller allow to create different dice bags (to organize dice by game system, by character or however you like) and it is possible to quickly switch from a bag to another.
+
+Rolling dice with Quick Dice Roller is... well... quick. Rather than choosing a die type with a tap and rolling it with another tap, Quick Dice Roller allow to roll a die simply tapping on the corresponding icon. A saving of 50%!
+
+The app can be configured to link different rolls, so two rolls made in rapid succession are linked together. Or, if such concatenation has to be made more than once, it is always possible to create a new die which sum the outcome of the two single rolls (i.e. "1d6+1d8").
+
+Like to play by chat or by e-mail? Quick Dice Roller allow to automatically copy last roll outcome to the clipboard, so sharing can be made with a simple "paste" command.
+
+Quick Dice Roller is one of the few apps of it's category (maybe the only?) that allows to apply modifiers after a roll is made, as usual with a simple touch. The warrior was blinded? No problem: tap to roll for the attack and tap to apply a -4 modifier.
+
+Some of the main features of Quick Dice:
+
+- Rolls dice with a single touch
+- Applies modifiers on the fly
+- Add, remove and edit dice at will
+- Organize dice in dice bags
+- Use same expression you're familiar to (i.e. "xdy+z")
+- Many functions to emulate main systems
+- Simple and intuitive Expression Builder
+- Online help
+- Large selection of icons for dice and dice bags
+- Manual or automatic aggregation of results
+- Measure the outcome of the results at a glance
+- Last roll overlay notification
+- Sound notifications (optional)
+- Persistence of data among various installations*
+- Import and export dice and dice bags definitions**
+
+Some of currently supported systems:
+
+- Arcan Myth
+- BASH!
+- Burning Wheel
+- Call of Cthulhu
+- Deadlands
+- Dungeon World
+- Dungeons & Dragons (all editions)
+- Dungeonslayers
+- Dystopian Wars
+- Exalted
+- Feng Shui
+- GURPS
+- HERO System
+- Legend of the five rings
+- Lords of Knowledge
+- MERP
+- Pathfinder
+- Savage Worlds
+- Star Wars
+- Storyteller System (World of Darkness)
+- Storytelling System (New World of Darkness)
+- Traveller
+
+...and many more!
+
+
+*The availability of data and preferences backup depends on the device's manufacturer, and is only supported on Android 2.2 or later.
+
+**This feature requires reading and writing to external storage.
+
+Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, Open, OSR, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, WhiteWholf
+
+##Recent Changes:500##
+- Move dice through dice bags
+- Clone dice and dice bags
+- Swipe to delete a result
+- Restore deleted results
+- Link roll results on demand
+- Function "abs"
+- Fixed "rup" and "rdn" functions
+- Minor fix and improvements
+
+##Promo Text:80##
+The flexible, complete and handy dice roller.
+
+## APPIA ##
+
+## Keywords:10 ##
+Dice, Dice Roller, Rpg, Free, WhiteWholf, Vampire, Exalted, D20, D&D

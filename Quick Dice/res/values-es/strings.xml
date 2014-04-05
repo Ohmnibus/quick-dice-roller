@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LanzaDados Rápidos</string>
+    <string name="app_author">Ohmnibus</string>
+    
+    <string name="lblName">Nombre</string>
+    <string name="hintName">Escriba el nombre del dado</string>
+    <string name="lblDesc">Descripción</string>
+    <string name="hintDesc">Una breve descripción del dado</string>
+	<string name="lblIcon">Icono</string>
+    <string name="lblExp">Fórmula</string>
+    <string name="hintExp">Escriba la fórmula del dado</string>
+    <string name="lblRangeValue">Valores</string>
+	<string name="lblCannotEvaluate">Imposible evaluar</string>
+	<string name="lblResultText">Resultado extendido</string>
+	<string name="lblResultValue">Resultado numérico</string>
+	<string name="lblDiceBuilder">Creación del dado</string>
+	<string name="lblDiceBuilderMsg">Marque el lanzamiento de un solo tipo de dados para añadir a la fórmula.</string>
+	<string name="lblCheckExpression">Controla la fórmula</string>
+	<string name="lblCheckPassed">La fórmula del dado es CORRECTA.</string>
+	<string name="lblIconPicker">Elige Icono</string>
+	<string name="lblDiceIconPicker">Icono del dado</string>
+	<string name="lblBagIconPicker">Icono de la colección</string>
+	<string name="lblModifierBuilder">Creación del modificador</string>
+	<string name="lblModifierBuilderMessage">Marque un modificador.</string>
+	<string name="lblNeutralModifier">¿Tiene sentido crear un modificador neutro? No Creo.</string>
+	<string name="lblDuplicateModifier">Este modificador ya existe.</string>
+    <string name="lblNameBag">Nombre</string>
+    <string name="hintNameBag">Escriba el nombre de la colección</string>
+    <string name="lblDescBag">Descripción</string>
+    <string name="hintDescBag">Una breve descripción de la colección</string>
+	<string name="lblIconBag">Icono</string>
+	<string name="lblMailSubject">[QDR] Sugerencias</string>
+	<string name="lblSendMail">Enviar sugerencia</string>
+	
+	<string name="lblConfirm">Acepta</string>
+	<string name="lblCancel">Cancelar</string>
+	<string name="lblYes">Si</string>
+	<string name="lblNo">No</string>
+	<string name="lblOk">Ok</string>
+
+	<string name="msgRemoveDiceTitle">Eliminar dado</string>
+	<string name="msgRemoveDice">¿Estás seguro que desea eliminar el dado \"%1$s\"?</string>
+	<string name="msgClearResultsTitle">Elimina los resultados</string>
+	<string name="msgClearResults">¿Estás seguro que desea eliminar todos los resultados?</string>
+	<string name="msgLostChange">Saliendo ahora se perderán todos los cambios no guardados. ¿Continuar?</string>
+
+	<string name="msgRemoveDiceBagTitle">Eliminar colección</string>
+	<string name="msgRemoveDiceBag">¿Estás seguro que desea eliminar la colección \"%1$s\"? Contiene \"%2$d\" dados y \"%3$d\" modificadores. Y todo esto se perderán en el tiempo como lágrimas en la lluvia.</string>
+
+	<string name="msgWhatsNewTitle">Novedades de la versión %2$s</string>
+	<!-- string name="msgWhatsNewBody"><![CDATA[
+	]]></string -->
+	<string name="msgAboutTitle">A proposito de %1$s</string>
+	<string name="msgAboutBody"><![CDATA[%1$s versión %2$s<br />
+Copyright (c) 2012-2014 by %3$s<br />
+<br />
+Traducciones: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<br />
+Señalar eventuales errores al siguente email <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
+<br />
+Esta es una app gratuita, si te gusta ¿porqué no 
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">me ofreces una cerveza</a>?
+Gracias!<br />
+<br />
+<a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> Es 
+publicado por Yuri Kanivets en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+<a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss</a> Es 
+publicado por Roman Nurik en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+<a href="http://nineoldandroids.com/">Nine Old Androids</a> Es 
+publicado por Jake Wharton en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+<a href="https://code.google.com/p/google-gson/">Google Gson</a> Es 
+publicado por Google en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />]]></string>
+	
+	<string name="msgRemoveModTitle">Elimina modificador</string>
+	<string name="msgRemoveMod">¿Estás seguro que desea eliminar definitivamente el modificador \"%1$s\"?</string>
+	<string name="msgBonusTitle">Bonus %1$+d</string>
+	<string name="msgBonusMessage">Modificador positivo de %1$+d</string>
+	<string name="msgMalusTitle">Malus %1$+d</string>
+	<string name="msgMalusMessage">Modificador negativo de %1$+d</string>
+	<string name="msgMaxBagsReach">No es más posible agregar colecciones de dados.</string>
+	<string name="msgMaxDiceReach">No es más posible agregar dados.</string>
+	<string name="msgMaxModifiersReach">Non es más posible agregar modificadores.</string>
+	<string name="msgOnlineHelpTitle">Referencia rápida</string>
+	<string name="msgOnlineHelp">Consulte la ayuda en línea</string>
+	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02</string>
+
+	<string name="mnuAddDice">Agregar dado</string>
+	<string name="mnuAddDiceHere">Agrega el dado aquì</string>
+	<string name="mnuClearAllResults">Cancelar todos los resultados</string>
+	<string name="mnuSettings">Configuración</string>
+	<string name="mnuAbout">Información</string>
+	<string name="mnuSuggest">Enviar sugerencia</string>
+	<string name="mnuRemove">Cancela el dado</string>
+	<string name="mnuEdit">Modifica el dado</string>
+	<string name="mnuRoll">Lanza el dado</string>
+	<string name="mnuSwitchPrev">Cambia con el anterior</string>
+	<string name="mnuSwitchNext">Cambia con el siguiente</string>
+	<string name="mnuDetails">Detalles</string>
+	<string name="mnuClearResult">Cancela el resultado</string>
+	<string name="mnuSplit">Divide los resultados</string>
+	<string name="mnuMerge">Une con el siguiente</string>
+	<string name="mnuAddMod">Agrega modificador</string>
+	<string name="mnuRemoveMod">Elimina el modificador</string>
+	<string name="mnuApplyMod">Aplicar el modificador</string>
+	<string name="mnuAddModHere">Añadir el modificador aquì</string>
+	<string name="mnuExit">Salir</string>
+	<string name="mnuAddDiceBag">Agrega colección</string>
+	<string name="mnuSelectDiceBag">Seleccionar la colección</string>
+	<string name="mnuEditDiceBag">Modifica la colección</string>
+	<string name="mnuAddDiceBagHere">Agrega la colección aquì</string>
+	<string name="mnuRemoveDiceBag">Cancela la colección</string>
+
+	<!-- Functions -->
+	<string name="fncExalName">Exaltado</string> 
+	<string name="fncExalDesc">Ejecuta una revisión utilizando el sistema Exaltado.</string>
+	<string name="fncExalURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exal</string>
+	<string-array name="fncExalParamNames">
+	    <item>Número de Dados</item>
+	    <item>Dificultad</item>
+	</string-array>
+	<string-array name="fncExalParamHints">
+	    <item>Número de d10 que lanzarà</item>
+	    <item>Valor mínimo para obtener</item>
+	</string-array>
+				
+	<string name="fncExpName">Abierto (semplice)</string>
+	<string name="fncExpDesc">Ejecuta un tiro abierto. Si se lanza de nuevo se obtiene el máximo o el mínimo.</string>
+	<string name="fncExpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<string-array name="fncExpParamNames">
+	    <item>Dado</item>
+	</string-array>
+	<string-array name="fncExpParamHints">
+	    <item>Dado a lanzar</item>
+	</string-array>
+
+	<string name="fncExpUpName">Abierto Su (semplice)</string>
+	<string name="fncExpUpDesc">Ejecuta un tiro abierto. Si se lanza de nuevo solo se obtiene el máximo.</string>
+	<string name="fncExpUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<string-array name="fncExpUpParamNames">
+	    <item>Dado</item>
+	</string-array>
+	<string-array name="fncExpUpParamHints">
+	    <item>Dado da lanzar</item>
+	</string-array>
+
+	<string name="fncExplodeName">Abierto</string>
+	<string name="fncExplodeDesc">Ejecuta un tiro abierto considerando una tolerancia. Si se lanza de nuevo se obtienen valores altos o bajos.</string>
+	<string name="fncExplodeURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explode</string>
+	<string-array name="fncExplodeParamNames">
+	    <item>Dado</item>
+	    <item>Tolerancia</item>
+	</string-array>
+	<string-array name="fncExplodeParamHints">
+	    <item>Dado a lanzar</item>
+	    <item>Probabilidad de lanzar de nuevo</item>
+	</string-array>
+
+	<string name="fncExplodeUpName">Abierto Su</string>
+	<string name="fncExplodeUpDesc">Ejecuta un tiro abierto considerando una tolerancia. Si lanza de nuevo solo se si obtienen valores altos.</string>
+	<string name="fncExplodeUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
+	<string-array name="fncExplodeUpParamNames">
+	    <item>Dado</item>
+	    <item>Tolerancia</item>
+	</string-array>
+	<string-array name="fncExplodeUpParamHints">
+	    <item>Dado a lanzar</item>
+	    <item>Probabilidad de lanzar de nuevo</item>
+	</string-array>
+
+	<string name="fncMaxName">Máximo</string>
+	<string name="fncMaxDesc">Devuelve el más alto de dos valores.</string>
+	<string name="fncMaxURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#max</string>
+	<string-array name="fncMaxParamNames">
+	    <item>Primer valor</item>
+	    <item>Segundo valor</item>
+	</string-array>
+	<string-array name="fncMaxParamHints">
+	    <item>Primera expresión</item>
+	    <item>Segudnda expresión</item>
+	</string-array>
+
+	<string name="fncNwodName">Nuevo MdT</string>
+	<string name="fncNwodDesc">Ejecuta una prueba según las reglas del Nuevo Mundo de Tinieblas.</string>
+	<string name="fncNwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
+	<string-array name="fncNwodParamNames">
+	    <item>Número de Dados</item>
+	    <item>Dificultad</item>
+	</string-array>
+	<string-array name="fncNwodParamHints">
+	    <item>Número de d10 a lanzar</item>
+	    <item>Valor mínimo para obtener</item>
+	</string-array>
+
+	<string name="fncOwodName">Antiguo MdT</string>
+	<string name="fncOwodDesc">Ejecuta una prueba según las reglas del Antiguo Mundo de Tinieblas.</string>
+	<string name="fncOwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#owod</string>
+	<string-array name="fncOwodParamNames">
+	    <item>Número di Dados</item>
+	    <item>Dificultad</item>
+	</string-array>
+	<string-array name="fncOwodParamHints">
+	    <item>Número de d10 a lanzar</item>
+	    <item>Valor mínimo para obtener</item>
+	</string-array>
+
+	<string name="fncPoolName">Reserva de Dados</string>
+	<string name="fncPoolDesc">Devuelve el númer de veces del cual la tirada es mayor o igual a la dificultad.</string>
+	<string name="fncPoolURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#pool</string>
+	<string-array name="fncPoolParamNames">
+	    <item>Dado</item>
+	    <item>Número di lanzamientos</item>
+	    <item>Dificultad</item>
+	</string-array>
+	<string-array name="fncPoolParamHints">
+	    <item>Dado a lanzar</item>
+	    <item>Número de lanzamientos que hacer</item>
+	    <item>Valor mínimo por obtener</item>
+	</string-array>
+
+	<string name="fncRakName">Lanza y Tieni</string>
+	<string name="fncRakDesc">Lanza un montón de dados y mantén solo un subconjunto.</string>
+	<string name="fncRakURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rak</string>
+	<string-array name="fncRakParamNames">
+	    <item>Dado</item>
+	    <item>Número de lanzamientos</item>
+	    <item>Resultados para mantener</item>
+	</string-array>
+	<string-array name="fncRakParamHints">
+	    <item>Dado a lanzar</item>
+	    <item>Número di lanzamientos para hacer</item>
+	    <item>Número di lanzamientos para mantener</item>
+	</string-array>
+
+	<string name="fncRdnName">Redondea hacia abajo</string>
+	<string name="fncRdnDesc">Redondea el valor hacia abajo.</string>
+	<string name="fncRdnURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
+	<string-array name="fncRdnParamNames">
+	    <item>Valor</item>
+	</string-array>
+	<string-array name="fncRdnParamHints">
+	    <item>Valor para redondear</item>
+	</string-array>
+
+	<string name="fncRupName">Redondea hacia arriba</string>
+	<string name="fncRupDesc">Redondea el valor hacia arriba.</string>
+	<string name="fncRupURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rup</string>
+	<string-array name="fncRupParamNames">
+	    <item>Valor</item>
+	</string-array>
+	<string-array name="fncRupParamHints">
+	    <item>Valor para redondear</item>
+	</string-array>
+
+	<!-- Errors -->
+	<string name="err_cannot_update">Imposible actualizar las definiciones de los dados.</string>
+	<string name="err_cannot_read">Imposible leer las definiciones de los dados. Serán utilizarán los predeterminados.</string>
+	<string name="err_name_required">El nombre del dado es obligatorio.</string>
+	<string name="err_cannot_update_mod">Imposible actualizar las definiciones de los modificadores.</string>
+	<string name="err_cannot_read_mod">Imposible leer las definiciones de los modificadores. Serán utilizados los predeterminados.</string>
+	<string name="err_bag_name_required">El nombre de la colección es obligatorio.</string>
+	<string name="err_no_email_client">No hay ningún cliente de correo electrónico instalado.</string>
+
+	<!-- Exceptions -->
+	<string name="exc_generic">La expresión no puede ser evaluada.</string>
+	<string name="exc_generic_parsed">La expresión no puede ser analizada.</string>
+	<string name="exc_division_by_zero">El resultado del dado ha generado una división por cero (solo Chuck Norris puede resolverla).</string>
+	<string name="exc_loop_detected">El resultado del dado ha generado un bucle infinito en la función \"%1$s\". Se toman demasiado tiempo para calcular.</string>
+	<string name="exc_expected_eos">Espera final de la expresión a la posición %1$d.</string>
+	<string name="exc_expected_parameter">Espera del parametro a la posición %1$d.</string>
+	<string name="exc_invalid_character">Carácter no válido en la posición %1$d.</string>
+	<string name="exc_missing_operand">Operador ausente  en la posición %1$d.</string>
+	<string name="exc_nothing_to_evaluate">La expresión está vacía.</string>
+	<string name="exc_unbalanced_bracket">Parentesis no balanceadas en el carácter %1$d.</string>
+	<string name="exc_unexpected_error">Error inesperado.</string>
+	<string name="exc_unexpected_parameter">Parámetro inesperado en la posición %1$d.</string>
+	<string name="exc_unknown_function">Función \"%1$s\" desconocida en la posición %2$d.</string>
+	<string name="exc_unknown_variable">Variable \"%1$s\" desconocida en la  posición %2$d.</string>
+	    		
+	<!-- Default dice bag description -->
+	<string name="def_bag_name">Predeterminada</string>
+	<string name="def_bag_description">Colección predeterminada</string>
+
+	<!-- Default dice set description -->
+	<string name="def_die_name">Dado</string>
+	<string name="def_die_desc">Lanza un dado</string>
+	<string-array name="default_dice_name">
+	    <item>d4</item>
+	    <item>d6</item>
+	    <item>d8</item>
+	    <item>d10</item>
+	    <item>d12</item>
+	    <item>d20</item>
+	    <item>d%</item>
+	</string-array>
+	<string-array name="default_dice_desc">
+	    <item>Lanza un dado con cuatro caras</item>
+	    <item>Lanza un dado con seis caras</item>
+	    <item>Lanza un dado con ocho caras</item>
+	    <item>Lanza un dado con diez caras</item>
+	    <item>Lanza un dado con doce caras</item>
+	    <item>Lanza un dado con veinte caras</item>
+	    <item>Lanza un dado porcentaje</item>
+	</string-array>
+
+	<!-- Preferences -->
+	<string name="pref_clipboard">Notas</string>
+	<string name="pref_clipboard_title">Uso de las notas</string>
+	<string name="pref_clipboard_desc">Indica si y cómo almacenar los resultados de los lanzamientos en las notas.</string>
+	<string name="pref_clipboard_dlg_title">¿Cómo utilizar las notas?</string>
+	<string-array name="entries_clipboard">
+		<item>No usar las notas</item>
+		<item>Memorizar el valor numérico</item>
+		<item>Memoriza el resultado extendido</item>
+	</string-array>
+	<string name="pref_link">Lanzamientos conectados</string>
+	<string name="pref_link_title">Une los lanzamientos</string>
+	<string name="pref_link_desc">Une los resultados de dos lanzamientos si son ejecutados en una suceción veloz.</string>
+	<string name="pref_link_auto_desc">Une los resultados de dos lanzamientos si son ejecutados en una suceción veloz.</string>
+	<string name="pref_link_sens_title">Sensibilidad</string>
+	<string name="pref_link_sens_desc">Intervalo de tiempo en el cual los lanzamientos vienen conectados.</string>
+	<string name="pref_link_sens_dlg_title">Escoje la sensibilidad</string>
+	<string-array name="entries_sensitivity">
+		<item>0,5 segundos</item>
+		<item>1 segundo</item>
+		<item>1,5 segundos</item>
+		<item>2 segundos</item>
+		<item>2,5 segundos</item>
+		<item>3 segundos</item>
+		<item>3,5 segundos</item>
+		<item>4 segundos</item>
+		<item>4,5 segundos</item>
+		<item>5 segundos</item>
+	</string-array>
+	<string name="pref_aspect">Apariencia</string>
+	<string name="pref_aspect_col_title">Columna de resultados</string>
+	<string name="pref_aspect_col_desc">Número de columnas para organizar los resultados.</string>
+	<string name="pref_aspect_col_dlg_title">¿Número de columnas?</string>
+	<string-array name="entries_columns">
+		<item>Una</item>
+		<item>Dos</item>
+		<item>Tres</item>
+	</string-array>
+	<string name="pref_aspect_mod_title">Muestra la barra de los modificadores</string>
+	<string name="pref_aspect_mod_desc">Muestra la barra para aplicar rapidamnete modificas a los lanzamientos.</string>
+	<string name="pref_aspect_popup_title">Superposición</string>
+	<string name="pref_aspect_popup_desc">Muestra el resultado del lanzamiento en superposición.</string>
+	<string name="pref_aspect_plain_bg_title">Desactivar el fondo</string>
+	<string name="pref_aspect_plain_bg_desc">Requiere reinicio. Desactivar la imagen de fondo para mejorar el rendimiento.</string>
+	<string name="pref_aspect_anim_title">Animación del dado</string>
+	<string name="pref_aspect_anim_desc">Muestra una animación en la superposición.</string>
+	<string name="pref_aspect_sound_title">Abilita el sonido</string>
+	<string name="pref_aspect_sound_desc">Abilita el sonido del lanzamiento del dado.</string>
+	<string name="pref_aspect_ext_sound_title">Sonidos extra</string>
+	<string name="pref_aspect_ext_sound_desc">Utiliza sonidos distintos para evidenciar suceso criticos y fallimenti catastrofici.</string>
+	<string name="pref_aspect_swapdesc_title">Cambia el nombre y el resultado</string>
+	<string name="pref_aspect_swapdesc_desc">Cambie el nombre dado y el resultado ampliado.</string>
+</resources>

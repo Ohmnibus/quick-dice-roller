@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Quick Dice Roller</string>
+    <string name="app_author">Ohmnibus</string>
+    
+    <string name="lblName">Name</string><!--4-->
+    <string name="hintName">Wie soll der Wurf heißen?</string><!--18 +7-->
+    <string name="lblDesc">Beschreibung</string><!--11 +1-->
+    <string name="hintDesc">Kurze Beschreibung des Wurfes</string><!--25 +4-->
+	<string name="lblIcon">Icon</string><!--4-->
+    <string name="lblExp">Formel</string><!--6 -1-->
+    <string name="hintExp">Die Formel für den Wurf</string><!--22 +1-->
+    <string name="lblRangeValue">Werte</string><!--6 -1-->
+	<string name="lblCannotEvaluate">Nicht auszuwerten</string><!--15 +2-->
+	<string name="lblResultText">Ergebnis erweitern</string><!--15 +3-->
+	<string name="lblResultValue">Numerisches Ergebnis</string><!--14 +6-->
+	<string name="lblDiceBuilder">Assistent</string><!--12 -3-->
+	<string name="lblDiceBuilderMsg">Erstelle einen einfachen Wurf und hänge ihn an die Formel an.</string><!--61 +2-->
+	<string name="lblCheckExpression">Formel überprüfen.</string><!--18-->
+	<string name="lblCheckPassed">Die Formel ist korrekt.</string><!--22-->
+	<string name="lblIconPicker">Icon-Wähler</string><!--10-->
+	<string name="lblDiceIconPicker">Würfelicon-Wähler</string><!--15 +1-->
+	<string name="lblBagIconPicker">Sammlungsicon-Wähler</string><!--15 +5-->
+	<string name="lblModifierBuilder">Mod-Assistent</string><!--11 +2-->
+	<string name="lblModifierBuilderMessage">Baue einen Modifikator.</string><!--19 +4-->
+	<string name="lblNeutralModifier">Macht es Sinn, einen neutralen Modifikator zu bauen? Ich glaube nicht.</string><!--68 +2-->
+	<string name="lblDuplicateModifier">Den Modifikator gibt es schon.</string><!--29 +1-->
+    <string name="lblNameBag">Name</string><!--4-->
+    <string name="hintNameBag">Wie soll die Sammlung heißen</string><!--19 +9-->
+    <string name="lblDescBag">Beschreibung</string><!--11 +1-->
+    <string name="hintDescBag">Kurze Beschreibung der Sammlung</string><!--26 +5-->
+	<string name="lblIconBag">Icon</string><!--4-->
+	<string name="lblMailSubject">[QDR] Suggestion</string><!--16-->
+	<string name="lblSendMail">Vorschlag abschicken.</string><!--17 +4-->
+	<string name="lblCurrentFolder">Aktueller Ordner: %1$s</string>
+	<string name="lblItemHiddenFolder">Versteckte Ordner</string>
+	<string name="lblItemFolder">Ordner</string>
+	<string name="lblItemFile">%1$s - %2$s %3$s</string>
+	<string name="lblParentFolder">Übergeordneten Ordner</string>
+	<string name="lblSelectFile">Datei auswählen</string>
+	<string name="lblSelectFolder">Ordner auswählen</string>
+	<string name="lblNewFile">Neue Datei</string>
+	<string name="lblImportFromRecent">Import aus den letzten Datei</string>
+	<string name="lblImportFrom">Importieren aus&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblExportTo">Exportieren, um&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblItemMRU">%2$d Würfel in %1$s Sammlungen - %4$s %5$s</string>
+	<string name="lblD">w</string><!-- The carachter used in expressions as in "3d6" -->
+	
+	<string name="lblGb">GB</string><!-- Short for Gigabyte -->
+	<string name="lblMb">MB</string><!-- Short for Megabyte -->
+	<string name="lblKb">kB</string><!-- Short for Kilobyte -->
+	<string name="lblB">B</string><!-- Short for byte -->
+
+	<string name="lblConfirm">Sichern</string><!--7-->
+	<string name="lblCancel">Abbruch</string><!--6 +1-->
+	<string name="lblYes">Ja</string><!--3 -1-->
+	<string name="lblNo">Nein</string><!--2 +2-->
+	<string name="lblOk">OK</string><!--2-->
+
+	<string name="msgRemoveDiceTitle">Wurf löschen</string><!--10 +2-->
+	<string name="msgRemoveDice">Bist Du sicher, daß Du den Wurf \"%1$s\" löschen möchtest?</string><!--55 +5-->
+	<string name="msgClearResultsTitle">Ergebnisse löschen</string><!--13 +5-->
+	<string name="msgClearResults">Möchtest Du wirklich alle Ergebnisse löschen?</string><!--43 +2-->
+	<string name="msgLostChange">Beim Verlassen werden alle Änderungen verworfen. Verlassen?</string><!--52 +7-->
+
+	<string name="msgRemoveDiceBagTitle">Sammlung löschen</string><!--15 +1-->
+	<string name="msgRemoveDiceBag">Bist Du wirklich sicher, daß Du die Sammlung \"%1$s\"? löschen möchtest? Sie enthält \"%2$d\" Würfe und \"%3$d\" Modifikator. Dies alles wird vergehen wie Staub im Wind.</string><!--166 +3-->
+	
+	<string name="msgWhatsNewTitle">Das ist neu in Version %2$s</string><!--26-->
+	<string name="msgWhatsNewBody"><![CDATA[
+	]]></string>
+	<string name="msgAboutTitle">Über %1$s</string><!--10 -1-->
+	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
+Copyright (c) 2012-2014 by %3$s<br />
+<br />
+Übersetzungen: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<br />
+Bitte melde Fehler an <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
+<br />
+Diese app ist kostenlos. Allerdings freue ich mich über
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">Spenden</a>.<br />
+Vielen Dank!<br />
+<br />
+<a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> wird 
+vertrieben von Yuri Kanivets unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+<a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss</a> wird 
+vertrieben von Roman Nurik unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+<a href="http://nineoldandroids.com/">Nine Old Androids</a> wird 
+vertrieben von Jake Wharton unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+<a href="https://code.google.com/p/google-gson/">Google Gson</a> wird 
+vertrieben von Google unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />]]></string>
+
+	<string name="msgRemoveModTitle">Modifikator entfernen</string>
+	<string name="msgRemoveMod">Möchtest Du wirklich den Modifikator \"%1$s\" entfernen?</string>
+	<string name="msgBonusTitle">Bonus: %1$+d</string>
+	<string name="msgBonusMessage">Positiver Modifikator von %1$+d</string>
+	<string name="msgMalusTitle">Malus: %1$+d</string>
+	<string name="msgMalusMessage">Negativer Modifikator von %1$+d</string>
+	<string name="msgMaxBagsReach">Du kannst keine weiteren Würfelsammlungen hinzufügen.</string>
+	<string name="msgMaxDiceReach">Du kannst keine weiteren Würfel hinzufügen.</string>
+	<string name="msgMaxModifiersReach">Du kannst keine weiteren Modifikatoren hinzufügen</string>
+	<string name="msgOnlineHelpTitle">Schnell-Referenz</string>
+	<string name="msgOnlineHelp">In die Online-Hilfe gucken</string>
+	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02</string>
+	<string name="msgCannotRead">Kann nicht gelesen Ordner-Inhalte</string>
+	<string name="msgFileNameInvalid">Dateiname \"%1$s\" ist nicht gültig.</string>
+	<string name="msgFileNameExists">Dateiname \"%1$s\" existiert bereits. Sind Sie sicher, dass Sie diese Datei überschreiben?</string>
+	<string name="msgExported">Würfel Definitionen exportiert</string>
+	<string name="msgImported">Würfel Definitionen importiert</string>
+	<string name="msgConfirmImport">Dieser Vorgang überschreibt alle Würfel Definitionen. Sind Sie sicher, dass Sie fortfahren möchten?</string>
+
+	<string name="mnuAddDice">Würfel hinzufügen</string>
+	<string name="mnuAddDiceHere">Würfel hier hinzufügen</string>
+	<string name="mnuClearAllResults">Alle Resultate löschen</string>
+	<string name="mnuSettings">Einstellungen</string>
+	<string name="mnuAbout">Informationen</string>
+	<string name="mnuSuggest">Verbesserungsvorschläge senden</string>
+	<string name="mnuRemove">Würfel löschen</string>
+	<string name="mnuEdit">Würfel editieren</string>
+	<string name="mnuRoll">Würfeln</string>
+	<string name="mnuSwitchPrev">Mit Vorgänger tauschen</string>
+	<string name="mnuSwitchNext">Mit Nachfolger tauschen</string>
+	<string name="mnuDetails">Details</string>
+	<string name="mnuClearResult">Resultat löschen</string>
+	<string name="mnuSplit">Einzelresultate</string>
+	<string name="mnuMerge">Mit nächstem Wurf verknüpfen</string>
+	<string name="mnuAddMod">Modifikator hinzufügen</string>
+	<string name="mnuRemoveMod">Modifikator entfernen</string>
+	<string name="mnuApplyMod">Modifikator anwenden</string>
+	<string name="mnuAddModHere">Modifikator hier hinzufügen</string>
+	<string name="mnuExit">Schließen</string>
+	<string name="mnuAddDiceBag">Sammlung hinzufügen</string>
+	<string name="mnuSelectDiceBag">Sammlung auswählen</string>
+	<string name="mnuEditDiceBag">Sammlung editieren</string>
+	<string name="mnuAddDiceBagHere">Sammlung hier hinzufügen</string>
+	<string name="mnuRemoveDiceBag">Sammlung entfernen</string>
+	<string name="mnuImportExport">Importieren / Exportieren</string>
+	
+	<!-- Functions -->
+	<string name="fncBASHName">BASH!</string>
+	<string name="fncBASHDesc">Wurf nach BASH!-Regeln.</string>
+	<string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
+	<string-array name="fncBASHParamNames">
+	    <item>Poolgröße</item>
+	    <item>Wurf</item>
+	</string-array>
+	<string-array name="fncBASHParamHints">
+	    <item>Anzahl der Würfel</item>
+	    <item>Zu prüfender Ausdruck</item>
+	</string-array>
+				
+	<string name="fncBWheelName">Burning Wheel</string>
+	<string name="fncBWheelDesc">Würfelt nach den Burning Wheel-Regeln.</string>
+	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
+	<string-array name="fncBWheelParamNames">
+	    <item>Wurf</item>
+	    <item>Poolgröße</item>
+	    <item>Ziel</item>
+	    <item>Noch einmal würfeln</item>
+	</string-array>
+	<string-array name="fncBWheelParamHints">
+	    <item>Zu prüfender Ausdruck</item>
+	    <item>Anzahl der Würfel</item>
+	    <item>Mindestwurf, um einen Erfolg zu erzielen</item>
+	    <item>Mindestwurf, um einen weiteren Wurf zu erhalten</item>
+	</string-array>
+				
+	<string name="fncDWarsName">Dystopian Wars</string>
+	<string name="fncDWarsDesc">Würfelt nach den Dystopian Wars-Regeln.</string>
+	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
+	<string-array name="fncDWarsParamNames">
+	    <item>Wurf</item>
+	    <item>Poolgröße</item>
+	    <item>Ziel</item>
+	    <item>Würfele nocheinmal</item>
+	</string-array>
+	<string-array name="fncDWarsParamHints">
+	    <item>Zu testender Ausdruck</item>
+	    <item>Anzahl der Würfel</item>
+	    <item>Mindestwurf, um einen Erfolg zu erzielen</item>
+	    <item>Mindestwurf, um einen weiteren Wurf zu erhalten</item>
+	</string-array>
+				
+	<string name="fncHEROName">HERO System</string>
+	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
+	<string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
+	<string-array name="fncHEROParamNames">
+	    <item>Poolgröße</item>
+	</string-array>
+	<string-array name="fncHEROParamHints">
+	    <item>Anzahl der W6</item>
+	</string-array>
+				
+	<string name="fncExalName">Exalted</string>
+	<string name="fncExalDesc">Würfelt nach den Exalted-Regeln.</string>
+	<string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
+	<string-array name="fncExalParamNames">
+	    <item>Poolgröße</item>
+	    <item>Ziel</item>
+	</string-array>
+	<string-array name="fncExalParamHints">
+	    <item>Anzahl der W10</item>
+	    <item>Mindestwurf, um einen Erfolg zu erzielen</item>
+	</string-array>
+				
+	<string name="fncExpName">Explodierender Wurf (einfach)</string>
+	<string name="fncExpDesc">Führt einen explodierenden Wurf durch. Würfel exolodieren für hohe und niedrige Werte.</string>
+	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<string-array name="fncExpParamNames">
+	    <item>Würfel</item>
+	</string-array>
+	<string-array name="fncExpParamHints">
+	    <item>Der explodierende Würfel</item>
+	</string-array>
+
+	<string name="fncExpUpName">Explodierender Wurf, aufwärts (einfach)</string>
+	<string name="fncExpUpDesc">Führt einen explodierenden Wurf durch. Würfel explodieren für hohe Werte.</string>
+	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<string-array name="fncExpUpParamNames">
+	    <item>Würfel</item>
+	</string-array>
+	<string-array name="fncExpUpParamHints">
+	    <item>Der explodierende Würfel</item>
+	</string-array>
+
+	<string name="fncExplodeName">Explodierender Wurf</string>
+	<string name="fncExplodeDesc">Führt einen explodierenden Wurf mit einem Schwellenwert durch. Würfel exolodieren für hohe und niedrige Werte.</string>
+	<string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
+	<string-array name="fncExplodeParamNames">
+	    <item>Würfel</item>
+	    <item>Schwellenwert</item>
+	</string-array>
+	<string-array name="fncExplodeParamHints">
+	    <item>Der explodierende Würfel</item>
+	    <item>Bestimmt, ab wann der Wurf explodiert</item>
+	</string-array>
+
+	<string name="fncExplodeUpName">Explodierender Wurf, aufwärts</string>
+	<string name="fncExplodeUpDesc">Führt einen explodierenden Wurf mit einem Schwellenwert durch. Explodiert nur für hohe Werte.</string>
+	<string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
+	<string-array name="fncExplodeUpParamNames">
+	    <item>Würfel</item>
+	    <item>Schwellenwert</item>
+	</string-array>
+	<string-array name="fncExplodeUpParamHints">
+	    <item>Der explodierende Würfel</item>
+	    <item>Bestimmt, ab wann der Wurf explodiert</item>
+	</string-array>
+
+	<string name="fncMaxName">Maximum</string>
+	<string name="fncMaxDesc">Gibt den höchsten erreichten Wert zurück.</string>
+	<string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
+	<string-array name="fncMaxParamNames">
+	    <item>Erster Wurf</item>
+	    <item>Zweiter Wurf</item>
+	</string-array>
+	<string-array name="fncMaxParamHints">
+	    <item>Erster zu testender Ausdruck</item>
+	    <item>Zweiter zu testender Ausdruck</item>
+	</string-array>
+
+	<string name="fncMinName">Minimum</string>
+	<string name="fncMinDesc">Gibt den niedrigsten erreichten Wert zurück.</string>
+	<string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
+	<string-array name="fncMinParamNames">
+	    <item>Erster Wurf</item>
+	    <item>Zweiter Wurf</item>
+	</string-array>
+	<string-array name="fncMinParamHints">
+	    <item>Erster zu testender Ausdruck</item>
+	    <item>Zweiter zu testender Ausdruck</item>
+	</string-array>
+
+	<string name="fncRandName">Zufallswert</string>
+	<string name="fncRandDesc">Liefert einen Zufallswert zwischen zwei Grenzen.</string>
+	<string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
+	<string-array name="fncRandParamNames">
+	    <item>Erste Grenze</item>
+	    <item>Zweite Grenze</item>
+	</string-array>
+	<string-array name="fncRandParamHints">
+	    <item>Erste Grenze</item>
+	    <item>Zweite Grenze</item>
+	</string-array>
+
+	<string name="fncNwodName">Neue WoD</string>
+	<string name="fncNwodDesc">Würfelt nach den Regeln der neuen World Of Darkness.</string>
+	<string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
+	<string-array name="fncNwodParamNames">
+	    <item>Poolgröße</item>
+	    <item>Ziel</item>
+	</string-array>
+	<string-array name="fncNwodParamHints">
+	    <item>Anzahl der W10</item>
+	    <item>Mindestwurf, um einen Erfolg zu erzielen</item>
+	</string-array>
+
+	<string name="fncOwodName">Original WoD</string>
+	<string name="fncOwodDesc">Würfelt nach den the Original-Regeln der World of Darkness.</string>
+	<string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
+	<string-array name="fncOwodParamNames">
+	    <item>Poolgröße</item>
+	    <item>Ziel</item>
+	</string-array>
+	<string-array name="fncOwodParamHints">
+	    <item>Anzahl der W10</item>
+	    <item>Mindestwurf, um einen Erfolg zu erzielen</item>
+	</string-array>
+
+	<string name="fncPoolName">Würfelpool</string>
+	<string name="fncPoolDesc">Gezählt wird die Zahl der Werte größer oder gleich dem Ziel.</string>
+	<string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
+	<string-array name="fncPoolParamNames">
+	    <item>Wurf</item>
+	    <item>Poolgröße</item>
+	    <item>Ziel</item>
+	</string-array>
+	<string-array name="fncPoolParamHints">
+	    <item>Zu prüfender Ausdruck</item>
+	    <item>Anzahl der Würfel</item>
+	    <item>Mindestwurf, um einen Erfolg zu erzielen</item>
+	</string-array>
+
+	<string name="fncRakName">Würfeln und Behalten</string>
+	<string name="fncRakDesc">Führt einen Würfeln-Und-Behalten-test durch.</string>
+	<string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
+	<string-array name="fncRakParamNames">
+	    <item>Wurf</item>
+	    <item>Poolgröße</item>
+	    <item>Behalten</item>
+	</string-array>
+	<string-array name="fncRakParamHints">
+	    <item>Was wird gewürfelt?</item>
+	    <item>Anzahl der Würfel</item>
+	    <item>Was wird behalten?</item>
+	</string-array>
+
+	<string name="fncRdnName">Abrunden</string>
+	<string name="fncRdnDesc">Übergebener Wert wird abgerundet.</string>
+	<string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
+	<string-array name="fncRdnParamNames">
+	    <item>Wert</item>
+	</string-array>
+	<string-array name="fncRdnParamHints">
+	    <item>Was soll abgerundet werden?</item>
+	</string-array>
+
+	<string name="fncRupName">Aufrunden</string>
+	<string name="fncRupDesc">Übergebener Wert wird aufgerundet.</string>
+	<string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
+	<string-array name="fncRupParamNames">
+	    <item>Wert</item>
+	</string-array>
+	<string-array name="fncRupParamHints">
+	    <item>Was soll aufgerundet werden?</item>
+	</string-array>
+
+	<!-- Errors -->
+	<string name="err_cannot_update">Kann die Würfeldefinitionen nicht aktualisieren.</string>
+	<string name="err_cannot_read">Kann die Würfeldefinitionen nicht lesen. Benutze Vorgaben.</string>
+	<string name="err_name_required">Der Würfel braucht einen Namen.</string>
+	<string name="err_cannot_read_mod">Kann die Modifikator-Definitionen nicht lesen. Benutze Vorgaben.</string>
+	<string name="err_bag_name_required">Die Sammlung braucht einen Namen.</string>
+	<string name="err_no_email_client">Kein Email-Client gefunden.</string>
+	<string name="err_cannot_export">Kann nicht exportieren die Würfel Definitionen.</string>
+	<string name="err_cannot_import">Kann nicht importieren die Würfel Definitionen.</string>
+	<string name="err_storage_not_found">Externer Speicher nicht gefunden.</string>
+
+	<!-- Exceptions -->
+	<string name="exc_generic">Der Ausdruck kann nicht ausgewertet werden.</string>
+	<string name="exc_generic_parsed">Der Ausdruck ist unverständlich.</string>
+	<string name="exc_division_by_zero">Das Würfelergebnis führte zu einer Division durch Null (und die kann nur Chuck Norris ausrechnen).</string>
+	<string name="exc_loop_detected">Das Würfelergebnis führte zu einer Endlosschleife in der Function \"%1$s\". Das auszurechnen, würde sehr lange dauern.</string>
+	<string name="exc_expected_eos">Ende des Ausdrucks erwartet bei Zeichen %1$d.</string>
+	<string name="exc_expected_parameter">Parameter erwartet bei Zeichen %1$d.</string>
+	<string name="exc_invalid_character">Ungültiges Zeichen an Position %1$d.</string>
+	<string name="exc_missing_operand">Fehlender Operand bei Zeichen %1$d.</string>
+	<string name="exc_nothing_to_evaluate">Der Ausdruck ist leer.</string>
+	<string name="exc_unbalanced_bracket">Nicht ausgeglichenes Klammerpaar bei Zeichen %1$d.</string>
+	<string name="exc_unexpected_error">Unerwarteter Fehler.</string>
+	<string name="exc_unexpected_parameter">Unerwarteter Fehler bei Zeichen %1$d.</string>
+	<string name="exc_unknown_function">Unbekannte Funktione: \"%1$s\" bei Zeichen %2$d.</string>
+	<string name="exc_unknown_variable">Unbekannte Variable: \"%1$s\" bei Zeichen %2$d.</string>
+	    		
+	<!-- Default dice bag description -->
+	<string name="def_bag_name">Standard</string>
+	<string name="def_bag_description">Standard-Sammlung</string>
+
+	<!-- Default dice set description -->
+	<string name="def_die_name">Würfel</string>
+	<string name="def_die_desc">Würfelt einen Würfel</string>
+	<string-array name="default_dice_name">
+	    <item>w4</item>
+	    <item>w6</item>
+	    <item>w8</item>
+	    <item>w10</item>
+	    <item>w12</item>
+	    <item>w20</item>
+	    <item>w%</item>
+	</string-array>
+	<string-array name="default_dice_desc">
+	    <item>Würfelt einen vierseitigen Würfel</item>
+	    <item>Würfelt einen sechsseitigen Würfel</item>
+	    <item>Würfelt einen achtseitigen Würfel</item>
+	    <item>Würfelt einen zehnseitigen Würfel</item>
+	    <item>Würfelt einen zwölfseitigen Würfel</item>
+	    <item>Würfelt einen zwanzigseitigen Würfel</item>
+	    <item>Würfelt einen hundertseitigen Würfel</item>
+	</string-array>
+
+	<!-- Preferences -->
+	<string name="pref_clipboard">Zwischenablage</string>
+	<string name="pref_clipboard_title">Zwischenablage benutzen</string>
+	<string name="pref_clipboard_desc">Gibt an, ob und wie Ergebnisse in die Zwischenablage gelegt werden sollen</string>
+	<string name="pref_clipboard_dlg_title">Wie wird die Zwischenablage eingesetzt?</string>
+	<string-array name="entries_clipboard">
+		<item>Keine Zwischenablage benutzen</item>
+		<item>Numerische Ergebnisse ablegen</item>
+		<item>Erweiterte Ergebnisse ablegen</item>
+	</string-array>
+	<string name="pref_link">Würfe verbinden</string>
+	<string name="pref_link_title">Würfelresultate verbinden</string>
+	<string name="pref_link_desc">Resultate von zwei Würfen verbinden, wenn diese in schneller Folge ausgeführt werden.</string>
+	<string name="pref_link_sens_title">Empfindlichkeit</string>
+	<string name="pref_link_sens_desc">Zeit zwischen zwei Würfen, damit sie automatisch verbunden werden.</string>
+	<string name="pref_link_sens_dlg_title">Empfindlichkeit auswählen</string>
+	<string-array name="entries_sensitivity">
+		<item>0,5 Sekunden</item>
+		<item>1 Sekunde</item>
+		<item>1,5 Sekunden</item>
+		<item>2 Sekunden</item>
+		<item>2,5 Sekunden</item>
+		<item>3 Sekunden</item>
+		<item>3,5 Sekunden</item>
+		<item>4 Sekunden</item>
+		<item>4,5 Sekunden</item>
+		<item>5 Sekunden</item>
+	</string-array>
+	<string name="pref_aspect">Aspekt</string>
+	<string name="pref_aspect_col_title">Ergebnis-Spalten</string>
+	<string name="pref_aspect_col_desc">Anzahl der Spalten für die Wurfergebnisse.</string>
+	<string name="pref_aspect_col_dlg_title">Anzahl der Spalten?</string>
+	<string-array name="entries_columns">
+		<item>Eine</item>
+		<item>Zwei</item>
+		<item>Drei</item>
+	</string-array>
+	<string name="pref_aspect_mod_title">Modifikator-Leiste anzeigen</string>
+	<string name="pref_aspect_mod_desc">Zeige die Schnell-Modifikator-Leiste an.</string>
+	<string name="pref_aspect_popup_title">Wurf-Popup anzeigen</string>
+	<string name="pref_aspect_popup_desc">Zeigt ein Popup mit dem Ergebnis des Wurfes an.</string>
+	<string name="pref_aspect_plain_bg_title">Einfache Grafik verwenden</string>
+	<string name="pref_aspect_plain_bg_desc">Erfordert einen Neustart der App. Zeigt einen einfachen Hintergrund, um die Performance zu verbessern.</string>
+	<string name="pref_aspect_anim_title">Würfel animieren</string>
+	<string name="pref_aspect_anim_desc">Zeige einen animierten Würfel im Wurf-Popup.</string>
+	<string name="pref_aspect_sound_title">Sound aktivieren</string>
+	<string name="pref_aspect_sound_desc">Würfelgeräusch an- oder ausschalten.</string>
+	<string name="pref_aspect_ext_sound_title">Erweiterter Sound</string>
+	<string name="pref_aspect_ext_sound_desc">Unterschiedliche Geräusche für kritische Erfolge und Fehlschläge.</string>
+	<string name="pref_aspect_swapdesc_title">Name und Ergebnis tauschen</string>
+	<string name="pref_aspect_swapdesc_desc">Name des Wurfes und erweitertes Ergebnis tauschen.</string>
+</resources>

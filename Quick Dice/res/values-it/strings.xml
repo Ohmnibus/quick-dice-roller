@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TiraDadi Rapido</string>
+    <string name="app_author">Ohmnibus</string>
+    
+    <string name="lblName">Nome</string>
+    <string name="hintName">Inserisci il nome del dado</string>
+    <string name="lblDesc">Descrizione</string>
+    <string name="hintDesc">Una breve descrizione del dado</string>
+	<string name="lblIcon">Icona</string>
+    <string name="lblExp">Formula</string>
+    <string name="hintExp">Inserisci la formula del dado</string>
+    <string name="lblRangeValue">Valori</string>
+	<string name="lblCannotEvaluate">Impossibile valutare</string>
+	<string name="lblResultText">Risultato esteso</string>
+	<string name="lblResultValue">Risultato numerico</string>
+	<string name="lblDiceBuilder">Creazione dado</string>
+	<string name="lblDiceBuilderMsg">Componi il lancio di un singolo tipo di dadi da aggiungere alla formula.</string>
+	<string name="lblCheckExpression">Controlla formula</string>
+	<string name="lblCheckPassed">La formula del dado è CORRETTA.</string>
+	<string name="lblIconPicker">Scegli un\'Icona</string>
+	<string name="lblDiceIconPicker">Icona del dado</string>
+	<string name="lblBagIconPicker">Icona della collezione</string>
+	<string name="lblModifierBuilder">Creazione modificatore</string>
+	<string name="lblModifierBuilderMessage">Componi un modificatore.</string>
+	<string name="lblNeutralModifier">Ha qualche senso creare un modificatore neutrale? Non penso.</string>
+	<string name="lblDuplicateModifier">Questo modificatore esiste già.</string>
+    <string name="lblNameBag">Nome</string>
+    <string name="hintNameBag">Inserisci il nome della collezione</string>
+    <string name="lblDescBag">Descrizione</string>
+    <string name="hintDescBag">Una breve descrizione della collezione</string>
+	<string name="lblIconBag">Icona</string>
+	<string name="lblMailSubject">[QDR] Suggerimenti</string>
+	<string name="lblSendMail">Invia suggerimento</string>
+	<string name="lblCurrentFolder">Cartella: %1$s</string>
+	<string name="lblItemHiddenFolder">Cartella nascosta</string>
+	<string name="lblItemFolder">Cartella</string>
+	<string name="lblItemFile">%1$s - %2$s %3$s</string>
+	<string name="lblParentFolder">Cartella superiore</string>
+	<string name="lblSelectFile">Scegli documento</string>
+	<string name="lblSelectFolder">Scegli cartella</string>
+	<string name="lblNewFile">Nuovo documento</string>
+	<string name="lblImportFromRecent">Importa dai documenti recenti</string>
+	<string name="lblImportFrom">Importa da&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblExportTo">Esporta su&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblItemMRU">%2$d dadi in %1$s collezioni - %4$s %5$s</string>
+	<string name="lblD">d</string><!-- The carachter used in expressions as in "3d6" -->
+	<string name="lblSelectDice">Scegli un dado</string>
+	<string name="lblSelectDiceDest">Scegli la destinazione</string>
+	<string name="lblLastPositionName">&lt;In fondo&gt;</string>
+	<string name="lblLastPositionDesc">&lt;Sposta il dado all\'ultima posizione&gt;</string>
+
+	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
+	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
+	<string name="lblKb">Kb</string><!-- Short for Kilobyte -->
+	<string name="lblB">b</string><!-- Short for byte -->
+
+	<string name="lblConfirm">Conferma</string>
+	<string name="lblCancel">Annulla</string>
+	<string name="lblYes">Sì</string>
+	<string name="lblNo">No</string>
+	<string name="lblOk">Ok</string>
+
+	<string name="msgRemoveDiceTitle">Elimina dado</string>
+	<string name="msgRemoveDice">Sei sicuro di voler eliminare definitivamente il dado \"%1$s\"?</string>
+	<string name="msgClearResultsTitle">Elimina i risultati</string>
+	<string name="msgClearResults">Sei sicuro di voler eliminare tutti i risultati?</string>
+	<string name="msgLostChange">Uscendo ora si perderanno tutte le modifiche non salvate. Continuare?</string>
+
+	<string name="msgRemoveDiceBagTitle">Elimina collezione</string>
+	<string name="msgRemoveDiceBag">Sei sicuro di voler eliminare definitivamente la collezione \"%1$s\"? Contiene \"%2$d\" dadi e \"%3$d\" modificatori. E tutto questo andrà perduto nel tempo come lacrime nella pioggia.</string>
+	
+	<string name="msgWhatsNew">Novità</string>
+	<string name="msgWhatsNewTitle">Novità nella versione %2$s</string>
+	<string name="msgWhatsNewBody"><![CDATA[
+<br />
+<b>Per favore</b> inviatemi una <a href="mailto:ohmnibus@gmail.com">mail</a> se avete dei suggerimenti su come migliorare l\'app.<br />
+<br />
+- Sposta i dadi tra collezioni<br />
+- Clona dadi e collezioni<br />
+- Swipe per eliminare un risultato<br />
+- Ripristina i risultati eliminati<br />
+- Collegamento dei lanci a richiesta<br />
+- Funzione \"abs\" (valore assoluto)<br />
+- Corrette le funzioni \"rup\" e \"rdn\"<br />
+- Correzioni ed ottimizzazioni minori<br />
+<br />]]></string>
+	<string name="msgAboutTitle">A proposito di %1$s</string>
+	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
+Copyright (c) 2012-2014 by %3$s<br />
+<br />
+Traduzioni: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<br />
+Segnalate eventuali errori all\'indirizzo <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
+<br />
+Questa è un\'app gratuita, ma se vi piace perché non  
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">offrirmi una birra</a>?
+Grazie!<br />
+<br />
+<a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> è
+pubblicato da Yuri Kanivets su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+<a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> è
+pubblicato da Roman Nurik su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+<a href="http://nineoldandroids.com/">Nine Old Androids</a> è
+pubblicato da Jake Wharton su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+<a href="https://code.google.com/p/google-gson/">Google Gson</a> è 
+pubblicato da Google su <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />]]></string>
+	
+	<string name="msgRemoveModTitle">Elimina modificatore</string>
+	<string name="msgRemoveMod">Sei sicuro di voler eliminare definitivamente il modificatore \"%1$s\"?</string>
+	<string name="msgBonusTitle">Bonus %1$+d</string>
+	<string name="msgBonusMessage">Modificatore positivo di %1$+d</string>
+	<string name="msgMalusTitle">Malus %1$+d</string>
+	<string name="msgMalusMessage">Modificatore negativo di %1$+d</string>
+	<string name="msgMaxBagsReach">Non è possibile aggiungere altre collezioni di dadi.</string>
+	<string name="msgMaxDiceReach">Non è possibile aggiungere altri dadi.</string>
+	<string name="msgMaxModifiersReach">Non è possibile aggiungere altri modificatori.</string>
+	<string name="msgOnlineHelpTitle">Riferimento rapido</string>
+	<string name="msgOnlineHelp">Consulta l\'aiuto in linea</string>
+	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02</string>
+	<string name="msgCannotRead">Impossibile leggere il contenuto della cartella (o comunque una parte)</string>
+	<string name="msgFileNameInvalid">Il nome del documento \"%1$s\" non è valido.</string>
+	<string name="msgFileNameExists">Esiste già un documento chiamato \"%1$s\". Sei sicuro di volerlo sovrasrivere?</string>
+	<string name="msgExported">Definizioni dei dadi esportate</string>
+	<string name="msgImported">Definizioni dei dadi importate</string>
+	<string name="msgConfirmImport">Questa operazione sovrascriverà tutte le attuali definizioni dei dadi. Sei sicuro di voler continuare?</string>
+
+	<string name="mnuAddDice">Aggiungi dado</string>
+	<string name="mnuAddDiceHere">Aggiungi dado qui</string>
+	<string name="mnuClearAllResults">Elimina tutti i risultati</string>
+	<string name="mnuUndoClearAllResult">Ripristina tutti i risultati</string>
+	<string name="mnuSettings">Impostazioni</string>
+	<string name="mnuAbout">Info</string>
+	<string name="mnuSuggest">Invia suggerimento</string>
+	<string name="mnuRemove">Elimina dado</string>
+	<string name="mnuEdit">Modifica dado</string>
+	<string name="mnuRoll">Lancia dado</string>
+	<string name="mnuSwitchPrev">Scambia col precedente</string>
+	<string name="mnuSwitchNext">Scambia col successivo</string>
+	<string name="mnuMoveTo">Sposta su&#8230;</string>
+	<string name="mnuClone">Clona dado</string>
+	<string name="mnuDetails">Dettagli</string>
+	<string name="mnuClearResult">Elimina risultato</string>
+	<string name="mnuUndoClearResult">Ripristina risultato</string>
+	<string name="mnuSplit">Dividi risultati</string>
+	<string name="mnuMerge">Unisci col successivo</string>
+	<string name="mnuAddMod">Aggiungi modificatore</string>
+	<string name="mnuRemoveMod">Elimina modificatore</string>
+	<string name="mnuApplyMod">Applica modificatore</string>
+	<string name="mnuAddModHere">Aggiungi modificatore qui</string>
+	<string name="mnuExit">Esci</string>
+	<string name="mnuAddDiceBag">Aggiungi collezione</string>
+	<string name="mnuSelectDiceBag">Seleziona collezione</string>
+	<string name="mnuEditDiceBag">Modifica collezione</string>
+	<string name="mnuAddDiceBagHere">Aggiungi collezione qui</string>
+	<string name="mnuRemoveDiceBag">Elimina collezione</string>
+	<string name="mnuImportExport">Importa / Esporta</string>
+	<string name="mnuCloneDiceBag">Clona collezione</string>
+	
+	<!-- Functions -->
+	<string name="fncBASHName">BASH!</string>
+	<string name="fncBASHDesc">Effettua un test con il sistema BASH!</string>
+	<string name="fncBASHURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#bash</string>
+	<string-array name="fncBASHParamNames">
+	    <item>Numero di Dadi</item>
+	    <item>Dado</item>
+	</string-array>
+	<string-array name="fncBASHParamHints">
+	    <item>Numero di dadi da lanciare</item>
+	    <item>Dado da lanciare</item>
+	</string-array>
+				
+	<string name="fncBWheelName">Burning Wheel</string>
+	<string name="fncBWheelDesc">Effettua un test con il sistema Burning Wheel.</string>
+	<string name="fncBWheelURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
+	<string-array name="fncBWheelParamNames">
+	    <item>Dado</item>
+	    <item>Numero di Dadi</item>
+	    <item>Difficoltà</item>
+	    <item>Lancia ancora</item>
+	</string-array>
+	<string-array name="fncBWheelParamHints">
+	    <item>Dado da lanciare</item>
+	    <item>Numero di dadi da lanciare</item>
+	    <item>Valore minimo da ottenere</item>
+	    <item>Valore da ottenere per un lancio extra</item>
+	</string-array>
+				
+	<string name="fncDWarsName">Dystopian Wars</string>
+	<string name="fncDWarsDesc">Effettua un tesr con il sistema Dystopian Wars.</string>
+	<string name="fncDWarsURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
+	<string-array name="fncDWarsParamNames">
+	    <item>Dado</item>
+	    <item>Numero di Dadi</item>
+	    <item>Difficoltà</item>
+	    <item>Lancia ancora</item>
+	</string-array>
+	<string-array name="fncDWarsParamHints">
+	    <item>Dado da lanciare</item>
+	    <item>Numero di dadi da lanciare</item>
+	    <item>Valore minimo da ottenere</item>
+	    <item>Valore da ottenere per un lancio extra</item>
+	</string-array>
+				
+	<string name="fncHEROName">HERO</string>
+	<string name="fncHERODesc">Lancia un certo numero di d6 e restituisce il danno totale ed il danno body.</string>
+	<string name="fncHEROURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#hero</string>
+	<string-array name="fncHEROParamNames">
+	    <item>Numero di Dadi</item>
+	</string-array>
+	<string-array name="fncHEROParamHints">
+	    <item>Numero di d6 da lanciare</item>
+	</string-array>
+				
+	<string name="fncExalName">Exalted</string>
+	<string name="fncExalDesc">Esegue un check usando il sistema di Exalted.</string>
+	<string name="fncExalURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exal</string>
+	<string-array name="fncExalParamNames">
+	    <item>Numero di Dadi</item>
+	    <item>Difficoltà</item>
+	</string-array>
+	<string-array name="fncExalParamHints">
+	    <item>Numero di d10 da lanciare</item>
+	    <item>Valore minimo da ottenere</item>
+	</string-array>
+				
+	<string name="fncExpName">Aperto (semplice)</string>
+	<string name="fncExpDesc">Esegue un tiro aperto. Si rilancia se si ottiene il massimo o il minimo.</string>
+	<string name="fncExpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<string-array name="fncExpParamNames">
+	    <item>Dado</item>
+	</string-array>
+	<string-array name="fncExpParamHints">
+	    <item>Dado da lanciare</item>
+	</string-array>
+
+	<string name="fncExpUpName">Aperto Su (semplice)</string>
+	<string name="fncExpUpDesc">Esegue un tiro aperto. Si rilancia solo se si ottiene il massimo.</string>
+	<string name="fncExpUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<string-array name="fncExpUpParamNames">
+	    <item>Dado</item>
+	</string-array>
+	<string-array name="fncExpUpParamHints">
+	    <item>Dado da lanciare</item>
+	</string-array>
+
+	<string name="fncExplodeName">Aperto</string>
+	<string name="fncExplodeDesc">Esegue un tiro aperto considerando una tolleranza. Si rilancia se si ottengono valori alti o bassi.</string>
+	<string name="fncExplodeURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explode</string>
+	<string-array name="fncExplodeParamNames">
+	    <item>Dado</item>
+	    <item>Tolleranza</item>
+	</string-array>
+	<string-array name="fncExplodeParamHints">
+	    <item>Dado da lanciare</item>
+	    <item>Probabilità di rilancio</item>
+	</string-array>
+
+	<string name="fncExplodeUpName">Aperto Su</string>
+	<string name="fncExplodeUpDesc">Esegue un tiro aperto considerando una tolleranza. Si rilancia solo se si ottengono valori alti.</string>
+	<string name="fncExplodeUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
+	<string-array name="fncExplodeUpParamNames">
+	    <item>Dado</item>
+	    <item>Tolleranza</item>
+	</string-array>
+	<string-array name="fncExplodeUpParamHints">
+	    <item>Dado da lanciare</item>
+	    <item>Probabilità di rilancio</item>
+	</string-array>
+
+	<string name="fncMaxName">Massimo</string>
+	<string name="fncMaxDesc">Restituisce il più alto tra due valori.</string>
+	<string name="fncMaxURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#max</string>
+	<string-array name="fncMaxParamNames">
+	    <item>Primo valore</item>
+	    <item>Secondo valore</item>
+	</string-array>
+	<string-array name="fncMaxParamHints">
+	    <item>Prima espressione</item>
+	    <item>Seconda espressione</item>
+	</string-array>
+
+	<string name="fncMinName">Minimo</string>
+	<string name="fncMinDesc">Restituisce il più basso tra due valori.</string>
+	<string name="fncMinURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#min</string>
+	<string-array name="fncMinParamNames">
+	    <item>Primo valore</item>
+	    <item>Secondo valore</item>
+	</string-array>
+	<string-array name="fncMinParamHints">
+	    <item>Prima espressione</item>
+	    <item>Seconda espressione</item>
+	</string-array>
+
+	<string name="fncRandName">Casuale</string>
+	<string name="fncRandDesc">Restituisce un valore casuale tra i due indicati.</string>
+	<string name="fncRandURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rand</string>
+	<string-array name="fncRandParamNames">
+	    <item>Primo valore</item>
+	    <item>Secondo valore</item>
+	</string-array>
+	<string-array name="fncRandParamHints">
+	    <item>Prima espressione</item>
+	    <item>Seconda espressione</item>
+	</string-array>
+
+	<string name="fncNwodName">Nuovo MdT</string>
+	<string name="fncNwodDesc">Esegue un test secondo le regole del Nuovo Mondo di Tenebra.</string>
+	<string name="fncNwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
+	<string-array name="fncNwodParamNames">
+	    <item>Numero di Dadi</item>
+	    <item>Difficoltà</item>
+	</string-array>
+	<string-array name="fncNwodParamHints">
+	    <item>Numero di d10 da lanciare</item>
+	    <item>Valore minimo da ottenere</item>
+	</string-array>
+
+	<string name="fncOwodName">Vecchio MdT</string>
+	<string name="fncOwodDesc">Esegue un test secondo le regole del Vecchio Mondo di Tenebra.</string>
+	<string name="fncOwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#owod</string>
+	<string-array name="fncOwodParamNames">
+	    <item>Numero di Dadi</item>
+	    <item>Difficoltà</item>
+	</string-array>
+	<string-array name="fncOwodParamHints">
+	    <item>Numero di d10 da lanciare</item>
+	    <item>Valore minimo da ottenere</item>
+	</string-array>
+
+	<string name="fncPoolName">Riserva di Dadi</string>
+	<string name="fncPoolDesc">Restituisce il numero di volte in cui il lancio è meggiore o uguale alla difficoltà.</string>
+	<string name="fncPoolURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#pool</string>
+	<string-array name="fncPoolParamNames">
+	    <item>Dado</item>
+	    <item>Numero di lanci</item>
+	    <item>Difficoltà</item>
+	</string-array>
+	<string-array name="fncPoolParamHints">
+	    <item>Dado da lanciare</item>
+	    <item>Numero di lanci da fare</item>
+	    <item>Valore minimo da ottenere</item>
+	</string-array>
+
+	<string name="fncRakName">Lancia e Tieni</string>
+	<string name="fncRakDesc">Lancia un tot di dadi ma ne tiene solo un sottoinsieme.</string>
+	<string name="fncRakURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rak</string>
+	<string-array name="fncRakParamNames">
+	    <item>Dado</item>
+	    <item>Numero di lanci</item>
+	    <item>Risultati da tenere</item>
+	</string-array>
+	<string-array name="fncRakParamHints">
+	    <item>Dado da lanciare</item>
+	    <item>Numero di lanci da fare</item>
+	    <item>Numero di lanci da tenere</item>
+	</string-array>
+
+	<string name="fncRdnName">Arrotonda per Difetto</string>
+	<string name="fncRdnDesc">Arrotonda il valore per difetto.</string>
+	<string name="fncRdnURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
+	<string-array name="fncRdnParamNames">
+	    <item>Valore</item>
+	</string-array>
+	<string-array name="fncRdnParamHints">
+	    <item>Valore da arrotondare</item>
+	</string-array>
+
+	<string name="fncRupName">Arrotonda per Eccesso</string>
+	<string name="fncRupDesc">Arrotonda il valore per eccesso.</string>
+	<string name="fncRupURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rup</string>
+	<string-array name="fncRupParamNames">
+	    <item>Valore</item>
+	</string-array>
+	<string-array name="fncRupParamHints">
+	    <item>Valore da arrotondare</item>
+	</string-array>
+
+	<string name="fncAbsName">Assoluto</string>
+	<string name="fncAbsDesc">Restituisce l\'assoluto (modulo) del valore specificato.</string>
+	<string name="fncAbsURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#abs</string>
+	<string-array name="fncAbsParamNames">
+	    <item>Valore</item>
+	</string-array>
+	<string-array name="fncAbsParamHints">
+	    <item>Valore da rendere assoluto</item>
+	</string-array>
+
+	<!-- Errors -->
+	<string name="err_cannot_update">Impossibile aggiornare le definizioni dei dadi.</string>
+	<string name="err_cannot_read">Impossibile leggere le definizioni dei dadi. Verranno usati quelli predefiniti.</string>
+	<string name="err_name_required">Il nome del dado è obbligatorio.</string>
+	<string name="err_cannot_read_mod">Impossibile leggere le definizioni dei modificatori. Verranno usati quelli predefiniti.</string>
+	<string name="err_bag_name_required">Il nome della collezione è obbligatorio.</string>
+	<string name="err_no_email_client">Non c\'è nessun client di posta elettronica installato.</string>
+	<string name="err_cannot_export">Impossibile esportare le definizioni dei dadi.</string>
+	<string name="err_cannot_import">Impossibile importare le definizioni dei dadi.</string>
+	<string name="err_storage_not_found">Memoria esterna non trovata.</string>
+	
+	<!-- Exceptions -->
+	<string name="exc_generic">L\'espressione non può essere valutata.</string>
+	<string name="exc_generic_parsed">L\'espressione non può essere analizzata.</string>
+	<string name="exc_division_by_zero">Il risultato del dado ha generato una divisione per zero (e solo Chuck Norris può risolverla).</string>
+	<string name="exc_loop_detected">Il risultato del dado ha generato un ciclo infinito nella funzione \"%1$s\". Ci vuole troppo tempo per calcolarlo.</string>
+	<string name="exc_expected_eos">Attesa fine dell\'espressione alla posizione %1$d.</string>
+	<string name="exc_expected_parameter">Atteso parametro alla posizione %1$d.</string>
+	<string name="exc_invalid_character">Carattere non valido alla posizione %1$d.</string>
+	<string name="exc_missing_operand">Operando assente alla posizione %1$d.</string>
+	<string name="exc_nothing_to_evaluate">L\'espressione è vuota.</string>
+	<string name="exc_unbalanced_bracket">Parentesi non bilanciate al carattere %1$d.</string>
+	<string name="exc_unexpected_error">Errore imprevisto.</string>
+	<string name="exc_unexpected_parameter">Parametro inatteso alla posizione %1$d.</string>
+	<string name="exc_unknown_function">Funzione \"%1$s\" sconosciuta alla posizione %2$d.</string>
+	<string name="exc_unknown_variable">Variabile \"%1$s\" sconosciuta alla posizione %2$d.</string>
+	    		
+	<!-- Default dice bag description -->
+	<string name="def_bag_name">Predefinita</string>
+	<string name="def_bag_description">Collezione predefinita</string>
+
+	<!-- Default dice set description -->
+	<string name="def_die_name">Dado</string>
+	<string name="def_die_desc">Lancia un dado</string>
+	<string-array name="default_dice_name">
+	    <item>d4</item>
+	    <item>d6</item>
+	    <item>d8</item>
+	    <item>d10</item>
+	    <item>d12</item>
+	    <item>d20</item>
+	    <item>d%</item>
+	</string-array>
+	<string-array name="default_dice_desc">
+	    <item>Lancia un dado a quattro facce</item>
+	    <item>Lancia un dado a sei facce</item>
+	    <item>Lancia un dado ad otto facce</item>
+	    <item>Lancia un dado a dieci facce</item>
+	    <item>Lancia un dado a dodici facce</item>
+	    <item>Lancia un dado a venti facce</item>
+	    <item>Lancia un dado percentuale</item>
+	</string-array>
+
+	<!-- Preferences -->
+	<string name="pref_clipboard">Appunti</string>
+	<string name="pref_clipboard_title">Utilizzo degli appunti</string>
+	<string name="pref_clipboard_desc">Indica se e come memorizzare i risultati dei lanci negli appunti.</string>
+	<string name="pref_clipboard_dlg_title">Come utilizzare gli appunti?</string>
+	<string-array name="entries_clipboard">
+		<item>Non usare gli appunti</item>
+		<item>Memorizza il valore numerico</item>
+		<item>Memorizza il risultato esteso</item>
+	</string-array>
+	<string name="pref_link">Lanci collegati</string>
+	<string name="pref_link_title">Collega i lanci</string>
+	<string name="pref_link_desc">Collega i risultati di due lanci se eseguiti in rapida successione.</string>
+	<string name="pref_link_auto_title">Collegamento automatico</string>
+	<string name="pref_link_auto_desc">Collega i risultati di due lanci se eseguiti in rapida successione.</string>
+	<string name="pref_link_sens_title">Sensibilità</string>
+	<string name="pref_link_sens_desc">Intervallo di tempo entro il quale due lanci vengono collegati.</string>
+	<string name="pref_link_sens_dlg_title">Scegli la sensibilità</string>
+	<string-array name="entries_sensitivity">
+		<item>0,5 secondi</item>
+		<item>1 secondo</item>
+		<item>1,5 secondi</item>
+		<item>2 secondi</item>
+		<item>2,5 secondi</item>
+		<item>3 secondi</item>
+		<item>3,5 secondi</item>
+		<item>4 secondi</item>
+		<item>4,5 secondi</item>
+		<item>5 secondi</item>
+	</string-array>
+	<string name="pref_aspect">Aspetto</string>
+	<string name="pref_aspect_col_title">Colonne dei risultati</string>
+	<string name="pref_aspect_col_desc">Numero di colonne su cui disporre i risultati.</string>
+	<string name="pref_aspect_col_dlg_title">Numero di colonne?</string>
+	<string-array name="entries_columns">
+		<item>Una</item>
+		<item>Due</item>
+		<item>Tre</item>
+	</string-array>
+	<string name="pref_aspect_mod_title">Mostra barra modificatori</string>
+	<string name="pref_aspect_mod_desc">Mostra la barra per applicare rapidamente modifiche ai lanci.</string>
+	<string name="pref_aspect_popup_title">Sovraimpressione</string>
+	<string name="pref_aspect_popup_desc">Mostra il risultato del lancio in sovraimpressione.</string>
+	<string name="pref_aspect_plain_bg_title">Disabilita sfondo</string>
+	<string name="pref_aspect_plain_bg_desc">Richiede il riavvio. Disabilita l\'immagine di sfondo per migliorare le prestazioni.</string>
+	<string name="pref_aspect_anim_title">Animazione dado</string>
+	<string name="pref_aspect_anim_desc">Mostra un\'animazione nella sovraimpressione.</string>
+	<string name="pref_aspect_sound_title">Abilita il suono</string>
+	<string name="pref_aspect_sound_desc">Abilita il suono del lancio del dado.</string>
+	<string name="pref_aspect_ext_sound_title">Suoni extra</string>
+	<string name="pref_aspect_ext_sound_desc">Utilizza suoni differenti per evidenziare successi critici e fallimenti catastrofici.</string>
+	<string name="pref_aspect_swapdesc_title">Scambia nome e risultato</string>
+	<string name="pref_aspect_swapdesc_desc">Scambia il nome del dado con il suo risultato esteso.</string>
+</resources>
