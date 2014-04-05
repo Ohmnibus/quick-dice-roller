@@ -1,0 +1,72 @@
+##Title:30##
+LanzaDados Rápidos
+
+##Description:4000##
+LanzaDados Rápidos (Quick Dice Roller) es un simulador de lanzamientos de dados extremamente flexible y personalizable creado en torno a las necesidades de los apasionados de los juegos de Rol (RPG).
+
+LanzaDados Rápidos pretende ser a la vez flexible, completo y práctico.
+
+Con LanzaDados Rápidos es posible lanzar un dado con un simple toque, desplazarse por la lista de los últimos resultados, combinar los resultados y ver de un vistazo la calidad del resultado (gracias a su indicador estrella).
+
+El corazón de LanzaDados Rápidos es un potente elaborador de expresiones que permite crear virtualmente cualquier combinación de dados. El elaborador està en grado de analizar los cuatros operadores básicos (+, -, *, /), las parentesis y un operador "d", que representa un lanzamiento del dado (ed. 1d6). Es posible representar lanzamientos complicados como por ejemplo "utiliza un dado de cuatro para las decenas y un dado de diez para las unidades" con la fórmula "(1d4*10) + (1d10-1)".
+
+Donde no es posible utilizar los operadores entran en juego las funciones especiales en grado de simular los principales sistemas: lanzar y mantener (roll&keep), lanzamientos libres, (lista de dados)? dice pool, ecc. 
+
+El generador de expresiones permite componer un lanzamiento de manera arbitraria seleccionando pocos elementos, sin tener que necesariamente conocer a fondo la sintaxis de las expresiones.
+
+
+Algunas de las características de Dados veloces:
+
+- Lanzar los dados con un simple toque
+- Aplicar modificadores sobre la marcha
+- Posibilidad de modificar a voluntad los dados
+- Los dados divididos en colecciones
+- Potente generador de expresiones
+- Funciones para la simulación de principales sitemas
+- Generador de expresiones sencillo e intuitivo
+- Amplia selección de dados e iconos mnemónicos
+- Posibilidad de agregar los resultados manualmente o de forma automática
+- Resultados de calidad de un solo vistazo
+- Notificación del último lanzamiento superposisionable
+- Notificaciones de sonidos
+- Persistencia de los datos entre las distintas instalaciones*
+- Importación y exportación de definiciones de los dados y colecciones
+
+Algunos de los sistemas soportados actualmente:
+
+- Antiguo Mundo de tinieblas
+- Arcan Myth
+- BASH!
+- Burning Wheel
+- Deadlands
+- Dungeons & Dragons (todas las ediciones)
+- Dungeon World
+- El Señor de los Anillos, el juego de rol de la Tierra Media
+- Exaltado
+- Feng Shui
+- GURPS
+- HERO System
+- La llamada de Cthulhu
+- La Leyenda de los Cinco Anillos
+- Lords of Knowledge
+- Nuevo Mundo de Tinieblas
+- Pathfinder
+- Savage Worlds
+- Star Wars
+- Traveller
+
+...y muchos más!
+
+
+*Copia de seguridad de sus datos y preferencias se encuentra disponible en la versión 2.2 de Android, pero no en todos los dispositivos.
+
+Palabras claves: Dados, Lanzamiento, Tiro, Lanza, Tira, Juegos, Rol, Español, Master, Free, WhiteWholf, WW, Vampiros, Exalted, L5A, L5R, D20, Pool, R&K, Explode, Exploding, Open, Dungeons & Dragons, HERO, GURPS, Pathfinder
+
+##Recent Changes:500##
+- Import and Export definitions
+- German translation
+- Slightly improved UI
+- Minor fix and improvement
+
+##Promo Text:80##
+El simulador de dados flexible, completo y práctico.

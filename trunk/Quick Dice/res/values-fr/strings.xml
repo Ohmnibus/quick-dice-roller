@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Lanceur de dés rapide</string>
+    <string name="app_author">Ohmnibus</string>
+    
+    <string name="lblName">Nom</string>
+    <string name="hintName">Entrez le nom des dés</string>
+    <string name="lblDesc">Description</string>
+    <string name="hintDesc">Une brève description du dé</string>
+	<string name="lblIcon">Icône</string>
+    <string name="lblExp">Formule</string>
+    <string name="hintExp">Entrez la formule du dé</string>
+    <string name="lblRangeValue">Valeurs</string>
+	<string name="lblCannotEvaluate">Impossible à évaluer</string>
+	<string name="lblResultText">Résultat étendu</string>
+	<string name="lblResultValue">Résultat numérique</string>
+	<string name="lblDiceBuilder">Création du dé</string>
+	<string name="lblDiceBuilderMsg">Composez le lancement d\'un seul type de dé pour l\'ajouter à la formule.</string>
+	<string name="lblCheckExpression">Vérifiez la formule</string>
+	<string name="lblCheckPassed">La formule du dé est CORRECT.</string>
+	<string name="lblIconPicker">Choisir l\'icône</string>
+	<string name="lblDiceIconPicker">Icône de le dé</string>
+	<string name="lblBagIconPicker">Icône de la collection</string>
+	<string name="lblModifierBuilder">Création du modificateur</string>
+	<string name="lblModifierBuilderMessage">Composez un modificateur.</string>
+	<string name="lblNeutralModifier">Il y a une logique puor créer un modificateur neutre? Je ne le pense pas.</string>
+	<string name="lblDuplicateModifier">Ce modificateur existe déjà.</string>
+    <string name="lblNameBag">Nom</string>
+    <string name="hintNameBag">Entrez le nom de la collection</string>
+    <string name="lblDescBag">Description</string>
+    <string name="hintDescBag">Une brève description de la collection</string>
+	<string name="lblIconBag">Icône</string>
+	<string name="lblMailSubject">[QDR] Suggestions</string>
+	<string name="lblSendMail">Envoyez vos suggestions</string>
+	<string name="lblCurrentFolder">Répertoire courant: %1$s</string>
+	<string name="lblItemHiddenFolder">Répertoire caché</string>
+	<string name="lblItemFolder">Répertoire</string>
+	<string name="lblItemFile">%1$s - %2$s %3$s</string>
+	<string name="lblParentFolder">Répertoire parent</string>
+	<string name="lblSelectFile">Choisizzez le ficher</string>
+	<string name="lblSelectFolder">Choisizzez le répertoire</string>
+	<string name="lblNewFile">Nouveau ficher</string>
+	<string name="lblImportFromRecent">Importez des fichiers récents</string>
+	<string name="lblImportFrom">Importez de&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblExportTo">Exportez de&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblItemMRU">%2$d dés in %1$s collections - %4$s %5$s</string>
+	<string name="lblD">d</string><!-- The carachter used in expressions as in "3d6" -->
+	<string name="lblSelectDice">Choisisser un dé</string>
+	<string name="lblSelectDiceDest">Choisisser la destination</string>
+	<string name="lblLastPositionName">&lt;Au fond&gt;</string>
+	<string name="lblLastPositionDesc">&lt;Déplacer le dé à la dernière position&gt;</string>
+	
+	<string name="lblGb">Go</string><!-- Short for Gigabyte -->
+	<string name="lblMb">Mo</string><!-- Short for Megabyte -->
+	<string name="lblKb">ko</string><!-- Short for Kilobyte -->
+	<string name="lblB">o</string><!-- Short for byte -->
+
+	<string name="lblConfirm">Confirmer</string>
+	<string name="lblCancel">Annuler</string>
+	<string name="lblYes">Oui</string>
+	<string name="lblNo">Non</string>
+	<string name="lblOk">Ok</string>
+
+	<string name="msgRemoveDiceTitle">Éliminer le dé</string>
+	<string name="msgRemoveDice">Êtes-vous sûr de vouloir éliminer définitivement l\'écrou \"%1$s\"?</string>
+	<string name="msgClearResultsTitle">Éliminer les résultats</string>
+	<string name="msgClearResults">Êtes-vous sûr de vouloir éliminer tous les résultats?</string>
+	<string name="msgLostChange">Sortent maintenant vous perdrez toutes les modifications non enregistrées. Continuer?</string>
+
+	<string name="msgRemoveDiceBagTitle">Éliminer la collection</string>
+	<string name="msgRemoveDiceBag">Êtes-vous sûr de vouloir éliminer définitivement la collection \"%1$s\"? Contient \"%2$s\" écrous et \"%3$s\" modificateurs. Et toutes ces choses se perdront dans l\'oubli, comme les larmes dans la pluie.</string>
+	
+	<string name="msgWhatsNew">Nouvelles</string>
+	<string name="msgWhatsNewTitle">Nouvelles dans la version %2$s</string>
+	<!-- string name="msgWhatsNewBody"><![CDATA[
+	]]></string -->
+	<string name="msgAboutTitle">Sur le %1$s</string>
+	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
+Copyright (c) 2012-2014 by %3$s<br />
+<br />
+Traductions: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<br />
+Vous pouvez signaler les problèmes à <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
+<br />
+Cette application est gratuite, mais si vous aimez, pourquoi ne pas 
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">me payer une bière</a>?
+Merci!<br />
+<br />
+<a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> est
+publié par Yuri Kanivets sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+<a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> est
+publié par Roman Nurik sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+<a href="http://nineoldandroids.com/">Nine Old Androids</a> est
+publié par Jake Wharton sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+<a href="https://code.google.com/p/google-gson/">Google Gson</a> est
+publié par Google sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />]]></string>
+	
+	<string name="msgRemoveModTitle">Éliminer le modificateur</string>
+	<string name="msgRemoveMod">Êtes-vous sûr de vouloir éliminer définitivement le modificateur \"%1$s\"?</string>
+	<string name="msgBonusTitle">Bonus %1$+d</string>
+	<string name="msgBonusMessage">Modificateur positif de %1$+d</string>
+	<string name="msgMalusTitle">Malus %1$+d</string>
+	<string name="msgMalusMessage">Modificateur négatif de %1$+d</string>
+	<string name="msgMaxBagsReach">Vous ne pouvez pas ajouter d\'autres collections de dés.</string>
+	<string name="msgMaxDiceReach">Vous ne pouvez pas ajouter d\'autres dés.</string>
+	<string name="msgMaxModifiersReach">Vous ne pouvez pas ajouter d\'autres modificateurs.</string>
+	<string name="msgOnlineHelpTitle">Référence rapide</string>
+	<string name="msgOnlineHelp">Consultez l\'aide en ligne</string>
+	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02</string>
+	<string name="msgCannotRead">C\'est impossible de lire le contenu d\'un répertoire (ou une partie de celui-ci)</string>
+	<string name="msgFileNameInvalid">Le nom du fichier \"%1$s\" n\'est pas valide.</string>
+	<string name="msgFileNameExists">Le nom du fichier \"%1$s\" existe déjà. Êtes-vous sûr de vouloir écraser ce fichier?</string>
+	<string name="msgExported">Définitions des dés exportées</string>
+	<string name="msgImported">Définitions des dés importées</string>
+	<string name="msgConfirmImport">Comme ça on va écraser toutes les définitions existantes des dés. Etes-vous sûr de vouloir continuer?</string>
+	
+	<string name="mnuAddDice">Ajouter un dé</string>
+	<string name="mnuAddDiceHere">Ajouter un dé ici</string>
+	<string name="mnuClearAllResults">Éliminer tous les résultats</string>
+	<string name="mnuUndoClearAllResult">Réinitialiser tous les résultats</string>
+	<string name="mnuSettings">Réglages</string>
+	<string name="mnuAbout">Infos</string>
+	<string name="mnuSuggest">Envoyez vos suggestions</string>
+	<string name="mnuRemove">Éliminer le dé</string>
+	<string name="mnuEdit">Modifier le dé</string>
+	<string name="mnuRoll">Lancer le dé</string>
+	<string name="mnuSwitchPrev">Echanger avec le précédent</string>
+	<string name="mnuSwitchNext">Echanger avec le subséquente</string>
+	<string name="mnuMoveTo">Déplacer sur&#8230;</string>
+	<string name="mnuClone">Dupliquer le dé</string>
+	<string name="mnuDetails">Détails</string>
+	<string name="mnuClearResult">Éliminer le résultat</string>
+	<string name="mnuUndoClearResult">Restaurer le résultat</string>
+	<string name="mnuSplit">Répartir les résultats</string>
+	<string name="mnuMerge">Fusionner avec le suivant</string>
+	<string name="mnuAddMod">Ajouter un modificateur</string>
+	<string name="mnuRemoveMod">Éliminer le modificateur</string>
+	<string name="mnuApplyMod">Appliquer le modificateur</string>
+	<string name="mnuAddModHere">Ajouter un modificateur ici</string>
+	<string name="mnuExit">Sortir</string>
+	<string name="mnuAddDiceBag">Ajouter une collection</string>
+	<string name="mnuSelectDiceBag">Choisir la collection</string>
+	<string name="mnuEditDiceBag">Modifier la collection</string>
+	<string name="mnuAddDiceBagHere">Ajouter une collection ici</string>
+	<string name="mnuRemoveDiceBag">Éliminer la collection</string>
+	<string name="mnuImportExport">Importées / Exportées</string>
+	<string name="mnuCloneDiceBag">Dupliquer la collection</string>
+
+	<!-- Functions -->
+	<string name="fncBASHName">BASH!</string>
+	<string name="fncBASHDesc">Il effectue un test en utilisant le système BASH!</string>
+	<string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
+	<string-array name="fncBASHParamNames">
+	    <item>Nombre de dés</item>
+	    <item>Dé</item>
+	</string-array>
+	<string-array name="fncBASHParamHints">
+	    <item>Nombre de dés à lancer</item>
+	    <item>Dé à lancer</item>
+	</string-array>
+				
+	<string name="fncBWheelName">Burning Wheel</string>
+	<string name="fncBWheelDesc">Il effectue un test en utilisant le système Burning Wheel.</string>
+	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
+	<string-array name="fncBWheelParamNames">
+	    <item>Dé</item>
+	    <item>Nombre de dés</item>
+	    <item>Niveau de difficulté</item>
+	    <item>Roulez encore</item>
+	</string-array>
+	<string-array name="fncBWheelParamHints">
+	    <item>Dé à lancer</item>
+	    <item>Nombre de dés à lancer</item>
+	    <item>Valeur minimale à obtenir</item>
+	    <item>Valeur à atteindre pour obtenir un rouleau supplémentaire</item>
+	</string-array>
+				
+	<string name="fncDWarsName">Dystopian Wars</string>
+	<string name="fncDWarsDesc">Il effectue un test en utilisant le système Dystopian Wars.</string>
+	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
+	<string-array name="fncDWarsParamNames">
+	    <item>Dé</item>
+	    <item>Nombre de dés</item>
+	    <item>Niveau de difficulté</item>
+	    <item>Roulez encore</item>
+	</string-array>
+	<string-array name="fncDWarsParamHints">
+	    <item>Dé à lancer</item>
+	    <item>Nombre de dés à lancer</item>
+	    <item>Valeur minimale à obtenir</item>
+	    <item>Valeur à atteindre pour obtenir un rouleau supplémentaire</item>
+	</string-array>
+				
+	<string name="fncHEROName">HERO System</string>
+	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
+	<string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
+	<string-array name="fncHEROParamNames">
+	    <item>Nombre de dés</item>
+	</string-array>
+	<string-array name="fncHEROParamHints">
+	    <item>Nombre de d6 à lancer</item>
+	</string-array>
+				
+	<string name="fncExalName">Exaltés</string>
+	<string name="fncExalDesc">Il effectue un test en utilisant le système Exaltés.</string>
+	<string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
+	<string-array name="fncExalParamNames">
+	    <item>Nombre de dés</item>
+	    <item>Niveau de difficulté</item>
+	</string-array>
+	<string-array name="fncExalParamHints">
+	    <item>Nombre de d10 à lancer</item>
+	    <item>Valeur minimale à obtenir</item>
+	</string-array>
+				
+	<string name="fncExpName">Éclatement (tir ouvert simple)</string>
+	<string name="fncExpDesc">Il effectue un éclatement. Il est relancé s\'il obtient le maximum ou le minimum.</string>
+	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<string-array name="fncExpParamNames">
+	    <item>Dé</item>
+	</string-array>
+	<string-array name="fncExpParamHints">
+	    <item>Dé à lancer</item>
+	</string-array>
+
+	<string name="fncExpUpName">Tir ouvert au dessus</string>
+	<string name="fncExpUpDesc">Il effectue un éclatement. Il est relancé seulement s\'il obtient le maximum.</string>
+	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<string-array name="fncExpUpParamNames">
+	    <item>Dé</item>
+	</string-array>
+	<string-array name="fncExpUpParamHints">
+	    <item>Dé à lancer</item>
+	</string-array>
+
+	<string name="fncExplodeName">Ouvert</string>
+	<string name="fncExplodeDesc">Il effectue un éclatement compte tenu d\'une tolérance. Il est relancé si vous obtenez des valeurs élevées ou basses.</string>
+	<string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
+	<string-array name="fncExplodeParamNames">
+	    <item>Dé</item>
+	    <item>Tolérance</item>
+	</string-array>
+	<string-array name="fncExplodeParamHints">
+	    <item>Dé à lancer</item>
+	    <item>Probabilité de relancer</item>
+	</string-array>
+
+	<string name="fncExplodeUpName">Ouvert au dessus</string>
+	<string name="fncExplodeUpDesc">Il effectue un éclatement compte tenu d\'une tolérance. Il est relancé seulement si vous obtenez des valeurs élevées ou basses.</string>
+	<string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
+	<string-array name="fncExplodeUpParamNames">
+	    <item>Dé</item>
+	    <item>Tolérance</item>
+	</string-array>
+	<string-array name="fncExplodeUpParamHints">
+	    <item>Dé à lancer</item>
+	    <item>Probabilité de relancer</item>
+	</string-array>
+
+	<string name="fncMaxName">Maximum</string>
+	<string name="fncMaxDesc">Il retourne la plus grande des deux valeurs.</string>
+	<string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
+	<string-array name="fncMaxParamNames">
+	    <item>La première valeu</item>
+	    <item>La deuxième valeur</item>
+	</string-array>
+	<string-array name="fncMaxParamHints">
+	    <item>La première expression</item>
+	    <item>La deuxième expression</item>
+	</string-array>
+
+	<string name="fncMinName">Minimum</string>
+	<string name="fncMinDesc">Il retourne la plus petite des deux valeurs.</string>
+	<string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
+	<string-array name="fncMinParamNames">
+	    <item>La première valeu</item>
+	    <item>La deuxième valeur</item>
+	</string-array>
+	<string-array name="fncMinParamHints">
+	    <item>La première expression</item>
+	    <item>La deuxième expression</item>
+	</string-array>
+
+	<string name="fncRandName">Aléatoire</string>
+	<string name="fncRandDesc">Il retourne un nombre aléatoire entre deux valeurs.</string>
+	<string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
+	<string-array name="fncRandParamNames">
+	    <item>La première valeu</item>
+	    <item>La deuxième valeur</item>
+	</string-array>
+	<string-array name="fncRandParamHints">
+	    <item>La première expression</item>
+	    <item>La deuxième expression</item>
+	</string-array>
+
+	<string name="fncNwodName">Nouveau MdT</string>
+	<string name="fncNwodDesc">Il effectue un test avec les règles du nouveau Monde des Ténèbres.</string>
+	<string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
+	<string-array name="fncNwodParamNames">
+	    <item>Nombre de dés</item>
+	    <item>Difficulté</item>
+	</string-array>
+	<string-array name="fncNwodParamHints">
+	    <item>Nombre de d10 à lancer</item>
+	    <item>Valeur minimale à obtenir</item>
+	</string-array>
+
+	<string name="fncOwodName">Vieux MdT</string>
+	<string name="fncOwodDesc">Il effectue un test avec les règles du vieux Monde des Ténèbres</string>
+	<string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
+	<string-array name="fncOwodParamNames">
+	    <item>Nombre de dés</item>
+	    <item>Difficulté</item>
+	</string-array>
+	<string-array name="fncOwodParamHints">
+	    <item>Nombre de d10 à lancer</item>
+	    <item>Valeur minimale à obtenir</item>
+	</string-array>
+
+	<string name="fncPoolName">Réserve de dés</string>
+	<string name="fncPoolDesc">Il retourne le nombre de fois où le lancement est meggiore ou égale à la difficulté.</string>
+	<string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
+	<string-array name="fncPoolParamNames">
+	    <item>Dé</item>
+	    <item>Dé à lancer</item>
+	    <item>Difficulté</item>
+	</string-array>
+	<string-array name="fncPoolParamHints">
+	    <item>Dé à lancer</item>
+	    <item>Nombre de lance à faire</item>
+	    <item>Valeur minimale à obtenir</item>
+	</string-array>
+
+	<string name="fncRakName">Lancer et maintener</string>
+	<string name="fncRakDesc">Il lance un certain nombre de dés, mais il ne garde qu\'un sous-ensemble.</string>
+	<string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
+	<string-array name="fncRakParamNames">
+	    <item>Dé</item>
+	    <item>Nombre de lances</item>
+	    <item>Résultats à garder</item>
+	</string-array>
+	<string-array name="fncRakParamHints">
+	    <item>Dé à lancer</item>
+	    <item>Nombre de lances à faire</item>
+	    <item>Nombre de lances à garder</item>
+	</string-array>
+
+	<string name="fncRdnName">Arrondir par défaut</string>
+	<string name="fncRdnDesc">Il arrondit la valeur par défaut.</string>
+	<string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
+	<string-array name="fncRdnParamNames">
+	    <item>Valeur</item>
+	</string-array>
+	<string-array name="fncRdnParamHints">
+	    <item>Valeur à arrondir</item>
+	</string-array>
+
+	<string name="fncRupName">Arrondir par excès</string>
+	<string name="fncRupDesc">Il arrondit la valeur par excès</string>
+	<string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
+	<string-array name="fncRupParamNames">
+	    <item>Valeur</item>
+	</string-array>
+	<string-array name="fncRupParamHints">
+	    <item>Valeur à arrondir</item>
+	</string-array>
+	
+	<string name="fncAbsName">Absolue</string>
+	<string name="fncAbsDesc">Il renvoie l\'absolue (module) de la valeur spécifiée.</string>
+	<string name="fncAbsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs</string>
+	<string-array name="fncAbsParamNames">
+	    <item>Valeur</item>
+	</string-array>
+	<string-array name="fncAbsParamHints">
+	    <item>Valeur à rendre absolue</item>
+	</string-array>
+
+	<!-- Errors -->
+	<string name="err_cannot_update">Impossible de mettre à jour les définitions de dés.</string>
+	<string name="err_cannot_read">Impossible de lire les définitions des dés. Seront utilisées les valeurs par défault</string>
+	<string name="err_name_required">Le nom de dé est nécessaire.</string>
+	<string name="err_cannot_read_mod">Impossible de lire les définitions des modificateurs. Seront utilisées les valeurs par défault</string>
+	<string name="err_bag_name_required">Le nom de la collection est nécessaire.</string>
+	<string name="err_no_email_client">Il n\'y a pas clients de messagerie installés.</string>
+	<string name="err_cannot_export">C\'est impossible d\'exporter les définitions des dés.</string>
+	<string name="err_cannot_import">C\'est impossible d\'importer les définitions des dés.</string>
+	<string name="err_storage_not_found">Mémoire externe introuvable.</string>
+	
+	<!-- Exceptions -->
+	<string name="exc_generic">L\'expression ne peut pas être évaluée.</string>
+	<string name="exc_generic_parsed">L\'expression ne peut pas être analysée.</string>
+	<string name="exc_division_by_zero">Le résultat de l\'écrou a créé une division par zéro (que seulement Chuck Norris peut résoudre).</string>
+	<string name="exc_loop_detected">Le résultat du lancement a généré une boucle infinie dans la fonction \"%1$s\". Il y faut trop de temps pour le calculer.</string>
+	<string name="exc_expected_eos">Fin de l\'expression attendue à la position %1$d.</string>
+	<string name="exc_expected_parameter">Paramètre attendu à la position %1$d.</string>
+	<string name="exc_invalid_character">Caractère invalid à la position %1$d.</string>
+	<string name="exc_missing_operand">opérande absent à la position %1$d.</string>
+	<string name="exc_nothing_to_evaluate">L\'expression est vide.</string>
+	<string name="exc_unbalanced_bracket">Parenthèses sans correspondance au caractère %1$d.</string>
+	<string name="exc_unexpected_error">Une erreur inattendue s\'est produite.</string>
+	<string name="exc_unexpected_parameter">Paramètre inattendu à la position %1$d.</string>
+	<string name="exc_unknown_function">Fonction \"%1$s\" inconnue à la position %2$d.</string>
+	<string name="exc_unknown_variable">Variable \"%1$s\" inconnue à la position %2$d.</string>
+	    		
+	<!-- Default dice bag description -->
+	<string name="def_bag_name">Défault</string>
+	<string name="def_bag_description">Collection par défault</string>
+
+	<!-- Default dice set description -->
+	<string name="def_die_name">Dé</string>
+	<string name="def_die_desc">Il lance un dé</string>
+	<string-array name="default_dice_name">
+	    <item>d4</item>
+	    <item>d6</item>
+	    <item>d8</item>
+	    <item>d10</item>
+	    <item>d12</item>
+	    <item>d20</item>
+	    <item>d%</item>
+	</string-array>
+	<string-array name="default_dice_desc">
+	    <item>Il lance un dé à 4 faces</item>
+	    <item>Il lance un dé à 6 faces</item>
+	    <item>Il lance un dé à 8 faces</item>
+	    <item>Il lance un dé à 10 faces</item>
+	    <item>Il lance un dé à 12 faces</item>
+	    <item>Il lance un dé à 20 faces</item>
+	    <item>Il lance un dé pourcentage</item>
+	</string-array>
+
+	<!-- Preferences -->
+	<string name="pref_clipboard">Presse-papiers</string>
+	<string name="pref_clipboard_title">Utilisation du presse-papiers</string>
+	<string name="pref_clipboard_desc">Indique si et comment stocker les résultats de jeté dansle presse-papiers.</string>
+	<string name="pref_clipboard_dlg_title">Comment utiliser les presse-papiers?</string>
+	<string-array name="entries_clipboard">
+		<item>Ne pas utiliser les presse-papiers</item>
+		<item>Il stocke la valeur numérique</item>
+		<item>Il stocke le résultat étendu</item>
+	</string-array>
+	<string name="pref_link">Lancements connectés</string>
+	<string name="pref_link_title">Il relie les lancements</string>
+	<string name="pref_link_desc">Il relie les résultats de deux lancement si il sont effectués dans une succession rapide.</string>
+	<string name="pref_link_auto_title">Connexion automatique</string>
+	<string name="pref_link_auto_desc">Il relie les résultats de deux lancement si il sont effectués dans une succession rapide.</string>
+	<string name="pref_link_sens_title">Sensibilité</string>
+	<string name="pref_link_sens_desc">L\'intervalle de temps dans lequel deux lancements sont connectés.</string>
+	<string name="pref_link_sens_dlg_title">Choisissez la sensibilité</string>
+	<string-array name="entries_sensitivity">
+		<item>0,5 secondes</item>
+		<item>1 seconde</item>
+		<item>1,5 secondes</item>
+		<item>2 secondes</item>
+		<item>2,5 secondes</item>
+		<item>3 secondes</item>
+		<item>3,5 secondes</item>
+		<item>4 secondes</item>
+		<item>4,5 secondes</item>
+		<item>5 secondes</item>
+	</string-array>
+	<string name="pref_aspect">Apparence</string>
+	<string name="pref_aspect_col_title">Colonnes de résultat</string>
+	<string name="pref_aspect_col_desc">Nombre de colonnes sur lesquelles ordonner les résultats.</string>
+	<string name="pref_aspect_col_dlg_title">Nombre de colonnes?</string>
+	<string-array name="entries_columns">
+		<item>Une</item>
+		<item>Deux</item>
+		<item>Trois</item>
+	</string-array>
+	<string name="pref_aspect_mod_title">Voir la barre des modificateurs</string>
+	<string name="pref_aspect_mod_desc">Il affiche la barre pour appliquer rapidement des modifications au lancement.</string>
+	<string name="pref_aspect_popup_title">Superposition</string>
+	<string name="pref_aspect_popup_desc">Il montre le résultat de la superposition de lancement.</string>
+	<string name="pref_aspect_plain_bg_title">Désactiver le fond</string>
+	<string name="pref_aspect_plain_bg_desc">Il nécessite un redémarrage. Désactiver l\'image de fond pour améliorer les performances.</string>
+	<string name="pref_aspect_anim_title">Animation du dé</string>
+	<string name="pref_aspect_anim_desc">Il montre l\'animation en superposition.</string>
+	<string name="pref_aspect_sound_title">Activer le son</string>
+	<string name="pref_aspect_sound_desc">Il active le son du dé.</string>
+	<string name="pref_aspect_ext_sound_title">Sons supplémentaires</string>
+	<string name="pref_aspect_ext_sound_desc">Il utilise des sons différents pour souligner les réussites et les échecs critiques catastrophiques.</string>
+	<string name="pref_aspect_swapdesc_title">Echanger le nom et le résultat</string>
+	<string name="pref_aspect_swapdesc_desc">Echanger le nom du dé avec son résultat étendu.</string>
+</resources>
