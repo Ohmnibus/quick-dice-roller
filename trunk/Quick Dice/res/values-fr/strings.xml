@@ -87,13 +87,15 @@ Cette application est gratuite, mais si vous aimez, pourquoi ne pas
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">me payer une bière</a>?
 Merci!<br />
 <br />
-<a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> est
+- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> est
 publié par Yuri Kanivets sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
-<a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> est
+- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> est
+publié par Lorensius W. L. T. sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> est
 publié par Roman Nurik sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
-<a href="http://nineoldandroids.com/">Nine Old Androids</a> est
+- <a href="http://nineoldandroids.com/">Nine Old Androids</a> est
 publié par Jake Wharton sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
-<a href="https://code.google.com/p/google-gson/">Google Gson</a> est
+- <a href="https://code.google.com/p/google-gson/">Google Gson</a> est
 publié par Google sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />]]></string>
 	
 	<string name="msgRemoveModTitle">Éliminer le modificateur</string>
