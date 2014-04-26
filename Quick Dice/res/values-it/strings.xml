@@ -84,6 +84,7 @@
 - Collegamento dei lanci a richiesta<br />
 - Funzione \"abs\" (valore assoluto)<br />
 - Corrette le funzioni \"rup\" e \"rdn\"<br />
+- Corretta la funzione \"rak\"<br />
 - Correzioni ed ottimizzazioni minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
@@ -98,13 +99,15 @@ Questa è un\'app gratuita, ma se vi piace perché non
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">offrirmi una birra</a>?
 Grazie!<br />
 <br />
-<a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> è
+- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> è
 pubblicato da Yuri Kanivets su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
-<a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> è
+- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> è
+pubblicato da Lorensius W. L. T. su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> è
 pubblicato da Roman Nurik su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
-<a href="http://nineoldandroids.com/">Nine Old Androids</a> è
+- <a href="http://nineoldandroids.com/">Nine Old Androids</a> è
 pubblicato da Jake Wharton su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
-<a href="https://code.google.com/p/google-gson/">Google Gson</a> è 
+- <a href="https://code.google.com/p/google-gson/">Google Gson</a> è 
 pubblicato da Google su <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />]]></string>
 	
 	<string name="msgRemoveModTitle">Elimina modificatore</string>

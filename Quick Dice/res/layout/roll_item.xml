@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rappresenta un risultato di un lancio -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/riRoot"
+    
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+	<ImageView
+	    android:id="@+id/riImage"
+	    android:layout_width="32dp"
+	    android:layout_height="32dp"
+	    
+	    android:layout_alignParentLeft="true"
+	    android:layout_centerVertical="true"
+	    
+	    android:src="@drawable/ic_dxx_gray"
+	    />
+    
+	<ImageView
+        android:id="@+id/riResultIcon"
+        
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        
+        android:layout_toRightOf="@+id/riResult"
+	    android:layout_centerVertical="true"
+
+        android:src="@drawable/ic_res_000"
+        />
+
+	<TextView style="@style/Result.Value"
+        android:id="@+id/riResult"
+        
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        
+        android:layout_toRightOf="@+id/riImage"
+	    android:layout_centerVertical="true"
+
+        android:text="00"
+        />
+
+	<TextView style="@style/Result.Title"
+        android:id="@+id/riName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        android:layout_toRightOf="@+id/riResultIcon"
+        android:layout_alignParentTop="true"
+        
+        android:text="1d12 + 1d12"
+		/>
+
+    <TextView style="@style/Result.Text"
+        android:id="@+id/riResultText"
+        
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        android:layout_toRightOf="@+id/riResultIcon"
+        android:layout_below="@+id/riName"
+        
+        android:text="[8] + [5]"
+        />
+
+</RelativeLayout>

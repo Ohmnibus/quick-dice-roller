@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drtRoot"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+	<RelativeLayout        android:id="@+id/drtRolling"
+	    android:layout_width="@dimen/roll_toast_canvas_size"
+		android:layout_height="@dimen/roll_toast_canvas_size"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true" >
+	
+	    <ImageView
+	        android:id="@+id/drtImg"
+	        android:layout_width="@dimen/roll_toast_icon_size"
+	        android:layout_height="@dimen/roll_toast_icon_size"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:src="@drawable/ic_d20_blue"
+	        android:contentDescription="@string/lblIcon" />
+
+	    <TextView
+	        android:id="@+id/drtText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:marqueeRepeatLimit="marquee_forever"
+	        android:singleLine="true"
+	        
+	        android:text="@string/lblOk"
+	        android:textSize="@dimen/roll_toast_base_font_size"
+	        android:textColor="@color/toast_dice_number"
+	        android:shadowColor="@color/toast_dice_number_shadow"
+	        android:shadowDx="0"
+	        android:shadowDy="0"
+	        android:shadowRadius="1.2" />
+	
+	</RelativeLayout>
+</RelativeLayout>

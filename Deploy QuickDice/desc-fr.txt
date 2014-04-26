@@ -1,71 +1,73 @@
 ##Title:30##
-Lanceur de dés rapide
+Lanceur de dÃ©s rapide
 
 ##Description:4000##
-Le "Lanceur de dés rapide" (Quick Dice Roller) est un simulateur de jet de dés crée pour répondre aux besoins des amateurs de jeux de rôle.
-Il vous permet de simuler des jets de dés pour la plupart des systèmes de jeu, en dépit de leur complexité.
+Le "Lanceur de dÃ©s rapide" (Quick Dice Roller) est un simulateur de jet de dÃ©s crÃ©e pour rÃ©pondre aux besoins des amateurs de jeux de rÃ´le.
+Il vous permet de simuler des jets de dÃ©s pour la plupart des systÃ¨mes de jeu, en dÃ©pit de leur complexitÃ©.
 
-Les dés peuvent être ajoutés à volonté, en utilisant les expressions classiques tels que "2d6 +5" ainsi que certains plus ou moins générique que "rak(1d6,4,3)" (et elles peuvent être combinés enseble). Un générateur d'expression pratique simplifie la procédure et vous permet d'accéder à l'aide en ligne (en italien et en anglais uniquement).
+Les dÃ©s peuvent Ãªtre ajoutÃ©s Ã  volontÃ©, en utilisant les expressions classiques tels que <i>2d6+5</i> ainsi que certains plus ou moins gÃ©nÃ©rique que <i>rak(1d6,4,3)</i> (et elles peuvent Ãªtre combinÃ©s enseble). Un gÃ©nÃ©rateur d'expression pratique simplifie la procÃ©dure et vous permet d'accÃ©der Ã  l'aide en ligne (en italien et en anglais uniquement).
 
-L'application vous permet de créer différentes collections de dés (selon le système de jeu, pour caractère ou comme mieux vous désirez) et vous pouvez passer d'une collection à l'autre très rapidement.
+Vous pouvez consulter la liste de toutes les fonctions supportÃ©es ici: http://goo.gl/TTjb9 (en anglais)
 
-Le lancer de dés est extrêmement rapide. Au lieu de choisir un dé avec une pression et l'exécuter avec une autre, le "Lanceur de dés rapide" vous permet de lancer avec une seule pression. Une économie de 50%!
+L'application vous permet de crÃ©er diffÃ©rentes collections de dÃ©s (selon le systÃ¨me de jeu, pour caractÃ¨re ou comme mieux vous dÃ©sirez) et vous pouvez passer d'une collection Ã  l'autre trÃ¨s rapidement.
 
-L'application peut être configuré pour concaténer les lancements, en façon que deux lancement consécutifs sont automatiquement regroupés en un seul lancement. Ou, si vous avez besoin de les concaténer souvent, vous pouvez créer un nouvel dé avec la somme des deux (par exemple, "1d6 +1 d8").
+Le lancer de dÃ©s est extrÃªmement rapide. Au lieu de choisir un dÃ© avec une pression et l'exÃ©cuter avec une autre, le "Lanceur de dÃ©s rapide" vous permet de lancer avec une seule pression. Une Ã©conomie de 50%!
 
-Jouez-vous par chat ou par e-mail? Le "Lanceur de dés rapides" vous permet de copier automatiquement le résultat du dernier lancement dans le presse-papiers, afin qu'il peut être partagé avec un simple "coller". 
+L'application peut Ãªtre configurÃ© pour concatÃ©ner les lancements, en faÃ§on que deux lancement consÃ©cutifs sont automatiquement regroupÃ©s en un seul lancement. Ou, si vous avez besoin de les concatÃ©ner souvent, vous pouvez crÃ©er un nouvel dÃ© avec la somme des deux (par exemple, <i>1d6+1d8</i>).
 
-Le "Lanceur de des rapides" est l'une des rares applications de sa catégorie (peut-être le seul?) qui vous permet d'ajouter des modificateurs même après que le lancement a été effectué, avec un simple pression. Le guerrier a un -4 à frapper parce qu'il a été aveuglé? Pas de problème: une pression sur le dé et une pression au modificateur -4.
+Jouez-vous par chat ou par e-mail? Le "Lanceur de dÃ©s rapides" vous permet de copier automatiquement le rÃ©sultat du dernier lancement dans le presse-papiers, afin qu'il peut Ãªtre partagÃ© avec un simple <i>coller</i>.
 
-Les principales caractéristiques du "Lanceur de dés rapide":
+Le "Lanceur de des rapides" est l'une des rares applications de sa catÃ©gorie (peut-Ãªtre le seul?) qui vous permet d'ajouter des modificateurs mÃªme aprÃ¨s que le lancement a Ã©tÃ© effectuÃ©, avec un simple pression. Le guerrier a un -4 Ã  frapper parce qu'il a Ã©tÃ© aveuglÃ©? Pas de problÃ¨me: une pression sur le dÃ© et une pression au modificateur -4.
 
-- Lancer de dés avec une simple pression
-- Appliquer facilement les modificateurs
-- Possibilité d'éditer librement les dés
-- Dés divisés en collections
-- Puissant processeur d'expressions
-- Fonctions pour la simulation des principaux systèmes
-- Constructeur des expressions simple et intuitif
-- Aide en ligne (en italien et en anglais uniquement)
-- Large choix de dés et icônes mnémoniques
-- Possibilité d'agréger les résultats en mode automatique ou manuel
-- Qualité du résultat avec un coup d'œil
-- Notification du dernier lancement en superposition 
-- Notifications sonorées
-- Persistance des données entre les différentes installations*
-- Importer et exporter les définitions des dés et des collections**
+<b>Les principales caractÃ©ristiques du "Lanceur de dÃ©s rapide"</b>
 
-Certains des systèmes pris en charge:
+â˜… Lancer de dÃ©s avec une simple pression
+â˜… Appliquer facilement les modificateurs
+â˜… PossibilitÃ© d'Ã©diter librement les dÃ©s
+â˜… DÃ©s divisÃ©s en collections
+â˜… Puissant processeur d'expressions
+â˜… Fonctions pour la simulation des principaux systÃ¨mes
+â˜… Constructeur des expressions simple et intuitif
+â˜… Aide en ligne (en italien et en anglais uniquement)
+â˜… Large choix de dÃ©s et icÃ´nes mnÃ©moniques
+â˜… PossibilitÃ© d'agrÃ©ger les rÃ©sultats en mode automatique ou manuel
+â˜… QualitÃ© du rÃ©sultat avec un coup d'Å“il
+â˜… Notification du dernier lancement en superposition 
+â˜… Notifications sonorÃ©es
+â˜… Persistance des donnÃ©es entre les diffÃ©rentes installations*
+â˜… Importer et exporter les dÃ©finitions des dÃ©s et des collections**
 
-- L'Appel de Cthulhu
-- Arcan Myth
-- BASH!
-- Burning Wheel
-- Deadlands
-- Donjons et Dragons (toutes les éditions)
-- Dungeon World
-- Exaltés
-- Feng Shui
-- GURPS
-- HERO System
-- JRTM
-- Le Livre des cinq anneaux
-- Lords of Knowledge
-- Pathfinder
-- Savage Worlds
-- Star Wars
-- Storyteller System (Le Monde des ténèbres)
-- Storytelling System (Le Monde des ténèbres 2)
-- Traveller
+<b>Certains des systÃ¨mes pris en charge</b>
+
+â˜† L'Appel de Cthulhu
+â˜† Arcan Myth
+â˜† BASH!
+â˜† Burning Wheel
+â˜† Deadlands
+â˜† Donjons et Dragons (toutes les Ã©ditions)
+â˜† Dungeon World
+â˜† ExaltÃ©s
+â˜† Feng Shui
+â˜† GURPS
+â˜† HERO System
+â˜† JRTM
+â˜† Le Livre des cinq anneaux
+â˜† Lords of Knowledge
+â˜† Pathfinder
+â˜† Savage Worlds
+â˜† Star Wars
+â˜† Storyteller System (Le Monde des tÃ©nÃ¨bres)
+â˜† Storytelling System (Le Monde des tÃ©nÃ¨bres 2)
+â˜† Traveller
 
 ...et bien d'autres!
 
 
-*La sauvegarde de vos données et de vos préférences est disponible dans la version 2.2 d'Android, mais pas sur tous les appareils.
+*La sauvegarde de vos donnÃ©es et de vos prÃ©fÃ©rences est disponible dans la version 2.2 d'Android, mais pas sur tous les appareils.
 
-**Il nécessite l'accès en lecture et en écriture à la mémoire du dispositif.
+**Il nÃ©cessite l'accÃ¨s en lecture et en Ã©criture Ã  la mÃ©moire du dispositif.
 
-Mots-clés: Dés, Lanceur, Jeté, Dice, dé, Die, Roller, JdR, Jeux, Rôle, RPG, Role, Jeu, Maître, Gratuit, français, WhiteWholf, WW, Vampires, Exaltés, L5A, L5R, D20, Pool, R&K, Explode, Exploding, Open
+Mots-clÃ©s: DÃ©s, Lanceur, JetÃ©, Dice, dÃ©, Die, Roller, JdR, Jeux, RÃ´le, RPG, Role, Jeu, MaÃ®tre, Gratuit, franÃ§ais, WhiteWholf, WW, Vampires, ExaltÃ©s, L5A, L5R, D20, Pool, R&K, Explode, Exploding, Open
 
 ##Recent Changes:500##
 - Move dice through dice bags
@@ -78,9 +80,9 @@ Mots-clés: Dés, Lanceur, Jeté, Dice, dé, Die, Roller, JdR, Jeux, Rôle, RPG, Role
 - Minor fix and improvements
 
 ##Promo Text:80##
-Le lanceur de dés flexible, complet et pratique.
+Le lanceur de dÃ©s flexible, complet et pratique.
 
 ## APPIA ##
 
 ## Keywords:10 ##
-Dés, Dice Roller, Gdr, Free, WhiteWholf, Vampiri, Exalted, D20, D&D
+DÃ©s, Dice Roller, Gdr, Free, WhiteWholf, Vampiri, Exalted, D20, D&D
