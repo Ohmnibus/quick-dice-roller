@@ -1,0 +1,91 @@
+##Title:30##
+TiraDadi Rapido
+
+##Description:4000##
+TiraDadi Rapido (Quick Dice Roller) è un'app creata per i geek fissati di GdR. Permette di simulare i lanci di dadi della maggior parte dei sistemi di gioco, per quanto complessi possano essere.
+
+I dadi possono essere aggiunti a piacimento, utilizzando le espressioni standard quali <i>2d6+5</i> oppure funzioni come <i>rak(1d6,4,3)</i> che permettono di simulare i sistemi di gioco più complessi. Un pratico costruttore di espressioni semplifica la procedura, e permette di accedere alla guida in linea (solo in italiano ed inglese).
+
+Controlla la lista di tutte le funzioni supportate qui: http://goo.gl/qh3oM
+
+L'app permette di creare differenti collezioni di dadi (suddivisi per sistema di gioco, per personaggio o come meglio preferite) ed è possibile passare da una collezione ad un'altra in un batter d'occhio.
+
+Il lancio dei dadi è velocissimo. Invece di scegliere un dado con un tocco e lanciarlo con un altro, TiraDadi Rapido permette di eseguire un lancio semplicemente toccando l'icona del dado corrispondente. Un risparmio del 50%!
+
+L'app può essere configurata per concatenare i lanci, in modo che due lanci consecutivi siano automaticamente aggregati in un unico lancio. Oppure, se dovete concatenarli spesso, potete creare un nuovo dado con la somma dei due (come ad esempio <i>1d6+1d8</i>).
+
+Giocate via chat, o via mail? TiraDadi Rapido permette di copiare automaticamente il risultato dell'ultimo lancio nella clipboard, in modo da poter essere condiviso con un semplice <i>incolla</i>.
+
+TiraDadi Rapido è una delle poche app della sua categoria (forse l'unica?) che permette di aggiungere modificatori al lancio anche dopo che questo è stato effettuato, sempre con un semplice tocco. Il guerriero ha un -4 al colpire perché è stato accecato? Nessun problema: un tap sul dado di attacco ed un tap sul modificatore -4.
+
+<b>Alcune delle principali caratteristiche di TiraDadi Rapido</b>
+
+★ Lancia i dadi con un semplice tocco
+★ Applica modificatori al volo
+★ Aggiungi, togli o modifica i dadi a piacimento
+★ Organizza i dadi in collezioni
+★ Usa le espressioni che ti sono familiari (come <i>xdy+z</i>)
+★ Ampia scelta di funzioni per la simulazione dei sistemi più complessi
+★ Costruttore di espressioni semplice ed intuitivo
+★ Guida in linea (solo italiano ed inglese)
+★ Ampia scelta di icone per i dadi e le collezioni
+★ Aggregazione automatica o manuale dei risultati
+★ Misura dell'esito del risultato a colpo d'occhio
+★ Notifica dell'ultimo lancio in sovraimpressione
+★ Notifiche sonore (opzionali)
+★ Persistenza dei dati tra varie installazioni*
+★ Importa ed esporta le definizioni dei dadi e delle collezioni**
+
+<b>Alcuni dei sistemi attualmente supportati</b>
+
+☆ Arcan Myth
+☆ BASH!
+☆ Burning Wheel
+☆ Deadlands
+☆ Dungeon World
+☆ Dungeons & Dragons (tutte le edizioni)
+☆ Dungeonslayers
+☆ Dystopian Wars
+☆ Exalted
+☆ Feng Shui
+☆ GIRSA
+☆ Guerre Stellari
+☆ GURPS
+☆ HERO System
+☆ La leggenda dei 5 anelli
+☆ Lords of Knowledge
+☆ Pathfinder
+☆ Il Richiamo di Cthulhu
+☆ Savage Worlds
+☆ Storyteller System (Mondo di Tenebra)
+☆ Storytelling System (Nuovo mondo di Tenebra)
+☆ Traveller
+
+...e molti altri!
+
+
+*La disponibilità del backup dei dati e delle preferenze dipende dal costruttore del dispositivo, ed è supportata solo in Android versione 2.2 o successiva.
+
+**Richiede l'accesso in lettura e scrittura alla memoria del dispositivo.
+
+Parole chiave: Aperto, Boardgame, D&D, D20, Da tavolo, Dadi, Dado, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, GdR, Giochi di Ruolo, Gioco di Ruolo, HERO, L5A, L5R, Lancia, Lancio, Master, OSR, Open, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, Vampiri, WhiteWholf
+
+
+##Recent Changes:500##
+- Sposta i dadi tra collezioni
+- Clona dadi e collezioni
+- Swipe per eliminare un risultato
+- Ripristina i risultati eliminati
+- Collegamento dei lanci a richiesta
+- Funzione "abs" (valore assoluto)
+- Corrette le funzioni "rup" e "rdn"
+- Corretta la funzione "rak"
+- Correzioni ed ottimizzazioni minori
+
+##Promo Text:80##
+Il simulatore di dadi flessibile, completo e pratico.
+
+## APPIA ##
+
+## Keywords:10 ##
+Dadi, Dice Roller, Gdr, Free, WhiteWholf, Vampiri, Exalted, D20, D&D

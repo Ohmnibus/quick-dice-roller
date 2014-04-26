@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="toast_dice_number">#dddddd</color>
+	<color name="toast_dice_number_shadow">#000000</color>
+	<color name="dice_number">#ffffff</color>
+	<color name="dice_number_shadow">#000000</color>
+	<color name="modifier_bg_start">#ff333333</color>
+	<color name="modifier_bg_end">#33333333</color>
+	<color name="main_bg">#112233</color>
+	<color name="main_bg_darker">#081122</color>
+	<color name="main_bg_border">#000811</color>
+</resources>

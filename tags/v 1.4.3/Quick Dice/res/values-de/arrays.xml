@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_dice_expr">
+	    <item>1w4</item>
+	    <item>1w6</item>
+	    <item>1w8</item>
+	    <item>1w10</item>
+	    <item>1w12</item>
+	    <item>1w20</item>
+	    <item>1w100</item>
+	</string-array>
+</resources>

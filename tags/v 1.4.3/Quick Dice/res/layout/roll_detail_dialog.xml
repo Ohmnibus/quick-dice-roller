@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content">
+	
+	    <TextView style="@style/Details.Label"
+	        android:id="@+id/rdNameLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentLeft="true"
+	        
+	        android:text="@string/lblName" />
+	    
+	    <TextView style="@style/Details.Value"
+	        android:id="@+id/rdName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdNameLabel"
+	        android:layout_alignLeft="@+id/rdNameLabel"
+	        
+	        android:text="@string/lblName" />
+	
+	    <TextView style="@style/Details.Label"
+	        android:id="@+id/rdDescriptionLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdName"
+	        android:layout_alignParentLeft="true"
+	        
+	        android:text="@string/lblDesc" />
+	    
+	    <TextView style="@style/Details.Value"
+	        android:id="@+id/rdDescription"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdDescriptionLabel"
+	        android:layout_alignLeft="@+id/rdDescriptionLabel"
+	        
+	        android:singleLine="false"
+	        
+	        android:text="@string/lblDesc" />
+	
+	    <!-- <TextView style="@style/RollDetailsLabel"
+	        android:id="@+id/rdExpressionLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdDescription"
+	        android:layout_alignParentLeft="true"
+	        
+	        android:text="@string/lblExp" />
+	    
+	    <TextView style="@style/RollDetailsValue"
+	        android:id="@+id/rdExpression"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdExpressionLabel"
+	        android:layout_alignLeft="@+id/rdDescriptionLabel"
+	        
+	        android:singleLine="false"
+	        
+	        android:text="@string/lblExp" /> -->
+	
+	    <TextView style="@style/Details.Label"
+	        android:id="@+id/rdResultTextLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdDescription"
+	        android:layout_alignParentLeft="true"
+	        
+	        android:text="@string/lblResultText" />
+	    
+	    <TextView style="@style/Details.Value"
+	        android:id="@+id/rdResultText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdResultTextLabel"
+	        android:layout_alignLeft="@+id/rdResultTextLabel"
+	        
+	        android:text="@string/lblResultText" />
+	
+	    <TextView style="@style/Details.Label"
+	        android:id="@+id/rdResultValueLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdResultText"
+	        android:layout_alignParentLeft="true"
+	        
+	        android:text="@string/lblResultValue" />
+	    
+	    <TextView style="@style/Details.Value"
+	        android:id="@+id/rdResultValue"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdResultValueLabel"
+	        android:layout_alignLeft="@+id/rdResultValueLabel"
+	        
+	        android:text="@string/lblResultValue" />
+	
+	    <TextView style="@style/Details.Label"
+	        android:id="@+id/rdRangeLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdResultValue"
+	        android:layout_alignParentLeft="true"
+	        
+	        android:text="@string/lblRangeValue" />
+	    
+	    <TextView style="@style/Details.Value"
+	        android:id="@+id/rdRange"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_below="@+id/rdRangeLabel"
+	        android:layout_alignLeft="@+id/rdRangeLabel"
+	        
+	        android:text="@string/lblRangeValue" />
+	
+	</RelativeLayout>
+</ScrollView>
