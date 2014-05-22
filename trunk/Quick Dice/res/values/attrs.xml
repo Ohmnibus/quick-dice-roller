@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<declare-styleable name="SplitView">
+		<attr name="handle" format="reference" />
+		<attr name="firstContent" format="reference" />
+		<attr name="secondContent" format="reference" />
+	</declare-styleable>
+
+	<declare-styleable name="SplitView_LayoutParams">
+		<attr name="minSize" format="dimension" />
+		<attr name="initialSize" format="dimension" />
+	</declare-styleable>
+</resources>

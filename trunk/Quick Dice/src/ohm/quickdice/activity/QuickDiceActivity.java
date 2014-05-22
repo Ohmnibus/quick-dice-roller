@@ -8,6 +8,8 @@ import ohm.library.compat.CompatActionBar;
 import ohm.library.compat.CompatClipboard;
 import ohm.library.gesture.SwipeDismissGridViewTouchListener;
 import ohm.library.gesture.SwipeDismissTouchListener;
+import ohm.library.widget.SplitView;
+import ohm.library.widget.SplitView.ResizeListener;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.DiceBagAdapter;
@@ -115,12 +117,9 @@ public class QuickDiceActivity extends BaseActivity {
 
 	//Cache for "rollDiceToast"
 	Toast rollDiceToast = null;
-	//View rollDiceLayout = null;
 	View rollDiceView = null;
 	ImageView rollDiceImage = null;
 	TextView rollDiceText = null;
-	
-	//long startInterval = 0;
 	
 	private final int LINK_LEVEL_OFF = 0;
 	private final int LINK_LEVEL_ON = 1;
@@ -129,85 +128,82 @@ public class QuickDiceActivity extends BaseActivity {
 
 	private final String TYPE_MODIFIER = "TYPE_MODIFIER";
 
-    /**
-     * Called when the activity is first created.
-     */
-//    @SuppressWarnings("unchecked")
+	/**
+	 * Called when the activity is first created.
+	 */
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        //Initializations
-        //app = (QuickDiceApp)this.getApplication();
-        app = QuickDiceApp.getInstance();
-        res = getResources();
-        //graphicManager = new Graphic(res);
-        graphicManager = app.getGraphic();
-        pref = app.getPreferences();
-        undoManager = UndoManager.getInstance();
-		
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		//Initializations
+		app = QuickDiceApp.getInstance();
+		res = getResources();
+		graphicManager = app.getGraphic();
+		pref = app.getPreferences();
+		undoManager = UndoManager.getInstance();
+
 		diceBagManager = app.getBagManager();
 		diceBagManager.initBagManager();
-		
-        diceBag = diceBagManager.getDice();
-        bonusBag = diceBagManager.getModifiers();
-		
-        modifierViewList = new ArrayList<View>();
-        
-        if (savedInstanceState != null) {
+
+		diceBag = diceBagManager.getDice();
+		bonusBag = diceBagManager.getModifiers();
+
+		modifierViewList = new ArrayList<View>();
+
+		if (savedInstanceState != null) {
 			lastResult = null;
 			resultList = null;
-        	
+
 			String jsonData = savedInstanceState.getString(KEY_ROLL_LIST);
-        	if (jsonData != null) {
+			if (jsonData != null) {
 				resultList = SerializationManager.ResultListNoException(jsonData);
-	            if (resultList != null) {
-	            	lastResult = resultList.remove(0);
-	            }
-        	}
-        } else {
-        	int currentVersion = app.getCurrentVersion();
-        	int lastVersionExecuted = app.getLastVersionExecuted();
-        	if (lastVersionExecuted < 0) {
-        		//First execution
-        		DialogHelper.ShowAbout(this);
-        		app.setLastVersionExecuted(currentVersion);
-        	} else if (lastVersionExecuted < currentVersion) {
-        		//Execution after update
-        		DialogHelper.ShowWhatsNew(this);
-        		app.setLastVersionExecuted(currentVersion);
-        	}
-        }
-        if (lastResult == null) {
-        	resultList = app.getPersistence().loadResultList();
-            if (resultList != null) {
-            	lastResult = resultList.remove(0);
-            }
-        }
-        if (lastResult == null) {
-        	lastResult = new RollResult[0];
-        }
-        
-        if (resultList == null) {
-        	resultList = new ArrayList<RollResult[]>();
-        }
-        
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        
-        initViews();
-    }
+				if (resultList != null) {
+					lastResult = resultList.remove(0);
+				}
+			}
+		} else {
+			int currentVersion = app.getCurrentVersion();
+			int lastVersionExecuted = app.getLastVersionExecuted();
+			if (lastVersionExecuted < 0) {
+				//First execution
+				DialogHelper.ShowAbout(this);
+				app.setLastVersionExecuted(currentVersion);
+			} else if (lastVersionExecuted < currentVersion) {
+				//Execution after update
+				DialogHelper.ShowWhatsNew(this);
+				app.setLastVersionExecuted(currentVersion);
+			}
+		}
+		if (lastResult == null) {
+			resultList = app.getPersistence().loadResultList();
+			if (resultList != null) {
+				lastResult = resultList.remove(0);
+			}
+		}
+		if (lastResult == null) {
+			lastResult = new RollResult[0];
+		}
+
+		if (resultList == null) {
+			resultList = new ArrayList<RollResult[]>();
+		}
+
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+		initViews();
+	}
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		// Sync the toggle state after onRestoreInstanceState has occurred.
-        diceBagDrawerToggle.syncState();
+		diceBagDrawerToggle.syncState();
 	}
 	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-        diceBagDrawerToggle.onConfigurationChanged(newConfig);
+		diceBagDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
@@ -246,11 +242,11 @@ public class QuickDiceActivity extends BaseActivity {
 		super.onStop();
 	}
 
-    @Override
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.menu_main, menu);
-	    return true;
+		inflater.inflate(R.menu.menu_main, menu);
+		return true;
 	}
 
 	@Override
@@ -258,8 +254,8 @@ public class QuickDiceActivity extends BaseActivity {
 		boolean retVal = super.onPrepareOptionsMenu(menu);
 
 		menu.findItem(R.id.mmUndoClearAllResults).setVisible(undoManager.canUndoAll());
-	    menu.findItem(R.id.mmUndoClearResult).setVisible(undoManager.canUndo());
-    	menu.findItem(R.id.mmAddModifier).setVisible(pref.getShowModifiers());
+		menu.findItem(R.id.mmUndoClearResult).setVisible(undoManager.canUndo());
+		menu.findItem(R.id.mmAddModifier).setVisible(pref.getShowModifiers());
 
 		return retVal;
 	}
@@ -268,53 +264,50 @@ public class QuickDiceActivity extends BaseActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		boolean retVal;
-		
+
 		if (diceBagDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		
+
 		retVal = true;
-		
-	    switch (item.getItemId()) {
-	    case R.id.mmAddDiceBag:
-			callEditDiceBag(EditBagActivity.ACTIVITY_ADD, null, EditBagActivity.POSITION_UNDEFINED);
-	        break;
-	    case R.id.mmAddDice:
-			callEditDice(EditDiceActivity.ACTIVITY_ADD, null, EditDiceActivity.POSITION_UNDEFINED);
-	        break;
-	    case R.id.mmAddModifier:
-	    	callAddModifier(ModifierBuilderDialog.POSITION_UNDEFINED);
-	        break;
-	    case R.id.mmSettings:
-			callPreferences();
-	        break;
-	    case R.id.mmUndoClearResult:
-	    	restoreFromUndoList();
-	    	break;
-	    case R.id.mmClearAllResults:
-	    	clearAllRollResult();
-	    	break;
-	    case R.id.mmUndoClearAllResults:
-	    	restoreFromUndoAll();
-	    	break;
-//	    case R.id.mmSuggest:
-//	    	sendSuggestion();
-//	    	break;
-	    case R.id.mmImportExport:
-	    	callImportExport();
-	    	break;
-	    case R.id.mmAbout:
-	    	DialogHelper.ShowAbout(this);
-	    	break;
-	    case R.id.mmExit:
-	    	this.finish();
-	    	break;
-	    default:
-	    	//Unknown: pass to parent
-	    	retVal=super.onOptionsItemSelected(item);
-	        break;
-	    }
-	    return retVal;
+
+		switch (item.getItemId()) {
+			case R.id.mmAddDiceBag:
+				callEditDiceBag(EditBagActivity.ACTIVITY_ADD, null, EditBagActivity.POSITION_UNDEFINED);
+				break;
+			case R.id.mmAddDice:
+				callEditDice(EditDiceActivity.ACTIVITY_ADD, null, EditDiceActivity.POSITION_UNDEFINED);
+				break;
+			case R.id.mmAddModifier:
+				callAddModifier(ModifierBuilderDialog.POSITION_UNDEFINED);
+				break;
+			case R.id.mmSettings:
+				callPreferences();
+				break;
+			case R.id.mmUndoClearResult:
+				restoreFromUndoList();
+				break;
+			case R.id.mmClearAllResults:
+				clearAllRollResult();
+				break;
+			case R.id.mmUndoClearAllResults:
+				restoreFromUndoAll();
+				break;
+			case R.id.mmImportExport:
+				callImportExport();
+				break;
+			case R.id.mmAbout:
+				DialogHelper.ShowAbout(this);
+				break;
+			case R.id.mmExit:
+				this.finish();
+				break;
+			default:
+				//Unknown: pass to parent
+				retVal=super.onOptionsItemSelected(item);
+				break;
+		}
+		return retVal;
 	}
 
 	/**
@@ -327,60 +320,60 @@ public class QuickDiceActivity extends BaseActivity {
 		if (requestCode == EditBagActivity.ACTIVITY_ADD && resultCode == EditBagActivity.RESULT_OK) {
 			//Add new dice bag
 			DiceBag newBag = getDiceBagFromIntent(data);
-	        if (newBag != null) {
+			if (newBag != null) {
 				int position = getDiceBagPositionFromIntent(data);
 				diceBagManager.addDiceBag(position, newBag);
 				diceBagManager.setCurrentDiceBag(position);
 				refreshAllDiceContainers();
-	        }
+			}
 		} else if (requestCode == EditBagActivity.ACTIVITY_EDIT && resultCode == EditBagActivity.RESULT_OK) {
 			//Edit dice bag
 			DiceBag newBag = getDiceBagFromIntent(data);
-	        if (newBag != null) {
+			if (newBag != null) {
 				int position = getDiceBagPositionFromIntent(data);
 				diceBagManager.editDiceBag(position, newBag);
-	        	refreshBagsList();
-	        }
+				refreshBagsList();
+			}
 		} else if (requestCode == EditDiceActivity.ACTIVITY_ADD && resultCode == EditDiceActivity.RESULT_OK) {
 			//Add new die
 			DExpression newExp = getExpressionFromIntent(data);
-	        if (newExp != null) {
+			if (newExp != null) {
 				int position = getExpressionPositionFromIntent(data);
 				diceBagManager.addDie(position, newExp);
 				refreshDiceList();
-	        }
+			}
 		} else if (requestCode == EditDiceActivity.ACTIVITY_EDIT && resultCode == EditDiceActivity.RESULT_OK) {
 			//Edit die
 			DExpression newExp = getExpressionFromIntent(data);
-	        if (newExp != null) {
-	        	int position = getExpressionPositionFromIntent(data);
+			if (newExp != null) {
+				int position = getExpressionPositionFromIntent(data);
 				diceBagManager.editDie(position, newExp);
 				refreshDiceList();
-	        }
+			}
 		} else if (requestCode == ImportExportActivity.ACTIVITY_IMPORT_EXPORT) {
 			if (resultCode == ImportExportActivity.RESULT_EXPORT) {
 				Toast.makeText(this, R.string.msgExported, Toast.LENGTH_SHORT).show();
 			} else if (resultCode == ImportExportActivity.RESULT_IMPORT) {
 				Toast.makeText(this, R.string.msgImported, Toast.LENGTH_SHORT).show();
-		        refreshAllDiceContainers(true);
-			//} else if (resultCode == ImportExportActivity.RESULT_IMPORT_FAILED) {
+				refreshAllDiceContainers(true);
+				//} else if (resultCode == ImportExportActivity.RESULT_IMPORT_FAILED) {
 				//NOOP
 				//(Error is already notified by persistence manager)
 			}
 		} else if (requestCode == PrefDiceActivity.ACTIVITY_EDIT_PREF) {
 			//Apply new preferences
-			
+
 			//Request for backup.
 			backedUpData = false;
-			
+
 			pref.resetCache();
-			
+
 			//Number of columns
 			gvResults.setNumColumns(pref.getGridResultColumn());
-			
+
 			//Swap name and results
 			ResultListAdapter.setSwapNameResult(pref.getSwapNameResult());
-			
+
 			//Roll Pop Up
 			if (! pref.getShowToast()) {
 				//Free cache for "rollDiceToast"
@@ -415,7 +408,7 @@ public class QuickDiceActivity extends BaseActivity {
 					rollDiceFumbleSound = null;
 				}
 			}
-			
+
 			//Modifiers bar
 			initModifierList();
 			refreshResultList();
@@ -425,46 +418,46 @@ public class QuickDiceActivity extends BaseActivity {
 	
 	private DiceBag getDiceBagFromIntent(Intent data) {
 		DiceBag retVal;
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-        	retVal = (DiceBag)extras.getSerializable(EditBagActivity.BUNDLE_DICE_BAG);
-        } else {
-        	retVal = null;
-        }
-        return retVal;
+		Bundle extras = data.getExtras();
+		if (extras != null) {
+			retVal = (DiceBag)extras.getSerializable(EditBagActivity.BUNDLE_DICE_BAG);
+		} else {
+			retVal = null;
+		}
+		return retVal;
 	}
-	
+
 	private int getDiceBagPositionFromIntent(Intent data) {
 		int retVal;
-        Bundle extras = data.getExtras();
-        if (extras != null && extras.containsKey(EditBagActivity.BUNDLE_POSITION)) {
-        	retVal = extras.getInt(EditBagActivity.BUNDLE_POSITION);
-        } else {
-        	retVal = EditBagActivity.POSITION_UNDEFINED;
-        }
-        return retVal;
+		Bundle extras = data.getExtras();
+		if (extras != null && extras.containsKey(EditBagActivity.BUNDLE_POSITION)) {
+			retVal = extras.getInt(EditBagActivity.BUNDLE_POSITION);
+		} else {
+			retVal = EditBagActivity.POSITION_UNDEFINED;
+		}
+		return retVal;
 	}
 
 	private DExpression getExpressionFromIntent(Intent data) {
 		DExpression retVal;
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-        	retVal = (DExpression)extras.getSerializable(EditDiceActivity.BUNDLE_DICE_EXPRESSION);
-        } else {
-        	retVal = null;
-        }
-        return retVal;
+		Bundle extras = data.getExtras();
+		if (extras != null) {
+			retVal = (DExpression)extras.getSerializable(EditDiceActivity.BUNDLE_DICE_EXPRESSION);
+		} else {
+			retVal = null;
+		}
+		return retVal;
 	}
 	
 	private int getExpressionPositionFromIntent(Intent data) {
 		int retVal;
-        Bundle extras = data.getExtras();
-        if (extras != null && extras.containsKey(EditDiceActivity.BUNDLE_POSITION)) {
-        	retVal = extras.getInt(EditDiceActivity.BUNDLE_POSITION);
-        } else {
-        	retVal = EditDiceActivity.POSITION_UNDEFINED;
-        }
-        return retVal;
+		Bundle extras = data.getExtras();
+		if (extras != null && extras.containsKey(EditDiceActivity.BUNDLE_POSITION)) {
+			retVal = extras.getInt(EditDiceActivity.BUNDLE_POSITION);
+		} else {
+			retVal = EditDiceActivity.POSITION_UNDEFINED;
+		}
+		return retVal;
 	}
 	
 	/**
@@ -509,8 +502,6 @@ public class QuickDiceActivity extends BaseActivity {
 		inflater.inflate(R.menu.menu_dice_bag, menu);
 		
 		//Get the dice icon and resize it to fit the menu header icon size.
-//		Drawable diceBagIcon = graphicManager.resizeDrawable(
-//				app.getDiceIcon(bag.getResourceIndex()), 32, 32);
 		Drawable diceBagIcon = graphicManager.getResizedDiceIcon(
 				bag.getResourceIndex(), 32, 32);
 		menu.setHeaderIcon(diceBagIcon);
@@ -544,8 +535,6 @@ public class QuickDiceActivity extends BaseActivity {
 		inflater.inflate(R.menu.menu_dice, menu);
 		
 		//Get the dice icon and resize it to fit the menu header icon size.
-//		Drawable diceIcon = graphicManager.resizeDrawable(
-//				app.getDiceIcon(exp.getResourceIndex()), 32, 32);
 		Drawable diceIcon = graphicManager.getResizedDiceIcon(
 				exp.getResourceIndex(), 32, 32);
 		menu.setHeaderIcon(diceIcon);
@@ -575,8 +564,6 @@ public class QuickDiceActivity extends BaseActivity {
 		inflater.inflate(R.menu.menu_modifier, menu);
 
 		modifier = bonusBag.get(index);
-//		modIcon = graphicManager.resizeDrawable(
-//				app.getDiceIcon(modifier.getResourceIndex()), 32, 32);
 		modIcon = graphicManager.getResizedDiceIcon(
 				modifier.getResourceIndex(), 32, 32);
 
@@ -632,8 +619,6 @@ public class QuickDiceActivity extends BaseActivity {
 
 		//Get the dice icon and resize it to fit the menu header icon size.
 		mergedRoll = RollResult.mergeResultList(rollItem);
-//		Drawable diceIcon = graphicManager.resizeDrawable(
-//				app.getDiceIcon(mergedRoll.getResourceIndex()), 32, 32);
 		Drawable diceIcon = graphicManager.getResizedDiceIcon(
 				mergedRoll.getResourceIndex(), 32, 32);
 		menu.setHeaderIcon(diceIcon);
@@ -667,223 +652,214 @@ public class QuickDiceActivity extends BaseActivity {
 
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 
-	    switch (item.getItemId()) {
-	    case R.id.mdbSelect:
-	    	diceBagManager.setCurrentDiceBag(info.position);
-	    	refreshAllDiceContainers();
-			diceBagDrawer.closeDrawer(lvDiceBag);
-	    	break;
-	    case R.id.mdbEdit:
-	    	bag = (DiceBag)lvDiceBag.getItemAtPosition(info.position);
-	    	callEditDiceBag(EditBagActivity.ACTIVITY_EDIT, bag, info.position);
-	    	break;
-	    case R.id.mdbAddHere:
-	    	callEditDiceBag(EditBagActivity.ACTIVITY_ADD, null, info.position);
-	    	break;
-	    case R.id.mdbClone:
-	    	if (lvDiceBag.getCount() >= pref.getMaxDiceBags()) {
-	    		//Maximum number of allowed dice bags reached
-	    		Toast.makeText(this, R.string.msgMaxBagsReach, Toast.LENGTH_LONG).show();
-	    	} else {
-		    	diceBagManager.cloneDiceBag(info.position);
-		    	refreshAllDiceContainers();
-	    	}
-	    	break;
-	    case R.id.mdbRemove:
-	    	//Ask confirmation prior to delete a dice bag.
-	    	targetItem = info.position;
-	    	bag = (DiceBag)lvDiceBag.getItemAtPosition(info.position);
-			builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.msgRemoveDiceBagTitle);
-			builder.setMessage(Helper.getString(res, R.string.msgRemoveDiceBag, bag.getName(), bag.getDice().size(), bag.getModifiers().size()));
-			builder.setPositiveButton(
-					R.string.lblYes,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-							diceBagManager.removeDiceBag(targetItem);
-							refreshAllDiceContainers();
-						}
-					});
-			builder.setNegativeButton(
-					R.string.lblNo,
-					cancelDialogClickListener);
-			builder.create().show();
-	    	break;
-	    case R.id.mdbSwitchPrev:
-			diceBagManager.moveDiceBag(info.position, info.position - 1);
-			refreshAllDiceContainers();
-	    	break;
-	    case R.id.mdbSwitchNext:
-			diceBagManager.moveDiceBag(info.position, info.position + 1);
-			refreshAllDiceContainers();
-	    	break;
-	    case R.id.mdDetails:
-			exp = (DExpression)gvDice.getItemAtPosition(info.position);
-	    	new DiceDetailDialog(this, exp).show();
-	    	break;
-	    case R.id.mdRoll:
-			exp = (DExpression)gvDice.getItemAtPosition(info.position);
-	    	doRoll(exp);
-	    	break;
-	    case R.id.mdEdit:
-			exp = (DExpression)gvDice.getItemAtPosition(info.position);
-	    	callEditDice(EditDiceActivity.ACTIVITY_EDIT, exp, info.position);
-	    	break;
-	    case R.id.mdRemove:
-	    	//Ask confirmation prior to delete a dice.
-	    	targetItem = info.position;
-			exp = (DExpression)gvDice.getItemAtPosition(info.position);
-			builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.msgRemoveDiceTitle);
-			builder.setMessage(Helper.getString(res, R.string.msgRemoveDice, exp.getName()));
-			builder.setPositiveButton(
-					R.string.lblYes,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-							diceBagManager.removeDie(targetItem);
-							refreshDiceList();
-						}
-					});
-			builder.setNegativeButton(
-					R.string.lblNo,
-					cancelDialogClickListener);
-			builder.create().show();
-	    	break;
-	    case R.id.mdAddHere:
-	    	callEditDice(EditDiceActivity.ACTIVITY_ADD, null, info.position);
-	    	break;
-	    case R.id.mdClone:
-	    	if (diceBag.size() >= pref.getMaxDice()) {
-	    		//Maximum number of allowed dice reached
-	    		Toast.makeText(this, R.string.msgMaxDiceReach, Toast.LENGTH_LONG).show();
-	    	} else {
-		    	diceBagManager.cloneDie(info.position);
-		    	refreshAllDiceContainers();
-	    	}
-	    	break;
-//	    case R.id.mdSwitchPrev:
-//	    	diceBagManager.moveDie(info.position, info.position - 1);
-//			refreshDiceList();
-//	    	break;
-//	    case R.id.mdSwitchNext:
-//	    	diceBagManager.moveDie(info.position, info.position + 1);
-//			refreshDiceList();
-//	    	break;
-	    case R.id.mdMoveTo:
-	    	targetItem = info.position;
-	    	new DicePickerDialog(
-	    			this,
-	    			R.string.lblSelectDiceDest,
-	    			diceBagManager.getCurrentDiceBag(),
-	    			info.position,
-	    			DicePickerDialog.DIALOG_SELECT_DESTINATION,
-	    			new DicePickerDialog.ReadyListener() {
-						@Override
-						public void ready(boolean confirmed, int groupId, int itemId) {
-							if (confirmed) {
-								moveDice(diceBagManager.getCurrentDiceBag(), targetItem,
-									groupId, itemId);
+		switch (item.getItemId()) {
+			case R.id.mdbSelect:
+				diceBagManager.setCurrentDiceBag(info.position);
+				refreshAllDiceContainers();
+				diceBagDrawer.closeDrawer(lvDiceBag);
+				break;
+			case R.id.mdbEdit:
+				bag = (DiceBag)lvDiceBag.getItemAtPosition(info.position);
+				callEditDiceBag(EditBagActivity.ACTIVITY_EDIT, bag, info.position);
+				break;
+			case R.id.mdbAddHere:
+				callEditDiceBag(EditBagActivity.ACTIVITY_ADD, null, info.position);
+				break;
+			case R.id.mdbClone:
+				if (lvDiceBag.getCount() >= pref.getMaxDiceBags()) {
+					//Maximum number of allowed dice bags reached
+					Toast.makeText(this, R.string.msgMaxBagsReach, Toast.LENGTH_LONG).show();
+				} else {
+					diceBagManager.cloneDiceBag(info.position);
+					refreshAllDiceContainers();
+				}
+				break;
+			case R.id.mdbRemove:
+				//Ask confirmation prior to delete a dice bag.
+				targetItem = info.position;
+				bag = (DiceBag)lvDiceBag.getItemAtPosition(info.position);
+				builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.msgRemoveDiceBagTitle);
+				builder.setMessage(Helper.getString(res, R.string.msgRemoveDiceBag, bag.getName(), bag.getDice().size(), bag.getModifiers().size()));
+				builder.setPositiveButton(
+						R.string.lblYes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+								diceBagManager.removeDiceBag(targetItem);
+								refreshAllDiceContainers();
 							}
-						}
-					}).show();
-	    	break;
-	    case R.id.mrDetails:
-	    	if (info != null) {
-	    		result = (RollResult[])gvResults.getItemAtPosition(info.position);
-	    	} else {
-	    		result = lastResult;
-	    	}
-	    	new RollDetailDialog(this, result).show();
-	    	break;
-	    case R.id.mrClear:
-	    	clearRollResult(info == null ? -1 : info.position);
-	    	break;
-	    case R.id.mrClearAll:
-	    	clearAllRollResult();
-	    	break;
-	    case R.id.mrSplit:
-	    	if (info != null) {
-	    		//Split result at given list position
-	    		result = (RollResult[])gvResults.getItemAtPosition(info.position);
-	    		resultList.remove(info.position);
-	    		//for (int i = result.length - 1; i >= 0; i--) {
-	    		for (int i = 0; i < result.length; i++) {	
-	    			resultList.add(info.position, new RollResult[] {result[i]});
-	    		}
-				refreshResultList();
-	    	} else {
-	    		//Split result in lastResult box
-	    		//for (int i = lastResult.length - 1; i >= 1; i--) {
-	    		for (int i = 0; i < lastResult.length - 1; i++) {
-	    			resultList.add(0, new RollResult[] {lastResult[i]});
-	    		}
-	    		lastResult = new RollResult[] {lastResult[lastResult.length - 1]};
-				refreshLastResult();
-				refreshResultList();
-	    	}
-	    	invalidateUndo();
-	    	break;
-	    case R.id.mrMerge:
-	    	if (info != null) {
-	    		//Merge result at given list position with previous
-	    		result = linkResult(resultList.get(info.position), resultList.get(info.position + 1));
-	    		resultList.remove(info.position + 1);
-	    		resultList.remove(info.position);
-    			resultList.add(info.position, result);
-				refreshResultList();
-	    	} else {
-	    		//Merge result in lastResult box with previous
-	    		lastResult = linkResult(lastResult, resultList.get(0));
-	    		resultList.remove(0);
-				refreshLastResult();
-				refreshResultList();
-	    	}
-	    	invalidateUndo();
-	    	break;
-	    case R.id.moApply:
-	    	doModifier(bonusBag.get(modifierOpeningMenu));
-	    	invalidateUndo();
-	    	break;
-	    case R.id.moRemove:
-	    	//Ask confirmation prior to delete a modifier.
-	    	targetItem = modifierOpeningMenu;
-	    	mod = bonusBag.get(modifierOpeningMenu);
-			builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.msgRemoveModTitle);
-			builder.setMessage(Helper.getString(res, R.string.msgRemoveMod, mod.getName()));
-			builder.setPositiveButton(
-					R.string.lblYes,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-//							bonusBag.remove(itemToRemove);
-//							savedData = false;
-							diceBagManager.removeModifier(targetItem);
-							refreshModifierList();
-						}
-					});
-			builder.setNegativeButton(
-					R.string.lblNo,
-					cancelDialogClickListener);
-			builder.create().show();
-	    	break;
-	    case R.id.moAddHere:
-	    	callAddModifier(modifierOpeningMenu);
-	    	break;
-	    case R.id.moSwitchPrev:
-	    	diceBagManager.moveModifier(modifierOpeningMenu, modifierOpeningMenu - 1);
-			refreshModifierList();
-	    	break;
-	    case R.id.moSwitchNext:
-	    	diceBagManager.moveModifier(modifierOpeningMenu, modifierOpeningMenu + 1);
-			refreshModifierList();
-	    	break;
-	    default:
-	    	retVal = super.onContextItemSelected(item);
-	    	break;
-	    }
+						});
+				builder.setNegativeButton(
+						R.string.lblNo,
+						cancelDialogClickListener);
+				builder.create().show();
+				break;
+			case R.id.mdbSwitchPrev:
+				diceBagManager.moveDiceBag(info.position, info.position - 1);
+				refreshAllDiceContainers();
+				break;
+			case R.id.mdbSwitchNext:
+				diceBagManager.moveDiceBag(info.position, info.position + 1);
+				refreshAllDiceContainers();
+				break;
+			case R.id.mdDetails:
+				exp = (DExpression)gvDice.getItemAtPosition(info.position);
+				new DiceDetailDialog(this, exp).show();
+				break;
+			case R.id.mdRoll:
+				exp = (DExpression)gvDice.getItemAtPosition(info.position);
+				doRoll(exp);
+				break;
+			case R.id.mdEdit:
+				exp = (DExpression)gvDice.getItemAtPosition(info.position);
+				callEditDice(EditDiceActivity.ACTIVITY_EDIT, exp, info.position);
+				break;
+			case R.id.mdRemove:
+				//Ask confirmation prior to delete a dice.
+				targetItem = info.position;
+				exp = (DExpression)gvDice.getItemAtPosition(info.position);
+				builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.msgRemoveDiceTitle);
+				builder.setMessage(Helper.getString(res, R.string.msgRemoveDice, exp.getName()));
+				builder.setPositiveButton(
+						R.string.lblYes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+								diceBagManager.removeDie(targetItem);
+								refreshDiceList();
+							}
+						});
+				builder.setNegativeButton(
+						R.string.lblNo,
+						cancelDialogClickListener);
+				builder.create().show();
+				break;
+			case R.id.mdAddHere:
+				callEditDice(EditDiceActivity.ACTIVITY_ADD, null, info.position);
+				break;
+			case R.id.mdClone:
+				if (diceBag.size() >= pref.getMaxDice()) {
+					//Maximum number of allowed dice reached
+					Toast.makeText(this, R.string.msgMaxDiceReach, Toast.LENGTH_LONG).show();
+				} else {
+					diceBagManager.cloneDie(info.position);
+					refreshAllDiceContainers();
+				}
+				break;
+			case R.id.mdMoveTo:
+				targetItem = info.position;
+				new DicePickerDialog(
+						this,
+						R.string.lblSelectDiceDest,
+						diceBagManager.getCurrentDiceBag(),
+						info.position,
+						DicePickerDialog.DIALOG_SELECT_DESTINATION,
+						new DicePickerDialog.ReadyListener() {
+							@Override
+							public void ready(boolean confirmed, int groupId, int itemId) {
+								if (confirmed) {
+									moveDice(
+											diceBagManager.getCurrentDiceBag(),
+											targetItem,
+											groupId,
+											itemId);
+								}
+							}
+						}).show();
+				break;
+			case R.id.mrDetails:
+				if (info != null) {
+					result = (RollResult[])gvResults.getItemAtPosition(info.position);
+				} else {
+					result = lastResult;
+				}
+				new RollDetailDialog(this, result).show();
+				break;
+			case R.id.mrClear:
+				clearRollResult(info == null ? -1 : info.position);
+				break;
+			case R.id.mrClearAll:
+				clearAllRollResult();
+				break;
+			case R.id.mrSplit:
+				if (info != null) {
+					//Split result at given list position
+					result = (RollResult[])gvResults.getItemAtPosition(info.position);
+					resultList.remove(info.position);
+					for (int i = 0; i < result.length; i++) {	
+						resultList.add(info.position, new RollResult[] {result[i]});
+					}
+					refreshResultList();
+				} else {
+					//Split result in lastResult box
+					for (int i = 0; i < lastResult.length - 1; i++) {
+						resultList.add(0, new RollResult[] {lastResult[i]});
+					}
+					lastResult = new RollResult[] {lastResult[lastResult.length - 1]};
+					refreshLastResult();
+					refreshResultList();
+				}
+				invalidateUndo();
+				break;
+			case R.id.mrMerge:
+				if (info != null) {
+					//Merge result at given list position with previous
+					result = linkResult(resultList.get(info.position), resultList.get(info.position + 1));
+					resultList.remove(info.position + 1);
+					resultList.remove(info.position);
+					resultList.add(info.position, result);
+					refreshResultList();
+				} else {
+					//Merge result in lastResult box with previous
+					lastResult = linkResult(lastResult, resultList.get(0));
+					resultList.remove(0);
+					refreshLastResult();
+					refreshResultList();
+				}
+				invalidateUndo();
+				break;
+			case R.id.moApply:
+				doModifier(bonusBag.get(modifierOpeningMenu));
+				invalidateUndo();
+				break;
+			case R.id.moRemove:
+				// Ask confirmation prior to delete a modifier.
+				targetItem = modifierOpeningMenu;
+				mod = bonusBag.get(modifierOpeningMenu);
+				builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.msgRemoveModTitle);
+				builder.setMessage(Helper.getString(res, R.string.msgRemoveMod, mod.getName()));
+				builder.setPositiveButton(
+						R.string.lblYes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+								diceBagManager.removeModifier(targetItem);
+								refreshModifierList();
+							}
+						});
+				builder.setNegativeButton(
+						R.string.lblNo,
+						cancelDialogClickListener);
+				builder.create().show();
+				break;
+			case R.id.moAddHere:
+				callAddModifier(modifierOpeningMenu);
+				break;
+			case R.id.moSwitchPrev:
+				diceBagManager.moveModifier(modifierOpeningMenu, modifierOpeningMenu - 1);
+				refreshModifierList();
+				break;
+			case R.id.moSwitchNext:
+				diceBagManager.moveModifier(modifierOpeningMenu, modifierOpeningMenu + 1);
+				refreshModifierList();
+				break;
+			default:
+				retVal = super.onContextItemSelected(item);
+				break;
+		}
 		return retVal;
 	}
 
@@ -894,32 +870,49 @@ public class QuickDiceActivity extends BaseActivity {
 			findViewById(R.id.mRoot).setBackgroundResource(R.color.main_bg); //Remove the background
 			findViewById(R.id.mDiceBagList).setBackgroundResource(R.color.main_bg); //Remove the background from bag list
 		}
-//		if (app.getPlainBackground()) {
-//	    	setContentView(R.layout.quick_dice_activity_light);
-//		} else {
-//	    	setContentView(R.layout.quick_dice_activity);
-//		}
-	    
-	    actionBar = CompatActionBar.createInstance(this);
+
+		actionBar = CompatActionBar.createInstance(this);
+
+		//Initialize SplitView to last known size
+		SplitView sw = (SplitView)findViewById(R.id.mSplitView);
+		if (sw.getOrientation() == SplitView.VERTICAL) {
+			if (pref.getSplitPanelHeight() >= 0) {
+				sw.setContentSize(SplitView.FIRST, pref.getSplitPanelHeight());
+			}
+		} else {
+			if (pref.getSplitPanelWidth() >= 0) {
+				sw.setContentSize(SplitView.FIRST, pref.getSplitPanelWidth());
+			}
+		}
+		sw.setOnResizeListener(new ResizeListener() {
+			@Override
+			public void onResize(int orientation, int newSize) {
+				if (orientation == SplitView.VERTICAL) {
+					pref.setSplitPanelHeight(newSize);
+				} else {
+					pref.setSplitPanelWidth(newSize);
+				}
+			}
+		});
+
+		//Dice bag list
+		initDiceBagList();
 		
-    	//Dice bag list
-    	initDiceBagList();
-    	
-    	//Dice bag
-    	initDiceGrid();
-    	
-    	//Modifier list
-    	initModifierList();
-
-    	//Result list
-    	initResultList();
-
-        // References to the last roll panel
-    	// Must be called at last
-    	initLastResultView();
-    	
-    	introAnimation();
-    }
+		//Dice bag
+		initDiceGrid();
+		
+		//Modifier list
+		initModifierList();
+		
+		//Result list
+		initResultList();
+		
+		// References to the last roll panel
+		// Must be called at last
+		initLastResultView();
+		
+		introAnimation();
+	}
 	
 	private void initDiceBagList() {
 		//openDrawerContentDescRes = R.string.mnuSelectDiceBag;
@@ -935,55 +928,55 @@ public class QuickDiceActivity extends BaseActivity {
 		diceBagDrawerToggle = new ActionBarDrawerToggle(
 				this,
 				diceBagDrawer,
-                R.drawable.ic_drawer,
-                R.string.mnuSelectDiceBag, //openDrawerContentDescRes,
-                R.string.app_name /* closeDrawerContentDescRes */) {
+				R.drawable.ic_drawer,
+				R.string.mnuSelectDiceBag, //openDrawerContentDescRes,
+				R.string.app_name /* closeDrawerContentDescRes */) {
 
-            /** Called when a drawer has settled in a completely closed state. */
+			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
 				//actionBar.setTitle(R.string.app_name);
 				actionBar.setTitle(diceBagManager.getDiceBag().getName());
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+				//invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 				ActivityCompat.invalidateOptionsMenu(QuickDiceActivity.this);
-            }
+			}
 
-            /** Called when a drawer has settled in a completely open state. */
+			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
 				actionBar.setTitle(R.string.mnuSelectDiceBag);
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+				//invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 				ActivityCompat.invalidateOptionsMenu(QuickDiceActivity.this);
-            }
-        };
-        
-        // Set the drawer toggle as the DrawerListener
-        diceBagDrawer.setDrawerListener(diceBagDrawerToggle);
+			}
+		};
 
-        actionBar.setTitle(diceBagManager.getDiceBag().getName());
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        
+		// Set the drawer toggle as the DrawerListener
+		diceBagDrawer.setDrawerListener(diceBagDrawerToggle);
+
+		actionBar.setTitle(diceBagManager.getDiceBag().getName());
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeButtonEnabled(true);
+
 		lvDiceBag = (ListView)findViewById(R.id.mDiceBagList);
 		lvDiceBag.setAdapter(new DiceBagAdapter(
-        		this,
-        		R.layout.dice_bag_item,
-        		diceBagManager.getDiceBags()));
+				this,
+				R.layout.dice_bag_item,
+				diceBagManager.getDiceBags()));
 		lvDiceBag.setOnItemClickListener(diceBagClickListener);
 		registerForContextMenu(lvDiceBag);
-    }
+	}
 	
 	private void initDiceGrid() {
-    	gvDice = (GridView)findViewById(R.id.mDiceSet);
+		gvDice = (GridView)findViewById(R.id.mDiceSet);
 
-    	gvDice.setAdapter(new GridExpressionAdapter(
-        		this,
-        		R.layout.dice_item,
-        		diceBag));
-    	
-        gvDice.setOnItemClickListener(diceClickListener);
-        
-        gvDice.setSelector(android.R.drawable.list_selector_background);
-        
-    	registerForContextMenu(gvDice);
+		gvDice.setAdapter(new GridExpressionAdapter(
+				this,
+				R.layout.dice_item,
+				diceBag));
+
+		gvDice.setOnItemClickListener(diceClickListener);
+
+		gvDice.setSelector(android.R.drawable.list_selector_background);
+
+		registerForContextMenu(gvDice);
 	}
 	
 	private void initModifierList() {
@@ -1045,49 +1038,47 @@ public class QuickDiceActivity extends BaseActivity {
 	}
 	
 	private void initResultList() {
-        gvResults = (GridView)findViewById(R.id.mRollList);
-        
-        gvResults.setNumColumns(pref.getGridResultColumn());
-        
-        ResultListAdapter.setSwapNameResult(pref.getSwapNameResult());
-        
-        gvResults.setAdapter(new ResultListAdapter(
-        		this,
-        		R.layout.roll_item,
-        		resultList));
+		gvResults = (GridView)findViewById(R.id.mRollList);
 
-        SwipeDismissGridViewTouchListener touchListener = new SwipeDismissGridViewTouchListener(
-        		gvResults,
-        		new SwipeDismissGridViewTouchListener.DismissCallbacks(){
+		gvResults.setNumColumns(pref.getGridResultColumn());
+
+		ResultListAdapter.setSwapNameResult(pref.getSwapNameResult());
+
+		gvResults.setAdapter(new ResultListAdapter(
+				this,
+				R.layout.roll_item,
+				resultList));
+
+		SwipeDismissGridViewTouchListener touchListener = new SwipeDismissGridViewTouchListener(
+				gvResults,
+				new SwipeDismissGridViewTouchListener.DismissCallbacks(){
 					@Override
-        			public void onDismiss(GridView gridView, int[] reverseSortedPositions) {
+					public void onDismiss(GridView gridView, int[] reverseSortedPositions) {
 						clearRollResult(reverseSortedPositions);
-        			}
+					}
 
 					@Override
 					public boolean canDismiss(int position) {
 						return true;
 					}
-        		},
-        		SwipeDismissGridViewTouchListener.DIRECTION_RTOL);
-        
-        gvResults.setOnTouchListener(touchListener);
-        gvResults.setOnScrollListener(touchListener.makeScrollListener());
-        
-        gvResults.setSelector(android.R.drawable.list_selector_background);
+				},
+				SwipeDismissGridViewTouchListener.DIRECTION_RTOL);
 
-        registerForContextMenu(gvResults);
+		gvResults.setOnTouchListener(touchListener);
+		gvResults.setOnScrollListener(touchListener.makeScrollListener());
+
+		gvResults.setSelector(android.R.drawable.list_selector_background);
+
+		registerForContextMenu(gvResults);
 	}
-    
-	private void initLastResultView() {
-        lastResHolder = findViewById(R.id.mLastRollContainer);
-        
-    	registerForContextMenu(lastResHolder);
 
-        //lastResHolder.setOnTouchListener(Behavior.listOnTouchListener);
-        
-        lastResHolder.setOnTouchListener(new Behavior.RollResultTouchListener(
-        		lastResHolder,
+	private void initLastResultView() {
+		lastResHolder = findViewById(R.id.mLastRollContainer);
+
+		registerForContextMenu(lastResHolder);
+
+		lastResHolder.setOnTouchListener(new Behavior.RollResultTouchListener(
+				lastResHolder,
 				null,
 				new SwipeDismissTouchListener.DismissCallbacks(){
 					public void onDismiss(View view, Object token) {
@@ -1100,25 +1091,24 @@ public class QuickDiceActivity extends BaseActivity {
 					}
 				}));
 
-    	//((View)lastRollBlock.findViewById(R.id.riRoot)).setBackgroundResource(R.drawable.bg_last_result);
-        lastResDieImage = (ImageView)lastResHolder.findViewById(R.id.riImage);
-    	lastResName = (TextView)lastResHolder.findViewById(R.id.riName);
-    	lastResText = (TextView)lastResHolder.findViewById(R.id.riResultText);
-    	lastResValue = (TextView)lastResHolder.findViewById(R.id.riResult);
-    	lastResResultImage = (ImageView)lastResHolder.findViewById(R.id.riResultIcon);
+		lastResDieImage = (ImageView)lastResHolder.findViewById(R.id.riImage);
+		lastResName = (TextView)lastResHolder.findViewById(R.id.riName);
+		lastResText = (TextView)lastResHolder.findViewById(R.id.riResultText);
+		lastResValue = (TextView)lastResHolder.findViewById(R.id.riResult);
+		lastResResultImage = (ImageView)lastResHolder.findViewById(R.id.riResultIcon);
 
-    	linkSwitchButton = (ImageButton)lastResHolder.findViewById(R.id.mLinkButton);
-    	linkSwitchButton.setOnClickListener(linkSwitchButtonClickListener);
+		linkSwitchButton = (ImageButton)lastResHolder.findViewById(R.id.mLinkButton);
+		linkSwitchButton.setOnClickListener(linkSwitchButtonClickListener);
 		refreshLinkSwitchButton();
-    	
-    	undoAllButton = (Button)findViewById(R.id.mUndoDeleteAll);
-    	undoAllButton.setOnClickListener(new OnClickListener() {
+
+		undoAllButton = (Button)findViewById(R.id.mUndoDeleteAll);
+		undoAllButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				restoreFromUndoAll();				
 			}
 		});
-    	
+
 		refreshLastResult();
 	}
 	
@@ -1126,12 +1116,13 @@ public class QuickDiceActivity extends BaseActivity {
 		//Only if result list is empty
 		if (resultList.size() == 0) {
 			lastResHolder.startAnimation(AnimationUtils.loadAnimation(this, R.anim.last_roll_intro));
-	        gvDice.startAnimation(AnimationUtils.loadAnimation(this, R.anim.dice_grid_intro));
-	        modifiersHolder.startAnimation(AnimationUtils.loadAnimation(this, R.anim.modifier_list_intro));
+			((SplitView)findViewById(R.id.mSplitView)).getHandle().startAnimation(AnimationUtils.loadAnimation(this, R.anim.split_handle_intro));
+			gvDice.startAnimation(AnimationUtils.loadAnimation(this, R.anim.dice_grid_intro));
+			modifiersHolder.startAnimation(AnimationUtils.loadAnimation(this, R.anim.modifier_list_intro));
 		}
 	}
 	
-    OnItemClickListener diceBagClickListener = new OnItemClickListener() {
+	OnItemClickListener diceBagClickListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			diceBagManager.setCurrentDiceBag(position);
@@ -1140,7 +1131,7 @@ public class QuickDiceActivity extends BaseActivity {
 		}
 	};
 	
-    OnItemClickListener diceClickListener = new OnItemClickListener() {
+	OnItemClickListener diceClickListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			doRoll(diceBag.get((int) id));
@@ -1286,7 +1277,7 @@ public class QuickDiceActivity extends BaseActivity {
 		}
 		lastResult[lastResult.length - 1] = res;
 		
-    	invalidateUndo();
+		invalidateUndo();
 		
 		refreshLastResult();
 	}
@@ -1339,8 +1330,7 @@ public class QuickDiceActivity extends BaseActivity {
 			View rollDiceLayout = getLayoutInflater().inflate(
 					R.layout.dice_roll_toast,
 					null);
-					//(ViewGroup) findViewById(R.id.drtRoot));
-	    	
+
 			rollDiceView = (View)rollDiceLayout.findViewById(R.id.drtRolling);
 			rollDiceImage = (ImageView)rollDiceLayout.findViewById(R.id.drtImg);
 			rollDiceText = (TextView)rollDiceLayout.findViewById(R.id.drtText);
@@ -1446,25 +1436,25 @@ public class QuickDiceActivity extends BaseActivity {
 	}
 	
 	private void refreshAllDiceContainers(boolean afterImport) {
-        diceBag = diceBagManager.getDice();
-        bonusBag = diceBagManager.getModifiers();
-        
-        //refreshDiceList();
-    	gvDice.setAdapter(new GridExpressionAdapter(
-        		QuickDiceActivity.this,
-        		R.layout.dice_item,
-        		diceBag));
-    	
-        initModifierList();
-        
-        if (afterImport) {
-        	lvDiceBag.setAdapter(new DiceBagAdapter(
-            		this,
-            		R.layout.dice_bag_item,
-            		diceBagManager.getDiceBags()));
-        } else {
-        	refreshBagsList();
-        }
+		diceBag = diceBagManager.getDice();
+		bonusBag = diceBagManager.getModifiers();
+
+		//refreshDiceList();
+		gvDice.setAdapter(new GridExpressionAdapter(
+				QuickDiceActivity.this,
+				R.layout.dice_item,
+				diceBag));
+
+		initModifierList();
+
+		if (afterImport) {
+			lvDiceBag.setAdapter(new DiceBagAdapter(
+					this,
+					R.layout.dice_bag_item,
+					diceBagManager.getDiceBags()));
+		} else {
+			refreshBagsList();
+		}
 	}
 	
 	private void callEditDiceBag(int requestType, DiceBag bag, int position) {
@@ -1511,21 +1501,22 @@ public class QuickDiceActivity extends BaseActivity {
 		boolean refreshLast = false;
 		RollResult[] removed;
 
-		for (int i = positions.length - 1; i >= 0; i--) {
-	    	if (positions[i] >= 0) {
-	    		//Clear result at given list position
-	    		removed = resultList.remove(positions[i]);
-	    	} else {
-	    		//Clear result in lastResult box
-	    		removed = lastResult;
-	    		if (resultList.size() > 0) {
-		    		lastResult = resultList.remove(0);
-	    		} else {
-	    			lastResult = new RollResult[0];
-	    		}
-	    		refreshLast = true;
-	    	}
-	    	undoManager.addToUndoList(positions[i], removed);
+		//Element indexes are ordered in growing order
+		for (int i = 0; i < positions.length; i++) {
+			if (positions[i] >= 0) {
+				//Clear result at given list position
+				removed = resultList.remove(positions[i]);
+			} else {
+				//Clear result in lastResult box
+				removed = lastResult;
+				if (resultList.size() > 0) {
+					lastResult = resultList.remove(0);
+				} else {
+					lastResult = new RollResult[0];
+				}
+				refreshLast = true;
+			}
+			undoManager.addToUndoList(positions[i], removed);
 		}
 		if (refreshLast) refreshLastResult();
 		refreshResultList();
@@ -1554,7 +1545,9 @@ public class QuickDiceActivity extends BaseActivity {
 					resultList.add(undo.getPosition(), undo.getRes());
 					refreshResultList();
 				} else {
-					//?!?
+					//Last element
+					resultList.add(undo.getRes());
+					refreshResultList();
 				}
 			}
 		}
@@ -1562,25 +1555,11 @@ public class QuickDiceActivity extends BaseActivity {
 
 	private void clearAllRollResult() {
 		if (lastResult.length > 0) {
-//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//			builder.setTitle(R.string.msgClearResultsTitle);
-//			builder.setMessage(R.string.msgClearResults);
-//			builder.setPositiveButton(R.string.lblYes, new DialogInterface.OnClickListener() {
-//				@Override
-//				public void onClick(DialogInterface dialog, int which) {
-//			    	lastResult = new RollResult[0];
-//			    	resultList.clear();
-//			    	refreshLastResult();
-//			    	refreshResultList();
-//				}
-//			});
-//			builder.setNegativeButton(R.string.lblNo, cancelDialogClickListener);
-//			builder.create().show();
 			undoManager.addToUndoAll(lastResult, resultList);
-	    	lastResult = new RollResult[0];
-	    	resultList.clear();
-	    	refreshLastResult();
-	    	refreshResultList();
+			lastResult = new RollResult[0];
+			resultList.clear();
+			refreshLastResult();
+			refreshResultList();
 		}
 	}
 	
@@ -1595,22 +1574,22 @@ public class QuickDiceActivity extends BaseActivity {
 				lastResult = new RollResult[0];
 			}
 	
-	    	refreshLastResult();
-	    	refreshResultList();
+			refreshLastResult();
+			refreshResultList();
 		}
 	}
 	
 //	private void sendSuggestion() {
-//    	Intent i = new Intent(Intent.ACTION_SEND);
-//    	i.setType("message/rfc822");
-//    	i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ohmnibus@gmail.com"});
-//    	i.putExtra(Intent.EXTRA_SUBJECT, res.getString(R.string.lblMailSubject));
-//    	//i.putExtra(Intent.EXTRA_TEXT, "body");
-//    	try {
-//    	    startActivity(Intent.createChooser(i, res.getString(R.string.lblSendMail)));
-//    	} catch (android.content.ActivityNotFoundException ex) {
-//    	    Toast.makeText(this, R.string.err_no_email_client, Toast.LENGTH_SHORT).show();
-//    	}
+//		Intent i = new Intent(Intent.ACTION_SEND);
+//		i.setType("message/rfc822");
+//		i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ohmnibus@gmail.com"});
+//		i.putExtra(Intent.EXTRA_SUBJECT, res.getString(R.string.lblMailSubject));
+//		//i.putExtra(Intent.EXTRA_TEXT, "body");
+//		try {
+//			startActivity(Intent.createChooser(i, res.getString(R.string.lblSendMail)));
+//		} catch (android.content.ActivityNotFoundException ex) {
+//			Toast.makeText(this, R.string.err_no_email_client, Toast.LENGTH_SHORT).show();
+//		}
 //	}
 	
 	private void callImportExport() {
@@ -1642,7 +1621,7 @@ public class QuickDiceActivity extends BaseActivity {
 			//Maximum number of allowed modifiers reached
 			Toast.makeText(this, R.string.msgMaxModifiersReach, Toast.LENGTH_LONG).show();
 		} else {
-	    	new ModifierBuilderDialog(this, position, modifierBuilderReadyListener).show();
+			new ModifierBuilderDialog(this, position, modifierBuilderReadyListener).show();
 		}
 	}
 	
@@ -1694,12 +1673,12 @@ public class QuickDiceActivity extends BaseActivity {
 		}
 	}
 	
-    CenterInParent centerInParentAgent = null;
-    ResetLinkSwitch resetLinkSwitchAgent = null;
-    //Handler myHandler = null;
-    Handler myHandler = new Handler();
+	CenterInParent centerInParentAgent = null;
+	ResetLinkSwitch resetLinkSwitchAgent = null;
+	//Handler myHandler = null;
+	Handler myHandler = new Handler();
 
-    private void resetLinkSwitch(int timeout) {
+	private void resetLinkSwitch(int timeout) {
 		if (resetLinkSwitchAgent == null) {
 			resetLinkSwitchAgent = new ResetLinkSwitch();
 		}
@@ -1707,16 +1686,16 @@ public class QuickDiceActivity extends BaseActivity {
 		myHandler.postDelayed(resetLinkSwitchAgent, timeout);
 	}
 	
-    class ResetLinkSwitch implements Runnable {
-        public void run() {
-        	if (linkRoll) {
-        		linkRoll = false;
-        		refreshLinkSwitchButton();
-        	}
-        }
-    }
+	class ResetLinkSwitch implements Runnable {
+		public void run() {
+			if (linkRoll) {
+				linkRoll = false;
+				refreshLinkSwitchButton();
+			}
+		}
+	}
 
-    private void centerInParent(View view) {
+	private void centerInParent(View view) {
 		if (centerInParentAgent == null) {
 			centerInParentAgent = new CenterInParent();
 		}
@@ -1728,22 +1707,22 @@ public class QuickDiceActivity extends BaseActivity {
 		myHandler.postDelayed(centerInParentAgent, 500);
 	}
 	
-    class CenterInParent implements Runnable {
-    	View mChild;
-    	
-    	public void setView(View child) {
-        	mChild = child;
-    	}
+	class CenterInParent implements Runnable {
+		View mChild;
 
-        public void run() {
-        	if (mChild.getParent() instanceof HorizontalScrollView) {
-        		HorizontalScrollView parent = (HorizontalScrollView) mChild.getParent();
-	        	if (parent.getWidth() < mChild.getWidth()) {
-	        		int scroll = (mChild.getWidth() - parent.getWidth()) / 2;
-	        		parent.scrollTo(scroll, 0);
-	        	}
-        	}
-        }
-    }
+		public void setView(View child) {
+			mChild = child;
+		}
+
+		public void run() {
+			if (mChild.getParent() instanceof HorizontalScrollView) {
+				HorizontalScrollView parent = (HorizontalScrollView) mChild.getParent();
+				if (parent.getWidth() < mChild.getWidth()) {
+					int scroll = (mChild.getWidth() - parent.getWidth()) / 2;
+					parent.scrollTo(scroll, 0);
+				}
+			}
+		}
+	}
 
 }

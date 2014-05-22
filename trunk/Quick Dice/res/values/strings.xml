@@ -50,6 +50,7 @@
 	<string name="lblSelectDiceDest">Select dice destination</string>
 	<string name="lblLastPositionName">&lt;At the end&gt;</string>
 	<string name="lblLastPositionDesc">&lt;Select this to move at the end&gt;</string>
+	<string name="lblDragToResize">Drag to resize</string>
 
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->

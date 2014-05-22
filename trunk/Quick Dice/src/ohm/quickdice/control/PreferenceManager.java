@@ -2,6 +2,7 @@ package ohm.quickdice.control;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 public class PreferenceManager {
 
@@ -33,6 +34,8 @@ public class PreferenceManager {
 	protected static final String KEY_MAX_LINKED_RESULTS = "KEY_MAX_LINKED_RESULTS";
 	protected static final String KEY_MAX_LISTED_RESULTS = "KEY_MAX_LISTED_RESULTS";
 	protected static final String KEY_SWAP_NAME_RESULT = "KEY_SWAP_NAME_RESULT";
+	protected static final String KEY_SPLIT_PANEL_WIDTH = "KEY_SPLIT_PANEL_WIDTH";
+	protected static final String KEY_SPLIT_PANEL_HEIGHT = "KEY_SPLIT_PANEL_HEIGHT";
 
 	private boolean initialized = false;
 	private int clipboardUsage;
@@ -46,6 +49,8 @@ public class PreferenceManager {
 	private boolean soundEnabled;
 	private boolean extSoundEnabled;
 	private boolean swapNameResult;
+	private int splitPanelWidth;
+	private int splitPanelHeight;
 	
 	private Context context;
 	private SharedPreferences config;
@@ -72,6 +77,8 @@ public class PreferenceManager {
 			soundEnabled = config.getBoolean(KEY_ENABLE_SOUND, true);
 			extSoundEnabled = config.getBoolean(KEY_ENABLE_SPECIAL_SOUND, true);
 			swapNameResult = config.getBoolean(KEY_SWAP_NAME_RESULT, false);
+			splitPanelWidth = config.getInt(KEY_SPLIT_PANEL_WIDTH, -1);
+			splitPanelHeight = config.getInt(KEY_SPLIT_PANEL_HEIGHT, -1);
 			initialized = true;
 		}
 	}
@@ -84,7 +91,6 @@ public class PreferenceManager {
 	 * {@code CLIPBOARD_TYPE_EXT}: Store the entire expression to the clipboard.<br />
 	 */
 	public int getClipboardUsage() {
-		//return config.getInt(KEY_CLIPBOARD, CLIPBOARD_TYPE_NONE);
 		initCache();
 		return clipboardUsage;
 	}
@@ -93,7 +99,6 @@ public class PreferenceManager {
 	 * Tell if automatic linking of roll results is enabled.
 	 */
 	public boolean getAutoLinkEnabled() {
-		//return config.getBoolean(KEY_LINK_RESULT, true);
 		initCache();
 		return autoLinkEnabled;
 	}
@@ -103,7 +108,6 @@ public class PreferenceManager {
 	 * @return Time (in milliseconds) within which two rolls are added.
 	 */
 	public int getLinkDelay() {
-		//return config.getInt(KEY_LINK_RESULT_DELAY, 1500);
 		initCache();
 		return linkDelay;
 	}
@@ -113,7 +117,6 @@ public class PreferenceManager {
 	 * @return
 	 */
 	public boolean getShowModifiers() {
-		//return config.getBoolean(KEY_SHOW_MODIFIERS, true);
 		initCache();
 		return showModifiers;
 	}
@@ -123,7 +126,6 @@ public class PreferenceManager {
 	 * @return Number of columns to display.
 	 */
 	public int getGridResultColumn() {
-		//return config.getInt(KEY_COLUMN_NUM, 1);
 		initCache();
 		return gridResultColumn;
 	}
@@ -133,7 +135,6 @@ public class PreferenceManager {
 	 * @return Boolean indicating if the use of plain background is required.
 	 */
 	public boolean getPlainBackground() {
-		//return config.getBoolean(KEY_PLAIN_BG, false);
 		initCache();
 		return plainBackground;
 	}
@@ -143,7 +144,6 @@ public class PreferenceManager {
 	 * @return {@code true} if toast is required, {@code false} otherwise.
 	 */
 	public boolean getShowToast() {
-		//return config.getBoolean(KEY_SHOW_TOAST, true);
 		initCache();
 		return showToast;
 	}
@@ -154,27 +154,49 @@ public class PreferenceManager {
 	 * @return {@code true} if animation is required, {@code false} otherwise.
 	 */
 	public boolean getShowAnimation() {
-		//return config.getBoolean(KEY_SHOW_ANIMATION, true);
 		initCache();
 		return showAnimation;
 	}
 
 	public boolean getSoundEnabled() {
-		//return config.getBoolean(KEY_ENABLE_SOUND, true);
 		initCache();
 		return soundEnabled;
 	}
 
 	public boolean getExtSoundEnabled() {
-		//return config.getBoolean(KEY_ENABLE_SPECIAL_SOUND, true);
 		initCache();
 		return extSoundEnabled;
 	}
 	
 	public boolean getSwapNameResult() {
-		//return config.getBoolean(KEY_SWAP_NAME_RESULT, false);
 		initCache();
 		return swapNameResult;
+	}
+
+	public int getSplitPanelWidth() {
+		initCache();
+		return splitPanelWidth;
+	}
+
+	public void setSplitPanelWidth(int width) {
+		initCache();
+		splitPanelWidth = width;
+		Editor edit = config.edit();
+		edit.putInt(KEY_SPLIT_PANEL_WIDTH, splitPanelWidth);
+		edit.commit();
+	}
+
+	public int getSplitPanelHeight() {
+		initCache();
+		return splitPanelHeight;
+	}
+
+	public void setSplitPanelHeight(int height) {
+		initCache();
+		splitPanelHeight = height;
+		Editor edit = config.edit();
+		edit.putInt(KEY_SPLIT_PANEL_HEIGHT, splitPanelHeight);
+		edit.commit();
 	}
 
 	/**
