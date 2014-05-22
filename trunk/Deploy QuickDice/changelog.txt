@@ -1,6 +1,6 @@
 v 1.4.x
 - Resizeable dice area
-- Fix bug related to result list
+- Fixed bug related to results list
 - Minor fix and improvements
 
 v 1.4.3

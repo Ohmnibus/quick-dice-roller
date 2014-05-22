@@ -78,14 +78,8 @@
 <br />
 <b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app and/or the translations.<br />
 <br />
-- Move dice through dice bags<br />
-- Clone dice and dice bags<br />
-- Swipe to delete a result<br />
-- Restore deleted results<br />
-- Link roll results on demand<br />
-- Function \"abs\"<br />
-- Fixed \"rup\" and \"rdn\" functions<br />
-- Fixed \"rak\" function<br />
+- Resizeable dice area<br />
+- Fixed bug related to results list<br />
 - Minor fix and improvements<br />
 <br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>

@@ -77,14 +77,8 @@
 <br />
 <b>Per favore</b> inviatemi una <a href="mailto:ohmnibus@gmail.com">mail</a> se avete dei suggerimenti su come migliorare l\'app.<br />
 <br />
-- Sposta i dadi tra collezioni<br />
-- Clona dadi e collezioni<br />
-- Swipe per eliminare un risultato<br />
-- Ripristina i risultati eliminati<br />
-- Collegamento dei lanci a richiesta<br />
-- Funzione \"abs\" (valore assoluto)<br />
-- Corrette le funzioni \"rup\" e \"rdn\"<br />
-- Corretta la funzione \"rak\"<br />
+- Area dei dadi ridimensionabile<br />
+- Risolti errori legati all\'elenco dei risultati<br />
 - Correzioni ed ottimizzazioni minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
