@@ -30,5 +30,5 @@
 	
 	<item
 	    android:state_focused="true"
-	    android:drawable="@+drawable/bg_last_result_focus" />
+	    android:drawable="@drawable/bg_last_result_focus" />
 </selector>

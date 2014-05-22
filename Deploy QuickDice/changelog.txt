@@ -1,3 +1,8 @@
+v 1.4.x
+- Resizeable dice area
+- Fix bug related to result list
+- Minor fix and improvements
+
 v 1.4.3
 - Move dice through dice bags
 - Clone dice and dice bags
