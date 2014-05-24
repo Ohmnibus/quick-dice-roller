@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
 	<!-- Dice Bag -->
 	<style name="DiceBagHandle">
-	    <item name="android:visibility">gone</item>
+		<item name="android:visibility">gone</item>
 	</style>
 </resources>
