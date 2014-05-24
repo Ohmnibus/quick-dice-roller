@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
+	xmlns:tools="http://schemas.android.com/tools"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res/ohm.quickdice"
 	android:id="@+id/mProfileDrawer"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
-	
+	android:layout_height="match_parent"
+	>
+
 	<!-- The main content view -->
 	<RelativeLayout
 		android:id="@+id/mRoot"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="@drawable/bg_wood" >
-	
+		android:background="@drawable/bg_wood"
+		>
+
 		<ImageView 
 			android:id="@+id/mBgLogo"
 			android:layout_width="250dp"
@@ -40,7 +43,7 @@
 
 		<RelativeLayout
 			android:id="@+id/mLastRollContainer"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 	
 			android:layout_alignParentLeft="true"
@@ -54,9 +57,11 @@
 			
 			<include
 				android:id="@+id/mLastRoll"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				
 				android:layout_alignParentLeft="true"
-				android:layout_alignParentTop="true"
+				android:layout_centerVertical="true"
 				
 				layout="@layout/roll_item"
 				/>
@@ -75,22 +80,30 @@
 				android:background="@drawable/ic_link"
 				/>
 
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+		
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentTop="true"
+				android:layout_toLeftOf="@+id/mLinkButton"
+				>
+				<Button 
+					android:id="@+id/mUndoDeleteAll"
+	
+					android:layout_width="wrap_content"
+					android:layout_height="48dp"
+	
+					android:layout_centerInParent="true"
+	
+					android:text="@string/mnuUndoClearAllResult"
+	
+					android:visibility="gone"
+					/>
+	
+			</RelativeLayout>
 		</RelativeLayout>
 		
-		<Button 
-			android:id="@+id/mUndoDeleteAll"
-			
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			
-			android:layout_centerInParent="true"
-			
-			android:text="@string/mnuUndoClearAllResult"
-			
-			android:visibility="gone"
-
-			/>
-
 		<ohm.library.widget.SplitView
 			android:id="@+id/mSplitView"
 			
@@ -131,7 +144,7 @@
 				android:id="@+id/mHandle"
 				
 				android:layout_width="fill_parent"
-				android:layout_height="16dp"
+				android:layout_height="24dp"
 				
 				android:background="@drawable/ic_handle_hori"
 				android:contentDescription="@string/lblDragToResize"
@@ -168,10 +181,12 @@
 			android:background="@drawable/bg_dice_grid" >
 			
 			<HorizontalScrollView
+				tools:ignore="UselessParent"
 				android:id="@+id/mModifierScroller"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_centerInParent="true" >
+				android:layout_centerInParent="true"
+				>
 		
 				<LinearLayout
 					android:id="@+id/mModifierList"
