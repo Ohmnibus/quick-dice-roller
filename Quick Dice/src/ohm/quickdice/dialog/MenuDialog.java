@@ -42,6 +42,15 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 				CompatMisc.getInstance().LAYOUT_MATCH_PARENT));
 		root.setCacheColorHint(Color.TRANSPARENT);
 		
+		//Get the drawable for the divider.
+		//Don't know any better way to do it.
+		Drawable divider;
+		TypedArray ta;
+		ta = activity.getApplicationContext().obtainStyledAttributes(new int[] { android.R.attr.listDivider });
+		divider = ta.getDrawable(0);
+		ta.recycle();
+		root.setDivider(divider);
+		
 		setView(root);
 		
 		setButton(BUTTON_POSITIVE, activity.getText(R.string.lblCancel), this);
@@ -59,14 +68,14 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 					root.getLayoutParams().width, // LayoutParams.FILL_PARENT,
 					root.getDividerHeight()));
 			
-			//Get the drawable for the divider.
-			//Don't know any better way to do it.
-			TypedArray ta = activity.getApplicationContext().obtainStyledAttributes(new int[] { android.R.attr.listDivider });
-			Drawable divider = ta.getDrawable(0);
+			ta = activity.getApplicationContext().obtainStyledAttributes(new int[] { android.R.attr.listDivider });
+			divider = ta.getDrawable(0);
 			ta.recycle();
 
 			CompatMisc.getInstance().setBackgroundDrawable(div, divider);
 			root.addHeaderView(div, null, false);
+		} else {
+			//Remove divider if list has been inflated
 		}
 		
 		root.setAdapter(adapter);

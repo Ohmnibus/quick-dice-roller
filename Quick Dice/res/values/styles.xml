@@ -11,7 +11,7 @@
 	<style name="Menu.Row">
 	</style>
 
-	<style name="Menu.Item">
+	<style name="Menu.ItemBase">
 		<item name="android:paddingTop">5dp</item>
 		<item name="android:paddingBottom">5dp</item>
 		<item name="android:paddingLeft">16dp</item>
@@ -22,8 +22,12 @@
 		<item name="android:singleLine">true</item>
 		<item name="android:textSize">14sp</item>
 		<item name="android:textColor">@android:color/primary_text_dark_nodisable</item>
-		<item name="android:textColor">?android:attr/actionMenuTextColor</item>
+		<!-- item name="android:textColor">?android:attr/actionMenuTextColor</item --><!-- Valid since v.11 -->
 		<item name="android:background">@drawable/bg_clickable</item>
+	</style>
+
+	<style name="Menu.Item" parent="Menu.ItemBase">
+		<item name="android:textColor">?android:attr/textColorPrimaryDisableOnly</item>
 	</style>
 
 	<style name="Menu.Divider">
