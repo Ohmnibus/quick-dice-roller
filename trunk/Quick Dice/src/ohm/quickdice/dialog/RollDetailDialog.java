@@ -1,77 +1,134 @@
 package ohm.quickdice.dialog;
 
+import java.util.ArrayList;
+
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
+import ohm.quickdice.adapter.MenuAdapter;
 import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.entity.RollResult;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class RollDetailDialog extends AlertDialog implements DialogInterface.OnClickListener {
+public class RollDetailDialog extends MenuDialog {
 
-	RollResult[] result;
+	RollResult[] lastResult;
+	ArrayList<RollResult[]> resultList;
+	int resultIndex;
+
+	RollResult[] result = null;
+	RollResult mergedResult = null;
 	GraphicManager graphicManager;
 	
-	public RollDetailDialog(Context context, RollResult[] result) {
-		super(context);
-		this.result = result;
-		//this.graphicManager = new Graphic(context.getResources());
+	public RollDetailDialog(Activity activity, Menu menu, RollResult[] lastResult, ArrayList<RollResult[]> resultList, int resultIndex) {
+		super(activity, menu);
+		this.lastResult = lastResult;
+		this.resultList = resultList;
+		this.resultIndex = resultIndex;
 		this.graphicManager = QuickDiceApp.getInstance().getGraphic();
 	}
 	
-	/* (non-Javadoc)
-	 * @see android.app.AlertDialog#onCreate(android.os.Bundle)
-	 */
+	protected RollResult[] getResult() {
+		if (result == null) {
+			if (resultIndex < 0) {
+				result = lastResult;
+			} else {
+				result = resultList.get(resultIndex); //This seem to never throw ClassCastException!!
+			}
+		}
+		return result;
+	}
+	
+	protected RollResult getMergedResult() {
+		if (mergedResult == null) {
+			mergedResult = RollResult.mergeResultList(getResult());
+			if (mergedResult == null) {
+				mergedResult = new RollResult("", "", "", 0, 0, 0, RollResult.DEFAULT_RESULT_ICON);
+			}
+		}
+		return mergedResult;
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//super.onCreate(savedInstanceState);
-		View mView = getLayoutInflater().inflate(R.layout.roll_detail_dialog, null);
-
-		setView(mView);
-
-		RollResult res = RollResult.mergeResultList(result);
-
-		if (res == null) {
-			res = new RollResult("", "", "", 0, 0, 0, RollResult.DEFAULT_RESULT_ICON);
-		}
-		setTitle(res.getName());
 		
-		setIcon(getDialogIcon(res));
-		
-		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-		
+		setTitle(getMergedResult().getName());
+
+		setIcon(getDialogIcon(getMergedResult()));
+
 		super.onCreate(savedInstanceState);
-		
-		TextView txt;
-		((TextView)findViewById(R.id.rdName)).setText(res.getName());
-		((TextView)findViewById(R.id.rdDescription)).setText(res.getDescription());
-		//((TextView)findViewById(R.id.rdExpression)).setText(res..getEDescription());
-		((TextView)findViewById(R.id.rdResultText)).setText(res.getResultText());
-		txt = (TextView)findViewById(R.id.rdResultValue);
-		txt.setText(Long.toString(res.getResultValue()));
+	}
+	
+	@Override
+	protected View getHeaderView(LayoutInflater inflater, ListView parent) {
+		View view = getLayoutInflater().inflate(R.layout.roll_detail_dialog, null);
 
-		Drawable resultIcon = graphicManager.resizeDrawable(res.getResultIconID(), 24, 24);
-		txt.setCompoundDrawablesWithIntrinsicBounds(null, null, resultIcon, null);
-		((TextView)findViewById(R.id.rdRange)).setText(
+		RollResult res = getMergedResult();
+		
+		view.setSelected(true);
+
+		//((TextView)view.findViewById(R.id.rdName)).setText(res.getName());
+		if (res.getDescription() == null || res.getDescription().length() == 0) {
+			((TextView)view.findViewById(R.id.rdDescription)).setVisibility(View.GONE);
+			((TextView)view.findViewById(R.id.rdDescriptionLabel)).setVisibility(View.GONE);
+		} else {
+			((TextView)view.findViewById(R.id.rdDescription)).setText(res.getDescription());
+		}
+		//((TextView)view.findViewById(R.id.rdExpression)).setText(res.);
+		((TextView)view.findViewById(R.id.rdResultText)).setText(res.getResultText());
+		((TextView)view.findViewById(R.id.rdResultValue)).setText(Long.toString(res.getResultValue()));
+		((ImageView)view.findViewById(R.id.rdResultQuality)).setImageResource(res.getResultIconID());
+		((TextView)view.findViewById(R.id.rdRange)).setText(
 				Long.toString(res.getMinResultValue()) + " - " +
 				Long.toString(res.getMaxResultValue()) + " (" +
 				Long.toString(res.getMaxResultValue() - res.getMinResultValue() + 1) + ")");
-	}
-	
-	protected Drawable getDialogIcon(RollResult res) {
-//		Graphic graphicManager = new Graphic(this.getContext().getResources());
-//		Drawable diceIcon = QuickDiceApp.getInstance().getDiceIcon(res.getResourceIndex());
-//		return graphicManager.resizeDrawable(diceIcon, 32, 32);
-		return graphicManager.getResizedDiceIcon(res.getResourceIndex(), 32, 32);
+		
+		return view;
 	}
 
 	@Override
-	public void onClick(DialogInterface dialog, int which) {
-		dismiss();
+	protected boolean onPrepareOptionsMenu(MenuAdapter adapter) {
+		RollResult[] rollItem;
+		RollResult[] nextItem;
+		
+		rollItem = getResult();
+		
+		if (resultIndex + 1 < resultList.size()) {
+			try {
+				nextItem = resultList.get(resultIndex + 1);
+			} catch (ClassCastException ex) {
+				//Really don't know why, but sometime
+				//a cast exception occur.
+				nextItem = null;
+			}
+		} else {
+			nextItem = null;
+		}
+
+		adapter.findItem(R.id.mrDetails).setVisible(false);
+
+		if (rollItem.length <= 1) {
+			//Cannot split
+			//adapter.findItem(R.id.mrSplit).setVisible(false);
+			adapter.findItem(R.id.mrSplit).setEnabled(false);
+		}
+		if (nextItem == null || rollItem.length + nextItem.length > QuickDiceApp.getInstance().getPreferences().getMaxResultLink()) {
+			//Cannot link (Last element or too much results)
+			//adapter.findItem(R.id.mrMerge).setVisible(false);
+			adapter.findItem(R.id.mrMerge).setEnabled(false);
+		}
+		
+		return super.onPrepareOptionsMenu(adapter);
+	}
+	
+	protected Drawable getDialogIcon(RollResult res) {
+		return graphicManager.getResizedDiceIcon(res.getResourceIndex(), 32, 32);
 	}
 }

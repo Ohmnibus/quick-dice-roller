@@ -460,40 +460,57 @@ public class QuickDiceActivity extends BaseActivity {
 		return retVal;
 	}
 	
+	private static final long CONTEXT_MENU_COOL_DOWN = 400; //0.4 seconds cool down
+	long contextMenuCooledDown = Long.MIN_VALUE;
+	
 	/**
-	 * Initialize context menus.
+	 * Check for cool down.<br />
+	 * Some actions, like rich context menus, can trigger a click if
+	 * touch is released between long click invocation and the display
+	 * of it's pop-up.<br />
+	 * This method check if it is passed enough time.
+	 * @return {@code true} if action can be performed,
+	 * {@code false} if not cooled down yet.
 	 */
+	private boolean checkCoolDown() {
+		return System.currentTimeMillis() >= contextMenuCooledDown;
+	}
+	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		contextMenuCooledDown = System.currentTimeMillis() + CONTEXT_MENU_COOL_DOWN;
+		
 		super.onCreateContextMenu(menu, v, menuInfo);
 		
 		if (v.getId() == lvDiceBag.getId()) {
 			//Context menu for the dice bags list
 			AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
 			
-			setupDiceBagMenu(info.position, menu);
+			setupDiceBagMenu(menu, info.position);
 		} else if (v.getId() == gvDice.getId()) {
 			//Context menu for the dice bag
 			AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
 			
-			setupDiceMenu(info.position, menu);
+			setupDiceMenu(menu, info.position);
 		} else if (v.getId() == gvResults.getId()) {
 			//Context menu for the result list
 			AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
-
-			setupRollMenu(info.position, menu);
+			if (info == null) {
+				info = mMenuInfo;
+			}
+			setupRollMenu(menu, info.position);
 		} else if (v.getTag(R.id.key_type) == TYPE_MODIFIER) {
 			//Context menu for a modifier
-			setupModifierMenu((Integer)v.getTag(R.id.key_value), menu);
+			setupModifierMenu(menu, (Integer)v.getTag(R.id.key_value));
 		} else {
 			//Context menu for the last result item
 			if (lastResult.length > 0) {
-				setupRollMenu(-1, menu);
+				setupRollMenu(menu, -1);
 			}
 		}
 	}
 
-	protected void setupDiceBagMenu(int index, ContextMenu menu) {
+	protected void setupDiceBagMenu(ContextMenu menu, int index) {
 		DiceBag bag;
 		
 		bag = (DiceBag)lvDiceBag.getItemAtPosition(index);
@@ -526,35 +543,18 @@ public class QuickDiceActivity extends BaseActivity {
 		}
 	}
 
-	protected void setupDiceMenu(int index, ContextMenu menu) {
-		DExpression exp;
-		
-		exp = (DExpression)gvDice.getItemAtPosition(index);
-
+	protected void setupDiceMenu(ContextMenu menu, int index) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_dice, menu);
 		
-		//Get the dice icon and resize it to fit the menu header icon size.
-		Drawable diceIcon = graphicManager.getResizedDiceIcon(
-				exp.getResourceIndex(), 32, 32);
-		menu.setHeaderIcon(diceIcon);
-		menu.setHeaderTitle(exp.getName());
-		
-		if (gvDice.getCount() == 1) {
-			//Only one element
-			menu.findItem(R.id.mdRemove).setVisible(false);
-			menu.findItem(R.id.mdMoveTo).setVisible(false);
-		}
-		if (diceBag.size() >= pref.getMaxDice()) {
-			//Maximum number of allowed dice reached
-			menu.findItem(R.id.mdAddHere).setVisible(false);
-			menu.findItem(R.id.mdClone).setVisible(false);
-		}
+		DiceDetailDialog dlg = new DiceDetailDialog(this, diceBagManager.getDiceBag(), index, menu);
+		dlg.show();
+		menu.clear();
 	}
 	
 	protected int modifierOpeningMenu;
 	
-	protected void setupModifierMenu(int index, ContextMenu menu) {
+	protected void setupModifierMenu(ContextMenu menu, int index) {
 		RollModifier modifier;
 		Drawable modIcon;
 		
@@ -592,46 +592,13 @@ public class QuickDiceActivity extends BaseActivity {
 		}
 	}
 
-	protected void setupRollMenu(int index, ContextMenu menu) {
-		RollResult[] rollItem;
-		RollResult[] nextItem;
-		RollResult mergedRoll;
-		
-		if (index < 0) {
-			rollItem = lastResult;
-		} else {
-			rollItem = resultList.get(index); //This seem to never throw ClassCastException!!
-		}
-		if (index + 1 < resultList.size()) {
-			try {
-				nextItem = resultList.get(index + 1);
-			} catch (ClassCastException ex) {
-				//Really don't know why, but sometime
-				//a cast exception occur.
-				nextItem = null;
-			}
-		} else {
-			nextItem = null;
-		}
-
+	protected void setupRollMenu(ContextMenu menu, int index) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_roll, menu);
-
-		//Get the dice icon and resize it to fit the menu header icon size.
-		mergedRoll = RollResult.mergeResultList(rollItem);
-		Drawable diceIcon = graphicManager.getResizedDiceIcon(
-				mergedRoll.getResourceIndex(), 32, 32);
-		menu.setHeaderIcon(diceIcon);
-		menu.setHeaderTitle(mergedRoll.getName());
-
-		if (rollItem.length <= 1) {
-			//Cannot split
-			menu.findItem(R.id.mrSplit).setVisible(false);
-		}
-		if (nextItem == null || rollItem.length + nextItem.length > pref.getMaxResultLink()) {
-			//Cannot link (Last element or too much results)
-			menu.findItem(R.id.mrMerge).setVisible(false);
-		}
+		
+		RollDetailDialog dlg = new RollDetailDialog(this, menu, lastResult, resultList, index);
+		dlg.show();
+		menu.clear();
 	}
 
 	protected int targetItem;
@@ -651,6 +618,10 @@ public class QuickDiceActivity extends BaseActivity {
 		retVal = true;
 
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		
+		if (info == null) {
+			info = mMenuInfo;
+		}
 
 		switch (item.getItemId()) {
 			case R.id.mdbSelect:
@@ -704,8 +675,8 @@ public class QuickDiceActivity extends BaseActivity {
 				refreshAllDiceContainers();
 				break;
 			case R.id.mdDetails:
-				exp = (DExpression)gvDice.getItemAtPosition(info.position);
-				new DiceDetailDialog(this, exp).show();
+				//exp = (DExpression)gvDice.getItemAtPosition(info.position);
+				//new DiceDetailDialog(this, exp).show();
 				break;
 			case R.id.mdRoll:
 				exp = (DExpression)gvDice.getItemAtPosition(info.position);
@@ -770,12 +741,12 @@ public class QuickDiceActivity extends BaseActivity {
 						}).show();
 				break;
 			case R.id.mrDetails:
-				if (info != null) {
-					result = (RollResult[])gvResults.getItemAtPosition(info.position);
-				} else {
-					result = lastResult;
-				}
-				new RollDetailDialog(this, result).show();
+				//if (info != null) {
+				//	result = (RollResult[])gvResults.getItemAtPosition(info.position);
+				//} else {
+				//	result = lastResult;
+				//}
+				//new RollDetailDialog(this, result).show();
 				break;
 			case R.id.mrClear:
 				clearRollResult(info == null ? -1 : info.position);
@@ -860,6 +831,7 @@ public class QuickDiceActivity extends BaseActivity {
 				retVal = super.onContextItemSelected(item);
 				break;
 		}
+		mMenuInfo = null;
 		return retVal;
 	}
 
@@ -1070,13 +1042,38 @@ public class QuickDiceActivity extends BaseActivity {
 		gvResults.setSelector(android.R.drawable.list_selector_background);
 
 		registerForContextMenu(gvResults);
+		
+		gvResults.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				mMenuInfo = new AdapterContextMenuInfo(view, position, id);
+				openContextMenu(gvResults);
+			}
+		});
 	}
+	
+	/**
+	 * This is used to pass result list item position to
+	 * {@link #onCreateContextMenu(ContextMenu, View, ContextMenuInfo)}
+	 * and {@link #onContextItemSelected(MenuItem)} in case of
+	 * single click.<br />
+	 * Use of global variables to pass parameters makes me sick, 
+	 * but can't find a better way, so for now tat's it.
+	 */
+	private AdapterView.AdapterContextMenuInfo mMenuInfo = null;
 
 	private void initLastResultView() {
 		lastResHolder = findViewById(R.id.mLastRollContainer);
 
 		registerForContextMenu(lastResHolder);
 
+		lastResHolder.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mMenuInfo = null;
+				openContextMenu(lastResHolder);
+			}
+		});
 		lastResHolder.setOnTouchListener(new Behavior.RollResultTouchListener(
 				lastResHolder,
 				null,
@@ -1187,10 +1184,12 @@ public class QuickDiceActivity extends BaseActivity {
 	}
 
 	private void doRoll(DExpression exp) {
-		try {
-			handleResult(new RollResult(exp.getResult()));
-		} catch (DException ex) {
-			handleErrResult(ex);
+		if (checkCoolDown()) {
+			try {
+				handleResult(new RollResult(exp.getResult()));
+			} catch (DException ex) {
+				handleErrResult(ex);
+			}
 		}
 	}
 
@@ -1222,27 +1221,28 @@ public class QuickDiceActivity extends BaseActivity {
 		
 		performRoll(res);
 		
-		//Link result if:
-		//- Linking is enabled
-		//- Link chain is not too long
-		//- Previous roll is not too far
-		//long now = System.currentTimeMillis();
 		
-//		addResult(res, pref.getLinkEnabled()
-//				&& lastResult.length < pref.getMaxResultLink()
-//				&& (now - startInterval) <= pref.getLinkDelay());
-//		
-//		startInterval = now;
-		
-		addResult(res, checkLinkRoll() //This condition must be evaluated so it must appear on first position
-				&& lastResult.length < pref.getMaxResultLink());
+		addResult(res, checkLinkRoll());
+	}
+	
+	/**
+	 * Check if roll has to be linked. It also update the status of the button.<br />
+	 * Link result if: <br />
+	 * - Linking is enabled<br />
+	 * - Previous roll is not too far<br />
+	 * - Link chain is not too long
+	 * @return {@code true} if roll must be linked, {@code false} otherwise.
+	 */
+	private boolean checkLinkRoll() {
+		return checkAutoLinkRoll() //This method must be invoked, so leave it at left of boolean operator
+				&& lastResult.length < pref.getMaxResultLink();
 	}
 	
 	/**
 	 * Check if roll has to be linked and update the status of the button.
 	 * @return
 	 */
-	private boolean checkLinkRoll() {
+	private boolean checkAutoLinkRoll() {
 		boolean retVal = linkRoll;
 		if (pref.getAutoLinkEnabled()) {
 			//Automatic linking enabled
@@ -1253,6 +1253,7 @@ public class QuickDiceActivity extends BaseActivity {
 			//If was true, set to false.
 			linkRoll = false;
 		}
+		//If status changed, update button
 		if (retVal != linkRoll) {
 			refreshLinkSwitchButton();
 		}

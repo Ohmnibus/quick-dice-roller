@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TiraDadi Rapido</string>
-    <string name="app_author">Ohmnibus</string>
-    
-    <string name="lblName">Nome</string>
-    <string name="hintName">Inserisci il nome del dado</string>
-    <string name="lblDesc">Descrizione</string>
-    <string name="hintDesc">Una breve descrizione del dado</string>
+	<string name="app_name">TiraDadi Rapido</string>
+	<string name="app_author">Ohmnibus</string>
+
+	<string name="lblName">Nome</string>
+	<string name="hintName">Inserisci il nome del dado</string>
+	<string name="lblDesc">Descrizione</string>
+	<string name="hintDesc">Una breve descrizione del dado</string>
 	<string name="lblIcon">Icona</string>
-    <string name="lblExp">Formula</string>
-    <string name="hintExp">Inserisci la formula del dado</string>
-    <string name="lblRangeValue">Valori</string>
+	<string name="lblExp">Formula</string>
+	<string name="hintExp">Inserisci la formula del dado</string>
+	<string name="lblRangeValue">Valori</string>
 	<string name="lblCannotEvaluate">Impossibile valutare</string>
 	<string name="lblResultText">Risultato esteso</string>
 	<string name="lblResultValue">Risultato numerico</string>
@@ -26,10 +26,10 @@
 	<string name="lblModifierBuilderMessage">Componi un modificatore.</string>
 	<string name="lblNeutralModifier">Ha qualche senso creare un modificatore neutrale? Non penso.</string>
 	<string name="lblDuplicateModifier">Questo modificatore esiste già.</string>
-    <string name="lblNameBag">Nome</string>
-    <string name="hintNameBag">Inserisci il nome della collezione</string>
-    <string name="lblDescBag">Descrizione</string>
-    <string name="hintDescBag">Una breve descrizione della collezione</string>
+	<string name="lblNameBag">Nome</string>
+	<string name="hintNameBag">Inserisci il nome della collezione</string>
+	<string name="lblDescBag">Descrizione</string>
+	<string name="hintDescBag">Una breve descrizione della collezione</string>
 	<string name="lblIconBag">Icona</string>
 	<string name="lblMailSubject">[QDR] Suggerimenti</string>
 	<string name="lblSendMail">Invia suggerimento</string>
@@ -50,7 +50,10 @@
 	<string name="lblSelectDiceDest">Scegli la destinazione</string>
 	<string name="lblLastPositionName">&lt;In fondo&gt;</string>
 	<string name="lblLastPositionDesc">&lt;Sposta il dado all\'ultima posizione&gt;</string>
-
+	<string name="lblDragToResize">Trascina per ridimensionare</string>
+	<string name="lblQuality">Qualità del risultato</string>
+	<string name="lblResultQualityRange">Risultato, qualità, intervallo</string>
+	
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
 	<string name="lblKb">Kb</string><!-- Short for Kilobyte -->
@@ -78,6 +81,7 @@
 <b>Per favore</b> inviatemi una <a href="mailto:ohmnibus@gmail.com">mail</a> se avete dei suggerimenti su come migliorare l\'app.<br />
 <br />
 - Area dei dadi ridimensionabile<br />
+- Menù contestuali arricchiti<br />
 - Risolti errori legati all\'elenco dei risultati<br />
 - Correzioni ed ottimizzazioni minori<br />
 <br />]]></string>
@@ -160,228 +164,228 @@ pubblicato da Google su <a href="http://www.apache.org/licenses/LICENSE-2.0">Apa
 	<string name="fncBASHDesc">Effettua un test con il sistema BASH!</string>
 	<string name="fncBASHURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#bash</string>
 	<string-array name="fncBASHParamNames">
-	    <item>Numero di Dadi</item>
-	    <item>Dado</item>
+		<item>Numero di Dadi</item>
+		<item>Dado</item>
 	</string-array>
 	<string-array name="fncBASHParamHints">
-	    <item>Numero di dadi da lanciare</item>
-	    <item>Dado da lanciare</item>
+		<item>Numero di dadi da lanciare</item>
+		<item>Dado da lanciare</item>
 	</string-array>
 				
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Effettua un test con il sistema Burning Wheel.</string>
 	<string name="fncBWheelURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
 	<string-array name="fncBWheelParamNames">
-	    <item>Dado</item>
-	    <item>Numero di Dadi</item>
-	    <item>Difficoltà</item>
-	    <item>Lancia ancora</item>
+		<item>Dado</item>
+		<item>Numero di Dadi</item>
+		<item>Difficoltà</item>
+		<item>Lancia ancora</item>
 	</string-array>
 	<string-array name="fncBWheelParamHints">
-	    <item>Dado da lanciare</item>
-	    <item>Numero di dadi da lanciare</item>
-	    <item>Valore minimo da ottenere</item>
-	    <item>Valore da ottenere per un lancio extra</item>
+		<item>Dado da lanciare</item>
+		<item>Numero di dadi da lanciare</item>
+		<item>Valore minimo da ottenere</item>
+		<item>Valore da ottenere per un lancio extra</item>
 	</string-array>
 				
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Effettua un tesr con il sistema Dystopian Wars.</string>
 	<string name="fncDWarsURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
 	<string-array name="fncDWarsParamNames">
-	    <item>Dado</item>
-	    <item>Numero di Dadi</item>
-	    <item>Difficoltà</item>
-	    <item>Lancia ancora</item>
+		<item>Dado</item>
+		<item>Numero di Dadi</item>
+		<item>Difficoltà</item>
+		<item>Lancia ancora</item>
 	</string-array>
 	<string-array name="fncDWarsParamHints">
-	    <item>Dado da lanciare</item>
-	    <item>Numero di dadi da lanciare</item>
-	    <item>Valore minimo da ottenere</item>
-	    <item>Valore da ottenere per un lancio extra</item>
+		<item>Dado da lanciare</item>
+		<item>Numero di dadi da lanciare</item>
+		<item>Valore minimo da ottenere</item>
+		<item>Valore da ottenere per un lancio extra</item>
 	</string-array>
 				
 	<string name="fncHEROName">HERO</string>
 	<string name="fncHERODesc">Lancia un certo numero di d6 e restituisce il danno totale ed il danno body.</string>
 	<string name="fncHEROURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#hero</string>
 	<string-array name="fncHEROParamNames">
-	    <item>Numero di Dadi</item>
+		<item>Numero di Dadi</item>
 	</string-array>
 	<string-array name="fncHEROParamHints">
-	    <item>Numero di d6 da lanciare</item>
+		<item>Numero di d6 da lanciare</item>
 	</string-array>
 				
 	<string name="fncExalName">Exalted</string>
 	<string name="fncExalDesc">Esegue un check usando il sistema di Exalted.</string>
 	<string name="fncExalURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exal</string>
 	<string-array name="fncExalParamNames">
-	    <item>Numero di Dadi</item>
-	    <item>Difficoltà</item>
+		<item>Numero di Dadi</item>
+		<item>Difficoltà</item>
 	</string-array>
 	<string-array name="fncExalParamHints">
-	    <item>Numero di d10 da lanciare</item>
-	    <item>Valore minimo da ottenere</item>
+		<item>Numero di d10 da lanciare</item>
+		<item>Valore minimo da ottenere</item>
 	</string-array>
 				
 	<string name="fncExpName">Aperto (semplice)</string>
 	<string name="fncExpDesc">Esegue un tiro aperto. Si rilancia se si ottiene il massimo o il minimo.</string>
 	<string name="fncExpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exp</string>
 	<string-array name="fncExpParamNames">
-	    <item>Dado</item>
+		<item>Dado</item>
 	</string-array>
 	<string-array name="fncExpParamHints">
-	    <item>Dado da lanciare</item>
+		<item>Dado da lanciare</item>
 	</string-array>
 
 	<string name="fncExpUpName">Aperto Su (semplice)</string>
 	<string name="fncExpUpDesc">Esegue un tiro aperto. Si rilancia solo se si ottiene il massimo.</string>
 	<string name="fncExpUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
 	<string-array name="fncExpUpParamNames">
-	    <item>Dado</item>
+		<item>Dado</item>
 	</string-array>
 	<string-array name="fncExpUpParamHints">
-	    <item>Dado da lanciare</item>
+		<item>Dado da lanciare</item>
 	</string-array>
 
 	<string name="fncExplodeName">Aperto</string>
 	<string name="fncExplodeDesc">Esegue un tiro aperto considerando una tolleranza. Si rilancia se si ottengono valori alti o bassi.</string>
 	<string name="fncExplodeURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explode</string>
 	<string-array name="fncExplodeParamNames">
-	    <item>Dado</item>
-	    <item>Tolleranza</item>
+		<item>Dado</item>
+		<item>Tolleranza</item>
 	</string-array>
 	<string-array name="fncExplodeParamHints">
-	    <item>Dado da lanciare</item>
-	    <item>Probabilità di rilancio</item>
+		<item>Dado da lanciare</item>
+		<item>Probabilità di rilancio</item>
 	</string-array>
 
 	<string name="fncExplodeUpName">Aperto Su</string>
 	<string name="fncExplodeUpDesc">Esegue un tiro aperto considerando una tolleranza. Si rilancia solo se si ottengono valori alti.</string>
 	<string name="fncExplodeUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
 	<string-array name="fncExplodeUpParamNames">
-	    <item>Dado</item>
-	    <item>Tolleranza</item>
+		<item>Dado</item>
+		<item>Tolleranza</item>
 	</string-array>
 	<string-array name="fncExplodeUpParamHints">
-	    <item>Dado da lanciare</item>
-	    <item>Probabilità di rilancio</item>
+		<item>Dado da lanciare</item>
+		<item>Probabilità di rilancio</item>
 	</string-array>
 
 	<string name="fncMaxName">Massimo</string>
 	<string name="fncMaxDesc">Restituisce il più alto tra due valori.</string>
 	<string name="fncMaxURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#max</string>
 	<string-array name="fncMaxParamNames">
-	    <item>Primo valore</item>
-	    <item>Secondo valore</item>
+		<item>Primo valore</item>
+		<item>Secondo valore</item>
 	</string-array>
 	<string-array name="fncMaxParamHints">
-	    <item>Prima espressione</item>
-	    <item>Seconda espressione</item>
+		<item>Prima espressione</item>
+		<item>Seconda espressione</item>
 	</string-array>
 
 	<string name="fncMinName">Minimo</string>
 	<string name="fncMinDesc">Restituisce il più basso tra due valori.</string>
 	<string name="fncMinURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#min</string>
 	<string-array name="fncMinParamNames">
-	    <item>Primo valore</item>
-	    <item>Secondo valore</item>
+		<item>Primo valore</item>
+		<item>Secondo valore</item>
 	</string-array>
 	<string-array name="fncMinParamHints">
-	    <item>Prima espressione</item>
-	    <item>Seconda espressione</item>
+		<item>Prima espressione</item>
+		<item>Seconda espressione</item>
 	</string-array>
 
 	<string name="fncRandName">Casuale</string>
 	<string name="fncRandDesc">Restituisce un valore casuale tra i due indicati.</string>
 	<string name="fncRandURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rand</string>
 	<string-array name="fncRandParamNames">
-	    <item>Primo valore</item>
-	    <item>Secondo valore</item>
+		<item>Primo valore</item>
+		<item>Secondo valore</item>
 	</string-array>
 	<string-array name="fncRandParamHints">
-	    <item>Prima espressione</item>
-	    <item>Seconda espressione</item>
+		<item>Prima espressione</item>
+		<item>Seconda espressione</item>
 	</string-array>
 
 	<string name="fncNwodName">Nuovo MdT</string>
 	<string name="fncNwodDesc">Esegue un test secondo le regole del Nuovo Mondo di Tenebra.</string>
 	<string name="fncNwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
 	<string-array name="fncNwodParamNames">
-	    <item>Numero di Dadi</item>
-	    <item>Difficoltà</item>
+		<item>Numero di Dadi</item>
+		<item>Difficoltà</item>
 	</string-array>
 	<string-array name="fncNwodParamHints">
-	    <item>Numero di d10 da lanciare</item>
-	    <item>Valore minimo da ottenere</item>
+		<item>Numero di d10 da lanciare</item>
+		<item>Valore minimo da ottenere</item>
 	</string-array>
 
 	<string name="fncOwodName">Vecchio MdT</string>
 	<string name="fncOwodDesc">Esegue un test secondo le regole del Vecchio Mondo di Tenebra.</string>
 	<string name="fncOwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#owod</string>
 	<string-array name="fncOwodParamNames">
-	    <item>Numero di Dadi</item>
-	    <item>Difficoltà</item>
+		<item>Numero di Dadi</item>
+		<item>Difficoltà</item>
 	</string-array>
 	<string-array name="fncOwodParamHints">
-	    <item>Numero di d10 da lanciare</item>
-	    <item>Valore minimo da ottenere</item>
+		<item>Numero di d10 da lanciare</item>
+		<item>Valore minimo da ottenere</item>
 	</string-array>
 
 	<string name="fncPoolName">Riserva di Dadi</string>
 	<string name="fncPoolDesc">Restituisce il numero di volte in cui il lancio è meggiore o uguale alla difficoltà.</string>
 	<string name="fncPoolURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#pool</string>
 	<string-array name="fncPoolParamNames">
-	    <item>Dado</item>
-	    <item>Numero di lanci</item>
-	    <item>Difficoltà</item>
+		<item>Dado</item>
+		<item>Numero di lanci</item>
+		<item>Difficoltà</item>
 	</string-array>
 	<string-array name="fncPoolParamHints">
-	    <item>Dado da lanciare</item>
-	    <item>Numero di lanci da fare</item>
-	    <item>Valore minimo da ottenere</item>
+		<item>Dado da lanciare</item>
+		<item>Numero di lanci da fare</item>
+		<item>Valore minimo da ottenere</item>
 	</string-array>
 
 	<string name="fncRakName">Lancia e Tieni</string>
 	<string name="fncRakDesc">Lancia un tot di dadi ma ne tiene solo un sottoinsieme.</string>
 	<string name="fncRakURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rak</string>
 	<string-array name="fncRakParamNames">
-	    <item>Dado</item>
-	    <item>Numero di lanci</item>
-	    <item>Risultati da tenere</item>
+		<item>Dado</item>
+		<item>Numero di lanci</item>
+		<item>Risultati da tenere</item>
 	</string-array>
 	<string-array name="fncRakParamHints">
-	    <item>Dado da lanciare</item>
-	    <item>Numero di lanci da fare</item>
-	    <item>Numero di lanci da tenere</item>
+		<item>Dado da lanciare</item>
+		<item>Numero di lanci da fare</item>
+		<item>Numero di lanci da tenere</item>
 	</string-array>
 
 	<string name="fncRdnName">Arrotonda per Difetto</string>
 	<string name="fncRdnDesc">Arrotonda il valore per difetto.</string>
 	<string name="fncRdnURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
 	<string-array name="fncRdnParamNames">
-	    <item>Valore</item>
+		<item>Valore</item>
 	</string-array>
 	<string-array name="fncRdnParamHints">
-	    <item>Valore da arrotondare</item>
+		<item>Valore da arrotondare</item>
 	</string-array>
 
 	<string name="fncRupName">Arrotonda per Eccesso</string>
 	<string name="fncRupDesc">Arrotonda il valore per eccesso.</string>
 	<string name="fncRupURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rup</string>
 	<string-array name="fncRupParamNames">
-	    <item>Valore</item>
+		<item>Valore</item>
 	</string-array>
 	<string-array name="fncRupParamHints">
-	    <item>Valore da arrotondare</item>
+		<item>Valore da arrotondare</item>
 	</string-array>
 
 	<string name="fncAbsName">Assoluto</string>
 	<string name="fncAbsDesc">Restituisce l\'assoluto (modulo) del valore specificato.</string>
 	<string name="fncAbsURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#abs</string>
 	<string-array name="fncAbsParamNames">
-	    <item>Valore</item>
+		<item>Valore</item>
 	</string-array>
 	<string-array name="fncAbsParamHints">
-	    <item>Valore da rendere assoluto</item>
+		<item>Valore da rendere assoluto</item>
 	</string-array>
 
 	<!-- Errors -->
@@ -410,7 +414,7 @@ pubblicato da Google su <a href="http://www.apache.org/licenses/LICENSE-2.0">Apa
 	<string name="exc_unexpected_parameter">Parametro inatteso alla posizione %1$d.</string>
 	<string name="exc_unknown_function">Funzione \"%1$s\" sconosciuta alla posizione %2$d.</string>
 	<string name="exc_unknown_variable">Variabile \"%1$s\" sconosciuta alla posizione %2$d.</string>
-	    		
+				
 	<!-- Default dice bag description -->
 	<string name="def_bag_name">Predefinita</string>
 	<string name="def_bag_description">Collezione predefinita</string>
@@ -419,22 +423,22 @@ pubblicato da Google su <a href="http://www.apache.org/licenses/LICENSE-2.0">Apa
 	<string name="def_die_name">Dado</string>
 	<string name="def_die_desc">Lancia un dado</string>
 	<string-array name="default_dice_name">
-	    <item>d4</item>
-	    <item>d6</item>
-	    <item>d8</item>
-	    <item>d10</item>
-	    <item>d12</item>
-	    <item>d20</item>
-	    <item>d%</item>
+		<item>d4</item>
+		<item>d6</item>
+		<item>d8</item>
+		<item>d10</item>
+		<item>d12</item>
+		<item>d20</item>
+		<item>d%</item>
 	</string-array>
 	<string-array name="default_dice_desc">
-	    <item>Lancia un dado a quattro facce</item>
-	    <item>Lancia un dado a sei facce</item>
-	    <item>Lancia un dado ad otto facce</item>
-	    <item>Lancia un dado a dieci facce</item>
-	    <item>Lancia un dado a dodici facce</item>
-	    <item>Lancia un dado a venti facce</item>
-	    <item>Lancia un dado percentuale</item>
+		<item>Lancia un dado a quattro facce</item>
+		<item>Lancia un dado a sei facce</item>
+		<item>Lancia un dado ad otto facce</item>
+		<item>Lancia un dado a dieci facce</item>
+		<item>Lancia un dado a dodici facce</item>
+		<item>Lancia un dado a venti facce</item>
+		<item>Lancia un dado percentuale</item>
 	</string-array>
 
 	<!-- Preferences -->
