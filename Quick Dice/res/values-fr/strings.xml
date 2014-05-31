@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Lanceur de dés rapide</string>
-    <string name="app_author">Ohmnibus</string>
-    
-    <string name="lblName">Nom</string>
-    <string name="hintName">Entrez le nom des dés</string>
-    <string name="lblDesc">Description</string>
-    <string name="hintDesc">Une brève description du dé</string>
+	<string name="app_name">Lanceur de dés rapide</string>
+	<string name="app_author">Ohmnibus</string>
+	
+	<string name="lblName">Nom</string>
+	<string name="hintName">Entrez le nom des dés</string>
+	<string name="lblDesc">Description</string>
+	<string name="hintDesc">Une brève description du dé</string>
 	<string name="lblIcon">Icône</string>
-    <string name="lblExp">Formule</string>
-    <string name="hintExp">Entrez la formule du dé</string>
-    <string name="lblRangeValue">Valeurs</string>
+	<string name="lblExp">Formule</string>
+	<string name="hintExp">Entrez la formule du dé</string>
+	<string name="lblRangeValue">Valeurs</string>
 	<string name="lblCannotEvaluate">Impossible à évaluer</string>
 	<string name="lblResultText">Résultat étendu</string>
 	<string name="lblResultValue">Résultat numérique</string>
@@ -26,10 +26,10 @@
 	<string name="lblModifierBuilderMessage">Composez un modificateur.</string>
 	<string name="lblNeutralModifier">Il y a une logique puor créer un modificateur neutre? Je ne le pense pas.</string>
 	<string name="lblDuplicateModifier">Ce modificateur existe déjà.</string>
-    <string name="lblNameBag">Nom</string>
-    <string name="hintNameBag">Entrez le nom de la collection</string>
-    <string name="lblDescBag">Description</string>
-    <string name="hintDescBag">Une brève description de la collection</string>
+	<string name="lblNameBag">Nom</string>
+	<string name="hintNameBag">Entrez le nom de la collection</string>
+	<string name="lblDescBag">Description</string>
+	<string name="hintDescBag">Une brève description de la collection</string>
 	<string name="lblIconBag">Icône</string>
 	<string name="lblMailSubject">[QDR] Suggestions</string>
 	<string name="lblSendMail">Envoyez vos suggestions</string>
@@ -50,7 +50,10 @@
 	<string name="lblSelectDiceDest">Choisisser la destination</string>
 	<string name="lblLastPositionName">&lt;Au fond&gt;</string>
 	<string name="lblLastPositionDesc">&lt;Déplacer le dé à la dernière position&gt;</string>
-	
+	<string name="lblDragToResize">Faire glisser pour redimensionner</string>
+	<string name="lblQuality">Qualité du résultat</string>
+	<string name="lblResultQualityRange">Résultat, qualité, gamme</string>
+
 	<string name="lblGb">Go</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mo</string><!-- Short for Megabyte -->
 	<string name="lblKb">ko</string><!-- Short for Kilobyte -->
@@ -154,228 +157,228 @@ publié par Google sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Lice
 	<string name="fncBASHDesc">Il effectue un test en utilisant le système BASH!</string>
 	<string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
 	<string-array name="fncBASHParamNames">
-	    <item>Nombre de dés</item>
-	    <item>Dé</item>
+		<item>Nombre de dés</item>
+		<item>Dé</item>
 	</string-array>
 	<string-array name="fncBASHParamHints">
-	    <item>Nombre de dés à lancer</item>
-	    <item>Dé à lancer</item>
+		<item>Nombre de dés à lancer</item>
+		<item>Dé à lancer</item>
 	</string-array>
 				
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Il effectue un test en utilisant le système Burning Wheel.</string>
 	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
 	<string-array name="fncBWheelParamNames">
-	    <item>Dé</item>
-	    <item>Nombre de dés</item>
-	    <item>Niveau de difficulté</item>
-	    <item>Roulez encore</item>
+		<item>Dé</item>
+		<item>Nombre de dés</item>
+		<item>Niveau de difficulté</item>
+		<item>Roulez encore</item>
 	</string-array>
 	<string-array name="fncBWheelParamHints">
-	    <item>Dé à lancer</item>
-	    <item>Nombre de dés à lancer</item>
-	    <item>Valeur minimale à obtenir</item>
-	    <item>Valeur à atteindre pour obtenir un rouleau supplémentaire</item>
+		<item>Dé à lancer</item>
+		<item>Nombre de dés à lancer</item>
+		<item>Valeur minimale à obtenir</item>
+		<item>Valeur à atteindre pour obtenir un rouleau supplémentaire</item>
 	</string-array>
 				
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Il effectue un test en utilisant le système Dystopian Wars.</string>
 	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
 	<string-array name="fncDWarsParamNames">
-	    <item>Dé</item>
-	    <item>Nombre de dés</item>
-	    <item>Niveau de difficulté</item>
-	    <item>Roulez encore</item>
+		<item>Dé</item>
+		<item>Nombre de dés</item>
+		<item>Niveau de difficulté</item>
+		<item>Roulez encore</item>
 	</string-array>
 	<string-array name="fncDWarsParamHints">
-	    <item>Dé à lancer</item>
-	    <item>Nombre de dés à lancer</item>
-	    <item>Valeur minimale à obtenir</item>
-	    <item>Valeur à atteindre pour obtenir un rouleau supplémentaire</item>
+		<item>Dé à lancer</item>
+		<item>Nombre de dés à lancer</item>
+		<item>Valeur minimale à obtenir</item>
+		<item>Valeur à atteindre pour obtenir un rouleau supplémentaire</item>
 	</string-array>
 				
 	<string name="fncHEROName">HERO System</string>
 	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
 	<string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
 	<string-array name="fncHEROParamNames">
-	    <item>Nombre de dés</item>
+		<item>Nombre de dés</item>
 	</string-array>
 	<string-array name="fncHEROParamHints">
-	    <item>Nombre de d6 à lancer</item>
+		<item>Nombre de d6 à lancer</item>
 	</string-array>
 				
 	<string name="fncExalName">Exaltés</string>
 	<string name="fncExalDesc">Il effectue un test en utilisant le système Exaltés.</string>
 	<string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
 	<string-array name="fncExalParamNames">
-	    <item>Nombre de dés</item>
-	    <item>Niveau de difficulté</item>
+		<item>Nombre de dés</item>
+		<item>Niveau de difficulté</item>
 	</string-array>
 	<string-array name="fncExalParamHints">
-	    <item>Nombre de d10 à lancer</item>
-	    <item>Valeur minimale à obtenir</item>
+		<item>Nombre de d10 à lancer</item>
+		<item>Valeur minimale à obtenir</item>
 	</string-array>
 				
 	<string name="fncExpName">Éclatement (tir ouvert simple)</string>
 	<string name="fncExpDesc">Il effectue un éclatement. Il est relancé s\'il obtient le maximum ou le minimum.</string>
 	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
 	<string-array name="fncExpParamNames">
-	    <item>Dé</item>
+		<item>Dé</item>
 	</string-array>
 	<string-array name="fncExpParamHints">
-	    <item>Dé à lancer</item>
+		<item>Dé à lancer</item>
 	</string-array>
 
 	<string name="fncExpUpName">Tir ouvert au dessus</string>
 	<string name="fncExpUpDesc">Il effectue un éclatement. Il est relancé seulement s\'il obtient le maximum.</string>
 	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
 	<string-array name="fncExpUpParamNames">
-	    <item>Dé</item>
+		<item>Dé</item>
 	</string-array>
 	<string-array name="fncExpUpParamHints">
-	    <item>Dé à lancer</item>
+		<item>Dé à lancer</item>
 	</string-array>
 
 	<string name="fncExplodeName">Ouvert</string>
 	<string name="fncExplodeDesc">Il effectue un éclatement compte tenu d\'une tolérance. Il est relancé si vous obtenez des valeurs élevées ou basses.</string>
 	<string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
 	<string-array name="fncExplodeParamNames">
-	    <item>Dé</item>
-	    <item>Tolérance</item>
+		<item>Dé</item>
+		<item>Tolérance</item>
 	</string-array>
 	<string-array name="fncExplodeParamHints">
-	    <item>Dé à lancer</item>
-	    <item>Probabilité de relancer</item>
+		<item>Dé à lancer</item>
+		<item>Probabilité de relancer</item>
 	</string-array>
 
 	<string name="fncExplodeUpName">Ouvert au dessus</string>
 	<string name="fncExplodeUpDesc">Il effectue un éclatement compte tenu d\'une tolérance. Il est relancé seulement si vous obtenez des valeurs élevées ou basses.</string>
 	<string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
 	<string-array name="fncExplodeUpParamNames">
-	    <item>Dé</item>
-	    <item>Tolérance</item>
+		<item>Dé</item>
+		<item>Tolérance</item>
 	</string-array>
 	<string-array name="fncExplodeUpParamHints">
-	    <item>Dé à lancer</item>
-	    <item>Probabilité de relancer</item>
+		<item>Dé à lancer</item>
+		<item>Probabilité de relancer</item>
 	</string-array>
 
 	<string name="fncMaxName">Maximum</string>
 	<string name="fncMaxDesc">Il retourne la plus grande des deux valeurs.</string>
 	<string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
 	<string-array name="fncMaxParamNames">
-	    <item>La première valeu</item>
-	    <item>La deuxième valeur</item>
+		<item>La première valeu</item>
+		<item>La deuxième valeur</item>
 	</string-array>
 	<string-array name="fncMaxParamHints">
-	    <item>La première expression</item>
-	    <item>La deuxième expression</item>
+		<item>La première expression</item>
+		<item>La deuxième expression</item>
 	</string-array>
 
 	<string name="fncMinName">Minimum</string>
 	<string name="fncMinDesc">Il retourne la plus petite des deux valeurs.</string>
 	<string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
 	<string-array name="fncMinParamNames">
-	    <item>La première valeu</item>
-	    <item>La deuxième valeur</item>
+		<item>La première valeu</item>
+		<item>La deuxième valeur</item>
 	</string-array>
 	<string-array name="fncMinParamHints">
-	    <item>La première expression</item>
-	    <item>La deuxième expression</item>
+		<item>La première expression</item>
+		<item>La deuxième expression</item>
 	</string-array>
 
 	<string name="fncRandName">Aléatoire</string>
 	<string name="fncRandDesc">Il retourne un nombre aléatoire entre deux valeurs.</string>
 	<string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
 	<string-array name="fncRandParamNames">
-	    <item>La première valeu</item>
-	    <item>La deuxième valeur</item>
+		<item>La première valeu</item>
+		<item>La deuxième valeur</item>
 	</string-array>
 	<string-array name="fncRandParamHints">
-	    <item>La première expression</item>
-	    <item>La deuxième expression</item>
+		<item>La première expression</item>
+		<item>La deuxième expression</item>
 	</string-array>
 
 	<string name="fncNwodName">Nouveau MdT</string>
 	<string name="fncNwodDesc">Il effectue un test avec les règles du nouveau Monde des Ténèbres.</string>
 	<string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
 	<string-array name="fncNwodParamNames">
-	    <item>Nombre de dés</item>
-	    <item>Difficulté</item>
+		<item>Nombre de dés</item>
+		<item>Difficulté</item>
 	</string-array>
 	<string-array name="fncNwodParamHints">
-	    <item>Nombre de d10 à lancer</item>
-	    <item>Valeur minimale à obtenir</item>
+		<item>Nombre de d10 à lancer</item>
+		<item>Valeur minimale à obtenir</item>
 	</string-array>
 
 	<string name="fncOwodName">Vieux MdT</string>
 	<string name="fncOwodDesc">Il effectue un test avec les règles du vieux Monde des Ténèbres</string>
 	<string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
 	<string-array name="fncOwodParamNames">
-	    <item>Nombre de dés</item>
-	    <item>Difficulté</item>
+		<item>Nombre de dés</item>
+		<item>Difficulté</item>
 	</string-array>
 	<string-array name="fncOwodParamHints">
-	    <item>Nombre de d10 à lancer</item>
-	    <item>Valeur minimale à obtenir</item>
+		<item>Nombre de d10 à lancer</item>
+		<item>Valeur minimale à obtenir</item>
 	</string-array>
 
 	<string name="fncPoolName">Réserve de dés</string>
 	<string name="fncPoolDesc">Il retourne le nombre de fois où le lancement est meggiore ou égale à la difficulté.</string>
 	<string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
 	<string-array name="fncPoolParamNames">
-	    <item>Dé</item>
-	    <item>Dé à lancer</item>
-	    <item>Difficulté</item>
+		<item>Dé</item>
+		<item>Dé à lancer</item>
+		<item>Difficulté</item>
 	</string-array>
 	<string-array name="fncPoolParamHints">
-	    <item>Dé à lancer</item>
-	    <item>Nombre de lance à faire</item>
-	    <item>Valeur minimale à obtenir</item>
+		<item>Dé à lancer</item>
+		<item>Nombre de lance à faire</item>
+		<item>Valeur minimale à obtenir</item>
 	</string-array>
 
 	<string name="fncRakName">Lancer et maintener</string>
 	<string name="fncRakDesc">Il lance un certain nombre de dés, mais il ne garde qu\'un sous-ensemble.</string>
 	<string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
 	<string-array name="fncRakParamNames">
-	    <item>Dé</item>
-	    <item>Nombre de lances</item>
-	    <item>Résultats à garder</item>
+		<item>Dé</item>
+		<item>Nombre de lances</item>
+		<item>Résultats à garder</item>
 	</string-array>
 	<string-array name="fncRakParamHints">
-	    <item>Dé à lancer</item>
-	    <item>Nombre de lances à faire</item>
-	    <item>Nombre de lances à garder</item>
+		<item>Dé à lancer</item>
+		<item>Nombre de lances à faire</item>
+		<item>Nombre de lances à garder</item>
 	</string-array>
 
 	<string name="fncRdnName">Arrondir par défaut</string>
 	<string name="fncRdnDesc">Il arrondit la valeur par défaut.</string>
 	<string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
 	<string-array name="fncRdnParamNames">
-	    <item>Valeur</item>
+		<item>Valeur</item>
 	</string-array>
 	<string-array name="fncRdnParamHints">
-	    <item>Valeur à arrondir</item>
+		<item>Valeur à arrondir</item>
 	</string-array>
 
 	<string name="fncRupName">Arrondir par excès</string>
 	<string name="fncRupDesc">Il arrondit la valeur par excès</string>
 	<string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
 	<string-array name="fncRupParamNames">
-	    <item>Valeur</item>
+		<item>Valeur</item>
 	</string-array>
 	<string-array name="fncRupParamHints">
-	    <item>Valeur à arrondir</item>
+		<item>Valeur à arrondir</item>
 	</string-array>
 	
 	<string name="fncAbsName">Absolue</string>
 	<string name="fncAbsDesc">Il renvoie l\'absolue (module) de la valeur spécifiée.</string>
 	<string name="fncAbsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs</string>
 	<string-array name="fncAbsParamNames">
-	    <item>Valeur</item>
+		<item>Valeur</item>
 	</string-array>
 	<string-array name="fncAbsParamHints">
-	    <item>Valeur à rendre absolue</item>
+		<item>Valeur à rendre absolue</item>
 	</string-array>
 
 	<!-- Errors -->
@@ -404,7 +407,7 @@ publié par Google sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Lice
 	<string name="exc_unexpected_parameter">Paramètre inattendu à la position %1$d.</string>
 	<string name="exc_unknown_function">Fonction \"%1$s\" inconnue à la position %2$d.</string>
 	<string name="exc_unknown_variable">Variable \"%1$s\" inconnue à la position %2$d.</string>
-	    		
+				
 	<!-- Default dice bag description -->
 	<string name="def_bag_name">Défault</string>
 	<string name="def_bag_description">Collection par défault</string>
@@ -413,22 +416,22 @@ publié par Google sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Lice
 	<string name="def_die_name">Dé</string>
 	<string name="def_die_desc">Il lance un dé</string>
 	<string-array name="default_dice_name">
-	    <item>d4</item>
-	    <item>d6</item>
-	    <item>d8</item>
-	    <item>d10</item>
-	    <item>d12</item>
-	    <item>d20</item>
-	    <item>d%</item>
+		<item>d4</item>
+		<item>d6</item>
+		<item>d8</item>
+		<item>d10</item>
+		<item>d12</item>
+		<item>d20</item>
+		<item>d%</item>
 	</string-array>
 	<string-array name="default_dice_desc">
-	    <item>Il lance un dé à 4 faces</item>
-	    <item>Il lance un dé à 6 faces</item>
-	    <item>Il lance un dé à 8 faces</item>
-	    <item>Il lance un dé à 10 faces</item>
-	    <item>Il lance un dé à 12 faces</item>
-	    <item>Il lance un dé à 20 faces</item>
-	    <item>Il lance un dé pourcentage</item>
+		<item>Il lance un dé à 4 faces</item>
+		<item>Il lance un dé à 6 faces</item>
+		<item>Il lance un dé à 8 faces</item>
+		<item>Il lance un dé à 10 faces</item>
+		<item>Il lance un dé à 12 faces</item>
+		<item>Il lance un dé à 20 faces</item>
+		<item>Il lance un dé pourcentage</item>
 	</string-array>
 
 	<!-- Preferences -->

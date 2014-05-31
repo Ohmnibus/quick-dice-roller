@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Quick Dice Roller</string>
-    <string name="app_author">Ohmnibus</string>
-    
-    <string name="lblName">Name</string>
-    <string name="hintName">Enter die name here</string>
-    <string name="lblDesc">Description</string>
-    <string name="hintDesc">Enter die description here</string>
+	<string name="app_name">Quick Dice Roller</string>
+	<string name="app_author">Ohmnibus</string>
+
+	<string name="lblName">Name</string>
+	<string name="hintName">Enter die name here</string>
+	<string name="lblDesc">Description</string>
+	<string name="hintDesc">Enter die description here</string>
 	<string name="lblIcon">Icon</string>
-    <string name="lblExp">Formula</string>
-    <string name="hintExp">Enter die formula here</string>
-    <string name="lblRangeValue">Values</string>
+	<string name="lblExp">Formula</string>
+	<string name="hintExp">Enter die formula here</string>
+	<string name="lblRangeValue">Values</string>
 	<string name="lblCannotEvaluate">Cannot evaluate</string>
 	<string name="lblResultText">Extended result</string>
 	<string name="lblResultValue">Numeric Result</string>
@@ -26,10 +26,10 @@
 	<string name="lblModifierBuilderMessage">Compose a modifier.</string>
 	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier? Don\'t think so.</string>
 	<string name="lblDuplicateModifier">This modifier already exists.</string>
-    <string name="lblNameBag">Name</string>
-    <string name="hintNameBag">Enter bag name here</string>
-    <string name="lblDescBag">Description</string>
-    <string name="hintDescBag">Enter bag description here</string>
+	<string name="lblNameBag">Name</string>
+	<string name="hintNameBag">Enter bag name here</string>
+	<string name="lblDescBag">Description</string>
+	<string name="hintDescBag">Enter bag description here</string>
 	<string name="lblIconBag">Icon</string>
 	<string name="lblMailSubject">[QDR] Suggestion</string>
 	<string name="lblSendMail">Submit suggestion</string>
@@ -51,6 +51,8 @@
 	<string name="lblLastPositionName">&lt;At the end&gt;</string>
 	<string name="lblLastPositionDesc">&lt;Select this to move at the end&gt;</string>
 	<string name="lblDragToResize">Drag to resize</string>
+	<string name="lblQuality">Result quality</string>
+	<string name="lblResultQualityRange">Result, quality, range</string>
 
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
@@ -79,6 +81,7 @@
 <b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app and/or the translations.<br />
 <br />
 - Resizeable dice area<br />
+- Rich context menu<br />
 - Fixed bug related to results list<br />
 - Minor fix and improvements<br />
 <br />]]></string>
@@ -161,228 +164,228 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="fncBASHDesc">Makes a check using BASH! rules.</string>
 	<string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
 	<string-array name="fncBASHParamNames">
-	    <item>Pool Size</item>
-	    <item>Roll</item>
+		<item>Pool Size</item>
+		<item>Roll</item>
 	</string-array>
 	<string-array name="fncBASHParamHints">
-	    <item>Number of roll to do</item>
-	    <item>Expression to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Expression to be tested</item>
 	</string-array>
 				
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Makes a check using Burning Wheel rules.</string>
 	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
 	<string-array name="fncBWheelParamNames">
-	    <item>Roll</item>
-	    <item>Pool Size</item>
-	    <item>Target</item>
-	    <item>Roll Again</item>
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
 	</string-array>
 	<string-array name="fncBWheelParamHints">
-	    <item>Expression to be tested</item>
-	    <item>Number of roll to do</item>
-	    <item>Value to reach to obtain a success</item>
-	    <item>Value to reach to obtain an extra roll</item>
+		<item>Expression to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
 	</string-array>
 				
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Makes a check using Dystopian Wars rules.</string>
 	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
 	<string-array name="fncDWarsParamNames">
-	    <item>Roll</item>
-	    <item>Pool Size</item>
-	    <item>Target</item>
-	    <item>Roll Again</item>
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
 	</string-array>
 	<string-array name="fncDWarsParamHints">
-	    <item>Expression to be tested</item>
-	    <item>Number of roll to do</item>
-	    <item>Value to reach to obtain a success</item>
-	    <item>Value to reach to obtain an extra roll</item>
+		<item>Expression to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
 	</string-array>
 				
 	<string name="fncHEROName">HERO System</string>
 	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
 	<string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
 	<string-array name="fncHEROParamNames">
-	    <item>Pool Size</item>
+		<item>Pool Size</item>
 	</string-array>
 	<string-array name="fncHEROParamHints">
-	    <item>Number of d6 to roll</item>
+		<item>Number of d6 to roll</item>
 	</string-array>
 				
 	<string name="fncExalName">Exalted</string>
 	<string name="fncExalDesc">Makes a check using Exalted rules.</string>
 	<string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
 	<string-array name="fncExalParamNames">
-	    <item>Pool Size</item>
-	    <item>Target</item>
+		<item>Pool Size</item>
+		<item>Target</item>
 	</string-array>
 	<string-array name="fncExalParamHints">
-	    <item>Number of d10 to roll</item>
-	    <item>Value to reach to obtain a success</item>
+		<item>Number of d10 to roll</item>
+		<item>Value to reach to obtain a success</item>
 	</string-array>
 				
 	<string name="fncExpName">Exploding (simple)</string>
 	<string name="fncExpDesc">Make an exploding roll. Explodes for high values as well as for low values.</string>
 	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
 	<string-array name="fncExpParamNames">
-	    <item>Roll</item>
+		<item>Roll</item>
 	</string-array>
 	<string-array name="fncExpParamHints">
-	    <item>The die to explode</item>
+		<item>The die to explode</item>
 	</string-array>
 
 	<string name="fncExpUpName">Exploding Upward (simple)</string>
 	<string name="fncExpUpDesc">Make an exploding roll. Explode only for high values.</string>
 	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
 	<string-array name="fncExpUpParamNames">
-	    <item>Roll</item>
+		<item>Roll</item>
 	</string-array>
 	<string-array name="fncExpUpParamHints">
-	    <item>The die to explode</item>
+		<item>The die to explode</item>
 	</string-array>
 
 	<string name="fncExplodeName">Exploding</string>
 	<string name="fncExplodeDesc">Make an exploding roll using a threshold. Explodes for high values as well as for low values.</string>
 	<string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
 	<string-array name="fncExplodeParamNames">
-	    <item>Roll</item>
-	    <item>Threshold</item>
+		<item>Roll</item>
+		<item>Threshold</item>
 	</string-array>
 	<string-array name="fncExplodeParamHints">
-	    <item>The die to explode</item>
-	    <item>Used to tell if the roll explodes</item>
+		<item>The die to explode</item>
+		<item>Used to tell if the roll explodes</item>
 	</string-array>
 
 	<string name="fncExplodeUpName">Exploding Upward</string>
 	<string name="fncExplodeUpDesc">Make an exploding roll using a threshold. Explode only for high values.</string>
 	<string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
 	<string-array name="fncExplodeUpParamNames">
-	    <item>Roll</item>
-	    <item>Threshold</item>
+		<item>Roll</item>
+		<item>Threshold</item>
 	</string-array>
 	<string-array name="fncExplodeUpParamHints">
-	    <item>The die to explode</item>
-	    <item>Used to tell if the roll explodes</item>
+		<item>The die to explode</item>
+		<item>Used to tell if the roll explodes</item>
 	</string-array>
 
 	<string name="fncMaxName">Maximum</string>
 	<string name="fncMaxDesc">Return the highest value obtained.</string>
 	<string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
 	<string-array name="fncMaxParamNames">
-	    <item>First Roll</item>
-	    <item>Second Roll</item>
+		<item>First Roll</item>
+		<item>Second Roll</item>
 	</string-array>
 	<string-array name="fncMaxParamHints">
-	    <item>First expression to test</item>
-	    <item>Second expression to test</item>
+		<item>First expression to test</item>
+		<item>Second expression to test</item>
 	</string-array>
 
 	<string name="fncMinName">Minimum</string>
 	<string name="fncMinDesc">Return the lowest value obtained.</string>
 	<string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
 	<string-array name="fncMinParamNames">
-	    <item>First Roll</item>
-	    <item>Second Roll</item>
+		<item>First Roll</item>
+		<item>Second Roll</item>
 	</string-array>
 	<string-array name="fncMinParamHints">
-	    <item>First expression to test</item>
-	    <item>Second expression to test</item>
+		<item>First expression to test</item>
+		<item>Second expression to test</item>
 	</string-array>
 
 	<string name="fncRandName">Random</string>
 	<string name="fncRandDesc">Return a random value between two boundaries.</string>
 	<string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
 	<string-array name="fncRandParamNames">
-	    <item>First boundary</item>
-	    <item>Second boundary</item>
+		<item>First boundary</item>
+		<item>Second boundary</item>
 	</string-array>
 	<string-array name="fncRandParamHints">
-	    <item>First boundary</item>
-	    <item>Second boundary</item>
+		<item>First boundary</item>
+		<item>Second boundary</item>
 	</string-array>
 
 	<string name="fncNwodName">New WoD</string>
 	<string name="fncNwodDesc">Makes a check using the New World of Darkness rules.</string>
 	<string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
 	<string-array name="fncNwodParamNames">
-	    <item>Pool Size</item>
-	    <item>Target</item>
+		<item>Pool Size</item>
+		<item>Target</item>
 	</string-array>
 	<string-array name="fncNwodParamHints">
-	    <item>Number of d10 to roll</item>
-	    <item>Value to reach to obtain a success</item>
+		<item>Number of d10 to roll</item>
+		<item>Value to reach to obtain a success</item>
 	</string-array>
 
 	<string name="fncOwodName">Original WoD</string>
 	<string name="fncOwodDesc">Makes a check using the Original World of Darkness rules.</string>
 	<string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
 	<string-array name="fncOwodParamNames">
-	    <item>Pool Size</item>
-	    <item>Target</item>
+		<item>Pool Size</item>
+		<item>Target</item>
 	</string-array>
 	<string-array name="fncOwodParamHints">
-	    <item>Number of d10 to roll</item>
-	    <item>Value to reach to obtain a success</item>
+		<item>Number of d10 to roll</item>
+		<item>Value to reach to obtain a success</item>
 	</string-array>
 
 	<string name="fncPoolName">Dice Pool</string>
 	<string name="fncPoolDesc">Number of times that the Roll is evaluated greater or equal to Target.</string>
 	<string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
 	<string-array name="fncPoolParamNames">
-	    <item>Roll</item>
-	    <item>Pool Size</item>
-	    <item>Target</item>
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
 	</string-array>
 	<string-array name="fncPoolParamHints">
-	    <item>Expression to be tested</item>
-	    <item>Number of roll to do</item>
-	    <item>Value to reach to obtain a success</item>
+		<item>Expression to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
 	</string-array>
 
 	<string name="fncRakName">Roll and Keep</string>
 	<string name="fncRakDesc">Execute a Roll and Keep test.</string>
 	<string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
 	<string-array name="fncRakParamNames">
-	    <item>Roll</item>
-	    <item>Pool Size</item>
-	    <item>Keep</item>
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Keep</item>
 	</string-array>
 	<string-array name="fncRakParamHints">
-	    <item>What to roll</item>
-	    <item>Roll to do</item>
-	    <item>Roll to keep</item>
+		<item>What to roll</item>
+		<item>Roll to do</item>
+		<item>Roll to keep</item>
 	</string-array>
 
 	<string name="fncRdnName">Round down</string>
 	<string name="fncRdnDesc">Round down the specified value.</string>
 	<string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
 	<string-array name="fncRdnParamNames">
-	    <item>Value</item>
+		<item>Value</item>
 	</string-array>
 	<string-array name="fncRdnParamHints">
-	    <item>What to round down</item>
+		<item>What to round down</item>
 	</string-array>
 
 	<string name="fncRupName">Round up</string>
 	<string name="fncRupDesc">Round up the specified value.</string>
 	<string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
 	<string-array name="fncRupParamNames">
-	    <item>Value</item>
+		<item>Value</item>
 	</string-array>
 	<string-array name="fncRupParamHints">
-	    <item>What to round up</item>
+		<item>What to round up</item>
 	</string-array>
 
 	<string name="fncAbsName">Absolute</string>
 	<string name="fncAbsDesc">Give the absolute (or modulus) of the specified value.</string>
 	<string name="fncAbsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs</string>
 	<string-array name="fncAbsParamNames">
-	    <item>Value</item>
+		<item>Value</item>
 	</string-array>
 	<string-array name="fncAbsParamHints">
-	    <item>What to make positive</item>
+		<item>What to make positive</item>
 	</string-array>
 
 	<!-- Errors -->
@@ -411,7 +414,7 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="exc_unexpected_parameter">Unexpected parameter at char %1$d.</string>
 	<string name="exc_unknown_function">Unknown function \"%1$s\" at char %2$d.</string>
 	<string name="exc_unknown_variable">Unknown variable \"%1$s\" at char %2$d.</string>
-	    		
+				
 	<!-- Default dice bag description -->
 	<string name="def_bag_name">Default</string>
 	<string name="def_bag_description">Default dice bag</string>
@@ -420,22 +423,22 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="def_die_name">Dice</string>
 	<string name="def_die_desc">Roll a die</string>
 	<string-array name="default_dice_name">
-	    <item>d4</item>
-	    <item>d6</item>
-	    <item>d8</item>
-	    <item>d10</item>
-	    <item>d12</item>
-	    <item>d20</item>
-	    <item>d%</item>
+		<item>d4</item>
+		<item>d6</item>
+		<item>d8</item>
+		<item>d10</item>
+		<item>d12</item>
+		<item>d20</item>
+		<item>d%</item>
 	</string-array>
 	<string-array name="default_dice_desc">
-	    <item>Roll a four sided die</item>
-	    <item>Roll a six sided die</item>
-	    <item>Roll a eight sided die</item>
-	    <item>Roll a ten sided die</item>
-	    <item>Roll a twelve sided die</item>
-	    <item>Roll a twenty sided die</item>
-	    <item>Roll a hundred sided die</item>
+		<item>Roll a four sided die</item>
+		<item>Roll a six sided die</item>
+		<item>Roll a eight sided die</item>
+		<item>Roll a ten sided die</item>
+		<item>Roll a twelve sided die</item>
+		<item>Roll a twenty sided die</item>
+		<item>Roll a hundred sided die</item>
 	</string-array>
 
 	<!-- Preferences -->

@@ -5,77 +5,92 @@ import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import ohm.quickdice.adapter.MenuAdapter;
+import ohm.quickdice.entity.DiceBag;
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class DiceDetailDialog extends AlertDialog implements DialogInterface.OnClickListener {
+public class DiceDetailDialog extends MenuDialog {
 
+	DiceBag diceBag;
+	int dieIndex;
 	DExpression expression;
-		
-	public DiceDetailDialog(Context context, DExpression expression) {
-		super(context);
-		this.expression = expression;
+	
+	public DiceDetailDialog(Activity activity, DiceBag diceBag, int dieIndex, Menu menu) {
+		super(activity, menu);
+		this.diceBag = diceBag;
+		this.dieIndex = dieIndex;
+		this.expression = diceBag.getDice().get(dieIndex);
 	}
-
-	/* (non-Javadoc)
-	 * @see android.app.AlertDialog#onCreate(android.os.Bundle)
-	 */
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//super.onCreate(savedInstanceState);
-		View mView = getLayoutInflater().inflate(R.layout.dice_detail_dialog, null);
-		
-		setView(mView);
 		
 		setTitle(expression.getName());
-		
+
 		setIcon(getDialogIcon());
-		
-		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-		
+
 		super.onCreate(savedInstanceState);
-		
-		((TextView)findViewById(R.id.ddName)).setText(expression.getName());
-		((TextView)findViewById(R.id.ddDescription)).setText(expression.getDescription());
-		((TextView)findViewById(R.id.ddExpresson)).setText(expression.getExpression());
+	}
+	
+	@Override
+	protected View getHeaderView(LayoutInflater inflater, ListView parent) {
+		View view = inflater.inflate(R.layout.dice_detail_dialog, null);
+
+		//((TextView)view.findViewById(R.id.ddName)).setText(expression.getName());
+		if (expression.getDescription() == null || expression.getDescription().length() == 0) {
+			((TextView)view.findViewById(R.id.ddDescription)).setVisibility(View.GONE);
+			((TextView)view.findViewById(R.id.ddDescriptionLabel)).setVisibility(View.GONE);
+		} else {
+			((TextView)view.findViewById(R.id.ddDescription)).setText(expression.getDescription());
+		}
+		((TextView)view.findViewById(R.id.ddExpresson)).setText(expression.getExpression());
 		try {
 			long min = expression.getMinResult() / TokenBase.VALUES_PRECISION_FACTOR;
 			long max = expression.getMaxResult() / TokenBase.VALUES_PRECISION_FACTOR;
 			long range = max - min + 1;
-//			((TextView)findViewById(R.id.ddMinResult)).setText(Long.toString(min));
-//			((TextView)findViewById(R.id.ddMaxResult)).setText(Long.toString(max));
-//			((TextView)findViewById(R.id.ddRange)).setText(Long.toString(range));
-			((TextView)findViewById(R.id.ddRange)).setText(
+			((TextView)view.findViewById(R.id.ddRange)).setText(
 					Long.toString(min) + " - " +
-					Long.toString(max) + " (" +
-					Long.toString(range) + ")");
+							Long.toString(max) + " (" +
+							Long.toString(range) + ")");
 		} catch (DException e) {
-//			((TextView)findViewById(R.id.ddMinResult)).setText(R.string.lblCannotEvaluate);
-//			((TextView)findViewById(R.id.ddMaxResult)).setText(R.string.lblCannotEvaluate);
 			((TextView)findViewById(R.id.ddRange)).setText(R.string.lblCannotEvaluate);
 		}
-	}
-	
-	protected Drawable getDialogIcon() {
-//		DisplayMetrics metrics = new DisplayMetrics();
-//		this.getWindow().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-//		Drawable diceIcon = QuickDiceApp.getInstance().getDiceIcon(expression.getResourceIndex());
-//		return Graphic.resizeDrawable(diceIcon, 32, 32, metrics);
-//		Graphic graphicManager = new Graphic(this.getContext().getResources());
-//		Drawable diceIcon = QuickDiceApp.getInstance().getDiceIcon(expression.getResourceIndex());
-//		return graphicManager.resizeDrawable(diceIcon, 32, 32);
-		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
-				expression.getResourceIndex(), 32, 32);
+		
+		return view;
 	}
 
 	@Override
-	public void onClick(DialogInterface dialog, int which) {
-		dismiss();
+	protected boolean onPrepareOptionsMenu(MenuAdapter adapter) {
+		
+		adapter.findItem(R.id.mdDetails).setVisible(false); //No longer needed.
+		adapter.findItem(R.id.mdRoll).setVisible(false); //Not really useful
+		
+		if (diceBag.getDice().size() == 1) {
+			//Only one element
+			//adapter.findItem(R.id.mdRemove).setVisible(false);
+			//adapter.findItem(R.id.mdMoveTo).setVisible(false);
+			adapter.findItem(R.id.mdRemove).setEnabled(false);
+			adapter.findItem(R.id.mdMoveTo).setEnabled(false);
+		}
+		if (diceBag.getDice().size() >= QuickDiceApp.getInstance().getPreferences().getMaxDice()) {
+			//Maximum number of allowed dice reached
+			//adapter.findItem(R.id.mdAddHere).setVisible(false);
+			//adapter.findItem(R.id.mdClone).setVisible(false);
+			adapter.findItem(R.id.mdAddHere).setEnabled(false);
+			adapter.findItem(R.id.mdClone).setEnabled(false);
+		}
+		return super.onPrepareOptionsMenu(adapter);
 	}
 
+	protected Drawable getDialogIcon() {
+		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
+				expression.getResourceIndex(), 32, 32);
+	}
 }

@@ -135,11 +135,11 @@ public class DiceBagManager {
 	public boolean editDiceBag(int position, DiceBag newBagData) {
 		boolean retVal = true;
 		if (position >= 0 && position < diceBagList.size()) {
-        	DiceBag bag = diceBagList.get(position);
-        	bag.setName(newBagData.getName());
-        	bag.setDescription(newBagData.getDescription());
-        	bag.setResourceIndex(newBagData.getResourceIndex());
-    		isDataSaved = false;
+			DiceBag bag = diceBagList.get(position);
+			bag.setName(newBagData.getName());
+			bag.setDescription(newBagData.getDescription());
+			bag.setResourceIndex(newBagData.getResourceIndex());
+			isDataSaved = false;
 		} else {
 			//WTF?
 			retVal = false;
@@ -147,6 +147,11 @@ public class DiceBagManager {
 		return retVal;
 	}
 
+	/**
+	 * Remove collection at given position.
+	 * @param position Position of collection to remove.
+	 * @return {@code true} if collection was removed, {@code false} otherwise.
+	 */
 	public boolean removeDiceBag(int position) {
 		boolean retVal = true;
 		if (position >= 0 && position < diceBagList.size()) {
@@ -169,6 +174,13 @@ public class DiceBagManager {
 		return retVal;
 	}
 	
+	/**
+	 * Swap two collections.
+	 * @param fromPosition Position of the first collection to move.
+	 * @param toPosition Position of the second collection to move.
+	 * @return {@code true} if operation has completed, {@code false} 
+	 * if the switch wasn't possible.
+	 */
 	public boolean moveDiceBag(int fromPosition, int toPosition) {
 		boolean retVal = true;
 		
@@ -176,16 +188,16 @@ public class DiceBagManager {
 				&& toPosition >= 0 && toPosition < diceBagList.size()) {
 			
 			DiceBag bag = diceBagList.remove(fromPosition);
-	    	diceBagList.add(toPosition, bag);
-	    	
-	    	//Change current dice bag if one of the two was the current
-	    	if (curDiceBagIndex == fromPosition) {
-	    		setCurrentDiceBag(toPosition);
-	    	} else if (curDiceBagIndex == toPosition) {
-	    		setCurrentDiceBag(fromPosition);
-	    	}
-	    	
-	    	isDataSaved = false;
+			diceBagList.add(toPosition, bag);
+
+			//Change current dice bag if one of the two was the current
+			if (curDiceBagIndex == fromPosition) {
+				setCurrentDiceBag(toPosition);
+			} else if (curDiceBagIndex == toPosition) {
+				setCurrentDiceBag(fromPosition);
+			}
+
+			isDataSaved = false;
 		} else {
 			//WTF?
 			retVal = false;
@@ -194,10 +206,18 @@ public class DiceBagManager {
 		return retVal;
 	}
 	
+	/**
+	 * Return the index of currently selected collection.
+	 * @return
+	 */
 	public int getCurrentDiceBag() {
 		return curDiceBagIndex;
 	}
 	
+	/**
+	 * Set the collection at given position as the one currently selected.
+	 * @param position Position of the collection to select.
+	 */
 	public void setCurrentDiceBag(int position) {
 		if (position < 0) {
 			curDiceBagIndex = 0;
@@ -212,14 +232,27 @@ public class DiceBagManager {
 		edit.commit();
 	}
 	
+	/**
+	 * Return the currently selected collection.
+	 * @return Currently selected {@link DiceBag}.
+	 */
 	public DiceBag getDiceBag() {
 		return getDiceBag(curDiceBagIndex);
 	}
 	
+	/**
+	 * Return specified collection.
+	 * @param position Position of the collection in the list (zero based).
+	 * @return
+	 */
 	public DiceBag getDiceBag(int position) {
 		return diceBagList.get(position);
 	}
 	
+	/**
+	 * Return an {@link ArrayList} containing all the collections.
+	 * @return List of collections.
+	 */
 	public ArrayList<DiceBag> getDiceBags() {
 		return diceBagList;
 	}
@@ -622,6 +655,7 @@ public class DiceBagManager {
 	 * @param context Context.
 	 * @return An ArrayList<RollModifier> representing a dice bag.
 	 */
+	@SuppressWarnings("deprecation")
 	private ArrayList<RollModifier> loadBonusBag() {
 		ArrayList<RollModifier> retVal;
 		
@@ -640,6 +674,7 @@ public class DiceBagManager {
 	 * @param context Context.
 	 * @return An ArrayList<DExpression> representing a dice bag.
 	 */
+	@SuppressWarnings("deprecation")
 	private ArrayList<DExpression> loadDiceBag() {
 		ArrayList<DExpression> retVal;
 		

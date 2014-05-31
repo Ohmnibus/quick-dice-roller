@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<integer-array name="roll_result_font_size">
-	    <item>24</item><!-- 0 digits -->
-	    <item>24</item><!-- 1 digit -->
-	    <item>24</item><!-- 2 digits -->
-	    <item>18</item><!-- 3 digits -->
-	    <item>12</item><!-- 4 digits -->
-	    <item>9</item><!-- 5 digits or more -->
+		<item>24</item><!-- 0 digits -->
+		<item>24</item><!-- 1 digit -->
+		<item>24</item><!-- 2 digits -->
+		<item>18</item><!-- 3 digits -->
+		<item>12</item><!-- 4 digits -->
+		<item>9</item><!-- 5 digits or more -->
 	</integer-array>
 
 	<!-- UNUSED -->
-    <integer-array name="roll_toast_font_size">
-	    <item>24</item><!-- 0 digits -->
-	    <item>24</item><!-- 1 digit -->
-	    <item>24</item><!-- 2 digits -->
-	    <item>18</item><!-- 3 digits -->
-	    <item>12</item><!-- 4 digits -->
-	    <item>9</item><!-- 5 digits or more -->
+	<integer-array name="roll_toast_font_size">
+		<item>24</item><!-- 0 digits -->
+		<item>24</item><!-- 1 digit -->
+		<item>24</item><!-- 2 digits -->
+		<item>18</item><!-- 3 digits -->
+		<item>12</item><!-- 4 digits -->
+		<item>9</item><!-- 5 digits or more -->
 	</integer-array>
+
+	<dimen name="separator_size">8dp</dimen>
 
 	<dimen name="dice_name_single_line_size">17sp</dimen>
 	<dimen name="dice_name_multi_line_size">11sp</dimen>
-	
-    <dimen name="roll_toast_canvas_size">96dp</dimen>
-    <dimen name="roll_toast_icon_size">64dp</dimen>
-    <!-- Same as 2 digit font size -->
-    <dimen name="roll_toast_base_font_size">24dp</dimen>
 
-    <dimen name="left_margin_for_handle">5dp</dimen>
-    <dimen name="right_margin_keep_clean">0dp</dimen>
-    <dimen name="right_margin_keep_clean_land">160dp</dimen><!-- Should be the same size as dice grid width -->
-    <dimen name="open_drawer_size">260dp</dimen>
+	<dimen name="roll_toast_canvas_size">96dp</dimen>
+	<dimen name="roll_toast_icon_size">64dp</dimen>
+	<!-- Same as 2 digit font size -->
+	<dimen name="roll_toast_base_font_size">24dp</dimen>
+
+	<dimen name="left_margin_for_handle">5dp</dimen>
+	<dimen name="right_margin_keep_clean">0dp</dimen>
+	<dimen name="right_margin_keep_clean_land">160dp</dimen><!-- Should be the same size as dice grid width -->
+	<dimen name="open_drawer_size">260dp</dimen>
 </resources>
