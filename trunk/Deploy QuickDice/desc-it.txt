@@ -2,6 +2,8 @@
 TiraDadi Rapido
 
 ##Description:4000##
+<i>Diventa beta tester per provare in anteprima le ultime novità &rarr; http://goo.gl/UuJBSO</i>
+
 TiraDadi Rapido (Quick Dice Roller) è un'app creata per i geek fissati di GdR. Permette di simulare i lanci di dadi della maggior parte dei sistemi di gioco, per quanto complessi possano essere.
 
 I dadi possono essere aggiunti a piacimento, utilizzando le espressioni standard quali <i>2d6+5</i> oppure funzioni come <i>rak(1d6,4,3)</i> che permettono di simulare i sistemi di gioco più complessi. Un pratico costruttore di espressioni semplifica la procedura, e permette di accedere alla guida in linea (solo in italiano ed inglese).
@@ -72,14 +74,9 @@ Parole chiave: Aperto, Boardgame, D&D, D20, Da tavolo, Dadi, Dado, Dice, Die, Du
 
 
 ##Recent Changes:500##
-- Sposta i dadi tra collezioni
-- Clona dadi e collezioni
-- Swipe per eliminare un risultato
-- Ripristina i risultati eliminati
-- Collegamento dei lanci a richiesta
-- Funzione "abs" (valore assoluto)
-- Corrette le funzioni "rup" e "rdn"
-- Corretta la funzione "rak"
+- Area dei dadi ridimensionabile
+- Menù contestuali arricchiti
+- Risolti errori legati all'elenco dei risultati
 - Correzioni ed ottimizzazioni minori
 
 ##Promo Text:80##

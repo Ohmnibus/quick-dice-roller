@@ -2,6 +2,8 @@
 Lanceur de dés rapide
 
 ##Description:4000##
+<i>Devenir un bêta-testeur pour expérimenter les dernières nouvelles &rarr; http://goo.gl/UuJBSO</i>
+
 Le "Lanceur de dés rapide" (Quick Dice Roller) est un simulateur de jet de dés crée pour répondre aux besoins des amateurs de jeux de rôle.
 Il vous permet de simuler des jets de dés pour la plupart des systèmes de jeu, en dépit de leur complexité.
 

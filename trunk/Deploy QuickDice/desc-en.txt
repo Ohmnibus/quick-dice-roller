@@ -2,6 +2,8 @@
 Quick Dice Roller
 
 ##Description:4000##
+<i>Become a beta tester for trialling of new features &rarr; http://goo.gl/UuJBSO</i>
+
 Quick Dice Roller is an app made for the tabletop RPG Geek. It make possible to emulate almost all the complex dice rolls required by those games.
 
 The dice can be added at will, using common expressions as <i>2d6+5</i> as well as special functions like <i>rak(1d6,4,3)</i> that emulates the most complex game systems. An handy expression builder simplifies the process, and allow to access to an online help.
@@ -71,15 +73,10 @@ Quick Dice Roller is one of the few apps of it's category (maybe the only?) that
 Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, Open, OSR, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, WhiteWholf
 
 ##Recent Changes:500##
-- Move dice through dice bags
-- Clone dice and dice bags
-- Swipe to delete a result
-- Restore deleted results
-- Link roll results on demand
-- Function "abs"
-- Fixed "rup" and "rdn" functions
-- Fixed "rak" function
-- Minor fix and improvements
+- Resizable dice area
+- Rich context menu
+- Fixed bug related to results list
+- Minor fix and improvements (splash screen, threads)
 
 ##Promo Text:80##
 The flexible, complete and handy dice roller.

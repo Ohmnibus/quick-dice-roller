@@ -19,17 +19,38 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 	static boolean swapResult;
 
 	/**
+	 * This class represents the views needed to display a Roll Result.
+	 * @author Ohmnibus
+	 *
+	 */
+	public static class ItemViews {
+		
+		public ImageView diceIcon;
+		public TextView resultValue;
+		public TextView name;
+		public TextView resultText;
+		public ImageView resultIcon;
+		
+		public ItemViews() {
+		}
+		
+		public ItemViews(ImageView diceIcon, TextView resultValue, TextView name, TextView resultText, ImageView resultIcon) {
+			this.diceIcon = diceIcon;
+			this.resultValue = resultValue;
+			this.name = name;
+			this.resultText = resultText;
+			this.resultIcon = resultIcon;
+		}
+	}
+
+	/**
 	 * This class contain all the variable view of a single item in a result list item.
 	 * @author Ohmnibus
 	 *
 	 */
-    private class ExpViewCache extends ViewCache  {
+	private class ExpViewCache extends ViewCache  {
 
-		ImageView diceIcon;
-		TextView resultValue;
-		TextView name;
-		TextView resultText;
-		ImageView resultIcon;
+		ItemViews itemViews;
 		
 		public ExpViewCache(View baseView) {
 			super(baseView);
@@ -38,15 +59,16 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 		@Override
 		protected void findAllViews(View baseView) {
 			//baseView.setBackgroundResource(android.R.drawable.list_selector_background);
-			name = (TextView) baseView.findViewById(R.id.riName);
-			resultText = (TextView) baseView.findViewById(R.id.riResultText);
-			resultValue = (TextView) baseView.findViewById(R.id.riResult);
-			diceIcon = (ImageView) baseView.findViewById(R.id.riImage);
-			resultIcon = (ImageView) baseView.findViewById(R.id.riResultIcon);
+			itemViews = new ItemViews();
+			itemViews.name = (TextView) baseView.findViewById(R.id.riName);
+			itemViews.resultText = (TextView) baseView.findViewById(R.id.riResultText);
+			itemViews.resultValue = (TextView) baseView.findViewById(R.id.riResult);
+			itemViews.diceIcon = (ImageView) baseView.findViewById(R.id.riImage);
+			itemViews.resultIcon = (ImageView) baseView.findViewById(R.id.riResultIcon);
 		}
 	}
 
-    public ResultListAdapter(Context context, int resourceId, List<RollResult[]> objects) {
+	public ResultListAdapter(Context context, int resourceId, List<RollResult[]> objects) {
 		super(context, resourceId, objects);
 	}
 
@@ -68,11 +90,7 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 		bindData(
 				getContext(),
 				resList,
-				cache.diceIcon,
-				cache.name,
-				cache.resultText,
-				cache.resultValue,
-				cache.resultIcon);
+				cache.itemViews);
 	}
 
 	@Override
@@ -91,35 +109,31 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 	public static void bindData(
 			Context context,
 			RollResult[] resList,
-			ImageView diceIcon,
-			TextView name, 
-			TextView resultText,
-			TextView resultValue,
-			ImageView resultIcon) {
+			ItemViews itemViews) {
 		
 		RollResult res = RollResult.mergeResultList(resList);
 
 		if (res != null) {
 			//QuickDiceApp app = (QuickDiceApp)context.getApplicationContext();
 			QuickDiceApp app = QuickDiceApp.getInstance();
-			diceIcon.setImageDrawable(app.getGraphic().getDiceIcon(res.getResourceIndex()));
+			itemViews.diceIcon.setImageDrawable(app.getGraphic().getDiceIcon(res.getResourceIndex()));
 			if (swapResult) {
-				name.setText(res.getResultText());
-				resultText.setText(res.getName());
+				itemViews.name.setText(res.getResultText());
+				itemViews.resultText.setText(res.getName());
 			} else {
-				name.setText(res.getName());
-				resultText.setText(res.getResultText());
+				itemViews.name.setText(res.getName());
+				itemViews.resultText.setText(res.getResultText());
 			}
 			String result = Long.toString(res.getResultValue());
-			resultValue.setText(result);
-			resultValue.setTextSize(TypedValue.COMPLEX_UNIT_DIP, getFontSize(context, result));
-			resultIcon.setImageResource(res.getResultIconID());
+			itemViews.resultValue.setText(result);
+			itemViews.resultValue.setTextSize(TypedValue.COMPLEX_UNIT_DIP, getFontSize(context, result));
+			itemViews.resultIcon.setImageResource(res.getResultIconID());
 		} else { 
-			diceIcon.setImageDrawable(null);
-			name.setText("");
-			resultText.setText("");
-			resultValue.setText("");
-			resultIcon.setImageDrawable(null);
+			itemViews.diceIcon.setImageDrawable(null);
+			itemViews.name.setText("");
+			itemViews.resultText.setText("");
+			itemViews.resultValue.setText("");
+			itemViews.resultIcon.setImageDrawable(null);
 		}
 	}
 	

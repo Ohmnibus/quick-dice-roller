@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="ohm.quickdice"
-	android:versionCode="24"
-	android:versionName="1.4.3.2"
+	android:versionCode="25"
+	android:versionName="1.4.4"
 	android:installLocation="auto"
 	>
 
@@ -24,12 +24,16 @@
 
 		<activity
 			android:label="@string/app_name"
-			android:name=".activity.QuickDiceActivity" >
+			android:name=".activity.QuickDiceActivity"
+			android:noHistory="true" >
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity
+			android:label="@string/app_name"
+			android:name=".activity.MainQuickDiceActivity" />
 		<activity
 			android:name=".activity.EditDiceActivity" />
 		<activity
