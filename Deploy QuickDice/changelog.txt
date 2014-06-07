@@ -1,7 +1,8 @@
-v 1.4.x
-- Resizeable dice area
+v 1.4.4
+- Resizable dice area
+- Rich context menu
 - Fixed bug related to results list
-- Minor fix and improvements
+- Minor fix and improvements (splash screen, threads)
 
 v 1.4.3
 - Move dice through dice bags

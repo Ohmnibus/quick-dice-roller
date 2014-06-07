@@ -2,6 +2,8 @@
 LanzaDados Rápidos
 
 ##Description:4000##
+<i>Conviértete en un probador beta para puesta a prueba de nuevas funcionalidades &rarr; http://goo.gl/UuJBSO</i>
+
 LanzaDados Rápidos (Quick Dice Roller) es un simulador de lanzamientos de dados extremamente flexible y personalizable creado en torno a las necesidades de los apasionados de los juegos de Rol (RPG).
 
 LanzaDados Rápidos pretende ser a la vez flexible, completo y práctico.

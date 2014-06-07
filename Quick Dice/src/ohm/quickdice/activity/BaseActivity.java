@@ -12,7 +12,7 @@ public abstract class BaseActivity extends Activity {
 		super.onDestroy();
 		
 		unbindDrawables(findViewById(android.R.id.content));
-        
+		
 		System.gc();
 	}
 	

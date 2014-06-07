@@ -360,6 +360,15 @@ public class PersistenceManager {
 	}
 
 	public ArrayList<RollResult[]> loadResultList() {
+		if (resultListCache == null) {
+			preloadResultList();
+		}
+		return resultListCache;
+	}
+
+	ArrayList<RollResult[]> resultListCache = null;
+	
+	public void preloadResultList() {
 		ArrayList<RollResult[]> retVal;
 		FileInputStream fis;
 		
@@ -388,6 +397,6 @@ public class PersistenceManager {
 			retVal = null;
 		}
 
-		return retVal;
+		resultListCache = retVal;
 	}
 }
