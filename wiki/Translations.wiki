@@ -19,8 +19,8 @@ Text that need translation is the part included in the _string_ tag (`Text 01` a
 Different languages are stored in different files all with the same name (`string.xml`) but located in different folders.
 
 Current translations:
-  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values/strings.xml English] - use this as reference for other translations
-  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values-it/strings.xml Italian]
+  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values/strings.xml English] - you can use this as reference for other translations
+  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values-it/strings.xml Italian] - you can use this as reference for other translations
   * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values-fr/strings.xml French]
   * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values-es/strings.xml Spanish] (partial)
   * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Quick%20Dice/res/values-de/strings.xml Deutch] (partial)
@@ -29,8 +29,8 @@ Current translations:
 Following files contains descriptions and details used in app stores. 
 
 These are simple text files for reference and don't need to follow any specific format.
-  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-en.txt English] - use this as reference for other translations
-  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-it.txt Italian]
+  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-en.txt English] - you can use this as reference for other translations
+  * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-it.txt Italian] - you can use this as reference for other translations
   * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-fr.txt French]
   * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-es.txt Spanish] (partial)
   * [https://code.google.com/p/quick-dice-roller/source/browse/trunk/Deploy%20QuickDice/desc-de.txt Deutch] (TODO)
