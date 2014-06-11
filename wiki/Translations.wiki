@@ -1,4 +1,5 @@
 #summary How to help to improve Quick Dice Roller by translating text
+#labels Featured
 
 = Introduction =
 
