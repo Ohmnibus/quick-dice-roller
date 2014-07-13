@@ -78,9 +78,9 @@ public class GraphicManager {
 	public Drawable getDiceIcon(int index) {
 		if (index <= 0 || index >= diceIconIDs.length) {
 			if (index == INDEX_DICE_ICON_BONUS) {
-				return res.getDrawable(R.drawable.ic_bonus);
+				return res.getDrawable(R.drawable.ic_mod_bonus);
 			} else if (index == INDEX_DICE_ICON_MALUS) {
-				return res.getDrawable(R.drawable.ic_malus);
+				return res.getDrawable(R.drawable.ic_mod_malus);
 			} else {
 				return res.getDrawable(R.drawable.ic_dxx_gray);
 			}

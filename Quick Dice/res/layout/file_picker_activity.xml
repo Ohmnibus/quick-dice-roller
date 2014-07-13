@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
-    <TextView
-        android:id="@+id/fpCurrentLocation"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentTop="true"
-	    android:layout_alignParentLeft="true"
-	    android:text="@string/app_name"
-        />
-    
+	android:layout_width="match_parent"
+	android:layout_height="match_parent" >
+	
+	<TextView
+		android:id="@+id/fpCurrentLocation"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:text="@string/app_name"
+		/>
+	
 	<ListView
-	    android:id="@+id/fpFileList"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:layout_below="@+id/fpCurrentLocation"
-	    android:layout_alignParentLeft="true"
-	    android:layout_above="@+id/fpBottomArea"
-	    />
+		android:id="@+id/fpFileList"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@+id/fpCurrentLocation"
+		android:layout_alignParentLeft="true"
+		android:layout_above="@+id/fpBottomArea"
+		/>
 	
 	<LinearLayout
-	    android:id="@+id/fpBottomArea"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_alignParentLeft="true"
-	    android:orientation="vertical"
-	    >
+		android:id="@+id/fpBottomArea"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:orientation="vertical"
+		>
 		<EditText
-		    android:id="@+id/fpFileName"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:text="@string/app_name"
-		    android:hint="@string/app_name"
-		    android:inputType="textNoSuggestions"
-		    android:visibility="visible"
-		    />
+			android:id="@+id/fpFileName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/app_name"
+			android:hint="@string/app_name"
+			android:inputType="textNoSuggestions"
+			android:visibility="visible"
+			/>
 		
 		<include
-		    layout="@layout/confirm_cancel_bar"
-		    android:id="@+id/fpButtonContainer"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        />
+			layout="@layout/confirm_cancel_bar"
+			android:id="@+id/fpButtonContainer"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			/>
 	</LinearLayout>
 </RelativeLayout>

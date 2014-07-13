@@ -64,6 +64,8 @@
 	<string name="lblYes">Yes</string>
 	<string name="lblNo">No</string>
 	<string name="lblOk">OK</string>
+	
+	<string name="lblUndo">UNDO</string>
 
 	<string name="msgRemoveDiceTitle">Remove die</string>
 	<string name="msgRemoveDice">Are you sure to definitively remove the die \"%1$s\"?</string>
@@ -80,10 +82,11 @@
 <br />
 <b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app and/or the translations.<br />
 <br />
-- Resizable dice area<br />
-- Rich context menu<br />
-- Fixed bug related to results list<br />
-- Minor fix and improvements<br />
+Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
+<br />
+&bull; Select from 4 different themes<br />
+&bull; Improved layout<br />
+&bull; Minor fix and improvements<br />
 <br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
@@ -93,20 +96,56 @@ Translations: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
 <br />
 Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
-This is a free app, however if you like it please consider to 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">make a donation</a>.
-Thanks!<br />
+This is a free app, however if you like it please consider to make a donation.<br />
 <br />
-- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> is
-published by Yuri Kanivets under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />
-- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> is
-published by Lorensius W. L. T. under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />
-- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> is
-published by Roman Nurik under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />
-- <a href="http://nineoldandroids.com/">Nine Old Androids</a> is
-published by Jake Wharton under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />
-- <a href="https://code.google.com/p/google-gson/">Google Gson</a> is
-published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />]]></string>
+Thanks!<br />]]></string>
+
+	<string name="msgLicenses">Licenses</string>
+	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>
+	<string-array name="lblLicenseLibURLs"><!-- No need to translate -->
+		<item>http://code.google.com/p/android-wheel/</item>
+		<item>https://github.com/lorensiuswlt/</item>
+		<item>https://github.com/romannurik/Android-SwipeToDismiss/</item>
+		<item>http://nineoldandroids.com/</item>
+		<item>https://code.google.com/p/google-gson/</item>
+	</string-array>
+	<string-array name="lblLicenseLibNames"><!-- No need to translate -->
+		<item>Android wheel widget</item>
+		<item>QuickAction widget</item>
+		<item>Swipe to Dismiss code</item>
+		<item>Nine Old Androids</item>
+		<item>Google Gson</item>
+	</string-array>
+	<string-array name="lblLicenseLibAuthors"><!-- No need to translate -->
+		<item>Yuri Kanivets</item>
+		<item>Lorensius W. L. T.</item>
+		<item>Roman Nurik</item>
+		<item>Jake Wharton</item>
+		<item>Google</item>
+	</string-array>
+	<string-array name="lblLicenseNames">
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+	</string-array>
+	<string-array name="lblLicenseURLs"><!-- No need to translate -->
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+	</string-array>
+
+	<string name="lbl_donate_title_small">Small donation</string>
+	<string name="lbl_donate_url_small">https://play.google.com/store/apps/details?id=ohm.donate.small</string>
+	
+	<string name="lbl_donate_title_medium">Medium donation</string>
+	<string name="lbl_donate_url_medium">https://play.google.com/store/apps/details?id=ohm.donate.medium</string>
+	
+	<string name="lbl_donate_title_large">Generous donation</string>
+	<string name="lbl_donate_url_large">https://play.google.com/store/apps/details?id=ohm.donate.large</string>
 
 	<string name="msgRemoveModTitle">Remove modifier</string>
 	<string name="msgRemoveMod">Are you sure to definitively remove the modifier \"%1$s\"?</string>
@@ -445,6 +484,7 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="pref_clipboard">Clipboard</string>
 	<string name="pref_clipboard_title">Clipboard Usage</string>
 	<string name="pref_clipboard_desc">Indicates whether and how to store the results to the clipboard.</string>
+	<string name="pref_clipboard_dyn_desc">%1$s.</string>
 	<string name="pref_clipboard_dlg_title">How to use the clipboard?</string>
 	<string-array name="entries_clipboard">
 		<item>Don\'t use clipboard</item>
@@ -458,6 +498,7 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="pref_link_auto_desc">Link the results of two rolls when executed in rapid succession.</string>
 	<string name="pref_link_sens_title">Sensitivity</string>
 	<string name="pref_link_sens_desc">Time within which a roll is linked to the previous.</string>
+	<string name="pref_link_sens_dyn_desc">Link rolls if made within %1$s.</string>
 	<string name="pref_link_sens_dlg_title">Select sensitivity</string>
 	<string-array name="entries_sensitivity">
 		<item>0,5 seconds</item>
@@ -474,6 +515,7 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="pref_aspect">Aspect</string>
 	<string name="pref_aspect_col_title">Result columns</string>
 	<string name="pref_aspect_col_desc">The number of columns on which results are displayed.</string>
+	<string name="pref_aspect_col_dyn_desc">Arrange results on %1$s column(s).</string>
 	<string name="pref_aspect_col_dlg_title">Number of columns?</string>
 	<string-array name="entries_columns">
 		<item>One</item>
@@ -484,8 +526,17 @@ published by Google under <a href="http://www.apache.org/licenses/LICENSE-2.0">A
 	<string name="pref_aspect_mod_desc">Show the quick modifier bar.</string>
 	<string name="pref_aspect_popup_title">Display roll popup</string>
 	<string name="pref_aspect_popup_desc">Display a popup containing the result of the roll.</string>
-	<string name="pref_aspect_plain_bg_title">Use light graphic</string>
-	<string name="pref_aspect_plain_bg_desc">Requires restart of the app. Display a plain background to improve performances.</string>
+	<!-- obsolete --><string name="pref_aspect_plain_bg_title">Use light graphic</string>
+	<!-- obsolete --><string name="pref_aspect_plain_bg_desc">Requires restart of the app. Display a plain background to improve performances.</string>
+	<string name="pref_aspect_theme_title">Theme</string>
+	<string name="pref_aspect_theme_dyn_desc">Use the %1$s theme.</string>
+	<string name="pref_aspect_theme_dlg_title">Apply which theme?</string>
+	<string-array name="entries_themes"><!-- Must be same number of items as "entryvalues_themes" -->
+		<item>Classic</item>
+		<item>Clean</item>
+		<item>Light</item>
+		<item>Dark</item>
+	</string-array>
 	<string name="pref_aspect_anim_title">Animate die</string>
 	<string name="pref_aspect_anim_desc">Display an animated die in the roll popup.</string>
 	<string name="pref_aspect_sound_title">Enable sound</string>

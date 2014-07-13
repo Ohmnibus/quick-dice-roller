@@ -1,48 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/edRoot"
+	android:id="@+id/edRoot"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="@drawable/bg_wood" >
-
-    <ImageView 
-        android:id="@+id/edBgLogo"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		
-		android:layout_centerHorizontal="true"
-		android:layout_centerVertical="true"
-		
-		android:src="@drawable/bg_logo"
-		android:contentDescription="@string/app_name"
-        />
+	>
 
 	<ScrollView
-	    android:layout_width="fill_parent"
+		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-	    
+		
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentTop="true"
 		android:layout_above="@+id/edButtonContainer"
 		>
-	    <RelativeLayout style="@style/Edit.ValueContainer"
+		<RelativeLayout style="@style/Edit.ValueContainer"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			>
 			
-	        <ImageButton style="@style/Edit.Icon"
-	            android:id="@+id/edIconPicker"
-	            
+			<ImageButton style="@style/Edit.Icon"
+				android:id="@+id/edIconPicker"
+				
 				android:layout_width="72dp"
 				android:layout_height="72dp"
-	            
-	            android:layout_alignParentLeft="true"
+				
+				android:layout_alignParentLeft="true"
 				android:layout_alignBottom="@+id/edNameText"
 				
 				android:scaleType="fitXY"
 				android:src="@drawable/ic_dxx_gray"
 				android:contentDescription="@string/lblIcon" />
-	    
+		
 			<TextView style="@style/Edit.Label"
 				android:id="@+id/edNameLabel"
 				android:layout_width="wrap_content"
@@ -85,29 +73,6 @@
 				android:hint="@string/hintDesc"
 				/>
 		
-			<!-- TextView style="@style/EditDiceLabel"
-				android:id="@+id/edIconLabel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				
-				android:layout_below="@+id/edDescText"
-				android:layout_alignLeft="@+id/edDescText"
-				
-				android:text="@string/lblIcon" />
-		
-			<Gallery style="@style/EditDiceValue"
-				android:id="@+id/edIconGallery"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:minHeight="48dp"
-				
-				android:layout_below="@+id/edIconLabel"
-				android:layout_alignLeft="@+id/edIconLabel"
-				
-				android:spacing="6dp"
-				android:unselectedAlpha="0.4"
-				/ -->
-		
 			<TextView style="@style/Edit.Label"
 				android:id="@+id/edExpLabel"
 				android:layout_width="wrap_content"
@@ -117,7 +82,7 @@
 				android:layout_alignLeft="@+id/edDescText"
 				
 				android:text="@string/lblExp" />
-		    
+			
 			<EditText style="@style/Edit.Value"
 				android:id="@+id/edExpText"
 				android:layout_width="fill_parent"
@@ -145,12 +110,12 @@
 	</ScrollView>
 
 	<include
-	    layout="@layout/confirm_cancel_bar"
-	    android:id="@+id/edButtonContainer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+		layout="@layout/confirm_cancel_bar"
+		android:id="@+id/edButtonContainer"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
 
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true" />
 	
 </RelativeLayout>

@@ -8,29 +8,6 @@
 	android:padding="16dp"
 	>
 
-	<!-- <TextView style="@style/Details.Value"
-		android:id="@+id/ddName"
-
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-
-		android:text="@string/lblName"
-		/>
-
-	<TextView style="@style/Details.Label"
-		android:id="@+id/ddNameLabel"
-
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-
-		android:text="@string/lblName"
-		/>
-
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/separator_size"
-		/> -->
-
 	<TextView style="@style/Details.Value"
 		android:id="@+id/ddDescription"
 		android:layout_width="match_parent"

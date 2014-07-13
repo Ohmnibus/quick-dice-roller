@@ -46,37 +46,29 @@ public class IconAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView img;
-        
-        if (convertView == null) {
-        	img = new ImageView(ctx);
-	        img.setLayoutParams(layoutParams);
-	        img.setScaleType(ImageView.ScaleType.FIT_XY);
-        } else {
-        	img = (ImageView)convertView;
-        }
-        
-        setImageResource(img, position);
-        
-        return img;
+		ImageView img;
+
+		if (convertView == null) {
+			img = new ImageView(ctx);
+			img.setLayoutParams(layoutParams);
+			img.setScaleType(ImageView.ScaleType.FIT_XY);
+		} else {
+			img = (ImageView)convertView;
+		}
+
+		setImageResource(img, position);
+
+		return img;
 	}
 	
 	private void setImageResource(ImageView img, int position) {
-        img.setImageDrawable(app.getGraphic().getDiceIcon(position));
-//        Drawable bg = img.getBackground();
-//        if (bg != null) {
-//        	bg.setColorFilter(app.getDiceColor(position), Mode.SRC);
-//        }else {
-//			bg = ctx.getResources().getDrawable(R.drawable.gallery_item_border).mutate();
-//			bg.setColorFilter(app.getDiceColor(position), Mode.SRC);
-//			img.setBackgroundDrawable(bg);
-//        }
-        if (position == selected) {
-        	img.setBackgroundResource(R.drawable.bg_last_result_focus);
-        } else {
-        	//img.setBackgroundDrawable(null);
-        	img.setBackgroundResource(0);
-        }
+		img.setImageDrawable(app.getGraphic().getDiceIcon(position));
+		if (position == selected) {
+			img.setBackgroundResource(R.drawable.bg_selector_state_focus);
+		} else {
+			//img.setBackgroundDrawable(null);
+			img.setBackgroundResource(0);
+		}
 	}
 	
 	public void setSelected(int position) {

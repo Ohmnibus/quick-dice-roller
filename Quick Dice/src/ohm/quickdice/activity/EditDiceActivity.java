@@ -72,35 +72,38 @@ public class EditDiceActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		setTheme(QuickDiceApp.getInstance().getPreferences().getDialogThemeResId());
+		
 		super.onCreate(savedInstanceState);
 
 		if (savedInstanceState != null) {
 			expression = (DExpression) savedInstanceState.getSerializable(KEY_DEXPRESSION);
 			position = savedInstanceState.getInt(KEY_POSITION);
-        	initViews(
-        			expression == null,
-        			savedInstanceState.getString(KEY_NAME),
-        			savedInstanceState.getString(KEY_DESCRIPTION),
-        			savedInstanceState.getInt(KEY_RES_INDEX),
-        			savedInstanceState.getString(KEY_EXPRESSION));
-    		initialResIndex = savedInstanceState.getInt(KEY_INITIAL_RES_INDEX);
-        	textChanged = savedInstanceState.getBoolean(KEY_TEXT_CHANGED);
+			initViews(
+					expression == null,
+					savedInstanceState.getString(KEY_NAME),
+					savedInstanceState.getString(KEY_DESCRIPTION),
+					savedInstanceState.getInt(KEY_RES_INDEX),
+					savedInstanceState.getString(KEY_EXPRESSION));
+			initialResIndex = savedInstanceState.getInt(KEY_INITIAL_RES_INDEX);
+			textChanged = savedInstanceState.getBoolean(KEY_TEXT_CHANGED);
 		} else {
 			Bundle extras = getIntent().getExtras();
-	        if (extras != null) {
-	        	req = extras.getInt(BUNDLE_REQUEST_TYPE);
-	        	if (req == ACTIVITY_EDIT) {
-	            	expression = (DExpression)extras.getSerializable(BUNDLE_DICE_EXPRESSION);
-	        	} else {
-	        		expression = null;
-	        	}
-	        	if (extras.containsKey(BUNDLE_POSITION)) {
-	        		position = extras.getInt(BUNDLE_POSITION);
-	        	} else {
-	        		position = POSITION_UNDEFINED;
-	        	}
-	        }
-	        initViews(expression);
+			if (extras != null) {
+				req = extras.getInt(BUNDLE_REQUEST_TYPE);
+				if (req == ACTIVITY_EDIT) {
+					expression = (DExpression)extras.getSerializable(BUNDLE_DICE_EXPRESSION);
+				} else {
+					expression = null;
+				}
+				if (extras.containsKey(BUNDLE_POSITION)) {
+					position = extras.getInt(BUNDLE_POSITION);
+				} else {
+					position = POSITION_UNDEFINED;
+				}
+			}
+			initViews(expression);
 		}
 	}
 	
@@ -129,53 +132,44 @@ public class EditDiceActivity extends BaseActivity {
 		outState.putInt(KEY_INITIAL_RES_INDEX, initialResIndex);
 		super.onSaveInstanceState(outState);
 	}
+	
+	private void initViews(DExpression exp) {
+		expression = exp;
 
-    private void initViews(DExpression exp) {
-    	expression = exp;
-    	
-    	if (exp == null) {
-        	initViews(
-        			true, 
-        			"", 
-        			"", 
-        			0, 
-        			"");
-    		initialResIndex = 0;
-        	textChanged = false;
-    	} else {
-        	initViews(
-        			false,
-        			exp.getName(),
-        			exp.getDescription(),
-        			exp.getResourceIndex(),
-        			exp.getExpression());
-    		initialResIndex = expression.getResourceIndex();
-        	textChanged = false;
-    	}
-    }
-    
-    private void initViews(boolean isNew, String name, String description, int resIndex, String exp) {
-		//if (QuickDiceApp.getInstance().getPlainBackground()) {
-	    //	setContentView(R.layout.edit_dice_activity_light);
-		//} else {
-	    //	setContentView(R.layout.edit_dice_activity);
-		//}
-    	
-		setContentView(R.layout.edit_dice_activity);
-		if (QuickDiceApp.getInstance().getPreferences().getPlainBackground()) {
-			findViewById(R.id.edBgLogo).setVisibility(View.GONE); //Remove the logo
-			findViewById(R.id.edRoot).setBackgroundResource(R.color.main_bg); //Remove the background
+		if (exp == null) {
+			initViews(
+					true, 
+					"", 
+					"", 
+					0, 
+					"");
+			initialResIndex = 0;
+			textChanged = false;
+		} else {
+			initViews(
+					false,
+					exp.getName(),
+					exp.getDescription(),
+					exp.getResourceIndex(),
+					exp.getExpression());
+			initialResIndex = expression.getResourceIndex();
+			textChanged = false;
 		}
-    	
-    	if (isNew) {
-    		setTitle(R.string.mnuAddDice);
-    	} else {
-    		setTitle(R.string.mnuEdit);
-    	}
-    	
-    	ibtIconPicker = (ImageButton)findViewById(R.id.edIconPicker);
-    	ibtIconPicker.setOnClickListener(iconPickerClickListener);
-    	
+	}
+
+	private void initViews(boolean isNew, String name, String description, int resIndex, String exp) {
+
+		setContentView(R.layout.edit_dice_activity);
+
+		if (isNew) {
+			setTitle(R.string.mnuAddDice);
+		} else {
+			setTitle(R.string.mnuEdit);
+		}
+
+		ibtIconPicker = (ImageButton)findViewById(R.id.edIconPicker);
+		ibtIconPicker.setOnClickListener(iconPickerClickListener);
+
 		txtName = (EditText) findViewById(R.id.edNameText);
 		txtName.setText(name);
 		txtName.addTextChangedListener(genericTextWatcher);
@@ -194,23 +188,23 @@ public class EditDiceActivity extends BaseActivity {
 
 		currentResIndex = resIndex;
 		initialResIndex = resIndex;
-    	textChanged = false;
-    	
-    	setCurrentIcon();
+		textChanged = false;
 
-    	confirm = (Button) findViewById(R.id.btuBarConfirm);
-    	confirm.setOnClickListener(confirmCancelClickListener);
-    	cancel = (Button) findViewById(R.id.btuBarCancel);
-    	cancel.setOnClickListener(confirmCancelClickListener);
-    	
-    	//((ImageButton)findViewById(R.id.btuDiceBuilder)).setOnClickListener(diceBuilderClickListener);
-    	//((ImageButton)findViewById(R.id.btuHelp)).setOnClickListener(helpClickListener);
-    	//((ImageButton)findViewById(R.id.btuCheckExpression)).setOnClickListener(checkExpressionClickListener);
-    	
-    	((ImageButton)findViewById(R.id.btuWizard)).setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
-    }
-    
-    private TextWatcher genericTextWatcher = new TextWatcher() {
+		setCurrentIcon();
+
+		confirm = (Button) findViewById(R.id.btuBarConfirm);
+		confirm.setOnClickListener(confirmCancelClickListener);
+		cancel = (Button) findViewById(R.id.btuBarCancel);
+		cancel.setOnClickListener(confirmCancelClickListener);
+
+		//((ImageButton)findViewById(R.id.btuDiceBuilder)).setOnClickListener(diceBuilderClickListener);
+		//((ImageButton)findViewById(R.id.btuHelp)).setOnClickListener(helpClickListener);
+		//((ImageButton)findViewById(R.id.btuCheckExpression)).setOnClickListener(checkExpressionClickListener);
+
+		((ImageButton)findViewById(R.id.btuWizard)).setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
+	}
+
+	private TextWatcher genericTextWatcher = new TextWatcher() {
 		
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -225,7 +219,7 @@ public class EditDiceActivity extends BaseActivity {
 		public void afterTextChanged(Editable s) {
 		}
 	};
-    
+
 	//Listener to the confirm and cancel button click
 	private OnClickListener confirmCancelClickListener = new OnClickListener() {
 		@Override
@@ -421,23 +415,23 @@ public class EditDiceActivity extends BaseActivity {
 	
 	private void askDropChanges() {
 		AlertDialog.Builder builder;
-    	builder = new AlertDialog.Builder(this);
-    	builder.setTitle(this.getTitle());
-    	builder.setMessage(R.string.msgLostChange);
-    	builder.setPositiveButton(
-    			R.string.lblYes,
-    			new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
-    				}
-    	       });
-    	builder.setNegativeButton(
-    			R.string.lblNo,
-    			new DialogInterface.OnClickListener() {
+		builder = new AlertDialog.Builder(this);
+		builder.setTitle(this.getTitle());
+		builder.setMessage(R.string.msgLostChange);
+		builder.setPositiveButton(
+				R.string.lblYes,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
+					}
+				});
+		builder.setNegativeButton(
+				R.string.lblNo,
+				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
-    	       });
-    	builder.create().show();
+				});
+		builder.create().show();
 	}
 }

@@ -1,3 +1,9 @@
+v 1.4.4.x
+- Themes (Classic, Clean, Light, Dark)
+- Edit activities styled as dialogs
+- Extended about dialog with licence panel
+- Minor fix and improvements (splash screen, threads)
+
 v 1.4.4
 - Resizable dice area
 - Rich context menu

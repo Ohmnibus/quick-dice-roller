@@ -357,13 +357,19 @@ public class PersistenceManager {
 		}
 		
 		resultList.remove(0);
+		
+		resultListCache = null;
 	}
 
 	public ArrayList<RollResult[]> loadResultList() {
 		if (resultListCache == null) {
 			preloadResultList();
 		}
-		return resultListCache;
+		//Since the first element is the "Last Roll", it is
+		//usually removed (lastResult = loadResultList().remove(0)).
+		//Thus, this function has to return a copy of the cache
+		//ArrayList in order to preserve all it's elements.
+		return resultListCache == null ? null : new ArrayList<RollResult[]>(resultListCache);
 	}
 
 	ArrayList<RollResult[]> resultListCache = null;

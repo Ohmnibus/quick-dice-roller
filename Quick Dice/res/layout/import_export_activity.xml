@@ -1,75 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ieRoot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-	android:background="@drawable/bg_wood" >
-    
-    <ImageView 
-        android:id="@+id/ieBgLogo"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		
-		android:layout_centerHorizontal="true"
-		android:layout_centerVertical="true"
-		
-		android:src="@drawable/bg_logo"
-		android:contentDescription="@string/app_name"
-        />
-    
-    <TextView style="@style/Edit.Label"
-        android:id="@+id/eiImportFromRecentLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+	android:id="@+id/ieRoot"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	>
+	
+	<TextView style="@style/Edit.Label"
+		android:id="@+id/eiImportFromRecentLabel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        
-        android:text="@string/lblImportFromRecent"
-        />
-    
-    <ListView
-        android:id="@+id/eiRecentList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        
-        android:layout_below="@+id/eiImportFromRecentLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/eiImport"
-        
-        android:cacheColorHint="#00000000"
-        />
-    
-    <Button
-        android:id="@+id/eiImport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        
-        android:layout_above="@+id/eiExport"
-        android:layout_alignParentLeft="true"
-        
-        android:text="@string/lblImportFrom"
-        android:drawableLeft="@drawable/ic_import"
-        />
-    
-    <Button
-        android:id="@+id/eiExport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        
-        android:layout_above="@+id/ieButtonContainer"
-        android:layout_alignParentLeft="true"
-        
-        android:text="@string/lblExportTo"
-        android:drawableLeft="@drawable/ic_export"
-        />
-    
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/lblImportFromRecent"
+		/>
+	
+	<ListView
+		android:id="@+id/eiRecentList"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_below="@+id/eiImportFromRecentLabel"
+		android:layout_alignParentLeft="true"
+		android:layout_above="@+id/eiImport"
+		
+		android:cacheColorHint="#00000000"
+		/>
+	
+	<Button
+		android:id="@+id/eiImport"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_above="@+id/eiExport"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/lblImportFrom"
+		android:drawableLeft="@drawable/ic_import"
+		/>
+	
+	<Button
+		android:id="@+id/eiExport"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_above="@+id/ieButtonContainer"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/lblExportTo"
+		android:drawableLeft="@drawable/ic_export"
+		/>
+	
 	<include layout="@layout/confirm_cancel_bar"
-	    android:id="@+id/ieButtonContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+		android:id="@+id/ieButtonContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
 
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

@@ -1,11 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<style name="AppBaseTheme" parent="@android:style/Theme">
+	</style>
+
+	<style name="DialogBaseTheme" parent="@android:style/Theme.Dialog">
+	</style>
+	
+	<style name="AppBaseTheme.Light" parent="@android:style/Theme">
+		<item name="android:colorBackground">#f5f5f5</item>
+		<item name="android:colorForeground">#000000</item>
+		<item name="android:windowBackground">?android:attr/colorBackground</item>
+	</style>
+
+	<style name="DialogBaseTheme.Light" parent="@android:style/Theme.Dialog">
+	</style>
+	
+	<!-- ********** -->
+	<!-- Base Theme -->
+	<!-- ********** -->
+	<!-- Application theme. -->
+	<style name="AppTheme" parent="AppBaseTheme">
+		<item name="ohmDialogTheme">@style/DialogBaseTheme</item>
+		<item name="ohmMainAppContainer">@style/Base.MainContainer</item>
+		<item name="ohmLokLogoEmboss">@style/Base.LoKLogo</item>
+		
+		<item name="ohmLastRollContainer">@style/Base.LastRoll</item>
+		<item name="ohmRollListContainer">@style/Base.RollList</item>
+		<item name="ohmResizeHandleHorizontal">@style/Base.ResizeHandle.Horizontal</item>
+		<item name="ohmResizeHandleVertical">@style/Base.ResizeHandle.Vertical</item>
+		<item name="ohmDiceGridContainer">@style/Base.DiceGrid</item>
+		<item name="ohmModifiersContainer">@style/Base.Modifiers</item>
+		
+		<item name="ohmDiceBagDrawer">@style/Base.Drawer.DiceBag</item>
+		
+		<item name="ohmFramedBackground">@drawable/theme_base_bg_framed</item>
+		<item name="ohmFramedBackgroundSelector">@drawable/theme_base_bg_framed_selector</item>
+	</style>
+
+	<style name="Base">
+	</style>
+
+	<!-- Main Container -->
+	<style name="Base.MainContainer">
+		<!-- <item name="android:background">@color/base_main_background</item> -->
+		<!-- <item name="android:background">?android:attr/colorBackground</item> -->
+		<item name="android:background">?android:attr/windowBackground</item>
+	</style>
+
+	<!-- Logo -->
+	<style name="Base.LoKLogo">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">0dp</item>
+		
+		<item name="android:visibility">gone</item>
+	</style>
+	
+	<!-- Last Roll -->
+	<style name="Base.LastRoll">
+		<item name="android:paddingTop">2dp</item>
+		<item name="android:paddingBottom">2dp</item>
+		<item name="android:paddingLeft">2dp</item>
+		<item name="android:paddingRight">2dp</item>
+		<item name="android:background">?attr/ohmFramedBackgroundSelector</item>
+	</style>
+	
+	<!-- Roll list -->
+	<style name="Base.RollList">
+		<item name="android:stretchMode">columnWidth</item>
+		<item name="android:gravity">center</item>
+	</style>
+	
+	<!-- Resize Handle -->
+	<style name="Base.ResizeHandle">
+		<item name="android:padding">@dimen/handle_padding</item>
+
+		<item name="android:background">@color/base_handle_solid_color</item>
+	</style>
+	
+	<style name="Base.ResizeHandle.Horizontal">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/handle_size</item>
+		
+		<item name="android:src">@drawable/ic_handle_img_hori</item>
+	</style>
+	
+	<style name="Base.ResizeHandle.Vertical">
+		<item name="android:layout_width">@dimen/handle_size</item>
+		<item name="android:layout_height">match_parent</item>
+		
+		<item name="android:src">@drawable/ic_handle_img_vert</item>
+	</style>
+	
+	<!-- Dice grid -->
+	<style name="Base.DiceGrid">
+		<item name="android:columnWidth">72dp</item>
+		<item name="android:numColumns">auto_fit</item>
+		<item name="android:verticalSpacing">4dp</item>
+		<item name="android:horizontalSpacing">4dp</item>
+		<item name="android:stretchMode">columnWidth</item>
+		<item name="android:gravity">center</item>
+		<!-- <item name="android:background">@drawable/bg_dice_grid</item> -->
+		<item name="android:background">?attr/ohmFramedBackground</item>
+	</style>
+	
+	<!-- Modifiers -->
+	<style name="Base.Modifiers">
+		<!-- <item name="android:background">@drawable/bg_dice_grid</item> -->
+		<item name="android:background">?attr/ohmFramedBackground</item>
+	</style>
+	
+	<!-- Dice Bag Drawer -->
+	<style name="Base.Drawer">
+		<item name="android:background">?android:attr/windowBackground</item>
+	</style>
+	
+	<style name="Base.Drawer.DiceBag">
+		<item name="android:divider">@android:color/transparent</item>
+		<item name="android:dividerHeight">0dp</item>
+		<!-- <item name="android:background">@color/base_main_background</item> -->
+		<!-- <item name="android:background">?android:attr/colorBackground</item> -->
+	</style>
+	
+	<!-- ************* -->
+	<!-- Classic Theme -->
+	<!-- ************* -->
+	<style name="QDR.Theme.Classic" parent="AppTheme">
+		<item name="ohmDialogTheme">@style/DialogBaseTheme</item>
+		<item name="ohmMainAppContainer">@style/Classic.MainContainer</item>
+		<item name="ohmLokLogoEmboss">@style/Classic.LoKLogo</item>
+		
+		<item name="ohmRollListContainer">@style/Classic.RollList</item>
+		<item name="ohmResizeHandleHorizontal">@style/Classic.ResizeHandle.Horizontal</item>
+		<item name="ohmResizeHandleVertical">@style/Classic.ResizeHandle.Vertical</item>
+		<item name="ohmDiceGridContainer">@style/Classic.DiceGrid</item>
+		
+		<item name="ohmDiceBagDrawer">@style/Classic.Drawer.DiceBag</item>
+
+		<item name="ohmFramedBackground">@drawable/theme_classic_bg_framed</item>
+		<item name="ohmFramedBackgroundSelector">@drawable/theme_classic_bg_framed_selector</item>
+	</style>
+
+	<style name="Classic">
+	</style>
+	
+	<!-- Main Container -->
+	<style name="Classic.MainContainer" parent="@style/Base.MainContainer">
+		<item name="android:background">@drawable/bg_wood</item>
+	</style>
+
+	<!-- Logo -->
+	<style name="Classic.LoKLogo" parent="@style/Base.LoKLogo">
+		<item name="android:layout_width">250dp</item>
+		<item name="android:layout_height">250dp</item>
+		
+		<item name="android:layout_centerHorizontal">true</item>
+		<item name="android:layout_centerVertical">true</item>
+		
+		<item name="android:src">@drawable/bg_logo</item>
+		<item name="android:visibility">visible</item>
+	</style>
+	
+	<!-- Roll list -->
+	<style name="Classic.RollList" parent="@style/Base.RollList">
+		<item name="android:cacheColorHint">#00000000</item>
+	</style>
+	
+	<!-- Resize Handle -->
+	<style name="Classic.ResizeHandle.Horizontal" parent="Base.ResizeHandle.Horizontal">
+		<item name="android:src">@drawable/ic_handle_img_hori</item>
+		<item name="android:background">@color/classic_handle_solid_color</item>
+	</style>
+	
+	<style name="Classic.ResizeHandle.Vertical" parent="Base.ResizeHandle.Vertical">
+		<item name="android:src">@drawable/ic_handle_img_vert</item>
+		<item name="android:background">@color/classic_handle_solid_color</item>
+	</style>
+	
+	<!-- Dice grid -->
+	<style name="Classic.DiceGrid" parent="@style/Base.DiceGrid">
+		<item name="android:cacheColorHint">#00000000</item>
+	</style>
+	
+	<style name="Classic.Drawer">
+	</style>
+
+	<!-- Dice Bag Drawer -->
+	<style name="Classic.Drawer.DiceBag" parent="@style/Base.Drawer.DiceBag">
+		<item name="android:background">@drawable/bg_wood</item>
+		<item name="android:cacheColorHint">#00000000</item>
+	</style>
+	
+	<!-- *********** -->
+	<!-- Clean Theme -->
+	<!-- *********** -->
+	<style name="QDR.Theme.Clean" parent="AppTheme">
+		<item name="ohmMainAppContainer">@style/Clean.MainContainer</item>
+		
+		<item name="ohmResizeHandleHorizontal">@style/Clean.ResizeHandle.Horizontal</item>
+		<item name="ohmResizeHandleVertical">@style/Clean.ResizeHandle.Vertical</item>
+		
+		<item name="ohmDiceBagDrawer">@style/Clean.Drawer.DiceBag</item>
+		
+		<item name="ohmFramedBackground">@drawable/theme_clean_bg_framed</item>
+		<item name="ohmFramedBackgroundSelector">@drawable/theme_clean_bg_framed_selector</item>
+	</style>
+	
+	<style name="Clean">
+	</style>
+	
+	<!-- Main Container -->
+	<style name="Clean.MainContainer" parent="@style/Base.MainContainer">
+		<item name="android:background">@color/clean_main_background</item>
+	</style>
+	
+	<!-- Resize Handle -->
+	<style name="Clean.ResizeHandle.Horizontal" parent="Base.ResizeHandle.Horizontal">
+		<item name="android:src">@drawable/ic_handle_img_hori</item>
+		<item name="android:background">@color/clean_handle_solid_color</item>
+	</style>
+	
+	<style name="Clean.ResizeHandle.Vertical" parent="Base.ResizeHandle.Vertical">
+		<item name="android:src">@drawable/ic_handle_img_vert</item>
+		<item name="android:background">@color/clean_handle_solid_color</item>
+	</style>
+	
+	<style name="Clean.Drawer">
+	</style>
+
+	<!-- Dice Bag Drawer -->
+	<style name="Clean.Drawer.DiceBag" parent="@style/Base.Drawer.DiceBag">
+		<item name="android:background">@color/clean_main_background</item>
+	</style>
+	
+	<!-- *********** -->
+	<!-- Light Theme -->
+	<!-- *********** -->
+	<style name="QDR.Theme.Light" parent="AppBaseTheme.Light">
+		<item name="ohmDialogTheme">@style/DialogBaseTheme.Light</item>
+		<item name="ohmMainAppContainer">@style/Light.MainContainer</item>
+		
+		<item name="ohmLokLogoEmboss">@style/Base.LoKLogo</item>
+		
+		<item name="ohmLastRollContainer">@style/Base.LastRoll</item>
+		<item name="ohmRollListContainer">@style/Base.RollList</item>
+		<item name="ohmResizeHandleHorizontal">@style/Light.ResizeHandle.Horizontal</item>
+		<item name="ohmResizeHandleVertical">@style/Light.ResizeHandle.Vertical</item>
+		<item name="ohmDiceGridContainer">@style/Base.DiceGrid</item>
+		<item name="ohmModifiersContainer">@style/Base.Modifiers</item>
+		
+		<item name="ohmDiceBagDrawer">@style/Base.Drawer.DiceBag</item>
+		
+		<item name="ohmFramedBackground">@drawable/theme_light_bg_framed</item>
+		<item name="ohmFramedBackgroundSelector">@drawable/theme_light_bg_framed_selector</item>
+	</style>
+	
+	<style name="Light">
+	</style>
+	
+	<!-- Main Container -->
+	<style name="Light.MainContainer">
+		<!-- <item name="android:background">@color/light_main_background</item> -->
+		<!-- <item name="android:background">?android:attr/colorBackground</item> -->
+		<item name="android:background">?android:attr/windowBackground</item>
+	</style>
+	
+	<!-- Resize Handle -->
+	<style name="Light.ResizeHandle.Horizontal" parent="Base.ResizeHandle.Horizontal">
+		<item name="android:src">@drawable/ic_handle_img_hori</item>
+		<item name="android:background">@color/light_handle_solid_color</item>
+	</style>
+	
+	<style name="Light.ResizeHandle.Vertical" parent="Base.ResizeHandle.Vertical">
+		<item name="android:src">@drawable/ic_handle_img_vert</item>
+		<item name="android:background">@color/light_handle_solid_color</item>
+	</style>
+	
+	<!-- *********** -->
+	<!-- Dark Theme -->
+	<!-- *********** -->
+	<style name="QDR.Theme.Dark" parent="AppTheme">
+	</style>
+	
+	<!-- ************ -->
+	<!-- Other styles -->
+	<!-- ************ -->
+
 	<style name="TextBase">
-		<item name="android:textColor">#ffffff</item>
+		<!-- <item name="android:textColor">#ffffff</item> -->
+		<item name="android:textColor">?android:attr/colorForeground</item>
 	</style>
 
 	<!-- Two column menu -->
 	<style name="Menu">
+	</style>
+
+	<style name="Menu.List">
+		<!-- <item name="android:divider">#fff</item> -->
+		<!-- <item name="android:dividerHeight">1dp</item> -->
+		<item name="android:divider">?android:attr/listDivider</item>
+		<item name="android:dividerHeight">@dimen/divider_thickness</item>
+		<item name="android:cacheColorHint">@android:color/transparent</item>
 	</style>
 
 	<style name="Menu.Row">
@@ -113,13 +408,15 @@
 	</style>
 	
 	<style name="Details.Label">
-		<item name="android:textColor">@android:color/secondary_text_dark</item>
+		<!-- <item name="android:textColor">@android:color/secondary_text_dark</item> -->
+		<item name="android:textColor">?android:attr/textColorSecondary</item>
 		<item name="android:textSize">14sp</item>
 	</style>
 
 	<style name="Details.Value">
-	    <item name="android:singleLine">false</item>
-		<item name="android:textColor">@android:color/primary_text_dark</item>
+		<item name="android:singleLine">false</item>
+		<!-- <item name="android:textColor">@android:color/primary_text_dark</item> -->
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
 		<item name="android:textSize">18sp</item>
 	</style>
 	
@@ -182,7 +479,7 @@
 		<item name="android:gravity">center</item>
 	</style>
 	
-	<!-- Dice -->
+	<!-- Dice item -->
 	<style name="Dice">
 	</style>
 	
@@ -197,14 +494,46 @@
 		<item name="android:ellipsize">marquee</item>
 		<item name="android:marqueeRepeatLimit">marquee_forever</item>
 		
-		<item name="android:textColor">@color/dice_number</item>
+		<!-- <item name="android:textColor">@color/dice_number</item> -->
+		<item name="android:textColor">?android:attr/colorForeground</item>
 		<item name="android:shadowRadius">true</item>
-		<item name="android:shadowColor">@android:color/black</item>
+		<!-- <item name="android:shadowColor">@android:color/black</item> -->
+		<item name="android:shadowColor">?android:attr/colorBackground</item>
 		<item name="android:shadowDx">0</item>
 		<item name="android:shadowDy">0</item>
 		<item name="android:shadowRadius">1.8</item>
 	</style>
-		
+	
+	<!-- Button bar -->
+	<style name="ButtonPanel">
+	</style>
+	
+	<style name="ButtonPanel.Container" parent="@android:style/ButtonBar">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+	
+	<style name="ButtonPanel.Button" parent="@android:style/Widget.Button">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+	
+	<style name="ButtonPanel.Divider">
+		<item name="android:background">@android:color/transparent</item>
+	</style>
+	
+	<style name="ButtonPanel.Divider.Horizontal"><!-- Horizontal line -->
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">0dp</item>
+		<item name="android:visibility">gone</item>
+	</style>
+	
+	<style name="ButtonPanel.Divider.Vertical"><!-- Vertical line -->
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">10dp</item>
+		<item name="android:visibility">invisible</item>
+	</style>
+	
 	<!-- File Picker -->
 	<style name="FolderItem" parent="Result">
 	</style>
@@ -213,5 +542,116 @@
 	</style>
 
 	<style name="FolderItem.Description" parent="Result.Text">
+	</style>
+	
+	<!-- Donate item -->
+	<style name="DonateItem">
+	</style>
+	
+	<style name="DonateItem.Frame" parent="@style/ButtonPanel.Button">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/icon_size</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:baselineAligned">false</item>
+	</style>
+	
+	<style name="DonateItem.Icon">
+		<item name="android:layout_width">32dp</item>
+		<item name="android:layout_height">32dp</item>
+		<item name="android:layout_weight">0</item>
+	</style>
+	
+	<style name="DonateItem.Text" parent="@android:style/TextAppearance.Widget.Button">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center</item>
+		<item name="android:lines">1</item>
+		<!-- <item name="android:textColor">?android:attr/textColorPrimary</item> -->
+		<item name="android:layout_weight">1</item>
+	</style>
+	
+	<style name="DonateItem.Divider.Horizontal" parent="@style/ButtonPanel.Divider.Horizontal">
+	</style>
+	
+	<!-- Undo bar -->
+	<style name="UndoBar">
+	</style>
+	
+	<style name="UndoBar.Frame">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">64dp</item><!-- 48 + Padding Top + Padding Bottom -->
+		
+		<item name="android:padding">8dp</item>
+	</style>
+	
+	<style name="UndoBar.Message">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:layout_weight">1</item>
+		
+		<item name="android:paddingLeft">@dimen/undo_bar_text_padding</item>
+		<item name="android:paddingRight">@dimen/undo_bar_text_padding</item>
+
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:textAppearance">?android:textAppearanceMedium</item>
+		<item name="android:textColor">@color/undo_bar_text</item>
+		<item name="android:maxLines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">end</item>
+		<item name="android:background">@drawable/bg_undo_left</item>
+	</style>
+	
+	<style name="UndoBar.Divider">
+		<item name="android:layout_width">0.75dp</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:src">@color/undo_bar_divider</item>
+		<item name="android:paddingTop">@dimen/undo_bar_img_padding</item>
+		<item name="android:paddingBottom">@dimen/undo_bar_img_padding</item>
+		<item name="android:background">@color/undo_bar_bg</item>
+	</style>
+	
+	<style name="UndoBar.Button">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">match_parent</item>
+		
+		<item name="android:paddingLeft">@dimen/undo_bar_text_padding</item>
+		<item name="android:paddingRight">@dimen/undo_bar_text_padding</item>
+		
+		<item name="android:gravity">center_vertical</item>
+		
+		<item name="android:textAppearance">?android:textAppearanceSmall</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">@color/undo_bar_text</item>
+		
+		<item name="android:drawableLeft">@android:drawable/ic_menu_revert</item>
+		<item name="android:drawablePadding">@dimen/undo_bar_img_padding</item>
+		
+		<item name="android:clickable">true</item>
+		<item name="android:background">@drawable/bg_undo_right</item>
+	</style>
+	
+	<!-- Markup Dialog -->
+	<style name="MarkupDialog">
+	</style>
+	
+	<style name="MarkupDialog.Frame">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+	
+	<style name="MarkupDialog.Icon">
+		<item name="android:layout_width">@dimen/icon_size</item>
+		<item name="android:layout_height">@dimen/icon_size</item>
+		<item name="android:layout_gravity">center_horizontal</item>
+		
+		<item name="android:scaleType">fitCenter</item>
+	</style>
+	
+	<style name="MarkupDialog.Text" parent="@android:style/TextAppearance.Medium">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		
+		<item name="android:padding">8dp</item>
+		<item name="android:textColor">?android:attr/colorForeground</item>
 	</style>
 </resources>

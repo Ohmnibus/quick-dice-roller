@@ -8,28 +8,6 @@
 	android:padding="16dp"
 	>
 	
-	<!-- <TextView style="@style/Details.Value"
-		android:id="@+id/rdName"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-		android:text="@string/lblName"
-		/>
-
-	<TextView style="@style/Details.Label"
-		android:id="@+id/rdNameLabel"
-		
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-		android:text="@string/lblName"
-		/>
-
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/separator_size"
-		/> -->
-
 	<TextView style="@style/Details.Value"
 		android:id="@+id/rdDescription"
 		android:layout_width="match_parent"
@@ -72,43 +50,6 @@
 		android:layout_height="@dimen/separator_size"
 		/>
 
-	<!-- <TextView style="@style/Details.Value"
-		android:id="@+id/rdResultValue"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-		android:text="@string/lblResultValue"
-		/>
-
-	<TextView style="@style/Details.Label"
-		android:id="@+id/rdResultValueLabel"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-		android:text="@string/lblResultValue"
-		/>
-
-	<View
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/separator_size"
-		/>
-
-	<TextView style="@style/Details.Value"
-		android:id="@+id/rdRange"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-		android:text="@string/lblRangeValue"
-		/>
-
-	<TextView style="@style/Details.Label"
-		android:id="@+id/rdRangeLabel"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		
-		android:text="@string/lblRangeValue"
-		/> -->
-	
 	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
