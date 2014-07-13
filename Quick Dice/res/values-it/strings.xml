@@ -78,13 +78,12 @@
 	<string name="msgWhatsNewTitle">Novità nella versione %2$s</string>
 	<string name="msgWhatsNewBody"><![CDATA[
 <br />
-<b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app.<br />
+<b>Per favore</b> inviatemi una <a href="mailto:ohmnibus@gmail.com">mail</a> se avete dei suggerimenti su come migliorare l\'app.<br />
 <br />
-Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
-<br />
-&bull; Scegli fra 4 temi differenti<br />
-&bull; Aspetto migliorato<br />
-&bull; Correzioni ed ottimizzazioni minori<br />
+- Area dei dadi ridimensionabile<br />
+- Menù contestuali arricchiti<br />
+- Risolti errori legati all\'elenco dei risultati<br />
+- Correzioni ed ottimizzazioni minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
@@ -92,21 +91,22 @@ Copyright (c) 2012-2014 by %3$s<br />
 <br />
 Traduzioni: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
 <br />
-Segnala eventuali errori all\'indirizzo <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
+Segnalate eventuali errori all\'indirizzo <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
-Questa è un\'app gratuita, ma se ti piace perché non offrirmi una birra?<br />
+Questa è un\'app gratuita, ma se vi piace perché non  
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">offrirmi una birra</a>?
+Grazie!<br />
 <br />
-Grazie!<br />]]></string>
-	
-	<string name="msgLicenses">Licenze</string>
-	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> è pubblicato da %3$s su <a href="%4$s">%5$s</a>.<br />]]></string>
-	<string-array name="lblLicenseNames">
-		<item>Licenza Apache 2.0</item>
-		<item>Licenza Apache 2.0</item>
-		<item>Licenza Apache 2.0</item>
-		<item>Licenza Apache 2.0</item>
-		<item>Licenza Apache 2.0</item>
-	</string-array>
+- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> è
+pubblicato da Yuri Kanivets su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> è
+pubblicato da Lorensius W. L. T. su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> è
+pubblicato da Roman Nurik su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="http://nineoldandroids.com/">Nine Old Androids</a> è
+pubblicato da Jake Wharton su <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://code.google.com/p/google-gson/">Google Gson</a> è 
+pubblicato da Google su <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.<br />]]></string>
 	
 	<string name="msgRemoveModTitle">Elimina modificatore</string>
 	<string name="msgRemoveMod">Sei sicuro di voler eliminare definitivamente il modificatore \"%1$s\"?</string>

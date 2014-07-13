@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
 	>
-	<LinearLayout style="@style/MarkupDialog.Frame"
-		android:id="@+id/grpContainer"
-		android:orientation="vertical"
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
 		>
-		<ImageView style="@style/MarkupDialog.Icon"
+		<ImageView
 			android:id="@+id/mkIcon"
 	
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			
+			android:layout_centerHorizontal="true"
+			android:layout_alignParentTop="true"
+			
 			android:src="@drawable/ic_launcher"
-			android:contentDescription="@null"
+			android:scaleType="fitCenter"
 			/>
-		<!-- <TextView style="@android:style/TextAppearance.Widget.TextView.PopupMenu"
+		<TextView
 			android:id="@+id/mkBody"
 			
-			android:layout_width="match_parent"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 	
+			android:layout_alignParentLeft="true"
+			android:layout_below="@+id/mkIcon"
+			android:layout_alignWithParentIfMissing="true"
+			
 			android:paddingTop="6dp"
 			android:paddingLeft="18dp"
 			android:paddingBottom="6dp"
@@ -28,11 +38,6 @@
 			android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi "
 			android:textColor="#ffffffff"
 			android:textSize="18sp"
-			/> -->
-		<TextView style="@style/MarkupDialog.Text"
-			android:id="@+id/mkBody"
-	
-			android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi "
 			/>
-	</LinearLayout>
+	</RelativeLayout>
 </ScrollView>

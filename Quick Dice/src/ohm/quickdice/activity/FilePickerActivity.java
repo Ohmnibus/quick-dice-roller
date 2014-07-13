@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.FolderContentAdapter;
 import ohm.quickdice.entity.FolderItem;
@@ -122,9 +121,6 @@ public class FilePickerActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-		setTheme(QuickDiceApp.getInstance().getPreferences().getDialogThemeResId());
-		
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.file_picker_activity);
@@ -162,107 +158,107 @@ public class FilePickerActivity extends Activity {
 	private void initViews() {
 
 		lblCurrent = (TextView)findViewById(R.id.fpCurrentLocation);
-
+		
 		listView = (ListView)findViewById(R.id.fpFileList);
-
+		
 		txtFileName = (EditText)findViewById(R.id.fpFileName);
+		
+    	confirm = (Button) findViewById(R.id.btuBarConfirm);
+    	confirm.setOnClickListener(confirmCancelClickListener);
+    	cancel = (Button) findViewById(R.id.btuBarCancel);
+    	cancel.setOnClickListener(confirmCancelClickListener);
 
-		confirm = (Button) findViewById(R.id.btuBarConfirm);
-		confirm.setOnClickListener(confirmCancelClickListener);
-		cancel = (Button) findViewById(R.id.btuBarCancel);
-		cancel.setOnClickListener(confirmCancelClickListener);
+    	switch (requestType) {
+    		case ACTIVITY_SELECT_FILE:
+    			if (title == null) title = getString(R.string.lblSelectFile);
+    			//Confirm button not needed.
+    			confirm.setVisibility(View.GONE);
+    			//Enable file name input not needed.
+    			txtFileName.setVisibility(View.GONE);
+    			break;
+    		case ACTIVITY_SELECT_FOLDER:
+    			if (title == null) title = getString(R.string.lblSelectFolder);
+    			//Enable file name input not needed.
+    			txtFileName.setVisibility(View.GONE);
+    			break;
+    		case ACTIVITY_NEW_FILE:
+    			if (title == null) title = getString(R.string.lblNewFile);
+    			//Enable file name input
+    			txtFileName.setText(defaultFileName);
+    			txtFileName.setVisibility(View.VISIBLE);
+    			break;
+    	}
+    	
+    	this.setTitle(title);
 
-		switch (requestType) {
-			case ACTIVITY_SELECT_FILE:
-				if (title == null) title = getString(R.string.lblSelectFile);
-				//Confirm button not needed.
-				confirm.setVisibility(View.GONE);
-				//Enable file name input not needed.
-				txtFileName.setVisibility(View.GONE);
-				break;
-			case ACTIVITY_SELECT_FOLDER:
-				if (title == null) title = getString(R.string.lblSelectFolder);
-				//Enable file name input not needed.
-				txtFileName.setVisibility(View.GONE);
-				break;
-			case ACTIVITY_NEW_FILE:
-				if (title == null) title = getString(R.string.lblNewFile);
-				//Enable file name input
-				txtFileName.setText(defaultFileName);
-				txtFileName.setVisibility(View.VISIBLE);
-				break;
-		}
-
-		this.setTitle(title);
-
-		if (curFolder != null) { 
-			showFolder(curFolder);
-		} else {
-			//Storage not available
-			//R.string.err_storage_not_found
-			lblCurrent.setText(R.string.err_storage_not_found);
-			confirm.setVisibility(View.GONE);
-			txtFileName.setVisibility(View.GONE);
-		}
+    	if (curFolder != null) { 
+    		showFolder(curFolder);
+    	} else {
+    		//Storage not available
+    		//R.string.err_storage_not_found
+    		lblCurrent.setText(R.string.err_storage_not_found);
+    		confirm.setVisibility(View.GONE);
+    		txtFileName.setVisibility(View.GONE);
+    	}
 	}
 
 	private void showFolder(File folder) {
 		File[] files = null;
-		List<FolderItem> items = new ArrayList<FolderItem>();
+        List<FolderItem> items = new ArrayList<FolderItem>();
 
-		files = folder.listFiles(fileFilter);
+    	files = folder.listFiles(fileFilter);
 
 		lblCurrent.setText(String.format(getString(R.string.lblCurrentFolder), folder.getName()));
+        
+        FolderItem item;
+        	
+        try {
+        	for (File file : files) {
+        		item = getFolderItem(file);
+        		if (item != null) {
+        			items.add(item);
+        		}
+        	}
+        } catch (Exception e) {
+        	Toast.makeText(this, R.string.msgCannotRead, Toast.LENGTH_LONG).show();
+        }
 
-		FolderItem item;
+        if (!folder.getPath().equalsIgnoreCase(root.getPath())) {
+        	//If this is not the root, allow to go back
+            if (folder.getParentFile() != null) {
+            	item = new FolderItem(
+            			"..",
+            			getString(R.string.lblParentFolder),
+            			folder.getParent(),
+            			FolderItem.TYPE_PARENT_FOLDER);
+            
+            	items.add(item);
+            }
+        }
+        
+        Collections.sort(items);
+        
+        folderContentAdapter = new FolderContentAdapter(
+        		listView.getContext(),
+        		R.layout.file_picker_item,
+                items);
+        
+        listView.setAdapter(folderContentAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-		try {
-			for (File file : files) {
-				item = getFolderItem(file);
-				if (item != null) {
-					items.add(item);
+				@Override
+				public void onItemClick(
+						AdapterView<?> adapter,
+						View view,
+						int position,
+						long id) {
+					
+					FolderItem item = folderContentAdapter.getItem(position);
+					handleSelection(item);
 				}
-			}
-		} catch (Exception e) {
-			Toast.makeText(this, R.string.msgCannotRead, Toast.LENGTH_LONG).show();
-		}
-
-		if (!folder.getPath().equalsIgnoreCase(root.getPath())) {
-			//If this is not the root, allow to go back
-			if (folder.getParentFile() != null) {
-				item = new FolderItem(
-						"..",
-						getString(R.string.lblParentFolder),
-						folder.getParent(),
-						FolderItem.TYPE_PARENT_FOLDER);
-
-				items.add(item);
-			}
-		}
-
-		Collections.sort(items);
-
-		folderContentAdapter = new FolderContentAdapter(
-				listView.getContext(),
-				R.layout.file_picker_item,
-				items);
-
-		listView.setAdapter(folderContentAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(
-					AdapterView<?> adapter,
-					View view,
-					int position,
-					long id) {
-
-				FolderItem item = folderContentAdapter.getItem(position);
-				handleSelection(item);
-			}
-
-		});
-
+                
+        });
+		
 	}
 	
 	private FolderItem getFolderItem(File file) {
@@ -386,24 +382,24 @@ public class FilePickerActivity extends Activity {
 			final File newFile = new File(curFolder, fileName);
 			if (newFile.exists()) {
 				AlertDialog.Builder builder;
-				builder = new AlertDialog.Builder(this);
-				builder.setTitle(this.getTitle());
-				builder.setMessage(String.format(getString(R.string.msgFileNameExists), fileName));
-				builder.setPositiveButton(
-						R.string.lblYes,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
-							}
-						});
-				builder.setNegativeButton(
-						R.string.lblNo,
-						new DialogInterface.OnClickListener() {
+		    	builder = new AlertDialog.Builder(this);
+		    	builder.setTitle(this.getTitle());
+		    	builder.setMessage(String.format(getString(R.string.msgFileNameExists), fileName));
+		    	builder.setPositiveButton(
+		    			R.string.lblYes,
+		    			new DialogInterface.OnClickListener() {
+		    				public void onClick(DialogInterface dialog, int id) {
+		    					returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
+		    				}
+		    	       });
+		    	builder.setNegativeButton(
+		    			R.string.lblNo,
+		    			new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								dialog.cancel();
 							}
-						});
-				builder.create().show();
+		    	       });
+		    	builder.create().show();
 			} else {
 				returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
 			}

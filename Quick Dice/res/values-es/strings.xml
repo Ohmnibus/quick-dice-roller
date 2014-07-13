@@ -60,19 +60,20 @@ Traducciones: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
 <br />
 Señalar eventuales errores al siguente email <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
-Esta es una app gratuita, si te gusta ¿porqué no me ofreces una cerveza?<br />
+Esta es una app gratuita, si te gusta ¿porqué no 
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">me ofreces una cerveza</a>?
+Gracias!<br />
 <br />
-Gracias!<br />]]></string>
-
-	<string name="msgLicenses">Licencias</string>
-	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> es publicado por %3$s en <a href="%4$s">%5$s</a>.<br />]]></string>
-	<string-array name="lblLicenseNames">
-		<item>Licencia Apache 2.0</item>
-		<item>Licencia Apache 2.0</item>
-		<item>Licencia Apache 2.0</item>
-		<item>Licencia Apache 2.0</item>
-		<item>Licencia Apache 2.0</item>
-	</string-array>
+- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> Es 
+publicado por Yuri Kanivets en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> Es 
+publicado por Lorensius W. L. T. en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss</a> Es 
+publicado por Roman Nurik en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="http://nineoldandroids.com/">Nine Old Androids</a> Es 
+publicado por Jake Wharton en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />
+- <a href="https://code.google.com/p/google-gson/">Google Gson</a> Es 
+publicado por Google en <a href="http://www.apache.org/licenses/LICENSE-2.0">Licenza Apache 2.0</a>.<br />]]></string>
 	
 	<string name="msgRemoveModTitle">Elimina modificador</string>
 	<string name="msgRemoveMod">¿Estás seguro que desea eliminar definitivamente el modificador \"%1$s\"?</string>

@@ -11,11 +11,11 @@
 		/> -->
 	<!-- API 14: @android:color/holo_blue_dark -->
 	<item
-		android:drawable="@drawable/bg_selector_state_pressed"
+		android:drawable="@drawable/bg_last_result_pressed"
 		android:state_pressed="true"
 		/>
 	<item
-		android:drawable="@drawable/bg_selector_state_pressed"
+		android:drawable="@drawable/bg_last_result_pressed"
 		android:state_enabled="true"
 		android:state_focused="true"
 		/>

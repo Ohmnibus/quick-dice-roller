@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/ebRoot"
+    android:id="@+id/ebRoot"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	>
+	android:background="@drawable/bg_wood" >
+
+    <ImageView 
+        android:id="@+id/ebBgLogo"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		
+		android:src="@drawable/bg_logo"
+		android:contentDescription="@string/app_name"
+        />
 
 	<ScrollView
-		android:layout_width="fill_parent"
+	    android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		
+	    
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentTop="true"
 		android:layout_above="@+id/ebButtonContainer"
 		>
-		<RelativeLayout style="@style/Edit.ValueContainer"
+	    <RelativeLayout style="@style/Edit.ValueContainer"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			>
 			
-			<ImageButton style="@style/Edit.Icon"
-				android:id="@+id/ebIconPicker"
-				
+	        <ImageButton style="@style/Edit.Icon"
+	            android:id="@+id/ebIconPicker"
+	            
 				android:layout_width="72dp"
 				android:layout_height="72dp"
-				
-				android:layout_alignParentLeft="true"
+	            
+	            android:layout_alignParentLeft="true"
 				android:layout_alignBottom="@+id/ebNameText"
 				
 				android:scaleType="fitXY"
 				android:src="@drawable/ic_dxx_gray"
 				android:contentDescription="@string/lblIcon" />
-			
+	        
 			<TextView style="@style/Edit.Label"
 				android:id="@+id/ebNameLabel"
 				android:layout_width="wrap_content"
@@ -72,15 +84,69 @@
 				
 				android:hint="@string/hintDescBag"
 				/>
+		
+			<!--  TextView style="@style/EditBagLabel"
+				android:id="@+id/ebIconLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/ebDescText"
+				android:layout_alignLeft="@+id/ebDescText"
+				
+				android:text="@string/lblIconBag" />
+		
+			<Gallery style="@style/EditBagValue"
+				android:id="@+id/ebIconGallery"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:minHeight="48dp"
+				
+				android:layout_below="@+id/ebIconLabel"
+				android:layout_alignLeft="@+id/ebIconLabel"
+				
+				android:spacing="6dp"
+				android:unselectedAlpha="0.4"
+				/ -->
 		</RelativeLayout>
 	</ScrollView>
 
 	<include
-		layout="@layout/confirm_cancel_bar"
-		android:id="@+id/ebButtonContainer"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+	    layout="@layout/confirm_cancel_bar"
+	    android:id="@+id/ebButtonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
+	
+	<!-- LinearLayout
+	    style="@android:style/ButtonBar"
+        android:id="@+id/ebButtonContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        
+        android:orientation="horizontal"
+        >
+	    <Button
+	        style="@android:style/Widget.Button"
+	        android:id="@+id/ebBtuConfirm"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_weight="1"
+	        
+	        android:text="@string/lblConfirm" />
+	    
+	    <Button
+	        style="@android:style/Widget.Button"
+	        android:id="@+id/ebBtuCancel"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_weight="1"
+	        android:text="@string/lblCancel" />
+    </LinearLayout -->
 </RelativeLayout>

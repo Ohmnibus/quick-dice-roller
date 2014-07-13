@@ -78,19 +78,20 @@ Copyright (c) 2012-2014 by %3$s<br />
 <br />
 Bitte melde Fehler an <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
-Diese app ist kostenlos. Allerdings freue ich mich über Spenden.<br />
+Diese app ist kostenlos. Allerdings freue ich mich über
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">Spenden</a>.<br />
+Vielen Dank!<br />
 <br />
-Vielen Dank!<br />]]></string>
-
-	<string name="msgLicenses">Lizenzen</string>
-	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> wird vertrieben von %3$s unter einer <a href="%4$s">%5$s</a>.<br />]]></string>
-	<string-array name="lblLicenseNames">
-		<item>Apache 2.0 Lizenz</item>
-		<item>Apache 2.0 Lizenz</item>
-		<item>Apache 2.0 Lizenz</item>
-		<item>Apache 2.0 Lizenz</item>
-		<item>Apache 2.0 Lizenz</item>
-	</string-array>
+- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> wird 
+vertrieben von Yuri Kanivets unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> wird 
+vertrieben von Lorensius W. L. T. unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss</a> wird 
+vertrieben von Roman Nurik unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+- <a href="http://nineoldandroids.com/">Nine Old Androids</a> wird 
+vertrieben von Jake Wharton unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />
+- <a href="https://code.google.com/p/google-gson/">Google Gson</a> wird 
+vertrieben von Google unter einer <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 Lizenz</a>.<br />]]></string>
 
 	<string name="msgRemoveModTitle">Modifikator entfernen</string>
 	<string name="msgRemoveMod">Möchtest Du wirklich den Modifikator \"%1$s\" entfernen?</string>

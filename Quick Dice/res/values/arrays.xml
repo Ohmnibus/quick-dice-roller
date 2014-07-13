@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<array name="diceIcons">
+    <array name="diceIcons">
 		<item>@drawable/ic_dxx_gray</item><!-- 0 -->
 
 		<item>@drawable/ic_d4_blue</item>
@@ -153,33 +153,26 @@
 	<string-array name="entryvalues_clipboard">
 		<item>0</item>
 		<item>1</item>
-		<item>2</item>
+  		<item>2</item>
 	</string-array>
 
 	<string-array name="entryvalues_sensitivity">
 		<item>500</item>
 		<item>1000</item>
-		<item>1500</item>
-		<item>2000</item>
-		<item>2500</item>
-		<item>3000</item>
-		<item>3500</item>
-		<item>4000</item>
-		<item>4500</item>
-		<item>5000</item>
+  		<item>1500</item>
+  		<item>2000</item>
+  		<item>2500</item>
+  		<item>3000</item>
+  		<item>3500</item>
+  		<item>4000</item>
+  		<item>4500</item>
+  		<item>5000</item>
 	</string-array>
 
 	<string-array name="entryvalues_columns">
 		<item>1</item>
 		<item>2</item>
-		<item>3</item>
-	</string-array>
-	
-	<string-array name="entryvalues_themes">
-		<item>0</item><!-- Classic -->
-		<item>1</item><!-- Clean -->
-		<item>2</item><!-- Light -->
-		<item>3</item><!-- Dark -->
+  		<item>3</item>
 	</string-array>
 	
 	<integer-array name="default_modifiers">

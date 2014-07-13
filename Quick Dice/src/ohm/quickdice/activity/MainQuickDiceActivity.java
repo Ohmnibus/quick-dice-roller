@@ -78,16 +78,15 @@ import android.widget.Toast;
 
 /**
  * Main {@link Activity} of the app.<br />
- * Renamed from {@code QuickDiceActivity} to {@code QuickDiceMainActivity} in
+ * Renamed from {@code QuickDiceActivity} to {@code MainQuickDiceActivity} in
  * order to realize a splash screen. See {@link QuickDiceActivity} for details.
  * @author Ohmnibus
  *
  */
-public class QuickDiceMainActivity extends BaseActivity {
+public class MainQuickDiceActivity extends BaseActivity {
 	
-	private static final String TAG = "QuickDiceMainActivity";
+	private static final String TAG = "MainQuickDiceActivity";
 	
-	int currentTheme;
 	QuickDiceApp app;
 	Resources res;
 	GraphicManager graphicManager;
@@ -147,10 +146,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
-		currentTheme = QuickDiceApp.getInstance().getPreferences().getThemeResId();
-		setTheme(currentTheme);
-
 		super.onCreate(savedInstanceState);
 
 		//Initializations
@@ -431,15 +426,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 			initModifierList();
 			refreshResultList();
 			refreshLastResult();
-			
-			if (pref.getThemeResId() != currentTheme) {
-				app.getPersistence().saveResultList(lastResult, resultList);
-				finish();
-				Intent intent = new Intent(this, QuickDiceMainActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(intent);
-			}
 		}
 	}
 	
@@ -487,7 +473,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		return retVal;
 	}
 	
-	private static final long CONTEXT_MENU_COOL_DOWN = 900; //0.9 seconds cool down
+	private static final long CONTEXT_MENU_COOL_DOWN = 400; //0.4 seconds cool down
 	long contextMenuCooledDown = Long.MIN_VALUE;
 	
 	/**
@@ -644,9 +630,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 		
 		retVal = true;
 
-		//Menu was closed, reset cooldown
-		contextMenuCooledDown = System.currentTimeMillis();
-		
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		
 		if (info == null) {
@@ -867,11 +850,11 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 	private void initViews() {
 		setContentView(R.layout.quick_dice_activity);
-//		if (pref.getPlainBackground()) {
-//			findViewById(R.id.mBgLogo).setVisibility(View.GONE); //Remove the logo
-//			findViewById(R.id.mRoot).setBackgroundResource(R.color.main_bg); //Remove the background
-//			findViewById(R.id.mDiceBagList).setBackgroundResource(R.color.main_bg); //Remove the background from bag list
-//		}
+		if (pref.getPlainBackground()) {
+			findViewById(R.id.mBgLogo).setVisibility(View.GONE); //Remove the logo
+			findViewById(R.id.mRoot).setBackgroundResource(R.color.main_bg); //Remove the background
+			findViewById(R.id.mDiceBagList).setBackgroundResource(R.color.main_bg); //Remove the background from bag list
+		}
 
 		actionBar = CompatActionBar.createInstance(this);
 
@@ -939,14 +922,14 @@ public class QuickDiceMainActivity extends BaseActivity {
 				//actionBar.setTitle(R.string.app_name);
 				actionBar.setTitle(diceBagManager.getDiceBag().getName());
 				//invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-				ActivityCompat.invalidateOptionsMenu(QuickDiceMainActivity.this);
+				ActivityCompat.invalidateOptionsMenu(MainQuickDiceActivity.this);
 			}
 
 			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
 				actionBar.setTitle(R.string.mnuSelectDiceBag);
 				//invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-				ActivityCompat.invalidateOptionsMenu(QuickDiceMainActivity.this);
+				ActivityCompat.invalidateOptionsMenu(MainQuickDiceActivity.this);
 			}
 		};
 
@@ -1277,7 +1260,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				}
 
 				//Dispatch
-				QuickDiceMainActivity.this.runOnUiThread(dispatchOutcome);
+				MainQuickDiceActivity.this.runOnUiThread(dispatchOutcome);
 			}
 		}
 		
@@ -1616,7 +1599,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 		//refreshDiceList();
 		gvDice.setAdapter(new GridExpressionAdapter(
-				QuickDiceMainActivity.this,
+				MainQuickDiceActivity.this,
 				R.layout.dice_item,
 				diceBag));
 

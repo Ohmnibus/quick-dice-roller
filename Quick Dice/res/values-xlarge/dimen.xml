@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- UNUSED -->
+	<integer-array name="roll_toast_font_size">
+	    <item>48</item><!-- 0 digits -->
+	    <item>48</item><!-- 1 digit -->
+	    <item>48</item><!-- 2 digits -->
+	    <item>36</item><!-- 3 digits -->
+	    <item>24</item><!-- 4 digits -->
+	    <item>18</item><!-- 5 digits or more -->
+	</integer-array>
 
-	<dimen name="roll_toast_canvas_size">192dp</dimen>
-	<dimen name="roll_toast_icon_size">128dp</dimen>
-	<dimen name="roll_toast_base_font_size">48dp</dimen>
-
+    <dimen name="roll_toast_canvas_size">192dp</dimen>
+    <dimen name="roll_toast_icon_size">128dp</dimen>
+    <!-- Same as 2 digit font size -->
+    <dimen name="roll_toast_base_font_size">48dp</dimen>
 </resources>

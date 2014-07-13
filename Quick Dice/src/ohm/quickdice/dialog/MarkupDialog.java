@@ -26,8 +26,8 @@ public class MarkupDialog extends AlertDialog implements OnClickListener, ImageG
 	int mIconId;
 	
 	public interface ReadyListener {
-		public void ready(boolean confirmed);
-	}
+        public void ready(boolean confirmed);
+    }
 
 	/**
 	 * Initialize a {@link MarkupDialog} with the specified parameters.<br />
@@ -39,7 +39,7 @@ public class MarkupDialog extends AlertDialog implements OnClickListener, ImageG
 	 */
 	public MarkupDialog(Context context, int titleId, int messageId, ReadyListener readyListener) {
 		this(context, titleId, messageId, 0, readyListener);
-	}
+    }
 
 	/**
 	 * Initialize a {@link MarkupDialog} with the specified parameters.<br />
@@ -57,7 +57,7 @@ public class MarkupDialog extends AlertDialog implements OnClickListener, ImageG
 				context.getResources().getString(messageId),
 				iconId,
 				readyListener);
-	}
+    }
 
 	/**
 	 * Initialize a {@link MarkupDialog} with the specified parameters.<br />
@@ -71,8 +71,8 @@ public class MarkupDialog extends AlertDialog implements OnClickListener, ImageG
 	public MarkupDialog(Context context, String title, String message, int iconId, ReadyListener readyListener) {
 		super(context);
 		mRes = context.getResources();
-		mMetrics = new DisplayMetrics();
-		this.getWindow().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+        mMetrics = new DisplayMetrics();
+        this.getWindow().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
 
 		mTitle = title;
 		mMessage = message;
@@ -88,8 +88,8 @@ public class MarkupDialog extends AlertDialog implements OnClickListener, ImageG
 		
 		setCancelable(false);
 		setTitle(mTitle);
-		setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblOk), this);
-		
+		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
+
 		super.onCreate(savedInstanceState);
 
 		if (mIconId > 0) {
@@ -100,26 +100,26 @@ public class MarkupDialog extends AlertDialog implements OnClickListener, ImageG
 		((TextView)findViewById(R.id.mkBody)).setText(Html.fromHtml(mMessage, this, null));
 		((TextView)findViewById(R.id.mkBody)).setMovementMethod(LinkMovementMethod.getInstance());
 	}
-	
+
 	@Override
 	public Drawable getDrawable(String source) {
-		Drawable retVal = null;
-		int resID = mRes.getIdentifier(source, "drawable", this.getContext().getPackageName());
-		retVal = mRes.getDrawable(resID);
-		//retVal.setBounds(0, 0, retVal.getIntrinsicWidth(), retVal.getIntrinsicHeight());
-		//retVal.setBounds(0, 0, 24, 24);
-		retVal.setBounds(
-				0, 
-				0, 
-				(int)(retVal.getIntrinsicWidth() * mMetrics.density), 
-				(int)(retVal.getIntrinsicHeight() * mMetrics.density));
-		return retVal;
+	    Drawable retVal = null;
+	    int resID = mRes.getIdentifier(source, "drawable", this.getContext().getPackageName());
+	    retVal = mRes.getDrawable(resID);
+	    //retVal.setBounds(0, 0, retVal.getIntrinsicWidth(), retVal.getIntrinsicHeight());
+	    //retVal.setBounds(0, 0, 24, 24);
+	    retVal.setBounds(
+	    		0, 
+	    		0, 
+	    		(int)(retVal.getIntrinsicWidth() * mMetrics.density), 
+	    		(int)(retVal.getIntrinsicHeight() * mMetrics.density));
+	    return retVal;
 	}
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		if (mReadyListener != null) {
-			mReadyListener.ready(which == BUTTON_NEGATIVE);
+			mReadyListener.ready(which == BUTTON_POSITIVE);
 		}
 		dismiss();
 	}

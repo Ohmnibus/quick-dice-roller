@@ -6,12 +6,15 @@ import ohm.quickdice.adapter.MenuAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Build;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -28,49 +31,54 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 		this.adapter = new MenuAdapter(activity, menu);
 	}
 	
-//	protected Menu newMenuInstance(Activity activity) {
-//		Menu retVal = null;
-//		try {
-//			Class<?> menuBuilderClass = Class.forName("com.android.internal.view.menu.MenuBuilder");
-//
-//			Constructor<?> constructor = menuBuilderClass.getDeclaredConstructor(Context.class);
-//
-//			retVal = (Menu) constructor.newInstance(activity);
-//
-//		} catch (Exception e) {e.printStackTrace();}
-//
-//		return retVal;
-//	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		View root = activity.getLayoutInflater().inflate(R.layout.dialog_menu, null);
-		ListView list = (ListView)root.findViewById(R.id.lvMenu);
 		
-		setView(list);
+		//TODO: Inflate view from resource so that can be easily styled
+		//TODO: When creating such layout, add the divider as well, avoiding to do it here (see "Add divider").
+		ListView root = new ListView(activity);
+		root.setLayoutParams(new LayoutParams( //LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+				CompatMisc.getInstance().LAYOUT_MATCH_PARENT,
+				CompatMisc.getInstance().LAYOUT_MATCH_PARENT));
+		root.setCacheColorHint(Color.TRANSPARENT);
+		
+		//Get the drawable for the divider.
+		//Don't know any better way to do it.
+		Drawable divider;
+		TypedArray ta;
+		ta = activity.getApplicationContext().obtainStyledAttributes(new int[] { android.R.attr.listDivider });
+		divider = ta.getDrawable(0);
+		ta.recycle();
+		root.setDivider(divider);
+		
+		setView(root);
 		
 		setButton(BUTTON_POSITIVE, activity.getText(R.string.lblCancel), this);
 		
 		super.onCreate(savedInstanceState);
 		
-		View headerView = getHeaderView(getLayoutInflater(), list);
+		View headerView = getHeaderView(getLayoutInflater(), root);
 		if (headerView != null) {
-			list.addHeaderView(headerView, null, false);
+			root.addHeaderView(headerView, null, false);
 			
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-				//Version prior to API11 need an explicit divider
-				View div = new ImageView(activity);
-	
-				div.setLayoutParams(new android.widget.AbsListView.LayoutParams(
-						list.getLayoutParams().width, // LayoutParams.FILL_PARENT,
-						activity.getResources().getDimensionPixelSize(R.dimen.divider_thickness))); //list.getDividerHeight()
-	
-				CompatMisc.getInstance().setBackgroundDrawable(div, list.getDivider().getConstantState().newDrawable());
-				list.addHeaderView(div, null, false);
-			}
+			//Add divider
+			View div = new ImageView(activity);
+
+			div.setLayoutParams(new android.widget.AbsListView.LayoutParams(
+					root.getLayoutParams().width, // LayoutParams.FILL_PARENT,
+					root.getDividerHeight()));
+			
+			ta = activity.getApplicationContext().obtainStyledAttributes(new int[] { android.R.attr.listDivider });
+			divider = ta.getDrawable(0);
+			ta.recycle();
+
+			CompatMisc.getInstance().setBackgroundDrawable(div, divider);
+			root.addHeaderView(div, null, false);
+		} else {
+			//Remove divider if list has been inflated
 		}
 		
-		list.setAdapter(adapter);
+		root.setAdapter(adapter);
 		
 		onPrepareOptionsMenu(adapter);
 		//TODO: Handle the case onPrepareOptionsMenu return "false".
@@ -113,7 +121,6 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 	@Override
 	public void onItemClick(MenuAdapter parent, View view, int row, int column, long id) {
 		MenuItem selected = parent.getItem(row, column);
-		//selected.set
 		activity.onContextItemSelected(selected);
 		dismiss();
 	}

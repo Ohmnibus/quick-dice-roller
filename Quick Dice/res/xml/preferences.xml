@@ -2,105 +2,97 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
 	<PreferenceCategory
-		android:title="@string/pref_link">
-		
-		<CheckBoxPreference
-			android:key="KEY_LINK_RESULT"
-			android:title="@string/pref_link_auto_title"
-			android:summary="@string/pref_link_auto_desc"
-			android:defaultValue="true" />
+         android:title="@string/pref_link">
+         
+         <CheckBoxPreference
+             android:key="KEY_LINK_RESULT"
+             android:title="@string/pref_link_auto_title"
+             android:summary="@string/pref_link_auto_desc"
+             android:defaultValue="true" />
 
-		<ohm.library.preference.IntListPreference
-			android:key="KEY_LINK_RESULT_DELAY"
-			android:title="@string/pref_link_sens_title"
-			android:summary="@string/pref_link_sens_desc"
-			android:dialogTitle="@string/pref_link_sens_dlg_title"
-			android:entryValues="@array/entryvalues_sensitivity"
-			android:entries="@array/entries_sensitivity"
-			android:defaultValue="1500"
-			android:dependency="KEY_LINK_RESULT" />
+         <!-- ohm.library.preference.IntListPreference -->
+         <ohm.library.preference.IntListPreference
+             android:key="KEY_LINK_RESULT_DELAY"
+             android:title="@string/pref_link_sens_title"
+             android:summary="@string/pref_link_sens_desc"
+             android:dialogTitle="@string/pref_link_sens_dlg_title"
+             android:entryValues="@array/entryvalues_sensitivity"
+             android:entries="@array/entries_sensitivity"
+             android:defaultValue="1500"
+             android:dependency="KEY_LINK_RESULT" />
 	</PreferenceCategory>
-	
+     
 	<PreferenceCategory
-		android:title="@string/pref_aspect">
-		
-		<CheckBoxPreference
-			android:key="KEY_SWAP_NAME_RESULT"
-			android:title="@string/pref_aspect_swapdesc_title"
-			android:summary="@string/pref_aspect_swapdesc_desc"
-			android:defaultValue="false" />
-		
-		<CheckBoxPreference
-			android:key="KEY_SHOW_MODIFIERS"
-			android:title="@string/pref_aspect_mod_title"
-			android:summary="@string/pref_aspect_mod_desc"
-			android:defaultValue="true" />
-		
-		<ohm.library.preference.IntListPreference
-			android:key="KEY_COLUMN_NUM"
-			android:title="@string/pref_aspect_col_title"
-			android:summary="@string/pref_aspect_col_desc"
-			android:dialogTitle="@string/pref_aspect_col_dlg_title"
-			android:entryValues="@array/entryvalues_columns"
-			android:entries="@array/entries_columns"
-			android:defaultValue="1"
-			/>
+         android:title="@string/pref_aspect">
+         
+         <CheckBoxPreference
+             android:key="KEY_SWAP_NAME_RESULT"
+             android:title="@string/pref_aspect_swapdesc_title"
+             android:summary="@string/pref_aspect_swapdesc_desc"
+             android:defaultValue="false" />
+         
+         <CheckBoxPreference
+             android:key="KEY_SHOW_MODIFIERS"
+             android:title="@string/pref_aspect_mod_title"
+             android:summary="@string/pref_aspect_mod_desc"
+             android:defaultValue="true" />
+         
+         <!-- ohm.library.preference.IntListPreference -->
+         <ohm.library.preference.IntListPreference
+             android:key="KEY_COLUMN_NUM"
+             android:title="@string/pref_aspect_col_title"
+             android:summary="@string/pref_aspect_col_desc"
+             android:dialogTitle="@string/pref_aspect_col_dlg_title"
+             android:entryValues="@array/entryvalues_columns"
+             android:entries="@array/entries_columns"
+             android:defaultValue="1" />
+             />
 
-		<!-- <CheckBoxPreference
-			android:key="KEY_PLAIN_BG"
-			android:title="@string/pref_aspect_plain_bg_title"
-			android:summary="@string/pref_aspect_plain_bg_desc"
-			android:defaultValue="false" /> -->
-		
-		<ohm.library.preference.IntListPreference
-			android:key="KEY_THEME"
-			android:title="@string/pref_aspect_theme_title"
-			android:summary="@string/pref_aspect_theme_dyn_desc"
-			android:dialogTitle="@string/pref_aspect_theme_dlg_title"
-			android:entries="@array/entries_themes"
-			android:entryValues="@array/entryvalues_themes"
-			android:defaultValue="1"
-			/>
+         <CheckBoxPreference
+             android:key="KEY_PLAIN_BG"
+             android:title="@string/pref_aspect_plain_bg_title"
+             android:summary="@string/pref_aspect_plain_bg_desc"
+             android:defaultValue="false" />
 
-		<CheckBoxPreference
-			android:key="KEY_SHOW_TOAST"
-			android:title="@string/pref_aspect_popup_title"
-			android:summary="@string/pref_aspect_popup_desc"
-			android:defaultValue="true" />
-		
-		<CheckBoxPreference 
-			android:key="KEY_SHOW_ANIMATION"
-			android:title="@string/pref_aspect_anim_title"
-			android:summary="@string/pref_aspect_anim_desc"
-			android:defaultValue="true"
-			android:dependency="KEY_SHOW_TOAST" />
+         <CheckBoxPreference
+             android:key="KEY_SHOW_TOAST"
+             android:title="@string/pref_aspect_popup_title"
+             android:summary="@string/pref_aspect_popup_desc"
+             android:defaultValue="true" />
+         
+         <CheckBoxPreference 
+             android:key="KEY_SHOW_ANIMATION"
+             android:title="@string/pref_aspect_anim_title"
+             android:summary="@string/pref_aspect_anim_desc"
+             android:defaultValue="true"
+             android:dependency="KEY_SHOW_TOAST" />
 
-		<CheckBoxPreference
-			android:key="KEY_ENABLE_SOUND"
-			android:title="@string/pref_aspect_sound_title"
-			android:summary="@string/pref_aspect_sound_desc"
-			android:defaultValue="true" />
-		
-		<CheckBoxPreference
-			android:key="KEY_ENABLE_SPECIAL_SOUND"
-			android:title="@string/pref_aspect_ext_sound_title"
-			android:summary="@string/pref_aspect_ext_sound_desc"
-			android:defaultValue="true"
-			android:dependency="KEY_ENABLE_SOUND" />
+         <CheckBoxPreference
+             android:key="KEY_ENABLE_SOUND"
+             android:title="@string/pref_aspect_sound_title"
+             android:summary="@string/pref_aspect_sound_desc"
+             android:defaultValue="true" />
+         
+         <CheckBoxPreference
+             android:key="KEY_ENABLE_SPECIAL_SOUND"
+             android:title="@string/pref_aspect_ext_sound_title"
+             android:summary="@string/pref_aspect_ext_sound_desc"
+             android:defaultValue="true"
+             android:dependency="KEY_ENABLE_SOUND" />
 	</PreferenceCategory>
-	
+     
 	<PreferenceCategory
-		android:title="@string/pref_clipboard">
-		
-		<!-- ohm.library.preference.IntListPreference -->
-		<ohm.library.preference.IntListPreference
-			android:key="KEY_CLIPBOARD"
-			android:title="@string/pref_clipboard_title"
-			android:summary="@string/pref_clipboard_desc"
-			android:dialogTitle="@string/pref_clipboard_dlg_title"
-			android:entryValues="@array/entryvalues_clipboard"
-			android:entries="@array/entries_clipboard"
-			android:defaultValue="0" />
+         android:title="@string/pref_clipboard">
+         
+         <!-- ohm.library.preference.IntListPreference -->
+         <ohm.library.preference.IntListPreference
+             android:key="KEY_CLIPBOARD"
+             android:title="@string/pref_clipboard_title"
+             android:summary="@string/pref_clipboard_desc"
+             android:dialogTitle="@string/pref_clipboard_dlg_title"
+             android:entryValues="@array/entryvalues_clipboard"
+             android:entries="@array/entries_clipboard"
+             android:defaultValue="0" />
 	</PreferenceCategory>
 
 </PreferenceScreen>

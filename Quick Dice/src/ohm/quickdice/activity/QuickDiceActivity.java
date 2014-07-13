@@ -6,6 +6,7 @@ import ohm.quickdice.control.PreferenceManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 /**
  * {@link QuickDiceActivity} has become a splash screen to initialize 
@@ -13,7 +14,7 @@ import android.os.Handler;
  * This class was meant to be named {@code StartupActivity}, but since renaming
  * the main activity in the manifest has lead to the removal of all the shortcut 
  * to the application in the launcher, I ended up renaming the original 
- * {@code QuickDiceActivity} to {@link QuickDiceMainActivity}.
+ * {@code QuickDiceActivity} to {@link MainQuickDiceActivity}.
  * @author Ohmnibus
  *
  */
@@ -32,6 +33,11 @@ public class QuickDiceActivity extends BaseActivity implements Runnable {
 		app = QuickDiceApp.getInstance();
 		pref = app.getPreferences();
 
+		if (pref.getPlainBackground()) {
+			findViewById(R.id.mBgLogo).setVisibility(View.GONE); //Remove the logo
+			findViewById(R.id.mRoot).setBackgroundResource(R.color.main_bg); //Remove the background
+		}
+		
 		new Thread(this).start();
 	}
 	
@@ -45,7 +51,7 @@ public class QuickDiceActivity extends BaseActivity implements Runnable {
 		app.getPersistence().preloadResultList();
 
 		//Launch main application
-		Intent i = new Intent(this, QuickDiceMainActivity.class);
+		Intent i = new Intent(this, MainQuickDiceActivity.class);
 		startActivity(i);
 
 		//Close self

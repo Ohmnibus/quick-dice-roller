@@ -86,19 +86,20 @@ Traductions: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
 <br />
 Vous pouvez signaler les problèmes à <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
-Cette application est gratuite, mais si vous aimez, pourquoi ne pas me payer une bière?<br />
+Cette application est gratuite, mais si vous aimez, pourquoi ne pas 
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZSAC6BX5N9NN">me payer une bière</a>?
+Merci!<br />
 <br />
-Merci!<br />]]></string>
-	
-	<string name="msgLicenses">Licences</string>
-	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> est publié par %3$s sur <a href="%4$s">%5$s</a>.<br />]]></string>
-	<string-array name="lblLicenseNames">
-		<item>Licence Apache 2.0</item>
-		<item>Licence Apache 2.0</item>
-		<item>Licence Apache 2.0</item>
-		<item>Licence Apache 2.0</item>
-		<item>Licence Apache 2.0</item>
-	</string-array>
+- <a href="http://code.google.com/p/android-wheel/">Android wheel widget</a> est
+publié par Yuri Kanivets sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+- <a href="https://github.com/lorensiuswlt/">QuickAction widget</a> est
+publié par Lorensius W. L. T. sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+- <a href="https://github.com/romannurik/Android-SwipeToDismiss/">Swipe to Dismiss code</a> est
+publié par Roman Nurik sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+- <a href="http://nineoldandroids.com/">Nine Old Androids</a> est
+publié par Jake Wharton sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />
+- <a href="https://code.google.com/p/google-gson/">Google Gson</a> est
+publié par Google sur <a href="http://www.apache.org/licenses/LICENSE-2.0">Licence Apache 2.0</a>.<br />]]></string>
 	
 	<string name="msgRemoveModTitle">Éliminer le modificateur</string>
 	<string name="msgRemoveMod">Êtes-vous sûr de vouloir éliminer définitivement le modificateur \"%1$s\"?</string>
