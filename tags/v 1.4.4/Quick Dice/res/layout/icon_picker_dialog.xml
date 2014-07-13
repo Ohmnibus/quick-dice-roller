@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ipdIcons"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    android:columnWidth="72dp"
+    android:numColumns="auto_fit"
+    android:verticalSpacing="4dp"
+    android:horizontalSpacing="4dp"
+    android:stretchMode="columnWidth"
+    android:gravity="center"
+    android:cacheColorHint="#00000000"
+    android:listSelector="@drawable/bg_last_result_focus" >
+
+</GridView>

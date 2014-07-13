@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/ohm.quickdice"
+	android:id="@+id/mProfileDrawer"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	>
+
+	<!-- The main content view -->
+	<RelativeLayout
+		android:id="@+id/mRoot"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/bg_wood"
+		>
+
+		<ImageView 
+			android:id="@+id/mBgLogo"
+			android:layout_width="250dp"
+			android:layout_height="250dp"
+			
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true"
+			
+			android:src="@drawable/bg_logo"
+			android:contentDescription="@string/app_name"
+			/>
+		
+		<ImageView 
+			style="@style/DiceBagHandle"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			
+			android:src="@drawable/ic_handle_bar"
+			android:scaleType="fitXY"
+			android:contentDescription="@string/app_name"
+			/>
+
+		<RelativeLayout
+			android:id="@+id/mLastRollContainer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+	
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			
+			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			android:padding="5dp"
+	
+			android:background="@drawable/bg_last_result"
+			>
+			
+			<include
+				android:id="@+id/mLastRoll"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_alignParentLeft="true"
+				android:layout_centerVertical="true"
+				
+				layout="@layout/roll_item"
+				/>
+
+			<ImageButton
+				android:id="@+id/mLinkButton"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+
+				android:layout_marginRight="5dp"
+
+				android:contentDescription="@string/pref_link_title"
+				android:background="@drawable/ic_link"
+				/>
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+		
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentTop="true"
+				android:layout_toLeftOf="@+id/mLinkButton"
+				>
+				<Button 
+					android:id="@+id/mUndoDeleteAll"
+	
+					android:layout_width="wrap_content"
+					android:layout_height="48dp"
+	
+					android:layout_centerInParent="true"
+	
+					android:text="@string/mnuUndoClearAllResult"
+	
+					android:visibility="gone"
+					/>
+	
+			</RelativeLayout>
+		</RelativeLayout>
+		
+		<ohm.library.widget.SplitView
+			android:id="@+id/mSplitView"
+			
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			
+			android:layout_alignParentLeft="true"
+			android:layout_below="@+id/mLastRollContainer"
+			android:layout_above="@+id/mModifierContainer"
+			android:layout_alignWithParentIfMissing="true"
+			
+			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			
+			android:orientation="vertical"
+			
+			app:handle="@+id/mHandle"
+			app:firstContent="@+id/mRollList"
+			app:secondContent="@+id/mDiceSet"
+			>
+			
+			<GridView
+				android:id="@+id/mRollList"
+				
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+
+				android:layout_weight="1"
+
+				app:minSize="0dp"
+
+				android:numColumns="1"
+				android:stretchMode="columnWidth"
+				android:gravity="center"
+
+				android:cacheColorHint="#00000000" />
+
+			<ImageView
+				android:id="@+id/mHandle"
+				
+				android:layout_width="fill_parent"
+				android:layout_height="24dp"
+				
+				android:background="@drawable/ic_handle_hori"
+				android:contentDescription="@string/lblDragToResize"
+				/>
+			
+			<GridView
+				android:id="@+id/mDiceSet"
+
+				android:layout_width="fill_parent"
+				android:layout_height="142dp"
+
+				app:minSize="68dp"
+
+				android:columnWidth="72dp"
+				android:numColumns="auto_fit"
+				android:verticalSpacing="4dp"
+				android:horizontalSpacing="4dp"
+				android:stretchMode="columnWidth"
+				android:gravity="center"
+				android:cacheColorHint="#00000000"
+
+				android:background="@drawable/bg_dice_grid"
+				>
+			</GridView>
+		</ohm.library.widget.SplitView>
+			
+		<RelativeLayout
+			android:id="@+id/mModifierContainer"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentBottom="true"
+			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			android:background="@drawable/bg_dice_grid" >
+			
+			<HorizontalScrollView
+				tools:ignore="UselessParent"
+				android:id="@+id/mModifierScroller"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				>
+		
+				<LinearLayout
+					android:id="@+id/mModifierList"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					>
+		
+					<ImageView
+						android:layout_width="48dp"
+						android:layout_height="48dp"
+						android:src="@drawable/ic_d100_blue"
+						android:contentDescription="@string/lblName" />
+		
+					<ImageView
+						android:layout_width="48dp"
+						android:layout_height="48dp"
+						android:src="@drawable/ic_d100_blue"
+						android:contentDescription="@string/lblName" />
+				 </LinearLayout>
+			</HorizontalScrollView>
+		</RelativeLayout>
+	</RelativeLayout>
+	
+	<!-- The navigation drawer -->
+	<ListView android:id="@+id/mDiceBagList"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginRight="@dimen/right_margin_keep_clean"
+		android:layout_gravity="start"
+		
+		android:choiceMode="singleChoice"
+		android:divider="@android:color/transparent"
+		android:dividerHeight="0dp"
+		
+		android:background="@drawable/bg_wood"
+		android:cacheColorHint="#00000000" />
+	
+</android.support.v4.widget.DrawerLayout>

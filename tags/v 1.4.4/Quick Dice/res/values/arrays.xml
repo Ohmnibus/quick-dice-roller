@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="diceIcons">
+		<item>@drawable/ic_dxx_gray</item><!-- 0 -->
+
+		<item>@drawable/ic_d4_blue</item>
+		<item>@drawable/ic_d6_blue</item>
+		<item>@drawable/ic_d8_blue</item>
+		<item>@drawable/ic_d10_blue</item>
+		<item>@drawable/ic_d12_blue</item><!-- 5 -->
+		<item>@drawable/ic_d20_blue</item>
+		<item>@drawable/ic_d100_blue</item>
+		<item>@drawable/ic_dxx_blue</item>
+
+		<item>@drawable/ic_d4_yellow</item>
+		<item>@drawable/ic_d6_yellow</item><!-- 10 -->
+		<item>@drawable/ic_d8_yellow</item>
+		<item>@drawable/ic_d10_yellow</item>
+		<item>@drawable/ic_d12_yellow</item>
+		<item>@drawable/ic_d20_yellow</item>
+		<item>@drawable/ic_d100_yellow</item><!-- 15 -->
+		<item>@drawable/ic_dxx_yellow</item>
+
+		<item>@drawable/ic_d4_vero</item>
+		<item>@drawable/ic_d6_vero</item>
+		<item>@drawable/ic_d8_vero</item>
+		<item>@drawable/ic_d10_vero</item><!-- 20 -->
+		<item>@drawable/ic_d12_vero</item>
+		<item>@drawable/ic_d20_vero</item>
+		<item>@drawable/ic_d100_vero</item>
+		<item>@drawable/ic_dxx_red</item>
+
+		<item>@drawable/ic_dc_sword</item><!-- 25 -->
+		<item>@drawable/ic_dc_saber</item>
+		<item>@drawable/ic_dc_shield</item>
+		<item>@drawable/ic_dc_sword_shield</item>
+		<item>@drawable/ic_dc_skull</item>
+		<item>@drawable/ic_dc_warrior01</item><!-- 30 -->
+		<item>@drawable/ic_dc_warrior02</item>
+		<item>@drawable/ic_dc_warrior03</item>
+
+		<item>@drawable/ic_dc_alarm</item>
+		<item>@drawable/ic_dc_bell</item>
+		<item>@drawable/ic_dc_timer</item><!-- 35 -->
+		<item>@drawable/ic_dc_heart</item>
+		<item>@drawable/ic_dc_star</item>
+		<item>@drawable/ic_dc_bomb</item>
+		<item>@drawable/ic_dc_box</item>
+		<item>@drawable/ic_dc_dragon</item><!-- 40 -->
+		<item>@drawable/ic_dc_horse</item>
+		
+		<item>@drawable/ic_dc_el_air</item>
+		<item>@drawable/ic_dc_el_earth</item>
+		<item>@drawable/ic_dc_el_fire</item>
+		<item>@drawable/ic_dc_el_ice</item><!-- 45 -->
+		<item>@drawable/ic_dc_el_lightning</item>
+		<item>@drawable/ic_dc_el_water</item>
+		
+		<item>@drawable/ic_dc_we_axe</item>
+		<item>@drawable/ic_dc_we_bow</item>
+		<item>@drawable/ic_dc_we_crossbow</item><!-- 50 -->
+		<item>@drawable/ic_dc_we_dagger</item>
+		<item>@drawable/ic_dc_we_raygun</item>
+		<item>@drawable/ic_dc_we_shotgun</item>
+		<item>@drawable/ic_dc_we_staff</item>
+		
+		<item>@drawable/ic_dc_mo_beholder</item><!-- 55 -->
+		<item>@drawable/ic_dc_mo_dragon</item>
+		<item>@drawable/ic_dc_mo_ogre</item>
+		<item>@drawable/ic_dc_mo_skeleton</item>
+		<item>@drawable/ic_dc_mo_spider</item>
+		<item>@drawable/ic_dc_mo_troll</item><!-- 60 -->
+		
+		<item>@drawable/ic_d2_white</item>
+		<item>@drawable/ic_d3_white</item>
+	</array>
+
+	<array name="diceColors">
+		<item>#888888</item><!-- Gray -->
+
+		<item>#18209c</item><!-- Blue -->
+		<item>#18209c</item>
+		<item>#18209c</item>
+		<item>#18209c</item>
+		<item>#18209c</item>
+		<item>#18209c</item>
+		<item>#18209c</item>
+		<item>#18209c</item>
+
+		<item>#fff718</item><!-- Yellow -->
+		<item>#fff718</item>
+		<item>#fff718</item>
+		<item>#fff718</item>
+		<item>#fff718</item>
+		<item>#fff718</item>
+		<item>#fff718</item>
+		<item>#fff718</item>
+
+		<item>#741d25</item><!-- Veronica -->
+		<item>#741d25</item>
+		<item>#741d25</item>
+		<item>#741d25</item>
+		<item>#741d25</item>
+		<item>#741d25</item>
+		<item>#741d25</item>
+		<item>#ad2421</item><!-- Red -->
+
+		<item>#e6e5e5</item><!-- 25 -->
+		<item>#c6c5c5</item>
+		<item>#d0cfcf</item>
+		<item>#d0cfcf</item>
+		<item>#91d7cb</item>
+		<item>#84acdd</item><!-- 30 -->
+		<item>#dc9f24</item>
+		<item>#797878</item>
+
+		<item>#fec305</item>
+		<item>#ff9406</item>
+		<item>#77b1ff</item><!-- 35 -->
+		<item>#f90000</item>
+		<item>#ffc713</item>
+		<item>#464646</item>
+		<item>#464646</item>
+		<item>#f90000</item><!-- 40 -->
+		<item>#c5b591</item>
+		
+		<item>#b9b8b1</item>
+		<item>#79472a</item>
+		<item>#ef6e14</item>
+		<item>#7cc6ea</item><!-- 45 -->
+		<item>#9fcace</item>
+		<item>#6ab4dc</item>
+		
+		<item>#87b890</item>
+		<item>#765f2e</item>
+		<item>#86684b</item><!-- 50 -->
+		<item>#555553</item>
+		<item>#5d5b54</item>
+		<item>#525456</item>
+		<item>#472e1d</item>
+		
+		<item>#753413</item><!-- 55 -->
+		<item>#8e4533</item>
+		<item>#94816b</item>
+		<item>#4f4b3d</item>
+		<item>#533d2d</item>
+		<item>#535347</item><!-- 60 -->
+		
+		<item>#a3a3a3</item>
+		<item>#a3a3a3</item>
+	</array>
+	
+	<string-array name="entryvalues_clipboard">
+		<item>0</item>
+		<item>1</item>
+  		<item>2</item>
+	</string-array>
+
+	<string-array name="entryvalues_sensitivity">
+		<item>500</item>
+		<item>1000</item>
+  		<item>1500</item>
+  		<item>2000</item>
+  		<item>2500</item>
+  		<item>3000</item>
+  		<item>3500</item>
+  		<item>4000</item>
+  		<item>4500</item>
+  		<item>5000</item>
+	</string-array>
+
+	<string-array name="entryvalues_columns">
+		<item>1</item>
+		<item>2</item>
+  		<item>3</item>
+	</string-array>
+	
+	<integer-array name="default_modifiers">
+	    <item>-3</item>
+	    <item>-2</item>
+	    <item>-1</item>
+	    <item>1</item>
+	    <item>2</item>
+	    <item>3</item>
+	</integer-array>
+	
+	<integer-array name="default_dice_icon">
+	    <item>1</item>
+	    <item>2</item>
+	    <item>3</item>
+	    <item>4</item>
+	    <item>5</item>
+	    <item>6</item>
+	    <item>7</item>
+	</integer-array>
+
+	<string-array name="default_dice_expr">
+	    <item>1d4</item>
+	    <item>1d6</item>
+	    <item>1d8</item>
+	    <item>1d10</item>
+	    <item>1d12</item>
+	    <item>1d20</item>
+	    <item>1d100</item>
+	</string-array>
+</resources>

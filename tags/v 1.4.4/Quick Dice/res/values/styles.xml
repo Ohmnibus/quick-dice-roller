@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	<style name="TextBase">
+		<item name="android:textColor">#ffffff</item>
+	</style>
+
+	<!-- Two column menu -->
+	<style name="Menu">
+	</style>
+
+	<style name="Menu.Row">
+	</style>
+
+	<style name="Menu.ItemBase">
+		<item name="android:paddingTop">5dp</item>
+		<item name="android:paddingBottom">5dp</item>
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:paddingRight">16dp</item>
+		
+		<item name="android:clickable">true</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">@android:color/primary_text_dark_nodisable</item>
+		<!-- item name="android:textColor">?android:attr/actionMenuTextColor</item --><!-- Valid since v.11 -->
+		<item name="android:background">@drawable/bg_clickable</item>
+	</style>
+
+	<style name="Menu.Item" parent="Menu.ItemBase">
+		<item name="android:textColor">?android:attr/textColorPrimaryDisableOnly</item>
+	</style>
+
+	<style name="Menu.Divider">
+		<item name="android:layout_width">0.75dp</item>
+		<item name="android:layout_height">match_parent</item>
+		
+		<item name="android:layout_marginTop">5dp</item>
+		<item name="android:layout_marginBottom">5dp</item>
+		
+		<item name="android:clickable">false</item>
+		<item name="android:background">?android:attr/listDivider</item>
+	</style>
+	
+	<!-- Result -->
+	<style name="Result" parent="TextBase">
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item>
+	</style>
+	
+	<style name="Result.Title">
+		<item name="android:textSize">18sp</item>
+	</style>
+
+	<style name="Result.Text">
+		<item name="android:textSize">12sp</item>
+	</style>
+
+	<style name="Result.Value">
+		<item name="android:textSize">24sp</item>
+		<item name="android:gravity">center</item>
+	</style>
+	
+	<!-- Generic Edit -->
+	<style name="Edit">
+	</style>
+
+	<style name="Edit.Icon">
+		<item name="android:padding">10dp</item>
+	</style>
+
+	<style name="Edit.ValueContainer">
+		<item name="android:paddingLeft">4dp</item>
+		<item name="android:paddingRight">10dp</item>
+	</style>
+
+	<style name="Edit.Label">
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:paddingRight">10dp</item>
+		<item name="android:paddingTop">10dp</item>
+		<item name="android:paddingBottom">2dp</item>
+		<item name="android:textSize">18sp</item>
+	</style>
+
+	<style name="Edit.Value">
+		<item name="android:maxLines">1</item>
+		<item name="android:ellipsize">end</item>
+		<item name="android:inputType">textNoSuggestions</item>
+		<item name="android:imeOptions">actionNext|flagNoExtractUi</item><!-- actionNext|flagNoExtractUi|flagForceAscii -->
+	</style>
+	
+	<!-- Separators -->
+	<style name="Separator">
+	</style>
+	
+	<style name="Separator.Horizontal">
+		<!-- <item name="android:width"></item> -->
+	</style>
+	
+	<style name="Spacer">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:layout_width">16dp</item>
+		<item name="android:layout_width">16dp</item>
+	</style>
+	
+	<!-- Generic Details -->
+	<style name="Details" parent="TextBase">
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item>
+		<item name="android:focusable">true</item>
+		<item name="android:focusableInTouchMode">true</item>
+	</style>
+	
+	<style name="Details.Label">
+		<item name="android:textColor">@android:color/secondary_text_dark</item>
+		<item name="android:textSize">14sp</item>
+	</style>
+
+	<style name="Details.Value">
+	    <item name="android:singleLine">false</item>
+		<item name="android:textColor">@android:color/primary_text_dark</item>
+		<item name="android:textSize">18sp</item>
+	</style>
+	
+	<!-- Generic Builder -->
+	<style name="Builder" parent="TextBase">
+		<!-- item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item -->
+	</style>
+	
+	<style name="Builder.Label">
+		<item name="android:paddingTop">4dp</item>
+		<item name="android:paddingBottom">4dp</item>
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:paddingRight">10dp</item>
+		<item name="android:textSize">18sp</item>
+	</style>
+
+	<style name="Builder.Label.Big">
+		<!-- <item name="android:paddingLeft">16dp</item> -->
+		<!-- <item name="android:paddingRight">16dp</item> -->
+		<item name="android:gravity">center</item>
+		<item name="android:textSize">24sp</item>
+	</style>
+
+	<style name="Builder.ValueContainer">
+		<item name="android:paddingLeft">9dp</item>
+		<item name="android:paddingRight">9dp</item>
+	</style>
+
+	<style name="Builder.Item.Label" parent="Edit.Label">
+		<!-- <item name="style">@style/Edit.Label</item> -->
+	</style>
+	
+	<style name="Builder.Item.Value" parent="Edit.Value">
+		<!-- <item name="style">@style/Edit.Value</item> -->
+	</style>
+
+	<!-- Dice Bag -->
+	<style name="DiceBagHandle">
+		<item name="android:visibility">visible</item>
+	</style>
+
+	<style name="DiceBag" parent="TextBase">
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item>
+	</style>
+	
+	<style name="DiceBagTitle" parent="DiceBag">
+		<item name="android:textSize">24sp</item>
+	</style>
+
+	<style name="DiceBagText" parent="DiceBag">
+		<item name="android:textSize">16sp</item>
+	</style>
+
+	<style name="DiceBagValue" parent="DiceBag">
+		<item name="android:textSize">24sp</item>
+		<item name="android:gravity">center</item>
+	</style>
+	
+	<!-- Dice -->
+	<style name="Dice">
+	</style>
+	
+	<style name="Dice.Icon">
+	</style>
+
+	<style name="Dice.Label">
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:textSize">@dimen/dice_name_single_line_size</item>
+		<item name="android:lineSpacingMultiplier">0.8</item>
+		
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item>
+		
+		<item name="android:textColor">@color/dice_number</item>
+		<item name="android:shadowRadius">true</item>
+		<item name="android:shadowColor">@android:color/black</item>
+		<item name="android:shadowDx">0</item>
+		<item name="android:shadowDy">0</item>
+		<item name="android:shadowRadius">1.8</item>
+	</style>
+		
+	<!-- File Picker -->
+	<style name="FolderItem" parent="Result">
+	</style>
+	
+	<style name="FolderItem.Name" parent="Result.Title">
+	</style>
+
+	<style name="FolderItem.Description" parent="Result.Text">
+	</style>
+</resources>
