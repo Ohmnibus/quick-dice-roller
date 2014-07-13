@@ -9,27 +9,17 @@
 	>
 
 	<!-- The main content view -->
-	<RelativeLayout
+	<RelativeLayout style="?attr/ohmMainAppContainer"
 		android:id="@+id/mRoot"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="@drawable/bg_wood"
 		>
 
-		<ImageView 
-			android:id="@+id/mBgLogo"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			
-			android:layout_centerHorizontal="true"
-			android:layout_centerVertical="true"
-			
-			android:src="@drawable/bg_logo"
+		<ImageView style="?attr/ohmLokLogoEmboss"
 			android:contentDescription="@string/app_name"
 			/>
 		
-		<ImageView 
-			style="@style/DiceBagHandle"
+		<ImageView style="@style/DiceBagHandle"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			
@@ -41,7 +31,7 @@
 			android:contentDescription="@string/app_name"
 			/>
 
-		<RelativeLayout
+		<RelativeLayout style="?attr/ohmLastRollContainer"
 			android:id="@+id/mLastRollContainer"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -50,14 +40,11 @@
 			android:layout_alignParentTop="true"
 			
 			android:layout_marginLeft="@dimen/left_margin_for_handle"
-			android:padding="5dp"
-	
-			android:background="@drawable/bg_last_result"
 			>
 			
 			<include
 				android:id="@+id/mLastRoll"
-				android:layout_width="wrap_content"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				
 				android:layout_alignParentLeft="true"
@@ -124,7 +111,7 @@
 			app:secondContent="@+id/mDiceSet"
 			>
 			
-			<GridView
+			<GridView style="?attr/ohmRollListContainer"
 				android:id="@+id/mRollList"
 				
 				android:layout_width="fill_parent"
@@ -135,12 +122,9 @@
 				app:minSize="0dp"
 
 				android:numColumns="1"
-				android:stretchMode="columnWidth"
-				android:gravity="center"
+				/>
 
-				android:cacheColorHint="#00000000" />
-
-			<ImageView
+			<!-- <ImageView
 				android:id="@+id/mHandle"
 				
 				android:layout_width="fill_parent"
@@ -148,37 +132,44 @@
 				
 				android:background="@drawable/ic_handle_hori"
 				android:contentDescription="@string/lblDragToResize"
+				/> -->
+			<ImageView style="?attr/ohmResizeHandleHorizontal"
+				android:id="@+id/mHandle"
+				
+				android:src="@drawable/ic_handle_img_hori"
+				android:contentDescription="@string/lblDragToResize"
 				/>
 			
-			<GridView
+			<GridView style="?attr/ohmDiceGridContainer"
 				android:id="@+id/mDiceSet"
 
 				android:layout_width="fill_parent"
 				android:layout_height="142dp"
 
 				app:minSize="68dp"
-
-				android:columnWidth="72dp"
-				android:numColumns="auto_fit"
-				android:verticalSpacing="4dp"
-				android:horizontalSpacing="4dp"
-				android:stretchMode="columnWidth"
-				android:gravity="center"
-				android:cacheColorHint="#00000000"
-
-				android:background="@drawable/bg_dice_grid"
 				>
 			</GridView>
 		</ohm.library.widget.SplitView>
+		
+		<!-- <include
+			layout="@layout/inc_undo_bar"
 			
-		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			
+			android:layout_alignParentLeft="true"
+			android:layout_alignWithParentIfMissing="true"
+			android:layout_above="@+id/mModifierContainer"
+			/> -->
+			
+		<RelativeLayout style="?attr/ohmModifiersContainer"
 			android:id="@+id/mModifierContainer"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentBottom="true"
 			android:layout_marginLeft="@dimen/left_margin_for_handle"
-			android:background="@drawable/bg_dice_grid" >
+			>
 			
 			<HorizontalScrollView
 				tools:ignore="UselessParent"
@@ -212,17 +203,14 @@
 	</RelativeLayout>
 	
 	<!-- The navigation drawer -->
-	<ListView android:id="@+id/mDiceBagList"
+	<ListView style="?attr/ohmDiceBagDrawer"
+		android:id="@+id/mDiceBagList"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_marginRight="@dimen/right_margin_keep_clean"
-		android:layout_gravity="start"
+		android:layout_gravity="left"
 		
 		android:choiceMode="singleChoice"
-		android:divider="@android:color/transparent"
-		android:dividerHeight="0dp"
-		
-		android:background="@drawable/bg_wood"
-		android:cacheColorHint="#00000000" />
+		/>
 	
 </android.support.v4.widget.DrawerLayout>

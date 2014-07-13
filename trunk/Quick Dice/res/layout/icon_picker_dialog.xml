@@ -12,6 +12,6 @@
     android:stretchMode="columnWidth"
     android:gravity="center"
     android:cacheColorHint="#00000000"
-    android:listSelector="@drawable/bg_last_result_focus" >
+    android:listSelector="@drawable/bg_selector_state_focus" >
 
 </GridView>

@@ -57,7 +57,6 @@ public class EditBagActivity extends BaseActivity {
 	protected ImageButton ibtIconPicker;
 	protected EditText txtName;
 	protected EditText txtDescription;
-	//protected Gallery glrResourceIndex;
 	protected Button confirm;
 	protected Button cancel;
 	protected boolean textChanged;
@@ -66,34 +65,37 @@ public class EditBagActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		setTheme(QuickDiceApp.getInstance().getPreferences().getDialogThemeResId());
+		
 		super.onCreate(savedInstanceState);
 
 		if (savedInstanceState != null) {
 			bag = (DiceBag) savedInstanceState.getSerializable(KEY_DICEBAG);
 			position = savedInstanceState.getInt(KEY_POSITION);
-        	initViews(
-        			bag == null,
-        			savedInstanceState.getString(KEY_NAME),
-        			savedInstanceState.getString(KEY_DESCRIPTION),
-        			savedInstanceState.getInt(KEY_RES_INDEX));
-    		initialResIndex = savedInstanceState.getInt(KEY_INITIAL_RES_INDEX);
-        	textChanged = savedInstanceState.getBoolean(KEY_TEXT_CHANGED);
+			initViews(
+					bag == null,
+					savedInstanceState.getString(KEY_NAME),
+					savedInstanceState.getString(KEY_DESCRIPTION),
+					savedInstanceState.getInt(KEY_RES_INDEX));
+			initialResIndex = savedInstanceState.getInt(KEY_INITIAL_RES_INDEX);
+			textChanged = savedInstanceState.getBoolean(KEY_TEXT_CHANGED);
 		} else {
 			Bundle extras = getIntent().getExtras();
-	        if (extras != null) {
-	        	req = extras.getInt(BUNDLE_REQUEST_TYPE);
-	        	if (req == ACTIVITY_EDIT) {
-	        		bag = (DiceBag)extras.getSerializable(BUNDLE_DICE_BAG);
-	        	} else {
-	        		bag = null;
-	        	}
-	        	if (extras.containsKey(BUNDLE_POSITION)) {
-	        		position = extras.getInt(BUNDLE_POSITION);
-	        	} else {
-	        		position = POSITION_UNDEFINED;
-	        	}
-	        }
-	        initViews(bag);
+			if (extras != null) {
+				req = extras.getInt(BUNDLE_REQUEST_TYPE);
+				if (req == ACTIVITY_EDIT) {
+					bag = (DiceBag)extras.getSerializable(BUNDLE_DICE_BAG);
+				} else {
+					bag = null;
+				}
+				if (extras.containsKey(BUNDLE_POSITION)) {
+					position = extras.getInt(BUNDLE_POSITION);
+				} else {
+					position = POSITION_UNDEFINED;
+				}
+			}
+			initViews(bag);
 		}
 	}
 
@@ -120,49 +122,40 @@ public class EditBagActivity extends BaseActivity {
 		super.onSaveInstanceState(outState);
 	}
 
-    private void initViews(DiceBag db) {
-    	bag = db;
-    	
-    	if (db == null) {
-        	initViews(
-        			true, 
-        			"", 
-        			"", 
-        			0);
-    		initialResIndex = 0;
-        	textChanged = false;
-    	} else {
-        	initViews(
-        			false,
-        			db.getName(),
-        			db.getDescription(),
-        			db.getResourceIndex());
-    		initialResIndex = bag.getResourceIndex();
-        	textChanged = false;
-    	}
-    }
-    
-    private void initViews(boolean isNew, String name, String description, int resIndex) {
-		//if (QuickDiceApp.getInstance().getPlainBackground()) {
-	    //	setContentView(R.layout.edit_bag_activity_light);
-		//} else {
-	    //	setContentView(R.layout.edit_bag_activity);
-		//}
-    	setContentView(R.layout.edit_bag_activity);
-		if (QuickDiceApp.getInstance().getPreferences().getPlainBackground()) {
-			findViewById(R.id.ebBgLogo).setVisibility(View.GONE); //Remove the logo
-			findViewById(R.id.ebRoot).setBackgroundResource(R.color.main_bg); //Remove the background
+	private void initViews(DiceBag db) {
+		bag = db;
+
+		if (db == null) {
+			initViews(
+					true, 
+					"", 
+					"", 
+					0);
+			initialResIndex = 0;
+			textChanged = false;
+		} else {
+			initViews(
+					false,
+					db.getName(),
+					db.getDescription(),
+					db.getResourceIndex());
+			initialResIndex = bag.getResourceIndex();
+			textChanged = false;
 		}
-    	
-    	if (isNew) {
-    		setTitle(R.string.mnuAddDiceBag);
-    	} else {
-    		setTitle(R.string.mnuEditDiceBag);
-    	}
-    	
-    	ibtIconPicker = (ImageButton)findViewById(R.id.ebIconPicker);
-    	ibtIconPicker.setOnClickListener(iconPickerClickListener);
-    	
+	}
+
+	private void initViews(boolean isNew, String name, String description, int resIndex) {
+		setContentView(R.layout.edit_bag_activity);
+
+		if (isNew) {
+			setTitle(R.string.mnuAddDiceBag);
+		} else {
+			setTitle(R.string.mnuEditDiceBag);
+		}
+
+		ibtIconPicker = (ImageButton)findViewById(R.id.ebIconPicker);
+		ibtIconPicker.setOnClickListener(iconPickerClickListener);
+
 		txtName = (EditText) findViewById(R.id.ebNameText);
 		txtName.setText(name);
 		txtName.addTextChangedListener(genericTextWatcher);
@@ -171,23 +164,19 @@ public class EditBagActivity extends BaseActivity {
 		txtDescription.setText(description);
 		txtDescription.addTextChangedListener(genericTextWatcher);
 		
-//    	glrResourceIndex = (Gallery) findViewById(R.id.ebIconGallery);
-//    	glrResourceIndex.setAdapter(new IconAdapter(this));
-//    	glrResourceIndex.setSelection(resIndex);
-		
 		initialResIndex = resIndex;
 		currentResIndex = resIndex;
-    	textChanged = false;
-    	
-    	setCurrentIcon();
+		textChanged = false;
 
-    	confirm = (Button) findViewById(R.id.btuBarConfirm);
-    	confirm.setOnClickListener(confirmCancelClickListener);
-    	cancel = (Button) findViewById(R.id.btuBarCancel);
-    	cancel.setOnClickListener(confirmCancelClickListener);
-    }
-    
-    private TextWatcher genericTextWatcher = new TextWatcher() {
+		setCurrentIcon();
+
+		confirm = (Button) findViewById(R.id.btuBarConfirm);
+		confirm.setOnClickListener(confirmCancelClickListener);
+		cancel = (Button) findViewById(R.id.btuBarCancel);
+		cancel.setOnClickListener(confirmCancelClickListener);
+	}
+
+	private TextWatcher genericTextWatcher = new TextWatcher() {
 		
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -202,7 +191,7 @@ public class EditBagActivity extends BaseActivity {
 		public void afterTextChanged(Editable s) {
 		}
 	};
-    
+
 	//Listener to the confirm and cancel button click
 	private OnClickListener confirmCancelClickListener = new OnClickListener() {
 		@Override
@@ -257,10 +246,6 @@ public class EditBagActivity extends BaseActivity {
 
 	protected DiceBag readDiceBag() {
 		DiceBag retVal;
-		//EditText txt;
-		//Gallery gallery;
-		
-		//txt = (EditText) findViewById(R.id.ebNameText);
 		
 		if (txtName.getText().toString().trim().length() == 0) {
 			txtName.requestFocus();
@@ -271,17 +256,13 @@ public class EditBagActivity extends BaseActivity {
 				retVal = bag;
 			} else {
 				//This should be a call for adding a dice bag.
-				//retVal = ((QuickDiceApp)getApplication()).initDiceBag();
-				//retVal = ((QuickDiceApp)getApplication()).getBagManager().initDiceBag();
 				retVal = ((QuickDiceApp)getApplication()).getBagManager().getNewDiceBag();
 			}
 			
 			retVal.setName(txtName.getText().toString().trim());
 
-			//txt = (EditText) findViewById(R.id.ebDescText);
 			retVal.setDescription(txtDescription.getText().toString());
 			
-			//gallery = (Gallery) findViewById(R.id.ebIconGallery);
 			retVal.setResourceIndex(currentResIndex);
 		}
 		
@@ -305,23 +286,23 @@ public class EditBagActivity extends BaseActivity {
 	
 	private void askDropChanges() {
 		AlertDialog.Builder builder;
-    	builder = new AlertDialog.Builder(this);
-    	builder.setTitle(this.getTitle());
-    	builder.setMessage(R.string.msgLostChange);
-    	builder.setPositiveButton(
-    			R.string.lblYes,
-    			new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    					returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
-    				}
-    	       });
-    	builder.setNegativeButton(
-    			R.string.lblNo,
-    			new DialogInterface.OnClickListener() {
+		builder = new AlertDialog.Builder(this);
+		builder.setTitle(this.getTitle());
+		builder.setMessage(R.string.msgLostChange);
+		builder.setPositiveButton(
+				R.string.lblYes,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
+					}
+				});
+		builder.setNegativeButton(
+				R.string.lblNo,
+				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
-    	       });
-    	builder.create().show();
+				});
+		builder.create().show();
 	}
 }

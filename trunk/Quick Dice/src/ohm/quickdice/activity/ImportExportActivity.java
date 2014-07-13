@@ -68,6 +68,9 @@ public class ImportExportActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		setTheme(QuickDiceApp.getInstance().getPreferences().getDialogThemeResId());
+		
 		super.onCreate(savedInstanceState);
 		
 		config = PreferenceManager.getDefaultSharedPreferences(this);
@@ -77,15 +80,11 @@ public class ImportExportActivity extends BaseActivity {
 		//graphicManager = new Graphic(getResources());
 		graphicManager = QuickDiceApp.getInstance().getGraphic();
 		
-        initViews();
+		initViews();
 	}
 
 	private void initViews() {
 		setContentView(R.layout.import_export_activity);
-		if (QuickDiceApp.getInstance().getPreferences().getPlainBackground()) {
-			findViewById(R.id.ieBgLogo).setVisibility(View.GONE); //Remove the logo
-			findViewById(R.id.ieRoot).setBackgroundResource(R.color.main_bg); //Remove the background
-		}
 		
 		lstRecentFiles = (ListView)findViewById(R.id.eiRecentList);
 		lstRecentFiles.setAdapter(new MostRecentFilesAdapter(
@@ -112,6 +111,7 @@ public class ImportExportActivity extends BaseActivity {
 		btuCancel.setOnClickListener(cancelClickListener);
 		
 		findViewById(R.id.btuBarConfirm).setVisibility(View.GONE);
+		//findViewById(R.id.vwDivider).setVisibility(View.GONE);
 	}
 	
 	OnItemClickListener recentFileClickListener = new OnItemClickListener() {
@@ -171,7 +171,7 @@ public class ImportExportActivity extends BaseActivity {
 		case FilePickerActivity.ACTIVITY_NEW_FILE:
 			if (resultCode == FilePickerActivity.RESULT_OK) {
 				//File name choose. Need to export.
-		        doExport(getPath(data));
+				doExport(getPath(data));
 			}
 			break;
 		}
@@ -186,30 +186,30 @@ public class ImportExportActivity extends BaseActivity {
 	
 	protected String getPath(Intent intent) {
 		Bundle extras = intent.getExtras();
-        return extras.getString(FilePickerActivity.BUNDLE_RESULT_PATH);
+		return extras.getString(FilePickerActivity.BUNDLE_RESULT_PATH);
 	}
 	
 	private void doExport(String path) {
 		//Check extension
-        java.io.File test = new java.io.File(path);
-        if (! test.getName().endsWith(FILE_EXTENSION)) {
-//        	if (! path.endsWith(".")) {
-//        		path = path + ".";
-//        	}
-        	path = path + FILE_EXTENSION;
-        }
-        QuickDiceApp app = QuickDiceApp.getInstance();
-        if (app.getBagManager().exportAll(path)) {
-        	//Save this entry to list (or bring it to top)
-	        MostRecentFile mru = createRecentFileInstance(path, app);
-	        updateRecentFileList(mru);
-	        saveRecentFiles(recentFiles);
-        } else {
-        	//This path is no good, remove from list.
-        	removeFromRecentFileList(path);
-        	saveRecentFiles(recentFiles);
-        }
-        
+		java.io.File test = new java.io.File(path);
+		if (! test.getName().endsWith(FILE_EXTENSION)) {
+//			if (! path.endsWith(".")) {
+//				path = path + ".";
+//			}
+			path = path + FILE_EXTENSION;
+		}
+		QuickDiceApp app = QuickDiceApp.getInstance();
+		if (app.getBagManager().exportAll(path)) {
+			//Save this entry to list (or bring it to top)
+			MostRecentFile mru = createRecentFileInstance(path, app);
+			updateRecentFileList(mru);
+			saveRecentFiles(recentFiles);
+		} else {
+			//This path is no good, remove from list.
+			removeFromRecentFileList(path);
+			saveRecentFiles(recentFiles);
+		}
+
 		returnToCaller(RESULT_EXPORT);
 	}
 	
@@ -217,40 +217,40 @@ public class ImportExportActivity extends BaseActivity {
 		//String path = getPath(data);
 		final String importPath = path;
 
-        //Confirm operation
-        AlertDialog.Builder builder;
-    	builder = new AlertDialog.Builder(this);
-    	builder.setTitle(this.getTitle());
-    	builder.setMessage(R.string.msgConfirmImport);
-    	builder.setPositiveButton(
-    			R.string.lblYes,
-    			new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int id) {
-    			        QuickDiceApp app = QuickDiceApp.getInstance();
-    			        if (app.getBagManager().importAll(importPath)) {
-    			        	//Save this entry to list (or bring it to top)
-    				        MostRecentFile mru = createRecentFileInstance(importPath, app);
-    				        updateRecentFileList(mru);
-    				        saveRecentFiles(recentFiles);
-    				        
-    			        	returnToCaller(RESULT_IMPORT);
-    			        } else {
-    			        	//This path is no good, remove from list.
-    			        	removeFromRecentFileList(importPath);
-    			        	saveRecentFiles(recentFiles);
-    			        	
-    			        	returnToCaller(RESULT_IMPORT_FAILED);
-    			        }
-    				}
-    	       });
-    	builder.setNegativeButton(
-    			R.string.lblNo,
-    			new DialogInterface.OnClickListener() {
+		//Confirm operation
+		AlertDialog.Builder builder;
+		builder = new AlertDialog.Builder(this);
+		builder.setTitle(this.getTitle());
+		builder.setMessage(R.string.msgConfirmImport);
+		builder.setPositiveButton(
+				R.string.lblYes,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						QuickDiceApp app = QuickDiceApp.getInstance();
+						if (app.getBagManager().importAll(importPath)) {
+							//Save this entry to list (or bring it to top)
+							MostRecentFile mru = createRecentFileInstance(importPath, app);
+							updateRecentFileList(mru);
+							saveRecentFiles(recentFiles);
+
+							returnToCaller(RESULT_IMPORT);
+						} else {
+							//This path is no good, remove from list.
+							removeFromRecentFileList(importPath);
+							saveRecentFiles(recentFiles);
+
+							returnToCaller(RESULT_IMPORT_FAILED);
+						}
+					}
+				});
+		builder.setNegativeButton(
+				R.string.lblNo,
+				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
-    	       });
-    	builder.create().show();
+				});
+		builder.create().show();
 	}
 	
 	private void removeFromRecentFileList(String path) {
