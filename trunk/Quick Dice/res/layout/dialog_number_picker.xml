@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/Builder.ValueContainer"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" >
+	
+	<TextView style="@style/Builder.Label"
+		android:id="@+id/lblMessage"
+		
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		
+		android:text="@string/app_name"
+		/>
+	 
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/lblMessage"
+		>
+		
+		<!-- Modifier Sign -->
+		<kankan.wheel.widget.WheelView
+			android:id="@+id/wheelSign"
+			
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			
+			android:layout_height="wrap_content"
+			android:layout_width="64dp"
+			/>
+		
+		<!-- Modifier tens -->
+		<kankan.wheel.widget.WheelView
+			android:id="@+id/wheelTens"
+			
+			android:layout_toRightOf="@+id/wheelSign"
+			android:layout_alignParentTop="true"
+			
+			android:layout_height="wrap_content"
+			android:layout_width="64dp"
+			/>
+		
+		<!-- Modifier units -->
+		<kankan.wheel.widget.WheelView
+			android:id="@+id/wheelUnits"
+			
+			android:layout_toRightOf="@+id/wheelTens"
+			android:layout_alignParentTop="true"
+			
+			android:layout_height="wrap_content"
+			android:layout_width="64dp"
+			/>
+	</RelativeLayout>
+	
+</RelativeLayout>

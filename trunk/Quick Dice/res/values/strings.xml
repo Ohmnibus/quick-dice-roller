@@ -22,6 +22,7 @@
 	<string name="lblIconPicker">Icon Picker</string>
 	<string name="lblDiceIconPicker">Dice icon Picker</string>
 	<string name="lblBagIconPicker">Bag icon Picker</string>
+	<string name="lblVariableIconPicker">Named value icon Picker</string>
 	<string name="lblModifierBuilder">Mod Builder</string>
 	<string name="lblModifierBuilderMessage">Compose a modifier.</string>
 	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier? Don\'t think so.</string>
@@ -53,7 +54,24 @@
 	<string name="lblDragToResize">Drag to resize</string>
 	<string name="lblQuality">Result quality</string>
 	<string name="lblResultQualityRange">Result, quality, range</string>
-
+	<string name="lblNameVar">Name</string>
+	<string name="hintNameVar">Value\'s name</string>
+	<string name="lblDescVar">Description</string>
+	<string name="hintDescVar">Value\'s description</string>
+	<string name="lblLabelVar">Label</string>
+	<string name="hintLabelVar">Label to use in expressions</string>
+	<string name="lblMinVar">Minimum</string>
+	<string name="lblCurVar">Current</string>
+	<string name="lblMaxVar">Maximum</string>
+	<string name="lblLabelValueVar">Label: Value (Min - Max)</string>
+	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s - %4$s)</string>
+	<string name="lblDiceBags">Dice bags</string>
+	<string name="lblVariables">Named values</string>
+	<string name="lblNumberPicker">Number picker</string>
+	<string name="lblSelectValue">Select a value.</string>
+	<string name="lblSelectMinValue">Select the lower bound for this named value.</string>
+	<string name="lblSelectMaxValue">Select the upper bound for this named value.</string>
+	
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
 	<string name="lblKb">Kb</string><!-- Short for Kilobyte -->
@@ -64,6 +82,7 @@
 	<string name="lblYes">Yes</string>
 	<string name="lblNo">No</string>
 	<string name="lblOk">OK</string>
+	<string name="lblDone">Done</string>
 	
 	<string name="lblUndo">UNDO</string>
 
@@ -72,9 +91,12 @@
 	<string name="msgClearResultsTitle">Clear results</string>
 	<string name="msgClearResults">Are you sure to clear all the roll results?</string>
 	<string name="msgLostChange">Leaving now you will lose pending changes. Continue?</string>
+	<string name="msgMissingVar">The dice requires some named values that are no longer available: \"%1$s\"\nThe dice cannot be rolled until the named values are added to the dice bag. Save anyway?</string>
+	<!-- <string name="msgMissingVar">These Named Values was not found in this dice bag: %1$s\nThis dice cannot properly work without them. Save anyway?</string> -->
 
 	<string name="msgRemoveDiceBagTitle">Remove dice bag</string>
 	<string name="msgRemoveDiceBag">Are you sure to definitively remove the dice bag \"%1$s\"? It contains \"%2$d\" dice and \"%3$d\" modifiers. All those items will be lost in time, like tears in rain.</string>
+	<string name="msgRemoveDiceBagNew">Are you sure to definitively remove the dice bag \"%1$s\"? It contains \"%2$d\" dice, \"%3$d\" named values and \"%4$d\" modifiers. All those items will be lost in time, like tears in rain.</string>
 	
 	<string name="msgWhatsNew">What\'s new</string>
 	<string name="msgWhatsNewTitle">What\'s new in version %2$s</string>
@@ -84,6 +106,7 @@
 <br />
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />
+&bull; Variable named values usable in expressions<br />
 &bull; Select from 4 different themes<br />
 &bull; Improved layout<br />
 &bull; Minor fix and improvements<br />
@@ -156,6 +179,7 @@ Thanks!<br />]]></string>
 	<string name="msgMaxBagsReach">You can\'t add more dice bags.</string>
 	<string name="msgMaxDiceReach">You can\'t add more dice.</string>
 	<string name="msgMaxModifiersReach">You can\'t add more modifiers.</string>
+	<string name="msgMaxVariablesReach">You can\'t add more named values.</string>
 	<string name="msgOnlineHelpTitle">Quick reference</string>
 	<string name="msgOnlineHelp">Check Online Help</string>
 	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02</string>
@@ -165,7 +189,10 @@ Thanks!<br />]]></string>
 	<string name="msgExported">Dice definitions exported</string>
 	<string name="msgImported">Dice definitions imported</string>
 	<string name="msgConfirmImport">This operation will overwrite all dice definitions. Are you sure you want to proceed?</string>
-				
+	<string name="msgRemoveVar">Are you sure to definitively remove the value named \"%1$s\"?</string>
+	<string name="msgRemoveUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it this dice won\'t work anymore. Continue anyway?</string>
+	<string name="msgRemoveMultiUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it these dice won\'t work anymore. Continue anyway?</string>
+
 	<string name="mnuAddDice">Add die</string>
 	<string name="mnuAddDiceHere">Add die here</string>
 	<string name="mnuClearAllResults">Clear all results</string>
@@ -197,7 +224,13 @@ Thanks!<br />]]></string>
 	<string name="mnuRemoveDiceBag">Remove dice bag</string>
 	<string name="mnuImportExport">Import / Export</string>
 	<string name="mnuCloneDiceBag">Clone dice bag</string>
-			
+	<string name="mnuAddVariable">Add named value</string>
+	<string name="mnuEditVariable">Edit named value</string>
+	<string name="mnuRemoveVariable">Remove named value</string>
+	<string name="mnuAddVariableHere">Add named value here</string>
+	<string name="mnuMoveVariableTo">Move named value to&#8230;</string>
+	<string name="mnuSelectVariable">Select named value</string>
+		
 	<!-- Functions -->
 	<string name="fncBASHName">BASH!</string>
 	<string name="fncBASHDesc">Makes a check using BASH! rules.</string>
@@ -437,6 +470,10 @@ Thanks!<br />]]></string>
 	<string name="err_cannot_export">Cannot export the dice definitions.</string>
 	<string name="err_cannot_import">Cannot import the dice definitions.</string>
 	<string name="err_storage_not_found">External storage not found.</string>
+	<string name="err_var_name_required">Value\'s name is required.</string>
+	<string name="err_var_label_required">Value\'s label is required and should be 2 to 5 characters long.</string>
+	<string name="err_var_label_invalid_char">Value\'s label should be composed only of alphabetic characters.</string>
+	<string name="err_var_label_exists">Value\'s label should be unique but \"%1$s\" is already used by the Named Value \"%2$s\".</string>
 
 	<!-- Exceptions -->
 	<string name="exc_generic">The expression cannot be evaluated.</string>

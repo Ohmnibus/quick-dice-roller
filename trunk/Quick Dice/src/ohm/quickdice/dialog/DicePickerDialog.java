@@ -35,20 +35,20 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 	int curItem;
 	int requestType;
 	ReadyListener readyListener;
-	
+
 	ExpandableListView expListView;
 
 	public interface ReadyListener {
-        public void ready(boolean confirmed, int groupId, int itemId);
-    }
+		public void ready(boolean confirmed, int groupId, int itemId);
+	}
 
 	public DicePickerDialog(Context context, ReadyListener readyListener) {
 		this(context, DIALOG_SELECT_DICE, readyListener);
-    }
+	}
 
 	public DicePickerDialog(Context context, int requestType, ReadyListener readyListener) {
 		this(context, R.string.lblSelectDice, GROUP_UNDEFINED, ITEM_UNDEFINED, requestType, readyListener);
-    }
+	}
 
 	public DicePickerDialog(Context context, int titleId, int currentGroup, int currentItem, int requestType, ReadyListener readyListener) {
 		super(context);
@@ -63,56 +63,56 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-        View mView = getLayoutInflater().inflate(R.layout.dice_picker_dialog, null);
-        
-        setView(mView);
-		
-        setTitle(this.titleId);
-		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-        setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
-        
-        super.onCreate(savedInstanceState);
+		View mView = getLayoutInflater().inflate(R.layout.dice_picker_dialog, null);
 
-        initViews();
+		setView(mView);
+
+		setTitle(this.titleId);
+		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
+		setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
+
+		super.onCreate(savedInstanceState);
+
+		initViews();
 	}
 
 	private void initViews() {
 
-        DiceBagManager diceBagManager = QuickDiceApp.getInstance().getBagManager();
-        
-        expListView = (ExpandableListView)findViewById(R.id.expListView);
-        if (requestType == DIALOG_SELECT_DESTINATION) {
-	        expListView.setAdapter(new ExpDiceBagAdapterDest(
-	        		context,
-	        		R.layout.dice_picker_group,
-	        		R.layout.dice_picker_item,
-	        		diceBagManager.getDiceBags()));
-        } else {
-	        expListView.setAdapter(new ExpDiceBagAdapter(
-	        		context,
-	        		R.layout.dice_picker_group,
-	        		R.layout.dice_picker_item,
-	        		diceBagManager.getDiceBags()));
-        }
-        expListView.setGroupIndicator(null);
-        if (curGroup != GROUP_UNDEFINED) {
-        	expListView.expandGroup(curGroup);
-        	if (curItem != ITEM_UNDEFINED) {
-            	//expListView.setSelectedChild(curGroup, curItem, true);
-    		    selectItem(expListView, curGroup, curItem);
-        	}
-        } else {
-        	expListView.expandGroup(diceBagManager.getCurrentDiceBag());
-        	//expListView.setSelectedChild(curGroup, curItem, true);
-        }
-        expListView.setOnChildClickListener(expListItemClickListener);
-		
-        getWindow().setLayout(
-        		WindowManager.LayoutParams.WRAP_CONTENT,
-        		WindowManager.LayoutParams.WRAP_CONTENT);
+		DiceBagManager diceBagManager = QuickDiceApp.getInstance().getBagManager();
+
+		expListView = (ExpandableListView)findViewById(R.id.expListView);
+		if (requestType == DIALOG_SELECT_DESTINATION) {
+			expListView.setAdapter(new ExpDiceBagAdapterDest(
+					context,
+					R.layout.dice_picker_group,
+					R.layout.dice_picker_item,
+					diceBagManager.getDiceBagCollection()));
+		} else {
+			expListView.setAdapter(new ExpDiceBagAdapter(
+					context,
+					R.layout.dice_picker_group,
+					R.layout.dice_picker_item,
+					diceBagManager.getDiceBagCollection()));
+		}
+		expListView.setGroupIndicator(null);
+		if (curGroup != GROUP_UNDEFINED) {
+			expListView.expandGroup(curGroup);
+			if (curItem != ITEM_UNDEFINED) {
+				//expListView.setSelectedChild(curGroup, curItem, true);
+				selectItem(expListView, curGroup, curItem);
+			}
+		} else {
+			expListView.expandGroup(diceBagManager.getCurrentIndex());
+			//expListView.setSelectedChild(curGroup, curItem, true);
+		}
+		expListView.setOnChildClickListener(expListItemClickListener);
+
+		getWindow().setLayout(
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.WRAP_CONTENT);
 	}
 
-	
+
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		if (readyListener != null) {
@@ -124,19 +124,19 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 		}
 		dismiss();
 	}
-	
+
 	ExpandableListView.OnChildClickListener expListItemClickListener = new OnChildClickListener() {
-		
+
 		@Override
 		public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 			curGroup = groupPosition;
 			curItem = childPosition;
 			//parent.setSelectedChild(curGroup, curItem, true);
-		    selectItem(parent, curGroup, curItem);
+			selectItem(parent, curGroup, curItem);
 			return true;
 		}
 	};
-	
+
 	protected void selectItem(ExpandableListView expList, int group, int item) {
 		long packedPosition = ExpandableListView.getPackedPositionForChild(group, item);
 		int position = expList.getFlatListPosition(packedPosition);

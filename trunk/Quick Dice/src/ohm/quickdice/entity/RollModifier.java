@@ -1,23 +1,17 @@
 package ohm.quickdice.entity;
 
-import java.io.Serializable;
-
 import ohm.quickdice.R;
 import ohm.quickdice.control.GraphicManager;
 
 import android.content.Context;
 
-public class RollModifier implements Serializable {
-
-	/**
-	 * Serial version UID used for serialization.
-	 */
-	private static final long serialVersionUID = -3803118813957250472L;
+public class RollModifier {
 
 	protected String title;
 	protected String description;
 	protected int value;
 	protected int resourceIndex;
+	protected DiceBag parent;
 	
 	public RollModifier(Context context, int value) {
 		if (value < 0) {
@@ -63,5 +57,23 @@ public class RollModifier implements Serializable {
 	
 	public int getResourceIndex() {
 		return resourceIndex;
+	}
+	
+	public DiceBag getParent() {
+		return parent;
+	}
+
+	protected void setParent(DiceBag parent) {
+		this.parent = parent;
+	}
+
+	public boolean isChanged() {
+		return parent == null ? false : parent.isChanged();
+	}
+
+	protected void setChanged() {
+		if (parent != null) {
+			parent.setChanged();
+		}
 	}
 }

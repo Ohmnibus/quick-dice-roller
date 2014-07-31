@@ -9,7 +9,8 @@
 		<item>9</item><!-- 5 digits or more -->
 	</integer-array>
 
-	<dimen name="frame_border_size">2dp</dimen>
+	<!-- <dimen name="frame_border_size">2dp</dimen> -->
+	<dimen name="frame_border_size">0dp</dimen>
 	<dimen name="frame_padding_size">2dp</dimen>
 	
 	<dimen name="handle_size">24dp</dimen>
@@ -35,8 +36,8 @@
 	<dimen name="roll_toast_icon_size">64dp</dimen>
 	<dimen name="roll_toast_base_font_size">24dp</dimen><!-- Same as 2 digit font size -->
 
-	<dimen name="left_margin_for_handle">5dp</dimen>
-	<dimen name="right_margin_keep_clean">0dp</dimen>
-	<dimen name="right_margin_keep_clean_land">160dp</dimen><!-- Should be the same size as dice grid width -->
-	<dimen name="open_drawer_size">260dp</dimen>
+	<dimen name="drawer_margin_for_handle">5dp</dimen>
+	<dimen name="drawer_margin_keep_clean">0dp</dimen>
+	<dimen name="drawer_margin_keep_clean_land">160dp</dimen><!-- Should be the same size as dice grid width -->
+	<dimen name="drawer_open_size">260dp</dimen>
 </resources>

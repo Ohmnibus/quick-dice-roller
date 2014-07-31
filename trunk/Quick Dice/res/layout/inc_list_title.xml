@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/ListTitle.Container"
+	>
+	
+	<TextView style="@style/ListTitle.Text"
+		android:id="@+id/lblTitle"
+		
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/lblDiceBags"
+		/>
+	
+	<View style="@style/ListTitle.Divider"
+		/>
+</RelativeLayout>

@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.LoopDetected;
@@ -30,7 +30,7 @@ public class TokenFunctionBASH extends TokenFunction {
 	 * evaluated again. The result is equal to the sum of all outcome.
 	 */
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		TokenBase tokenRollNum = getChild(1);
 		TokenBase roll = getChild(2);
 		long topThreshold;

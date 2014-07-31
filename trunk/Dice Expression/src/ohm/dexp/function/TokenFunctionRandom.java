@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.Dice;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
@@ -23,7 +23,7 @@ public class TokenFunctionRandom extends TokenFunction {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 
 		TokenBase lChild = getChild(1);
 		TokenBase rChild = getChild(2);

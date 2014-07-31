@@ -2,11 +2,11 @@ package ohm.quickdice.dialog;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.PopupMenu;
-import ohm.dexp.DExpression;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.DParseException;
 import ohm.quickdice.R;
 import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
+import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.FunctionDescriptor;
 import ohm.quickdice.entity.FunctionDescriptor.ParamDescriptor;
 import ohm.quickdice.util.Helper;
@@ -24,57 +24,57 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FunctionBuilderDialog extends BuilderDialogBase {
-	
+
 	FunctionDescriptor fncDesc;
-	
+
 	ViewGroup paramContainer;
 	EditText[] txtParamArray;
-	
+
 	public FunctionBuilderDialog(Context context, View view, FunctionDescriptor functionDescriptor, ReadyListener readyListener) {
 		super(context, view, readyListener);
-		
+
 		this.fncDesc = functionDescriptor;
 	}
-	
+
 	@Override
 	protected void setupDialog(AlertDialog dialog) {
 		Context context = dialog.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+		LayoutInflater inflater = LayoutInflater.from(context);
 
 		dialog.setTitle(fncDesc.getName());
-		
-        View mView = inflater.inflate(R.layout.function_builder_dialog, null);
 
-        ((TextView)mView.findViewById(R.id.fbFunctionBuilderMessage)).setText(fncDesc.getDesc());
-        
-        String msg;
-        
-        msg = "<a href=\"" + fncDesc.getUrl() + "\">" +
-        	context.getString(R.string.msgOnlineHelp) +
-        	"</a>";
-        
-        ((TextView)mView.findViewById(R.id.fbFunctionBuilderLink)).setText(Html.fromHtml(msg, null, null));
-        ((TextView)mView.findViewById(R.id.fbFunctionBuilderLink)).setMovementMethod(LinkMovementMethod.getInstance());
-        
-        paramContainer = (ViewGroup)mView.findViewById(R.id.fbParamList);
-        
-        paramContainer.removeAllViews();
-        
-        ParamDescriptor[] paramArray; 
-        ParamDescriptor param; 
-        View paramView;
-        TextView paramLabel;
-        EditText paramValue = null;
-        ImageButton paramMenu;
-        
-        paramArray = fncDesc.getParameters();
-        txtParamArray = new EditText[paramArray.length];
+		View mView = inflater.inflate(R.layout.function_builder_dialog, null);
+
+		((TextView)mView.findViewById(R.id.fbFunctionBuilderMessage)).setText(fncDesc.getDesc());
+
+		String msg;
+
+		msg = "<a href=\"" + fncDesc.getUrl() + "\">" +
+				context.getString(R.string.msgOnlineHelp) +
+				"</a>";
+
+		((TextView)mView.findViewById(R.id.fbFunctionBuilderLink)).setText(Html.fromHtml(msg, null, null));
+		((TextView)mView.findViewById(R.id.fbFunctionBuilderLink)).setMovementMethod(LinkMovementMethod.getInstance());
+
+		paramContainer = (ViewGroup)mView.findViewById(R.id.fbParamList);
+
+		paramContainer.removeAllViews();
+
+		ParamDescriptor[] paramArray; 
+		ParamDescriptor param; 
+		View paramView;
+		TextView paramLabel;
+		EditText paramValue = null;
+		ImageButton paramMenu;
+
+		paramArray = fncDesc.getParameters();
+		txtParamArray = new EditText[paramArray.length];
 
 		for (int i = 0; i < paramArray.length; i++) {
 			param = paramArray[i];
-			
-			paramView = inflater.inflate(R.layout.function_builder_item, null);
-			
+
+			paramView = inflater.inflate(R.layout.function_builder_item, paramContainer, false);
+
 			paramLabel = (TextView)paramView.findViewById(R.id.fbiLabel);
 			paramValue = (EditText)paramView.findViewById(R.id.fbiValue);
 			paramMenu = (ImageButton)paramView.findViewById(R.id.fbiMenu);
@@ -84,13 +84,13 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 
 			paramMenu.setTag(paramValue);
 			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
-			
+
 			paramContainer.addView(paramView);
 			txtParamArray[i] = paramValue;
 		}
-		
+
 		dialog.setView(mView);
-		
+
 		dialog.getWindow().setLayout(
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT);
@@ -100,26 +100,26 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 	protected int getActionType() {
 		return BuilderDialogBase.ACTION_EDIT;
 	}
-	
+
 	@Override
 	protected boolean checkExpression() {
 		boolean retVal;
-		
+
 		//Check validity of all subexpressions
 		retVal = true;
 		for (int i=0; i<txtParamArray.length && retVal; i++){
 			retVal = checkExpression(txtParamArray[i]);
 		}
-		
+
 		return retVal;
 	}
 
 	@Override
 	protected String getExpression() {
 		String retVal;
-		
+
 		retVal = fncDesc.getToken() + "(";
-		
+
 		for (int i=0;i<txtParamArray.length;i++){
 			if (i > 0) {
 				retVal += ",";
@@ -128,108 +128,108 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 		}
 
 		retVal += ")";
-		
+
 		return retVal;
 	}
 
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//        View mView = getLayoutInflater().inflate(R.layout.function_builder_dialog, null);
-//        
-//        setView(mView);
-//		
-//        setTitle(fncDesc.getName());
-//		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-//        setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
-//        
-//        super.onCreate(savedInstanceState);
-//        
-//        //Hack to avoid automatic dismiss on button click.
-//        getButton(BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				FunctionBuilderDialog.this.onClick(FunctionBuilderDialog.this, DialogInterface.BUTTON_POSITIVE);
-//			}
-//		});
-//
-//        ((TextView)findViewById(R.id.fbFunctionBuilderMessage)).setText(fncDesc.getDesc());
-//        
-//        String msg;
-//        
-//        msg = "<a href=\"" + fncDesc.getUrl() + "\">" +
-//        	this.getContext().getResources().getText(R.string.msgOnlineHelp) +
-//        	"</a>";
-//        
-//        ((TextView)findViewById(R.id.fbFunctionBuilderLink)).setText(Html.fromHtml(msg, null, null));
-//        ((TextView)findViewById(R.id.fbFunctionBuilderLink)).setMovementMethod(LinkMovementMethod.getInstance());
-//        
-//        paramContainer = (ViewGroup)findViewById(R.id.fbParamList);
-//        
-//        LayoutInflater inflater = LayoutInflater.from(this.getContext());
-//        
-//        paramContainer.removeAllViews();
-//        
-//        ParamDescriptor[] paramArray; 
-//        ParamDescriptor param; 
-//        View paramView;
-//        TextView paramLabel;
-//        EditText paramValue = null;
-//        ImageButton paramMenu;
-//        
-//        paramArray = fncDesc.getParameters();
-//        txtParamArray = new EditText[paramArray.length];
-//
-//		for (int i = 0; i < paramArray.length; i++) {
-//			param = paramArray[i];
-//			
-//			paramView = inflater.inflate(R.layout.function_builder_item, null);
-//			
-//			paramLabel = (TextView)paramView.findViewById(R.id.fbiLabel);
-//			paramValue = (EditText)paramView.findViewById(R.id.fbiValue);
-//			paramMenu = (ImageButton)paramView.findViewById(R.id.fbiMenu);
-//
-//			paramLabel.setText(param.getLabel());
-//			paramValue.setHint(param.getHint());
-//			//paramValue.setOnFocusChangeListener(focusListener);
-//			//paramValue.setFocusable(false);
-////			paramValue.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-////				@Override
-////				public void onFocusChange(View v, boolean hasFocus) {
-////					if (hasFocus) {
-////						getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-////					}
-////				}
-////			});
-//
-//			paramMenu.setTag(paramValue);
-//			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
-//			
-//			paramContainer.addView(paramView);
-//			txtParamArray[i] = paramValue;
-//		}
-//		
-//		final TextView asd = paramValue;
-//		
-//		this.setOnShowListener(new OnShowListener() {
-//			
-//			@Override
-//			public void onShow(DialogInterface dialog) {
-//	        	//imm.toggleSoftInputFromWindow(asd.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-//	        	//imm.showSoftInput(asd, InputMethodManager.SHOW_FORCED);
-//	        	//InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//	        	imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-//			}
-//		});
-//        
-//		imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//		
-//		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//		getWindow().setLayout(
-//				WindowManager.LayoutParams.WRAP_CONTENT,
-//				WindowManager.LayoutParams.WRAP_CONTENT);
-//	}
+	//	@Override
+	//	protected void onCreate(Bundle savedInstanceState) {
+	//        View mView = getLayoutInflater().inflate(R.layout.function_builder_dialog, null);
+	//        
+	//        setView(mView);
+	//		
+	//        setTitle(fncDesc.getName());
+	//		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
+	//        setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
+	//        
+	//        super.onCreate(savedInstanceState);
+	//        
+	//        //Hack to avoid automatic dismiss on button click.
+	//        getButton(BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+	//			@Override
+	//			public void onClick(View v) {
+	//				FunctionBuilderDialog.this.onClick(FunctionBuilderDialog.this, DialogInterface.BUTTON_POSITIVE);
+	//			}
+	//		});
+	//
+	//        ((TextView)findViewById(R.id.fbFunctionBuilderMessage)).setText(fncDesc.getDesc());
+	//        
+	//        String msg;
+	//        
+	//        msg = "<a href=\"" + fncDesc.getUrl() + "\">" +
+	//        	this.getContext().getResources().getText(R.string.msgOnlineHelp) +
+	//        	"</a>";
+	//        
+	//        ((TextView)findViewById(R.id.fbFunctionBuilderLink)).setText(Html.fromHtml(msg, null, null));
+	//        ((TextView)findViewById(R.id.fbFunctionBuilderLink)).setMovementMethod(LinkMovementMethod.getInstance());
+	//        
+	//        paramContainer = (ViewGroup)findViewById(R.id.fbParamList);
+	//        
+	//        LayoutInflater inflater = LayoutInflater.from(this.getContext());
+	//        
+	//        paramContainer.removeAllViews();
+	//        
+	//        ParamDescriptor[] paramArray; 
+	//        ParamDescriptor param; 
+	//        View paramView;
+	//        TextView paramLabel;
+	//        EditText paramValue = null;
+	//        ImageButton paramMenu;
+	//        
+	//        paramArray = fncDesc.getParameters();
+	//        txtParamArray = new EditText[paramArray.length];
+	//
+	//		for (int i = 0; i < paramArray.length; i++) {
+	//			param = paramArray[i];
+	//			
+	//			paramView = inflater.inflate(R.layout.function_builder_item, null);
+	//			
+	//			paramLabel = (TextView)paramView.findViewById(R.id.fbiLabel);
+	//			paramValue = (EditText)paramView.findViewById(R.id.fbiValue);
+	//			paramMenu = (ImageButton)paramView.findViewById(R.id.fbiMenu);
+	//
+	//			paramLabel.setText(param.getLabel());
+	//			paramValue.setHint(param.getHint());
+	//			//paramValue.setOnFocusChangeListener(focusListener);
+	//			//paramValue.setFocusable(false);
+	////			paramValue.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+	////				@Override
+	////				public void onFocusChange(View v, boolean hasFocus) {
+	////					if (hasFocus) {
+	////						getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+	////					}
+	////				}
+	////			});
+	//
+	//			paramMenu.setTag(paramValue);
+	//			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
+	//			
+	//			paramContainer.addView(paramView);
+	//			txtParamArray[i] = paramValue;
+	//		}
+	//		
+	//		final TextView asd = paramValue;
+	//		
+	//		this.setOnShowListener(new OnShowListener() {
+	//			
+	//			@Override
+	//			public void onShow(DialogInterface dialog) {
+	//	        	//imm.toggleSoftInputFromWindow(asd.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+	//	        	//imm.showSoftInput(asd, InputMethodManager.SHOW_FORCED);
+	//	        	//InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+	//	        	imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+	//			}
+	//		});
+	//        
+	//		imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+	//		
+	//		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+	//		getWindow().setLayout(
+	//				WindowManager.LayoutParams.WRAP_CONTENT,
+	//				WindowManager.LayoutParams.WRAP_CONTENT);
+	//	}
 
-	
+
 	private BuilderDialogBase.ReadyListener builderReadyListener = new ReadyListener() {
 		@Override
 		public void ready(View view, boolean confirmed, int action, String diceExpression) {
@@ -240,16 +240,16 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 					int selEnd;
 					String oldDiceExp;
 					String newDiceExp;
-	
+
 					txt = (EditText)view.getTag();
 					selStart = txt.getSelectionStart();
 					selEnd = txt.getSelectionEnd();
 					oldDiceExp = txt.getText().toString();
-					
+
 					newDiceExp = oldDiceExp.substring(0, selStart) +
-						diceExpression +
-						oldDiceExp.substring(selEnd);
-					
+							diceExpression +
+							oldDiceExp.substring(selEnd);
+
 					txt.setText(newDiceExp);
 					txt.setSelection(selStart, selStart + diceExpression.length());
 					txt.requestFocus();
@@ -262,7 +262,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 			}
 		}
 	};
-	
+
 	/**
 	 * Check the expression contained in the specified {@link EditText}
 	 * @param txt {@link EditText} containing the expression to test.
@@ -270,17 +270,19 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 	 */
 	protected boolean checkExpression(EditText txt) {
 		boolean retVal;
-		DExpression dExp;
+		Dice dExp;
 
 		retVal = true;
-		
-		dExp = new DExpression();
+
+		dExp = new Dice();
 		dExp.setID(-1);
 		dExp.setName("");
+		dExp.setDescription("");
 		dExp.setExpression(txt.getText().toString());
-			
+
 		try {
-			dExp.getResult();
+			//Make a dummy roll to check for error.
+			dExp.getNewResult();
 		} catch (DException e) {
 			showExpressionError(e, txt);
 			retVal = false;
@@ -296,7 +298,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 			}
 		}
 		txt.requestFocus();
-		
+
 		Helper.showErrorToast(txt.getContext(), e);
 	}
 
@@ -311,7 +313,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 	 */
 	public static ActionItem getActionItem(Context context, PopupMenu parent, ReadyListener readyListener, FunctionDescriptor functionDescriptor) {
 		ActionItem retVal;
-		
+
 		retVal = new ActionItem();
 		retVal.setTitle(functionDescriptor.getName());
 		retVal.setIcon(context.getResources().getDrawable(functionDescriptor.getResId()));
@@ -319,13 +321,13 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 
 		return retVal;
 	}
-	
+
 	protected static class FunctionBuilderActionItemClickListener implements View.OnClickListener {
-		
+
 		PopupMenu parent;
 		FunctionDescriptor functionDescriptor;
 		ReadyListener readyListener;
-		
+
 		public FunctionBuilderActionItemClickListener(PopupMenu parent, FunctionDescriptor functionDescriptor, ReadyListener readyListener) {
 			this.parent = parent;
 			this.functionDescriptor = functionDescriptor;
@@ -335,7 +337,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 		@Override
 		public void onClick(View v) {
 			View refView = parent != null ? parent.getAnchor() : v;
-			
+
 			new FunctionBuilderDialog(
 					refView.getContext(),
 					refView,

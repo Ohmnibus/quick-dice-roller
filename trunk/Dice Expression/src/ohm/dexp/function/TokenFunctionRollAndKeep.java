@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 
@@ -32,7 +32,7 @@ public class TokenFunctionRollAndKeep extends TokenFunction {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		TokenBase roll;
 		int poolSize;
 		int keepSize;

@@ -1,11 +1,11 @@
 package ohm.quickdice.dialog;
 
-import ohm.dexp.DExpression;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.MenuAdapter;
+import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -20,7 +20,7 @@ public class DiceDetailDialog extends MenuDialog {
 
 	DiceBag diceBag;
 	int dieIndex;
-	DExpression expression;
+	Dice expression;
 	
 	public DiceDetailDialog(Activity activity, DiceBag diceBag, int dieIndex, Menu menu) {
 		super(activity, menu);
@@ -41,7 +41,7 @@ public class DiceDetailDialog extends MenuDialog {
 	
 	@Override
 	protected View getHeaderView(LayoutInflater inflater, ListView parent) {
-		View view = inflater.inflate(R.layout.dice_detail_dialog, null);
+		View view = inflater.inflate(R.layout.dice_detail_dialog, parent, false);
 
 		//((TextView)view.findViewById(R.id.ddName)).setText(expression.getName());
 		if (expression.getDescription() == null || expression.getDescription().length() == 0) {
@@ -60,7 +60,7 @@ public class DiceDetailDialog extends MenuDialog {
 							Long.toString(max) + " (" +
 							Long.toString(range) + ")");
 		} catch (DException e) {
-			((TextView)findViewById(R.id.ddRange)).setText(R.string.lblCannotEvaluate);
+			((TextView)view.findViewById(R.id.ddRange)).setText(R.string.lblCannotEvaluate);
 		}
 		
 		return view;

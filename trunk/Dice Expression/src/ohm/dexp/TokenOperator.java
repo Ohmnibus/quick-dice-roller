@@ -44,7 +44,7 @@ class TokenOperatorAdd extends TokenOperator {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		//int retVal;
 		TokenBase lChild;
 		TokenBase rChild;
@@ -110,7 +110,7 @@ class TokenOperatorSubtract extends TokenOperator {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		TokenBase lChild;
 		TokenBase rChild;
 		
@@ -159,7 +159,7 @@ class TokenOperatorMultiply extends TokenOperator {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 
 		TokenBase lChild = getLeftChild();
 		TokenBase rChild = getRightChild();
@@ -206,7 +206,7 @@ class TokenOperatorDivide extends TokenOperator {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		
 		TokenBase lChild = getLeftChild();
 		TokenBase rChild = getRightChild();
@@ -271,7 +271,7 @@ class TokenOperatorDice extends TokenOperator {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		Dice dice;
 		int lResult;
 		long lMaxResult;
