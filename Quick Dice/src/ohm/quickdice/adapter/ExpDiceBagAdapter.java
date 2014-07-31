@@ -3,26 +3,28 @@ package ohm.quickdice.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import ohm.dexp.DExpression;
 import ohm.library.adapter.CachedExpandableArrayAdapter;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
+import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
+import ohm.quickdice.entity.DiceBagCollection;
+import ohm.quickdice.entity.DiceCollection;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, DExpression> {
-	
+public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, Dice> {
+
 	static final QuickDiceApp app = QuickDiceApp.getInstance();
-	
-    protected class MyChildViewCache extends ChildViewCache  {
+
+	protected class MyChildViewCache extends ChildViewCache  {
 
 		ImageView icon;
 		TextView name;
 		TextView description;
-		
+
 		public MyChildViewCache(View baseView) {
 			super(baseView);
 		}
@@ -36,7 +38,7 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, DEx
 
 		@Override
 		public void bindData() {
-			DExpression dice = (DExpression)data;
+			Dice dice = (Dice)data;
 
 			icon.setImageDrawable(app.getGraphic().getDiceIcon(dice.getResourceIndex()));
 			name.setText(dice.getName());
@@ -45,13 +47,13 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, DEx
 
 	}
 
-    protected class MyGroupViewCache extends GroupViewCache  {
+	protected class MyGroupViewCache extends GroupViewCache  {
 
 		ImageView icon;
 		ImageView indicator;
 		TextView name;
 		TextView description;
-		
+
 		public MyGroupViewCache(View baseView) {
 			super(baseView);
 		}
@@ -76,15 +78,31 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, DEx
 		}
 
 	}
-    
-	public ExpDiceBagAdapter(Context context, int groupResourceId, int childResourceId, List<DiceBag> diceBags) {
-		super(context, groupResourceId, childResourceId, diceBags, getChildLists(diceBags));
+
+	public ExpDiceBagAdapter(Context context, int groupResourceId, int childResourceId, DiceBagCollection diceBagCollection) {
+		super(context, groupResourceId, childResourceId, getParentList(diceBagCollection), getChildLists(diceBagCollection));
+	}
+
+	private static List<DiceBag> getParentList(DiceBagCollection diceBagCollection) {
+		List<DiceBag> retVal = new ArrayList<DiceBag>();
+		for (DiceBag diceBag : diceBagCollection) {
+			retVal.add(diceBag);
+		}
+		return retVal;
 	}
 	
-	private static List<List<DExpression>> getChildLists(List<DiceBag> diceBags) {
-		List<List<DExpression>> retVal = new ArrayList<List<DExpression>>();
-		for (DiceBag diceBag : diceBags) {
-			retVal.add(diceBag.getDice());
+	private static List<List<Dice>> getChildLists(DiceBagCollection diceBagCollection) {
+		List<List<Dice>> retVal = new ArrayList<List<Dice>>();
+		for (DiceBag diceBag : diceBagCollection) {
+			retVal.add(getChildList(diceBag.getDice()));
+		}
+		return retVal;
+	}
+	
+	private static List<Dice> getChildList(DiceCollection diceCollection) {
+		List<Dice> retVal = new ArrayList<Dice>();
+		for (Dice dice: diceCollection) {
+			retVal.add(dice);
 		}
 		return retVal;
 	}
@@ -98,5 +116,5 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, DEx
 	protected ChildViewCache createChildCache(int group, int position, View convertView) {
 		return new MyChildViewCache(convertView);
 	}
-	
+
 }

@@ -8,11 +8,19 @@
 	<item android:id="@+id/mmClearAllResults"
 		android:icon="@android:drawable/ic_menu_close_clear_cancel"
 		android:title="@string/mnuClearAllResults"
-	    android:showAsAction="ifRoom|withText" />
+		android:showAsAction="ifRoom|withText" />
 
 	<item android:id="@+id/mmUndoClearAllResults"
 		android:icon="@android:drawable/ic_menu_revert"
 		android:title="@string/mnuUndoClearAllResult" />
+
+	<item android:id="@+id/mmSelectDiceBag"
+		android:icon="@drawable/ic_menu_bag"
+		android:title="@string/mnuSelectDiceBag" />
+
+	<item android:id="@+id/mmSelectVariable"
+		android:icon="@android:drawable/ic_menu_sort_alphabetically"
+		android:title="@string/mnuSelectVariable" />
 
 	<item android:id="@+id/mmAddDiceBag"
 		android:icon="@drawable/ic_menu_bag"
@@ -21,6 +29,10 @@
 	<item android:id="@+id/mmAddDice"
 		android:icon="@drawable/ic_menu_dice"
 		android:title="@string/mnuAddDice" />
+	
+	<item android:id="@+id/mmAddVariable"
+		android:icon="@android:drawable/ic_menu_sort_alphabetically"
+		android:title="@string/mnuAddVariable" />
 
 	<item android:id="@+id/mmAddModifier"
 		android:icon="@android:drawable/ic_menu_add"

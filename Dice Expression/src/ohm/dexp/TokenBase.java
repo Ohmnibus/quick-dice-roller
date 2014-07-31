@@ -12,14 +12,14 @@ import ohm.dexp.exception.DException;
 public abstract class TokenBase {
 	
 	/** Precision used to perform evaluation */
-	public static final int VALUES_PRECISION = 3;
+	public static final int VALUES_PRECISION_DIGITS = 3;
 	/** Precision factor used to convert raw values to actual ones */
-	public static final int VALUES_PRECISION_FACTOR = (int)java.lang.Math.pow(10, VALUES_PRECISION);
+	public static final int VALUES_PRECISION_FACTOR = (int)java.lang.Math.pow(10, VALUES_PRECISION_DIGITS);
 
 	/** Precision used to output values */
-	public static final int VALUES_OUTPUT_PRECISION = 2;
+	public static final int VALUES_OUTPUT_PRECISION_DIGITS = 2;
 	/** Precision factor used to evaluate output */
-	public static final int VALUES_OUTPUT_PRECISION_FACTOR = (int)java.lang.Math.pow(10, VALUES_OUTPUT_PRECISION);
+	public static final int VALUES_OUTPUT_PRECISION_FACTOR = (int)java.lang.Math.pow(10, VALUES_OUTPUT_PRECISION_DIGITS);
 
 	/** Max size of a single token */
 	public static final int MAX_TOKEN_STRING_LENGTH = 64;
@@ -66,7 +66,7 @@ public abstract class TokenBase {
 			format = new DecimalFormat();
 			//format.setMinimumFractionDigits(VALUES_OUTPUT_PRECISION);
 			format.setMinimumFractionDigits(0);
-			format.setMaximumFractionDigits(VALUES_OUTPUT_PRECISION);
+			format.setMaximumFractionDigits(VALUES_OUTPUT_PRECISION_DIGITS);
 			format.setMinimumIntegerDigits(1);
 			format.setMaximumIntegerDigits(Integer.MAX_VALUE);
 		}
@@ -164,7 +164,7 @@ public abstract class TokenBase {
 	 * @param instance Instance to use to evaluate variables.
 	 * @throws DException Thrown if an error occurred during expression tree evaluation.
 	 */
-	public void evaluate(DInstance instance) throws DException {
+	public void evaluate(DContext instance) throws DException {
 //		DException retVal;
 //		
 //		retVal = null;
@@ -311,5 +311,5 @@ public abstract class TokenBase {
 	 * @param instance Instance to use to evaluate variables.
 	 * @throws DException Thrown if an error occurred during expression tree evaluation.
 	 */
-	abstract protected void evaluateSelf(DInstance instance) throws DException;
+	abstract protected void evaluateSelf(DContext instance) throws DException;
 }

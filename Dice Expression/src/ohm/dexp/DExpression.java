@@ -1,8 +1,10 @@
 package ohm.dexp;
 
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Stack;
 
+import ohm.dexp.DContext.DVariable;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.ExpectedEndOfStatement;
 import ohm.dexp.exception.ExpectedParameter;
@@ -16,70 +18,44 @@ import ohm.dexp.exception.UnknownVariable;
 import ohm.dexp.function.TokenFunction;
 
 /**
- * Class to handle dice expressions again a given {@link DContext} and evaluate them
- * again a given {@link DInstance} of a {@link DContext}.
+ * Class to handle dice expressions and evaluate them against a given {@link DContext}.
  * @author Ohmnibus
  *
  */
-public class DExpression extends EntityBase {
+public class DExpression {
 
-	/**
-	 * Serial version UID used for serialization.
-	 */
-	private static final long serialVersionUID = 4278225516667385017L;
-	
-	private transient DContext context;
+	private static final String[] EMPTY_VAR_KEYS = new String[0];
 	private String exp;
+	private DContext ctx = null;
+	private transient String[] varKeys; //Contain used variable names.
+	private transient Hashtable<String, DVariable> varCache; //Contain used variables and their last value.
 	private transient TokenBase root;
 	private transient boolean parsed;
 	private transient boolean evaluatedOnce;
-	private transient boolean evaluated;
-	private transient int lastUsedInstanceID = -1;
+	//private transient boolean evaluated;
 	private transient long resultValue;
 	private transient long resultMaxValue;
 	private transient long resultMinValue;
 	private transient String resultString;
 	private transient DException error;
-	//private int errNumber;
-	//private int errFrom;
-	//private int errTo;
-	
-	/**
-	 * Create a new contextless empty expression.
-	 */
-	public DExpression() {
-		reset();
-		this.context = null;
-	}
 	
 	/**
 	 * Create a new empty expression.
-	 * @param context Context to use to parse the expression.
 	 */
-	public DExpression(DContext context) {
-		reset();
-		this.context = context;
+	public DExpression() {
+		this(null);
 	}
 	
 	/**
 	 * Create a new expression from an expression string.
-	 * @param context Context to use to parse the expression.
 	 * @param exp Expression string.
 	 */
-	public DExpression(DContext context, String exp) {
+	public DExpression(String exp) {
+		varCache = new Hashtable<String, DVariable>();
 		reset();
-		this.context = context;
 		this.exp = exp;
 	}
 	
-	/**
-	 * Get the context associated to the expression evaluator.
-	 * @return Context used.
-	 */
-	public DContext getContext() {
-		return context;
-	}
-
 	/**
 	 * Set a new expression string to the evaluator.
 	 * @param exp Expression string.
@@ -97,50 +73,34 @@ public class DExpression extends EntityBase {
 		return exp;
 	}
 	
-//	/**
-//	 * "Roll" the dice defined in the expression.<br />
-//	 * This take no effect if the expression is deterministic (does not contain dices).
-//	 */
-//	public void roll() {
-//		evaluated = false;
-//	}
-//	
-//	/**
-//	 * Get the expression result trunked to it's integer part.
-//	 * @return The expression result.
-//	 */
-//	public long getResult() {
-//		return getRawResult() / TokenBase.VALUES_PRECISION_FACTOR;
-//	}
-//	
-//	/**
-//	 * Get the raw expression result.<br />
-//	 * This is a fixed point value with {@link TokenBase.VALUES_DECIMALS} decimal values
-//	 * and need do be adjusted to obtain the real expression result.<br />
-//	 * @return The raw expression result.
-//	 */
-//	public long getRawResult() {
-//		evaluate();
-//		return resultValue;
-//	}
-//	
-//	/**
-//	 * Get a string representing the expression with roll result in place of dices. 
-//	 * @return String representation of the result.
-//	 */
-//	public String getResultString() {
-//		evaluate();
-//		return resultString;
-//	}
+	/**
+	 * Sets the context on which this expression will be evaluated.
+	 * @param context Context to use on evaluating this expression.
+	 */
+	public void setContext(DContext context) {
+		this.ctx = context;
+	}
 	
 	/**
-	 * "Roll" the dice defined in the expression and return the result.<br />
-	 * The result is always the same if the expression is deterministic (does not contain dices).
+	 * Get the context used to evaluate this expression.
+	 * @return Context.
+	 */
+	public DContext getContext() {
+		return this.ctx;
+	}
+
+	
+	/**
+	 * Evaluate the expression and return a result.<br />
+	 * If the expression contains indeterministic elements (dice and/or indeterministic
+	 * functions), all these values are randomly evaluated to compute a new result.<br />
+	 * If the expression is deterministic (does not contain dices) the result will be always 
+	 * the same.
 	 * @return Result of the expression evaluation.
 	 * @throws DException Thrown if an error occurred during parse or evaluation.
 	 */
 	public DResult getResult() throws DException {
-		evaluated = false;
+		//evaluated = false;
 		
 		evaluate();
 		
@@ -148,13 +108,15 @@ public class DExpression extends EntityBase {
 	}
 	
 	/**
-	 * Get the expression maximum result.
+	 * Get the expression maximum result.<br />
+	 * This value is evaluated only one time.
 	 * @return Expression maximum result in "raw" format (like {@link getRawResult}).
 	 * @throws DException Thrown if an error occurred during parse or evaluation.
 	 */
 	public long getMaxResult() throws DException {
 		//This is always a constant value, so just one evaluation is required.
-		if (! evaluatedOnce) {
+		//if (! evaluatedOnce) {
+		if (! validBounds()) {
 			evaluate();
 		} else if (error != null) {
 			throw error;
@@ -163,13 +125,15 @@ public class DExpression extends EntityBase {
 	}
 	
 	/**
-	 * Get the expression minimum result.
+	 * Get the expression minimum result.<br />
+	 * This value is evaluated only one time.
 	 * @return Expression minimum result in "raw" format (like {@link getRawResult}).
 	 * @throws DException Thrown if an error occurred during parse or evaluation.
 	 */
 	public long getMinResult() throws DException {
 		//This is always a constant value, so just one evaluation is required.
-		if (! evaluatedOnce) {
+		//if (! evaluatedOnce) {
+		if (! validBounds()) {
 			evaluate();
 		} else if (error != null) {
 			throw error;
@@ -177,42 +141,87 @@ public class DExpression extends EntityBase {
 		return resultMinValue;
 	}
 	
-//	/**
-//	 * Get the parsing/evaluating error number, or {@link ERR_NONE} if no error where encountered.
-//	 * @return Error number.
-//	 */
-//	public int getErrNumber() {
-//		if (! evaluatedOnce) {
-//			evaluate();
-//		}
-//		return errNumber;
-//	}
-//	
-//	/**
-//	 * Get the first character where error was encountered.
-//	 * @return First character of error area.
-//	 */
-//	public int getErrFrom() {
-//		if (! evaluatedOnce) {
-//			evaluate();
-//		}
-//		return errFrom;
-//	}
-//	
-//	/**
-//	 * Get the last character where error was encountered.
-//	 * @return Last character of error area.
-//	 */
-//	public int getErrTo() {
-//		if (! evaluatedOnce) {
-//			evaluate();
-//		}
-//		return errTo;
-//	}
+	/**
+	 * Return an array containing all the label of the variables required
+	 * by this dice expression.
+	 * @return Array of variable's labels
+	 * @throws DException Thrown if an error occurred during parse or evaluation.
+	 */
+	public String[] getRequiredVariables() throws DException {
+		
+		try {
+			if (! parsed) {
+				//A call to parse() should be enough, but better
+				//perform all the checks made in evaluate()
+				evaluate();
+			} else if (error != null) {
+				throw error;
+			}
+		} catch (UnknownVariable ex) {
+			//Consume
+		}
+
+		return varKeys;
+	}
+	
 	
 	// =============================
 	// Private and protected methods
 	// =============================
+	
+	/**
+	 * Tell if {@link #resultMinValue} and {@link #resultMaxValue} are valid.
+	 * @return
+	 */
+	protected boolean validBounds() {
+		boolean retVal = true;
+		if (evaluatedOnce == false) {
+			return false;
+		}
+//		if (ctx != null && varCache.size() > 0) { //If exp was not parsed "varCache" has no elements.
+//			Enumeration<String> keys = varCache.keys();
+//			while (keys.hasMoreElements()) {
+//				String key = keys.nextElement();
+//				if (ctx.checkName(key) == false || ! varCache.get(key).equals(ctx.getVariable(key))) {
+//					//Note: if checkName was false we are going to get an UnknownFunction exception.
+//					retVal = false;
+//					break;
+//				}
+//			}
+//		}
+		if (ctx != null) {
+			for (String key : varKeys) { //If exp was not parsed "varKeys" has no elements.
+				if (ctx.checkName(key) == false || ! varCache.get(key).equals(ctx.getVariable(key))) {
+					//Note: if checkName was false we are going to get an UnknownFunction exception.
+					retVal = false;
+					break;
+				}
+			}
+		}
+		return retVal;
+	}
+	
+	/**
+	 * Set values of variables to the ones contained in current {@link DContext}.
+	 */
+	protected void setVarCacheValues() {
+//		if (ctx != null && varCache.size() > 0) {
+//			Enumeration<String> keys = varCache.keys();
+//			while (keys.hasMoreElements()) {
+//				String key = keys.nextElement();
+//				if (ctx.checkName(key)) {
+//					varCache.put(key, new DVariable(ctx.getVariable(key)));
+//				}
+//			}
+//		}
+		if (ctx != null) {
+			for (String key : varKeys) {
+				if (ctx.checkName(key)) {
+					varCache.put(key, new DVariable(ctx.getVariable(key)));
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Reset all content as the instance has been just created.
@@ -221,51 +230,34 @@ public class DExpression extends EntityBase {
 		exp = "";
 		root = null;
 		parsed = false;
-		evaluated = false;
+		//evaluated = false;
 		evaluatedOnce = false;
 		resultValue = 0;
 		resultMaxValue = 0;
 		resultMinValue = 0;
 		resultString = "";
+		varKeys = EMPTY_VAR_KEYS;
+		varCache.clear();
 		error = null;
-		//errNumber = DResult.ERR_NONE;
-		//errFrom = 0;
-		//errTo = 0;
 	}
-
-//	protected void setError(int errorCode, int errorFrom, int errorTo) {
-//		root = null;
-//		parsed = true;
-//		evaluated = true;
-//		evaluatedOnce = true;
-//		resultValue = 0;
-//		resultMaxValue = 0;
-//		resultMinValue = 0;
-//		resultString = "Error";
-//		errNumber = errorCode;
-//		errFrom = errorFrom;
-//		errTo = errorTo;
-//	}
 
 	protected void setError(DException ex) {
 		root = null;
 		parsed = true;
-		evaluated = true;
+		//evaluated = true;
 		evaluatedOnce = true;
 		resultValue = 0;
 		resultMaxValue = 0;
 		resultMinValue = 0;
 		resultString = "Error";
+		
+		setVarCacheValues();
+		
 		error = ex;
-		//errNumber = errorCode;
-		//errFrom = errorFrom;
-		//errTo = errorTo;
 	}
 	
 	protected void setResult(TokenBase rootToken) {
-		//root = rootToken;
-		//parsed = true;
-		evaluated = true;
+		//evaluated = true;
 		evaluatedOnce = true;
 		
 		resultValue = rootToken.getRawResult();
@@ -273,10 +265,9 @@ public class DExpression extends EntityBase {
 		resultMinValue = rootToken.getMinResult();
 		resultString = rootToken.getResultString();
 		
+		setVarCacheValues();
+		
 		error = null;
-		//errNumber = DResult.ERR_NONE;
-		//errFrom = 0;
-		//errTo = 0;
 	}
 	
 	/**
@@ -284,31 +275,15 @@ public class DExpression extends EntityBase {
 	 * @return Error code.
 	 */
 	protected void evaluate() throws DException {
-		DInstance instance;
-		
-		if (getContext() != null) {
-			instance = getContext().getCurrentInstance();
-		} else {
-			instance = null;
-		}
-		
-		if (lastUsedInstanceID != (instance == null ? Integer.MIN_VALUE : instance.getID())) {
-			evaluated = false;
-			evaluatedOnce = false;
-			lastUsedInstanceID = (instance == null ? Integer.MIN_VALUE : instance.getID());
-		}
-		
-		if (! evaluated) {
-			try {
-				parse();
-				
-				root.evaluate(instance);
-				
-				setResult(root);
-			} catch (DException ex) {
-				setError(ex);
-				throw ex;
-			}
+		try {
+			parse();
+			
+			root.evaluate(ctx);
+			
+			setResult(root);
+		} catch (DException ex) {
+			setError(ex);
+			throw ex;
 		}
 	}
 	
@@ -317,27 +292,25 @@ public class DExpression extends EntityBase {
 	 * @return Error code.
 	 */
 	protected void parse() throws DException {
-		//int retVal;
-		int iPos;		/* Expression index */
+		int iPos;           /* Expression index */
 
 		GetTokenResult actToken;
 		GetTokenResult nextToken;
 		TokenBase tmpToken;
-		int actTokenType;	/* Current token type (speed up a bit) */
-		int lastTokenType;	/* Last token type */
-		TokenBase tLastOp;	/* Last operator found */
-		TokenBase tLastOpP; /* Last priority operator found */ //TODO: Investigare meglio
-		TokenBase tFunc;	/* Last function found */
+		int actTokenType;   /* Current token type (speed up a bit) */
+		int lastTokenType;  /* Last token type */
+		TokenBase tLastOp;  /* Last operator found */
+		TokenBase tLastOpP; /* Last priority operator found */ //TODO: Check if still needed
+		TokenBase tFunc;    /* Last function found */
 		Stack<TokenBase> parseStack;
 		boolean isTerminal;	/* If last valid token is a terminal one */
 		
 		if (parsed) {
-			//return errNumber;
 			if (error != null) throw error;
 			return; //Already parsed, no action needed.
 		}
 
-		//retVal = DResult.ERR_NONE;
+		varCache.clear();
 		tLastOp = null;
 		tLastOpP = null;
 		tFunc = null;
@@ -352,8 +325,6 @@ public class DExpression extends EntityBase {
 			iPos = actToken.end;
 			
 			if (nextToken.type != TK_NULL) {
-				//actToken = nextToken; <- THIS IS BAD
-				//actToken.error = nextToken.error;
 				actToken.value = nextToken.value;
 				actToken.type = nextToken.type;
 				actToken.begin = nextToken.begin;
@@ -437,8 +408,6 @@ public class DExpression extends EntityBase {
 							/* Process ")" token */
 							if (parseStack.isEmpty()) {
 								/* Error - unbalanced parenthesis */
-								//retVal = DResult.ERR_UNBALANCED_PARENTHESYS;
-								//setError(retVal, actToken.begin, actToken.begin);
 								throw new UnbalancedBracket(actToken.begin);
 							} else {
 								tmpToken = root;
@@ -456,8 +425,6 @@ public class DExpression extends EntityBase {
 									tFunc.setNextChild(tmpToken);
 									if (tFunc.nextChildNum()<=tFunc.getChildNumber()) {
 										/* Error - too few parameters */
-										//retVal = DResult.ERR_TOO_FEW_PARAMETERS;
-										//setError(retVal, actToken.begin, actToken.begin);
 										throw new ExpectedParameter(actToken.begin);
 									} else {
 										tmpToken = tFunc;	/* To not write another "if (tLastOp==null)..." */
@@ -484,15 +451,11 @@ public class DExpression extends EntityBase {
 							}
 							if (tmpToken==null) {
 								/* Error - expected eos */
-								//retVal = DResult.ERR_EXPECTED_END_OF_STAT;
-								//setError(retVal, actToken.begin, exp.length());
 								throw new ExpectedEndOfStatement(actToken.begin);
 							} else {
 								tmpToken.setNextChild(root);
 								if (tmpToken.nextChildNum()>tmpToken.getChildNumber()) {
 									/* Error - too much parameters */
-									//retVal = DResult.ERR_TOO_MANY_PARAMETERS;
-									//setError(retVal, actToken.begin, actToken.begin);
 									throw new UnexpectedParameter(actToken.begin);
 								} else {
 									root=null;
@@ -512,29 +475,24 @@ public class DExpression extends EntityBase {
 								tFunc = TokenFunction.InitToken(actToken.value);
 								if (tFunc == null) {
 									//Error: function is not recognized
-									//retVal = DResult.ERR_UNKNOWN_FUNCTION;
-									//setError(retVal, actToken.begin, actToken.end);
 									throw new UnknownFunction(actToken.value, actToken.begin, actToken.end);
 								}
 							} else {
-								//if (context.checkVariable(actToken.value)) {
-								//	tmpToken = TokenValue.InitToken(actToken.value);
-								tmpToken = TokenValue.InitToken(actToken.value, context);
-								if (tmpToken != null) {
-									if (tLastOp==null) {
-										root = tmpToken;
-									} else {
-										tLastOp.setRightChild(tmpToken);
-									}
-									isTerminal = true;
+								//tmpToken = TokenValue.InitToken(actToken.value, ctx);
+								tmpToken = TokenValue.InitToken(actToken.value, actToken.begin);
+								//if (tmpToken != null) {
+								varCache.put(actToken.value, new DVariable(0, 0, 0));
+								if (tLastOp==null) {
+									root = tmpToken;
 								} else {
-									//Error: variable is not defined
-									//retVal = DResult.ERR_UNKNOWN_VARIABLE;
-									//setError(retVal, actToken.begin, actToken.end);
-									throw new UnknownVariable(actToken.value, actToken.begin, actToken.end);
+									tLastOp.setRightChild(tmpToken);
 								}
+								isTerminal = true;
+								//} else {
+								//	//Error: variable is not defined
+								//	throw new UnknownVariable(actToken.value, actToken.begin, actToken.end);
+								//}
 							}
-
 					}
 					lastTokenType=actToken.type;
 				} else {
@@ -542,68 +500,57 @@ public class DExpression extends EntityBase {
 					switch (lastTokenType) {
 						case TK_VAL:
 						case TK_PCL:
-							//retVal = DResult.ERR_EXPECTED_END_OF_STAT;
-							//setError(retVal, actToken.begin, exp.length());
-							//break;
 							throw new ExpectedEndOfStatement(actToken.begin);
 						case TK_UOP:
 						case TK_OP:
 						case TK_POP:
 						case TK_COM:
-							//retVal = DResult.ERR_MISSING_OPERAND;
-							//setError(retVal, actToken.begin, actToken.begin);
-							//break;
 							throw new MissingOperand(actToken.begin);
 						default:
-							//retVal = DResult.ERR_TOO_FEW_PARAMETERS;
-							//setError(retVal, actToken.begin, actToken.begin);
-							//break;
 							throw new ExpectedParameter(actToken.begin);
 					}
 				}
 			} else {
-				/* can be an error or a parse end */
-				//if (actToken.error != DResult.ERR_NONE) {
-				//	/* Error from getToken */
-				//	retVal = actToken.error;
-				//	setError(retVal, actToken.begin, actToken.end);
-				//} else {
-					/* Check if state is valid */
-					if (!parseStack.isEmpty()) {
-						/* Stack not empty: unbalanced parenthesis */
-						//retVal = DResult.ERR_UNBALANCED_PARENTHESYS;
-						//setError(retVal, exp.length()+1, exp.length()+1);
-						throw new UnbalancedBracket(exp.length()+1);
-					} else if (root == null) {
-						/* Root=null: Empty expression */
-						//retVal = DResult.ERR_NOTHING_TO_EVALUATE;
-						//setError(retVal, 0, 0);
-						throw new NothingToEvaluate();
-					} else if (!isTerminal) {
-						/* bTerminal=false: Expected operand */
-						//retVal = DResult.ERR_MISSING_OPERAND;
-						//setError(retVal, exp.length()+1, exp.length()+1);
-						throw new MissingOperand(exp.length()+1);
-					}
-				//}
+				/* Check if state is valid */
+				if (!parseStack.isEmpty()) {
+					/* Stack not empty: unbalanced parenthesis */
+					//retVal = DResult.ERR_UNBALANCED_PARENTHESYS;
+					//setError(retVal, exp.length()+1, exp.length()+1);
+					throw new UnbalancedBracket(exp.length()+1);
+				} else if (root == null) {
+					/* Root=null: Empty expression */
+					//retVal = DResult.ERR_NOTHING_TO_EVALUATE;
+					//setError(retVal, 0, 0);
+					throw new NothingToEvaluate();
+				} else if (!isTerminal) {
+					/* bTerminal=false: Expected operand */
+					//retVal = DResult.ERR_MISSING_OPERAND;
+					//setError(retVal, exp.length()+1, exp.length()+1);
+					throw new MissingOperand(exp.length()+1);
+				}
 			}
 		} while (actToken.type!=TK_NULL /* && retVal==DResult.ERR_NONE */);
-		
-		parsed = true;
 
-		//return retVal;		
+		//Get the array of required variables
+		if (varCache.size() > 0) {
+			varKeys = varCache.keySet().toArray(EMPTY_VAR_KEYS);
+		} else {
+			varKeys = EMPTY_VAR_KEYS;
+		}
+
+		parsed = true;
 	}
 
 	/*
-	 * Token riconosciuti:
-	 * - Valore
-	 * - Operatore
-	 * - Variabile
-	 * - Funzione/Variabile
-	 * Pseoudo-token
-	 * - Aperta Parentesi
-	 * - Chiusa parentesi
-	 * - Virgola (delimitatore di parametro)
+	 * Valid Tokens:
+	 * - Value
+	 * - Operator
+	 * - Variable
+	 * - Function/Variable
+	 * Pseudo-token
+	 * - Open bracket
+	 * - Closed bracket
+	 * - Comma (parameter separator)
 	 */
 	/** Null token */
 	private static final int TK_NULL = 0;
@@ -619,7 +566,7 @@ public class DExpression extends EntityBase {
 	private static final int TK_POP = 6;
 	/** Pseudo-token: Closed bracket */
 	private static final int TK_PCL = 7;
-	/** Pseudo-token: Parameter delimiter */
+	/** Pseudo-token: Parameter separator */
 	private static final int TK_COM = 8; /* Set TOKEN_NUMBER as the last value */
 
 	
@@ -709,7 +656,6 @@ public class DExpression extends EntityBase {
 	 * @param retVal A {@link GetTokenResult} instance where token properties are written.
 	 */
 	private void getToken(String exp, int index, GetTokenResult retVal) throws DException {
-		//GetTokenResult retVal;
 		String sExpr;
 		int iCnt;	/* Counter and new token position */
 		char actChar, nextChar;			/* Actual and next char */
@@ -717,8 +663,6 @@ public class DExpression extends EntityBase {
 		int dotCount = 0; /* Used to check double dot in values */
 		StringBuilder myValue = null; /* Used to optimize creation of values and names */
 		
-		//retVal = new GetTokenResult();
-		//retVal.error = DResult.ERR_NONE;
 		retVal.value = "";
 		retVal.type = TK_NULL;
 		retVal.begin = index;
@@ -781,9 +725,7 @@ public class DExpression extends EntityBase {
 						retVal.type = TK_NAME;
 						break;
 					case CT_UNKNOWN:
-						//retVal.error = DResult.ERR_INVALID_CHARACTER;
-						//retVal.end = iCnt + 1;
-						//break;
+						/* error: Invalid character */
 						throw new InvalidCharacter(retVal.begin);
 				}
 			}
@@ -803,8 +745,6 @@ public class DExpression extends EntityBase {
 						/* Numbers */
 						if (actCharType==CT_DOT && dotCount > 0) {
 							/* error: double dot */
-							//retVal.error = DResult.ERR_EXPECTED_END_OF_STAT;
-							//retVal.end = iCnt + 1;
 							throw new ExpectedEndOfStatement(retVal.begin);
 						}
 
@@ -853,8 +793,6 @@ public class DExpression extends EntityBase {
 			retVal.begin = index;
 			retVal.end = sExpr.length()+1;
 		}
-		
-		//return retVal;
 	}
 	
 	private static final int CT_NULL = 0;
@@ -923,15 +861,12 @@ public class DExpression extends EntityBase {
 		}
 
 		public void reset() {
-			//error = DResult.ERR_NONE;
 			value = "";
 			type = TK_NULL;
 			begin = 0;
 			end = 0;
 		}
 
-		/** Error code */
-		//public int error = DResult.ERR_NONE;
 		/** Token raw name */
 		public String value = "";
 		/** Token type */

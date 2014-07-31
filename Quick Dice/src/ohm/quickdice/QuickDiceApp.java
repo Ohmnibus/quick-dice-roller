@@ -186,4 +186,27 @@ public class QuickDiceApp extends Application {
 		return bagManager;
 	}
 
+	/**
+	 * Tell if a new dice bag can be added.
+	 * @return
+	 */
+	public boolean canAddDiceBag() {
+		return getBagManager().getDiceBagCollection().size() < getPreferences().getMaxDiceBags();
+	}
+	
+	/**
+	 * Tell if a new variable can be added to current dice bag.
+	 * @return
+	 */
+	public boolean canAddVariable() {
+		return getBagManager().getDiceBagCollection().getCurrent().getVariables().size() < getPreferences().getMaxVariables();
+	}
+	
+	/**
+	 * Tell if a new dice can be added to current dice bag.
+	 * @return
+	 */
+	public boolean canAddDice() {
+		return getBagManager().getDiceBagCollection().getCurrent().getDice().size() < getPreferences().getMaxDice();
+	}
 }

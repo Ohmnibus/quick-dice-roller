@@ -16,32 +16,44 @@ public abstract class TokenValue extends TokenBase {
 	/**
 	 * Initialize a token of type {@link TokenValueVariable}.
 	 * @param name Variable name.
-	 * @param context Expression context.
-	 * @return New token instance, or {@literal null} if the variable name was not found.
+	 * @param position Starting position inside the expression, used in {@link UnknownVariable} exception.
+	 * @return New token instance.
 	 */
-	public static TokenValue InitToken(String name, DContext context) {
-		return context == null || !context.checkVariable(name) ? null : new TokenValueVariable(name);
+	public static TokenValue InitToken(String name, int position) {
+		return new TokenValueVariable(name, position);
+	}
+
+	/**
+	 * Initialize a token of type {@link TokenValueVariable}.
+	 * @param name Variable name.
+	 * @param context Expression context.
+	 * @return New token instance, or {@code null} if the variable name was not found.
+	 */
+	public static TokenValue InitToken(String name, int position, DContext context) {
+		return context == null || !context.checkName(name) ? null : new TokenValueVariable(name, position);
 	}
 
 	public static long ParseRawValue(String str) {
 		long retVal;
-	    int iDotPlace = str.indexOf(".");
-	    if (iDotPlace>=0) {
-	    	//TODO: Ottimizzare quanto segue, il codice mi sembra piuttosto sporco
-	        /* Get decimal value */
-	        if ((str.length()-1)>iDotPlace) {
-	        	retVal = Long.parseLong((str+"000").substring(iDotPlace+1, iDotPlace+1+VALUES_PRECISION));
-	        } else
-	        	retVal = 0;
+		int iDotPlace = str.indexOf(".");
+		if (iDotPlace>=0) {
+			//TODO: Following code should be optimized/cleaned
+			
+			/* Get decimal value */
+			if ((str.length()-1)>iDotPlace) {
+				retVal = Long.parseLong((str+"000").substring(iDotPlace+1, iDotPlace+1+VALUES_PRECISION_DIGITS));
+			} else
+				retVal = 0;
 
-	        /* Normalize to three digits */
-	        while (retVal>VALUES_PRECISION_FACTOR) retVal=retVal/10;
-	        /* Add integer value */
-	        retVal = retVal + (Long.parseLong(str.substring(0, iDotPlace)) * VALUES_PRECISION_FACTOR);
-	    } else {
-	    	retVal = Long.parseLong(str) * VALUES_PRECISION_FACTOR;
-	    }
-	    return retVal;
+			/* Normalize to three digits */
+			while (retVal>VALUES_PRECISION_FACTOR) retVal=retVal/10;
+			
+			/* Add integer value */
+			retVal = retVal + (Long.parseLong(str.substring(0, iDotPlace)) * VALUES_PRECISION_FACTOR);
+		} else {
+			retVal = Long.parseLong(str) * VALUES_PRECISION_FACTOR;
+		}
+		return retVal;
 	}
 }
 
@@ -69,18 +81,20 @@ class TokenValueConstant extends TokenValue {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
-	    resultString = rawValueToString(resultValue);
+	protected void evaluateSelf(DContext instance) throws DException {
+		resultString = rawValueToString(resultValue);
 	}
-	
+
 }
 
 class TokenValueVariable extends TokenValue {
 	
-	protected String _name;
+	protected String name;
+	protected int position;
 	
-	public TokenValueVariable(String name) {
-		this._name = name;
+	public TokenValueVariable(String name, int position) {
+		this.name = name;
+		this.position = position;
 	}
 
 	@Override
@@ -99,18 +113,22 @@ class TokenValueVariable extends TokenValue {
 	}
 
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		try {
-			resultValue = instance.getValue(_name);
-			resultMinValue = resultValue;
-			resultMaxValue = resultValue;
-		    resultString = "[" + rawValueToString(resultValue) + "]";
+			if (instance == null) {
+				//Name not defined for sure
+				throw new IllegalArgumentException();
+			}
+			resultValue = instance.getValue(name);
+			resultMinValue = instance.getMinValue(name);
+			resultMaxValue = instance.getMaxValue(name);
+			resultString = "[" + name + ":" + rawValueToString(resultValue) + "]";
 		} catch (IllegalArgumentException ex) {
 			resultValue = 0;
 			resultMinValue = resultValue;
 			resultMaxValue = resultValue;
-		    resultString = "";
-		    throw new UnknownVariable(_name, 0, 0);
+			resultString = "";
+			throw new UnknownVariable(name, position);
 		}
 	}
 }

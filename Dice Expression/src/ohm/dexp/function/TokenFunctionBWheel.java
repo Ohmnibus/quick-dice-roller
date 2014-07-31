@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.LoopDetected;
@@ -37,7 +37,7 @@ public class TokenFunctionBWheel extends TokenFunction {
 	private int target;
 	private int rollAgain;
 
-	protected void initSequence(DInstance instance) throws DException {
+	protected void initSequence(DContext instance) throws DException {
 		TokenBase tokenPoolSize;
 		TokenBase tokenTarget;
 		TokenBase tokenRollAgain;
@@ -77,7 +77,7 @@ public class TokenFunctionBWheel extends TokenFunction {
 		}
 	}
 
-	protected long getMaxPoolSize(DInstance instance) throws DException {
+	protected long getMaxPoolSize(DContext instance) throws DException {
 		return getChild(INDEX_POOL).getMaxResult();
 	}
 
@@ -85,7 +85,7 @@ public class TokenFunctionBWheel extends TokenFunction {
 	 * @see ohm.dexp.function.TokenFunctionPoolBase#evaluateSelf(ohm.dexp.DInstance)
 	 */
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		int rollRes;
 		int successes;
 		String sep;

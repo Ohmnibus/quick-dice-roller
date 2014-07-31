@@ -33,9 +33,11 @@
 		<item name="ohmModifiersContainer">@style/Base.Modifiers</item>
 		
 		<item name="ohmDiceBagDrawer">@style/Base.Drawer.DiceBag</item>
+		<item name="ohmVariableDrawer">@style/Base.Drawer.Variable</item>
 		
 		<item name="ohmFramedBackground">@drawable/theme_base_bg_framed</item>
 		<item name="ohmFramedBackgroundSelector">@drawable/theme_base_bg_framed_selector</item>
+		<item name="ohmFramedBackgroundSecondary">@drawable/theme_base_bg_framed_secondary</item>
 	</style>
 
 	<style name="Base">
@@ -107,7 +109,7 @@
 	<!-- Modifiers -->
 	<style name="Base.Modifiers">
 		<!-- <item name="android:background">@drawable/bg_dice_grid</item> -->
-		<item name="android:background">?attr/ohmFramedBackground</item>
+		<item name="android:background">?attr/ohmFramedBackgroundSecondary</item>
 	</style>
 	
 	<!-- Dice Bag Drawer -->
@@ -120,6 +122,12 @@
 		<item name="android:dividerHeight">0dp</item>
 		<!-- <item name="android:background">@color/base_main_background</item> -->
 		<!-- <item name="android:background">?android:attr/colorBackground</item> -->
+	</style>
+	
+	<!-- Variable Drawer -->
+	<style name="Base.Drawer.Variable">
+		<item name="android:divider">@android:color/transparent</item>
+		<item name="android:dividerHeight">0dp</item>
 	</style>
 	
 	<!-- ************* -->
@@ -136,9 +144,11 @@
 		<item name="ohmDiceGridContainer">@style/Classic.DiceGrid</item>
 		
 		<item name="ohmDiceBagDrawer">@style/Classic.Drawer.DiceBag</item>
+		<item name="ohmVariableDrawer">@style/Classic.Drawer.Variable</item>
 
 		<item name="ohmFramedBackground">@drawable/theme_classic_bg_framed</item>
 		<item name="ohmFramedBackgroundSelector">@drawable/theme_classic_bg_framed_selector</item>
+		<item name="ohmFramedBackgroundSecondary">@drawable/theme_classic_bg_framed_secondary</item>
 	</style>
 
 	<style name="Classic">
@@ -191,6 +201,12 @@
 		<item name="android:cacheColorHint">#00000000</item>
 	</style>
 	
+	<!-- Variable Drawer -->
+	<style name="Classic.Drawer.Variable" parent="@style/Base.Drawer.Variable">
+		<item name="android:background">@drawable/bg_wood</item>
+		<item name="android:cacheColorHint">#00000000</item>
+	</style>
+	
 	<!-- *********** -->
 	<!-- Clean Theme -->
 	<!-- *********** -->
@@ -201,9 +217,11 @@
 		<item name="ohmResizeHandleVertical">@style/Clean.ResizeHandle.Vertical</item>
 		
 		<item name="ohmDiceBagDrawer">@style/Clean.Drawer.DiceBag</item>
+		<item name="ohmVariableDrawer">@style/Clean.Drawer.Variable</item>
 		
 		<item name="ohmFramedBackground">@drawable/theme_clean_bg_framed</item>
 		<item name="ohmFramedBackgroundSelector">@drawable/theme_clean_bg_framed_selector</item>
+		<item name="ohmFramedBackgroundSecondary">@drawable/theme_clean_bg_framed_secondary</item>
 	</style>
 	
 	<style name="Clean">
@@ -233,6 +251,11 @@
 		<item name="android:background">@color/clean_main_background</item>
 	</style>
 	
+	<!-- Variable Drawer -->
+	<style name="Clean.Drawer.Variable" parent="@style/Base.Drawer.Variable">
+		<item name="android:background">@color/clean_main_background</item>
+	</style>
+	
 	<!-- *********** -->
 	<!-- Light Theme -->
 	<!-- *********** -->
@@ -250,9 +273,11 @@
 		<item name="ohmModifiersContainer">@style/Base.Modifiers</item>
 		
 		<item name="ohmDiceBagDrawer">@style/Base.Drawer.DiceBag</item>
+		<item name="ohmVariableDrawer">@style/Base.Drawer.Variable</item>
 		
 		<item name="ohmFramedBackground">@drawable/theme_light_bg_framed</item>
 		<item name="ohmFramedBackgroundSelector">@drawable/theme_light_bg_framed_selector</item>
+		<item name="ohmFramedBackgroundSecondary">@drawable/theme_light_bg_framed_secondary</item>
 	</style>
 	
 	<style name="Light">
@@ -395,7 +420,7 @@
 	<style name="Spacer">
 		<item name="android:background">@android:color/transparent</item>
 		<item name="android:layout_width">16dp</item>
-		<item name="android:layout_width">16dp</item>
+		<item name="android:layout_height">16dp</item>
 	</style>
 	
 	<!-- Generic Details -->
@@ -479,6 +504,30 @@
 		<item name="android:gravity">center</item>
 	</style>
 	
+	<!-- Variable -->
+	<style name="VariableHandle">
+		<item name="android:visibility">visible</item>
+	</style>
+
+	<style name="Variable" parent="TextBase">
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item>
+	</style>
+	
+	<style name="VariableTitle" parent="Variable">
+		<item name="android:textSize">24sp</item>
+	</style>
+
+	<style name="VariableText" parent="Variable">
+		<item name="android:textSize">16sp</item>
+	</style>
+
+	<style name="VariableValue" parent="Variable">
+		<item name="android:textSize">24sp</item>
+		<item name="android:gravity">center</item>
+	</style>
+	
 	<!-- Dice item -->
 	<style name="Dice">
 	</style>
@@ -496,7 +545,7 @@
 		
 		<!-- <item name="android:textColor">@color/dice_number</item> -->
 		<item name="android:textColor">?android:attr/colorForeground</item>
-		<item name="android:shadowRadius">true</item>
+		<!-- <item name="android:shadowRadius">true</item> -->
 		<!-- <item name="android:shadowColor">@android:color/black</item> -->
 		<item name="android:shadowColor">?android:attr/colorBackground</item>
 		<item name="android:shadowDx">0</item>
@@ -653,5 +702,37 @@
 		
 		<item name="android:padding">8dp</item>
 		<item name="android:textColor">?android:attr/colorForeground</item>
+	</style>
+	
+	<style name="ListTitle">
+	</style>
+
+	<style name="ListTitle.Container">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">?attr/ohmFramedBackgroundSecondary</item>
+	</style>
+	
+	<style name="ListTitle.Text" parent="@style/TextBase">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+
+		<item name="android:paddingTop">8dp</item>
+		<item name="android:paddingBottom">8dp</item>
+		<item name="android:paddingLeft">8dp</item>
+		<item name="android:paddingRight">8dp</item>
+		
+		<!-- <item name="android:gravity">center</item> -->
+		<item name="android:textSize">20sp</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:marqueeRepeatLimit">marquee_forever</item>
+	</style>
+	
+	<style name="ListTitle.Divider">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">0.75dp</item>
+		<item name="android:background">?android:attr/colorForeground</item>
+		<item name="android:visibility">gone</item>
 	</style>
 </resources>

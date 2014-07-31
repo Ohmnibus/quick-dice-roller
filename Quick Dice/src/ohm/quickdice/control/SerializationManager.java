@@ -10,60 +10,138 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import ohm.dexp.DExpression;
+import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
+import ohm.quickdice.entity.DiceBagCollection;
+import ohm.quickdice.entity.DiceCollection;
+import ohm.quickdice.entity.ModifierCollection;
 import ohm.quickdice.entity.MostRecentFile;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.RollResult;
+import ohm.quickdice.entity.Variable;
+import ohm.quickdice.entity.VariableCollection;
+
+import android.util.Log;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 public class SerializationManager {
 	
-	protected static final int SERIALIZER_VERSION = 3;
+	protected static final String TAG = "SerializationManager";
+	protected static final int SERIALIZER_VERSION = 4;
 	protected static final String CHARSET = "UTF-8";
 
+//	/**
+//	 * Serialize a collection of Dice Bags to a JSON string.
+//	 * @param diceBags Dice Bags to serialize.
+//	 * @return JSON string containing Dice Bags serialization.
+//	 * @throws Exception Raised if object cannot be serialized.
+//	 */
+//	@Deprecated
+//	public static String DiceBags(ArrayList<DiceBag> diceBags) throws IOException {
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//		serializeDiceBags(baos, diceBags);
+//		return baos.toString(CHARSET);
+//	}
+//	
+//	/**
+//	 * Serialize a collection of Dice Bags to the specified stream.
+//	 * @param out Stream to write into
+//	 * @param diceBags Dice Bags to serialize.
+//	 * @throws IOException Exception Raised if object cannot be serialized.
+//	 */
+//	@Deprecated
+//	public static void DiceBags(OutputStream out, ArrayList<DiceBag> diceBags) throws IOException {
+//		serializeDiceBags(out, diceBags);
+//	}
+//	
+//	/**
+//	 * Deserialize a collection of Dice Bags from a JSON string
+//	 * @param diceBags JSON string containing Dice Bags
+//	 * @return Deserialized Dice Bags
+//	 * @throws IOException Exception Raised if object cannot be deserialized.
+//	 */
+//	@Deprecated
+//	public static ArrayList<DiceBag> DiceBags(String diceBags) throws IOException {
+//		return deserializeDiceBags(diceBags);
+//	}
+//
+//	/**
+//	 * Deserialize a collection of Dice Bags from the specified stream
+//	 * @param in Stream to read from
+//	 * @return Deserialized Dice Bags
+//	 * @throws IOException Exception Raised if object cannot be deserialized.
+//	 */
+//	@Deprecated
+//	public static ArrayList<DiceBag> DiceBags(InputStream in) throws IOException {
+//		return deserializeDiceBags(in);
+//	}
+
+	/* Dice Bag Collection */
+	
 	/**
 	 * Serialize a collection of Dice Bags to a JSON string.
-	 * @param diceBags Dice Bags to serialize.
+	 * @param diceBagCollection Dice Bags to serialize.
 	 * @return JSON string containing Dice Bags serialization.
 	 * @throws Exception Raised if object cannot be serialized.
 	 */
-	public static String DiceBags(ArrayList<DiceBag> diceBags) throws IOException {
+	public static String DiceBagCollection(DiceBagCollection diceBagCollection) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		serializeDiceBags(baos, diceBags);
+		serializeDiceBagCollection(baos, diceBagCollection);
 		return baos.toString(CHARSET);
 	}
 	
 	/**
 	 * Serialize a collection of Dice Bags to the specified stream.
 	 * @param out Stream to write into
-	 * @param diceBags Dice Bags to serialize.
+	 * @param diceBagCollection Dice Bags to serialize.
 	 * @throws IOException Exception Raised if object cannot be serialized.
 	 */
-	public static void DiceBags(OutputStream out, ArrayList<DiceBag> diceBags) throws IOException {
-		serializeDiceBags(out, diceBags);
+	public static void DiceBagCollection(OutputStream out, DiceBagCollection diceBagCollection) throws IOException {
+		serializeDiceBagCollection(out, diceBagCollection);
 	}
 	
 	/**
-	 * Deserialize a collection of Dice Bags from a JSON string
-	 * @param diceBags JSON string containing Dice Bags
-	 * @return Deserialized Dice Bags
+	 * Deserialize a collection of Dice Bags from a JSON string into the specified collection.
+	 * @param serializedCollection JSON string containing Dice Bag Collection
+	 * @param diceBagCollection {@link DiceBagCollection} to fill with deserialized data.
 	 * @throws IOException Exception Raised if object cannot be deserialized.
 	 */
-	public static ArrayList<DiceBag> DiceBags(String diceBags) throws IOException {
-		return deserializeDiceBags(diceBags);
+	public static void DiceBagCollection(String serializedCollection, DiceBagCollection diceBagCollection) throws IOException {
+		deserializeDiceBagCollection(serializedCollection, diceBagCollection);
 	}
 
 	/**
-	 * Deserialize a collection of Dice Bags from the specified stream
+	 * Deserialize a collection of Dice Bags from the specified stream into the specified collection.
 	 * @param in Stream to read from
-	 * @return Deserialized Dice Bags
+	 * @param diceBagCollection {@link DiceBagCollection} to fill with deserialized data.
 	 * @throws IOException Exception Raised if object cannot be deserialized.
 	 */
-	public static ArrayList<DiceBag> DiceBags(InputStream in) throws IOException {
-		return deserializeDiceBags(in);
+	public static void DiceBagCollection(InputStream in, DiceBagCollection diceBagCollection) throws IOException {
+		deserializeDiceBagCollection(in, diceBagCollection);
+	}
+	
+	/* Dice Bag */
+	
+	/**
+	 * Safely serialize a Dice Bag to a JSON string.<br />
+	 * If the parameter is {@code null} or an error occur
+	 * this method will return a {@code null} value.
+	 * @param diceBag Dice Bag to serialize.
+	 * @return JSON string containing Dice Bag serialization, or {@code null}.
+	 */
+	public static String DiceBagSafe(DiceBag diceBag) {
+		String retVal = null;
+		if (diceBag != null) {
+			try {
+				return DiceBag(diceBag);
+			} catch (IOException e) {
+				Log.w(TAG, "DiceBagSafe: Cannot serialize", e);
+				retVal = null;
+			}
+		}
+		return retVal;
 	}
 
 	/**
@@ -84,7 +162,27 @@ public class SerializationManager {
 	}
 	
 	/**
-	 * Deserialize a Dice Bag from a JSON string
+	 * Deserialize a Dice Bag from a JSON string.<br />
+	 * If the parameter is {@code null} or an error occur
+	 * this method will return a {@code null} value.
+	 * @param diceBag JSON string containing Dice Bag
+	 * @return Deserialized Dice Bag, or {@code null}.
+	 */
+	public static DiceBag DiceBagSafe(String diceBag) {
+		DiceBag retVal = null;
+		if (diceBag != null) {
+			try {
+				return DiceBag(diceBag);
+			} catch (IOException e) {
+				Log.w(TAG, "DiceBagSafe: Cannot deserialize", e);
+				retVal = null;
+			}
+		}
+		return retVal;
+	}
+	
+	/**
+	 * Safely deserialize a Dice Bag from a JSON string
 	 * @param diceBag JSON string containing Dice Bag
 	 * @return Deserialized Dice Bag
 	 * @throws IOException Exception Raised if object cannot be deserialized.
@@ -100,18 +198,40 @@ public class SerializationManager {
 		
 		return retVal;
 	}
+	
+	/* Variable */
+	
+	/**
+	 * Safely serialize a variable to a JSON string.<br />
+	 * If the parameter is {@code null} or an error occur
+	 * this method will return a {@code null} value.
+	 * @param dice Variable to serialize.
+	 * @return JSON string containing the variable, or {@code null}.
+	 */
+	public static String VariableSafe(Variable variable) {
+		String retVal = null;
+		if (variable != null) {
+			try {
+				return Variable(variable);
+			} catch (IOException e) {
+				Log.w(TAG, "VariableSafe: Cannot serialize", e);
+				retVal = null;
+			}
+		}
+		return retVal;
+	}
 
 	/**
-	 * Serialize a Die to a JSON string.
-	 * @param die Die to serialize.
-	 * @return JSON string containing the collection of Dice.
+	 * Serialize a variable to a JSON string.
+	 * @param dice Variable to serialize.
+	 * @return JSON string containing the variable.
 	 * @throws IOException Exception Raised if object cannot be serialized.
 	 */
-	public static String Die(DExpression die) throws IOException {
+	public static String Variable(Variable variable) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		JsonWriter writer = new JsonWriter(new OutputStreamWriter(baos, CHARSET));
 		
-		serializeDie(writer, die);
+		serializeVariable(writer, variable);
 		
 		writer.close();
 		
@@ -119,76 +239,187 @@ public class SerializationManager {
 	}
 	
 	/**
-	 * Deserialize a Die from a JSON string
-	 * @param die JSON string containing the Die
-	 * @return Deserialized Die
+	 * Safely deserialize a variable from a JSON string.<br />
+	 * If the parameter is {@code null} or an error occur
+	 * this method will return a {@code null} value.
+	 * @param dice JSON string containing the variable.
+	 * @return Deserialized variable, or {@code null}.
+	 */
+	public static Variable VariableSafe(String variable) {
+		Variable retVal = null;
+		if (variable != null) {
+			try {
+				retVal = Variable(variable);
+			} catch (IOException e) {
+				Log.w(TAG, "VariableSafe: Cannot deserialize", e);
+				retVal = null;
+			}
+		}
+		return retVal;
+	}
+	
+	/**
+	 * Deserialize a variable from a JSON string
+	 * @param dice JSON string containing the variable
+	 * @return Deserialized variable
 	 * @throws IOException Exception Raised if object cannot be deserialized.
 	 */
-	public static DExpression Die(String die) throws IOException {
-		DExpression retVal;
-		ByteArrayInputStream bais = new ByteArrayInputStream(die.getBytes(CHARSET));
+	public static Variable Variable(String variable) throws IOException {
+		Variable retVal;
+		
+		ByteArrayInputStream bais = new ByteArrayInputStream(variable.getBytes(CHARSET));
 		JsonReader reader = new JsonReader(new InputStreamReader(bais, CHARSET));
 		
-		retVal = deserializeDie(reader);
+		retVal = deserializeVariable(reader);
 		
 		reader.close();
 		
 		return retVal;
 	}
 
-//	/**
-//	 * Serialize a collection of Dice to a JSON string.
-//	 * @param dice Collection of Dice to serialize.
-//	 * @return JSON string containing the collection of Dice.
-//	 * @throws JSONException Raised if a JSON related problem occur.
-//	 */
-//	public static String DiceList(ArrayList<DExpression> dice) throws JSONException {
-//		return convertDiceListToJSON(dice).toString();
-//	}
+	/* Dice */
+
+	/**
+	 * Safely serialize a dice to a JSON string.<br />
+	 * If the parameter is {@code null} or an error occur
+	 * this method will return a {@code null} value.
+	 * @param dice Dice to serialize.
+	 * @return JSON string containing the dice, or {@code null}.
+	 */
+	public static String DiceSafe(Dice dice) {
+		String retVal = null;
+		if (dice != null) {
+			try {
+				return Dice(dice);
+			} catch (IOException e) {
+				Log.w(TAG, "DiceSafe: Cannot serialize", e);
+				retVal = null;
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * Serialize a dice to a JSON string.
+	 * @param dice Dice to serialize.
+	 * @return JSON string containing the dice.
+	 * @throws IOException Exception Raised if object cannot be serialized.
+	 */
+	public static String Dice(Dice dice) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		JsonWriter writer = new JsonWriter(new OutputStreamWriter(baos, CHARSET));
+		
+		serializeDice(writer, dice);
+		
+		writer.close();
+		
+		return baos.toString(CHARSET);
+	}
 	
 	/**
-	 * Deserialize a collection of Dice from the specified stream
-	 * @param in Stream to read from
-	 * @return Deserialized collection of Dice
+	 * Safely deserialize a dice from a JSON string.<br />
+	 * If the parameter is {@code null} or an error occur
+	 * this method will return a {@code null} value.
+	 * @param dice JSON string containing the dice.
+	 * @return Deserialized dice, or {@code null}.
+	 */
+	public static Dice DiceSafe(String dice) {
+		Dice retVal = null;
+		if (dice != null) {
+			try {
+				return Dice(dice);
+			} catch (IOException e) {
+				Log.w(TAG, "DiceSafe: Cannot deserialize", e);
+				retVal = null;
+			}
+		}
+		return retVal;
+	}
+	
+	/**
+	 * Deserialize a dice from a JSON string
+	 * @param dice JSON string containing the dice
+	 * @return Deserialized dice
 	 * @throws IOException Exception Raised if object cannot be deserialized.
 	 */
-	public static ArrayList<DExpression> DiceList(InputStream in) throws IOException {
-		ArrayList<DExpression> retVal;
-		JsonReader reader = new JsonReader(new InputStreamReader(in, CHARSET));
-
+	public static Dice Dice(String dice) throws IOException {
+		Dice retVal;
+		
+		ByteArrayInputStream bais = new ByteArrayInputStream(dice.getBytes(CHARSET));
+		JsonReader reader = new JsonReader(new InputStreamReader(bais, CHARSET));
+		
 		retVal = deserializeDice(reader);
 		
 		reader.close();
-
+		
 		return retVal;
 	}
 
+	/**
+	 * Legacy method to load a {@link DiceCollection} from the old file.
+	 * @param stream
+	 * @param collection
+	 */
+	public static void DiceCollection(InputStream stream, DiceCollection collection) throws IOException {
+		JsonReader reader = new JsonReader(new InputStreamReader(stream, CHARSET));
+		
+		deserializeDiceCollection(reader, collection);
+		
+		reader.close();
+	}
+	
 //	/**
-//	 * Serialize a collection of Modifiers to a JSON string.
-//	 * @param bonusBag Collection of Modifiers to serialize.
-//	 * @return JSON string containing the collection of Modifiers.
-//	 * @throws JSONException Raised if a JSON related problem occur.
+//	 * Deserialize a collection of Dice from the specified stream
+//	 * @param in Stream to read from
+//	 * @return Deserialized collection of Dice
+//	 * @throws IOException Exception Raised if object cannot be deserialized.
 //	 */
-//	public static String BonusList(ArrayList<RollModifier> bonusBag) throws JSONException {
-//		return convertBonusListToJSON(bonusBag).toString();
+//	@Deprecated
+//	public static ArrayList<Dice> DiceList(InputStream in) throws IOException {
+//		ArrayList<Dice> retVal;
+//		JsonReader reader = new JsonReader(new InputStreamReader(in, CHARSET));
+//
+//		retVal = deserializeDiceList(reader);
+//		
+//		reader.close();
+//
+//		return retVal;
+//	}
+
+	/* Modifier */
+	
+//	/**
+//	 * Deserialize a collection of Modifiers from the specified stream
+//	 * @param in Stream to read from.
+//	 * @return Deserialized collection of Modifiers
+//	 * @throws IOException Exception Raised if object cannot be deserialized.
+//	 */
+//	@Deprecated
+//	public static ArrayList<RollModifier> BonusList(InputStream in) throws IOException {
+//		ArrayList<RollModifier> retVal;
+//		JsonReader reader = new JsonReader(new InputStreamReader(in, CHARSET));
+//
+//		retVal = deserializeModifiers(reader);
+//		
+//		reader.close();
+//
+//		return retVal;
 //	}
 	
 	/**
-	 * Deserialize a collection of Modifiers from the specified stream
-	 * @param in Stream to read from.
-	 * @return Deserialized collection of Modifiers
-	 * @throws IOException Exception Raised if object cannot be deserialized.
+	 * Legacy method to load a {@link ModifierCollection} from the old file.
+	 * @param stream
+	 * @param collection
 	 */
-	public static ArrayList<RollModifier> BonusList(InputStream in) throws IOException {
-		ArrayList<RollModifier> retVal;
-		JsonReader reader = new JsonReader(new InputStreamReader(in, CHARSET));
-
-		retVal = deserializeModifiers(reader);
+	public static void ModifierCollection(InputStream stream, ModifierCollection collection) throws IOException {
+		JsonReader reader = new JsonReader(new InputStreamReader(stream, CHARSET));
+		
+		deserializeModifierCollection(reader, collection);
 		
 		reader.close();
-
-		return retVal;
 	}
+	
+	/* Roll Result */
 	
 	/**
 	 * Serialize a list of roll result trapping any exception.
@@ -263,6 +494,8 @@ public class SerializationManager {
 		return deserializeResultList(in);
 	}
 
+	/* Recent Files */
+	
 	/**
 	 * Serialize a list of most recent files
 	 * @param mostRecentFileList List of elements to be serialized
@@ -283,12 +516,17 @@ public class SerializationManager {
 		return deserializeMostRecentFileList(mostRecentFileList);
 	}
 	
+	/* ***************************** */
+	/* Private and protected methods */
+	/* ***************************** */
+	
 	private static final String FIELD_MRU_LIST = "mruList";
 	private static final String FIELD_MRU_NAME = "name";
 	private static final String FIELD_MRU_PATH = "path";
 	private static final String FIELD_MRU_BAGS = "bags";
 	private static final String FIELD_MRU_DICE = "dice";
 	private static final String FIELD_MRU_MODS = "mods";
+	private static final String FIELD_MRU_VARS = "vars";
 	private static final String FIELD_MRU_LAST = "last";
 
 	private static void serializeMostRecentFileList(OutputStream out, ArrayList<MostRecentFile> mostRecentFileList) throws IOException {
@@ -316,6 +554,7 @@ public class SerializationManager {
 		writer.name(FIELD_MRU_BAGS).value(mostRecentFile.getBagsNum());
 		writer.name(FIELD_MRU_DICE).value(mostRecentFile.getDiceNum());
 		writer.name(FIELD_MRU_MODS).value(mostRecentFile.getModsNum());
+		writer.name(FIELD_MRU_VARS).value(mostRecentFile.getVarsNum());
 		writer.name(FIELD_MRU_LAST).value(mostRecentFile.getLastUsed().getTime());
 		
 		writer.endObject();
@@ -361,6 +600,7 @@ public class SerializationManager {
 		int bags = 0;
 		int dice = 0;
 		int mods = 0;
+		int vars = 0;
 		long date = 0;
 		
 		reader.beginObject();
@@ -376,6 +616,8 @@ public class SerializationManager {
 				dice = reader.nextInt();
 			} else if (fieldName.equals(FIELD_MRU_MODS)) {
 				mods = reader.nextInt();
+			} else if (fieldName.equals(FIELD_MRU_VARS)) {
+				vars = reader.nextInt();
 			} else if (fieldName.equals(FIELD_MRU_LAST)) {
 				date = reader.nextLong();
 			} else {
@@ -391,6 +633,7 @@ public class SerializationManager {
 					bags,
 					dice,
 					mods,
+					vars,
 					new Date(date)
 					);
 	}
@@ -554,9 +797,31 @@ public class SerializationManager {
 	private static final String FIELD_DESCRIPTION = "desc";
 	private static final String FIELD_RESOURCE_INDEX = "resIdx";
 	private static final String FIELD_BAGS = "bags";
+	private static final String FIELD_VARS = "vars";
 	private static final String FIELD_MODS = "mods";
 
-	private static void serializeDiceBags(OutputStream out, ArrayList<DiceBag> diceBags) throws IOException {
+//	@Deprecated
+//	private static void serializeDiceBags(OutputStream out, ArrayList<DiceBag> diceBags) throws IOException {
+//		JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, CHARSET));
+//		
+//		writer.beginObject();
+//		
+//		writer.name(FIELD_VERSION).value(SERIALIZER_VERSION);
+//		writer.name(FIELD_DICE_BAGS);
+//		
+//		writer.beginArray();
+//		
+//		for (DiceBag b : diceBags) {
+//			serializeDiceBag(writer, b);
+//		}
+//
+//		writer.endArray();
+//		
+//		writer.endObject(); //FIELD_DICE_BAGS
+//		writer.close();
+//	}
+	
+	private static void serializeDiceBagCollection(OutputStream out, DiceBagCollection diceBagCollection) throws IOException {
 		JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, CHARSET));
 		
 		writer.beginObject();
@@ -566,7 +831,7 @@ public class SerializationManager {
 		
 		writer.beginArray();
 		
-		for (DiceBag b : diceBags) {
+		for (DiceBag b : diceBagCollection) {
 			serializeDiceBag(writer, b);
 		}
 
@@ -576,17 +841,58 @@ public class SerializationManager {
 		writer.close();
 	}
 	
-	private static ArrayList<DiceBag> deserializeDiceBags(String diceBag) throws IOException {
-		ByteArrayInputStream bais = new ByteArrayInputStream(diceBag.getBytes(CHARSET));
-		return deserializeDiceBags(bais);
+//	@Deprecated
+//	private static ArrayList<DiceBag> deserializeDiceBags(String diceBag) throws IOException {
+//		ByteArrayInputStream bais = new ByteArrayInputStream(diceBag.getBytes(CHARSET));
+//		return deserializeDiceBags(bais);
+//	}
+//	
+//	@Deprecated
+//	private static ArrayList<DiceBag> deserializeDiceBags(InputStream in) throws IOException {
+//		ArrayList<DiceBag> retVal;
+//		JsonReader reader = new JsonReader(new InputStreamReader(in, CHARSET));
+//		String fieldName;
+//		
+//		retVal = new ArrayList<DiceBag>();
+//		
+//		reader.beginObject();
+//		while (reader.hasNext()) {
+//			fieldName = reader.nextName();
+//			if (fieldName.equals(FIELD_VERSION)) {
+//				//This can never happen for very old versions.
+//				//Not a problem, since old file version are always readable.
+//				int version = reader.nextInt();
+//				if (version > SERIALIZER_VERSION) {
+//					reader.close();
+//					throw new IOException("Cannot deserialize a file created with an higher app version.");
+//				}
+//			} else if (fieldName.equals(FIELD_DICE_BAGS)) {
+//				reader.beginArray();
+//				while (reader.hasNext()) {
+//					retVal.add(deserializeDiceBag(reader));
+//				}
+//				reader.endArray();
+//			} else {
+//				//Unknown element
+//				reader.skipValue();
+//			}
+//		}
+//		reader.endObject();
+//		reader.close();
+//		
+//		return retVal;
+//	}
+	
+	private static void deserializeDiceBagCollection(String serializedCollection, DiceBagCollection diceBagCollection) throws IOException {
+		ByteArrayInputStream bais = new ByteArrayInputStream(serializedCollection.getBytes(CHARSET));
+		deserializeDiceBagCollection(bais, diceBagCollection);
 	}
 	
-	private static ArrayList<DiceBag> deserializeDiceBags(InputStream in) throws IOException {
-		ArrayList<DiceBag> retVal;
+	private static void deserializeDiceBagCollection(InputStream in, DiceBagCollection diceBagCollection) throws IOException {
 		JsonReader reader = new JsonReader(new InputStreamReader(in, CHARSET));
 		String fieldName;
 		
-		retVal = new ArrayList<DiceBag>();
+		diceBagCollection.clear();
 		
 		reader.beginObject();
 		while (reader.hasNext()) {
@@ -602,7 +908,7 @@ public class SerializationManager {
 			} else if (fieldName.equals(FIELD_DICE_BAGS)) {
 				reader.beginArray();
 				while (reader.hasNext()) {
-					retVal.add(deserializeDiceBag(reader));
+					diceBagCollection.add(deserializeDiceBag(reader));
 				}
 				reader.endArray();
 			} else {
@@ -612,8 +918,6 @@ public class SerializationManager {
 		}
 		reader.endObject();
 		reader.close();
-		
-		return retVal;
 	}
 
 	private static void serializeDiceBag(JsonWriter writer, DiceBag diceBag) throws IOException {
@@ -623,9 +927,14 @@ public class SerializationManager {
 		writer.name(FIELD_DESCRIPTION).value(diceBag.getDescription());
 		writer.name(FIELD_RESOURCE_INDEX).value(diceBag.getResourceIndex());
 		writer.name(FIELD_BAGS);
-		serializeDice(writer, diceBag.getDice());
+		//serializeDiceList(writer, diceBag.getDiceList());
+		serializeDiceCollection(writer, diceBag.getDice());
+		writer.name(FIELD_VARS);
+		//serializeVariableList(writer, diceBag.getVariables());
+		serializeVariableCollection(writer, diceBag.getVariables());
 		writer.name(FIELD_MODS);
-		serializeModifiers(writer, diceBag.getModifiers());
+		//serializeModifiers(writer, diceBag.getModifiers());
+		serializeModifierCollection(writer, diceBag.getModifiers());
 		
 		writer.endObject();
 	}
@@ -645,9 +954,14 @@ public class SerializationManager {
 			} else if (fieldName.equals(FIELD_RESOURCE_INDEX)) {
 				retVal.setResourceIndex(reader.nextInt());
 			} else if (fieldName.equals(FIELD_BAGS)) {
-				retVal.setDice(deserializeDice(reader));
+				//retVal.setDiceList(deserializeDiceList(reader));
+				deserializeDiceCollection(reader, retVal.getDice());
+			} else if (fieldName.equals(FIELD_VARS)) {
+				//retVal.setVariables(deserializeVariableList(reader));
+				deserializeVariableCollection(reader, retVal.getVariables());
 			} else if (fieldName.equals(FIELD_MODS)) {
-				retVal.setModifiers(deserializeModifiers(reader));
+				//retVal.setModifiers(deserializeModifiers(reader));
+				deserializeModifierCollection(reader, retVal.getModifiers());
 			} else {
 				//Unknown element
 				reader.skipValue();
@@ -655,7 +969,11 @@ public class SerializationManager {
 		}
 		reader.endObject();
 		
-		return retVal;		
+//		if (retVal.getVariables() == null) {
+//			retVal.setVariables(new ArrayList<Variable>());
+//		}
+		
+		return retVal;
 	}
 
 	private static final String FIELD_DB_ID = "id";
@@ -665,41 +983,79 @@ public class SerializationManager {
 	private static final String FIELD_DB_EXPRESSION = "exp";
 	private static final String FIELD_DB_DICE_BAG = "diceBag";
 	
-	private static void serializeDice(JsonWriter writer, ArrayList<DExpression> dice) throws IOException {
+//	@Deprecated
+//	private static void serializeDiceList(JsonWriter writer, ArrayList<Dice> diceList) throws IOException {
+//		writer.beginObject();
+//		writer.name(FIELD_DB_DICE_BAG);
+//		writer.beginArray();
+//		for (Dice d : diceList) {
+//			serializeDice(writer, d);
+//		}
+//		writer.endArray();
+//		writer.endObject(); //FIELD_DB_DICE_BAG
+//	}
+	
+	private static void serializeDiceCollection(JsonWriter writer, DiceCollection diceList) throws IOException {
 		writer.beginObject();
 		writer.name(FIELD_DB_DICE_BAG);
 		writer.beginArray();
-		for (DExpression d : dice) {
-			serializeDie(writer, d);
+		for (Dice d : diceList) {
+			serializeDice(writer, d);
 		}
 		writer.endArray();
 		writer.endObject(); //FIELD_DB_DICE_BAG
 	}
 	
-	private static void serializeDie(JsonWriter writer, DExpression die) throws IOException {
+	private static void serializeDice(JsonWriter writer, Dice dice) throws IOException {
 		writer.beginObject();
 		
-		writer.name(FIELD_DB_ID).value(die.getID());
-		writer.name(FIELD_DB_NAME).value(die.getName());
-		writer.name(FIELD_DB_DESCRIPTION).value(die.getDescription());
-		writer.name(FIELD_DB_RESOURCE_INDEX).value(die.getResourceIndex());
-		writer.name(FIELD_DB_EXPRESSION).value(die.getExpression());
+		writer.name(FIELD_DB_ID).value(dice.getID());
+		writer.name(FIELD_DB_NAME).value(dice.getName());
+		writer.name(FIELD_DB_DESCRIPTION).value(dice.getDescription());
+		writer.name(FIELD_DB_RESOURCE_INDEX).value(dice.getResourceIndex());
+		writer.name(FIELD_DB_EXPRESSION).value(dice.getExpression());
 
 		writer.endObject();
 	}
 	
-	private static ArrayList<DExpression> deserializeDice(JsonReader reader) throws IOException {
-		ArrayList<DExpression> retVal;
+//	@Deprecated
+//	private static ArrayList<Dice> deserializeDiceList(JsonReader reader) throws IOException {
+//		ArrayList<Dice> retVal;
+//		String fieldName;
+//		
+//		reader.beginObject();
+//		retVal = new ArrayList<Dice>();
+//		while (reader.hasNext()) {
+//			fieldName = reader.nextName();
+//			if (fieldName.equals(FIELD_DB_DICE_BAG)) {
+//				reader.beginArray();
+//				while (reader.hasNext()) {
+//					retVal.add(deserializeDice(reader));
+//				}
+//				reader.endArray();
+//			} else {
+//				//Unknown element
+//				reader.skipValue();
+//			}
+//		}
+//		reader.endObject();
+//		
+//		return retVal;
+//	}
+
+	private static void deserializeDiceCollection(JsonReader reader, DiceCollection diceList) throws IOException {
 		String fieldName;
 		
+		diceList.clear();
+		
 		reader.beginObject();
-		retVal = new ArrayList<DExpression>();
+
 		while (reader.hasNext()) {
 			fieldName = reader.nextName();
 			if (fieldName.equals(FIELD_DB_DICE_BAG)) {
 				reader.beginArray();
 				while (reader.hasNext()) {
-					retVal.add(deserializeDie(reader));
+					diceList.add(deserializeDice(reader));
 				}
 				reader.endArray();
 			} else {
@@ -708,16 +1064,14 @@ public class SerializationManager {
 			}
 		}
 		reader.endObject();
-		
-		return retVal;
 	}
 
-	private static DExpression deserializeDie(JsonReader reader) throws IOException {
-		DExpression retVal;
+	private static Dice deserializeDice(JsonReader reader) throws IOException {
+		Dice retVal;
 		String fieldName;
 		
 		reader.beginObject();
-		retVal = new DExpression();
+		retVal = new Dice();
 		while (reader.hasNext()) {
 			fieldName = reader.nextName();
 			if (fieldName.equals(FIELD_DB_ID)) {
@@ -740,17 +1094,158 @@ public class SerializationManager {
 		return retVal;
 	}
 
+	private static final String FIELD_VAR_ID = "id";
+	private static final String FIELD_VAR_NAME = "name";
+	private static final String FIELD_VAR_DESCRIPTION = "desc";
+	private static final String FIELD_VAR_RESOURCE_INDEX = "resIdx";
+	private static final String FIELD_VAR_LABEL = "lbl";
+	private static final String FIELD_VAR_MIN_VAL = "min";
+	private static final String FIELD_VAR_MAX_VAL = "max";
+	private static final String FIELD_VAR_CUR_VAL = "val";
+	private static final String FIELD_VAR_VAR_LIST = "varBag";
+	
+//	private static void serializeVariableList(JsonWriter writer, ArrayList<Variable> variableList) throws IOException {
+//		writer.beginObject();
+//		writer.name(FIELD_VAR_VAR_LIST);
+//		writer.beginArray();
+//		for (Variable v : variableList) {
+//			serializeVariable(writer, v);
+//		}
+//		writer.endArray();
+//		writer.endObject();
+//	}
+	
+	private static void serializeVariableCollection(JsonWriter writer, VariableCollection variableList) throws IOException {
+		writer.beginObject();
+		writer.name(FIELD_VAR_VAR_LIST);
+		writer.beginArray();
+		for (Variable v : variableList) {
+			serializeVariable(writer, v);
+		}
+		writer.endArray();
+		writer.endObject();
+	}
+	
+	private static void serializeVariable(JsonWriter writer, Variable variable) throws IOException {
+		writer.beginObject();
+		
+		writer.name(FIELD_VAR_ID).value(variable.getID());
+		writer.name(FIELD_VAR_NAME).value(variable.getName());
+		writer.name(FIELD_VAR_DESCRIPTION).value(variable.getDescription());
+		writer.name(FIELD_VAR_RESOURCE_INDEX).value(variable.getResourceIndex());
+		writer.name(FIELD_VAR_LABEL).value(variable.getLabel());
+		writer.name(FIELD_VAR_MIN_VAL).value(variable.getMinVal());
+		writer.name(FIELD_VAR_MAX_VAL).value(variable.getMaxVal());
+		writer.name(FIELD_VAR_CUR_VAL).value(variable.getCurVal());
+
+		writer.endObject();
+	}
+
+//	@Deprecated
+//	private static ArrayList<Variable> deserializeVariableList(JsonReader reader) throws IOException {
+//		ArrayList<Variable> retVal;
+//		String fieldName;
+//		
+//		reader.beginObject();
+//		retVal = new ArrayList<Variable>();
+//		while (reader.hasNext()) {
+//			fieldName = reader.nextName();
+//			if (fieldName.equals(FIELD_VAR_VAR_LIST)) {
+//				reader.beginArray();
+//				while (reader.hasNext()) {
+//					retVal.add(deserializeVariable(reader));
+//				}
+//				reader.endArray();
+//			} else {
+//				//Unknown element
+//				reader.skipValue();
+//			}
+//		}
+//		reader.endObject();
+//		
+//		return retVal;
+//	}
+
+	private static void deserializeVariableCollection(JsonReader reader, VariableCollection collection) throws IOException {
+		String fieldName;
+		
+		collection.clear();
+		
+		reader.beginObject();
+
+		while (reader.hasNext()) {
+			fieldName = reader.nextName();
+			if (fieldName.equals(FIELD_VAR_VAR_LIST)) {
+				reader.beginArray();
+				while (reader.hasNext()) {
+					collection.add(deserializeVariable(reader));
+				}
+				reader.endArray();
+			} else {
+				//Unknown element
+				reader.skipValue();
+			}
+		}
+		reader.endObject();
+	}
+
+	private static Variable deserializeVariable(JsonReader reader) throws IOException {
+		Variable retVal;
+		String fieldName;
+		
+		reader.beginObject();
+		retVal = new Variable();
+		while (reader.hasNext()) {
+			fieldName = reader.nextName();
+			if (fieldName.equals(FIELD_VAR_ID)) {
+				retVal.setID(reader.nextInt());
+			} else if (fieldName.equals(FIELD_VAR_NAME)) {
+				retVal.setName(reader.nextString());
+			} else if (fieldName.equals(FIELD_VAR_DESCRIPTION)) {
+				retVal.setDescription(reader.nextString());
+			} else if (fieldName.equals(FIELD_VAR_RESOURCE_INDEX)) {
+				retVal.setResourceIndex(reader.nextInt());
+			} else if (fieldName.equals(FIELD_VAR_LABEL)) {
+				retVal.setLabel(reader.nextString());
+			} else if (fieldName.equals(FIELD_VAR_MIN_VAL)) {
+				retVal.setMinVal(reader.nextInt());
+			} else if (fieldName.equals(FIELD_VAR_MAX_VAL)) {
+				retVal.setMaxVal(reader.nextInt());
+			} else if (fieldName.equals(FIELD_VAR_CUR_VAL)) {
+				retVal.setCurVal(reader.nextInt());
+			} else {
+				//Unknown element
+				reader.skipValue();
+			}
+		}
+		reader.endObject();
+		
+		return retVal;
+	}
+	
 	private static final String FIELD_BB_NAME = "name";
 	private static final String FIELD_BB_DESCRIPTION = "desc";
 	private static final String FIELD_BB_RESOURCE_INDEX = "resIdx";
 	private static final String FIELD_BB_MODIFIER = "mod";
 	private static final String FIELD_BB_BONUS_BAG = "bonusBag";
 	
-	private static void serializeModifiers(JsonWriter writer, ArrayList<RollModifier> modifiers) throws IOException {
+//	@Deprecated
+//	private static void serializeModifiers(JsonWriter writer, ArrayList<RollModifier> modifiers) throws IOException {
+//		writer.beginObject();
+//		writer.name(FIELD_BB_BONUS_BAG);
+//		writer.beginArray();
+//		for (RollModifier m : modifiers) {
+//			serializeModifier(writer, m);
+//		}		
+//		writer.endArray();
+//		writer.endObject(); //FIELD_BB_BONUS_BAG
+//	}
+	
+	private static void serializeModifierCollection(JsonWriter writer, ModifierCollection collection) throws IOException {
 		writer.beginObject();
 		writer.name(FIELD_BB_BONUS_BAG);
 		writer.beginArray();
-		for (RollModifier m : modifiers) {
+		for (RollModifier m : collection) {
 			serializeModifier(writer, m);
 		}		
 		writer.endArray();
@@ -768,18 +1263,43 @@ public class SerializationManager {
 		writer.endObject();
 	}
 
-	private static ArrayList<RollModifier> deserializeModifiers(JsonReader reader) throws IOException {
-		ArrayList<RollModifier> retVal;
+//	@Deprecated
+//	private static ArrayList<RollModifier> deserializeModifiers(JsonReader reader) throws IOException {
+//		ArrayList<RollModifier> retVal;
+//		String fieldName;
+//		
+//		reader.beginObject();
+//		retVal = new ArrayList<RollModifier>();
+//		while (reader.hasNext()) {
+//			fieldName = reader.nextName();
+//			if (fieldName.equals(FIELD_BB_BONUS_BAG)) {
+//				reader.beginArray();
+//				while (reader.hasNext()) {
+//					retVal.add(deserializeModifier(reader));
+//				}
+//				reader.endArray();
+//			} else {
+//				//Unknown element
+//				reader.skipValue();
+//			}
+//		}
+//		reader.endObject();
+//		
+//		return retVal;
+//	}
+	
+	private static void deserializeModifierCollection(JsonReader reader, ModifierCollection collection) throws IOException {
 		String fieldName;
 		
+		collection.clear();
+		
 		reader.beginObject();
-		retVal = new ArrayList<RollModifier>();
 		while (reader.hasNext()) {
 			fieldName = reader.nextName();
 			if (fieldName.equals(FIELD_BB_BONUS_BAG)) {
 				reader.beginArray();
 				while (reader.hasNext()) {
-					retVal.add(deserializeModifier(reader));
+					collection.add(deserializeModifier(reader));
 				}
 				reader.endArray();
 			} else {
@@ -788,8 +1308,6 @@ public class SerializationManager {
 			}
 		}
 		reader.endObject();
-		
-		return retVal;
 	}
 	
 	private static RollModifier deserializeModifier(JsonReader reader) throws IOException {

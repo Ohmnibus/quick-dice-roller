@@ -26,7 +26,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_centerVertical="true"
 			
-			android:src="@drawable/ic_handle_bar"
+			android:src="@drawable/ic_handle_bar_left"
 			android:scaleType="fitXY"
 			android:contentDescription="@string/app_name"
 			/>
@@ -40,7 +40,7 @@
 			android:layout_alignParentTop="true"
 			android:layout_alignParentLeft="true"
 			
-			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			android:layout_marginLeft="@dimen/drawer_margin_for_handle"
 			
 			android:orientation="horizontal"
 			
@@ -206,7 +206,7 @@
 		android:id="@+id/mDiceBagList"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_marginRight="@dimen/right_margin_keep_clean_land"
+		android:layout_marginRight="@dimen/drawer_margin_keep_clean_land"
 		android:layout_gravity="left"
 		
 		android:choiceMode="singleChoice"

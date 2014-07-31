@@ -18,6 +18,7 @@ public class PreferenceManager {
 	public static final int THEME_DARK = 3;
 
 	protected static final int MAX_DICE = 24;
+	protected static final int MAX_VAR = 24;
 	protected static final int MAX_DICE_BAGS = 12;
 	protected static final int MAX_MODIFIERS = 24;
 	protected static final int MAX_LINKED_RESULTS = 8;
@@ -298,6 +299,15 @@ public class PreferenceManager {
 		return MAX_DICE_BAGS;
 	}
 
+	/**
+	 * Return the max number of variables allowed in the dice bag.
+	 * @return Maximum number of variables allowed in the dice bag.
+	 */
+	public int getMaxVariables() {
+		//return config.getInt(KEY_MAX_VAR, 16);
+		return MAX_VAR;
+	}
+	
 	/**
 	 * Return the max number of dice allowed in the dicebag.
 	 * @return Maximum number of dice allowed in the dicebag.

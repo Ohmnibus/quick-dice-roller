@@ -8,14 +8,16 @@ public class MostRecentFile implements Comparable<MostRecentFile>{
 	int bagsNum;
 	int diceNum;
 	int modsNum;
+	int varsNum;
 	String path;
 	Date lastUsed;
 	
-	public MostRecentFile(String name, String path, int bagsNum, int diceNum, int modsNum, Date lastUsed) {
+	public MostRecentFile(String name, String path, int bagsNum, int diceNum, int modsNum, int varsNum, Date lastUsed) {
 		this.name = name;
 		this.bagsNum = bagsNum;
 		this.diceNum = diceNum;
 		this.modsNum = modsNum;
+		this.varsNum = varsNum;
 		this.path = path;
 		this.lastUsed = lastUsed;
 	}
@@ -46,6 +48,13 @@ public class MostRecentFile implements Comparable<MostRecentFile>{
 	 */
 	public int getModsNum() {
 		return modsNum;
+	}
+	
+	/**
+	 * @return the varsNum
+	 */
+	public int getVarsNum() {
+		return varsNum;
 	}
 
 	/**

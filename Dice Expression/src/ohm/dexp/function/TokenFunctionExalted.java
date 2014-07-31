@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 
@@ -28,7 +28,7 @@ public class TokenFunctionExalted extends TokenFunctionPoolBase {
 	private int oneCount;
 
 	@Override
-	protected void initSequence(DInstance instance) throws DException {
+	protected void initSequence(DContext instance) throws DException {
 		TokenBase tokenTarget;
 		
 		tokenTarget = getChild(INDEX_TARGET);
@@ -39,18 +39,18 @@ public class TokenFunctionExalted extends TokenFunctionPoolBase {
 	}
 
 	@Override
-	protected int getPoolSize(DInstance instance) throws DException {
+	protected int getPoolSize(DContext instance) throws DException {
 		getChild(INDEX_POOL).evaluate(instance);
 		return (int)getChild(INDEX_POOL).getResult();
 	}
 
 	@Override
-	protected int getRoll(DInstance instance) throws DException {
+	protected int getRoll(DContext instance) throws DException {
 		return standardDice.roll();
 	}
 
 	@Override
-	protected int countSuccesses(DInstance instance, int rollResult) throws DException {
+	protected int countSuccesses(DContext instance, int rollResult) throws DException {
 		int retVal;
 		
 		retVal = 0;
@@ -73,7 +73,7 @@ public class TokenFunctionExalted extends TokenFunctionPoolBase {
 	}
 
 	@Override
-	protected void endSequence(DInstance instance) throws DException {
+	protected void endSequence(DContext instance) throws DException {
 		if (resultValue == 0 && oneCount > 0) {
 			//Botch!
 			resultValue = -1;
@@ -82,7 +82,7 @@ public class TokenFunctionExalted extends TokenFunctionPoolBase {
 	}
 
 	@Override
-	protected long getMaxPoolSize(DInstance instance) throws DException {
+	protected long getMaxPoolSize(DContext instance) throws DException {
 		return getChild(INDEX_POOL).getMaxResult();
 	}
 

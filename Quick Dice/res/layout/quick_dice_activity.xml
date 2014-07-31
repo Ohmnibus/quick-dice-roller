@@ -26,9 +26,21 @@
 			android:layout_alignParentLeft="true"
 			android:layout_centerVertical="true"
 			
-			android:src="@drawable/ic_handle_bar"
+			android:src="@drawable/ic_handle_bar_left"
 			android:scaleType="fitXY"
-			android:contentDescription="@string/app_name"
+			android:contentDescription="@null"
+			/>
+		
+		<ImageView style="@style/DiceBagHandle"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			
+			android:src="@drawable/ic_handle_bar_right"
+			android:scaleType="fitXY"
+			android:contentDescription="@null"
 			/>
 
 		<RelativeLayout style="?attr/ohmLastRollContainer"
@@ -39,7 +51,8 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentTop="true"
 			
-			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			android:layout_marginLeft="@dimen/drawer_margin_for_handle"
+			android:layout_marginRight="@dimen/drawer_margin_for_handle"
 			>
 			
 			<include
@@ -102,7 +115,8 @@
 			android:layout_above="@+id/mModifierContainer"
 			android:layout_alignWithParentIfMissing="true"
 			
-			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			android:layout_marginLeft="@dimen/drawer_margin_for_handle"
+			android:layout_marginRight="@dimen/drawer_margin_for_handle"
 			
 			android:orientation="vertical"
 			
@@ -168,7 +182,8 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentBottom="true"
-			android:layout_marginLeft="@dimen/left_margin_for_handle"
+			android:layout_marginLeft="@dimen/drawer_margin_for_handle"
+			android:layout_marginRight="@dimen/drawer_margin_for_handle"
 			>
 			
 			<HorizontalScrollView
@@ -207,10 +222,17 @@
 		android:id="@+id/mDiceBagList"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_marginRight="@dimen/right_margin_keep_clean"
+		android:layout_marginRight="@dimen/drawer_margin_keep_clean"
 		android:layout_gravity="left"
 		
 		android:choiceMode="singleChoice"
 		/>
 	
+	<ListView style="?attr/ohmVariableDrawer"
+		android:id="@+id/mVariableList"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginRight="@dimen/drawer_margin_keep_clean"
+		android:layout_gravity="right"
+		/>
 </android.support.v4.widget.DrawerLayout>

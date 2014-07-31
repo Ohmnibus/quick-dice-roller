@@ -1,8 +1,5 @@
 package ohm.quickdice.entity;
 
-import java.io.Serializable;
-
-import ohm.dexp.DResult;
 import ohm.quickdice.R;
 import ohm.quickdice.control.GraphicManager;
 
@@ -11,12 +8,12 @@ import ohm.quickdice.control.GraphicManager;
  * @author Ohmnibus
  *
  */
-public class RollResult implements Serializable {
+public class RollResult /* implements Serializable */ {
 	
 	/**
 	 * Serial version UID used for serialization.
 	 */
-	private static final long serialVersionUID = -8278370559503945512L;
+	//private static final long serialVersionUID = -8278370559503945512L;
 
 	public static final int DEFAULT_RESULT_ICON = R.drawable.ic_dxx_gray;
 	
@@ -28,20 +25,20 @@ public class RollResult implements Serializable {
 	protected long minResultValue;
 	protected int resourceIndex;
 	
-	/**
-	 * Initialize a {@link RollResult} object from a {@link DResult}.
-	 * @param dResult
-	 */
-	public RollResult(DResult dResult) {
-		this(
-				new String(dResult.getExpression().getName()),
-				new String(dResult.getExpression().getDescription()),
-				new String(dResult.getResultText()),
-				dResult.getResult(),
-				dResult.getMaxResult(),
-				dResult.getMinResult(),
-				dResult.getExpression().getResourceIndex());
-	}
+//	/**
+//	 * Initialize a {@link RollResult} object from a {@link DResult}.
+//	 * @param dResult
+//	 */
+//	public RollResult(DResult dResult) {
+//		this(
+//				new String(dResult.getExpression().getName()),
+//				new String(dResult.getExpression().getDescription()),
+//				new String(dResult.getResultText()),
+//				dResult.getResult(),
+//				dResult.getMaxResult(),
+//				dResult.getMinResult(),
+//				dResult.getExpression().getResourceIndex());
+//	}
 
 	/**
 	 * Initialize a {@link RollResult} object from given parameters.

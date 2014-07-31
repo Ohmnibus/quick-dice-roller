@@ -45,7 +45,7 @@ public class Helper {
 
 	Context ctx;
 	Resources res;
-	
+
 	/**
 	 * Initialize the helper based on a context.
 	 * @param context
@@ -54,7 +54,7 @@ public class Helper {
 		ctx = context;
 		res = ctx.getResources();
 	}
-	
+
 	/**
 	 * Show a confirm/cancel dialog.
 	 * @param titleId Resource id for the title string.
@@ -71,7 +71,7 @@ public class Helper {
 			DialogInterface.OnClickListener yesListener,
 			int noId,
 			DialogInterface.OnClickListener noListener) {
-		
+
 		showDialog(
 				ctx,
 				titleId,
@@ -81,7 +81,7 @@ public class Helper {
 				noId,
 				noListener);
 	}
-	
+
 	/**
 	 * Show a confirm/cancel dialog.
 	 * @param context The context to use. Usually your {@link Application} or {@link Activity} object.
@@ -100,7 +100,7 @@ public class Helper {
 			DialogInterface.OnClickListener yesListener,
 			int noId,
 			DialogInterface.OnClickListener noListener) {
-		
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(titleId);
 		builder.setMessage(messageId);
@@ -109,7 +109,7 @@ public class Helper {
 		builder.setNegativeButton(noId, noListener);
 		builder.create().show();
 	}
-	
+
 	/**
 	 * Display a toast showing the error message.
 	 * @param e Exception containing error info.
@@ -126,7 +126,7 @@ public class Helper {
 		Toast.makeText(context, getErrorMessage(context, e), Toast.LENGTH_LONG).show();
 	}
 
-	
+
 	/**
 	 * Construct an error message from an exception.
 	 * @param e Exception containing error info.
@@ -136,7 +136,7 @@ public class Helper {
 		return getErrorMessage(ctx, e);
 	}
 
-	
+
 	/**
 	 * Construct an error message from an exception.
 	 * @param context The context to use. Usually your {@link Application} or {@link Activity} object.
@@ -146,7 +146,7 @@ public class Helper {
 	public static String getErrorMessage(Context context, DException e) {
 		String retVal;
 		Resources res = context.getResources();
-		
+
 		try {
 			throw e;
 		} catch (DivisionByZero ex) {
@@ -172,16 +172,16 @@ public class Helper {
 		} catch (UnknownFunction ex) {
 			retVal = String.format(res.getString(R.string.exc_unknown_function), ex.getName(), ex.getFromChar());
 		} catch (UnknownVariable ex) {
-			retVal = String.format(res.getString(R.string.exc_unknown_variable), ex.getName(), ex.getFromChar());
+			retVal = String.format(res.getString(R.string.exc_unknown_variable), ex.getName(), ex.getPosition());
 		} catch (DParseException ex) {
 			retVal = res.getString(R.string.exc_generic_parsed);
 		} catch (DException ex) {
 			retVal = res.getString(R.string.exc_generic);
 		}
-		
+
 		return retVal;
 	}
-	
+
 	/**
 	 * Get a resource string given it's {@link Context} and it's id.
 	 * @param context {@link Context} of the string.
@@ -191,7 +191,7 @@ public class Helper {
 	public static String getString(Context context, int resId) {
 		return getString(context.getResources(), resId);
 	}
-	
+
 	/**
 	 * Get a formatted resource string given it's {@link Context} and it's id.
 	 * @param context {@link Context} of the string.
@@ -212,7 +212,7 @@ public class Helper {
 	public static String getString(Resources resources, int resId) {
 		return resources.getString(resId);
 	}
-	
+
 	/**
 	 * Get a formatted resource string given the context resources and it's id.
 	 * @param resources {@link Resources} from which get the string.
@@ -232,28 +232,28 @@ public class Helper {
 	@SuppressWarnings("rawtypes")
 	public static void requestBackup(Context ctx) {
 		try {
-	        Class managerClass = Class.forName("android.app.backup.BackupManager");
-	        Constructor managerConstructor = managerClass.getConstructor(Context.class);
-	        Object manager = managerConstructor.newInstance(ctx);
-	        Method m = managerClass.getMethod("dataChanged");
-	        m.invoke(manager);
-	        //Log.d("requestBackup", "Backup requested");
-	    } catch(ClassNotFoundException e) {
-	        //Log.d("requestBackup", "No backup manager found");
-	    } catch(Throwable t) {
-	        //Log.d("requestBackup", "Scheduling backup failed " + t);
-	        t.printStackTrace();
-	    }			
+			Class managerClass = Class.forName("android.app.backup.BackupManager");
+			Constructor managerConstructor = managerClass.getConstructor(Context.class);
+			Object manager = managerConstructor.newInstance(ctx);
+			Method m = managerClass.getMethod("dataChanged");
+			m.invoke(manager);
+			//Log.d("requestBackup", "Backup requested");
+		} catch(ClassNotFoundException e) {
+			//Log.d("requestBackup", "No backup manager found");
+		} catch(Throwable t) {
+			//Log.d("requestBackup", "Scheduling backup failed " + t);
+			t.printStackTrace();
+		}			
 	}
-	
+
 	public static OnClickListener getExpressionActionsClickListener(BuilderDialogBase.ReadyListener builderReadyListener) {
 		return new ExpressionActionsClickListener(builderReadyListener);
 	}
-	
+
 	protected static class ExpressionActionsClickListener implements View.OnClickListener {
-		
+
 		ReadyListener readyListener;
-		
+
 		public ExpressionActionsClickListener(ReadyListener readyListener) {
 			this.readyListener = readyListener;
 		}
@@ -264,19 +264,19 @@ public class Helper {
 			popupMenu.show();
 		}
 	}
-	
-    /**
-     * Get the pop-up menu to be used with expressions.<br />
-     * @param v View for which the pop-up menu is called.
-     * @param builderReadyListener Listener to be invoked when the dialog is dismissed.
-     * @return A {@link PopupMenu} ready to be shown.
-     */
+
+	/**
+	 * Get the pop-up menu to be used with expressions.<br />
+	 * @param v View for which the pop-up menu is called.
+	 * @param builderReadyListener Listener to be invoked when the dialog is dismissed.
+	 * @return A {@link PopupMenu} ready to be shown.
+	 */
 	public static PopupMenu getExpressionPopupMenu(View v, BuilderDialogBase.ReadyListener builderReadyListener) {
 		PopupMenu retVal;
 		ActionItem ai;
-		
+
 		retVal = new PopupMenu(v);
-		
+
 		//Verify
 		ai = new ActionItem();
 		ai.setTitle(v.getContext().getResources().getString(R.string.lblCheckExpression));
@@ -305,28 +305,28 @@ public class Helper {
 						retVal,
 						builderReadyListener)
 				);
-		
+
 		//Function Builders
 		FunctionDescriptor[] fnc = QuickDiceApp.getInstance().getFunctionDescriptors();
-		
+
 		for (int i = 0; i < fnc.length; i++) {
 			retVal.addActionItem(
-				FunctionBuilderDialog.getActionItem(
-						v.getContext(),
-						retVal,
-						builderReadyListener,
-						fnc[i])
-				);
+					FunctionBuilderDialog.getActionItem(
+							v.getContext(),
+							retVal,
+							builderReadyListener,
+							fnc[i])
+					);
 		}
-		
+
 		return retVal;
-    }
-	
+	}
+
 	protected static class CheckActionItemClickListener implements View.OnClickListener {
-		
+
 		PopupMenu parent;
 		ReadyListener readyListener;
-		
+
 		public CheckActionItemClickListener(PopupMenu parent, ReadyListener readyListener) {
 			this.parent = parent;
 			this.readyListener = readyListener;

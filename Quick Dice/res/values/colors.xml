@@ -14,25 +14,26 @@
 	<color name="undo_bar_bg_pressed">#858585</color><!-- Same for all styles -->
 
 	<!-- <color name="base_main_background">?android:attr/colorBackground</color> -->
-	<color name="base_frame_solid_color">#20ffffff</color>
+	<color name="base_frame_solid_color">#30ffffff</color>
 	<color name="base_frame_border_color">#40ffffff</color>
+	<color name="base_frame_secondary_solid_color">#40ffffff</color>
 	<color name="base_handle_solid_color">#bcbcbc</color>
 	
 	<color name="classic_main_background">#112233</color>
 	<color name="classic_frame_solid_color">#40000000</color>
 	<color name="classic_frame_border_color">#80000000</color>
+	<color name="classic_frame_secondary_solid_color">#80000000</color>
 	<color name="classic_handle_solid_color">#000000</color>
 	
 	<color name="clean_main_background">#112233</color>
 	<color name="clean_frame_solid_color">#081122</color>
 	<color name="clean_frame_border_color">#000811</color>
+	<color name="clean_frame_secondary_solid_color">#000811</color>
 	<color name="clean_handle_solid_color">#000000</color>
 	
 	<!-- <color name="light_main_background">?android:attr/colorBackground</color> -->
-	<!-- <color name="light_frame_solid_color">#ffdddddd</color>
-	<color name="light_frame_border_color">#ffd2d2d2</color> -->
-	<color name="light_frame_solid_color">#100099cc</color>
-	<!-- <color name="light_frame_border_color">#800099cc</color> -->
+	<color name="light_frame_solid_color">#200099cc</color>
 	<color name="light_frame_border_color">#99bfcc</color>
+	<color name="light_frame_secondary_solid_color">#400099cc</color>
 	<color name="light_handle_solid_color">#99bfcc</color>
 </resources>

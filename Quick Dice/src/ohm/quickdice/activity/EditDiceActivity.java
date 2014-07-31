@@ -1,15 +1,20 @@
 package ohm.quickdice.activity;
 
-import ohm.dexp.DExpression;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.DParseException;
+import ohm.dexp.exception.UnknownVariable;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
+import ohm.quickdice.control.SerializationManager;
 import ohm.quickdice.dialog.BuilderDialogBase;
 import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.dialog.IconPickerDialog;
+import ohm.quickdice.entity.Dice;
+import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.util.Helper;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class EditDiceActivity extends BaseActivity {
+public class EditDiceActivity extends BaseActivity implements OnClickListener {
 
 	/**
 	 * Open the activity to edit an existing dice expression.
@@ -41,9 +46,9 @@ public class EditDiceActivity extends BaseActivity {
 	 */
 	public static final int RESULT_CANCEL = 0x00010002;
 	/**
-	 * Define the bundle content as {@link DExpression}.
+	 * Define the bundle content as {@link Dice}.
 	 */
-	public static final String BUNDLE_DICE_EXPRESSION = "DExpression";
+	public static final String BUNDLE_DICE = "Dice";
 	/**
 	 * Define the bundle content as a type of request ({@code ACTIVITY_EDIT} or {@code ACTIVITY_ADD}).
 	 */
@@ -56,7 +61,8 @@ public class EditDiceActivity extends BaseActivity {
 	
 	public static final int POSITION_UNDEFINED = -1;
 	
-	protected DExpression expression;
+	protected DiceBag currentDiceBag;
+	protected Dice expression;
 	protected int position;
 	protected int req;
 	protected ImageButton ibtIconPicker;
@@ -77,9 +83,13 @@ public class EditDiceActivity extends BaseActivity {
 		
 		super.onCreate(savedInstanceState);
 
+		currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
+
 		if (savedInstanceState != null) {
-			expression = (DExpression) savedInstanceState.getSerializable(KEY_DEXPRESSION);
-			position = savedInstanceState.getInt(KEY_POSITION);
+			//expression = SerializationManager.DiceSafe(savedInstanceState.getString(KEY_DICE));
+			//position = savedInstanceState.getInt(KEY_POSITION);
+			expression = getDice(savedInstanceState);
+			position = getDicePosition(savedInstanceState);
 			initViews(
 					expression == null,
 					savedInstanceState.getString(KEY_NAME),
@@ -93,22 +103,24 @@ public class EditDiceActivity extends BaseActivity {
 			if (extras != null) {
 				req = extras.getInt(BUNDLE_REQUEST_TYPE);
 				if (req == ACTIVITY_EDIT) {
-					expression = (DExpression)extras.getSerializable(BUNDLE_DICE_EXPRESSION);
+					//expression = SerializationManager.DiceSafe(extras.getString(BUNDLE_DICE));
+					expression = getDice(extras);
 				} else {
 					expression = null;
 				}
-				if (extras.containsKey(BUNDLE_POSITION)) {
-					position = extras.getInt(BUNDLE_POSITION);
-				} else {
-					position = POSITION_UNDEFINED;
-				}
+//				if (extras.containsKey(BUNDLE_POSITION)) {
+//					position = extras.getInt(BUNDLE_POSITION);
+//				} else {
+//					position = POSITION_UNDEFINED;
+//				}
+				position = getDicePosition(extras);
 			}
 			initViews(expression);
 		}
 	}
 	
-	protected static final String KEY_DEXPRESSION = "KEY_DEXPRESSION";
-	protected static final String KEY_POSITION = "KEY_POSITION";
+	//protected static final String KEY_DICE = "KEY_DICE";
+	//protected static final String KEY_POSITION = "KEY_POSITION";
 	protected static final String KEY_NAME = "KEY_NAME";
 	protected static final String KEY_DESCRIPTION = "KEY_DESCRIPTION";
 	protected static final String KEY_RES_INDEX = "KEY_RES_INDEX";
@@ -121,11 +133,11 @@ public class EditDiceActivity extends BaseActivity {
 	 */
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		outState.putSerializable(KEY_DEXPRESSION, expression);
-		outState.putInt(KEY_POSITION, position);
+		outState.putString(BUNDLE_DICE, SerializationManager.DiceSafe(expression));
+		outState.putInt(BUNDLE_POSITION, position);
+		
 		outState.putString(KEY_NAME, txtName.getText().toString());
 		outState.putString(KEY_DESCRIPTION, txtDescription.getText().toString());
-		//outState.putInt(KEY_RES_INDEX, glrResourceIndex.getSelectedItemPosition());
 		outState.putInt(KEY_RES_INDEX, currentResIndex);
 		outState.putString(KEY_EXPRESSION, txtExpression.getText().toString());
 		outState.putBoolean(KEY_TEXT_CHANGED, textChanged);
@@ -133,7 +145,7 @@ public class EditDiceActivity extends BaseActivity {
 		super.onSaveInstanceState(outState);
 	}
 	
-	private void initViews(DExpression exp) {
+	private void initViews(Dice exp) {
 		expression = exp;
 
 		if (exp == null) {
@@ -168,7 +180,7 @@ public class EditDiceActivity extends BaseActivity {
 		}
 
 		ibtIconPicker = (ImageButton)findViewById(R.id.edIconPicker);
-		ibtIconPicker.setOnClickListener(iconPickerClickListener);
+		ibtIconPicker.setOnClickListener(this);
 
 		txtName = (EditText) findViewById(R.id.edNameText);
 		txtName.setText(name);
@@ -177,10 +189,6 @@ public class EditDiceActivity extends BaseActivity {
 		txtDescription = (EditText) findViewById(R.id.edDescText);
 		txtDescription.setText(description);
 		txtDescription.addTextChangedListener(genericTextWatcher);
-		
-//    	glrResourceIndex = (Gallery) findViewById(R.id.edIconGallery);
-//    	glrResourceIndex.setAdapter(new IconAdapter(this));
-//    	glrResourceIndex.setSelection(resIndex);
 		
 		txtExpression = (EditText) findViewById(R.id.edExpText);
 		txtExpression.setText(exp);
@@ -193,13 +201,9 @@ public class EditDiceActivity extends BaseActivity {
 		setCurrentIcon();
 
 		confirm = (Button) findViewById(R.id.btuBarConfirm);
-		confirm.setOnClickListener(confirmCancelClickListener);
+		confirm.setOnClickListener(this);
 		cancel = (Button) findViewById(R.id.btuBarCancel);
-		cancel.setOnClickListener(confirmCancelClickListener);
-
-		//((ImageButton)findViewById(R.id.btuDiceBuilder)).setOnClickListener(diceBuilderClickListener);
-		//((ImageButton)findViewById(R.id.btuHelp)).setOnClickListener(helpClickListener);
-		//((ImageButton)findViewById(R.id.btuCheckExpression)).setOnClickListener(checkExpressionClickListener);
+		cancel.setOnClickListener(this);
 
 		((ImageButton)findViewById(R.id.btuWizard)).setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
 	}
@@ -220,51 +224,39 @@ public class EditDiceActivity extends BaseActivity {
 		}
 	};
 
-	//Listener to the confirm and cancel button click
-	private OnClickListener confirmCancelClickListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			DExpression retExp;
-			int result;
-			if (v == confirm) {
-				retExp = readExpression();
-				if (retExp == null) {
-					//The expression is not valid
-					return;
-				}
-				result = RESULT_OK;
-			} else {
-				if (dataChanged()) {
-					askDropChanges();
-					return;
-				}
-				retExp = null;
-				result = RESULT_CANCEL;
-			}
-			returnToCaller(retExp, position, result);
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.btuBarConfirm:
+				//Confirm button
+				//retExp = readDice();
+				//if (retExp == null) {
+				//	//The expression is not valid
+				//	return;
+				//}
+				//returnToCaller(retExp, position, RESULT_OK);
+				handleConfirmButton();
+				break;
+			case R.id.btuBarCancel:
+				//Cancel button
+//				if (dataChanged()) {
+//					askDropChanges();
+//				} else {
+//					returnToCaller(null, position, RESULT_CANCEL);
+//				}
+				handleCancelButton();
+				break;
+			case R.id.edIconPicker:
+				//Icon picker dialog
+				new IconPickerDialog(
+						EditDiceActivity.this,
+						R.string.lblDiceIconPicker,
+						currentResIndex,
+						iconPickerReadyListener).show();
+				break;
 		}
-	};
-	
+	}
 
-//	private OnClickListener diceBuilderClickListener = new OnClickListener() {
-//		@Override
-//		public void onClick(View v) {
-//			new DiceBuilderDialog(EditDiceActivity.this, v, builderReadyListener).show();
-//		}
-//	};
-//	
-//	private OnClickListener helpClickListener = new OnClickListener() {
-//		@Override
-//		public void onClick(View v) {
-//	    	new MarkupDialog(
-//	    			EditDiceActivity.this,
-//	    			R.string.msgOnlineHelpTitle,
-//	    			R.string.msgOnlineHelp,
-//	    			0, //R.drawable.ic_launcher,
-//	    			null).show();
-//		}
-//	};
-	
 	private BuilderDialogBase.ReadyListener builderReadyListener = new ReadyListener() {
 		@Override
 		public void ready(View view, boolean confirmed, int action, String diceExpression) {
@@ -289,7 +281,7 @@ public class EditDiceActivity extends BaseActivity {
 					txt.setSelection(selStart, selStart + diceExpression.length());
 					txt.requestFocus();
 				} else {
-					DExpression retExp = readExpression();
+					Dice retExp = readDice();
 					if (retExp != null) {
 						//The expression is valid
 						Toast.makeText(EditDiceActivity.this, R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
@@ -299,21 +291,10 @@ public class EditDiceActivity extends BaseActivity {
 		}
 	};
 	
-	private OnClickListener iconPickerClickListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			new IconPickerDialog(
-					EditDiceActivity.this,
-					R.string.lblDiceIconPicker,
-					currentResIndex,
-					iconPickerReadyListener).show();
-		}
-	};
-	
-	private IconPickerDialog.ReadyListener iconPickerReadyListener = new IconPickerDialog.ReadyListener() {
+	private IconPickerDialog.OnIconPickedListener iconPickerReadyListener = new IconPickerDialog.OnIconPickedListener() {
 		
 		@Override
-		public void ready(boolean confirmed, int iconId) {
+		public void onIconPicked(boolean confirmed, int iconId) {
 			if (confirmed) {
 				currentResIndex = iconId;
 				setCurrentIcon();
@@ -326,23 +307,10 @@ public class EditDiceActivity extends BaseActivity {
 				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
 	}
 	
-//	private OnClickListener checkExpressionClickListener = new OnClickListener() {
-//		@Override
-//		public void onClick(View v) {
-//			DExpression retExp = readExpression();
-//			if (retExp != null) {
-//				//The expression is valid
-//				Toast.makeText(EditDiceActivity.this, R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
-//			}			
-//		}
-//	};
-	
-	protected DExpression readExpression() {
-		DExpression retVal;
-		//EditText txt;
-		//Gallery gallery;
+	protected Dice readDice() {
+		Dice retVal;
 		
-		retVal = new DExpression();
+		retVal = new Dice();
 		
 		if (expression != null) {
 			retVal.setID(expression.getID());
@@ -350,29 +318,25 @@ public class EditDiceActivity extends BaseActivity {
 			retVal.setID(-1);
 		}
 		
-		//txt = (EditText) findViewById(R.id.edNameText);
-		//retVal.setName(txt.getText().toString().trim());
 		retVal.setName(txtName.getText().toString().trim());
 		
 		if (retVal.getName().length() == 0) {
-			//txt.requestFocus();
 			txtName.requestFocus();
 			retVal = null;
 			Toast.makeText(this, R.string.err_name_required, Toast.LENGTH_LONG).show();
 		} else {
-			//txt = (EditText) findViewById(R.id.edDescText);
-			//retVal.setDescription(txt.getText().toString());
 			retVal.setDescription(txtDescription.getText().toString());
 			
-			//gallery = (Gallery) findViewById(R.id.edIconGallery);
 			retVal.setResourceIndex(currentResIndex);
 			
-			//txt = (EditText) findViewById(R.id.edExpText);
-			//retVal.setExpression(txt.getText().toString());
 			retVal.setExpression(txtExpression.getText().toString());
 			
 			try {
-				retVal.getResult();
+				//Make a dummy roll to check for error.
+				retVal.setContext(currentDiceBag);
+				retVal.getNewResult();
+			} catch (UnknownVariable e) {
+				//This issue will be checked later
 			} catch (DException e) {
 				retVal = null;
 				showExpressionError(e);
@@ -392,6 +356,13 @@ public class EditDiceActivity extends BaseActivity {
 			if ((ex.getFromChar() - 1) >= 0 && (ex.getToChar() - 1) < txt.getText().length()) {
 				txt.setSelection(ex.getFromChar() - 1, ex.getToChar() - 1);
 			}
+		} else if (e instanceof UnknownVariable) {
+			UnknownVariable ex = (UnknownVariable) e;
+			int fromChar = ex.getPosition() - 1;
+			int toChar = ex.getPosition() + ex.getName().length() - 1;
+			if (fromChar >= 0 && toChar < txt.getText().length()) {
+				txt.setSelection(fromChar, toChar);
+			}
 		}
 		txt.requestFocus();
 		
@@ -402,10 +373,11 @@ public class EditDiceActivity extends BaseActivity {
 		return textChanged || currentResIndex != initialResIndex;
 	}
 	
-	private void returnToCaller(DExpression retExp, int position, int result) {
+	private void returnToCaller(Dice retExp, int position, int result) {
 		Bundle bundle = new Bundle();
 		bundle.putInt(BUNDLE_POSITION, position);
-		bundle.putSerializable(BUNDLE_DICE_EXPRESSION, retExp);
+		//bundle.putSerializable(BUNDLE_DICE_EXPRESSION, retExp);
+		bundle.putString(BUNDLE_DICE, SerializationManager.DiceSafe(retExp));
 		Intent mIntent = new Intent();
 		mIntent.putExtras(bundle);
 		mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -413,25 +385,175 @@ public class EditDiceActivity extends BaseActivity {
 		finish();
 	}
 	
-	private void askDropChanges() {
-		AlertDialog.Builder builder;
-		builder = new AlertDialog.Builder(this);
-		builder.setTitle(this.getTitle());
-		builder.setMessage(R.string.msgLostChange);
-		builder.setPositiveButton(
-				R.string.lblYes,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
-					}
-				});
-		builder.setNegativeButton(
-				R.string.lblNo,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-		builder.create().show();
+	private void handleCancelButton() {
+		if (dataChanged()) {
+			new AlertDialog.Builder(this)
+				.setTitle(this.getTitle())
+				.setMessage(R.string.msgLostChange)
+				.setPositiveButton(R.string.lblYes, handleCancelButtonClickListener)
+				.setNegativeButton(R.string.lblNo, handleCancelButtonClickListener)
+				.show();
+		} else {
+			returnToCaller(null, position, RESULT_CANCEL);
+		}
+	}
+	
+	private DialogInterface.OnClickListener handleCancelButtonClickListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int id) {
+			if (id == AlertDialog.BUTTON_POSITIVE) {
+				returnToCaller(null, position, RESULT_CANCEL);
+			} else if (id == AlertDialog.BUTTON_NEGATIVE) {
+				dialog.cancel();
+			}
+		}
+	};
+
+	private void handleConfirmButton() {
+		
+		Dice dice = readDice();
+		if (dice == null) {
+			//The expression is not valid
+			//Do nothing.
+			return;
+		}
+
+		String[] badLabels = dice.getUnavailableVariables(currentDiceBag);
+		
+		if (badLabels.length > 0) {
+			//Some variables required by the dice are not available.
+			//Show alert.
+			String labelChain = "";
+			for (String label : badLabels) {
+				if (labelChain.length() > 0) {
+					labelChain += ", ";
+				}
+				labelChain += label;
+			}
+			
+			diceToSendBack = dice;
+			
+			new AlertDialog.Builder(this)
+				.setTitle(this.getTitle())
+				.setMessage(getString(R.string.msgMissingVar, labelChain))
+				.setPositiveButton(R.string.lblYes, handleConfirmButtonClickListener)
+				.setNegativeButton(R.string.lblNo, handleConfirmButtonClickListener)
+				.show();
+		} else {
+			returnToCaller(dice, position, RESULT_OK);
+		}
+	}
+	
+	private Dice diceToSendBack;
+	
+	private DialogInterface.OnClickListener handleConfirmButtonClickListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int id) {
+			if (id == AlertDialog.BUTTON_POSITIVE) {
+				returnToCaller(diceToSendBack, position, RESULT_OK);
+			} else if (id == AlertDialog.BUTTON_NEGATIVE) {
+				dialog.cancel();
+			}
+		}
+	};
+
+	/**
+	 * Launch the {@link EditDiceActivity} to insert a new dice, and then deliver the
+	 * result to specified {@link Activity}.
+	 * @param activity Activity where to deliver the result.
+	 */
+	public static void callInsert(Activity activity) {
+		callInsert(activity, POSITION_UNDEFINED);
+	}
+	
+	/**
+	 * Launch the {@link EditDiceActivity} to insert a new dice, and then deliver the
+	 * result to specified {@link Activity}.<br />
+	 * The new dice will be added at the specified position.
+	 * @param activity Activity where to deliver the result.
+	 * @param position Where to put the new dice.
+	 */
+	public static void callInsert(Activity activity, int position) {
+		Intent i = getIntentForInsert(activity, position);
+		if (i !=  null) {
+			activity.startActivityForResult(i, ACTIVITY_ADD);
+		}
+	}
+	
+	protected static Intent getIntentForInsert(Context context) {
+		return getIntentForInsert(context, POSITION_UNDEFINED);
+	}
+	
+	protected static Intent getIntentForInsert(Context context, int position) {
+		Intent retVal;
+		if (! QuickDiceApp.getInstance().canAddDiceBag()) {
+			//Maximum number of allowed bags reached
+			Toast.makeText(context, R.string.msgMaxBagsReach, Toast.LENGTH_LONG).show();
+			return null;
+		}
+		
+		Bundle bundle = new Bundle();
+		bundle.putInt(BUNDLE_REQUEST_TYPE, ACTIVITY_ADD);
+		bundle.putString(BUNDLE_DICE, null);
+		bundle.putInt(BUNDLE_POSITION, position);
+		
+		retVal = new Intent(context, EditDiceActivity.class);
+		retVal.putExtras(bundle);
+		
+		return retVal;
+	}
+	
+	/**
+	 * Launch the {@link EditDiceActivity} to edit an existing dice, and then deliver the
+	 * result to specified {@link Activity}.
+	 * @param activity Activity where to deliver the result.
+	 * @param position Position of the dice to edit.
+	 * @param data Dice to edit.
+	 */
+	public static void callEdit(Activity activity, int position, Dice data) {
+		Intent i = getIntentForEdit(activity, position, data);
+		if (i !=  null) {
+			activity.startActivityForResult(i, ACTIVITY_EDIT);
+		}
+	}
+	
+	protected static Intent getIntentForEdit(Context context, int position, Dice data) {
+		Intent retVal;
+		
+		Bundle bundle = new Bundle();
+		bundle.putInt(BUNDLE_REQUEST_TYPE, ACTIVITY_EDIT);
+		bundle.putString(BUNDLE_DICE, SerializationManager.DiceSafe(data));
+		bundle.putInt(BUNDLE_POSITION, position);
+		
+		retVal = new Intent(context, EditDiceActivity.class);
+		retVal.putExtras(bundle);
+		
+		return retVal;
+	}
+	
+	public static Dice getDice(Intent data) {
+		return getDice(data.getExtras());
+	}
+	
+	public static Dice getDice(Bundle data) {
+		Dice retVal;
+		if (data != null) {
+			retVal = SerializationManager.DiceSafe(data.getString(BUNDLE_DICE));
+		} else {
+			retVal = null;
+		}
+		return retVal;
+	}
+	
+	public static int getDicePosition(Intent data) {
+		return getDicePosition(data.getExtras());
+	}
+	
+	public static int getDicePosition(Bundle data) {
+		int retVal;
+		if (data != null && data.containsKey(BUNDLE_POSITION)) {
+			retVal = data.getInt(BUNDLE_POSITION);
+		} else {
+			retVal = POSITION_UNDEFINED;
+		}
+		return retVal;
 	}
 }

@@ -10,6 +10,7 @@ import ohm.quickdice.adapter.MostRecentFilesAdapter;
 import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.control.SerializationManager;
 import ohm.quickdice.entity.DiceBag;
+import ohm.quickdice.entity.DiceBagCollection;
 import ohm.quickdice.entity.MostRecentFile;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,23 +31,23 @@ public class ImportExportActivity extends BaseActivity {
 	/**
 	 * Open the activity to import or export definitions.
 	 */
-	public static final int ACTIVITY_IMPORT_EXPORT = 0x00dba601;
+	public static final int ACTIVITY_IMPORT_EXPORT = 0x00040000;
 	/**
 	 * The activity was closed after importing dice definitions
 	 */
-	public static final int RESULT_IMPORT = 0x00dba601;
+	public static final int RESULT_IMPORT = 0x00040001;
 	/**
 	 * The activity was closed after and importing dice definitions failed
 	 */
-	public static final int RESULT_IMPORT_FAILED = 0x00dba604;
+	public static final int RESULT_IMPORT_FAILED = 0x00040004;
 	/**
 	 * The activity was closed after exporting dice definitions
 	 */
-	public static final int RESULT_EXPORT = 0x00dba602;
+	public static final int RESULT_EXPORT = 0x00040002;
 	/**
 	 * The activity was closed pressing "Cancel" or the back button
 	 */
-	public static final int RESULT_CANCEL = 0x00dba603;
+	public static final int RESULT_CANCEL = 0x00040003;
 	/**
 	 * Define the bundle content as a type of request ({@code ACTIVITY_IMPORT_EXPORT}).
 	 */
@@ -293,12 +294,14 @@ public class ImportExportActivity extends BaseActivity {
 		int bags = 0;
 		int dice = 0;
 		int mods = 0;
+		int vars = 0;
 		
-		ArrayList<DiceBag> diceBags = app.getBagManager().getDiceBags();
+		DiceBagCollection diceBags = app.getBagManager().getDiceBagCollection();
 		for (DiceBag diceBag : diceBags) {
 			bags += 1;
 			dice += diceBag.getDice().size();
 			mods += diceBag.getModifiers().size();
+			vars += diceBag.getVariables().size();
 		}
 		
 		file = new java.io.File(path);
@@ -309,6 +312,7 @@ public class ImportExportActivity extends BaseActivity {
 				bags,
 				dice,
 				mods,
+				vars,
 				new Date());
 	}
 	

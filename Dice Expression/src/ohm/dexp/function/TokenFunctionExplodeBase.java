@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.LoopDetected;
@@ -26,7 +26,7 @@ public abstract class TokenFunctionExplodeBase extends TokenFunction {
 	 * @param bothDirection True to apply explosion to both direction, false to explode only upward.
 	 * @throws DException
 	 */
-	protected void evaluateExplode(DInstance instance, TokenBase roll, long tolerance, boolean bothDirection) throws DException {
+	protected void evaluateExplode(DContext instance, TokenBase roll, long tolerance, boolean bothDirection) throws DException {
 		
 		//[10,10,5] 25
 		//10

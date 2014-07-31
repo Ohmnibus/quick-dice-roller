@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 
@@ -28,7 +28,7 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 	private int target;
 	
 	@Override
-	protected void initSequence(DInstance instance) throws DException {
+	protected void initSequence(DContext instance) throws DException {
 		TokenBase tokenPoolSize;
 		TokenBase tokenTarget;
 		
@@ -43,12 +43,12 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 	}
 
 	@Override
-	protected int getPoolSize(DInstance instance) throws DException {
+	protected int getPoolSize(DContext instance) throws DException {
 		return poolSize;
 	}
 
 	@Override
-	protected int getRoll(DInstance instance) throws DException {
+	protected int getRoll(DContext instance) throws DException {
 		int retVal;
 		
 		retVal = 0;
@@ -61,7 +61,7 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 	}
 
 	@Override
-	protected int countSuccesses(DInstance instance, int rollResult) throws DException {
+	protected int countSuccesses(DContext instance, int rollResult) throws DException {
 		int retVal;
 		retVal = 0;
 		do {
@@ -74,12 +74,12 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 	}
 
 	@Override
-	protected void endSequence(DInstance instance) throws DException {
+	protected void endSequence(DContext instance) throws DException {
 		//NOOP
 	}
 
 	@Override
-	protected long getMaxPoolSize(DInstance instance) throws DException {
+	protected long getMaxPoolSize(DContext instance) throws DException {
 		return getChild(INDEX_POOL).getMaxResult();
 	}
 

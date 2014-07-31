@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-import ohm.dexp.DInstance;
+import ohm.dexp.DContext;
 import ohm.dexp.Dice;
 import ohm.dexp.exception.DException;
 
@@ -12,7 +12,7 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 	protected static Dice standardDice = new Dice(10);
 	
 	@Override
-	protected void evaluateSelf(DInstance instance) throws DException {
+	protected void evaluateSelf(DContext instance) throws DException {
 		int rollRes;
 		int poolSize;
 		int successes;
@@ -75,31 +75,31 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 	/**
 	 * Used to eventually initialize specific values.
 	 */
-	protected abstract void initSequence(DInstance instance) throws DException;
+	protected abstract void initSequence(DContext instance) throws DException;
 
 	/**
 	 * Return the pool size, or the number of roll to perform.
 	 * @return The number of roll to perform.
 	 */
-	protected abstract int getPoolSize(DInstance instance) throws DException;
+	protected abstract int getPoolSize(DContext instance) throws DException;
 
 	/**
 	 * Perform a roll and return the result.
 	 * @return Result of a single roll.
 	 */
-	protected abstract int getRoll(DInstance instance) throws DException;
+	protected abstract int getRoll(DContext instance) throws DException;
 
 	/**
 	 * Return the number of successes obtained with this roll.<br />
 	 * Can be a negative value.
 	 * @return Successes for this roll.
 	 */
-	protected abstract int countSuccesses(DInstance instance, int rollResult) throws DException;
+	protected abstract int countSuccesses(DContext instance, int rollResult) throws DException;
 
 	/**
 	 * Used to eventually perform controls after the pool rolls.
 	 */
-	protected abstract void endSequence(DInstance instance) throws DException;
+	protected abstract void endSequence(DContext instance) throws DException;
 
 	/**
 	 * Return the maximum size of the pool.<br />
@@ -107,5 +107,5 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 	 * to specify a variable pool size.
 	 * @return The maximum pool size.
 	 */
-	protected abstract long getMaxPoolSize(DInstance instance) throws DException;
+	protected abstract long getMaxPoolSize(DContext instance) throws DException;
 }

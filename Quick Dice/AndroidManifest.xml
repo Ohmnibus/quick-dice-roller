@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="ohm.quickdice"
-	android:versionCode="26"
-	android:versionName="1.4.4.1"
+	android:versionCode="27"
+	android:versionName="1.4.4.2"
 	android:installLocation="auto"
 	>
 
@@ -38,6 +38,9 @@
 		<activity
 			android:theme="@style/DialogBaseTheme"
 			android:name=".activity.EditDiceActivity" />
+		<activity
+			android:theme="@style/DialogBaseTheme"
+			android:name=".activity.EditVariableActivity" />
 		<activity
 			android:theme="@style/DialogBaseTheme"
 			android:name=".activity.EditBagActivity" />

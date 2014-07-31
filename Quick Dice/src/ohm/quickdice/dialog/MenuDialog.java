@@ -15,10 +15,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-public class MenuDialog extends AlertDialog implements DialogInterface.OnClickListener, MenuAdapter.OnItemClickListener {
+public class MenuDialog extends AlertDialog implements DialogInterface.OnClickListener, MenuAdapter.OnItemClickListener, DialogInterface.OnDismissListener {
 
 	private Activity activity;
 	private MenuAdapter adapter;
+	private OnDismissListener dismissListener = null;
 
 	public MenuDialog(Activity activity, Menu menu) {
 		super(activity);
@@ -26,6 +27,13 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 		//Adapter must be initialized now because menu
 		//could be cleared by caller to avoid system context menu
 		this.adapter = new MenuAdapter(activity, menu);
+		super.setOnDismissListener(this);
+	}
+	
+	@Override
+	public void setOnDismissListener(OnDismissListener listener) {
+		//super.setOnDismissListener(listener);
+		dismissListener = listener;
 	}
 	
 //	protected Menu newMenuInstance(Activity activity) {
@@ -49,7 +57,7 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 		
 		setView(list);
 		
-		setButton(BUTTON_POSITIVE, activity.getText(R.string.lblCancel), this);
+		setButton(BUTTON_POSITIVE, activity.getText(R.string.lblDone), this);
 		
 		super.onCreate(savedInstanceState);
 		
@@ -57,8 +65,8 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 		if (headerView != null) {
 			list.addHeaderView(headerView, null, false);
 			
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-				//Version prior to API11 need an explicit divider
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+				//Version prior to API19 need an explicit divider
 				View div = new ImageView(activity);
 	
 				div.setLayoutParams(new android.widget.AbsListView.LayoutParams(
@@ -116,5 +124,12 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 		//selected.set
 		activity.onContextItemSelected(selected);
 		dismiss();
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		if (dismissListener != null) {
+			dismissListener.onDismiss(dialog);
+		}
 	}
 }
