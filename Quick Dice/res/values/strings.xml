@@ -60,9 +60,11 @@
 	<string name="hintDescVar">Value\'s description</string>
 	<string name="lblLabelVar">Label</string>
 	<string name="hintLabelVar">Label to use in expressions</string>
-	<string name="lblMinVar">Minimum</string>
-	<string name="lblCurVar">Current</string>
-	<string name="lblMaxVar">Maximum</string>
+	<string name="lblMinimum">Minimum</string>
+	<string name="lblCurrent">Current</string>
+	<string name="lblMaximum">Maximum</string>
+	<string name="lblMin">Min</string>
+	<string name="lblMax">Max</string>
 	<string name="lblLabelValueVar">Label: Value (Min - Max)</string>
 	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s - %4$s)</string>
 	<string name="lblDiceBags">Dice bags</string>
@@ -222,6 +224,7 @@ Thanks!<br />]]></string>
 	<string name="mnuEditDiceBag">Edit dice bag</string>
 	<string name="mnuAddDiceBagHere">Add dice bag here</string>
 	<string name="mnuRemoveDiceBag">Remove dice bag</string>
+	<string name="mnuOpenDiceBagDrawer">Open bag drawer</string>
 	<string name="mnuImportExport">Import / Export</string>
 	<string name="mnuCloneDiceBag">Clone dice bag</string>
 	<string name="mnuAddVariable">Add named value</string>
@@ -229,8 +232,8 @@ Thanks!<br />]]></string>
 	<string name="mnuRemoveVariable">Remove named value</string>
 	<string name="mnuAddVariableHere">Add named value here</string>
 	<string name="mnuMoveVariableTo">Move named value to&#8230;</string>
-	<string name="mnuSelectVariable">Select named value</string>
-		
+	<string name="mnuOpenVariableDrawer">Open named value drawer</string>
+
 	<!-- Functions -->
 	<string name="fncBASHName">BASH!</string>
 	<string name="fncBASHDesc">Makes a check using BASH! rules.</string>

@@ -1,8 +1,12 @@
-v 1.4.4.x
+v 2.0.0
+- Named values (= variables)
 - Themes (Classic, Clean, Light, Dark)
 - Edit activities styled as dialogs
 - Extended about dialog with licence panel
-- Minor fix and improvements (splash screen, threads)
+- Improved interface in drawers (title)
+- Fix: Glith opening a context menu with single click
+- Huge refactoring of data manipulation layer
+- Minor fix and improvements
 
 v 1.4.4
 - Resizable dice area

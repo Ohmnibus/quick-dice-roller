@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditVariableActivity extends BaseActivity
@@ -73,6 +74,7 @@ public class EditVariableActivity extends BaseActivity
 	protected EditText txtLabel;
 	protected Button cmdMinVal;
 	protected SeekBar sbCurVal;
+	protected TextView lblCurVal;
 	protected Button cmdMaxVal;
 	protected int minVal;
 	protected int curVal;
@@ -211,6 +213,7 @@ public class EditVariableActivity extends BaseActivity
 		curVal = getInt(bundle, KEY_CUR_VAL, 5);
 		maxVal = getInt(bundle, KEY_MAX_VAL, 20);
 
+		lblCurVal = (TextView)findViewById(R.id.lblCurrent);
 		cmdMinVal = (Button)findViewById(R.id.cmdMin);
 		cmdMinVal.setOnClickListener(this);
 		sbCurVal = (SeekBar)findViewById(R.id.sbCurrent);
@@ -256,7 +259,7 @@ public class EditVariableActivity extends BaseActivity
 				//new ModifierBuilderDialog(this, position, minValueReadyListener).show();
 				new NumberPickerDialog(
 						this,
-						R.string.lblMinVar,
+						R.string.lblMinimum,
 						R.string.lblSelectMinValue,
 						minVal,
 						minValuePickedListener).show();
@@ -265,7 +268,7 @@ public class EditVariableActivity extends BaseActivity
 				//new ModifierBuilderDialog(this, position, maxValueReadyListener).show();
 				new NumberPickerDialog(
 						this,
-						R.string.lblMaxVar,
+						R.string.lblMaximum,
 						R.string.lblSelectMaxValue,
 						maxVal,
 						maxValuePickedListener).show();
@@ -350,6 +353,7 @@ public class EditVariableActivity extends BaseActivity
 			curVal = maxVal;
 		}
 		cmdMinVal.setText(Integer.toString(minVal));
+		lblCurVal.setText(Integer.toString(curVal));
 		cmdMaxVal.setText(Integer.toString(maxVal));
 
 		sbCurVal.setMax(maxVal-minVal);
@@ -366,6 +370,7 @@ public class EditVariableActivity extends BaseActivity
 		if (fromUser) {
 			curVal = progress + minVal;
 			valChanged = true;
+			lblCurVal.setText(Integer.toString(curVal));
 		}
 	}
 

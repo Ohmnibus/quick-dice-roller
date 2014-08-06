@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
 	<item
-		android:id="@+id/mrDetails"
-		android:title="@string/mnuDetails" />
-	
-	<item
 		android:id="@+id/mrSplit"
 		android:title="@string/mnuSplit" />
 	

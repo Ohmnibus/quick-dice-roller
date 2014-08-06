@@ -94,67 +94,86 @@
 				android:hint="@string/hintLabelVar"
 				/>
 			
-			<TextView style="@style/Edit.Label"
-				android:id="@+id/lblMin"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				
-				android:layout_below="@+id/txtLabel"
-				android:layout_alignParentLeft="true"
-				
-				android:text="@string/lblMinVar" />
-			
-			<Button
-				android:id="@+id/cmdMin"
-				android:layout_width="48dp"
-				android:layout_height="48dp"
-				
-				android:layout_below="@+id/lblMin"
-				android:layout_alignParentLeft="true"
-				
-				android:text="0"
-				/>
-			
-			<TextView style="@style/Edit.Label"
-				android:id="@+id/lblCurrent"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				
-				android:layout_centerHorizontal="true"
-				android:layout_below="@+id/txtLabel"
-				
-				android:text="@string/lblCurVar" />
-			
-			<SeekBar
-				android:id="@+id/sbCurrent"
+			<LinearLayout
+				android:id="@+id/grpLabel"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				
-				android:layout_below="@+id/lblCurrent"
-				android:layout_toRightOf="@+id/cmdMin"
-				android:layout_toLeftOf="@+id/cmdMax"
-				/>
+				android:layout_below="@+id/txtLabel"
+				android:layout_alignParentLeft="true"
+				
+				android:orientation="horizontal"
+				>
+				
+				<TextView style="@style/Edit.Label"
+					android:id="@+id/lblMin"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					
+					android:layout_weight="0"
+					
+					android:text="@string/lblMin" />
+				
+				<TextView style="@style/Edit.Label"
+					android:id="@+id/lblCurrent"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					
+					android:layout_weight="1"
+					
+					android:gravity="center_horizontal"
+					
+					android:text="@string/lblCurrent" />
+				
+				<TextView style="@style/Edit.Label"
+					android:id="@+id/lblMax"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					
+					android:layout_weight="0"
+					
+					android:text="@string/lblMax" />
+			</LinearLayout>
 			
-			<TextView style="@style/Edit.Label"
-				android:id="@+id/lblMax"
-				android:layout_width="wrap_content"
+			<LinearLayout
+				android:id="@+id/grpValues"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				
-				android:layout_below="@+id/txtLabel"
-				android:layout_alignParentRight="true"
+				android:layout_below="@+id/grpLabel"
+				android:layout_alignParentLeft="true"
 				
-				android:text="@string/lblMaxVar" />
-			
-			<Button
-				android:id="@+id/cmdMax"
-				android:layout_width="48dp"
-				android:layout_height="48dp"
+				android:orientation="horizontal"
+				android:gravity="center_vertical"
+				>
+				<Button
+					android:id="@+id/cmdMin"
+					android:layout_width="72dp"
+					android:layout_height="48dp"
+					
+					android:layout_weight="0"
+					
+					android:text="0"
+					/>
 				
-				android:layout_below="@+id/lblMax"
-				android:layout_alignParentRight="true"
+				<SeekBar
+					android:id="@+id/sbCurrent"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					
+					android:layout_weight="1"
+					/>
 				
-				android:text="20"
-				/>
+				<Button
+					android:id="@+id/cmdMax"
+					android:layout_width="72dp"
+					android:layout_height="48dp"
+					
+					android:layout_weight="0"
+					
+					android:text="20"
+					/>
+			</LinearLayout>
 		</RelativeLayout>
 	</ScrollView>
 

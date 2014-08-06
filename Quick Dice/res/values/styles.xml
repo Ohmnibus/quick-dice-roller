@@ -704,12 +704,14 @@
 		<item name="android:textColor">?android:attr/colorForeground</item>
 	</style>
 	
+	<!-- Drawer title -->
 	<style name="ListTitle">
 	</style>
 
 	<style name="ListTitle.Container">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center_vertical</item>
 		<item name="android:background">?attr/ohmFramedBackgroundSecondary</item>
 	</style>
 	
@@ -729,10 +731,28 @@
 		<item name="android:marqueeRepeatLimit">marquee_forever</item>
 	</style>
 	
-	<style name="ListTitle.Divider">
-		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_height">0.75dp</item>
-		<item name="android:background">?android:attr/colorForeground</item>
-		<item name="android:visibility">gone</item>
+	<style name="ListTitle.Button">
+		<item name="android:layout_width">48dp</item>
+		<item name="android:layout_height">48dp</item>
+		<item name="android:background">@drawable/bg_clickable</item>
+	</style>
+	
+	<style name="ListTitle.Divider.Vertical" parent="@style/ButtonPanel.Divider.Vertical">
+	</style>
+	
+	<!-- Link Roll button -->
+	<style name="LinkRoll">
+	</style>
+	
+	<style name="LinkRoll.Button">
+		<item name="android:layout_width">48dp</item>
+		<item name="android:layout_height">48dp</item>
+		<item name="android:layout_marginRight">4dp</item>
+		<item name="android:scaleType">centerInside</item>
+		<item name="android:src">@drawable/ic_link</item>
+		<item name="android:background">@drawable/bg_clickable</item>
+	</style>
+	
+	<style name="LinkRoll.Divider.Vertical" parent="@style/ButtonPanel.Divider.Vertical">
 	</style>
 </resources>
