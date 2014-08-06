@@ -14,25 +14,25 @@
 		android:icon="@android:drawable/ic_menu_revert"
 		android:title="@string/mnuUndoClearAllResult" />
 
-	<item android:id="@+id/mmSelectDiceBag"
+	<item android:id="@+id/mmOpenDiceBagDrawer"
 		android:icon="@drawable/ic_menu_bag"
-		android:title="@string/mnuSelectDiceBag" />
+		android:title="@string/mnuOpenDiceBagDrawer" />
 
-	<item android:id="@+id/mmSelectVariable"
-		android:icon="@android:drawable/ic_menu_sort_alphabetically"
-		android:title="@string/mnuSelectVariable" />
+	<item android:id="@+id/mmOpenVariableDrawer"
+		android:icon="@drawable/ic_menu_variable"
+		android:title="@string/mnuOpenVariableDrawer" />
 
-	<item android:id="@+id/mmAddDiceBag"
+	<!-- <item android:id="@+id/mmAddDiceBag"
 		android:icon="@drawable/ic_menu_bag"
-		android:title="@string/mnuAddDiceBag" />
+		android:title="@string/mnuAddDiceBag" /> -->
 
 	<item android:id="@+id/mmAddDice"
 		android:icon="@drawable/ic_menu_dice"
 		android:title="@string/mnuAddDice" />
 	
-	<item android:id="@+id/mmAddVariable"
-		android:icon="@android:drawable/ic_menu_sort_alphabetically"
-		android:title="@string/mnuAddVariable" />
+	<!-- <item android:id="@+id/mmAddVariable"
+		android:icon="@drawable/ic_menu_variable"
+		android:title="@string/mnuAddVariable" /> -->
 
 	<item android:id="@+id/mmAddModifier"
 		android:icon="@android:drawable/ic_menu_add"

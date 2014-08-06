@@ -69,7 +69,6 @@ public class DiceDetailDialog extends MenuDialog {
 	@Override
 	protected boolean onPrepareOptionsMenu(MenuAdapter adapter) {
 		
-		adapter.findItem(R.id.mdDetails).setVisible(false); //No longer needed.
 		adapter.findItem(R.id.mdRoll).setVisible(false); //Not really useful
 		
 		if (diceBag.getDice().size() == 1) {

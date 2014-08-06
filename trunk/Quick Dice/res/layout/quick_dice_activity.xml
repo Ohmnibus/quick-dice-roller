@@ -62,22 +62,22 @@
 				
 				android:layout_alignParentLeft="true"
 				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@+id/mLinkButton"
 				
 				layout="@layout/roll_item"
 				/>
 
-			<ImageButton
+			<View style="@style/LinkRoll.Divider.Vertical"
+				android:layout_toLeftOf="@+id/mLinkButton"
+				android:layout_centerVertical="true"
+				/>
+			<ImageButton style="@style/LinkRoll.Button"
 				android:id="@+id/mLinkButton"
-				android:layout_width="48dp"
-				android:layout_height="48dp"
 				
 				android:layout_alignParentRight="true"
 				android:layout_centerVertical="true"
 
-				android:layout_marginRight="5dp"
-
 				android:contentDescription="@string/pref_link_title"
-				android:background="@drawable/ic_link"
 				/>
 
 			<RelativeLayout

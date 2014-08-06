@@ -68,7 +68,7 @@ public class RollDetailDialog extends MenuDialog {
 	
 	@Override
 	protected View getHeaderView(LayoutInflater inflater, ListView parent) {
-		View view = getLayoutInflater().inflate(R.layout.roll_detail_dialog, null);
+		View view = getLayoutInflater().inflate(R.layout.roll_detail_dialog, parent, false);
 
 		RollResult res = getMergedResult();
 		
@@ -111,8 +111,6 @@ public class RollDetailDialog extends MenuDialog {
 		} else {
 			nextItem = null;
 		}
-
-		adapter.findItem(R.id.mrDetails).setVisible(false);
 
 		if (rollItem.length <= 1) {
 			//Cannot split

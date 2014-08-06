@@ -17,7 +17,6 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 
 	private ArrayList<DiceBag> diceBagList = new ArrayList<DiceBag>();
 	private DiceBagManager owner;
-	private boolean isDataSaved = true;
 
 	/**
 	 * Initialize a new instance of {@link DiceBagCollection}.<br />
@@ -25,7 +24,7 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 	 */
 	public DiceBagCollection(DiceBagManager owner) {
 		this.owner = owner;
-		this.isDataSaved = true;
+		diceBagList = new ArrayList<DiceBag>();
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 			retVal = diceBagList.size() - 1;
 		}
 		newBag.setParent(owner);
-		isDataSaved = false;
+		setChanged();
 		return retVal;
 	}
 
@@ -88,7 +87,7 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 			bag.setName(newBagData.getName());
 			bag.setDescription(newBagData.getDescription());
 			bag.setResourceIndex(newBagData.getResourceIndex());
-			isDataSaved = false;
+			setChanged();
 		} else {
 			//WTF?
 			retVal = false;
@@ -108,7 +107,7 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 			int curDiceBagIndex = getCurrentIndex();
 			retVal = diceBagList.remove(position);
 			retVal.setParent(null); //Avoid side effects
-			isDataSaved = false;
+			setChanged();
 			
 			if (position < curDiceBagIndex) {
 				//Index of current selected bag is decreased by one.
@@ -151,7 +150,7 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 				setCurrentIndex(fromPosition);
 			}
 
-			isDataSaved = false;
+			setChanged();
 		} else {
 			//WTF?
 			retVal = false;
@@ -209,11 +208,11 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 	}
 	
 	public boolean isChanged() {
-		return ! isDataSaved;
+		return owner.isDataChanged();
 	}
 	
 	protected void setChanged() {
-		isDataSaved = false;
+		owner.setDataChanged();
 	}
 
 	@Override

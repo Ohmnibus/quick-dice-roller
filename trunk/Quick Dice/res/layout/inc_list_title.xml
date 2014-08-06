@@ -6,12 +6,25 @@
 	<TextView style="@style/ListTitle.Text"
 		android:id="@+id/lblTitle"
 		
-		android:layout_alignParentTop="true"
+		android:layout_centerVertical="true"
 		android:layout_alignParentLeft="true"
+		android:layout_toLeftOf="@+id/cmdAddNew"
 		
 		android:text="@string/lblDiceBags"
 		/>
 	
-	<View style="@style/ListTitle.Divider"
+	<View style="@style/ListTitle.Divider.Vertical"
+		android:layout_centerVertical="true"
+		android:layout_toLeftOf="@+id/cmdAddNew"
+		/>
+	
+	<ImageView style="@style/ListTitle.Button"
+		android:id="@+id/cmdAddNew"
+		
+		android:layout_centerVertical="true"
+		android:layout_alignParentRight="true"
+		
+		android:src="@android:drawable/ic_menu_add"
+		android:contentDescription="@null"
 		/>
 </RelativeLayout>

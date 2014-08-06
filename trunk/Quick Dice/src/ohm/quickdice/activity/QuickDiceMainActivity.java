@@ -112,6 +112,10 @@ public class QuickDiceMainActivity extends BaseActivity {
 	GridView gvResults;
 	GridView gvDice;
 	ViewGroup vgModifiers = null;
+	
+	View addDiceBag;
+	View addVariable;
+	
 	DrawerLayout drawer;
 	ActionBarDrawerToggle drawerToggle;
 	CompatActionBar actionBar;
@@ -128,19 +132,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 	boolean linkRoll = false;
 
 	RollDiceToast rollDiceToast;
-//	//Cache for effects
-//	Animation rollDiceAnimation = null;
-//	private static final int ROLL_DICE_PLAYER_COUNT = 3; //Max number of overlapped sounds
-//	private int rollDicePlayerIndex = 0; //Used to cycle through sound players
-//	PlayerRunnable[] rollDicePlayer = null;
-//	PlayerRunnable[] rollDiceCriticalPlayer = null;
-//	PlayerRunnable[] rollDiceFumblePlayer = null;
-//
-//	//Cache for "rollDiceToast"
-//	Toast rollDiceToast = null;
-//	View rollDiceView = null;
-//	ImageView rollDiceImage = null;
-//	TextView rollDiceText = null;
 	
 	private final int LINK_LEVEL_OFF = 0;
 	private final int LINK_LEVEL_ON = 1;
@@ -171,8 +162,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 		diceBagManager = app.getBagManager();
 		diceBagManager.initBagManager();
 
-		//diceBag = diceBagManager.getDiceList();
-		//bonusBag = diceBagManager.getModifiers();
 		diceBag = diceBagManager.getDiceBagCollection().getCurrent();
 
 		modifierViewList = new ArrayList<View>();
@@ -299,23 +288,22 @@ public class QuickDiceMainActivity extends BaseActivity {
 		retVal = true;
 
 		switch (item.getItemId()) {
-			case R.id.mmSelectDiceBag:
+			case R.id.mmOpenDiceBagDrawer:
 				drawer.openDrawer(lvDiceBag);
 				break;
-			case R.id.mmSelectVariable:
+			case R.id.mmOpenVariableDrawer:
 				drawer.openDrawer(lvVariable);
 				break;
-			case R.id.mmAddDiceBag:
-				//callEditDiceBag(EditBagActivity.ACTIVITY_ADD, null, EditBagActivity.POSITION_UNDEFINED);
-				EditBagActivity.callInsert(this);
-				break;
+//			case R.id.mmAddDiceBag:
+//				EditBagActivity.callInsert(this);
+//				break;
 			case R.id.mmAddDice:
 				//callEditDice(EditDiceActivity.ACTIVITY_ADD, null, EditDiceActivity.POSITION_UNDEFINED);
 				EditDiceActivity.callInsert(this);
 				break;
-			case R.id.mmAddVariable:
-				EditVariableActivity.callInsert(this);
-				break;
+//			case R.id.mmAddVariable:
+//				EditVariableActivity.callInsert(this);
+//				break;
 			case R.id.mmAddModifier:
 				callAddModifier(ModifierBuilderDialog.POSITION_UNDEFINED);
 				break;
@@ -365,7 +353,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 						//int position = getDiceBagPositionFromIntent(data);
 						int position = EditBagActivity.getDiceBagPosition(data);
 						//diceBagManager.addDiceBag(position, newBag);
-						diceBagManager.getDiceBagCollection().add(position, newBag);
+						position = diceBagManager.getDiceBagCollection().add(position, newBag);
 						diceBagManager.setCurrentIndex(position);
 						refreshAllDiceContainers();
 					}
@@ -464,41 +452,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 	
 				//Pop Up
 				rollDiceToast.refreshConfig();
-				
-//				//Roll Pop Up
-//				if (! pref.getShowToast()) {
-//					//Free cache for "rollDiceToast"
-//					rollDiceToast = null;
-//					//rollDiceLayout = null;
-//					rollDiceView = null;
-//					rollDiceImage = null;
-//					rollDiceText = null;
-//				}
-//				//Roll Animation
-//				if (! pref.getShowAnimation()) {
-//					//Free resources
-//					rollDiceAnimation = null;
-//				}
-//				//Roll sound
-//				if (! pref.getSoundEnabled()) {
-//					//Free resources
-//					if (rollDicePlayer != null) {
-//						PlayerRunnable.disposePlayers(rollDicePlayer);
-//						rollDicePlayer = null;
-//					}
-//				}
-//				//Roll ext sound
-//				if (! pref.getSoundEnabled() || ! pref.getExtSoundEnabled()) {
-//					//Free resources
-//					if (rollDiceCriticalPlayer != null) {
-//						PlayerRunnable.disposePlayers(rollDiceCriticalPlayer);
-//						rollDiceCriticalPlayer = null;
-//					}
-//					if (rollDiceFumblePlayer != null) {
-//						PlayerRunnable.disposePlayers(rollDiceFumblePlayer);
-//						rollDiceFumblePlayer = null;
-//					}
-//				}
 	
 				//Modifiers bar
 				initModifierList();
@@ -800,10 +753,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 		retVal = true;
 
 		switch (item.getItemId()) {
-			case R.id.mdDetails:
-				//dice = (Dice)gvDice.getItemAtPosition(info.position);
-				//new DiceDetailDialog(this, dice).show();
-				break;
 			case R.id.mdRoll:
 				dice = (Dice)gvDice.getItemAtPosition(info.position);
 				doRoll(dice);
@@ -885,14 +834,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 		retVal = true;
 
 		switch (item.getItemId()) {
-			case R.id.mrDetails:
-				//if (info != null) {
-				//	result = (RollResult[])gvResults.getItemAtPosition(info.position);
-				//} else {
-				//	result = lastResult;
-				//}
-				//new RollDetailDialog(this, result).show();
-				break;
 			case R.id.mrClear:
 				clearRollResult(info == null ? -1 : info.position);
 				break;
@@ -990,7 +931,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				break;
 			case R.id.moSwitchNext:
 				//diceBagManager.moveModifier(modifierOpeningMenu, modifierOpeningMenu + 1);
-				diceBag.getModifiers().move(modifierOpeningMenu, modifierOpeningMenu + 1);
+				diceBag.getModifiers().move(modifierOpeningMenu + 1, modifierOpeningMenu);
 				refreshModifierList();
 				break;
 			default:
@@ -1024,7 +965,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				refreshVariablesList();
 				break;
 			case R.id.mvSwitchNext:
-				diceBag.getVariables().move(index, index + 1);
+				diceBag.getVariables().move(index + 1, index);
 				refreshVariablesList();
 				break;
 			case R.id.mvRemove:
@@ -1124,6 +1065,56 @@ public class QuickDiceMainActivity extends BaseActivity {
 		introAnimation();
 	}
 	
+	private class ActionBarDoubleDrawerToggle extends ActionBarDrawerToggle {
+
+		private DrawerLayout drawerLayout;
+		
+		public ActionBarDoubleDrawerToggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes) {
+			super(activity, drawerLayout, drawerImageRes, R.string.app_name, R.string.app_name);
+			
+			this.drawerLayout = drawerLayout;
+		}
+		
+		// android.R.id.home as defined by public API in v11
+		private static final int ID_HOME = 0x0102002c;
+		
+		private static final int GRAVITY_FIRST = Gravity.LEFT;
+		private static final int GRAVITY_SECOND = Gravity.RIGHT;
+
+		/** Called when a drawer has settled in a completely closed state. */
+		public void onDrawerClosed(View drawerView) {
+			if (drawerView.getId() == R.id.mDiceBagList) {
+				actionBar.setTitle(diceBag.getName());
+			}
+			ActivityCompat.invalidateOptionsMenu(QuickDiceMainActivity.this);
+		}
+
+		/** Called when a drawer has settled in a completely open state. */
+		public void onDrawerOpened(View drawerView) {
+			if (drawerView.getId() == R.id.mDiceBagList) {
+				actionBar.setTitle(R.string.mnuSelectDiceBag);
+			}
+			ActivityCompat.invalidateOptionsMenu(QuickDiceMainActivity.this);
+		}
+		
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			if (item != null && item.getItemId() == ID_HOME && isDrawerIndicatorEnabled()) {
+				if (drawerLayout.isDrawerVisible(GRAVITY_SECOND)) {
+					drawerLayout.closeDrawer(GRAVITY_SECOND);
+				} else {
+					if (drawerLayout.isDrawerVisible(GRAVITY_FIRST)) {
+						drawerLayout.closeDrawer(GRAVITY_FIRST);
+					} else {
+						drawerLayout.openDrawer(GRAVITY_FIRST);
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+	}
+	
 	private void initDrawers() {
 		drawer = (DrawerLayout)findViewById(R.id.mProfileDrawer);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -1134,57 +1125,16 @@ public class QuickDiceMainActivity extends BaseActivity {
 			drawer.setDrawerShadow(R.drawable.ic_handle_bar_right, Gravity.RIGHT);
 		}
 
-		drawerToggle = new ActionBarDrawerToggle(
+		drawerToggle = new ActionBarDoubleDrawerToggle(
 				this,
 				drawer,
-				R.drawable.ic_drawer,
-				R.string.mnuSelectDiceBag, //openDrawerContentDescRes,
-				R.string.app_name /* closeDrawerContentDescRes */) {
-
-			/** Called when a drawer has settled in a completely closed state. */
-			public void onDrawerClosed(View drawerView) {
-				if (drawerView.getId() == R.id.mDiceBagList) {
-					//actionBar.setTitle(R.string.app_name);
-					//actionBar.setTitle(diceBagManager.getDiceBag().getName());
-					actionBar.setTitle(diceBag.getName());
-					//invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-					ActivityCompat.invalidateOptionsMenu(QuickDiceMainActivity.this);
-				}
-			}
-
-			/** Called when a drawer has settled in a completely open state. */
-			public void onDrawerOpened(View drawerView) {
-				if (drawerView.getId() == R.id.mDiceBagList) {
-					actionBar.setTitle(R.string.mnuSelectDiceBag);
-					//invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-					ActivityCompat.invalidateOptionsMenu(QuickDiceMainActivity.this);
-				}
-			}
-			
-			@Override
-			public boolean onOptionsItemSelected(MenuItem item) {
-				//TODO: Fix behavior of component
-				//This is the code of base "onOptionsItemSelected"
-//				if (item != null && item.getItemId() == ID_HOME && mDrawerIndicatorEnabled) {
-//					if (mDrawerLayout.isDrawerVisible(GravityCompat.START)) {
-//						mDrawerLayout.closeDrawer(GravityCompat.START);
-//					} else {
-//						mDrawerLayout.openDrawer(GravityCompat.START);
-//					}
-//					return true;
-//				}
-//				return false;
-				return super.onOptionsItemSelected(item);
-			}
-		};
+				R.drawable.ic_drawer);
 
 		// Set the drawer toggle as the DrawerListener
 		drawer.setDrawerListener(drawerToggle);
 	}
 	
 	private void initDiceBagList() {
-		
-		//actionBar.setTitle(diceBagManager.getDiceBag().getName());
 		actionBar.setTitle(diceBag.getName());
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
@@ -1193,6 +1143,16 @@ public class QuickDiceMainActivity extends BaseActivity {
 		
 		View title = getLayoutInflater().inflate(R.layout.inc_list_title, lvDiceBag, false);
 		((TextView)title.findViewById(R.id.lblTitle)).setText(R.string.lblDiceBags);
+		addDiceBag = title.findViewById(R.id.cmdAddNew);
+		addDiceBag.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (app.canAddDiceBag()) { //Redundant control
+					EditBagActivity.callInsert(QuickDiceMainActivity.this);
+				}
+			}
+		});
+		addDiceBag.setVisibility(app.canAddDiceBag() ? View.VISIBLE : View.GONE);
 		
 		lvDiceBag.addHeaderView(title, null, false);
 
@@ -1211,6 +1171,16 @@ public class QuickDiceMainActivity extends BaseActivity {
 		
 		View title = getLayoutInflater().inflate(R.layout.inc_list_title, lvVariable, false);
 		((TextView)title.findViewById(R.id.lblTitle)).setText(R.string.lblVariables);
+		addVariable = title.findViewById(R.id.cmdAddNew);
+		addVariable.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (app.canAddVariable()) { //Redundant control
+					EditVariableActivity.callInsert(QuickDiceMainActivity.this);
+				}
+			}
+		});
+		addVariable.setVisibility(app.canAddVariable() ? View.VISIBLE : View.GONE);
 		
 		lvVariable.addHeaderView(title, null, false);
 
@@ -1449,9 +1419,10 @@ public class QuickDiceMainActivity extends BaseActivity {
 	};
 	
 	private void refreshLinkSwitchButton() {
-		linkSwitchButton.getBackground().setLevel(linkRoll ? LINK_LEVEL_ON : LINK_LEVEL_OFF);
-		//linkSwitchButton.setImageLevel(linkRoll ? 1 : 0);
-		//linkSwitchButton.refreshDrawableState();
+//		//linkSwitchButton.setImageLevel(linkRoll ? 1 : 0);
+//		//linkSwitchButton.refreshDrawableState();
+//		linkSwitchButton.getBackground().setLevel(linkRoll ? LINK_LEVEL_ON : LINK_LEVEL_OFF);
+		linkSwitchButton.setImageLevel(linkRoll ? LINK_LEVEL_ON : LINK_LEVEL_OFF);
 	}
 	
 	/**
@@ -1856,6 +1827,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		//((DiceBagAdapter)lvDiceBag.getAdapter()).notifyDataSetChanged();
 		////lvDiceBag.invalidateViews();
 		notifyDataSetChanged(lvDiceBag);
+		addDiceBag.setVisibility(app.canAddDiceBag() ? View.VISIBLE : View.GONE);
 	}
 	
 	/**
@@ -1872,6 +1844,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	private void refreshVariablesList() {
 		//((VariableAdapter)lvVariable.getAdapter()).notifyDataSetChanged();
 		notifyDataSetChanged(lvVariable);
+		addVariable.setVisibility(app.canAddVariable() ? View.VISIBLE : View.GONE);
 	}
 	
 	private void notifyDataSetChanged(AbsListView listView) {
@@ -1916,6 +1889,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				this,
 				R.layout.item_variable,
 				diceBag.getVariables()));
+		addVariable.setVisibility(app.canAddVariable() ? View.VISIBLE : View.GONE);
 
 		initModifierList();
 
@@ -1924,6 +1898,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 					this,
 					R.layout.dice_bag_item,
 					diceBagManager.getDiceBagCollection()));
+			addDiceBag.setVisibility(app.canAddDiceBag() ? View.VISIBLE : View.GONE);
 		} else {
 			refreshBagsList();
 		}
