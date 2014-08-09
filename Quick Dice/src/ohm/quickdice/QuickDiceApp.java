@@ -43,9 +43,12 @@ public class QuickDiceApp extends Application {
 			addFunction("min", TokenFunctionMin.class, R.drawable.ic_fnc, R.string.fncMinName, R.string.fncMinDesc, R.string.fncMinURL, R.array.fncMinParamNames, R.array.fncMinParamHints);
 			addFunction("rand", TokenFunctionRandom.class, R.drawable.ic_fnc, R.string.fncRandName, R.string.fncRandDesc, R.string.fncRandURL, R.array.fncRandParamNames, R.array.fncRandParamHints);
 			addFunction("exp", TokenFunctionExp.class, R.drawable.ic_fnc, R.string.fncExpName, R.string.fncExpDesc, R.string.fncExpURL, R.array.fncExpParamNames, R.array.fncExpParamHints);
-			addFunction("expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
-			addFunction("explode", TokenFunctionExplode.class, R.drawable.ic_fnc, R.string.fncExplodeName, R.string.fncExplodeDesc, R.string.fncExplodeURL, R.array.fncExplodeParamNames, R.array.fncExplodeParamHints);
-			addFunction("explodeup", TokenFunctionExplodeUp.class, R.drawable.ic_fnc, R.string.fncExplodeUpName, R.string.fncExplodeUpDesc, R.string.fncExplodeUpURL, R.array.fncExplodeUpParamNames, R.array.fncExplodeUpParamHints);
+//			addFunction("expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
+//			addFunction("explode", TokenFunctionExplode.class, R.drawable.ic_fnc, R.string.fncExplodeName, R.string.fncExplodeDesc, R.string.fncExplodeURL, R.array.fncExplodeParamNames, R.array.fncExplodeParamHints);
+//			addFunction("explodeup", TokenFunctionExplodeUp.class, R.drawable.ic_fnc, R.string.fncExplodeUpName, R.string.fncExplodeUpDesc, R.string.fncExplodeUpURL, R.array.fncExplodeUpParamNames, R.array.fncExplodeUpParamHints);
+			addHiddenFunction("expup", TokenFunctionExpUp.class);
+			addHiddenFunction("explode", TokenFunctionExplode.class);
+			addHiddenFunction("explodeup", TokenFunctionExplodeUp.class);
 
 			addFunction("rak", TokenFunctionRollAndKeep.class, R.drawable.ic_fnc, R.string.fncRakName, R.string.fncRakDesc, R.string.fncRakURL, R.array.fncRakParamNames, R.array.fncRakParamHints);
 			addFunction("pool", TokenFunctionPool.class, R.drawable.ic_fnc, R.string.fncPoolName, R.string.fncPoolDesc, R.string.fncPoolURL, R.array.fncPoolParamNames, R.array.fncPoolParamHints);
@@ -87,6 +90,10 @@ public class QuickDiceApp extends Application {
 				onlineReferenceId,
 				paramNamesId, 
 				paramHintsId);
+	}
+	
+	private void addHiddenFunction(String token, Class<? extends TokenFunction> functionClass) {
+		TokenFunction.addFunction(token, functionClass);
 	}
 	
 	public FunctionDescriptor[] getFunctionDescriptors() {

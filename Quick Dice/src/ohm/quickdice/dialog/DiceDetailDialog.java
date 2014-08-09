@@ -55,10 +55,15 @@ public class DiceDetailDialog extends MenuDialog {
 			long min = expression.getMinResult() / TokenBase.VALUES_PRECISION_FACTOR;
 			long max = expression.getMaxResult() / TokenBase.VALUES_PRECISION_FACTOR;
 			long range = max - min + 1;
+//			((TextView)view.findViewById(R.id.ddRange)).setText(
+//					Long.toString(min) + " - " +
+//							Long.toString(max) + " (" +
+//							Long.toString(range) + ")");
 			((TextView)view.findViewById(R.id.ddRange)).setText(
-					Long.toString(min) + " - " +
-							Long.toString(max) + " (" +
-							Long.toString(range) + ")");
+					view.getResources().getString(R.string.lblRangeFmt,
+							min,
+							max,
+							range));
 		} catch (DException e) {
 			((TextView)view.findViewById(R.id.ddRange)).setText(R.string.lblCannotEvaluate);
 		}

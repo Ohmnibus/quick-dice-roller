@@ -54,6 +54,7 @@
 	<string name="lblDragToResize">Drag to resize</string>
 	<string name="lblQuality">Result quality</string>
 	<string name="lblResultQualityRange">Result, quality, range</string>
+	<string name="lblRangeFmt">%1$d &#8594; %2$d (%3$d)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblNameVar">Name</string>
 	<string name="hintNameVar">Value\'s name</string>
 	<string name="lblDescVar">Description</string>
@@ -65,8 +66,8 @@
 	<string name="lblMaximum">Maximum</string>
 	<string name="lblMin">Min</string>
 	<string name="lblMax">Max</string>
-	<string name="lblLabelValueVar">Label: Value (Min - Max)</string>
-	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s - %4$s)</string>
+	<string name="lblLabelValueVar">Label: Value (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
+	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblDiceBags">Dice bags</string>
 	<string name="lblVariables">Named values</string>
 	<string name="lblNumberPicker">Number picker</string>
@@ -301,49 +302,57 @@ Thanks!<br />]]></string>
 		<item>Value to reach to obtain a success</item>
 	</string-array>
 				
-	<string name="fncExpName">Exploding (simple)</string>
-	<string name="fncExpDesc">Make an exploding roll. Explodes for high values as well as for low values.</string>
-	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
-	<string-array name="fncExpParamNames">
-		<item>Roll</item>
-	</string-array>
-	<string-array name="fncExpParamHints">
-		<item>The die to explode</item>
-	</string-array>
+	<!-- Changed --><string name="fncExpName">Exploding</string>
+	<!-- Changed --><string name="fncExpDesc">Make an exploding roll.</string>
+	<!-- Changed --><string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<!-- Changed --><string-array name="fncExpParamNames">
+	<!-- Changed -->	<item>Roll</item>
+	<!-- Changed -->	<item>Upper target</item>
+	<!-- Changed -->	<item>Lower target</item>
+	<!-- Changed -->	<item>Max upward explosions</item>
+	<!-- Changed -->	<item>Max downward explosions</item>
+	<!-- Changed --></string-array>
+	<!-- Changed --><string-array name="fncExpParamHints">
+	<!-- Changed -->	<item>The die to roll</item>
+	<!-- Changed -->	<item>Target for upward explosions</item>
+	<!-- Changed -->	<item>Target for downward explosions</item>
+	<!-- Changed -->	<item>Max upward explosions</item>
+	<!-- Changed -->	<item>Max downward explosions</item>
+	<!-- Changed --></string-array>
 
-	<string name="fncExpUpName">Exploding Upward (simple)</string>
-	<string name="fncExpUpDesc">Make an exploding roll. Explode only for high values.</string>
-	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
-	<string-array name="fncExpUpParamNames">
-		<item>Roll</item>
-	</string-array>
-	<string-array name="fncExpUpParamHints">
-		<item>The die to explode</item>
-	</string-array>
+	<!-- Obsolete --><string name="fncExpUpName">Exploding Upward (simple)</string>
+	<!-- Obsolete --><string name="fncExpUpDesc">Make an exploding roll. Explode only for high values.</string>
+	<!-- Obsolete --><string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<!-- Obsolete --><string-array name="fncExpUpParamNames">
+	<!-- Obsolete -->	<item>Roll</item>
+	<!-- Obsolete --></string-array>
+	<!-- Obsolete --><string-array name="fncExpUpParamHints">
+	<!-- Obsolete -->	<item>The die to explode</item>
+	<!-- Obsolete --></string-array>
 
-	<string name="fncExplodeName">Exploding</string>
-	<string name="fncExplodeDesc">Make an exploding roll using a threshold. Explodes for high values as well as for low values.</string>
-	<string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
-	<string-array name="fncExplodeParamNames">
-		<item>Roll</item>
-		<item>Threshold</item>
-	</string-array>
-	<string-array name="fncExplodeParamHints">
-		<item>The die to explode</item>
-		<item>Used to tell if the roll explodes</item>
-	</string-array>
+	<!-- Obsolete --><string name="fncExplodeName">Exploding</string>
+	<!-- Obsolete --><string name="fncExplodeDesc">Make an exploding roll using a threshold. Explodes for high values as well as for low values.</string>
+	<!-- Obsolete --><string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
+	<!-- Obsolete --><string-array name="fncExplodeParamNames">
+	<!-- Obsolete -->	<item>Roll</item>
+	<!-- Obsolete -->	<item>Threshold</item>
+	<!-- Obsolete --></string-array>
+	<!-- Obsolete --><string-array name="fncExplodeParamHints">
+	<!-- Obsolete -->	<item>The die to explode</item>
+	<!-- Obsolete -->	<item>Used to tell if the roll explodes</item>
+	<!-- Obsolete --></string-array>
 
-	<string name="fncExplodeUpName">Exploding Upward</string>
-	<string name="fncExplodeUpDesc">Make an exploding roll using a threshold. Explode only for high values.</string>
-	<string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
-	<string-array name="fncExplodeUpParamNames">
-		<item>Roll</item>
-		<item>Threshold</item>
-	</string-array>
-	<string-array name="fncExplodeUpParamHints">
-		<item>The die to explode</item>
-		<item>Used to tell if the roll explodes</item>
-	</string-array>
+	<!-- Obsolete --><string name="fncExplodeUpName">Exploding Upward</string>
+	<!-- Obsolete --><string name="fncExplodeUpDesc">Make an exploding roll using a threshold. Explode only for high values.</string>
+	<!-- Obsolete --><string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
+	<!-- Obsolete --><string-array name="fncExplodeUpParamNames">
+	<!-- Obsolete -->	<item>Roll</item>
+	<!-- Obsolete -->	<item>Threshold</item>
+	<!-- Obsolete --></string-array>
+	<!-- Obsolete --><string-array name="fncExplodeUpParamHints">
+	<!-- Obsolete -->	<item>The die to explode</item>
+	<!-- Obsolete -->	<item>Used to tell if the roll explodes</item>
+	<!-- Obsolete --></string-array>
 
 	<string name="fncMaxName">Maximum</string>
 	<string name="fncMaxDesc">Return the highest value obtained.</string>
