@@ -85,10 +85,18 @@ public class RollDetailDialog extends MenuDialog {
 		((TextView)view.findViewById(R.id.rdResultText)).setText(res.getResultText());
 		((TextView)view.findViewById(R.id.rdResultValue)).setText(Long.toString(res.getResultValue()));
 		((ImageView)view.findViewById(R.id.rdResultQuality)).setImageResource(res.getResultIconID());
+//		((TextView)view.findViewById(R.id.rdRange)).setText(
+//				Long.toString(res.getMinResultValue()) + " - " +
+//				Long.toString(res.getMaxResultValue()) + " (" +
+//				Long.toString(res.getMaxResultValue() - res.getMinResultValue() + 1) + ")");
+		long min = res.getMinResultValue();
+		long max = res.getMaxResultValue();
+		long range = max - min + 1;
 		((TextView)view.findViewById(R.id.rdRange)).setText(
-				Long.toString(res.getMinResultValue()) + " - " +
-				Long.toString(res.getMaxResultValue()) + " (" +
-				Long.toString(res.getMaxResultValue() - res.getMinResultValue() + 1) + ")");
+				view.getResources().getString(R.string.lblRangeFmt,
+						min,
+						max,
+						range));
 		
 		return view;
 	}

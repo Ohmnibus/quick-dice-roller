@@ -32,14 +32,14 @@ public abstract class TokenBase {
 	public static final int MAX_TOTAL_ITERATIONS = 5000;
 
 	/** Index of next argument to be assigned (0-based) */
-	protected int nextChild;
+	private int nextChild;
+	/** Number of child required by this token */
+	private int numChild;
 	/** Number of child allowed by this token */
-	protected int numChild;
+	private int maxNumChild;
 	/** Child contained by this token */
-	protected TokenBase childList[];
+	private TokenBase childList[];
 
-	//private int errNumber;
-	
 	protected long resultValue;
 	protected long resultMaxValue;
 	protected long resultMinValue;
@@ -53,13 +53,13 @@ public abstract class TokenBase {
 	public TokenBase() {
 		nextChild = 0;
 		numChild = initChildNumber();
-		childList = new TokenBase[numChild];
+		maxNumChild = numChild + initOptionalChildNumber();
+		childList = new TokenBase[maxNumChild];
 
 		resultValue = 0;
 		resultMaxValue = 0;
 		resultMinValue = 0;
 		resultString = "";
-		//errNumber = DResult.ERR_NONE;
 		
 		if (format == null) {
 			//Initialize the decimal formatter.
@@ -73,11 +73,19 @@ public abstract class TokenBase {
 	}
 
 	/**
-	 * Return the number of child required by this token.
-	 * @return Number of child required by this token.
+	 * Return the number of mandatory child required by this token.
+	 * @return Number of mandatory child required by this token.
 	 */
 	public int getChildNumber() {
 		return numChild;
+	}
+
+	/**
+	 * Return the maximum number of child allowed by this token.
+	 * @return Maximum number of child allowed by this token.
+	 */
+	public int getMaxChildNumber() {
+		return maxNumChild;
 	}
 
 	/**
@@ -139,7 +147,7 @@ public abstract class TokenBase {
 	 * or greater than the number of accepted arguments.
 	 */
 	public void setChild(TokenBase child, int index) throws IndexOutOfBoundsException {
-		if (index>numChild || index < 1) {
+		if (index > maxNumChild || index < 1) {
 			throw new IndexOutOfBoundsException("TokenBase.setChild: Out of bound.");
 		}
 		childList[index-1]=child;
@@ -153,7 +161,7 @@ public abstract class TokenBase {
 	 * or greater than the number of accepted arguments.
 	 */
 	public TokenBase getChild(int index) throws IndexOutOfBoundsException {
-		if (index>numChild || index < 1) {
+		if (index > maxNumChild || index < 1) {
 			throw new IndexOutOfBoundsException("TokenBase.getChild: Out of bound");
 		}
 		return childList[index-1];
@@ -165,25 +173,6 @@ public abstract class TokenBase {
 	 * @throws DException Thrown if an error occurred during expression tree evaluation.
 	 */
 	public void evaluate(DContext instance) throws DException {
-//		DException retVal;
-//		
-//		retVal = null;
-//		
-//		errNumber = evaluateSelf(instance);
-//		
-//		switch (errNumber) {
-//		case DResult.ERR_NONE:
-//			retVal = null;
-//			break;
-//		case DResult.ERR_DIVISION_BY_ZERO:
-//			retVal = new DivisionByZero();
-//			break;
-//		default:
-//			retVal = new UnexpectedError();
-//			break;
-//		}
-//		
-//		return retVal;
 		evaluateSelf(instance);
 	}
 
@@ -202,7 +191,6 @@ public abstract class TokenBase {
 	 * by 10 ^ VALUES_DECIMALS.
 	 */
 	public long getRawResult() {
-		//evaluate();
 		return resultValue;
 	}
 
@@ -213,10 +201,6 @@ public abstract class TokenBase {
 	 * {@link getRawResult}.
 	 */
 	public long getMaxResult() {
-		//This is always a constant value, so just one evaluation is required.
-		//if (! evaluatedOnce) {
-		//	evaluate();
-		//}
 		return resultMaxValue;
 	}
 	
@@ -227,10 +211,6 @@ public abstract class TokenBase {
 	 * {@link getRawResult}.
 	 */
 	public long getMinResult() {
-		//This is always a constant value, so just one evaluation is required.
-		//if (! evaluatedOnce) {
-		//	evaluate();
-		//}
 		return resultMinValue;
 	}
 
@@ -239,17 +219,8 @@ public abstract class TokenBase {
 	 * @return The token tree expression.
 	 */
 	public String getResultString() {
-		//evaluate();
 		return resultString;
 	}
-	
-	///**
-	// * Get the token error code.
-	// * @return Error code.
-	// */
-	//public int getError() {
-	//	return errNumber;
-	//}
 	
 	/**
 	 * Convert a raw value into it's {@link String} expression.
@@ -257,9 +228,6 @@ public abstract class TokenBase {
 	 * @return String representation of the value.
 	 */
 	public static String rawValueToString(long rawValue) {
-		//return Long.toString(rawValue / VALUES_PRECISION_FACTOR) + 
-		//    "." + 
-		//    Long.toString((rawValue % VALUES_PRECISION_FACTOR) / VALUES_OUTPUT_PRECISION_FACTOR);
 		return format.format(rawValue / VALUES_PRECISION_FACTOR);
 	}
 	
@@ -279,10 +247,18 @@ public abstract class TokenBase {
 	// ================
 
 	/**
-	 * Get the required token number for initialization purpose.
-	 * @return The number of child required by the token.
+	 * Initializes the number of mandatory child tokens required by this token.
+	 * @return The number of mandatory child tokens required.
 	 */
 	abstract protected int initChildNumber();
+
+	/**
+	 * Initializes the number of optional child tokens allowed by this token.
+	 * @return The number of optional child tokens allowed.
+	 */
+	protected int initOptionalChildNumber() {
+		return 0;
+	}
 
 	/**
 	 * Get the token type. Each token class must return a different type.

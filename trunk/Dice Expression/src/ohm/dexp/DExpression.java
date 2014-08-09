@@ -300,7 +300,7 @@ public class DExpression {
 		int actTokenType;   /* Current token type (speed up a bit) */
 		int lastTokenType;  /* Last token type */
 		TokenBase tLastOp;  /* Last operator found */
-		TokenBase tLastOpP; /* Last priority operator found */ //TODO: Check if still needed
+		//TokenBase tLastOpP; /* Last priority operator found */
 		TokenBase tFunc;    /* Last function found */
 		Stack<TokenBase> parseStack;
 		boolean isTerminal;	/* If last valid token is a terminal one */
@@ -312,7 +312,7 @@ public class DExpression {
 
 		varCache.clear();
 		tLastOp = null;
-		tLastOpP = null;
+		//tLastOpP = null;
 		tFunc = null;
 		lastTokenType = TK_NULL;
 		
@@ -374,21 +374,24 @@ public class DExpression {
 									tmpToken.setLeftChild(root);
 									root = tmpToken;
 								}
-								tLastOpP = tLastOp; //Same as "tLastOpP = null".
+								//tLastOpP = tLastOp; //Same as "tLastOpP = null".
+								//tLastOpP = null;
 							} else {
-								if (tmpToken.getPriority() > tLastOp.getPriority() || lastTokenType == TK_UOP) {
-									tmpToken.setLeftChild(tLastOp.getRightChild());
-									tLastOp.setRightChild(tmpToken);
-
-									tLastOpP = tLastOp;
-								} else {
-									tmpToken.setLeftChild(tLastOp);
-									if (tLastOpP==null) {
-										root = tmpToken;
-									} else {
-										tLastOpP.setRightChild(tmpToken);
-									}
-								}
+								/* Unary operator after another operator */
+								//if (tmpToken.getPriority() > tLastOp.getPriority() || lastTokenType == TK_UOP) {
+								//  tmpToken.setLeftChild(tLastOp.getRightChild());
+								//  tLastOp.setRightChild(tmpToken);
+								//  tLastOpP = tLastOp;
+								//} else {
+								//	tmpToken.setLeftChild(tLastOp);
+								//	if (tLastOpP==null) {
+								//		root = tmpToken;
+								//	} else {
+								//		tLastOpP.setRightChild(tmpToken);
+								//	}
+								//}
+								tmpToken.setLeftChild(tLastOp.getRightChild());
+								tLastOp.setRightChild(tmpToken);
 							}
 							tLastOp = tmpToken;
 							break;
@@ -396,12 +399,12 @@ public class DExpression {
 							/* Process "(" token */
 							parseStack.push(root);
 							parseStack.push(tLastOp);
-							parseStack.push(tLastOpP);
+							//parseStack.push(tLastOpP);
 							parseStack.push(tFunc);
 							
 							root = null;
 							tLastOp = null;
-							tLastOpP = null;
+							//tLastOpP = null;
 							tFunc = null;
 							break;
 						case TK_PCL:
@@ -413,7 +416,7 @@ public class DExpression {
 								tmpToken = root;
 								
 								tFunc = parseStack.pop();
-								tLastOpP = parseStack.pop();
+								//tLastOpP = parseStack.pop();
 								tLastOp = parseStack.pop();
 								root = parseStack.pop();
 								
@@ -423,7 +426,7 @@ public class DExpression {
 									/* Check for correct arguments number */
 									/* Add function to tree */
 									tFunc.setNextChild(tmpToken);
-									if (tFunc.nextChildNum()<=tFunc.getChildNumber()) {
+									if (tFunc.nextChildNum() <= tFunc.getChildNumber()) {
 										/* Error - too few parameters */
 										throw new ExpectedParameter(actToken.begin);
 									} else {
@@ -454,13 +457,13 @@ public class DExpression {
 								throw new ExpectedEndOfStatement(actToken.begin);
 							} else {
 								tmpToken.setNextChild(root);
-								if (tmpToken.nextChildNum()>tmpToken.getChildNumber()) {
+								if (tmpToken.nextChildNum() > tmpToken.getMaxChildNumber()) {
 									/* Error - too much parameters */
 									throw new UnexpectedParameter(actToken.begin);
 								} else {
 									root=null;
 									tLastOp=null;
-									tLastOpP=null;
+									//tLastOpP=null;
 									tFunc=null;
 								}
 							}
