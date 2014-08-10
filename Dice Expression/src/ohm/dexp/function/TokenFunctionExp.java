@@ -120,7 +120,8 @@ public class TokenFunctionExp extends TokenFunctionExplodeBase {
 			if (lowerOpen) {
 				explodingRange += (lowerTarget - resultMinValue) + VALUES_PRECISION_FACTOR;
 			}
-			loopSafe = explodingRange == 0 || (((range * 2) / explodingRange) >= 3);
+			//loopSafe = explodingRange == 0 || (((range * 2) / explodingRange) >= 3);
+			loopSafe = loopLessExplosion(range, explodingRange);
 		}
 		
 		if (! loopSafe) {

@@ -1,5 +1,10 @@
 package ohm.dexp.exception;
 
+/**
+ * This exception indicates the presence of a (possible) loop.
+ * @author Ohmnibus
+ *
+ */
 public class LoopDetected extends DException {
 
 	/**

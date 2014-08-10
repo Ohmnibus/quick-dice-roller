@@ -3,6 +3,7 @@ package ohm.dexp.function;
 import ohm.dexp.DContext;
 import ohm.dexp.Dice;
 import ohm.dexp.exception.DException;
+import ohm.dexp.exception.ParameterOutOfBound;
 
 public abstract class TokenFunctionPoolBase extends TokenFunction {
 
@@ -24,10 +25,9 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 
 		poolSize = getPoolSize(instance);
 		if (poolSize > MAX_TOKEN_ITERATIONS) {
-			poolSize = MAX_TOKEN_ITERATIONS;
-		} /* else if (poolSize < 1) {
-			poolSize = 1;
-		} */
+			//poolSize = MAX_TOKEN_ITERATIONS;
+			throw new ParameterOutOfBound(getFunctionName(this.getClass()), getPoolIndex());
+		}
 		
 
 		for (int i=1; i<=poolSize; i++) {
@@ -82,6 +82,12 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 	 * @return The number of roll to perform.
 	 */
 	protected abstract int getPoolSize(DContext instance) throws DException;
+
+	/**
+	 * Return the index of the parameter that contain the pool size.
+	 * @return The index of the parameter that contain the pool size.
+	 */
+	protected abstract int getPoolIndex();
 
 	/**
 	 * Perform a roll and return the result.

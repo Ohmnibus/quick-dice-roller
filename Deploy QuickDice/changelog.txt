@@ -1,5 +1,6 @@
 v 2.0.0
 - Named values (= variables)
+- Support to "Shadowrun" system
 - Themes (Classic, Clean, Light, Dark)
 - Edit activities styled as dialogs
 - Extended about dialog with licence panel
@@ -9,6 +10,7 @@ v 2.0.0
 - Functions "expUp", "explode", "explodeUp" hidden in interface (but still working)
 - Fix: Glith opening a context menu with single click
 - Fix: Error on expression like "3*-4"
+- Fix: Dice pools with large number of rolls
 - Huge refactoring of data manipulation layer
 - Minor fix and improvements
 

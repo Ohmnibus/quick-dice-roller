@@ -4,6 +4,7 @@ import ohm.dexp.DContext;
 import ohm.dexp.Dice;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
+import ohm.dexp.exception.ParameterOutOfBound;
 
 public class TokenFunctionHERO extends TokenFunction {
 
@@ -43,8 +44,9 @@ public class TokenFunctionHERO extends TokenFunction {
 		poolSize = (int)poolSizeToken.getResult();
 		
 		if (poolSize > MAX_TOKEN_ITERATIONS) {
-			poolSize = MAX_TOKEN_ITERATIONS;
-			halfDice = false;
+			//poolSize = MAX_TOKEN_ITERATIONS;
+			//halfDice = false;
+			throw new ParameterOutOfBound(getFunctionName(this.getClass()), 1);
 		}
 
 		resultValue = 0;

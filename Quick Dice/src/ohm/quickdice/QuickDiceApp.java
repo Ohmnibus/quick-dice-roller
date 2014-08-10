@@ -59,10 +59,13 @@ public class QuickDiceApp extends Application {
 			addFunction("dwars", TokenFunctionDWars.class, R.drawable.ic_fnc, R.string.fncDWarsName, R.string.fncDWarsDesc, R.string.fncDWarsURL, R.array.fncDWarsParamNames, R.array.fncDWarsParamHints);
 			addFunction("hero", TokenFunctionHERO.class, R.drawable.ic_fnc, R.string.fncHEROName, R.string.fncHERODesc, R.string.fncHEROURL, R.array.fncHEROParamNames, R.array.fncHEROParamHints);
 			addFunction("bash", TokenFunctionBASH.class, R.drawable.ic_fnc, R.string.fncBASHName, R.string.fncBASHDesc, R.string.fncBASHURL, R.array.fncBASHParamNames, R.array.fncBASHParamHints);
+			addFunction("shrun", TokenFunctionShRun.class, R.drawable.ic_fnc, R.string.fncShRunName, R.string.fncShRunDesc, R.string.fncShRunURL, R.array.fncShRunParamNames, R.array.fncShRunParamHints);
 
 			addFunction("rup", TokenFunctionRoundUp.class, R.drawable.ic_fnc, R.string.fncRupName, R.string.fncRupDesc, R.string.fncRupURL, R.array.fncRupParamNames, R.array.fncRupParamHints);
 			addFunction("rdn", TokenFunctionRoundDown.class, R.drawable.ic_fnc, R.string.fncRdnName, R.string.fncRdnDesc, R.string.fncRdnURL, R.array.fncRdnParamNames, R.array.fncRdnParamHints);
 			addFunction("abs", TokenFunctionAbs.class, R.drawable.ic_fnc, R.string.fncAbsName, R.string.fncAbsDesc, R.string.fncAbsURL, R.array.fncAbsParamNames, R.array.fncAbsParamHints);
+			
+			//TODO: Sort "functions" based on names
 		}
 	});
 

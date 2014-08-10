@@ -247,7 +247,7 @@ Thanks!<br />]]></string>
 		<item>Number of roll to do</item>
 		<item>Expression to be tested</item>
 	</string-array>
-				
+
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Makes a check using Burning Wheel rules.</string>
 	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
@@ -263,7 +263,7 @@ Thanks!<br />]]></string>
 		<item>Value to reach to obtain a success</item>
 		<item>Value to reach to obtain an extra roll</item>
 	</string-array>
-				
+
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Makes a check using Dystopian Wars rules.</string>
 	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
@@ -472,6 +472,24 @@ Thanks!<br />]]></string>
 		<item>What to make positive</item>
 	</string-array>
 
+	<string name="fncShRunName">Shadowrun 5</string>
+	<string name="fncShRunDesc">Makes a check using Shadowrun 5 rules.</string>
+	<string name="fncShRunURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun</string>
+	<string-array name="fncShRunParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
+		<item>Fail target</item>
+	</string-array>
+	<string-array name="fncShRunParamHints">
+		<item>Expression to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
+		<item>Value used to compute Glitches</item>
+	</string-array>
+
 	<!-- Errors -->
 	<string name="err_cannot_update">Cannot update the dice definitions.</string>
 	<string name="err_cannot_read">Cannot read the dice definitions. Using default.</string>
@@ -497,6 +515,7 @@ Thanks!<br />]]></string>
 	<string name="exc_invalid_character">Invalid character at position %1$d.</string>
 	<string name="exc_missing_operand">Missing operand at char %1$d.</string>
 	<string name="exc_nothing_to_evaluate">The expression is empty.</string>
+	<string name="exc_parameter_out_of_bound">Parameter number %2$d of function \"%1$s\" is too high or too low.</string>
 	<string name="exc_unbalanced_bracket">Unbalanced bracket at char %1$d.</string>
 	<string name="exc_unexpected_error">Unexpected error.</string>
 	<string name="exc_unexpected_parameter">Unexpected parameter at char %1$d.</string>

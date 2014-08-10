@@ -14,6 +14,7 @@ import ohm.dexp.exception.ExpectedParameter;
 import ohm.dexp.exception.InvalidCharacter;
 import ohm.dexp.exception.MissingOperand;
 import ohm.dexp.exception.NothingToEvaluate;
+import ohm.dexp.exception.ParameterOutOfBound;
 import ohm.dexp.exception.UnbalancedBracket;
 import ohm.dexp.exception.UnexpectedError;
 import ohm.dexp.exception.UnexpectedParameter;
@@ -151,28 +152,30 @@ public class Helper {
 			throw e;
 		} catch (DivisionByZero ex) {
 			retVal = res.getString(R.string.exc_division_by_zero);
-		} catch (LoopDetected ex) {
-			retVal = String.format(res.getString(R.string.exc_loop_detected), ex.getFunctionName());
 		} catch (ExpectedEndOfStatement ex) {
-			retVal = String.format(res.getString(R.string.exc_expected_eos), ex.getFromChar());
+			retVal = res.getString(R.string.exc_expected_eos, ex.getFromChar());
 		} catch (ExpectedParameter ex) {
-			retVal = String.format(res.getString(R.string.exc_expected_parameter), ex.getFromChar());
+			retVal = res.getString(R.string.exc_expected_parameter, ex.getFromChar());
 		} catch (InvalidCharacter ex) {
-			retVal = String.format(res.getString(R.string.exc_invalid_character), ex.getFromChar());
+			retVal = res.getString(R.string.exc_invalid_character, ex.getFromChar());
+		} catch (LoopDetected ex) {
+			retVal = res.getString(R.string.exc_loop_detected, ex.getFunctionName());
 		} catch (MissingOperand ex) {
-			retVal = String.format(res.getString(R.string.exc_missing_operand), ex.getFromChar());
+			retVal = res.getString(R.string.exc_missing_operand, ex.getFromChar());
 		} catch (NothingToEvaluate ex) {
 			retVal = res.getString(R.string.exc_nothing_to_evaluate);
+		} catch (ParameterOutOfBound ex) {
+			retVal = res.getString(R.string.exc_parameter_out_of_bound, ex.getFunctionName(), ex.getParamIndex());
 		} catch (UnbalancedBracket ex) {
-			retVal = String.format(res.getString(R.string.exc_unbalanced_bracket), ex.getFromChar());
+			retVal = res.getString(R.string.exc_unbalanced_bracket, ex.getFromChar());
 		} catch (UnexpectedError ex) {
 			retVal = res.getString(R.string.exc_unexpected_error);
 		} catch (UnexpectedParameter ex) {
-			retVal = String.format(res.getString(R.string.exc_unexpected_parameter), ex.getFromChar());
+			retVal = res.getString(R.string.exc_unexpected_parameter, ex.getFromChar());
 		} catch (UnknownFunction ex) {
-			retVal = String.format(res.getString(R.string.exc_unknown_function), ex.getName(), ex.getFromChar());
+			retVal = res.getString(R.string.exc_unknown_function, ex.getName(), ex.getFromChar());
 		} catch (UnknownVariable ex) {
-			retVal = String.format(res.getString(R.string.exc_unknown_variable), ex.getName(), ex.getPosition());
+			retVal = res.getString(R.string.exc_unknown_variable, ex.getName(), ex.getPosition());
 		} catch (DParseException ex) {
 			retVal = res.getString(R.string.exc_generic_parsed);
 		} catch (DException ex) {

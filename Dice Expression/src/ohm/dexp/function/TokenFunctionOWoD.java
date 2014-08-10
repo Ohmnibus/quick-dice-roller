@@ -47,7 +47,12 @@ public class TokenFunctionOWoD extends TokenFunctionPoolBase {
 		getChild(INDEX_POOL).evaluate(instance);
 		return (int)getChild(INDEX_POOL).getResult();
 	}
-
+	
+	@Override
+	protected int getPoolIndex() {
+		return INDEX_POOL;
+	}
+	
 	@Override
 	protected int getRoll(DContext instance) throws DException {
 		int retVal;
