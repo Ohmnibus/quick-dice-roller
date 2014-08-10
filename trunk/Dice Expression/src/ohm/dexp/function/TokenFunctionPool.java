@@ -51,6 +51,11 @@ public class TokenFunctionPool extends TokenFunctionPoolBase {
 	}
 
 	@Override
+	protected int getPoolIndex() {
+		return INDEX_POOL;
+	}
+
+	@Override
 	protected int getRoll(DContext instance) throws DException {
 		roll.evaluate(instance);
 		return (int)roll.getResult();

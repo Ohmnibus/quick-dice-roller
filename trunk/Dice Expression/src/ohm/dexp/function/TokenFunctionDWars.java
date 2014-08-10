@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-public class TokenFunctionDWars extends TokenFunctionBWheel {
+public class TokenFunctionDWars extends TokenFunctionShRun {
 
 	@Override
 	protected int initChildNumber() {
@@ -20,5 +20,10 @@ public class TokenFunctionDWars extends TokenFunctionBWheel {
 	@Override
 	protected boolean extraSuccessOnRollAgain() {
 		return true;
+	}
+	
+	@Override
+	protected boolean emitGlitch() {
+		return false;
 	}
 }

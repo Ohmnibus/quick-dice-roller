@@ -4,6 +4,7 @@ import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.LoopDetected;
+import ohm.dexp.exception.ParameterOutOfBound;
 
 public class TokenFunctionBASH extends TokenFunction {
 
@@ -61,7 +62,8 @@ public class TokenFunctionBASH extends TokenFunction {
 		}
 		
 		if (rollNum > MAX_TOKEN_ITERATIONS) {
-			rollNum = MAX_TOKEN_ITERATIONS;
+			//rollNum = MAX_TOKEN_ITERATIONS;
+			throw new ParameterOutOfBound(getFunctionName(this.getClass()), 1);
 		}
 
 		resultValue = 0;

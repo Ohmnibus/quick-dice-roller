@@ -48,6 +48,11 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 	}
 
 	@Override
+	protected int getPoolIndex() {
+		return INDEX_POOL;
+	}
+
+	@Override
 	protected int getRoll(DContext instance) throws DException {
 		int retVal;
 		
@@ -82,65 +87,4 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 	protected long getMaxPoolSize(DContext instance) throws DException {
 		return getChild(INDEX_POOL).getMaxResult();
 	}
-
-//	@Override
-//	protected void evaluateSelf(DInstance instance) throws DException {
-//		Dice roll;
-//		TokenBase tokenPoolSize;
-//		TokenBase tokenTarget;
-//
-//		int res;
-//		int poolSize;
-//		int target;
-//
-//		roll = new Dice(10);
-//		tokenPoolSize = getChild(1);
-//		tokenTarget = getChild(2);
-//		
-//		tokenPoolSize.evaluate(instance);
-//
-//		poolSize = (int)tokenPoolSize.getResult();
-//		if (poolSize > MAX_TOKEN_ITERATIONS)
-//			poolSize = MAX_TOKEN_ITERATIONS;
-//		
-//		target = (int)tokenTarget.getResult();
-//
-//		resultValue = 0;
-//		resultString = "[";
-//
-//		for (int i=1; i<=poolSize; i++) {
-//			if (resultString.length() < MAX_TOKEN_STRING_LENGTH && i>1) {
-//				resultString += ",";
-//			}
-//
-//			// Roll the value
-//			res = 0;
-//			do {
-//				res += roll.roll();
-//			} while (res % 10 == 0);
-//
-//			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-//				resultString = resultString + Long.toString(res);
-//			}
-//
-//			do {
-//				if (res >= target) {
-//					resultValue++;
-//					if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-//						resultString = resultString + "!";
-//					}
-//				}
-//				res -= 10;
-//			} while (res > 0);
-//
-//			resultValue = resultValue * VALUES_PRECISION_FACTOR;
-//			resultMaxValue = tokenPoolSize.getMaxResult();
-//			resultMinValue = 0;
-//			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-//				resultString = resultString + "]";
-//			} else {
-//				resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
-//			}
-//		}
-//	}
 }
