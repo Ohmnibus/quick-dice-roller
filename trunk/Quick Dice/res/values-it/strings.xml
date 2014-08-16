@@ -82,9 +82,16 @@
 <br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />
+&bull; Titoli con l\'opzione "aggiungi" nei pannelli laterali<br />
+&bull; Supporto a Shadowrun 4a e 5a ed.<br />
+&bull; Migliorato il risultato di molte funzioni<br />
+&bull; Correzioni e miglioramenti minori<br />
+<br />
+Version 1.4.4.2<br />
+&bull; Valori denominati utilizzabili nelle espressioni<br />
 &bull; Scegli fra 4 temi differenti<br />
 &bull; Aspetto migliorato<br />
-&bull; Correzioni ed ottimizzazioni minori<br />
+&bull; Correzioni e miglioramenti minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />

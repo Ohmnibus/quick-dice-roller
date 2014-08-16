@@ -30,7 +30,24 @@ public class TokenFunctionMin extends TokenFunction {
 		lChild.evaluate(instance);
 		rChild.evaluate(instance);
 
-		resultValue = Math.min(lChild.getRawResult(), rChild.getRawResult());
+		String sign;
+		String lFlag = "";
+		String rFlag = "";
+		
+		//resultValue = Math.min(lChild.getRawResult(), rChild.getRawResult());
+		if (lChild.getRawResult() < rChild.getRawResult()) {
+			resultValue = lChild.getRawResult();
+			lFlag = SYM_SELECTED; //"!";
+			sign = CH_LT; //"<";
+		} else if (lChild.getRawResult() > rChild.getRawResult()) {
+			resultValue = rChild.getRawResult();
+			rFlag = SYM_SELECTED; //"!";
+			sign = CH_GT; //">";
+		} else {
+			resultValue = lChild.getRawResult();
+			lFlag = SYM_SELECTED; //"!";
+			sign = CH_EQUAL; //"=";
+		}
 
 		resultMaxValue = Math.min(lChild.getMaxResult(), rChild.getMaxResult());
 		resultMinValue = Math.min(lChild.getMinResult(), rChild.getMinResult());
@@ -40,25 +57,23 @@ public class TokenFunctionMin extends TokenFunction {
 		String rRes = rChild.getResultString();
 		if (lRes.length() + rRes.length() + 10 > MAX_TOKEN_STRING_LENGTH) {
 			//Output will be too long, use short format
-			resultString = 
-				"[" + 
-				Long.toString(lChild.getRawResult() / VALUES_PRECISION_FACTOR) + 
-				"?" + 
-				Long.toString(rChild.getRawResult() / VALUES_PRECISION_FACTOR) + 
-				"=" + 
-				Long.toString(resultValue / VALUES_PRECISION_FACTOR) + 
-				"]";
-		} else {
-			//Long format
-			resultString = 
-				"[" + 
-				lRes + 
-				"?" + 
-				rRes + 
-				"=" + 
-				Long.toString(resultValue / VALUES_PRECISION_FACTOR) + 
-				"]";
+			lRes = Long.toString(lChild.getRawResult() / VALUES_PRECISION_FACTOR);
+			rRes = Long.toString(rChild.getRawResult() / VALUES_PRECISION_FACTOR);
 		}
+//		resultString = 
+//				"[" + 
+//				lRes + 
+//				"?" + 
+//				rRes + 
+//				"=" + 
+//				Long.toString(resultValue / VALUES_PRECISION_FACTOR) + 
+//				"]";
+		resultString = 
+				SYM_BEGIN + 
+				lFlag + lRes +
+				sign + 
+				rRes + rFlag +
+				SYM_END;
 	}
 
 }

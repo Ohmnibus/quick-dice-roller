@@ -1,13 +1,15 @@
 v 2.0.0
 - Named values (= variables)
-- Support to "Shadowrun" system
+- Support to "Shadowrun" system (4 and 5 ed.)
 - Themes (Classic, Clean, Light, Dark)
 - Edit activities styled as dialogs
 - Extended about dialog with licence panel
 - Titles with "add" option on drawers
 - Support to variable length functions
-- Extended the "exp" function
-- Functions "expUp", "explode", "explodeUp" hidden in interface (but still working)
+- Support to number in function names (3 alpha + digit|alpha)
+- Extended the "exp" and "expUp" functions
+- Functions "explode" and "explodeUp" hidden in interface (but still working)
+- Better output for many functions (...)
 - Fix: Glith opening a context menu with single click
 - Fix: Error on expression like "3*-4"
 - Fix: Dice pools with large number of rolls

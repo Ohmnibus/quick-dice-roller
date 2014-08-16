@@ -3,6 +3,7 @@ package ohm.dexp.function;
 import ohm.dexp.DContext;
 import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
+import ohm.dexp.exception.ParameterOutOfBound;
 
 public class TokenFunctionRollAndKeep extends TokenFunction {
 
@@ -12,13 +13,18 @@ public class TokenFunctionRollAndKeep extends TokenFunction {
 
 	private static final int MAX_POOL_SIZE = 50;
 	
-	private long[] rollValues = new long[MAX_POOL_SIZE];
+	private long[] rollValues = null; // = new long[MAX_POOL_SIZE];
 
-	private boolean[] validValues = new boolean[MAX_POOL_SIZE];
+	private boolean[] validValues = null; // = new boolean[MAX_POOL_SIZE];
 	
 	@Override
 	protected int initChildNumber() {
-		return 3;
+		return 2;
+	}
+	
+	@Override
+	protected int initOptionalChildNumber() {
+		return 1;
 	}
 
 	@Override
@@ -42,14 +48,19 @@ public class TokenFunctionRollAndKeep extends TokenFunction {
 		getChild(INDEX_POOL).evaluate(instance);
 		poolSize = (int)getChild(INDEX_POOL).getResult();
 		if (poolSize > MAX_POOL_SIZE) {
-			poolSize = MAX_POOL_SIZE;
+			//poolSize = MAX_POOL_SIZE;
+			throw new ParameterOutOfBound(getFunctionName(this.getClass()), INDEX_POOL);
 		}
 		if (poolSize < 0) {
 			poolSize = 0;
 		}
 
-		getChild(INDEX_KEEP).evaluate(instance);
-		keepSize = (int)getChild(INDEX_KEEP).getResult();
+		if (getChild(INDEX_KEEP) != null) {
+			getChild(INDEX_KEEP).evaluate(instance);
+			keepSize = (int)getChild(INDEX_KEEP).getResult();
+		} else {
+			keepSize = poolSize;
+		}
 		
 		if (keepSize > poolSize) {
 			keepSize = poolSize;
@@ -61,6 +72,11 @@ public class TokenFunctionRollAndKeep extends TokenFunction {
 		
 		minKept = Long.MAX_VALUE;
 		minKeptIndex = 0;
+		
+		if (rollValues == null || rollValues.length < poolSize) {
+			rollValues = new long[poolSize];
+			validValues = new boolean[poolSize];
+		}
 		
 		for (int i = 0; i<poolSize; i++) {
 			roll.evaluate(instance);
@@ -101,16 +117,16 @@ public class TokenFunctionRollAndKeep extends TokenFunction {
 		}
 		
 		resultValue = 0;
-		resultString = "[";
+		resultString = SYM_BEGIN; //"[";
 
 		for (int i = 0; i<poolSize; i++) {
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
 				if (i > 0) {
-					resultString += ",";
+					resultString += SYM_SEP; //",";
 				}
 				resultString += Long.toString(rollValues[i] / VALUES_PRECISION_FACTOR);
-				if (validValues[i]) {
-					resultString += "!";
+				if (validValues[i] && keepSize != poolSize) {
+					resultString += SYM_SELECTED; //"!";
 				}
 			}
 			if (validValues[i]) {
@@ -121,9 +137,10 @@ public class TokenFunctionRollAndKeep extends TokenFunction {
 		resultMaxValue = keepSize * roll.getMaxResult();
 		resultMinValue = keepSize * roll.getMinResult();
 		if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-			resultString += "]";
+			resultString += SYM_END; //"]";
 		} else {
-			resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			//resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			resultString = SYM_TRUNK_BEGIN + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + SYM_TRUNK_END;
 		}
 	}
 }

@@ -5,7 +5,7 @@ package ohm.dexp.function;
  * @author Ohmnibus
  * 
  */
-public class TokenFunctionBWheel extends TokenFunctionShRun {
+public class TokenFunctionBWheel extends TokenFunctionShRun5 {
 
 //	private static final int INDEX_ROLL = 1;
 //	private static final int INDEX_POOL = 2;

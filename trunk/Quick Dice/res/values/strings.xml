@@ -109,6 +109,12 @@
 <br />
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />
+&bull; Titles with "add" option on drawers<br />
+&bull; Support to Shadowrun 4ed and 5ed<br />
+&bull; Better output for many functions<br />
+&bull; Minor fix and improvements<br />
+<br />
+Version 1.4.4.2<br />
 &bull; Variable named values usable in expressions<br />
 &bull; Select from 4 different themes<br />
 &bull; Improved layout<br />
@@ -302,33 +308,41 @@ Thanks!<br />]]></string>
 		<item>Value to reach to obtain a success</item>
 	</string-array>
 				
-	<!-- Changed --><string name="fncExpName">Exploding</string>
-	<!-- Changed --><string name="fncExpDesc">Make an exploding roll.</string>
+	<!-- Changed --><string name="fncExpName">Exploding/Collapsing</string>
+	<!-- Changed --><string name="fncExpDesc">Make an exploding/collapsing roll.</string>
 	<!-- Changed --><string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
 	<!-- Changed --><string-array name="fncExpParamNames">
 	<!-- Changed -->	<item>Roll</item>
 	<!-- Changed -->	<item>Upper target</item>
 	<!-- Changed -->	<item>Lower target</item>
-	<!-- Changed -->	<item>Max upward explosions</item>
-	<!-- Changed -->	<item>Max downward explosions</item>
+	<!-- Changed -->	<item>Max explosions</item>
+	<!-- Changed -->	<item>Max collapses</item>
 	<!-- Changed --></string-array>
 	<!-- Changed --><string-array name="fncExpParamHints">
 	<!-- Changed -->	<item>The die to roll</item>
-	<!-- Changed -->	<item>Target for upward explosions</item>
-	<!-- Changed -->	<item>Target for downward explosions</item>
-	<!-- Changed -->	<item>Max upward explosions</item>
-	<!-- Changed -->	<item>Max downward explosions</item>
+	<!-- Changed -->	<item>Target for explosions</item>
+	<!-- Changed -->	<item>Target for collapses</item>
+	<!-- Changed -->	<item>Max num. of explosions</item>
+	<!-- Changed -->	<item>Max num. of collapses</item>
 	<!-- Changed --></string-array>
 
-	<!-- Obsolete --><string name="fncExpUpName">Exploding Upward (simple)</string>
-	<!-- Obsolete --><string name="fncExpUpDesc">Make an exploding roll. Explode only for high values.</string>
-	<!-- Obsolete --><string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
-	<!-- Obsolete --><string-array name="fncExpUpParamNames">
-	<!-- Obsolete -->	<item>Roll</item>
-	<!-- Obsolete --></string-array>
-	<!-- Obsolete --><string-array name="fncExpUpParamHints">
-	<!-- Obsolete -->	<item>The die to explode</item>
-	<!-- Obsolete --></string-array>
+	<!-- Changed --><string name="fncExpUpName">Exploding</string>
+	<!-- Changed --><string name="fncExpUpDesc">Make an exploding roll.</string>
+	<!-- Changed --><string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<!-- Changed --><string-array name="fncExpUpParamNames">
+	<!-- Changed -->	<item>First Roll</item>
+	<!-- Changed -->	<item>First Target</item>
+	<!-- Changed -->	<item>Subsequent dice</item>
+	<!-- Changed -->	<item>Subsequent target</item>
+	<!-- Changed -->	<item>Max explosions</item>
+	<!-- Changed --></string-array>
+	<!-- Changed --><string-array name="fncExpUpParamHints">
+	<!-- Changed -->	<item>The first die to roll</item>
+	<!-- Changed -->	<item>Target for first explosions</item>
+	<!-- Changed -->	<item>The subsequent dice to roll</item>
+	<!-- Changed -->	<item>Target for subsequent explosions</item>
+	<!-- Changed -->	<item>Max num. of explosions</item>
+	<!-- Changed --></string-array>
 
 	<!-- Obsolete --><string name="fncExplodeName">Exploding</string>
 	<!-- Obsolete --><string name="fncExplodeDesc">Make an exploding roll using a threshold. Explodes for high values as well as for low values.</string>
@@ -472,17 +486,35 @@ Thanks!<br />]]></string>
 		<item>What to make positive</item>
 	</string-array>
 
-	<string name="fncShRunName">Shadowrun 5</string>
-	<string name="fncShRunDesc">Makes a check using Shadowrun 5 rules.</string>
-	<string name="fncShRunURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun</string>
-	<string-array name="fncShRunParamNames">
+	<string name="fncShRun4Name">Shadowrun 4</string>
+	<string name="fncShRun4Desc">Makes a check using Shadowrun 4 rules.</string>
+	<string name="fncShRun4URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun4</string>
+	<string-array name="fncShRun4ParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
 		<item>Target</item>
 		<item>Roll Again</item>
 		<item>Fail target</item>
 	</string-array>
-	<string-array name="fncShRunParamHints">
+	<string-array name="fncShRun4ParamHints">
+		<item>Expression to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
+		<item>Value used to compute Glitches</item>
+	</string-array>
+
+	<string name="fncShRun5Name">Shadowrun 5</string>
+	<string name="fncShRun5Desc">Makes a check using Shadowrun 5 rules.</string>
+	<string name="fncShRun5URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun5</string>
+	<string-array name="fncShRun5ParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
+		<item>Fail target</item>
+	</string-array>
+	<string-array name="fncShRun5ParamHints">
 		<item>Expression to be tested</item>
 		<item>Number of roll to do</item>
 		<item>Value to reach to obtain a success</item>

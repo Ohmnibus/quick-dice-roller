@@ -11,7 +11,7 @@ import ohm.dexp.exception.ParameterOutOfBound;
  * @author Ohmnibus
  * 
  */
-public class TokenFunctionShRun extends TokenFunction {
+public class TokenFunctionShRun5 extends TokenFunction {
 
 	private static final int INDEX_ROLL = 1;
 	private static final int INDEX_POOL = 2;
@@ -45,8 +45,8 @@ public class TokenFunctionShRun extends TokenFunction {
 		TokenBase tokenTarget;
 		TokenBase tokenRollAgain;
 		TokenBase tokenGlitchTarget;
-		long maxValue;
-		long minValue;
+//		long maxValue;
+//		long minValue;
 		boolean loopSafe = true;
 
 		tokenPoolSize = getChild(INDEX_POOL);
@@ -63,29 +63,32 @@ public class TokenFunctionShRun extends TokenFunction {
 		rollAgain = (int)tokenRollAgain.getResult();
 		
 		roll.evaluate(instance);
-		maxValue = roll.getMaxResult() / VALUES_PRECISION_FACTOR;
-		minValue = roll.getMinResult() / VALUES_PRECISION_FACTOR;
+//		maxValue = roll.getMaxResult() / VALUES_PRECISION_FACTOR;
+//		minValue = roll.getMinResult() / VALUES_PRECISION_FACTOR;
 		
 		if (emitGlitch()) {
 			tokenGlitchTarget = getChild(INDEX_GLITCH_TARGET);
 			tokenGlitchTarget.evaluate(instance);
 			glitchTarget = (int)tokenGlitchTarget.getResult();
 		} else {
-			glitchTarget = (int)minValue - 1; //Never glitch
+			//glitchTarget = (int)minValue - 1; //Never glitch
+			//glitchTarget = (int)(roll.getMinResult() / VALUES_PRECISION_FACTOR) - 1; //Never glitch
+			glitchTarget = Integer.MIN_VALUE; //Never glitch
 		}
 
 		//Check for loops
-		if (rollAgain > maxValue) {
-			//This will never explode and can lead to a division by zero
-			//Don't know how to handle, but at least is not a loop.
-			loopSafe = true;
-		} else {
-			//To avoid loops, at least 1 outcome out of 3 must not explode.
-			//loopSafe = ((((maxValue - minValue) + 1) * 2) / ((maxValue - rollAgain) + 1) >= 3);
-			long range = (maxValue - minValue) + 1;
-			long explodingRange = (maxValue - rollAgain) + 1;
-			loopSafe = TokenFunctionExplodeBase.loopLessExplosion(range, explodingRange);
-		}
+//		if (rollAgain > maxValue) {
+//			//This will never explode and can lead to a division by zero
+//			//Don't know how to handle, but at least is not a loop.
+//			loopSafe = true;
+//		} else {
+//			//To avoid loops, at least 1 outcome out of 3 must not explode.
+//			//loopSafe = ((((maxValue - minValue) + 1) * 2) / ((maxValue - rollAgain) + 1) >= 3);
+//			long range = (maxValue - minValue) + 1;
+//			long explodingRange = (maxValue - rollAgain) + 1;
+//			loopSafe = TokenFunctionExplodeBase.loopLessExplosion(range, explodingRange);
+//		}
+		loopSafe = TokenFunctionExplodeBase.loopLessExplosion(instance, roll, rollAgain * VALUES_PRECISION_FACTOR);
 		
 		if (! loopSafe) {
 			throw new LoopDetected(getFunctionName(this.getClass()));
@@ -105,7 +108,7 @@ public class TokenFunctionShRun extends TokenFunction {
 		String sep;
 
 		resultValue = 0;
-		resultString = "[";
+		resultString = SYM_BEGIN; // "[";
 		glitchCount = 0;
 		rollCount = 0;
 
@@ -118,7 +121,8 @@ public class TokenFunctionShRun extends TokenFunction {
 
 		for (int i=1; i<=poolSize; i++) {
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH && i>1) {
-				resultString += ",";
+				//resultString += ",";
+				resultString += SYM_SEP;
 			}
 			
 			// Roll the value
@@ -134,13 +138,14 @@ public class TokenFunctionShRun extends TokenFunction {
 				roll.evaluate(instance);
 				if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
 					resultString = resultString + sep + Integer.toString(rollRes);
-					sep = "+";
+					//sep = "+";
+					sep = SYM_EXPLODE;
 				}
 				
 				if (rollRes >= target) {
 					successes++;
 					if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-						resultString = resultString + "!";
+						resultString = resultString + SYM_SUCCESS; // "!";
 					}
 				}
 				
@@ -152,7 +157,7 @@ public class TokenFunctionShRun extends TokenFunction {
 					//Count an extra success on "roll again"
 					successes++;
 					if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-						resultString = resultString + "!";
+						resultString = resultString + SYM_SUCCESS; // "!";
 					}
 				}
 			} while (rollRes >= rollAgain);
@@ -161,13 +166,15 @@ public class TokenFunctionShRun extends TokenFunction {
 		}
 		
 		String glitch = "";
-		if ((glitchCount * 2 > rollCount) && emitGlitch()) {
+		if (emitGlitch() && isGlitch(glitchCount, rollCount)) {
 			if (resultValue > 0) {
 				//Glitch
-				glitch = ":G";
+				//glitch = ":G";
+				glitch = SYM_SEP_FINAL + "G";
 			} else {
 				//Critical Glitch
-				glitch = ":C";
+				//glitch = ":C";
+				glitch = SYM_SEP_FINAL + "C";
 			}
 		}
 		
@@ -175,9 +182,10 @@ public class TokenFunctionShRun extends TokenFunction {
 		resultMaxValue = Math.max(getMaxPoolSize(instance), 1);
 		resultMinValue = 0;
 		if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-			resultString = resultString + glitch + "]";
+			resultString = resultString + glitch + SYM_END; // "]";
 		} else {
-			resultString = "[..." + glitch + "=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			//resultString = "[..." + glitch + "=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			resultString = SYM_TRUNK_BEGIN + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + glitch + SYM_TRUNK_END;
 		}
 	}
 	
@@ -187,5 +195,9 @@ public class TokenFunctionShRun extends TokenFunction {
 	
 	protected boolean emitGlitch() {
 		return true;
+	}
+	
+	protected boolean isGlitch(int oneCount, int rollCount) {
+		return (oneCount * 2 > rollCount);
 	}
 }
