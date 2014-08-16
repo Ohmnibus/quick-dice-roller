@@ -19,7 +19,7 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 		int successes;
 
 		resultValue = 0;
-		resultString = "[";
+		resultString = SYM_BEGIN; //"[";
 
 		initSequence(instance);
 
@@ -32,7 +32,7 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 
 		for (int i=1; i<=poolSize; i++) {
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH && i>1) {
-				resultString += ",";
+				resultString += SYM_SEP; //",";
 			}
 			
 			// Roll the value
@@ -47,13 +47,13 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 			//Place a "!" for every success
 			for (int j = 0; j<successes; j++) {
 				if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-					resultString = resultString + "!";
+					resultString = resultString + SYM_SUCCESS; //"!";
 				}
 			}
 			//Place a "*" for every failure
 			for (int j = 0; j>successes; j--) {
 				if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-					resultString = resultString + "*";
+					resultString = resultString + SYM_FAILURE; //"*";
 				}
 			}
 			
@@ -66,9 +66,10 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 		resultMaxValue = Math.max(getMaxPoolSize(instance), 1);
 		resultMinValue = 0;
 		if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-			resultString = resultString + "]";
+			resultString = resultString + SYM_END; //"]";
 		} else {
-			resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			//resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			resultString = SYM_TRUNK_BEGIN + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + SYM_TRUNK_END;
 		}
 	}
 	

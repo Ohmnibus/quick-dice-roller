@@ -90,15 +90,15 @@ public class TokenFunctionOWoD extends TokenFunctionPoolBase {
 			if (resultValue == 0) {
 				//No successes and at least one one: botch
 				resultValue = -1;
-				resultString = resultString + ":B"; //B as Botch
+				resultString = resultString + SYM_SEP_SAME + "B"; //B as Botch
 			} else if (oneCount > resultValue) {
 				//Number of ones is gt the number of successes: 0 successes
 				resultValue = 0;
-				resultString = resultString + ":F"; //F as Fail
+				resultString = resultString + SYM_SEP_SAME + "F"; //F as Fail
 			} else if (resultValue > 0) {
 				//Got at least one one, subtract 1 from the result
 				resultValue--;
-				resultString = resultString + ":C"; //C as Canceled
+				resultString = resultString + SYM_SEP_SAME + "C"; //C as Canceled
 			}
 		}
 	}

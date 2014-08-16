@@ -68,7 +68,7 @@ public class TokenFunctionBASH extends TokenFunction {
 
 		resultValue = 0;
 
-		resultString = "[";
+		resultString = SYM_BEGIN; // "[";
 
 		resultMaxValue = roll.getMaxResult() * rollNum; //This is surely false
 		resultMinValue = roll.getMinResult() * rollNum;
@@ -84,7 +84,7 @@ public class TokenFunctionBASH extends TokenFunction {
 				roll.evaluate(instance);
 				
 				if (resultString.length() < MAX_TOKEN_STRING_LENGTH)
-					resultString += ",";
+					resultString += SYM_SEP; // ",";
 			}
 			result = roll.getRawResult();
 			resultValue += result;
@@ -108,15 +108,17 @@ public class TokenFunctionBASH extends TokenFunction {
 			resultValue += result;
 			iterations++;
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH)
-				resultString = resultString + "," + Long.toString(result / VALUES_PRECISION_FACTOR) + "!";
+				resultString = resultString + SYM_SEP + Long.toString(result / VALUES_PRECISION_FACTOR) + SYM_EXTRA;
+				//resultString = resultString + "," + Long.toString(result / VALUES_PRECISION_FACTOR) + "!";
 			
 			exploding = exploding && (result == firstResult);
 		}
 
 		if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-			resultString += "]";
+			resultString += SYM_END; // "]";
 		} else {
-			resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			//resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+			resultString = SYM_TRUNK_BEGIN + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + SYM_TRUNK_END;
 		}
 
 	}

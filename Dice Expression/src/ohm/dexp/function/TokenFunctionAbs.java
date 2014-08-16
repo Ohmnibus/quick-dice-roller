@@ -54,10 +54,12 @@ public class TokenFunctionAbs extends TokenFunction {
 		String res = child.getResultString();
 		if (res.length() + 2 > MAX_TOKEN_STRING_LENGTH) {
 			//Output will be too long, use short format
-			resultString = "|" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "|";
+			//resultString = "|" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "|";
+			resultString = CH_ABS_OP + SYM_TRUNK_PART_ELLIPSIS + SYM_TRUNK_PART_EQUAL + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + CH_ABS_CL;
 		} else {
 			//Long format
-			resultString = "|" + res + "|";
+			//resultString = "|" + res + "|";
+			resultString = CH_ABS_OP + res + CH_ABS_CL;
 		}
 	}
 

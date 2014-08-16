@@ -1,6 +1,6 @@
 package ohm.dexp.function;
 
-public class TokenFunctionDWars extends TokenFunctionShRun {
+public class TokenFunctionDWars extends TokenFunctionShRun5 {
 
 	@Override
 	protected int initChildNumber() {

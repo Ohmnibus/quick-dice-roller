@@ -60,7 +60,7 @@ public class TokenFunctionRandom extends TokenFunction {
 //				Long.toString(resultValue / VALUES_PRECISION_FACTOR) + 
 //				"]";
 //		}
-		resultString = "[" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+		resultString = SYM_BEGIN + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + SYM_END;
 	}
 
 }

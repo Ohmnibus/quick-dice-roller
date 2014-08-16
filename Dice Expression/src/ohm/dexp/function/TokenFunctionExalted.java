@@ -82,7 +82,8 @@ public class TokenFunctionExalted extends TokenFunctionPoolBase {
 		if (resultValue == 0 && oneCount > 0) {
 			//Botch!
 			resultValue = -1;
-			resultString = resultString + ":B"; //B as Botch
+			//resultString = resultString + ":B"; //B as Botch
+			resultString = resultString + SYM_SEP_FINAL + "B"; //B as Botch
 		}
 	}
 

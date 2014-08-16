@@ -34,7 +34,8 @@ public class TokenFunctionRoundDown extends TokenFunction {
 		resultMaxValue = round(param.getMaxResult());
 		resultMinValue = round(param.getMinResult());
 
-		resultString = "{" + param.getResultString() + "}";
+		//resultString = "{" + param.getResultString() + "}";
+		resultString = CH_RDN_OP + param.getResultString() + CH_RDN_CL;
 	}
 
 	protected long round(long value) {

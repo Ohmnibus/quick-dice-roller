@@ -34,7 +34,8 @@ public class TokenFunctionRoundUp extends TokenFunction {
 		resultMaxValue = round(param.getMaxResult());
 		resultMinValue = round(param.getMinResult());
 
-		resultString = "{" + param.getResultString() + "}";
+		//resultString = "{" + param.getResultString() + "}";
+		resultString = CH_RUP_OP + param.getResultString() + CH_RUP_CL;
 	}
 	
 	protected long round(long value) {

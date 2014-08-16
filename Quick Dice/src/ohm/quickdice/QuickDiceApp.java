@@ -43,10 +43,10 @@ public class QuickDiceApp extends Application {
 			addFunction("min", TokenFunctionMin.class, R.drawable.ic_fnc, R.string.fncMinName, R.string.fncMinDesc, R.string.fncMinURL, R.array.fncMinParamNames, R.array.fncMinParamHints);
 			addFunction("rand", TokenFunctionRandom.class, R.drawable.ic_fnc, R.string.fncRandName, R.string.fncRandDesc, R.string.fncRandURL, R.array.fncRandParamNames, R.array.fncRandParamHints);
 			addFunction("exp", TokenFunctionExp.class, R.drawable.ic_fnc, R.string.fncExpName, R.string.fncExpDesc, R.string.fncExpURL, R.array.fncExpParamNames, R.array.fncExpParamHints);
-//			addFunction("expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
+			addFunction("expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
 //			addFunction("explode", TokenFunctionExplode.class, R.drawable.ic_fnc, R.string.fncExplodeName, R.string.fncExplodeDesc, R.string.fncExplodeURL, R.array.fncExplodeParamNames, R.array.fncExplodeParamHints);
 //			addFunction("explodeup", TokenFunctionExplodeUp.class, R.drawable.ic_fnc, R.string.fncExplodeUpName, R.string.fncExplodeUpDesc, R.string.fncExplodeUpURL, R.array.fncExplodeUpParamNames, R.array.fncExplodeUpParamHints);
-			addHiddenFunction("expup", TokenFunctionExpUp.class);
+//			addHiddenFunction("expup", TokenFunctionExpUp.class);
 			addHiddenFunction("explode", TokenFunctionExplode.class);
 			addHiddenFunction("explodeup", TokenFunctionExplodeUp.class);
 
@@ -59,7 +59,8 @@ public class QuickDiceApp extends Application {
 			addFunction("dwars", TokenFunctionDWars.class, R.drawable.ic_fnc, R.string.fncDWarsName, R.string.fncDWarsDesc, R.string.fncDWarsURL, R.array.fncDWarsParamNames, R.array.fncDWarsParamHints);
 			addFunction("hero", TokenFunctionHERO.class, R.drawable.ic_fnc, R.string.fncHEROName, R.string.fncHERODesc, R.string.fncHEROURL, R.array.fncHEROParamNames, R.array.fncHEROParamHints);
 			addFunction("bash", TokenFunctionBASH.class, R.drawable.ic_fnc, R.string.fncBASHName, R.string.fncBASHDesc, R.string.fncBASHURL, R.array.fncBASHParamNames, R.array.fncBASHParamHints);
-			addFunction("shrun", TokenFunctionShRun.class, R.drawable.ic_fnc, R.string.fncShRunName, R.string.fncShRunDesc, R.string.fncShRunURL, R.array.fncShRunParamNames, R.array.fncShRunParamHints);
+			addFunction("shrun4", TokenFunctionShRun4.class, R.drawable.ic_fnc, R.string.fncShRun4Name, R.string.fncShRun4Desc, R.string.fncShRun4URL, R.array.fncShRun4ParamNames, R.array.fncShRun4ParamHints);
+			addFunction("shrun5", TokenFunctionShRun5.class, R.drawable.ic_fnc, R.string.fncShRun5Name, R.string.fncShRun5Desc, R.string.fncShRun5URL, R.array.fncShRun5ParamNames, R.array.fncShRun5ParamHints);
 
 			addFunction("rup", TokenFunctionRoundUp.class, R.drawable.ic_fnc, R.string.fncRupName, R.string.fncRupDesc, R.string.fncRupURL, R.array.fncRupParamNames, R.array.fncRupParamHints);
 			addFunction("rdn", TokenFunctionRoundDown.class, R.drawable.ic_fnc, R.string.fncRdnName, R.string.fncRdnDesc, R.string.fncRdnURL, R.array.fncRdnParamNames, R.array.fncRdnParamHints);

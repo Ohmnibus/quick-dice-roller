@@ -300,7 +300,7 @@ public class DExpression {
 		int actTokenType;   /* Current token type (speed up a bit) */
 		int lastTokenType;  /* Last token type */
 		TokenBase tLastOp;  /* Last operator found */
-		//TokenBase tLastOpP; /* Last priority operator found */
+		TokenBase tLastOpP; /* Operator before unary operator */
 		TokenBase tFunc;    /* Last function found */
 		Stack<TokenBase> parseStack;
 		boolean isTerminal;	/* If last valid token is a terminal one */
@@ -312,7 +312,7 @@ public class DExpression {
 
 		varCache.clear();
 		tLastOp = null;
-		//tLastOpP = null;
+		tLastOpP = null;
 		tFunc = null;
 		lastTokenType = TK_NULL;
 		
@@ -344,10 +344,16 @@ public class DExpression {
 						case TK_VAL:
 							/* Add Number to tree */
 							tmpToken = TokenValue.InitToken(TokenValue.ParseRawValue(actToken.value));
-							if (tLastOp==null) {
+							if (tLastOp == null) {
 								root = tmpToken;
 							} else {
 								tLastOp.setRightChild(tmpToken);
+								if (tLastOpP != null) {
+									/* Added child to unary operator. */
+									/* Reset reference to last operator before unary operator */
+									tLastOp = tLastOpP;
+									tLastOpP = null;
+								}
 							}
 							isTerminal = true;
 							break;
@@ -358,15 +364,12 @@ public class DExpression {
 							if (tLastOp == null) {
 								if (root == null) {
 									/* Unary operator */
-									if (tmpToken instanceof TokenOperatorDice) {
-										//tmpToken.setLeftChild(TokenValue.InitToken(1));
-										root = tmpToken;
-									} else if (tmpToken instanceof TokenOperatorAdd || tmpToken instanceof TokenOperatorSubtract) {
-										//tmpToken.setLeftChild(TokenValue.InitToken(0));
+									if (tmpToken instanceof TokenOperatorDice
+											|| tmpToken instanceof TokenOperatorAdd
+											|| tmpToken instanceof TokenOperatorSubtract) {
+
 										root = tmpToken;
 									} else {
-										//retVal = DResult.ERR_MISSING_OPERAND;
-										//setError(retVal, actToken.begin, actToken.begin);
 										throw new MissingOperand(actToken.begin);
 									}
 								} else {
@@ -375,23 +378,27 @@ public class DExpression {
 									root = tmpToken;
 								}
 								//tLastOpP = tLastOp; //Same as "tLastOpP = null".
-								//tLastOpP = null;
+								tLastOpP = null;
 							} else {
-								/* Unary operator after another operator */
 								//if (tmpToken.getPriority() > tLastOp.getPriority() || lastTokenType == TK_UOP) {
-								//  tmpToken.setLeftChild(tLastOp.getRightChild());
-								//  tLastOp.setRightChild(tmpToken);
-								//  tLastOpP = tLastOp;
-								//} else {
-								//	tmpToken.setLeftChild(tLastOp);
-								//	if (tLastOpP==null) {
-								//		root = tmpToken;
-								//	} else {
-								//		tLastOpP.setRightChild(tmpToken);
-								//	}
-								//}
-								tmpToken.setLeftChild(tLastOp.getRightChild());
-								tLastOp.setRightChild(tmpToken);
+								if (tmpToken.getPriority() > tLastOp.getPriority()) {
+									tmpToken.setLeftChild(tLastOp.getRightChild());
+									tLastOp.setRightChild(tmpToken);
+									//tLastOpP = tLastOp;
+									tLastOpP = null;
+								} else if (lastTokenType == TK_OP || lastTokenType == TK_UOP) {
+									/* Unary operator after another operator */
+									tmpToken.setLeftChild(tLastOp.getRightChild()); //Always null!
+									tLastOp.setRightChild(tmpToken);
+									if (tLastOpP == null) {
+										/* Set reference to last operator before unary operator */
+										tLastOpP = tLastOp;
+									}
+								} else {
+									tmpToken.setLeftChild(root);
+									root = tmpToken;
+									tLastOpP = null;
+								}
 							}
 							tLastOp = tmpToken;
 							break;
@@ -399,12 +406,12 @@ public class DExpression {
 							/* Process "(" token */
 							parseStack.push(root);
 							parseStack.push(tLastOp);
-							//parseStack.push(tLastOpP);
+							parseStack.push(tLastOpP);
 							parseStack.push(tFunc);
 							
 							root = null;
 							tLastOp = null;
-							//tLastOpP = null;
+							tLastOpP = null;
 							tFunc = null;
 							break;
 						case TK_PCL:
@@ -416,7 +423,7 @@ public class DExpression {
 								tmpToken = root;
 								
 								tFunc = parseStack.pop();
-								//tLastOpP = parseStack.pop();
+								tLastOpP = parseStack.pop();
 								tLastOp = parseStack.pop();
 								root = parseStack.pop();
 								
@@ -463,7 +470,7 @@ public class DExpression {
 								} else {
 									root=null;
 									tLastOp=null;
-									//tLastOpP=null;
+									tLastOpP=null;
 									tFunc=null;
 								}
 							}
@@ -764,15 +771,17 @@ public class DExpression {
 						}
 						break;
 					case TK_NAME:
-						/* Functions */
-						
-						//retVal.value = retVal.value + String.valueOf(actChar);
+						/* Functions and variables */
 						if (myValue == null) {
 							myValue = new StringBuilder();
 						}
 						myValue.append(actChar);
-						
-						if (nextCharType != CT_ALPHA) {
+
+						//To prevent that "d6" could be recognized as a name,
+						//they must be of 3 ALPHA followed by any combination of ALPHA or DIGIT
+
+						//if (nextCharType != CT_ALPHA && nextCharType != CT_DIGIT) {
+						if (nextCharType != CT_ALPHA && (myValue.length() < 3 || nextCharType != CT_DIGIT)) {
 							/* Function recognized */
 							retVal.value = myValue.toString();
 							retVal.end = iCnt + 1;

@@ -51,11 +51,11 @@ public class TokenFunctionHERO extends TokenFunction {
 
 		resultValue = 0;
 		resultBody = 0;
-		resultString = "[";
+		resultString = SYM_BEGIN; // "[";
 
 		for (int i=1; i<=poolSize; i++) {
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH && i>1) {
-				resultString += ",";
+				resultString += SYM_SEP; // ",";
 			}
 			
 			// Roll the value
@@ -74,7 +74,7 @@ public class TokenFunctionHERO extends TokenFunction {
 
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
 				resultString = resultString + Integer.toString(rollRes) +
-					":" + Integer.toString(rollBody);
+					SYM_SEP_SAME + Integer.toString(rollBody);
 			}
 			
 			resultValue += rollRes;
@@ -83,7 +83,7 @@ public class TokenFunctionHERO extends TokenFunction {
 		
 		if (halfDice) {
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-				resultString += ",";
+				resultString += SYM_SEP; // ",";
 			}
 			
 			// Roll the value
@@ -100,8 +100,10 @@ public class TokenFunctionHERO extends TokenFunction {
 			rollRes = (rollRes + 1) / 2;
 
 			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-				resultString = resultString + "{" + Integer.toString(rollRes) +
-					":" + Integer.toString(rollBody) + "}";
+				//resultString = resultString + "{" + Integer.toString(rollRes) +
+				//	":" + Integer.toString(rollBody) + "}";
+				resultString = resultString + SYM_BEGIN_ALT + Integer.toString(rollRes) +
+						SYM_SEP_SAME + Integer.toString(rollBody) + SYM_END_ALT;
 			}
 			
 			resultValue += rollRes;
@@ -117,8 +119,10 @@ public class TokenFunctionHERO extends TokenFunction {
 		}
 		if (resultString.length() >= MAX_TOKEN_STRING_LENGTH) {
 			//Output is too long
-			resultString = "[...";
+			//resultString = "[...";
+			resultString = SYM_BEGIN + SYM_TRUNK_PART_ELLIPSIS; // "[...";
 		}
-		resultString += "=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + ":" + resultBody + "]";
+		//resultString += "=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + ":" + resultBody + "]";
+		resultString += CH_EQUAL + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + SYM_SEP_SAME + resultBody + SYM_END;
 	}
 }
