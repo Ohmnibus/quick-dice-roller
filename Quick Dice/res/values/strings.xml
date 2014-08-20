@@ -645,4 +645,7 @@ Thanks!<br />]]></string>
 	<string name="pref_aspect_ext_sound_desc">Different sound effects for criticals and fumbles.</string>
 	<string name="pref_aspect_swapdesc_title">Swap name and result</string>
 	<string name="pref_aspect_swapdesc_desc">Swap the die name and its extended result.</string>
+	<string name="pref_behaviour">Behaviour</string>
+	<string name="pref_behaviour_wakelock_title">Keep screen on</string>
+	<string name="pref_behaviour_wakelock_desc">Keep the screen on while using the app.</string>
 </resources>

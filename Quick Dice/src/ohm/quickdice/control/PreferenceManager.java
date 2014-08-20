@@ -46,6 +46,7 @@ public class PreferenceManager {
 	public static final String KEY_SWAP_NAME_RESULT = "KEY_SWAP_NAME_RESULT";
 	public static final String KEY_SPLIT_PANEL_WIDTH = "KEY_SPLIT_PANEL_WIDTH";
 	public static final String KEY_SPLIT_PANEL_HEIGHT = "KEY_SPLIT_PANEL_HEIGHT";
+	public static final String KEY_WAKELOCK = "KEY_WAKELOCK";
 
 	private boolean initialized = false;
 	private int clipboardUsage;
@@ -64,6 +65,7 @@ public class PreferenceManager {
 	private boolean swapNameResult;
 	private int splitPanelWidth;
 	private int splitPanelHeight;
+	private boolean wakeLock;
 	
 	private Context context;
 	private SharedPreferences config;
@@ -103,6 +105,7 @@ public class PreferenceManager {
 			swapNameResult = config.getBoolean(KEY_SWAP_NAME_RESULT, false);
 			splitPanelWidth = config.getInt(KEY_SPLIT_PANEL_WIDTH, -1);
 			splitPanelHeight = config.getInt(KEY_SPLIT_PANEL_HEIGHT, -1);
+			wakeLock = config.getBoolean(KEY_WAKELOCK, true);
 			initialized = true;
 		}
 	}
@@ -259,6 +262,15 @@ public class PreferenceManager {
 		return extSoundEnabled;
 	}
 	
+	/**
+	 * Tell if the wake-lock (keep screen on) should be enabled.
+	 * @return {@code true} is wake-lock is enabled, {@code false} otherwise.
+	 */
+	public boolean getWakeLock() {
+		initCache();
+		return wakeLock;
+	}
+
 	public boolean getSwapNameResult() {
 		initCache();
 		return swapNameResult;

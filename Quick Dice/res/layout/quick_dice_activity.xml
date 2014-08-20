@@ -232,7 +232,7 @@
 		android:id="@+id/mVariableList"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_marginRight="@dimen/drawer_margin_keep_clean"
+		android:layout_marginLeft="@dimen/drawer_margin_keep_clean"
 		android:layout_gravity="right"
 		/>
 </android.support.v4.widget.DrawerLayout>

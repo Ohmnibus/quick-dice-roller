@@ -27,6 +27,7 @@ import ohm.quickdice.dialog.DiceBuilderDialog;
 import ohm.quickdice.dialog.FunctionBuilderDialog;
 import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.entity.FunctionDescriptor;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,6 +36,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 /**
@@ -265,6 +267,14 @@ public class Helper {
 		public void onClick(View v) {
 			PopupMenu popupMenu = Helper.getExpressionPopupMenu(v, readyListener);
 			popupMenu.show();
+		}
+	}
+	
+	public static void setWakeLock(Activity activity, boolean wakeLock) {
+		if (wakeLock) {
+			activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		} else {
+			activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		}
 	}
 

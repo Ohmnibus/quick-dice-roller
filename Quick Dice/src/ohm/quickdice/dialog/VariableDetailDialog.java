@@ -116,10 +116,10 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 
 	@Override
 	public void onDismiss(DialogInterface dialog) {
-		if (newVal != variable.getCurVal()) {
-			//QuickDiceApp.getInstance().getBagManager().setVariableValue(varIndex, newVal);
-			variable.setCurVal(newVal);
-		}
+		//if (newVal != variable.getCurVal()) {
+		//QuickDiceApp.getInstance().getBagManager().setVariableValue(varIndex, newVal);
+		variable.setCurVal(newVal);
+		//}
 		super.onDismiss(dialog);
 	}
 }
