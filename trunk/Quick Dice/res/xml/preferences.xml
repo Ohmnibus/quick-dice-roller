@@ -62,6 +62,11 @@
 			android:defaultValue="1"
 			/>
 
+	</PreferenceCategory>
+	
+	<PreferenceCategory
+		android:title="@string/pref_behaviour">
+		
 		<CheckBoxPreference
 			android:key="KEY_SHOW_TOAST"
 			android:title="@string/pref_aspect_popup_title"
@@ -87,6 +92,12 @@
 			android:summary="@string/pref_aspect_ext_sound_desc"
 			android:defaultValue="true"
 			android:dependency="KEY_ENABLE_SOUND" />
+		
+		<CheckBoxPreference
+			android:key="KEY_WAKELOCK"
+			android:title="@string/pref_behaviour_wakelock_title"
+			android:summary="@string/pref_behaviour_wakelock_desc"
+			android:defaultValue="true" />
 	</PreferenceCategory>
 	
 	<PreferenceCategory

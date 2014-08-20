@@ -14,8 +14,11 @@ public class VariableCollection implements BaseCollection<Variable> {
 	private ArrayList<Variable> variableList;
 	private DiceBag owner;
 	private DContext context;
+	
+	/** If context is changed in it's structure */
 	private boolean contextValid = false;
-	private boolean contextUpdated = false;
+	/** If context is changed in it's values */
+	private boolean contextUpToDate = false;
 
 	protected VariableCollection(DiceBag owner) {
 		this.owner = owner;
@@ -278,9 +281,22 @@ public class VariableCollection implements BaseCollection<Variable> {
 		return retVal;
 	}
 	
+	/**
+	 * Notify a change in the structure or content of any variable.
+	 */
 	protected void setChanged() {
 		owner.setChanged();
-		changedContext();
+		//changedContext();
+		contextValid = false;
+	}
+
+	/**
+	 * Notify a change in any value of any variable.
+	 */
+	protected void setValueChanged() {
+		owner.setChanged();
+		//changedCcontent();
+		contextUpToDate = false;
 	}
 
 	@Override
@@ -288,20 +304,20 @@ public class VariableCollection implements BaseCollection<Variable> {
 		return variableList.iterator();
 	}
 	
-	/**
-	 * Notify a change of the context.<br />
-	 * Such changes happen when variables are added, deleted, moved or edited.
-	 */
-	protected void changedContext() {
-		contextValid = false;
-	}
+//	/**
+//	 * Notify a change of the context.<br />
+//	 * Such changes happen when variables are added, deleted, moved or edited.
+//	 */
+//	private void changedContext() {
+//		contextValid = false;
+//	}
 	
-	/**
-	 * Notify a change of a value of a variable.<br />
-	 */
-	protected void changedContent() {
-		contextUpdated = false;
-	}
+//	/**
+//	 * Notify a change of a value of a variable.<br />
+//	 */
+//	protected void changedContent() {
+//		contextUpdated = false;
+//	}
 	
 	protected DContext getContext() {
 		if (! contextValid) {
@@ -318,8 +334,8 @@ public class VariableCollection implements BaseCollection<Variable> {
 			}
 			
 			contextValid = true;
-			contextUpdated = true;
-		} else if (! contextUpdated) {
+			contextUpToDate = true;
+		} else if (! contextUpToDate) {
 			//Context is not updated.
 			//It's values are changed.
 			for (Variable var : variableList) {
@@ -329,6 +345,7 @@ public class VariableCollection implements BaseCollection<Variable> {
 						var.getMaxVal() * TokenBase.VALUES_PRECISION_FACTOR,
 						var.getCurVal() * TokenBase.VALUES_PRECISION_FACTOR);
 			}
+			contextUpToDate = true;
 		}
 		return context;
 	}

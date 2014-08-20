@@ -207,6 +207,8 @@ public class QuickDiceMainActivity extends BaseActivity {
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		initViews();
+		
+		Helper.setWakeLock(this, pref.getWakeLock());
 	}
 	
 	@Override
@@ -452,6 +454,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 	
 				//Pop Up
 				rollDiceToast.refreshConfig();
+				
+				//Wake Lock
+				Helper.setWakeLock(this, pref.getWakeLock());
 	
 				//Modifiers bar
 				initModifierList();

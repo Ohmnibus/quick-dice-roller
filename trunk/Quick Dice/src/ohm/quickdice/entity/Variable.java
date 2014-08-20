@@ -165,9 +165,12 @@ public class Variable {
 	 * @param curVal Current value.
 	 */
 	public void setCurVal(int curVal) {
-		this.curVal = curVal;
-		if (parent != null) {
-			parent.getVariables().changedContent();
+		if (curVal != this.curVal) {
+			this.curVal = curVal;
+			if (parent != null) {
+				//parent.getVariables().changedContent();
+				parent.getVariables().setValueChanged();
+			}
 		}
 	}
 	
