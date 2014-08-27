@@ -13,6 +13,10 @@ import ohm.quickdice.entity.VariableCollection;
 
 public class VariableAdapter extends CachedCollectionAdapter<Variable> {
 
+	public static final int NO_SELECTION = -1;
+	
+	private int curPos = NO_SELECTION;
+
 	/**
 	 * This class contain all the variable view of a single item in a result list item.
 	 * @author Ohmnibus
@@ -21,7 +25,7 @@ public class VariableAdapter extends CachedCollectionAdapter<Variable> {
 	private class ItemViewCache extends ViewCache<Variable>  {
 
 		ImageView variableIcon;
-		//View root;
+		View root;
 		TextView name;
 		TextView description;
 		TextView value;
@@ -32,7 +36,7 @@ public class VariableAdapter extends CachedCollectionAdapter<Variable> {
 
 		@Override
 		protected void findAllViews(View baseView) {
-			//root = baseView;
+			root = baseView;
 			name = (TextView) baseView.findViewById(R.id.lblName);
 			description = (TextView) baseView.findViewById(R.id.lblDescription);
 			variableIcon = (ImageView) baseView.findViewById(R.id.imgIcon);
@@ -60,5 +64,20 @@ public class VariableAdapter extends CachedCollectionAdapter<Variable> {
 		cache.name.setText(variable.getName());
 		cache.description.setText(variable.getDescription());
 		cache.value.setText(Integer.toString(variable.getCurVal()));
+		
+		if (cache.position == curPos) {
+			cache.root.setBackgroundResource(R.drawable.bg_selector_state_selected);
+		} else {
+			cache.root.setBackgroundResource(0);
+		}
+	}
+	
+	public void setSelected(int position) {
+		curPos = position;
+		notifyDataSetChanged();
+	}
+	
+	public int getSelected() {
+		return curPos;
 	}
 }

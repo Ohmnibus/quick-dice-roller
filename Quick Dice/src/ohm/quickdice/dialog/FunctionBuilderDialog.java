@@ -4,12 +4,14 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.PopupMenu;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.DParseException;
+import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.FunctionDescriptor;
 import ohm.quickdice.entity.FunctionDescriptor.ParamDescriptor;
 import ohm.quickdice.util.Helper;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Html;
@@ -36,10 +38,11 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 		this.fncDesc = functionDescriptor;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	protected void setupDialog(AlertDialog dialog) {
 		Context context = dialog.getContext();
-		LayoutInflater inflater = LayoutInflater.from(context);
+		LayoutInflater inflater = dialog.getLayoutInflater();
 
 		dialog.setTitle(fncDesc.getName());
 
@@ -69,6 +72,8 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 
 		paramArray = fncDesc.getParameters();
 		txtParamArray = new EditText[paramArray.length];
+		
+		int baseId = mView.getId();
 
 		for (int i = 0; i < paramArray.length; i++) {
 			param = paramArray[i];
@@ -86,7 +91,22 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
 
 			paramContainer.addView(paramView);
+			
 			txtParamArray[i] = paramValue;
+			//txtParamArray[i].setId(View.generateViewId());
+			
+			do {
+				baseId++;
+			} while (mView.findViewById(baseId) != null);
+			
+			txtParamArray[i].setId(baseId);
+			
+			if (i > 0) {
+				//txtParamArray[i-1].setNextFocusForwardId(txtParamArray[i].getId());
+				txtParamArray[i-1].setNextFocusRightId(txtParamArray[i].getId());
+			}
+			txtParamArray[i].setFocusableInTouchMode(true);
+			registerEditText(txtParamArray[i]);
 		}
 
 		dialog.setView(mView);
@@ -95,7 +115,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 	}
-
+	
 	@Override
 	protected int getActionType() {
 		return BuilderDialogBase.ACTION_EDIT;
@@ -132,103 +152,6 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 		return retVal;
 	}
 
-	//	@Override
-	//	protected void onCreate(Bundle savedInstanceState) {
-	//        View mView = getLayoutInflater().inflate(R.layout.function_builder_dialog, null);
-	//        
-	//        setView(mView);
-	//		
-	//        setTitle(fncDesc.getName());
-	//		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-	//        setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
-	//        
-	//        super.onCreate(savedInstanceState);
-	//        
-	//        //Hack to avoid automatic dismiss on button click.
-	//        getButton(BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-	//			@Override
-	//			public void onClick(View v) {
-	//				FunctionBuilderDialog.this.onClick(FunctionBuilderDialog.this, DialogInterface.BUTTON_POSITIVE);
-	//			}
-	//		});
-	//
-	//        ((TextView)findViewById(R.id.fbFunctionBuilderMessage)).setText(fncDesc.getDesc());
-	//        
-	//        String msg;
-	//        
-	//        msg = "<a href=\"" + fncDesc.getUrl() + "\">" +
-	//        	this.getContext().getResources().getText(R.string.msgOnlineHelp) +
-	//        	"</a>";
-	//        
-	//        ((TextView)findViewById(R.id.fbFunctionBuilderLink)).setText(Html.fromHtml(msg, null, null));
-	//        ((TextView)findViewById(R.id.fbFunctionBuilderLink)).setMovementMethod(LinkMovementMethod.getInstance());
-	//        
-	//        paramContainer = (ViewGroup)findViewById(R.id.fbParamList);
-	//        
-	//        LayoutInflater inflater = LayoutInflater.from(this.getContext());
-	//        
-	//        paramContainer.removeAllViews();
-	//        
-	//        ParamDescriptor[] paramArray; 
-	//        ParamDescriptor param; 
-	//        View paramView;
-	//        TextView paramLabel;
-	//        EditText paramValue = null;
-	//        ImageButton paramMenu;
-	//        
-	//        paramArray = fncDesc.getParameters();
-	//        txtParamArray = new EditText[paramArray.length];
-	//
-	//		for (int i = 0; i < paramArray.length; i++) {
-	//			param = paramArray[i];
-	//			
-	//			paramView = inflater.inflate(R.layout.function_builder_item, null);
-	//			
-	//			paramLabel = (TextView)paramView.findViewById(R.id.fbiLabel);
-	//			paramValue = (EditText)paramView.findViewById(R.id.fbiValue);
-	//			paramMenu = (ImageButton)paramView.findViewById(R.id.fbiMenu);
-	//
-	//			paramLabel.setText(param.getLabel());
-	//			paramValue.setHint(param.getHint());
-	//			//paramValue.setOnFocusChangeListener(focusListener);
-	//			//paramValue.setFocusable(false);
-	////			paramValue.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-	////				@Override
-	////				public void onFocusChange(View v, boolean hasFocus) {
-	////					if (hasFocus) {
-	////						getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-	////					}
-	////				}
-	////			});
-	//
-	//			paramMenu.setTag(paramValue);
-	//			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
-	//			
-	//			paramContainer.addView(paramView);
-	//			txtParamArray[i] = paramValue;
-	//		}
-	//		
-	//		final TextView asd = paramValue;
-	//		
-	//		this.setOnShowListener(new OnShowListener() {
-	//			
-	//			@Override
-	//			public void onShow(DialogInterface dialog) {
-	//	        	//imm.toggleSoftInputFromWindow(asd.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
-	//	        	//imm.showSoftInput(asd, InputMethodManager.SHOW_FORCED);
-	//	        	//InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-	//	        	imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-	//			}
-	//		});
-	//        
-	//		imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-	//		
-	//		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-	//		getWindow().setLayout(
-	//				WindowManager.LayoutParams.WRAP_CONTENT,
-	//				WindowManager.LayoutParams.WRAP_CONTENT);
-	//	}
-
 
 	private BuilderDialogBase.ReadyListener builderReadyListener = new ReadyListener() {
 		@Override
@@ -236,22 +159,23 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 			if (confirmed) {
 				if (action == BuilderDialogBase.ACTION_EDIT) {
 					EditText txt;
-					int selStart;
-					int selEnd;
-					String oldDiceExp;
-					String newDiceExp;
-
+//					int selStart;
+//					int selEnd;
+//					String oldDiceExp;
+//					String newDiceExp;
+//
 					txt = (EditText)view.getTag();
-					selStart = txt.getSelectionStart();
-					selEnd = txt.getSelectionEnd();
-					oldDiceExp = txt.getText().toString();
-
-					newDiceExp = oldDiceExp.substring(0, selStart) +
-							diceExpression +
-							oldDiceExp.substring(selEnd);
-
-					txt.setText(newDiceExp);
-					txt.setSelection(selStart, selStart + diceExpression.length());
+//					selStart = txt.getSelectionStart();
+//					selEnd = txt.getSelectionEnd();
+//					oldDiceExp = txt.getText().toString();
+//
+//					newDiceExp = oldDiceExp.substring(0, selStart) +
+//							diceExpression +
+//							oldDiceExp.substring(selEnd);
+//
+//					txt.setText(newDiceExp);
+//					txt.setSelection(selStart, selStart + diceExpression.length());
+					Helper.setTextInsideSelection(txt, diceExpression, true);
 					txt.requestFocus();
 				} else {
 					if (checkExpression((EditText)view.getTag())) {
@@ -282,6 +206,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 
 		try {
 			//Make a dummy roll to check for error.
+			dExp.setContext(QuickDiceApp.getInstance().getBagManager().getCurrent());
 			dExp.getNewResult();
 		} catch (DException e) {
 			showExpressionError(e, txt);
@@ -342,7 +267,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 					refView.getContext(),
 					refView,
 					functionDescriptor,
-					readyListener).getDialog().show();
+					readyListener).show(); //.getDialog().show();
 
 			if (parent != null) {
 				parent.dismiss();

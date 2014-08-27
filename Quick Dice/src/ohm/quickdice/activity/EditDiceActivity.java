@@ -3,6 +3,7 @@ package ohm.quickdice.activity;
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.DParseException;
 import ohm.dexp.exception.UnknownVariable;
+import ohm.library.widget.KeyboardView;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.control.SerializationManager;
@@ -11,6 +12,7 @@ import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.dialog.IconPickerDialog;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
+import ohm.quickdice.util.CustomKeyboard;
 import ohm.quickdice.util.Helper;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -75,9 +78,14 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 	protected Button cancel;
 	protected boolean textChanged;
 	protected int initialResIndex;
+	protected CustomKeyboard keyboard = null;
+	
+	public static Activity self;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		self = this;
 		
 		setTheme(QuickDiceApp.getInstance().getPreferences().getDialogThemeResId());
 		
@@ -193,6 +201,14 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		txtExpression = (EditText) findViewById(R.id.edExpText);
 		txtExpression.setText(exp);
 		txtExpression.addTextChangedListener(genericTextWatcher);
+		
+		if (QuickDiceApp.getInstance().getPreferences().getCustomKeyboard()) {
+			keyboard = new CustomKeyboard(
+					this,
+					(KeyboardView)findViewById(R.id.kvwKeyboard),
+					R.xml.kbd_dice);
+			keyboard.registerEditText(txtExpression);
+		}
 
 		currentResIndex = resIndex;
 		initialResIndex = resIndex;
@@ -206,6 +222,17 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		cancel.setOnClickListener(this);
 
 		((ImageButton)findViewById(R.id.btuWizard)).setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (keyboard != null && keyboard.isVisible()) {
+				keyboard.hide();
+				return true;
+			}
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	private TextWatcher genericTextWatcher = new TextWatcher() {
@@ -263,22 +290,23 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 			if (confirmed) {
 				if (action == BuilderDialogBase.ACTION_EDIT) {
 					EditText txt;
-					int selStart;
-					int selEnd;
-					String oldDiceExp;
-					String newDiceExp;
-	
+//					int selStart;
+//					int selEnd;
+//					String oldDiceExp;
+//					String newDiceExp;
+//	
 					txt = (EditText) findViewById(R.id.edExpText);
-					selStart = txt.getSelectionStart();
-					selEnd = txt.getSelectionEnd();
-					oldDiceExp = txt.getText().toString();
-					
-					newDiceExp = oldDiceExp.substring(0, selStart) +
-						diceExpression +
-						oldDiceExp.substring(selEnd);
-					
-					txt.setText(newDiceExp);
-					txt.setSelection(selStart, selStart + diceExpression.length());
+//					selStart = txt.getSelectionStart();
+//					selEnd = txt.getSelectionEnd();
+//					oldDiceExp = txt.getText().toString();
+//					
+//					newDiceExp = oldDiceExp.substring(0, selStart) +
+//						diceExpression +
+//						oldDiceExp.substring(selEnd);
+//					
+//					txt.setText(newDiceExp);
+//					txt.setSelection(selStart, selStart + diceExpression.length());
+					Helper.setTextInsideSelection(txt, diceExpression, true);
 					txt.requestFocus();
 				} else {
 					Dice retExp = readDice();

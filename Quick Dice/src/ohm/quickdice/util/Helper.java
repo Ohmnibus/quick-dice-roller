@@ -25,6 +25,7 @@ import ohm.quickdice.R;
 import ohm.quickdice.dialog.BuilderDialogBase;
 import ohm.quickdice.dialog.DiceBuilderDialog;
 import ohm.quickdice.dialog.FunctionBuilderDialog;
+import ohm.quickdice.dialog.VariablePickerDialog;
 import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.entity.FunctionDescriptor;
 import android.app.Activity;
@@ -34,9 +35,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.text.Editable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -277,6 +280,38 @@ public class Helper {
 			activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		}
 	}
+	
+	/**
+	 * Substitute the selection of given {@link EditText} with specified text.<br />
+	 * If no text is selected then specified text will be inserted at current cursor position.<br />
+	 * Newly inserted text will be selected.
+	 * @param editText Target {@link EditText}.
+	 * @param txt Text to insert.
+	 * @param select {@code true} to select newly added text.
+	 */
+	public static void setTextInsideSelection(EditText editText, String txt, boolean select) {
+		Editable editable;
+		int selStart;
+		int selEnd;
+		
+		editable = editText.getText();
+
+		selStart = editText.getSelectionStart();
+		selEnd = editText.getSelectionEnd();
+		if (selStart > selEnd) {
+			int tmp = selStart;
+			selStart = selEnd;
+			selEnd = tmp;
+		}
+		
+		editable.replace(selStart, selEnd, txt);
+
+		if (select) {
+			editText.setSelection(selStart, selStart + txt.length());
+		} else {
+			editText.setSelection(selStart + txt.length());
+		}
+	}
 
 	/**
 	 * Get the pop-up menu to be used with expressions.<br />
@@ -318,6 +353,15 @@ public class Helper {
 						retVal,
 						builderReadyListener)
 				);
+
+		//Named Values
+		ai = VariablePickerDialog.getActionItem(
+				v.getContext(),
+				retVal,
+				builderReadyListener);
+		if (ai != null) {
+			retVal.addActionItem(ai);
+		}
 
 		//Function Builders
 		FunctionDescriptor[] fnc = QuickDiceApp.getInstance().getFunctionDescriptors();

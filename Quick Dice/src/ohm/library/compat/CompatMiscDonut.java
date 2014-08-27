@@ -2,8 +2,10 @@ package ohm.library.compat;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.EditText;
 
 /**
  * Derived class to be used with {@link Build.VERSION_CODES.DONUT} (API 4).
@@ -18,6 +20,11 @@ public class CompatMiscDonut extends CompatMisc {
 	}
 
 	@Override
+	public void setInputTypeNoKeyboard(EditText editText) {
+		editText.setInputType(InputType.TYPE_NULL);
+	}
+	
+	@Override
 	protected int getLayoutMatchParent() {
 		return LayoutParams.FILL_PARENT;
 	}
@@ -26,5 +33,4 @@ public class CompatMiscDonut extends CompatMisc {
 	protected int getLayoutWrapContent() {
 		return LayoutParams.WRAP_CONTENT;
 	}
-
 }

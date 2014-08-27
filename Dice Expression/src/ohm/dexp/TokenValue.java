@@ -120,8 +120,11 @@ class TokenValueVariable extends TokenValue {
 				throw new IllegalArgumentException();
 			}
 			resultValue = instance.getValue(name);
-			resultMinValue = instance.getMinValue(name);
-			resultMaxValue = instance.getMaxValue(name);
+			//resultMinValue = instance.getMinValue(name);
+			//resultMaxValue = instance.getMaxValue(name);
+			//Using instance's max and min values lead to ranges too broad.
+			resultMinValue = resultValue;
+			resultMaxValue = resultValue;
 			resultString = "[" + name + ":" + rawValueToString(resultValue) + "]";
 		} catch (IllegalArgumentException ex) {
 			resultValue = 0;

@@ -3,6 +3,7 @@ package ohm.library.compat;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
+import android.widget.EditText;
 
 /**
  * Provides compatibility access to various methods.
@@ -63,6 +64,12 @@ public abstract class CompatMisc {
 	 */
 	public abstract void setBackgroundDrawable(View v, Drawable d);
 
+	/**
+	 * Set the input type of the {@link EditText} in order to disable system soft keyboard.
+	 * @param editText The {@link EditText} for which to disable system soft keyboard
+	 */
+	public abstract void setInputTypeNoKeyboard(EditText editText);
+	
 	/**
 	 * The value to be assigned to {@link #LAYOUT_MATCH_PARENT}.
 	 * @return Value to be assigned to {@link #LAYOUT_MATCH_PARENT}

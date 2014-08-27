@@ -24,7 +24,7 @@ public abstract class CachedExpandableArrayAdapter<T, S> extends BaseExpandableL
 	 */
 	private abstract class ViewCache {
 		
-		View baseView;
+		protected View root;
 
 		/**
 		 * 
@@ -32,8 +32,8 @@ public abstract class CachedExpandableArrayAdapter<T, S> extends BaseExpandableL
 		 * @param baseView Parent view defining the list element.
 		 */
 		public ViewCache(View baseView) {
-			this.baseView = baseView;
-			findAllViews(this.baseView);
+			this.root = baseView;
+			findAllViews(this.root);
 		}
 		
 		/**

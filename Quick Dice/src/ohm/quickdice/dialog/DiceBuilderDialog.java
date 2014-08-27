@@ -9,6 +9,7 @@ import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import kankan.wheel.widget.adapters.WheelViewAdapter;
 import ohm.quickdice.R;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -33,26 +34,27 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		super(context, view, readyListener);
 	}
 
-    @Override
+	@SuppressLint("InflateParams")
+	@Override
 	protected void setupDialog(AlertDialog dialog) {
 		Context context = dialog.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+		LayoutInflater inflater = LayoutInflater.from(context);
 
-        rootView = inflater.inflate(R.layout.dice_builder_dialog, null);
-        
-        dialog.setView(rootView);
+		rootView = inflater.inflate(R.layout.dice_builder_dialog, null);
 		
-        dialog.setTitle(R.string.lblDiceBuilder);
+		dialog.setView(rootView);
+		
+		dialog.setTitle(R.string.lblDiceBuilder);
 
-        timeWheel = initWheel(context, R.id.dbDiceRollTimes, 0, new NumericWheelAdapter(context, 1, 10));
-        faceWheel = initWheel(context, R.id.dbDiceFaces, 0, new DiceWheelAdapter(context));
-        modsWheel = initWheel(context, R.id.dbDiceModifiers, 0, new ModifierWheelAdapter(context, -50, 50));
+		timeWheel = initWheel(context, R.id.dbDiceRollTimes, 0, new NumericWheelAdapter(context, 1, 10));
+		faceWheel = initWheel(context, R.id.dbDiceFaces, 0, new DiceWheelAdapter(context));
+		modsWheel = initWheel(context, R.id.dbDiceModifiers, 0, new ModifierWheelAdapter(context, -50, 50));
 		
-        modsWheel.setCurrentItem(50);
-        
-        dialog.getWindow().setLayout(
-        		WindowManager.LayoutParams.WRAP_CONTENT,
-        		WindowManager.LayoutParams.WRAP_CONTENT);
+		modsWheel.setCurrentItem(50);
+		
+		dialog.getWindow().setLayout(
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.WRAP_CONTENT);
 	}
 
 	@Override
@@ -85,56 +87,56 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		return diceExpression;
 	}
 
-//    @Override
+//	@Override
 //	protected void onCreate(Bundle savedInstanceState) {
-//        View mView = getLayoutInflater().inflate(R.layout.dice_builder_dialog, null);
-//        
-//        setView(mView);
+//		View mView = getLayoutInflater().inflate(R.layout.dice_builder_dialog, null);
 //		
-//        setTitle(R.string.lblDiceBuilder);
+//		setView(mView);
+//		
+//		setTitle(R.string.lblDiceBuilder);
 //		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-//        setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
-//        
-//        super.onCreate(savedInstanceState);
-//
-//        timeWheel = initWheel(R.id.dbDiceRollTimes, 0, new NumericWheelAdapter(getContext(), 1, 10));
-//        faceWheel = initWheel(R.id.dbDiceFaces, 0, new DiceWheelAdapter(getContext()));
-//        modsWheel = initWheel(R.id.dbDiceModifiers, 0, new ModifierWheelAdapter(getContext(), -50, 50));
+//		setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
 //		
-//        modsWheel.setCurrentItem(50);
-//        
-//        getWindow().setLayout(
-//        		WindowManager.LayoutParams.WRAP_CONTENT,
-//        		WindowManager.LayoutParams.WRAP_CONTENT);
+//		super.onCreate(savedInstanceState);
+//
+//		timeWheel = initWheel(R.id.dbDiceRollTimes, 0, new NumericWheelAdapter(getContext(), 1, 10));
+//		faceWheel = initWheel(R.id.dbDiceFaces, 0, new DiceWheelAdapter(getContext()));
+//		modsWheel = initWheel(R.id.dbDiceModifiers, 0, new ModifierWheelAdapter(getContext(), -50, 50));
+//		
+//		modsWheel.setCurrentItem(50);
+//		
+//		getWindow().setLayout(
+//				WindowManager.LayoutParams.WRAP_CONTENT,
+//				WindowManager.LayoutParams.WRAP_CONTENT);
 //	}
 
-    /**
-     * Initializes wheel
-     * @param id the wheel widget Id
-     */
-    private WheelView initWheel(Context context, int id, int label, WheelViewAdapter adapter) {
-        WheelView wheel = getWheel(id);
-        //wheel.setViewAdapter(new NumericWheelAdapter(getContext(), minValue, maxValue));
-        wheel.setViewAdapter(adapter);
-        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        	wheel.setVisibleItems(3);
-        } else {
-        	wheel.setVisibleItems(5);
-        }
-        //wheel.setLabel(this.getContext().getString(label));
-        wheel.setCurrentItem(0);
-        
-        return wheel;
-    }
+	/**
+	 * Initializes wheel
+	 * @param id the wheel widget Id
+	 */
+	private WheelView initWheel(Context context, int id, int label, WheelViewAdapter adapter) {
+		WheelView wheel = getWheel(id);
+		//wheel.setViewAdapter(new NumericWheelAdapter(getContext(), minValue, maxValue));
+		wheel.setViewAdapter(adapter);
+		if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			wheel.setVisibleItems(3);
+		} else {
+			wheel.setVisibleItems(5);
+		}
+		//wheel.setLabel(this.getContext().getString(label));
+		wheel.setCurrentItem(0);
+		
+		return wheel;
+	}
 
-    /**
-     * Returns wheel by Id
-     * @param id the wheel Id
-     * @return the wheel with passed Id
-     */
-    private WheelView getWheel(int id) {
-    	return (WheelView)rootView.findViewById(id);
-    }
+	/**
+	 * Returns wheel by Id
+	 * @param id the wheel Id
+	 * @return the wheel with passed Id
+	 */
+	private WheelView getWheel(int id) {
+		return (WheelView)rootView.findViewById(id);
+	}
 
 	protected class DiceWheelAdapter extends NumericWheelAdapter {
 		
@@ -162,16 +164,16 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		 */
 		@Override
 		public CharSequence getItemText(int index) {
-	        if (index >= 0 && index < getItemsCount()) {
-	        	if (diceFaces[index] == 100) {
-	        		return "%";
-	        	} else if (diceFaces[index] == 1000) {
-	        		return "‰";
-	        	} else {
-		            return Integer.toString(diceFaces[index]);
-	        	}
-	        }
-	        return null;
+			if (index >= 0 && index < getItemsCount()) {
+				if (diceFaces[index] == 100) {
+					return "%";
+				} else if (diceFaces[index] == 1000) {
+					return "‰";
+				} else {
+					return Integer.toString(diceFaces[index]);
+				}
+			}
+			return null;
 		}
 
 		/* (non-Javadoc)
@@ -182,21 +184,21 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 			return diceFaces.length;
 		}
 		
-        public int getItemValue(int index) {
-        	int retVal;
-	        if (index >= 0 && index < getItemsCount()) {
-	            retVal = diceFaces[index];
-	        } else {
-	        	retVal = 0;
-	        }
-	        return retVal;
-        }
+		public int getItemValue(int index) {
+			int retVal;
+			if (index >= 0 && index < getItemsCount()) {
+				retVal = diceFaces[index];
+			} else {
+				retVal = 0;
+			}
+			return retVal;
+		}
 	}
 	
 	protected class ModifierWheelAdapter extends NumericWheelAdapter {
-        // Index of current item
-        int currentItem;
-        int minValue;
+		// Index of current item
+		int currentItem;
+		int minValue;
 
 		public ModifierWheelAdapter(Context context, int minValue, int maxValue) {
 			super(context, minValue, maxValue);
@@ -204,48 +206,48 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		}
 
 
-        @Override
-        protected void configureTextView(TextView view) {
-            super.configureTextView(view);
-            if (getItemValue(currentItem) == 0) {
-                view.setTextColor(0xFF888888);
-            }
-            //view.setTypeface(Typeface.SANS_SERIF);
-        }
+		@Override
+		protected void configureTextView(TextView view) {
+			super.configureTextView(view);
+			if (getItemValue(currentItem) == 0) {
+				view.setTextColor(0xFF888888);
+			}
+			//view.setTypeface(Typeface.SANS_SERIF);
+		}
 
-        /* (non-Javadoc)
+		/* (non-Javadoc)
 		 * @see kankan.wheel.widget.adapters.NumericWheelAdapter#getItemText(int)
 		 */
 		@Override
 		public CharSequence getItemText(int index) {
-	        if (index >= 0 && index < getItemsCount()) {
-	            int value = getItemValue(index);
-	            if (value == 0) {
-		            return "0";
-	            } else if (value > 0) {
-		            return "+" + Integer.toString(value);
-	            } else {
-		            return Integer.toString(value);
-	            }
-	        }
-	        return null;
+			if (index >= 0 && index < getItemsCount()) {
+				int value = getItemValue(index);
+				if (value == 0) {
+					return "0";
+				} else if (value > 0) {
+					return "+" + Integer.toString(value);
+				} else {
+					return Integer.toString(value);
+				}
+			}
+			return null;
 		}
 		
-        @Override
-        public View getItem(int index, View cachedView, ViewGroup parent) {
-            currentItem = index;
-            return super.getItem(index, cachedView, parent);
-        }
-        
-        public int getItemValue(int index) {
-        	int retVal;
-	        if (index >= 0 && index < getItemsCount()) {
-	            retVal = minValue + index;
-	        } else {
-	        	retVal = 0;
-	        }
-	        return retVal;
-        }
+		@Override
+		public View getItem(int index, View cachedView, ViewGroup parent) {
+			currentItem = index;
+			return super.getItem(index, cachedView, parent);
+		}
+		
+		public int getItemValue(int index) {
+			int retVal;
+			if (index >= 0 && index < getItemsCount()) {
+				retVal = minValue + index;
+			} else {
+				retVal = 0;
+			}
+			return retVal;
+		}
 	}
 	
 	/**
@@ -284,7 +286,7 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 			new DiceBuilderDialog(
 					refView.getContext(), 
 					refView, 
-					readyListener).getDialog().show();
+					readyListener).show(); //.getDialog().show();
 			if (parent != null) {
 				parent.dismiss();
 			}

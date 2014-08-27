@@ -47,6 +47,7 @@ public class PreferenceManager {
 	public static final String KEY_SPLIT_PANEL_WIDTH = "KEY_SPLIT_PANEL_WIDTH";
 	public static final String KEY_SPLIT_PANEL_HEIGHT = "KEY_SPLIT_PANEL_HEIGHT";
 	public static final String KEY_WAKELOCK = "KEY_WAKELOCK";
+	public static final String KEY_CUSTOM_KEYBOARD = "KEY_CUSTOM_KEYBOARD";
 
 	private boolean initialized = false;
 	private int clipboardUsage;
@@ -66,6 +67,7 @@ public class PreferenceManager {
 	private int splitPanelWidth;
 	private int splitPanelHeight;
 	private boolean wakeLock;
+	private boolean customKeyboard;
 	
 	private Context context;
 	private SharedPreferences config;
@@ -106,6 +108,7 @@ public class PreferenceManager {
 			splitPanelWidth = config.getInt(KEY_SPLIT_PANEL_WIDTH, -1);
 			splitPanelHeight = config.getInt(KEY_SPLIT_PANEL_HEIGHT, -1);
 			wakeLock = config.getBoolean(KEY_WAKELOCK, true);
+			customKeyboard = config.getBoolean(KEY_CUSTOM_KEYBOARD, true);
 			initialized = true;
 		}
 	}
@@ -269,6 +272,11 @@ public class PreferenceManager {
 	public boolean getWakeLock() {
 		initCache();
 		return wakeLock;
+	}
+	
+	public boolean getCustomKeyboard() {
+		initCache();
+		return customKeyboard;
 	}
 
 	public boolean getSwapNameResult() {

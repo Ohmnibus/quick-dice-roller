@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Builder.ValueContainer"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+	style="@style/Builder.ValueContainer"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
 	>
 
 	<TextView style="@style/Builder.Label"
@@ -16,17 +16,17 @@
 		
 		android:text="@string/lblDiceBuilderMsg"
 		/>
-     
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        
+	 
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		
 		android:layout_centerHorizontal="true"
 		android:layout_below="@+id/dbDiceBuilderMessage"
-        >
-        
-        <!-- Times -->
-        <kankan.wheel.widget.WheelView
+		>
+		
+		<!-- Times -->
+		<kankan.wheel.widget.WheelView
 			android:id="@+id/dbDiceRollTimes"
 			
 			android:layout_alignParentLeft="true"
@@ -35,8 +35,8 @@
 			android:layout_height="wrap_content"
 			android:layout_width="64dp"
 			/>
-        
-        <TextView style="@style/Builder.Label.Big"
+		
+		<TextView style="@style/Builder.Label.Big"
 			android:id="@+id/dbDiceLabel"
 			
 			android:layout_toRightOf="@+id/dbDiceRollTimes"
@@ -45,10 +45,10 @@
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			
-            android:text="@string/lblD"/>
-        
-        <!-- Faces -->
-        <kankan.wheel.widget.WheelView
+			android:text="@string/lblD"/>
+		
+		<!-- Faces -->
+		<kankan.wheel.widget.WheelView
 			android:id="@+id/dbDiceFaces"
 			
 			android:layout_toRightOf="@+id/dbDiceLabel"
@@ -57,9 +57,9 @@
 			android:layout_height="wrap_content"
 			android:layout_width="64dp"
 			/>
-        
-        <!-- Modifier -->
-        <kankan.wheel.widget.WheelView
+		
+		<!-- Modifier -->
+		<kankan.wheel.widget.WheelView
 			android:id="@+id/dbDiceModifiers"
 			
 			android:layout_toRightOf="@+id/dbDiceFaces"

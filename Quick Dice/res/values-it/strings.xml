@@ -82,6 +82,16 @@
 <br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />
+&bull; Controllo sullo stand-by<br />
+&bull; Tastiera speciale per le espressioni<br />
+&bull; Ampliato range per i valori denominati<br />
+&bull; Selezione dei valori denominati negli editor di espressioni<br />
+&bull; Corretto: errore in modalità orizzontale<br />
+&bull; Corretto: i valori denominati non sono salvati dopo una modifica<br />
+&bull; Corretto: i valori denominati non funzionano nei wizard di funzioni<br />
+&bull; Corretto: errori grafici minori<br />
+<br />
+Version 1.4.4.3<br />
 &bull; Titoli con l\'opzione "aggiungi" nei pannelli laterali<br />
 &bull; Supporto a Shadowrun 4a e 5a ed.<br />
 &bull; Migliorato il risultato di molte funzioni<br />

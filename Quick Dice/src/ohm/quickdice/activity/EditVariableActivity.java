@@ -262,6 +262,7 @@ public class EditVariableActivity extends BaseActivity
 						R.string.lblMinimum,
 						R.string.lblSelectMinValue,
 						minVal,
+						3,
 						minValuePickedListener).show();
 				break;
 			case R.id.cmdMax:
@@ -271,6 +272,7 @@ public class EditVariableActivity extends BaseActivity
 						R.string.lblMaximum,
 						R.string.lblSelectMaxValue,
 						maxVal,
+						3,
 						maxValuePickedListener).show();
 				break;
 			case R.id.btuBarConfirm:
