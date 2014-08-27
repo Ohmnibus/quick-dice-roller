@@ -17,6 +17,12 @@ import android.widget.TextView;
 
 public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, Dice> {
 
+	public static final int GROUP_UNDEFINED = -1;
+	public static final int ITEM_UNDEFINED = -1;
+	
+	private int curGroup = GROUP_UNDEFINED;
+	private int curItem = ITEM_UNDEFINED;
+	
 	static final QuickDiceApp app = QuickDiceApp.getInstance();
 
 	protected class MyChildViewCache extends ChildViewCache  {
@@ -43,6 +49,16 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, Dic
 			icon.setImageDrawable(app.getGraphic().getDiceIcon(dice.getResourceIndex()));
 			name.setText(dice.getName());
 			description.setText(dice.getDescription());
+			
+			setSelection();
+		}
+		
+		protected void setSelection() {
+			if (groupPosition == curGroup && childPosition == curItem) {
+				root.setBackgroundResource(R.drawable.bg_selector_state_selected);
+			} else {
+				root.setBackgroundResource(0);
+			}
 		}
 
 	}
@@ -117,4 +133,17 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, Dic
 		return new MyChildViewCache(convertView);
 	}
 
+	public void setSelected(int groupPosition, int itemPosition) {
+		curGroup = groupPosition;
+		curItem = itemPosition;
+		notifyDataSetChanged();
+	}
+	
+	public int getSelectedGroup() {
+		return curGroup;
+	}
+	
+	public int getSelectedItem() {
+		return curItem;
+	}
 }

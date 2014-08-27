@@ -115,7 +115,12 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true" />
+		android:layout_above="@+id/kvwKeyboard"
+		android:layout_alignParentLeft="true"
+		android:layout_alignWithParentIfMissing="true"
+		/>
 	
+	<ohm.library.widget.KeyboardView  style="@style/Keyboard"
+		android:id="@+id/kvwKeyboard"
+		/>
 </RelativeLayout>

@@ -25,7 +25,7 @@
 	<string name="lblVariableIconPicker">Named value icon Picker</string>
 	<string name="lblModifierBuilder">Mod Builder</string>
 	<string name="lblModifierBuilderMessage">Compose a modifier.</string>
-	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier? Don\'t think so.</string>
+	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier?</string>
 	<string name="lblDuplicateModifier">This modifier already exists.</string>
 	<string name="lblNameBag">Name</string>
 	<string name="hintNameBag">Enter bag name here</string>
@@ -74,6 +74,9 @@
 	<string name="lblSelectValue">Select a value.</string>
 	<string name="lblSelectMinValue">Select the lower bound for this named value.</string>
 	<string name="lblSelectMaxValue">Select the upper bound for this named value.</string>
+	<string name="lblSelectVariable">Select a Named Value</string>
+	<string name="lblSelectFunction">Select a Function</string>
+	<string name="lblSelectVariableNone">This bag doesn\'t contain any named value.</string>
 	
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
@@ -109,6 +112,16 @@
 <br />
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />
+&bull; Keep screen on<br />
+&bull; New keyboard for dice expressions<br />
+&bull; Increased value range<br />
+&bull; Named value picker in expression editor<br />
+&bull; Fix: error in landscape mode<br />
+&bull; Fix: named value not saved upon value change<br />
+&bull; Fix: named value in function builder didn\'t work<br />
+&bull; Fix: layout issues<br />
+<br />
+Version 1.4.4.3<br />
 &bull; Titles with "add" option on drawers<br />
 &bull; Support to Shadowrun 4ed and 5ed<br />
 &bull; Better output for many functions<br />
@@ -648,4 +661,8 @@ Thanks!<br />]]></string>
 	<string name="pref_behaviour">Behaviour</string>
 	<string name="pref_behaviour_wakelock_title">Keep screen on</string>
 	<string name="pref_behaviour_wakelock_desc">Keep the screen on while using the app.</string>
+	<string name="pref_aspect_keyboard_title">Use custom keyboard</string>
+	<string name="pref_aspect_keyboard_desc">Use custom keyboard to write expressions.</string>
+	
+	<string name="kbd_next">Next</string><!-- Keep this short! Max 4 char! -->
 </resources>

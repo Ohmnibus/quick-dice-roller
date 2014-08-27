@@ -61,7 +61,12 @@
 			android:entryValues="@array/entryvalues_themes"
 			android:defaultValue="1"
 			/>
-
+		
+		<CheckBoxPreference
+			android:key="KEY_CUSTOM_KEYBOARD"
+			android:title="@string/pref_aspect_keyboard_title"
+			android:summary="@string/pref_aspect_keyboard_desc"
+			android:defaultValue="true" />
 	</PreferenceCategory>
 	
 	<PreferenceCategory

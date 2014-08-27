@@ -17,13 +17,16 @@ import android.widget.TextView;
 public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 
 	private static final int DEFAULT_VALUE = 0;
+	private static final int DEFAULT_DIGITS = 2;
 
 	String title;
 	String message;
 	int defaultValue;
+	int digits;
 	OnNumberPickedListener onNumberPickedListener;
 
 	WheelView signWheel;
+	WheelView hundWheel;
 	WheelView tensWheel;
 	WheelView unitWheel;
 
@@ -47,17 +50,20 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	 * @param onNumberPickedListener Callback listener.
 	 */
 	public NumberPickerDialog(Context context, int defaultValue, OnNumberPickedListener onNumberPickedListener) {
-		this(context, R.string.lblNumberPicker, R.string.lblSelectValue, defaultValue, onNumberPickedListener);
+		this(context, R.string.lblNumberPicker, R.string.lblSelectValue, defaultValue, DEFAULT_DIGITS, onNumberPickedListener);
 	}
 
 	/**
 	 * Initialize a picker with given parameters.
 	 * @param context Context
+	 * @param titleResId Title resource id.
+	 * @param messageResId Message resource id.
 	 * @param defaultValue Default value.
+	 * @param digits Number of digits to show.
 	 * @param onNumberPickedListener Callback listener.
 	 */
-	public NumberPickerDialog(Context context, int titleResId, int messageResId, int defaultValue, OnNumberPickedListener onNumberPickedListener) {
-		this(context, context.getString(titleResId), context.getString(messageResId), defaultValue, onNumberPickedListener);
+	public NumberPickerDialog(Context context, int titleResId, int messageResId, int defaultValue, int digits, OnNumberPickedListener onNumberPickedListener) {
+		this(context, context.getString(titleResId), context.getString(messageResId), defaultValue, digits, onNumberPickedListener);
 	}
 
 	/**
@@ -66,16 +72,27 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	 * @param title Title
 	 * @param message Message
 	 * @param defaultValue Default value.
+	 * @param digits Number of digits to show.
 	 * @param onNumberPickedListener Callback listener.
 	 */
-	public NumberPickerDialog(Context context, String title, String message, int defaultValue, OnNumberPickedListener onNumberPickedListener) {
+	public NumberPickerDialog(Context context, String title, String message, int defaultValue, int digits, OnNumberPickedListener onNumberPickedListener) {
 		super(context);
 		
 		this.onNumberPickedListener = onNumberPickedListener;
-		if (defaultValue > 99) {
-			this.defaultValue = 99;
-		} else if (defaultValue < -99) {
-			this.defaultValue = -99;
+		if (digits > 3) {
+			this.digits = 3;
+		} else if (digits < 1) {
+			this.digits = 1;
+		} else {
+			this.digits = digits;
+		}
+		
+		long max = pow(10, this.digits) - 1;
+		
+		if (defaultValue > max) {
+			this.defaultValue = (int) max;
+		} else if (defaultValue < -max) {
+			this.defaultValue = (int) -max;
 		} else {
 			this.defaultValue = defaultValue;
 		}
@@ -83,6 +100,17 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 		this.message = message;
 	}
 
+	long pow (long a, int b) {
+		if ( b == 0)        return 1;
+		if ( b == 1)        return a;
+		if (isEven( b ))    return     pow ( a * a, b/2); //even a=(a^2)^b/2
+		else                return a * pow ( a * a, b/2); //odd  a=a*(a^2)^b/2
+	}
+	
+	boolean isEven(int b) {
+		return (b / 2) == ((b + 1) / 2);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		View mView = getLayoutInflater().inflate(R.layout.dialog_number_picker, null);
@@ -97,26 +125,33 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 		super.onCreate(savedInstanceState);
 
 		int curSign;
+		int cur100s;
 		int curTens;
 		int curUnits;
 
 		if (defaultValue >= 0) {
 			curSign = 0;
+			cur100s = (defaultValue / 100) % 10;
 			curTens = (defaultValue / 10) % 10;
 			curUnits = defaultValue % 10;
 		} else {
 			curSign = 1;
+			cur100s = ((-defaultValue) / 100) % 10;
 			curTens = ((-defaultValue) / 10) % 10;
 			curUnits = (-defaultValue) % 10;
 		}
 
 		signWheel = initWheel(R.id.wheelSign, curSign, new ArrayWheelAdapter<String>(getContext(), new String[] {"+", "-"}));
+		hundWheel = initWheel(R.id.wheelHundreds, cur100s, new NumericWheelAdapter(getContext(), 0, 9));
 		tensWheel = initWheel(R.id.wheelTens, curTens, new NumericWheelAdapter(getContext(), 0, 9));
 		unitWheel = initWheel(R.id.wheelUnits, curUnits, new NumericWheelAdapter(getContext(), 0, 9));
 
-//		getWindow().setLayout(
-//				WindowManager.LayoutParams.WRAP_CONTENT,
-//				WindowManager.LayoutParams.WRAP_CONTENT);
+		if (digits < 3) {
+			hundWheel.setVisibility(View.GONE);
+		}
+		if (digits < 2) {
+			tensWheel.setVisibility(View.GONE);
+		}
 	}
 
 	/**
@@ -125,14 +160,12 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	 */
 	private WheelView initWheel(int id, int current, WheelViewAdapter adapter) {
 		WheelView wheel = getWheel(id);
-		//wheel.setViewAdapter(new NumericWheelAdapter(getContext(), minValue, maxValue));
 		wheel.setViewAdapter(adapter);
 		if (this.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			wheel.setVisibleItems(3);
 		} else {
 			wheel.setVisibleItems(5);
 		}
-		//wheel.setLabel(this.getContext().getString(label));
 		wheel.setCurrentItem(current);
 
 		return wheel;
@@ -153,10 +186,11 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 		if (which == DialogInterface.BUTTON_POSITIVE) {
 			//The dialog has been confirmed
 			int sign = signWheel.getCurrentItem() == 0 ? 1 : -1;
+			int hund = hundWheel.getCurrentItem();
 			int tens = tensWheel.getCurrentItem();
 			int unit = unitWheel.getCurrentItem();
 
-			value = sign * ((tens * 10) + unit);
+			value = sign * ((hund * 100) + (tens * 10) + unit);
 		} else {
 			value = 0;
 		}

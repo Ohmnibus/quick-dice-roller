@@ -22,6 +22,8 @@ public class ExpDiceBagAdapterDest extends ExpDiceBagAdapter {
 				icon.setVisibility(View.INVISIBLE);
 				name.setText(R.string.lblLastPositionName);
 				description.setText(R.string.lblLastPositionDesc);
+
+				setSelection();
 			} else {
 				icon.setVisibility(View.VISIBLE);
 				super.bindData();

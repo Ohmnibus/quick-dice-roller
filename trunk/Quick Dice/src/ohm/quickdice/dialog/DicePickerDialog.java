@@ -5,6 +5,7 @@ import ohm.quickdice.R;
 import ohm.quickdice.adapter.ExpDiceBagAdapter;
 import ohm.quickdice.adapter.ExpDiceBagAdapterDest;
 import ohm.quickdice.control.DiceBagManager;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,7 +30,7 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 	public static final int GROUP_UNDEFINED = -1;
 	public static final int ITEM_UNDEFINED = -1;
 
-	Context context;
+	//Context context;
 	int titleId;
 	int curGroup;
 	int curItem;
@@ -55,12 +56,13 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 
 		this.curGroup = currentGroup;
 		this.curItem = currentItem;
-		this.context = context;
+		//this.context = context;
 		this.titleId = titleId;
 		this.requestType = requestType;
 		this.readyListener = readyListener;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		View mView = getLayoutInflater().inflate(R.layout.dice_picker_dialog, null);
@@ -83,13 +85,13 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 		expListView = (ExpandableListView)findViewById(R.id.expListView);
 		if (requestType == DIALOG_SELECT_DESTINATION) {
 			expListView.setAdapter(new ExpDiceBagAdapterDest(
-					context,
+					getContext(), // context,
 					R.layout.dice_picker_group,
 					R.layout.dice_picker_item,
 					diceBagManager.getDiceBagCollection()));
 		} else {
 			expListView.setAdapter(new ExpDiceBagAdapter(
-					context,
+					getContext(), //context,
 					R.layout.dice_picker_group,
 					R.layout.dice_picker_item,
 					diceBagManager.getDiceBagCollection()));
@@ -138,8 +140,9 @@ public class DicePickerDialog extends AlertDialog implements DialogInterface.OnC
 	};
 
 	protected void selectItem(ExpandableListView expList, int group, int item) {
-		long packedPosition = ExpandableListView.getPackedPositionForChild(group, item);
-		int position = expList.getFlatListPosition(packedPosition);
-		expList.setItemChecked(position, true);
+//		long packedPosition = ExpandableListView.getPackedPositionForChild(group, item);
+//		int position = expList.getFlatListPosition(packedPosition);
+//		expList.setItemChecked(position, true);
+		((ExpDiceBagAdapter)expList.getExpandableListAdapter()).setSelected(group, item);
 	}
 }

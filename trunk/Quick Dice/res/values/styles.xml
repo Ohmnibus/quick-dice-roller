@@ -409,6 +409,19 @@
 		<item name="android:imeOptions">actionNext|flagNoExtractUi</item><!-- actionNext|flagNoExtractUi|flagForceAscii -->
 	</style>
 	
+	<!-- Custom Keyboard -->
+	<style name="Keyboard">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		
+		<item name="android:layout_alignParentBottom">true</item>
+		<item name="android:layout_centerHorizontal">true</item>
+		
+		<item name="android:focusable">true</item>
+		<item name="android:focusableInTouchMode">true</item>
+		<item name="android:visibility">gone</item>
+	</style>
+	
 	<!-- Separators -->
 	<style name="Separator">
 	</style>

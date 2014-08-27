@@ -30,7 +30,7 @@ public class ModifierBuilderDialog extends NumberPickerDialog implements NumberP
 	 * @param onCreatedListener Callback listener.
 	 */
 	public ModifierBuilderDialog(Context context, int position, OnCreatedListener onCreatedListener) {
-		super(context, R.string.lblModifierBuilder, R.string.lblModifierBuilderMessage, 0, null);
+		super(context, R.string.lblModifierBuilder, R.string.lblModifierBuilderMessage, 0, 2, null);
 
 		super.onNumberPickedListener = this;
 		this.position = position;
