@@ -97,8 +97,7 @@
 	<string name="msgClearResultsTitle">Clear results</string>
 	<string name="msgClearResults">Are you sure to clear all the roll results?</string>
 	<string name="msgLostChange">Leaving now you will lose pending changes. Continue?</string>
-	<string name="msgMissingVar">The dice requires some named values that are no longer available: \"%1$s\"\nThe dice cannot be rolled until the named values are added to the dice bag. Save anyway?</string>
-	<!-- <string name="msgMissingVar">These Named Values was not found in this dice bag: %1$s\nThis dice cannot properly work without them. Save anyway?</string> -->
+	<string name="msgMissingVar">The die requires some named values that are no longer available: \"%1$s\"\nThe die cannot be rolled until the named values are added to the dice bag. Save anyway?</string>
 
 	<string name="msgRemoveDiceBagTitle">Remove dice bag</string>
 	<string name="msgRemoveDiceBag">Are you sure to definitively remove the dice bag \"%1$s\"? It contains \"%2$d\" dice and \"%3$d\" modifiers. All those items will be lost in time, like tears in rain.</string>
@@ -560,7 +559,7 @@ Thanks!<br />]]></string>
 	<string name="exc_invalid_character">Invalid character at position %1$d.</string>
 	<string name="exc_missing_operand">Missing operand at char %1$d.</string>
 	<string name="exc_nothing_to_evaluate">The expression is empty.</string>
-	<string name="exc_parameter_out_of_bound">Parameter number %2$d of function \"%1$s\" is too high or too low.</string>
+	<string name="exc_parameter_out_of_bound">Parameter number %2$d of function \"%1$s\" is too high.</string>
 	<string name="exc_unbalanced_bracket">Unbalanced bracket at char %1$d.</string>
 	<string name="exc_unexpected_error">Unexpected error.</string>
 	<string name="exc_unexpected_parameter">Unexpected parameter at char %1$d.</string>
