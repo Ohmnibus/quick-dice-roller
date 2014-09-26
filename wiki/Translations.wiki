@@ -5,6 +5,12 @@
 
 Anyone, developer or not, can help to improve Quick Dice Roller by translating text or giving feed-back on current translations.
 
+= Crowdin =
+
+The easiest way to help with the translation is to go to the [https://crowdin.com/project/quick-dice-roller Quick Dice Roller project hosted on Crowdin].
+
+Here you can check the status of the translation on each language and give your contribute. It won't take more than few minutes, and the tool is very easy to use, so don't be shy :)
+
 = Details =
 
 As for all android apps, localized text is organized into XML resources with the following format:
