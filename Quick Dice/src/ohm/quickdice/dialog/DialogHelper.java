@@ -122,15 +122,18 @@ public class DialogHelper {
 			version = "1.0.0";
 		}
 
-		title = String.format(res.getString(R.string.msgWhatsNewTitle),
+		title = res.getString(R.string.msgWhatsNewTitle,
 				res.getString(R.string.app_name),
 				version);
 
-		body = String.format(res.getString(R.string.msgWhatsNewBody),
-				res.getString(R.string.app_name),
-				version,
-				res.getString(R.string.app_author));
+//		body = String.format(res.getString(R.string.msgWhatsNewBody),
+//				res.getString(R.string.app_name),
+//				version,
+//				res.getString(R.string.app_author));
 
+		body = res.getString(R.string.msgWhatsNewIntro) +
+				res.getString(R.string.msgWhatsNewBody);
+		
 		new MarkupDialog(context, title, body, -1, null).show();
 	}
 	

@@ -2,37 +2,35 @@
 TiraDadi Rapido
 
 ##Description:4000##
-<i>Diventa beta tester per provare in anteprima le ultime novità &rarr; http://goo.gl/UuJBSO</i>
+TiraDadi Rapido (Quick Dice Roller) è un'app creata per i geek fissati di GdR e giochi da tavolo. Permette di simulare i lanci di dadi della maggior parte dei sistemi di gioco, per quanto complessi possano essere.
 
-TiraDadi Rapido (Quick Dice Roller) è un'app creata per i geek fissati di GdR. Permette di simulare i lanci di dadi della maggior parte dei sistemi di gioco, per quanto complessi possano essere.
-
-I dadi possono essere aggiunti a piacimento, utilizzando le espressioni standard quali <i>2d6+5</i> oppure funzioni come <i>rak(1d6,4,3)</i> che permettono di simulare i sistemi di gioco più complessi. Un pratico costruttore di espressioni semplifica la procedura, e permette di accedere alla guida in linea (solo in italiano ed inglese).
+I dadi possono essere aggiunti a piacimento, utilizzando le formule standard quali <i>2d6+5</i> oppure funzioni come <i>rak(1d6,4,3)</i> che permettono di simulare i sistemi di gioco più complessi. Un pratico costruttore di formule semplifica la procedura, e permette di accedere alla guida in linea (solo in italiano ed inglese).
 
 Controlla la lista di tutte le funzioni supportate qui: http://goo.gl/qh3oM
 
-L'app permette di creare differenti collezioni di dadi (suddivisi per sistema di gioco, per personaggio o come meglio preferite) ed è possibile passare da una collezione ad un'altra in un batter d'occhio.
+Tranquillo! Non hai bisogno di scrivere la formula tutte le volte! Una volta definito, un dado può essere lanciato tutte le volte che si desidera semplicemente toccando l'icona corrispondente.
 
-Il lancio dei dadi è velocissimo. Invece di scegliere un dado con un tocco e lanciarlo con un altro, TiraDadi Rapido permette di eseguire un lancio semplicemente toccando l'icona del dado corrispondente. Un risparmio del 50%!
+I "valori denominati", oltre a tenere traccia dei punteggi del gioco, permettono di definire formule basate su di essi. Crea ad esempio il valore denominato "Livello" con etichetta "lvl", quindi usa la formula "(lvl)d6" per determinare i danni della palla di fuoco - in questo modo non devi modificare la formula ogni volta che il tuo mago livella: basta cambiare il valore di "Livello"!
+
+L'app permette di creare differenti collezioni di dadi (suddivisi per sistema di gioco, per personaggio o come meglio preferite) ed è possibile passare da una collezione ad un'altra in un batter d'occhio.
 
 L'app può essere configurata per concatenare i lanci, in modo che due lanci consecutivi siano automaticamente aggregati in un unico lancio. Oppure, se dovete concatenarli spesso, potete creare un nuovo dado con la somma dei due (come ad esempio <i>1d6+1d8</i>).
 
 Giocate via chat, o via mail? TiraDadi Rapido permette di copiare automaticamente il risultato dell'ultimo lancio nella clipboard, in modo da poter essere condiviso con un semplice <i>incolla</i>.
 
-TiraDadi Rapido è una delle poche app della sua categoria (forse l'unica?) che permette di aggiungere modificatori al lancio anche dopo che questo è stato effettuato, sempre con un semplice tocco. Il guerriero ha un -4 al colpire perché è stato accecato? Nessun problema: un tap sul dado di attacco ed un tap sul modificatore -4.
+TiraDadi Rapido è una delle poche app della sua categoria (forse l'unica?) che permette di aggiungere modificatori al lancio anche dopo che questo è stato effettuato, sempre con un semplice tocco. Il guerriero è stato accecato? Nessun problema: un tap sul dado di attacco ed un tap sul modificatore -4.
 
 <b>Alcune delle principali caratteristiche di TiraDadi Rapido</b>
 
-★ Lancia i dadi con un semplice tocco
 ★ Applica modificatori al volo
-★ Aggiungi, togli o modifica i dadi a piacimento
 ★ Organizza i dadi in collezioni
-★ Usa le espressioni che ti sono familiari (come <i>xdy+z</i>)
-★ Ampia scelta di funzioni per la simulazione dei sistemi più complessi
-★ Costruttore di espressioni semplice ed intuitivo
+★ Usa le formule che ti sono familiari (come <i>xdy+z</i>)
+★ Usa i valori denominati per tener traccia dei punteggi e nelle formule
+★ Molte funzioni per la simulazione dei sistemi più complessi
+★ Costruttore di formule semplice ed intuitivo
 ★ Guida in linea (solo italiano ed inglese)
 ★ Ampia scelta di icone per i dadi e le collezioni
 ★ Aggregazione automatica o manuale dei risultati
-★ Misura dell'esito del risultato a colpo d'occhio
 ★ Notifica dell'ultimo lancio in sovraimpressione
 ★ Notifiche sonore (opzionali)
 ★ Persistenza dei dati tra varie installazioni*
@@ -56,17 +54,25 @@ TiraDadi Rapido è una delle poche app della sua categoria (forse l'unica?) che 
 ☆ HERO System
 ☆ La leggenda dei 5 anelli
 ☆ Lords of Knowledge
+☆ Mondo di Tenebra
 ☆ Pathfinder
 ☆ Il Richiamo di Cthulhu
 ☆ Savage Worlds
-☆ Storyteller System (Mondo di Tenebra)
-☆ Storytelling System (Nuovo mondo di Tenebra)
+☆ Shadowrun
 ☆ Traveller
 
 ...e molti altri!
 
+TiraDadi Rapido è un'applicazione per Android gratuita ed open source. Tutti possono (e sono invitati a) contribuire al suo sviluppo in uno dei modi seguenti:
 
-*La disponibilità del backup dei dati e delle preferenze dipende dal costruttore del dispositivo, ed è supportata solo in Android versione 2.2 o successiva.
+• Entrare nella community di Google+ → http://goo.gl/atlhS9
+• Diventare un beta tester → http://goo.gl/UuJBSO
+• Contribuire alle traduzioni → http://goo.gl/9ySLIO
+• Segnalare errori nel codice sorgente → http://goo.gl/06fEHI
+• Far conoscere ai propri amici TiraDadi Rapido
+
+
+*Il backup dei dati dipende dal dispositivo, ed è supportata solo in Android 2.2 o successiva.
 
 **Richiede l'accesso in lettura e scrittura alla memoria del dispositivo.
 
@@ -74,13 +80,18 @@ Parole chiave: Aperto, Boardgame, D&D, D20, Da tavolo, Dadi, Dado, Dice, Die, Du
 
 
 ##Recent Changes:500##
-- Area dei dadi ridimensionabile
-- Menù contestuali arricchiti
-- Risolti errori legati all'elenco dei risultati
-- Correzioni ed ottimizzazioni minori
+- Valori denominati utilizzabili nelle formule
+- Quattro temi tra cui scegliere
+- Tastiera speciale per modificare le formule
+- Controllo stand-by
+- Supporto a Shadowrun 4a e 5a ed.
+- Funzioni "exp" ed "expUp" migliorate
+- Migliorato il risultato esteso di molte funzioni
+- Aspetto ed interfaccia migliorati
+- Correzioni minori e molti miglioramenti
 
 ##Promo Text:80##
-Il simulatore di dadi flessibile, completo e pratico.
+Il simulatore di dadi flessibile, completo e pratico per GdR e boardgame.
 
 ## APPIA ##
 

@@ -11,6 +11,8 @@ v 2.0.0
 - Functions "explode" and "explodeUp" hidden in interface (but still working)
 - Better output for many functions (...)
 - Keep screen on while using the app
+- Special keyboard for entering expressions
+- Dice builder: fix layout in landscape mode on large devices
 - Fix: Glith opening a context menu with single click
 - Fix: Error on expression like "3*-4"
 - Fix: Dice pools with large number of rolls

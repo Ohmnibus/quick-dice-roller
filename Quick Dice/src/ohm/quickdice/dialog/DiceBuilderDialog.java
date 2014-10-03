@@ -118,15 +118,32 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		WheelView wheel = getWheel(id);
 		//wheel.setViewAdapter(new NumericWheelAdapter(getContext(), minValue, maxValue));
 		wheel.setViewAdapter(adapter);
-		if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			wheel.setVisibleItems(3);
-		} else {
-			wheel.setVisibleItems(5);
-		}
+//		if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//			wheel.setVisibleItems(3);
+//		} else {
+//			wheel.setVisibleItems(5);
+//		}
 		//wheel.setLabel(this.getContext().getString(label));
+		wheel.setVisibleItems(getVisibleItems(context));
 		wheel.setCurrentItem(0);
 		
 		return wheel;
+	}
+	
+	private int getVisibleItems(Context context) {
+		int visibleItems = 5;
+		if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			//Screen is landscape. Available height may not be enough for 5 items.
+			int screenSize = context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+			if (screenSize == Configuration.SCREENLAYOUT_SIZE_UNDEFINED
+					|| screenSize == Configuration.SCREENLAYOUT_SIZE_SMALL
+					|| screenSize == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+				
+				//Screen height is too small for 5 items.
+				visibleItems = 3;
+			}
+		}
+		return visibleItems;
 	}
 
 	/**
