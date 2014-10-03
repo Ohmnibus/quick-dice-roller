@@ -5,18 +5,18 @@
 	<string name="app_author">Ohmnibus</string>
 
 	<string name="lblName">Nome</string>
-	<string name="hintName">Inserisci il nome del dado</string>
+	<string name="hintName">Identifica il dado</string>
 	<string name="lblDesc">Descrizione</string>
-	<string name="hintDesc">Una breve descrizione del dado</string>
+	<string name="hintDesc">Descrizione opzionale del dado</string>
 	<string name="lblIcon">Icona</string>
 	<string name="lblExp">Formula</string>
-	<string name="hintExp">Inserisci la formula del dado</string>
+	<string name="hintExp">Definisce il lancio, tipo 3d6+4</string>
 	<string name="lblRangeValue">Valori</string>
 	<string name="lblCannotEvaluate">Impossibile valutare</string>
 	<string name="lblResultText">Risultato esteso</string>
 	<string name="lblResultValue">Risultato numerico</string>
 	<string name="lblDiceBuilder">Creazione dado</string>
-	<string name="lblDiceBuilderMsg">Componi il lancio di un singolo tipo di dadi da aggiungere alla formula.</string>
+	<string name="lblDiceBuilderMsg">Componi il lancio di un singolo tipo di dado da aggiungere alla formula.</string>
 	<string name="lblCheckExpression">Controlla formula</string>
 	<string name="lblCheckPassed">La formula del dado è CORRETTA.</string>
 	<string name="lblIconPicker">Scegli un\'Icona</string>
@@ -25,12 +25,12 @@
 	<string name="lblVariableIconPicker">Icona del valore denominato</string>
 	<string name="lblModifierBuilder">Creazione modificatore</string>
 	<string name="lblModifierBuilderMessage">Componi un modificatore.</string>
-	<string name="lblNeutralModifier">Ha qualche senso creare un modificatore neutrale? Non penso.</string>
+	<string name="lblNeutralModifier">Ha qualche senso creare un modificatore neutrale?</string>
 	<string name="lblDuplicateModifier">Questo modificatore esiste già.</string>
 	<string name="lblNameBag">Nome</string>
-	<string name="hintNameBag">Inserisci il nome della collezione</string>
+	<string name="hintNameBag">Identifica la collezione</string>
 	<string name="lblDescBag">Descrizione</string>
-	<string name="hintDescBag">Una breve descrizione della collezione</string>
+	<string name="hintDescBag">Descrizione opzionale della collezione</string>
 	<string name="lblIconBag">Icona</string>
 	<string name="lblMailSubject">[QDR] Suggerimenti</string>
 	<string name="lblSendMail">Invia suggerimento</string>
@@ -56,11 +56,11 @@
 	<string name="lblResultQualityRange">Risultato, qualità, intervallo</string>
 	<string name="lblRangeFmt">%1$d &#8594; %2$d (%3$d)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblNameVar">Nome</string>
-	<string name="hintNameVar">Nome del valore</string>
+	<string name="hintNameVar">Identifica il valore</string>
 	<string name="lblDescVar">Descrizione</string>
-	<string name="hintDescVar">Descrizione del valore</string>
+	<string name="hintDescVar">Descrizione opzionale del valore</string>
 	<string name="lblLabelVar">Etichetta</string>
-	<string name="hintLabelVar">Da usare nelle espressioni</string>
+	<string name="hintLabelVar">Da usare nelle formule</string>
 	<string name="lblMinimum">Minimo</string>
 	<string name="lblCurrent">Attuale</string>
 	<string name="lblMaximum">Massimo</string>
@@ -105,38 +105,28 @@
 	
 	<string name="msgWhatsNew">Novità</string>
 	<string name="msgWhatsNewTitle">Novità nella versione %2$s</string>
-	<string name="msgWhatsNewBody"><![CDATA[
+	<string name="msgWhatsNewIntro"><![CDATA[
 <br />
-<b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app.<br />
+<b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />
 <br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
-<br />
-&bull; Controllo sullo stand-by<br />
-&bull; Tastiera speciale per le espressioni<br />
-&bull; Ampliato range per i valori denominati<br />
-&bull; Selezione dei valori denominati negli editor di espressioni<br />
-&bull; Corretto: errore in modalità orizzontale<br />
-&bull; Corretto: i valori denominati non sono salvati dopo una modifica<br />
-&bull; Corretto: i valori denominati non funzionano nei wizard di funzioni<br />
-&bull; Corretto: errori grafici minori<br />
-<br />
-Version 1.4.4.3<br />
-&bull; Titoli con l\'opzione "aggiungi" nei pannelli laterali<br />
+<br />]]></string>
+	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Valori denominati utilizzabili nelle formule<br />
+&bull; Quattro temi tra cui scegliere<br />
+&bull; Tastiera speciale per modificare le formule<br />
+&bull; Controllo stand-by<br />
 &bull; Supporto a Shadowrun 4a e 5a ed.<br />
-&bull; Migliorato il risultato di molte funzioni<br />
-&bull; Correzioni e miglioramenti minori<br />
-<br />
-Version 1.4.4.2<br />
-&bull; Valori denominati utilizzabili nelle espressioni<br />
-&bull; Scegli fra 4 temi differenti<br />
-&bull; Aspetto migliorato<br />
-&bull; Correzioni e miglioramenti minori<br />
+&bull; Funzioni "exp" ed "expUp" migliorate<br />
+&bull; Migliorato il risultato esteso di molte funzioni<br />
+&bull; Aspetto ed interfaccia migliorati<br />
+&bull; Correzioni minori e molti miglioramenti<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
 Copyright (c) 2012-2014 by %3$s<br />
 <br />
-Traduzioni: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Traduzioni</a>: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
 <br />
 Segnala eventuali errori all\'indirizzo <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
@@ -360,8 +350,8 @@ Grazie!<br />]]></string>
 		<item>Secondo valore</item>
 	</string-array>
 	<string-array name="fncMaxParamHints">
-		<item>Prima espressione</item>
-		<item>Seconda espressione</item>
+		<item>Prima formula</item>
+		<item>Seconda formula</item>
 	</string-array>
 
 	<string name="fncMinName">Minimo</string>
@@ -372,8 +362,8 @@ Grazie!<br />]]></string>
 		<item>Secondo valore</item>
 	</string-array>
 	<string-array name="fncMinParamHints">
-		<item>Prima espressione</item>
-		<item>Seconda espressione</item>
+		<item>Prima formula</item>
+		<item>Seconda formula</item>
 	</string-array>
 
 	<string name="fncRandName">Casuale</string>
@@ -384,8 +374,8 @@ Grazie!<br />]]></string>
 		<item>Secondo valore</item>
 	</string-array>
 	<string-array name="fncRandParamHints">
-		<item>Prima espressione</item>
-		<item>Seconda espressione</item>
+		<item>Prima formula</item>
+		<item>Seconda formula</item>
 	</string-array>
 
 	<string name="fncNwodName">Nuovo MdT</string>
@@ -522,15 +512,15 @@ Grazie!<br />]]></string>
 	<string name="err_var_label_exists">L\'etichetta del valore denominato deve essere univoca e \"%1$s\" è già utilizzata da \"%2$s\".</string>
 
 	<!-- Exceptions -->
-	<string name="exc_generic">L\'espressione non può essere valutata.</string>
-	<string name="exc_generic_parsed">L\'espressione non può essere analizzata.</string>
+	<string name="exc_generic">La formula non può essere valutata.</string>
+	<string name="exc_generic_parsed">La formula non può essere analizzata.</string>
 	<string name="exc_division_by_zero">Il risultato del dado ha generato una divisione per zero (e solo Chuck Norris può risolverla).</string>
 	<string name="exc_loop_detected">Il risultato del dado ha generato un ciclo infinito nella funzione \"%1$s\". Ci vuole troppo tempo per calcolarlo.</string>
-	<string name="exc_expected_eos">Attesa fine dell\'espressione alla posizione %1$d.</string>
+	<string name="exc_expected_eos">Attesa fine della formula alla posizione %1$d.</string>
 	<string name="exc_expected_parameter">Atteso parametro alla posizione %1$d.</string>
 	<string name="exc_invalid_character">Carattere non valido alla posizione %1$d.</string>
 	<string name="exc_missing_operand">Operando assente alla posizione %1$d.</string>
-	<string name="exc_nothing_to_evaluate">L\'espressione è vuota.</string>
+	<string name="exc_nothing_to_evaluate">La formula è vuota.</string>
 	<string name="exc_parameter_out_of_bound">Il parametro numero %2$d della funzione \"%1$s\" è troppo alto.</string>
 	<string name="exc_unbalanced_bracket">Parentesi non bilanciate al carattere %1$d.</string>
 	<string name="exc_unexpected_error">Errore imprevisto.</string>
@@ -633,7 +623,7 @@ Grazie!<br />]]></string>
 	<string name="pref_behaviour_wakelock_title">Mantieni lo schermo attivo</string>
 	<string name="pref_behaviour_wakelock_desc">Mantieni lo schermo attivo mentre usi l\'app.</string>
 	<string name="pref_aspect_keyboard_title">Usa la tastiera speciale</string>
-	<string name="pref_aspect_keyboard_desc">Usa la tastiera speciale per la scrittura delle espressioni.</string>
+	<string name="pref_aspect_keyboard_desc">Usa la tastiera speciale per la scrittura delle formule.</string>
 	
 	<string name="kbd_next">Avanti</string><!-- Keep this short! Max 4 char! -->
 </resources>

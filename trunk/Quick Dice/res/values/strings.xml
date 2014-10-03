@@ -2,23 +2,23 @@
 <resources>
 
 	<string name="app_name">Quick Dice Roller</string>
-	<string name="app_author">Ohmnibus</string>
+	<string name="app_author">Ohmnibus</string><!-- No need to translate -->
 
 	<string name="lblName">Name</string>
-	<string name="hintName">Enter die name here</string>
+	<string name="hintName">Identifies the die</string>
 	<string name="lblDesc">Description</string>
-	<string name="hintDesc">Enter die description here</string>
+	<string name="hintDesc">Optional description for the die</string>
 	<string name="lblIcon">Icon</string>
 	<string name="lblExp">Formula</string>
-	<string name="hintExp">Enter die formula here</string>
+	<string name="hintExp">Define the die roll, like 3d6+4</string>
 	<string name="lblRangeValue">Values</string>
 	<string name="lblCannotEvaluate">Cannot evaluate</string>
 	<string name="lblResultText">Extended result</string>
 	<string name="lblResultValue">Numeric Result</string>
 	<string name="lblDiceBuilder">Dice Builder</string>
 	<string name="lblDiceBuilderMsg">Compose a single type dice roll to add to the main formula.</string>
-	<string name="lblCheckExpression">Check die formula.</string>
-	<string name="lblCheckPassed">Die formula is CORRECT.</string>
+	<string name="lblCheckExpression">Check formula</string>
+	<string name="lblCheckPassed">Die\'s formula is CORRECT.</string>
 	<string name="lblIconPicker">Icon Picker</string>
 	<string name="lblDiceIconPicker">Dice icon Picker</string>
 	<string name="lblBagIconPicker">Bag icon Picker</string>
@@ -28,9 +28,9 @@
 	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier?</string>
 	<string name="lblDuplicateModifier">This modifier already exists.</string>
 	<string name="lblNameBag">Name</string>
-	<string name="hintNameBag">Enter bag name here</string>
+	<string name="hintNameBag">Identifies the bag</string>
 	<string name="lblDescBag">Description</string>
-	<string name="hintDescBag">Enter bag description here</string>
+	<string name="hintDescBag">Optional description for the bag</string>
 	<string name="lblIconBag">Icon</string>
 	<string name="lblMailSubject">[QDR] Suggestion</string>
 	<string name="lblSendMail">Submit suggestion</string>
@@ -46,7 +46,7 @@
 	<string name="lblImportFrom">Import from&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblExportTo">Export to&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblItemMRU">%2$d dice in %1$s bags - %4$s %5$s</string>
-	<string name="lblD">d</string><!-- The carachter used in expressions as in "3d6" -->
+	<string name="lblD">d</string><!-- The carachter used in formulas as in "3d6" -->
 	<string name="lblSelectDice">Select dice</string>
 	<string name="lblSelectDiceDest">Select dice destination</string>
 	<string name="lblLastPositionName">&lt;At the end&gt;</string>
@@ -56,11 +56,11 @@
 	<string name="lblResultQualityRange">Result, quality, range</string>
 	<string name="lblRangeFmt">%1$d &#8594; %2$d (%3$d)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblNameVar">Name</string>
-	<string name="hintNameVar">Value\'s name</string>
+	<string name="hintNameVar">Identifies the value</string>
 	<string name="lblDescVar">Description</string>
-	<string name="hintDescVar">Value\'s description</string>
+	<string name="hintDescVar">Optional description for the value</string>
 	<string name="lblLabelVar">Label</string>
-	<string name="hintLabelVar">Label to use in expressions</string>
+	<string name="hintLabelVar">Label to use in formulas</string>
 	<string name="lblMinimum">Minimum</string>
 	<string name="lblCurrent">Current</string>
 	<string name="lblMaximum">Maximum</string>
@@ -105,38 +105,28 @@
 	
 	<string name="msgWhatsNew">What\'s new</string>
 	<string name="msgWhatsNewTitle">What\'s new in version %2$s</string>
-	<string name="msgWhatsNewBody"><![CDATA[
+	<string name="msgWhatsNewIntro"><![CDATA[
 <br />
-<b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app and/or the translations.<br />
+<b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app or check the <a href="https://crowdin.com/project/quick-dice-roller">Crowdin project</a> to help me to improve translations.<br />
 <br />
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
-<br />
+<br />]]></string>
+	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Named values usable in formulas<br />
+&bull; Four different app themes<br />
+&bull; New keyboard to edit formulas<br />
 &bull; Keep screen on<br />
-&bull; New keyboard for dice expressions<br />
-&bull; Increased value range<br />
-&bull; Named value picker in expression editor<br />
-&bull; Fix: error in landscape mode<br />
-&bull; Fix: named value not saved upon value change<br />
-&bull; Fix: named value in function builder didn\'t work<br />
-&bull; Fix: layout issues<br />
-<br />
-Version 1.4.4.3<br />
-&bull; Titles with "add" option on drawers<br />
 &bull; Support to Shadowrun 4ed and 5ed<br />
-&bull; Better output for many functions<br />
-&bull; Minor fix and improvements<br />
-<br />
-Version 1.4.4.2<br />
-&bull; Variable named values usable in expressions<br />
-&bull; Select from 4 different themes<br />
+&bull; Extended the "exp" and "expUp" functions<br />
+&bull; Improved output for many functions<br />
 &bull; Improved layout<br />
-&bull; Minor fix and improvements<br />
+&bull; Minor fix and lot of improvements<br />
 <br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
 Copyright (c) 2012-2014 by %3$s<br />
 <br />
-Translations: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Translations</a>: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
 <br />
 Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
@@ -263,7 +253,7 @@ Thanks!<br />]]></string>
 	</string-array>
 	<string-array name="fncBASHParamHints">
 		<item>Number of roll to do</item>
-		<item>Expression to be tested</item>
+		<item>Die formula to be tested</item>
 	</string-array>
 
 	<string name="fncBWheelName">Burning Wheel</string>
@@ -276,7 +266,7 @@ Thanks!<br />]]></string>
 		<item>Roll Again</item>
 	</string-array>
 	<string-array name="fncBWheelParamHints">
-		<item>Expression to be tested</item>
+		<item>Formula to be tested</item>
 		<item>Number of roll to do</item>
 		<item>Value to reach to obtain a success</item>
 		<item>Value to reach to obtain an extra roll</item>
@@ -292,7 +282,7 @@ Thanks!<br />]]></string>
 		<item>Roll Again</item>
 	</string-array>
 	<string-array name="fncDWarsParamHints">
-		<item>Expression to be tested</item>
+		<item>Formula to be tested</item>
 		<item>Number of roll to do</item>
 		<item>Value to reach to obtain a success</item>
 		<item>Value to reach to obtain an extra roll</item>
@@ -388,8 +378,8 @@ Thanks!<br />]]></string>
 		<item>Second Roll</item>
 	</string-array>
 	<string-array name="fncMaxParamHints">
-		<item>First expression to test</item>
-		<item>Second expression to test</item>
+		<item>First formula to test</item>
+		<item>Second formula to test</item>
 	</string-array>
 
 	<string name="fncMinName">Minimum</string>
@@ -400,8 +390,8 @@ Thanks!<br />]]></string>
 		<item>Second Roll</item>
 	</string-array>
 	<string-array name="fncMinParamHints">
-		<item>First expression to test</item>
-		<item>Second expression to test</item>
+		<item>First formula to test</item>
+		<item>Second formula to test</item>
 	</string-array>
 
 	<string name="fncRandName">Random</string>
@@ -449,7 +439,7 @@ Thanks!<br />]]></string>
 		<item>Target</item>
 	</string-array>
 	<string-array name="fncPoolParamHints">
-		<item>Expression to be tested</item>
+		<item>Formula to be tested</item>
 		<item>Number of roll to do</item>
 		<item>Value to reach to obtain a success</item>
 	</string-array>
@@ -509,7 +499,7 @@ Thanks!<br />]]></string>
 		<item>Fail target</item>
 	</string-array>
 	<string-array name="fncShRun4ParamHints">
-		<item>Expression to be tested</item>
+		<item>Formula to be tested</item>
 		<item>Number of roll to do</item>
 		<item>Value to reach to obtain a success</item>
 		<item>Value to reach to obtain an extra roll</item>
@@ -527,7 +517,7 @@ Thanks!<br />]]></string>
 		<item>Fail target</item>
 	</string-array>
 	<string-array name="fncShRun5ParamHints">
-		<item>Expression to be tested</item>
+		<item>Formula to be tested</item>
 		<item>Number of roll to do</item>
 		<item>Value to reach to obtain a success</item>
 		<item>Value to reach to obtain an extra roll</item>
@@ -550,15 +540,15 @@ Thanks!<br />]]></string>
 	<string name="err_var_label_exists">Value\'s label should be unique but \"%1$s\" is already used by the Named Value \"%2$s\".</string>
 
 	<!-- Exceptions -->
-	<string name="exc_generic">The expression cannot be evaluated.</string>
-	<string name="exc_generic_parsed">The expression cannot be parsed.</string>
+	<string name="exc_generic">The formula cannot be evaluated.</string>
+	<string name="exc_generic_parsed">The formula cannot be parsed.</string>
 	<string name="exc_division_by_zero">The dice result lead to a division by zero (and only Chuck Norris can compute it).</string>
 	<string name="exc_loop_detected">The dice result lead to an infinite loop in function \"%1$s\". It take too long to compute.</string>
 	<string name="exc_expected_eos">Expected end of statement at char %1$d.</string>
 	<string name="exc_expected_parameter">Expected parameter at char %1$d.</string>
 	<string name="exc_invalid_character">Invalid character at position %1$d.</string>
 	<string name="exc_missing_operand">Missing operand at char %1$d.</string>
-	<string name="exc_nothing_to_evaluate">The expression is empty.</string>
+	<string name="exc_nothing_to_evaluate">The formula is empty.</string>
 	<string name="exc_parameter_out_of_bound">Parameter number %2$d of function \"%1$s\" is too high.</string>
 	<string name="exc_unbalanced_bracket">Unbalanced bracket at char %1$d.</string>
 	<string name="exc_unexpected_error">Unexpected error.</string>
@@ -661,7 +651,7 @@ Thanks!<br />]]></string>
 	<string name="pref_behaviour_wakelock_title">Keep screen on</string>
 	<string name="pref_behaviour_wakelock_desc">Keep the screen on while using the app.</string>
 	<string name="pref_aspect_keyboard_title">Use custom keyboard</string>
-	<string name="pref_aspect_keyboard_desc">Use custom keyboard to write expressions.</string>
+	<string name="pref_aspect_keyboard_desc">Use custom keyboard to write formulas.</string>
 	
-	<string name="kbd_next">Next</string><!-- Keep this short! Max 4 char! -->
+	<string name="kbd_next">Next</string><!-- Keep this short! Max 4-6 char! -->
 </resources>
