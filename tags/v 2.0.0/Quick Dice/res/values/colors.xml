@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="toast_dice_number">#dddddd</color><!-- Same for all styles -->
+	<color name="toast_dice_number_shadow">#000000</color><!-- Same for all styles -->
+
+	<color name="modifier_number_color">#ffffff</color><!-- Same for all styles -->
+	<color name="modifier_number_shadow">#000000</color><!-- Same for all styles -->
+	<color name="modifier_bg_start">#ff333333</color><!-- Same for all styles -->
+	<color name="modifier_bg_end">#33333333</color><!-- Same for all styles -->
+	
+	<color name="undo_bar_bg">#db555555</color><!-- Same for all styles -->
+	<color name="undo_bar_divider">#afafaf</color><!-- Same for all styles -->
+	<color name="undo_bar_text">#ffffff</color><!-- Same for all styles -->
+	<color name="undo_bar_bg_pressed">#858585</color><!-- Same for all styles -->
+
+	<!-- <color name="base_main_background">?android:attr/colorBackground</color> -->
+	<color name="base_frame_solid_color">#30ffffff</color>
+	<color name="base_frame_border_color">#40ffffff</color>
+	<color name="base_frame_secondary_solid_color">#40ffffff</color>
+	<color name="base_handle_solid_color">#bcbcbc</color>
+	
+	<color name="classic_main_background">#112233</color>
+	<color name="classic_frame_solid_color">#40000000</color>
+	<color name="classic_frame_border_color">#80000000</color>
+	<color name="classic_frame_secondary_solid_color">#80000000</color>
+	<color name="classic_handle_solid_color">#000000</color>
+	
+	<color name="clean_main_background">#112233</color>
+	<color name="clean_frame_solid_color">#081122</color>
+	<color name="clean_frame_border_color">#000811</color>
+	<color name="clean_frame_secondary_solid_color">#000811</color>
+	<color name="clean_handle_solid_color">#000000</color>
+	
+	<!-- <color name="light_main_background">?android:attr/colorBackground</color> -->
+	<color name="light_frame_solid_color">#200099cc</color>
+	<color name="light_frame_border_color">#99bfcc</color>
+	<color name="light_frame_secondary_solid_color">#400099cc</color>
+	<color name="light_handle_solid_color">#99bfcc</color>
+</resources>

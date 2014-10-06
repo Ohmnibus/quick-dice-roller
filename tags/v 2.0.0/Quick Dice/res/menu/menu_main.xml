@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<item android:id="@+id/mmUndoClearResult"
+		android:icon="@android:drawable/ic_menu_revert"
+		android:title="@string/mnuUndoClearResult" />
+
+	<item android:id="@+id/mmClearAllResults"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel"
+		android:title="@string/mnuClearAllResults"
+		android:showAsAction="ifRoom|withText" />
+
+	<item android:id="@+id/mmUndoClearAllResults"
+		android:icon="@android:drawable/ic_menu_revert"
+		android:title="@string/mnuUndoClearAllResult" />
+
+	<item android:id="@+id/mmOpenDiceBagDrawer"
+		android:icon="@drawable/ic_menu_bag"
+		android:title="@string/mnuOpenDiceBagDrawer" />
+
+	<item android:id="@+id/mmOpenVariableDrawer"
+		android:icon="@drawable/ic_menu_variable"
+		android:title="@string/mnuOpenVariableDrawer" />
+
+	<!-- <item android:id="@+id/mmAddDiceBag"
+		android:icon="@drawable/ic_menu_bag"
+		android:title="@string/mnuAddDiceBag" /> -->
+
+	<item android:id="@+id/mmAddDice"
+		android:icon="@drawable/ic_menu_dice"
+		android:title="@string/mnuAddDice" />
+	
+	<!-- <item android:id="@+id/mmAddVariable"
+		android:icon="@drawable/ic_menu_variable"
+		android:title="@string/mnuAddVariable" /> -->
+
+	<item android:id="@+id/mmAddModifier"
+		android:icon="@android:drawable/ic_menu_add"
+		android:title="@string/mnuAddMod" />
+
+	<item android:id="@+id/mmSettings"
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:title="@string/mnuSettings" />
+
+	<!-- item android:id="@+id/mmSuggest"
+		android:icon="@android:drawable/ic_menu_send"
+		android:title="@string/mnuSuggest" / -->
+		
+	<item android:id="@+id/mmImportExport"
+		android:icon="@android:drawable/ic_menu_save"
+		android:title="@string/mnuImportExport" />
+
+	<item android:id="@+id/mmExit"
+		android:icon="@drawable/ic_menu_exit"
+		android:title="@string/mnuExit" />
+
+	<item android:id="@+id/mmAbout"
+		android:icon="@android:drawable/ic_menu_info_details"
+		android:title="@string/mnuAbout" />
+
+</menu>
