@@ -20,7 +20,7 @@ Like to play by chat or by e-mail? Quick Dice Roller allow to automatically copy
 
 Quick Dice Roller is one of the few apps of it's category (maybe the only?) that allows to apply modifiers after a roll is made, as usual with a simple touch. The warrior was blinded? No problem: tap to roll for the attack and tap to apply a -4 modifier.
 
-<b>Some of the main features of Quick Dice</b>
+<b>Some of the main features of Quick Dice Roller</b>
 
 ★ Applies modifiers on the fly
 ★ Organize dice in dice bags
