@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/edRoot"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:layout_above="@+id/edButtonContainer"
+		>
+		<RelativeLayout style="@style/Edit.ValueContainer"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			>
+			
+			<ImageButton style="@style/Edit.Icon"
+				android:id="@+id/edIconPicker"
+				
+				android:layout_width="72dp"
+				android:layout_height="72dp"
+				
+				android:layout_alignParentLeft="true"
+				android:layout_alignBottom="@+id/edNameText"
+				
+				android:scaleType="fitXY"
+				android:src="@drawable/ic_dxx_gray"
+				android:contentDescription="@string/lblIcon" />
+		
+			<TextView style="@style/Edit.Label"
+				android:id="@+id/edNameLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_toRightOf="@+id/edIconPicker"
+				android:layout_alignParentTop="true"
+				
+				android:text="@string/lblName" />
+		
+			<EditText style="@style/Edit.Value"
+				android:id="@+id/edNameText"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/edNameLabel"
+				android:layout_alignLeft="@+id/edNameLabel"
+				
+				android:hint="@string/hintName"
+				/>
+		
+			<TextView style="@style/Edit.Label"
+				android:id="@+id/edDescLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/edNameText"
+				android:layout_alignParentLeft="true"
+				
+				android:text="@string/lblDesc" />
+		
+			<EditText style="@style/Edit.Value"
+				android:id="@+id/edDescText"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/edDescLabel"
+				android:layout_alignLeft="@+id/edDescLabel"
+				
+				android:hint="@string/hintDesc"
+				/>
+		
+			<TextView style="@style/Edit.Label"
+				android:id="@+id/edExpLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/edDescText"
+				android:layout_alignLeft="@+id/edDescText"
+				
+				android:text="@string/lblExp" />
+			
+			<EditText style="@style/Edit.Value"
+				android:id="@+id/edExpText"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/edExpLabel"
+				android:layout_alignLeft="@+id/edExpLabel"
+				android:layout_toLeftOf="@+id/btuWizard"
+				
+				android:hint="@string/hintExp"
+				/>
+	
+			<ImageButton
+				android:id="@+id/btuWizard"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				
+				android:layout_alignBottom="@+id/edExpText"
+				android:layout_alignParentRight="true"
+				
+				android:src="@drawable/ic_wizard"
+				android:scaleType="centerInside"
+				android:contentDescription="@string/lblDiceBuilder" />
+		</RelativeLayout>
+	</ScrollView>
+
+	<include
+		layout="@layout/confirm_cancel_bar"
+		android:id="@+id/edButtonContainer"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_above="@+id/kvwKeyboard"
+		android:layout_alignParentLeft="true"
+		android:layout_alignWithParentIfMissing="true"
+		/>
+	
+	<ohm.library.widget.KeyboardView  style="@style/Keyboard"
+		android:id="@+id/kvwKeyboard"
+		/>
+</RelativeLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<style name="AppBaseTheme" parent="@android:style/Theme.Holo">
+	</style>
+
+	<style name="DialogBaseTheme" parent="@android:style/Theme.Holo.Dialog">
+	</style>
+	
+	<style name="AppBaseTheme.Light" parent="@android:style/Theme.Holo.Light">
+		<!-- Must be completely defined for API below 11 -->
+	</style>
+
+	<style name="DialogBaseTheme.Light" parent="@android:style/Theme.Holo.Light.Dialog">
+	</style>
+
+	<!-- Dice Bag -->
+	<style name="DiceBagHandle">
+		<item name="android:visibility">gone</item>
+	</style>
+
+	<style name="Menu.ItemBase">
+		<item name="android:paddingTop">5dp</item>
+		<item name="android:paddingBottom">5dp</item>
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:paddingRight">16dp</item>
+		
+		<item name="android:clickable">true</item>
+		<item name="android:gravity">left|center_vertical</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">@android:color/primary_text_dark_nodisable</item>
+		<!-- item name="android:textColor">?android:attr/actionMenuTextColor</item --><!-- Valid since v.11 -->
+		<item name="android:background">@drawable/bg_clickable</item>
+	</style>
+
+	<style name="Menu.Item" parent="Menu.ItemBase">
+		<item name="android:textColor">?android:attr/actionMenuTextColor</item><!-- this is valid since v.11 -->
+	</style>
+	
+	<!-- Button bar -->
+	<style name="ButtonPanel">
+	</style>
+	
+	<style name="ButtonPanel.Container">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+	
+	<style name="ButtonPanel.Button">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">?android:attr/selectableItemBackground</item>
+	</style>
+	
+	<style name="ButtonPanel.Divider">
+		<item name="android:background">?android:attr/dividerVertical</item>
+	</style>
+	
+	<style name="ButtonPanel.Divider.Horizontal"><!-- Horizontal line -->
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/divider_thickness</item>
+		<item name="android:layout_marginLeft">@dimen/divider_padding</item>
+		<item name="android:layout_marginRight">@dimen/divider_padding</item>
+	</style>
+	
+	<style name="ButtonPanel.Divider.Vertical"><!-- Vertical line -->
+		<item name="android:layout_width">@dimen/divider_thickness</item>
+		<item name="android:layout_height">40dp</item><!-- 48dp - margins -->
+		<item name="android:layout_marginTop">@dimen/divider_padding</item>
+		<item name="android:layout_marginBottom">@dimen/divider_padding</item>
+	</style>
+	
+	<!-- Donate item -->
+	<style name="DonateItem.Frame" parent="@style/ButtonPanel.Button">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/icon_size</item>
+		<item name="android:gravity">center</item>
+		<item name="android:baselineAligned">false</item>
+
+		<item name="android:paddingLeft">8dp</item>
+		<item name="android:paddingRight">8dp</item>
+	</style>
+	
+	<style name="DonateItem.Icon">
+		<item name="android:layout_width">32dp</item>
+		<item name="android:layout_height">32dp</item>
+		<item name="android:layout_weight">0</item>
+		<item name="android:layout_marginRight">8dp</item>
+	</style>
+	
+	<style name="DonateItem.Text" parent="@android:style/TextAppearance.Widget.Button">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center</item>
+		<item name="android:lines">1</item>
+		<item name="android:textColor">?android:attr/textColorPrimary</item>
+		<item name="android:layout_weight">0</item>
+	</style>
+</resources>

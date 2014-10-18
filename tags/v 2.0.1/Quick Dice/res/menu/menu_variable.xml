@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+		android:id="@+id/mvEdit"
+		android:title="@string/mnuEditVariable" />
+	
+	<!-- <item
+		android:id="@+id/mvClone"
+		android:title="@string/mnuClone" /> -->
+
+	<item
+		android:id="@+id/mvAddHere"
+		android:title="@string/mnuAddVariableHere" />
+
+	<!-- <item
+		android:id="@+id/mvMoveTo"
+		android:title="@string/mnuMoveVariableTo" /> -->
+
+	<item
+		android:id="@+id/mvSwitchPrev"
+		android:title="@string/mnuSwitchPrev" />
+
+	<item
+		android:id="@+id/mvSwitchNext"
+		android:title="@string/mnuSwitchNext" />
+
+	<item
+		android:id="@+id/mvRemove"
+		android:title="@string/mnuRemoveVariable" />
+</menu>

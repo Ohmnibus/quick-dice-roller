@@ -1,0 +1,76 @@
+##Title:30##
+Quick Dice Roller
+
+##Description:4000##
+Quick Dice Roller is an extremely flexible and customizable dice roller designed around the needs of Role Playing Games fans.
+
+Quick Dice Roller aims to be flexible, complete and handy at the same time.
+
+With Quick Dice Roller it is possible to roll a die with a simple touch, scroll the last result list, link results and see the quality of a result at a glance (thanks to the star indicator).
+
+The heart of Quick Dice Roller is a powerful expresson parser that allow to create virtually any combination of dice.
+The parser can understand the four usual operators (+, -, *, /), brackets and the "d" operator that represent a die roll (ie 1d6).
+Is therefore possible to represent complex rolls as "use a four sided dice as tens and a ten sided dice for as units" with the expression "(1d4*10) + (1d10-1)".
+And when operators aren't enough you can use special functions to simulate main systems: roll&keep, open rolls, dice pool, etc.
+The expression builder allow you to build any dice combination just selecting some menu items, even without any knowledge on expression syntax.
+
+Some of the features of Quick Dice:
+
+- Roll dice with a simple touch
+- Apply modifiers on the fly
+- Ability to modify at will all the dice
+- Dice organized in dice bags
+- Powerful expression parser
+- Special functions to simulate main systems
+- Simple and intuitive Expression Builder
+- Large selection of die and mnemonic icons
+- Ability to manually or automatically aggregate results
+- Quality of results at a glance
+- Last roll overlay notification
+- Ability to enable sound notifications
+- Persistence of data among various installations*
+- Import and export dice and bags definitions
+
+Some of currently supported systems:
+
+- Arcan Myth
+- BASH!
+- Burning Wheel
+- Call of Cthulhu
+- Deadlands
+- Dungeons & Dragons (all editions)
+- Dungeon World
+- Dystopian Wars
+- Exalted
+- Feng Shui
+- GURPS
+- HERO System
+- Legend of the five rings
+- Lords of Knowledge
+- MERP
+- Pathfinder
+- Savage Worlds
+- Star Wars
+- Storyteller System (World of Darkness)
+- Storytelling System (New World of Darkness)
+- Traveller
+
+...and many more!
+
+
+*Data and preferences backup is available from Android version 2.2, but not on all devices.
+
+Keywords: Dice, Die, Roller, Rpg, Role, Game, Master, Free, WhiteWholf, WW, Vampiri, Vampire, Exalted, L5R, D20, Pool, R&K, Explode, Exploding, Open, D&D, Dungeons & Dragons, HERO, GURPS, Pathfinder
+
+##Recent Changes:500##
+- Import and Export definitions
+- Slightly improved UI
+- Minor fix and improvement
+
+##Promo Text:80##
+The flexible, complete and handy dice roller.
+
+## APPIA ##
+
+## Keywords:10 ##
+Dice, Dice Roller, Rpg, Free, WhiteWholf, Vampire, Exalted, D20, D&D

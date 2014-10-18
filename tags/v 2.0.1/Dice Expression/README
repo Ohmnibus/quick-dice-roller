@@ -1,0 +1,5 @@
+Dice Expression
+
+This library allow to parse and evaluate expressions that represents dice rolls of any complexity.
+
+More info at https://code.google.com/p/quick-dice-roller/
