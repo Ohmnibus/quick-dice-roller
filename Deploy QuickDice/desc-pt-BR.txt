@@ -1,0 +1,95 @@
+##Title:30##
+Rolagem de Dados Rápida
+
+##Description:4000##
+Rolagem de Dados Rápida (Quick Dice Roller) é um app feito para aficionados em RPG de mesa. Ele permite emular quase todos as complexas roladas de dados usadas em jogos de RPG e tabuleiro.
+
+Podem-se acrescentar dados a vontade, usando fórmulas simples como <i>2d6+5</i>, bem como, com funções especiais do tipo <i>rak(1d6,4,3)</i> que simulam sistemas de jogo mais complexos. Um prático construtor de fórmulas facilita o processo e permite o acesso para uma ajuda on-line.
+
+Confira neste endereço a lista das funções do app: http//goo.gl/TTjb9
+
+Não se preocupe! Você não precisará escrever a fórmula o tempo todo! Uma vez definida, o dado será rolado todas as vezes que você quiser com um simples toque no ícone correspondente.
+
+"Variável Nomeada", bem como um registro de valores do jogo, permitem que você faça fórmulas baseadas nesses dados. Você pode criar, por exemplo, uma Variável Nomeada "Nível" com a etiqueta "nvl", então usá-la na fórmula "(nvl)d6" para determinar o dano da bola de fogo - desse jeito você não precisa editar a fórmula toda vez que seu mago subir de nível: basta somente mudar o valor da Variável Nomeada "Nível"!
+
+Rolagem de Dados Rápida te permite criar bolsas de dados diferentes (para organizar os dados por sistema de jogo, personagem ou por qualquer razão que você queira) e é possível trocar de uma bolsa para a outra rapidamente.
+
+O app permite configurar rolagens em cadeia, duas rolagens feitas rapidamente são consideradas em conjunto. Ou, se esse conjunto de rolada acontecer com frequência, sempre é possível criar um novo dado que some o resultado de duas rolagens separadas (isto é, <i>1d6+1d8</i>).
+
+Gosta de jogar por sala de bate-papo ou por e-mail? Rolagem de Dados Rápida permite que automaticamente você copie o último resultado de sua rolagem para a área de transferência, então compartilhar passa a ser somente o comando <i>colar</i>.
+
+Rolagem de Dados Rápida é um dos poucos apps da categoria (se não for o único) que permite aplicar modificadores após a rolagem ter sido feita, facilmente com um simples toque. O guerreiro está cego? Sem problema: toque para a rolagem do ataque e toque para aplicar o modificador de -4.
+
+<b>Algumas das principais funções do Rolagem de Dados Rápida</b>
+
+★ Aplicar modificadores após a rolagem
+★ Organizar dados em diferentes bolsas de dados
+★ Use as mesmas fórmulas com as quais você está familiarizado (isto é, <i>xdy+z</i>)
+★ Use Variável Nomeada para manter um registro de valores dentro das fórmulas
+★ Muitas funções para simular muitos sistemas
+★ Construtor de fórmulas simples e intuitivo
+★ Ajuda on-line
+★ Várias opções de imagens para os ícones dos dados e das bolsas de dados
+★ Adição de resultados automática ou manual
+★ Notificação clara do resultado da última rolagem
+★ Avisos sonoros
+★ Persistência das informações através de várias instalações*
+★ Importar e exportar definições dos dados e das bolsas de dados**
+
+<b>Alguns dos sistemas cobertos</b>
+
+☆ BASH!
+☆ Burning Wheel
+☆ Call of Cthulhu
+☆ Deadlands
+☆ Dungeon World
+☆ Dungeons & Dragons
+☆ Dungeonslayers
+☆ Exalted
+☆ Feng Shui
+☆ GURPS
+☆ HERO System
+☆ Legend of the five rings
+☆ MERP
+☆ Pathfinder
+☆ Savage Worlds
+☆ Shadowrun
+☆ Star Wars
+☆ Traveller
+☆ World of Darkness
+
+...e muitos mais!
+
+Rolagem de Dados Rápida é um aplicativo para Android grátis e de código aberto. Qualquer pessoa pode (é considerem-se convidados) contribuir para o seu desenvolvimento em uma ou mais das seguintes maneiras:
+
+• Junte-se a comunidade oficial no Google+ → http://goo.gl/atlhS9
+• Torne-se um usuário Beta para testar as novas funcionalidades → http://goo.gl/UuJBSO
+• Melhore traduções ou adicione novas → http://goo.gl/9ySLIO
+• Verifique o código-fonte para caça de falhas (ou por diversão) → http://goo.gl/06fEHI
+• Fale para os seus amigos do Rolagem de Dados Rápida
+
+
+*A disponibilidade do backup depende do aparelho e somente é suportado pelo Android 2.2 ou posteriores.
+
+**Esta funcionalidade exige ler e escrever e um dispositivo de armazenamento externo.
+
+Palavras-chave: Aberto, D&D, D20, Dado, Dados, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Explodir, GURPS, HERO, Jogo de Interpretação, Jogo de Mesa, Jogos de Tabuleiro, L5R, Master, OSR, Parada de dados, Pathfinder, Rolar e Manter, Rolagem, Role Playing Game, RPG, Vampire, WhiteWholf
+
+##Recent Changes:500##
+- Variável Nomeada podem, ser usadas em fórmulas
+- Quatro tipos diferentes de tema para o aplicativo
+- Novo teclado para a edição de fórmulas
+- Manter a tela ligada
+- Suporte para Shadowrun 4a e 5a edições
+- Expansão das funções "exp" e "expUp"
+- Melhoria na saída do resultado de muitas funções
+- Melhoria na apresentação
+- Pequenas correções e muitas melhorias
+
+##Promo Text:80##
+Flexível, completo e prático para rolagem de dados para jogos de tabuleiro e aficionados por RPG.
+
+## APPIA ##
+
+## Keywords:10 ##
+Aberto, Dados, Rolagem de Dados, RPG, WhiteWolf, Vampire, Exalted, D20, D&D
