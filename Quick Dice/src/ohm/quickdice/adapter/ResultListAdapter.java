@@ -116,7 +116,8 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 		if (res != null) {
 			//QuickDiceApp app = (QuickDiceApp)context.getApplicationContext();
 			QuickDiceApp app = QuickDiceApp.getInstance();
-			itemViews.diceIcon.setImageDrawable(app.getGraphic().getDiceIcon(res.getResourceIndex()));
+			//itemViews.diceIcon.setImageDrawable(app.getBagManager().getIconDrawable(res.getResourceIndex()));
+			app.getBagManager().setIconDrawable(itemViews.diceIcon, res.getResourceIndex());
 			if (swapResult) {
 				itemViews.name.setText(res.getResultText());
 				itemViews.resultText.setText(res.getName());

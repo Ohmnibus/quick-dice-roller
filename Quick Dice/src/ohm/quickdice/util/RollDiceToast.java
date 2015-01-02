@@ -1,15 +1,17 @@
 package ohm.quickdice.util;
 
+import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
-import ohm.quickdice.control.GraphicManager;
+import ohm.quickdice.control.DiceBagManager;
 import ohm.quickdice.control.PreferenceManager;
 import ohm.quickdice.entity.RollResult;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,38 +22,43 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RollDiceToast {
+public class RollDiceToast implements TextToSpeech.OnInitListener {
 	
 	private static final String TAG = "RollDiceToast";
 	
-	Context context;
-	PreferenceManager pref;
-	GraphicManager graphicManager;
+	private Context context;
+	private PreferenceManager pref;
+	//GraphicManager graphicManager;
+	private DiceBagManager diceBagManager;
 	
 	//Cache for effects
-	Animation rollDiceAnimation = null;
+	private Animation rollDiceAnimation = null;
 	private static final int ROLL_DICE_PLAYER_COUNT = 3; //Max number of overlapped sounds
 	private int rollDicePlayerIndex = 0; //Used to cycle through sound players
-	PlayerRunnable[] rollDicePlayer = null;
-	PlayerRunnable[] rollDiceCriticalPlayer = null;
-	PlayerRunnable[] rollDiceFumblePlayer = null;
+	private PlayerRunnable[] rollDicePlayer = null;
+	private PlayerRunnable[] rollDiceCriticalPlayer = null;
+	private PlayerRunnable[] rollDiceFumblePlayer = null;
 	private ThreadPoolExecutor executor = (ThreadPoolExecutor)Executors.newCachedThreadPool();
+	
+	private TextToSpeech rollDiceTeller = null;
 
 	//Cache for "rollDiceToast"
-	Toast rollDiceToast = null;
-	View rollDiceView = null;
-	ImageView rollDiceImage = null;
-	TextView rollDiceText = null;
+	private Toast rollDiceToast = null;
+	private View rollDiceView = null;
+	private ImageView rollDiceImage = null;
+	private TextView rollDiceText = null;
 	
 	private boolean showToast;
 	private boolean animateToast;
 	private boolean soundEnabled;
 	private boolean soundExtEnabled;
+	private boolean speechEnabled;
+	private boolean speechActive = false;
 
-	public RollDiceToast(Context context, PreferenceManager preferenceManager, GraphicManager graphicManager) {
+	public RollDiceToast(Context context, PreferenceManager preferenceManager, DiceBagManager diceBagManager) {
 		this.context = context;
 		this.pref = preferenceManager;
-		this.graphicManager = graphicManager;
+		this.diceBagManager = diceBagManager;
 		refreshConfig();
 	}
 	
@@ -60,6 +67,7 @@ public class RollDiceToast {
 		setAnimateToast(pref.getShowAnimation());
 		setSoundEnabled(pref.getSoundEnabled());
 		setSoundExtEnabled(pref.getExtSoundEnabled());
+		setSpeechEnabled(pref.getSpeechEnabled());
 	}
 	
 	private void setShowToast(boolean enabled) {
@@ -108,6 +116,65 @@ public class RollDiceToast {
 			}
 		}
 	}
+
+	private void setSpeechEnabled(boolean enabled) {
+		speechEnabled = enabled;
+		if (speechEnabled) {
+			if (rollDiceTeller == null) {
+				rollDiceTeller = new TextToSpeech(context, this);
+			}
+		} else {
+			if (rollDiceTeller != null) {
+				rollDiceTeller.stop();
+				rollDiceTeller.shutdown();
+				rollDiceTeller = null;
+			}
+			speechActive = false;
+		}
+	}
+	
+	@Override
+	public void onInit(int status) {
+		if (status == TextToSpeech.SUCCESS) {
+			Locale loc = Locale.getDefault();
+			int avail = rollDiceTeller.isLanguageAvailable(loc);
+			if (avail != TextToSpeech.LANG_MISSING_DATA && avail != TextToSpeech.LANG_NOT_SUPPORTED) {
+				rollDiceTeller.setLanguage(loc);
+			} else {
+				//Current locale is not available.
+				//Leave default language.
+			}
+			speechActive = true;
+		}
+	}
+	
+	/**
+	 * Releases the resources used by the RollDiceToast.
+	 * It is good practice for instance to call this method in the onDestroy() method 
+	 * of an Activity so the RollDiceToast can be cleanly stopped.
+	 */
+	public void shutdown() {
+		//Free sound resources
+		if (rollDicePlayer != null) {
+			PlayerRunnable.disposePlayers(rollDicePlayer);
+			rollDicePlayer = null;
+		}
+		//Free extended sound resources
+		if (rollDiceCriticalPlayer != null) {
+			PlayerRunnable.disposePlayers(rollDiceCriticalPlayer);
+			rollDiceCriticalPlayer = null;
+		}
+		if (rollDiceFumblePlayer != null) {
+			PlayerRunnable.disposePlayers(rollDiceFumblePlayer);
+			rollDiceFumblePlayer = null;
+		}
+		//Free TTS resources
+		if (rollDiceTeller != null) {
+			rollDiceTeller.stop();
+			rollDiceTeller.shutdown();
+			rollDiceTeller = null;
+		}
+	}
 	
 	public void performRoll(RollResult res) {
 
@@ -120,6 +187,9 @@ public class RollDiceToast {
 		
 		if (soundEnabled)
 			performRollSound(res);
+		
+		if (speechEnabled)
+			performRollSpeech(res);
 	}
 
 	private void performRollPopup(RollResult res) {
@@ -165,7 +235,8 @@ public class RollDiceToast {
 		//Create the shape of the dice
 		int resIndex = res.getResourceIndex();
 
-		rollDiceImage.setImageDrawable(graphicManager.getDiceIconShape(resIndex, resIndex));
+		//rollDiceImage.setImageDrawable(graphicManager.getDiceIconShape(resIndex, resIndex));
+		rollDiceImage.setImageDrawable(diceBagManager.getIconMask(resIndex));
 
 		rollDiceToast.show();
 	}
@@ -198,6 +269,16 @@ public class RollDiceToast {
 		rollDicePlayerIndex = (rollDicePlayerIndex + 1) % 3;
 	}
 
+	private void performRollSpeech(RollResult res) {
+		if (speechEnabled && speechActive) {
+			String speech = Long.toString(res.getResultValue());
+			rollDiceTeller.speak(
+					speech,
+					TextToSpeech.QUEUE_FLUSH,
+					null);
+		}
+	}
+	
 	private static class PlayerRunnable implements Runnable {
 		
 		int resId;

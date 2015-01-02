@@ -46,7 +46,9 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, Dic
 		public void bindData() {
 			Dice dice = (Dice)data;
 
-			icon.setImageDrawable(app.getGraphic().getDiceIcon(dice.getResourceIndex()));
+			//icon.setImageDrawable(app.getGraphic().getDiceIcon(dice.getResourceIndex()));
+			//icon.setImageDrawable(app.getBagManager().getIconDrawable(dice.getResourceIndex()));
+			app.getBagManager().setIconDrawable(icon, dice.getResourceIndex());
 			name.setText(dice.getName());
 			description.setText(dice.getDescription());
 			
@@ -86,7 +88,8 @@ public class ExpDiceBagAdapter extends CachedExpandableArrayAdapter<DiceBag, Dic
 		public void bindData(boolean expanded) {
 			DiceBag diceBag = (DiceBag)data;
 
-			icon.setImageDrawable(app.getGraphic().getDiceIcon(diceBag.getResourceIndex()));
+			//icon.setImageDrawable(app.getBagManager().getIconDrawable(diceBag.getResourceIndex()));
+			app.getBagManager().setIconDrawable(icon, diceBag.getResourceIndex());
 			name.setText(diceBag.getName());
 			description.setText(diceBag.getDescription());
 			indicator.setImageResource(

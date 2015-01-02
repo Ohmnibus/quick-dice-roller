@@ -33,7 +33,8 @@
 			android:text="@string/lblOk"
 			android:textColor="@color/modifier_number_color"
 			android:textSize="24dp"
-			android:textStyle="bold" />
+			android:textStyle="bold"
+			/>
 	</FrameLayout>
 
 </FrameLayout>

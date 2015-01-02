@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import ohm.quickdice.R;
-import ohm.quickdice.entity.DiceBagCollection;
 import ohm.quickdice.entity.DiceCollection;
 import ohm.quickdice.entity.ModifierCollection;
 import ohm.quickdice.entity.RollResult;
@@ -46,36 +45,36 @@ public class PersistenceManager {
 
 	
 	/**
-	 * Populate the specified collection of dice bags
+	 * Populate the specified Dice Bag Manager
 	 * with the data stored on the device internal memory, if found.
-	 * @param diceBagCollection Collection to populate.
+	 * @param diceBagManager Dice Bag Manager to populate.
 	 * @return {@code true} if data where correctly loaded, {@code false} if an error occurred.
 	 */
-	public boolean loadDiceBagCollection(DiceBagCollection diceBagCollection) {
-		return loadOrImportDiceBagCollection(diceBagCollection, null, ACTION_LOAD);
+	public boolean loadDiceBagManager(DiceBagManager diceBagManager) {
+		return loadOrImportDiceBagManager(diceBagManager, null, ACTION_LOAD);
 	}
 
 	/**
-	 * Populate the specified collection of dice bags
+	 * Populate the specified Dice Bag Manager
 	 * with the data stored on the device external memory, if found.<br />
 	 * If such data where not found, the collection will be populated
 	 * with default data.
-	 * @param diceBagCollection Collection to populate.
+	 * @param diceBagManager Dice Bag Manager to populate.
 	 * @param path The path where to import from
 	 * @return {@code true} if data where correctly loaded, {@code false} if an error occurred.
 	 */
-	public boolean importDiceBagCollection(DiceBagCollection diceBagCollection, String path) {
-		return loadOrImportDiceBagCollection(diceBagCollection, path, ACTION_IMPORT);
+	public boolean importDiceBagManager(DiceBagManager diceBagManager, String path) {
+		return loadOrImportDiceBagManager(diceBagManager, path, ACTION_IMPORT);
 	}
 
 	/**
-	 * Load all the Dice Bags from the device internal memory, if found.
-	 * @param diceBagCollection Collection to populate.
+	 * Load the Dice Bag Manager from the device internal memory, if found.
+	 * @param diceBagManager Dice Bag Manager to populate.
 	 * @param path The path where to import from (used only if {@code action} == {@link #ACTION_IMPORT})
 	 * @param action Either {@link #ACTION_LOAD} or {@link #ACTION_IMPORT}
 	 * @return {@code true} if data where correctly loaded, {@code false} if an error occurred.
 	 */
-	protected boolean loadOrImportDiceBagCollection(DiceBagCollection diceBagCollection, String path, int action) {
+	protected boolean loadOrImportDiceBagManager(DiceBagManager diceBagManager, String path, int action) {
 		boolean retVal = false;
 		int errorMessageResId;
 		FileInputStream fis;
@@ -88,8 +87,6 @@ public class PersistenceManager {
 			throw new IllegalArgumentException();
 		}
 		
-		diceBagCollection.clear();
-
 		try {
 			synchronized (dataAccessLock) {
 				if (action == ACTION_LOAD) {
@@ -100,12 +97,12 @@ public class PersistenceManager {
 					fis = new FileInputStream(new File(path));
 				}
 
-				SerializationManager.DiceBagCollection(fis, diceBagCollection);
+				SerializationManager.DiceBagManager(fis, diceBagManager);
 
 				fis.close();
 			}
 			
-			retVal = diceBagCollection.size() > 0;
+			retVal = diceBagManager.getDiceBagCollection().size() > 0;
 			Log.i(TAG, "loadOrImportDiceBags: " + retVal);
 		} catch (FileNotFoundException e) {
 			Log.w(TAG, "loadOrImportDiceBags", e);
@@ -128,33 +125,33 @@ public class PersistenceManager {
 	}
 
 	/**
-	 * Store all the Dice Bags in the device internal memory.
-	 * @param diceBagCollection The collection of dice bag to store.
+	 * Store the Dice Bag Manager in the device internal memory.
+	 * @param diceBagManager The Dice Bag Manager to store.
 	 * @return {@code true} if data where saved, {@code false} otherwise
 	 */
-	public boolean saveDiceBagCollection(DiceBagCollection diceBagCollection) {
-		return saveOrExportDiceBagCollection(diceBagCollection, null, ACTION_SAVE);
+	public boolean saveDiceBagManager(DiceBagManager diceBagManager) {
+		return saveOrExportDiceBagManager(diceBagManager, null, ACTION_SAVE);
 	}
 	
 	/**
-	 * Store all the Dice Bags in the device external memory.
-	 * @param diceBags An {@code ArrayList<DiceBag>} representing all the Dice Bags.
+	 * Store the Dice Bag Manager in the device external memory.
+	 * @param diceBagManager The Dice Bag Manager to export.
 	 * @param path Path where to save the dice bags data.
 	 * @return {@code true} if data where saved, {@code false} otherwise
 	 */
-	public boolean exportDiceBagCollection(DiceBagCollection diceBagCollection, String path) {
-		return saveOrExportDiceBagCollection(diceBagCollection, path, ACTION_EXPORT);
+	public boolean exportDiceBagManager(DiceBagManager diceBagManager, String path) {
+		return saveOrExportDiceBagManager(diceBagManager, path, ACTION_EXPORT);
 	}
 
 	
 	/**
-	 * Store all the Dice Bags in the device internal or external memory.
-	 * @param diceBags An ArrayList<DiceBag> representing all the Dice Bags
+	 * Store the Dice Bag Manager in the device internal or external memory.
+	 * @param diceBagManager The Dice Bag Manager to save or export
 	 * @param path The path where to save (used only if {@code action} == {@link #ACTION_EXPORT})
 	 * @param action Either {@link #ACTION_SAVE} or {@link #ACTION_EXPORT}
 	 * @return {@code true} if data where saved, {@code false} otherwise
 	 */
-	protected boolean saveOrExportDiceBagCollection(DiceBagCollection diceBags, String path, int action) {
+	protected boolean saveOrExportDiceBagManager(DiceBagManager diceBagManager, String path, int action) {
 		boolean retVal = false;
 		int errorMessageResId;
 		FileOutputStream fos;
@@ -176,7 +173,7 @@ public class PersistenceManager {
 					//External storage
 					fos = new FileOutputStream(new File(path));
 				}
-				SerializationManager.DiceBagCollection(fos, diceBags);
+				SerializationManager.DiceBagManager(fos, diceBagManager);
 				fos.close();
 			}
 			retVal = true;

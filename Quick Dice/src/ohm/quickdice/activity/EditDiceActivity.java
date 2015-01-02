@@ -9,7 +9,6 @@ import ohm.quickdice.R;
 import ohm.quickdice.control.SerializationManager;
 import ohm.quickdice.dialog.BuilderDialogBase;
 import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
-import ohm.quickdice.dialog.IconPickerDialog;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.util.CustomKeyboard;
@@ -41,14 +40,6 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 	 */
 	public static final int ACTIVITY_ADD = 0x00010002;
 	/**
-	 * The activity was closed pressing "Ok"
-	 */
-	public static final int RESULT_OK = 0x00010001;
-	/**
-	 * The activity was closed pressing "Cancel" or the back button
-	 */
-	public static final int RESULT_CANCEL = 0x00010002;
-	/**
 	 * Define the bundle content as {@link Dice}.
 	 */
 	public static final String BUNDLE_DICE = "Dice";
@@ -64,7 +55,7 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 	
 	public static final int POSITION_UNDEFINED = -1;
 	
-	protected DiceBag currentDiceBag;
+	//protected DiceBag currentDiceBag;
 	protected Dice expression;
 	protected int position;
 	protected int req;
@@ -72,7 +63,6 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 	protected int currentResIndex;
 	protected EditText txtName;
 	protected EditText txtDescription;
-	//protected Gallery glrResourceIndex;
 	protected EditText txtExpression;
 	protected Button confirm;
 	protected Button cancel;
@@ -91,7 +81,7 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		
 		super.onCreate(savedInstanceState);
 
-		currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
+		//currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
 
 		if (savedInstanceState != null) {
 			//expression = SerializationManager.DiceSafe(savedInstanceState.getString(KEY_DICE));
@@ -256,56 +246,42 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 			case R.id.btuBarConfirm:
 				//Confirm button
-				//retExp = readDice();
-				//if (retExp == null) {
-				//	//The expression is not valid
-				//	return;
-				//}
-				//returnToCaller(retExp, position, RESULT_OK);
 				handleConfirmButton();
 				break;
 			case R.id.btuBarCancel:
 				//Cancel button
-//				if (dataChanged()) {
-//					askDropChanges();
-//				} else {
-//					returnToCaller(null, position, RESULT_CANCEL);
-//				}
 				handleCancelButton();
 				break;
 			case R.id.edIconPicker:
 				//Icon picker dialog
-				new IconPickerDialog(
+				IconPickerActivity.start(
 						EditDiceActivity.this,
-						R.string.lblDiceIconPicker,
 						currentResIndex,
-						iconPickerReadyListener).show();
+						R.string.lblDiceIconPicker);
 				break;
 		}
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+			case IconPickerActivity.ACTIVITY_SELECT_ICON:
+				if (resultCode == RESULT_OK) {
+					currentResIndex = IconPickerActivity.getIconIdFromBundle(data);;
+					setCurrentIcon();
+				}
+				break;
+		}
+	}
+	
 	private BuilderDialogBase.ReadyListener builderReadyListener = new ReadyListener() {
 		@Override
 		public void ready(View view, boolean confirmed, int action, String diceExpression) {
 			if (confirmed) {
 				if (action == BuilderDialogBase.ACTION_EDIT) {
 					EditText txt;
-//					int selStart;
-//					int selEnd;
-//					String oldDiceExp;
-//					String newDiceExp;
-//	
 					txt = (EditText) findViewById(R.id.edExpText);
-//					selStart = txt.getSelectionStart();
-//					selEnd = txt.getSelectionEnd();
-//					oldDiceExp = txt.getText().toString();
-//					
-//					newDiceExp = oldDiceExp.substring(0, selStart) +
-//						diceExpression +
-//						oldDiceExp.substring(selEnd);
-//					
-//					txt.setText(newDiceExp);
-//					txt.setSelection(selStart, selStart + diceExpression.length());
 					Helper.setTextInsideSelection(txt, diceExpression, true);
 					txt.requestFocus();
 				} else {
@@ -319,20 +295,12 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		}
 	};
 	
-	private IconPickerDialog.OnIconPickedListener iconPickerReadyListener = new IconPickerDialog.OnIconPickedListener() {
-		
-		@Override
-		public void onIconPicked(boolean confirmed, int iconId) {
-			if (confirmed) {
-				currentResIndex = iconId;
-				setCurrentIcon();
-			}
-		}
-	};
-	
 	private void setCurrentIcon() {
-		ibtIconPicker.setImageDrawable(
-				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
+//		ibtIconPicker.setImageDrawable(
+//				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
+//		ibtIconPicker.setImageDrawable(
+//				QuickDiceApp.getInstance().getBagManager().getIconDrawable(currentResIndex));
+		QuickDiceApp.getInstance().getBagManager().setIconDrawable(ibtIconPicker, currentResIndex);
 	}
 	
 	protected Dice readDice() {
@@ -361,6 +329,7 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 			
 			try {
 				//Make a dummy roll to check for error.
+				final DiceBag currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
 				retVal.setContext(currentDiceBag);
 				retVal.getNewResult();
 			} catch (UnknownVariable e) {
@@ -422,14 +391,14 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 				.setNegativeButton(R.string.lblNo, handleCancelButtonClickListener)
 				.show();
 		} else {
-			returnToCaller(null, position, RESULT_CANCEL);
+			returnToCaller(null, position, RESULT_CANCELED);
 		}
 	}
 	
 	private DialogInterface.OnClickListener handleCancelButtonClickListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int id) {
 			if (id == AlertDialog.BUTTON_POSITIVE) {
-				returnToCaller(null, position, RESULT_CANCEL);
+				returnToCaller(null, position, RESULT_CANCELED);
 			} else if (id == AlertDialog.BUTTON_NEGATIVE) {
 				dialog.cancel();
 			}
@@ -445,6 +414,7 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 			return;
 		}
 
+		final DiceBag currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
 		String[] badLabels = dice.getUnavailableVariables(currentDiceBag);
 		
 		if (badLabels.length > 0) {

@@ -92,6 +92,8 @@
 	
 	<string name="lblUndo">UNDO</string>
 
+	<string name="msgInitApp">Initializing app data&#8230;</string>
+	
 	<string name="msgRemoveDiceTitle">Remove die</string>
 	<string name="msgRemoveDice">Are you sure to definitively remove the die \"%1$s\"?</string>
 	<string name="msgClearResultsTitle">Clear results</string>
@@ -112,15 +114,9 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; Named values usable in formulas<br />
-&bull; Four different app themes<br />
-&bull; New keyboard to edit formulas<br />
-&bull; Keep screen on<br />
-&bull; Support to Shadowrun 4ed and 5ed<br />
-&bull; Extended the "exp" and "expUp" functions<br />
-&bull; Improved output for many functions<br />
-&bull; Improved layout<br />
-&bull; Minor fix and lot of improvements<br />
+&bull; Custom icons<br />
+&bull; Speech synthesis<br />
+&bull; Minor fix and improvements<br />
 <br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
@@ -142,6 +138,7 @@ Thanks!<br />]]></string>
 		<item>https://github.com/romannurik/Android-SwipeToDismiss/</item>
 		<item>http://nineoldandroids.com/</item>
 		<item>https://code.google.com/p/google-gson/</item>
+		<item>https://source.android.com/source/index.html</item>
 	</string-array>
 	<string-array name="lblLicenseLibNames"><!-- No need to translate -->
 		<item>Android wheel widget</item>
@@ -149,12 +146,14 @@ Thanks!<br />]]></string>
 		<item>Swipe to Dismiss code</item>
 		<item>Nine Old Androids</item>
 		<item>Google Gson</item>
+		<item>Base64</item>
 	</string-array>
 	<string-array name="lblLicenseLibAuthors"><!-- No need to translate -->
 		<item>Yuri Kanivets</item>
 		<item>Lorensius W. L. T.</item>
 		<item>Roman Nurik</item>
 		<item>Jake Wharton</item>
+		<item>Google</item>
 		<item>Google</item>
 	</string-array>
 	<string-array name="lblLicenseNames">
@@ -163,8 +162,10 @@ Thanks!<br />]]></string>
 		<item>Apache 2.0 License</item>
 		<item>Apache 2.0 License</item>
 		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
 	</string-array>
 	<string-array name="lblLicenseURLs"><!-- No need to translate -->
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
 		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
 		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
 		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
@@ -203,7 +204,11 @@ Thanks!<br />]]></string>
 	<string name="msgRemoveVar">Are you sure to definitively remove the value named \"%1$s\"?</string>
 	<string name="msgRemoveUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it this dice won\'t work anymore. Continue anyway?</string>
 	<string name="msgRemoveMultiUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it these dice won\'t work anymore. Continue anyway?</string>
-
+	<string name="msgRemoveIconTitle">Remove icon</string>
+	<string name="msgRemoveIconUnused">Are you sure to definitively remove this icon?</string>
+	<string name="msgRemoveIconUsed">This icon is currently used %1$d time(s). Are you sure to definitively remove it?</string>
+	<string name="msgRemoveIconSystem">This icon cannot be removed.</string>
+	
 	<string name="mnuAddDice">Add die</string>
 	<string name="mnuAddDiceHere">Add die here</string>
 	<string name="mnuClearAllResults">Clear all results</string>
@@ -645,6 +650,8 @@ Thanks!<br />]]></string>
 	<string name="pref_aspect_sound_desc">Enable or disable rolling dice sound.</string>
 	<string name="pref_aspect_ext_sound_title">Extended sound</string>
 	<string name="pref_aspect_ext_sound_desc">Different sound effects for criticals and fumbles.</string>
+	<string name="pref_aspect_tts_title">Enable speech synthesis</string>
+	<string name="pref_aspect_tts_desc">Enable or disable the speech synthesis of the last result.</string>
 	<string name="pref_aspect_swapdesc_title">Swap name and result</string>
 	<string name="pref_aspect_swapdesc_desc">Swap the die name and its extended result.</string>
 	<string name="pref_behaviour">Behaviour</string>

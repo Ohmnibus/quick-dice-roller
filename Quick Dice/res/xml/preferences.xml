@@ -99,6 +99,12 @@
 			android:dependency="KEY_ENABLE_SOUND" />
 		
 		<CheckBoxPreference
+			android:key="KEY_ENABLE_TTS"
+			android:title="@string/pref_aspect_tts_title"
+			android:summary="@string/pref_aspect_tts_desc"
+			android:defaultValue="false" />
+		
+		<CheckBoxPreference
 			android:key="KEY_WAKELOCK"
 			android:title="@string/pref_behaviour_wakelock_title"
 			android:summary="@string/pref_behaviour_wakelock_desc"

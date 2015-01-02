@@ -7,11 +7,11 @@ import java.util.Date;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.MostRecentFilesAdapter;
-import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.control.SerializationManager;
 import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.entity.DiceBagCollection;
 import ohm.quickdice.entity.MostRecentFile;
+import ohm.quickdice.util.Helper;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -65,7 +65,7 @@ public class ImportExportActivity extends BaseActivity {
 	SharedPreferences config = null;
 	ArrayList<MostRecentFile> recentFiles;
 	
-	GraphicManager graphicManager;
+	//GraphicManager graphicManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class ImportExportActivity extends BaseActivity {
 		recentFiles = loadRecentFiles();
 		
 		//graphicManager = new Graphic(getResources());
-		graphicManager = QuickDiceApp.getInstance().getGraphic();
+		//graphicManager = QuickDiceApp.getInstance().getGraphic();
 		
 		initViews();
 	}
@@ -97,13 +97,15 @@ public class ImportExportActivity extends BaseActivity {
 		Drawable drawable;
 		
 		btuImport = (Button)findViewById(R.id.eiImport);
-		drawable = graphicManager.resizeDrawable(R.drawable.ic_import, 64, 32);
+		//drawable = graphicManager.resizeDrawable(R.drawable.ic_import, 64, 32);
+		drawable = Helper.resizeDrawable(this, R.drawable.ic_import, 64, 32);
 		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 		btuImport.setCompoundDrawables(drawable, null, null, null);
 		btuImport.setOnClickListener(importClickListener);
 		
 		btuExport = (Button)findViewById(R.id.eiExport);
-		drawable = graphicManager.resizeDrawable(R.drawable.ic_export, 64, 32);
+		//drawable = graphicManager.resizeDrawable(R.drawable.ic_export, 64, 32);
+		drawable = Helper.resizeDrawable(this, R.drawable.ic_export, 64, 32);
 		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 		btuExport.setCompoundDrawables(drawable, null, null, null);
 		btuExport.setOnClickListener(exportClickListener);

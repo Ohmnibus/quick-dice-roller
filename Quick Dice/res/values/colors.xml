@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="default_dice_color">#888888</color>
+	
 	<color name="toast_dice_number">#dddddd</color><!-- Same for all styles -->
 	<color name="toast_dice_number_shadow">#000000</color><!-- Same for all styles -->
 
 	<color name="modifier_number_color">#ffffff</color><!-- Same for all styles -->
 	<color name="modifier_number_shadow">#000000</color><!-- Same for all styles -->
-	<color name="modifier_bg_start">#ff333333</color><!-- Same for all styles -->
-	<color name="modifier_bg_end">#33333333</color><!-- Same for all styles -->
-	
+
 	<color name="undo_bar_bg">#db555555</color><!-- Same for all styles -->
 	<color name="undo_bar_divider">#afafaf</color><!-- Same for all styles -->
 	<color name="undo_bar_text">#ffffff</color><!-- Same for all styles -->

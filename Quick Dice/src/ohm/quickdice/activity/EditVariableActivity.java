@@ -4,10 +4,9 @@ import java.util.Locale;
 
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
-import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.control.SerializationManager;
-import ohm.quickdice.dialog.IconPickerDialog;
 import ohm.quickdice.dialog.NumberPickerDialog;
+import ohm.quickdice.entity.IconCollection;
 import ohm.quickdice.entity.Variable;
 import ohm.quickdice.entity.VariableCollection;
 import android.app.Activity;
@@ -29,7 +28,6 @@ import android.widget.Toast;
 public class EditVariableActivity extends BaseActivity
 	implements
 		View.OnClickListener,
-		IconPickerDialog.OnIconPickedListener,
 		SeekBar.OnSeekBarChangeListener {
 
 	/**
@@ -40,14 +38,6 @@ public class EditVariableActivity extends BaseActivity
 	 * Open the activity to add a new variable.
 	 */
 	public static final int ACTIVITY_ADD = 0x00050002;
-	/**
-	 * The activity was closed pressing "Ok"
-	 */
-	public static final int RESULT_OK = 0x00050001;
-	/**
-	 * The activity was closed pressing "Cancel" or the back button
-	 */
-	public static final int RESULT_CANCEL = 0x00050002;
 	/**
 	 * Define the bundle content as {@link Variable}.
 	 */
@@ -208,7 +198,7 @@ public class EditVariableActivity extends BaseActivity
 		txtLabel.setText(getString(bundle, KEY_LABEL, ""));
 		txtLabel.addTextChangedListener(genericTextWatcher);
 
-		currentResIndex = getInt(bundle, KEY_RES_INDEX, GraphicManager.INDEX_DICE_ICON_DEFAULT);
+		currentResIndex = getInt(bundle, KEY_RES_INDEX, IconCollection.ID_ICON_DEFAULT);
 		minVal = getInt(bundle, KEY_MIN_VAL, 0);
 		curVal = getInt(bundle, KEY_CUR_VAL, 5);
 		maxVal = getInt(bundle, KEY_MAX_VAL, 20);
@@ -249,11 +239,10 @@ public class EditVariableActivity extends BaseActivity
 		Variable retVal;
 		switch (v.getId()) {
 			case R.id.cmdIconPicker:
-				new IconPickerDialog(
-						v.getContext(),
-						R.string.lblVariableIconPicker,
+				IconPickerActivity.start(
+						this,
 						currentResIndex,
-						this).show();
+						R.string.lblVariableIconPicker);
 				break;
 			case R.id.cmdMin:
 				//new ModifierBuilderDialog(this, position, minValueReadyListener).show();
@@ -288,7 +277,7 @@ public class EditVariableActivity extends BaseActivity
 					askDropChanges();
 					return;
 				}
-				returnToCaller(null, position, RESULT_CANCEL);
+				returnToCaller(null, position, RESULT_CANCELED);
 				break;
 		}
 	}
@@ -320,10 +309,15 @@ public class EditVariableActivity extends BaseActivity
 	}
 	
 	@Override
-	public void onIconPicked(boolean confirmed, int iconId) {
-		if (confirmed) {
-			currentResIndex = iconId;
-			setCurrentIcon();
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+			case IconPickerActivity.ACTIVITY_SELECT_ICON:
+				if (resultCode == RESULT_OK) {
+					currentResIndex = IconPickerActivity.getIconIdFromBundle(data);
+					setCurrentIcon();
+				}
+				break;
 		}
 	}
 
@@ -363,8 +357,11 @@ public class EditVariableActivity extends BaseActivity
 	};
 
 	private void setCurrentIcon() {
-		ibtIconPicker.setImageDrawable(
-				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
+//		ibtIconPicker.setImageDrawable(
+//				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
+//		ibtIconPicker.setImageDrawable(
+//				QuickDiceApp.getInstance().getBagManager().getIconDrawable(currentResIndex));
+		QuickDiceApp.getInstance().getBagManager().setIconDrawable(ibtIconPicker, currentResIndex);
 	}
 
 	@Override
@@ -469,7 +466,7 @@ public class EditVariableActivity extends BaseActivity
 				R.string.lblYes,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
+						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCELED);
 					}
 				});
 		builder.setNegativeButton(

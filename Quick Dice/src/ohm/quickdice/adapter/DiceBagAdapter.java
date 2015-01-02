@@ -53,7 +53,9 @@ public class DiceBagAdapter extends CachedCollectionAdapter<DiceBag> {
 		DiceBag diceBag = cache.data;
 
 		QuickDiceApp app = (QuickDiceApp)getContext().getApplicationContext();
-		cache.diceBagIcon.setImageDrawable(app.getGraphic().getDiceIcon(diceBag.getResourceIndex()));
+		//cache.diceBagIcon.setImageDrawable(app.getGraphic().getDiceIcon(diceBag.getResourceIndex()));
+		//cache.diceBagIcon.setImageDrawable(app.getBagManager().getIconDrawable(diceBag.getResourceIndex()));
+		app.getBagManager().setIconDrawable(cache.diceBagIcon, diceBag.getResourceIndex());
 		cache.name.setText(diceBag.getName());
 		cache.description.setText(diceBag.getDescription());
 

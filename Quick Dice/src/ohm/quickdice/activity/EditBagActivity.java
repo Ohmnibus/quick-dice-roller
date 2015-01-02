@@ -3,7 +3,6 @@ package ohm.quickdice.activity;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.control.SerializationManager;
-import ohm.quickdice.dialog.IconPickerDialog;
 import ohm.quickdice.entity.DiceBag;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,14 +29,14 @@ public class EditBagActivity extends BaseActivity {
 	 * Open the activity to add a new dice bag.
 	 */
 	public static final int ACTIVITY_ADD = 0x00030002;
-	/**
-	 * The activity was closed pressing "Ok"
-	 */
-	public static final int RESULT_OK = 0x00030001;
-	/**
-	 * The activity was closed pressing "Cancel" or the back button
-	 */
-	public static final int RESULT_CANCEL = 0x00030002;
+//	/**
+//	 * The activity was closed pressing "Ok"
+//	 */
+//	public static final int RESULT_OK = 0x00030001;
+//	/**
+//	 * The activity was closed pressing "Cancel" or the back button
+//	 */
+//	public static final int RESULT_CANCEL = 0x00030002;
 	/**
 	 * Define the bundle content as {@link DiceBag}.
 	 */
@@ -220,7 +219,7 @@ public class EditBagActivity extends BaseActivity {
 					return;
 				}
 				retVal = null;
-				result = RESULT_CANCEL;
+				result = RESULT_CANCELED;
 			}
 			returnToCaller(retVal, position, result);
 		}
@@ -229,28 +228,31 @@ public class EditBagActivity extends BaseActivity {
 	private OnClickListener iconPickerClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			new IconPickerDialog(
+			IconPickerActivity.start(
 					EditBagActivity.this,
-					R.string.lblBagIconPicker,
 					currentResIndex,
-					iconPickerReadyListener).show();
+					R.string.lblBagIconPicker);
 		}
 	};
 	
-	private IconPickerDialog.OnIconPickedListener iconPickerReadyListener = new IconPickerDialog.OnIconPickedListener() {
-		
-		@Override
-		public void onIconPicked(boolean confirmed, int iconId) {
-			if (confirmed) {
-				currentResIndex = iconId;
-				setCurrentIcon();
-			}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode) {
+			case IconPickerActivity.ACTIVITY_SELECT_ICON:
+				if (resultCode == RESULT_OK) {
+					currentResIndex = IconPickerActivity.getIconIdFromBundle(data);
+					setCurrentIcon();
+				}
+				break;
 		}
 	};
 	
 	private void setCurrentIcon() {
-		ibtIconPicker.setImageDrawable(
-				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
+//		ibtIconPicker.setImageDrawable(
+//				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
+//		ibtIconPicker.setImageDrawable(
+//				QuickDiceApp.getInstance().getBagManager().getIconDrawable(currentResIndex));
+		QuickDiceApp.getInstance().getBagManager().setIconDrawable(ibtIconPicker, currentResIndex);
 	}
 
 	protected DiceBag readDiceBag() {
@@ -303,7 +305,7 @@ public class EditBagActivity extends BaseActivity {
 				R.string.lblYes,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCEL);
+						returnToCaller(null, POSITION_UNDEFINED, RESULT_CANCELED);
 					}
 				});
 		builder.setNegativeButton(

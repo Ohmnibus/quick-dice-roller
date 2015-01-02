@@ -60,7 +60,8 @@ public class VariableAdapter extends CachedCollectionAdapter<Variable> {
 		Variable variable = cache.data;
 
 		QuickDiceApp app = QuickDiceApp.getInstance();
-		cache.variableIcon.setImageDrawable(app.getGraphic().getDiceIcon(variable.getResourceIndex()));
+		//cache.variableIcon.setImageDrawable(app.getBagManager().getIconDrawable(variable.getResourceIndex()));
+		app.getBagManager().setIconDrawable(cache.variableIcon, variable.getResourceIndex());
 		cache.name.setText(variable.getName());
 		cache.description.setText(variable.getDescription());
 		cache.value.setText(Integer.toString(variable.getCurVal()));

@@ -112,15 +112,9 @@
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; Valori denominati utilizzabili nelle formule<br />
-&bull; Quattro temi tra cui scegliere<br />
-&bull; Tastiera speciale per modificare le formule<br />
-&bull; Controllo stand-by<br />
-&bull; Supporto a Shadowrun 4a e 5a ed.<br />
-&bull; Funzioni "exp" ed "expUp" migliorate<br />
-&bull; Migliorato il risultato esteso di molte funzioni<br />
-&bull; Aspetto ed interfaccia migliorati<br />
-&bull; Correzioni minori e molti miglioramenti<br />
+&bull; Icone personalizzate<br />
+&bull; Sintesi vocale<br />
+&bull; Correzioni e miglioramenti minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />

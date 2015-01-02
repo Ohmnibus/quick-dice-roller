@@ -1,7 +1,6 @@
 package ohm.quickdice.entity;
 
 import ohm.quickdice.R;
-import ohm.quickdice.control.GraphicManager;
 
 import android.content.Context;
 
@@ -10,30 +9,34 @@ public class RollModifier {
 	protected String title;
 	protected String description;
 	protected int value;
-	protected int resourceIndex;
+	protected int iconId;
 	protected DiceBag parent;
 	
 	public RollModifier(Context context, int value) {
 		if (value < 0) {
 			//Penalty
-			this.title = String.format(context.getString(R.string.msgMalusTitle), value);
-			this.description = String.format(context.getString(R.string.msgMalusMessage), value);
+//			this.title = String.format(context.getString(R.string.msgMalusTitle), value);
+//			this.description = String.format(context.getString(R.string.msgMalusMessage), value);
+			this.title = context.getString(R.string.msgMalusTitle, value);
+			this.description = context.getString(R.string.msgMalusMessage, value);
 			this.value = value;
-			this.resourceIndex = GraphicManager.INDEX_DICE_ICON_MALUS;
+			//this.resourceIndex = GraphicManager.INDEX_DICE_ICON_MALUS;
+			this.iconId = IconCollection.ID_ICON_MALUS;
 		} else {
 			//Bonus
-			this.title = String.format(context.getString(R.string.msgBonusTitle), value);
-			this.description = String.format(context.getString(R.string.msgBonusMessage), value);
+			this.title = context.getString(R.string.msgBonusTitle, value);
+			this.description = context.getString(R.string.msgBonusMessage, value);
 			this.value = value;
-			this.resourceIndex = GraphicManager.INDEX_DICE_ICON_BONUS;
+			//this.resourceIndex = GraphicManager.INDEX_DICE_ICON_BONUS;
+			this.iconId = IconCollection.ID_ICON_MALUS;
 		}
 	}
 	
-	public RollModifier(String name, String description, int value, int resourceIndex) {
+	public RollModifier(String name, String description, int value, int iconId) {
 		this.title = name;
 		this.description = description;
 		this.value = value;
-		this.resourceIndex = resourceIndex;
+		this.iconId = iconId;
 	}
 	
 	public String getName() {
@@ -56,7 +59,8 @@ public class RollModifier {
 	}
 	
 	public int getResourceIndex() {
-		return resourceIndex;
+		//TODO: Rename to getIconID
+		return iconId;
 	}
 	
 	public DiceBag getParent() {

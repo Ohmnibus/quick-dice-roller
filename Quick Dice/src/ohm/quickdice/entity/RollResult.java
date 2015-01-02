@@ -1,7 +1,6 @@
 package ohm.quickdice.entity;
 
 import ohm.quickdice.R;
-import ohm.quickdice.control.GraphicManager;
 
 /**
  * This class define and handle all the data relate to the result of a dice roll.
@@ -183,13 +182,15 @@ public class RollResult /* implements Serializable */ {
 			for (int i = 1; i < resList.length; i++) {
 				res = resList[i];
 				//Default icon never changes.
-				if (retVal.resourceIndex != GraphicManager.INDEX_DICE_ICON_DEFAULT 
+				if (retVal.resourceIndex != IconCollection.ID_ICON_DEFAULT 
 						&& retVal.resourceIndex != res.getResourceIndex()) {
-					if (retVal.resourceIndex == GraphicManager.INDEX_DICE_ICON_BONUS || retVal.resourceIndex == GraphicManager.INDEX_DICE_ICON_MALUS) {
+					if (retVal.resourceIndex == IconCollection.ID_ICON_BONUS 
+							|| retVal.resourceIndex == IconCollection.ID_ICON_MALUS) {
 						//Bonus/Malus icon is not considered
 						retVal.resourceIndex = res.resourceIndex;
-					} else if (res.resourceIndex != GraphicManager.INDEX_DICE_ICON_BONUS && res.resourceIndex != GraphicManager.INDEX_DICE_ICON_MALUS) {
-						retVal.resourceIndex = GraphicManager.INDEX_DICE_ICON_DEFAULT;
+					} else if (res.resourceIndex != IconCollection.ID_ICON_BONUS 
+							&& res.resourceIndex != IconCollection.ID_ICON_MALUS) {
+						retVal.resourceIndex = IconCollection.ID_ICON_DEFAULT;
 					}
 				}
 				retVal.title += " + " + res.getName(); 

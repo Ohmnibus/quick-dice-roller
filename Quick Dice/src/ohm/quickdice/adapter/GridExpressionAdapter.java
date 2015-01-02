@@ -73,6 +73,7 @@ public class GridExpressionAdapter extends CachedCollectionAdapter<Dice> {
 					TypedValue.COMPLEX_UNIT_PX,
 					app.getResources().getDimension(R.dimen.dice_name_multi_line_size));
 		}
-		cache.icon.setImageDrawable(app.getGraphic().getDiceIcon(exp.getResourceIndex()));
+		//cache.icon.setImageDrawable(app.getBagManager().getIconDrawable(exp.getResourceIndex()));
+		app.getBagManager().setIconDrawable(cache.icon, exp.getResourceIndex());
 	}
 }
