@@ -100,7 +100,7 @@
 <br />
 Deseja ficar sempre atualizado? <a href="http://goo.gl/UuJBSO">Torne-se um usuário Beta!</a><br />
 <br />]]></string>
-  <string name="msgWhatsNewBody"><![CDATA[
+  <!-- <string name="msgWhatsNewBody"><![CDATA[
 &bull; Variáveis Nomeadas para usar em fórmulas<br />
 &bull; Quatro temas diferentes para o aplicativo<br />
 &bull; Novo teclado para editar as fórmulas<br />
@@ -110,7 +110,7 @@ Deseja ficar sempre atualizado? <a href="http://goo.gl/UuJBSO">Torne-se um usuá
 &bull; Melhorado o resultado de saída de muitas fórmulas<br />
 &bull; Apresentação melhorada<br />
 &bull; Pequenos reparos e muitos melhoramentos<br />
-<br />]]></string>
+<br />]]></string> -->
   <string name="msgAboutTitle">Sobre %1$s</string>
   <string name="msgAboutBody"><![CDATA[%1$s versão %2$s<br />
 Direitos autorais (c) 2012-2014 por %3$s<br />

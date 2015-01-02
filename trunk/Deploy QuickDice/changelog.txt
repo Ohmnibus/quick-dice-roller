@@ -1,3 +1,11 @@
+v 2.1.0
+- Custom icons
+- Speech synthesis
+- Minor fix and improvements
+
+v 2.0.1
+- Portuguese (Brazilian) translation
+
 v 2.0.0
 - Named values (= variables)
 - Support to "Shadowrun" system (4 and 5 ed.)

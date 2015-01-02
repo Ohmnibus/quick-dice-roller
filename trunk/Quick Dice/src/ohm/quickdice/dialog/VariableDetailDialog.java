@@ -94,7 +94,7 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 	}
 	
 	protected Drawable getDialogIcon() {
-		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
+		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
 				variable.getResourceIndex(), 32, 32);
 	}
 

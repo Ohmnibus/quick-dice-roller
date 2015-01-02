@@ -94,7 +94,9 @@ public class DiceDetailDialog extends MenuDialog {
 	}
 
 	protected Drawable getDialogIcon() {
-		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
+//		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
+//				expression.getResourceIndex(), 32, 32);
+		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
 				expression.getResourceIndex(), 32, 32);
 	}
 }

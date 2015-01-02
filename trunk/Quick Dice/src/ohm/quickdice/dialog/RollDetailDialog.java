@@ -25,14 +25,14 @@ public class RollDetailDialog extends MenuDialog {
 
 	RollResult[] result = null;
 	RollResult mergedResult = null;
-	GraphicManager graphicManager;
+	//GraphicManager graphicManager;
 	
 	public RollDetailDialog(Activity activity, Menu menu, RollResult[] lastResult, ArrayList<RollResult[]> resultList, int resultIndex) {
 		super(activity, menu);
 		this.lastResult = lastResult;
 		this.resultList = resultList;
 		this.resultIndex = resultIndex;
-		this.graphicManager = QuickDiceApp.getInstance().getGraphic();
+		//this.graphicManager = QuickDiceApp.getInstance().getGraphic();
 	}
 	
 	protected RollResult[] getResult() {
@@ -135,6 +135,8 @@ public class RollDetailDialog extends MenuDialog {
 	}
 	
 	protected Drawable getDialogIcon(RollResult res) {
-		return graphicManager.getResizedDiceIcon(res.getResourceIndex(), 32, 32);
+		//return graphicManager.getResizedDiceIcon(res.getResourceIndex(), 32, 32);
+		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
+				res.getResourceIndex(), 32, 32);
 	}
 }

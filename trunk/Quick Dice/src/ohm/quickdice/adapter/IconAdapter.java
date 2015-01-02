@@ -1,81 +1,103 @@
 package ohm.quickdice.adapter;
 
-import ohm.quickdice.QuickDiceApp;
+import ohm.library.adapter.CachedCollectionAdapter;
 import ohm.quickdice.R;
-import android.app.Activity;
+import ohm.quickdice.entity.Icon;
+import ohm.quickdice.entity.IconCollection;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
-public class IconAdapter extends BaseAdapter {
-	int selected;
-	private Context ctx;
-	private QuickDiceApp app;
-	private DisplayMetrics metrics;
-	private GridView.LayoutParams layoutParams;
+public class IconAdapter extends CachedCollectionAdapter<Icon> {
+	public static final int ID_ICON_ADDNEW = -10;
+	public static final int ID_ICON_NONE = -11;
 	
-	public IconAdapter(Context c, int selected) {
-		ctx = c;
-		app = (QuickDiceApp)ctx.getApplicationContext();
-		metrics = new DisplayMetrics();
-		((Activity)ctx).getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		layoutParams = new GridView.LayoutParams(
-				(int)(64 * metrics.density),
-				(int)(64 * metrics.density)); 
-		this.selected = selected;
+	private int selectedIconId;
+	
+	private class ItemViewCache extends ViewCache<Icon>  {
+
+		View root;
+		ImageView icon;
+		ImageView lock;
+
+		public ItemViewCache(View baseView) {
+			super(baseView);
+		}
+
+		@Override
+		protected void findAllViews(View baseView) {
+			root = baseView;
+			icon = (ImageView) baseView.findViewById(R.id.imgIcon);
+			lock = (ImageView) baseView.findViewById(R.id.imgLock);
+		}
 	}
 	
-	@Override
-	public int getCount() {
-		return app.getGraphic().getDiceIconCount();
+	public IconAdapter(Context context, int resourceId, IconCollection collection) {
+		this(context, resourceId, collection, ID_ICON_NONE);
+	}
+
+	public IconAdapter(Context context, int resourceId, IconCollection collection, int selectedIconId) {
+		super(context, resourceId, collection);
+		this.selectedIconId = selectedIconId;
 	}
 
 	@Override
-	public Object getItem(int position) {
-		return position;
+	protected ViewCache<Icon> createCache(int position, View convertView) {
+		return new ItemViewCache(convertView);
+	}
+
+	@Override
+	protected void bindData(ViewCache<Icon> viewCache) {
+		ItemViewCache cache = (ItemViewCache)viewCache;
+
+		Icon icon = cache.data;
+
+		if (icon == null) {
+			//Add icon
+			cache.icon.setImageResource(android.R.drawable.ic_menu_add);
+			cache.lock.setVisibility(View.GONE);
+			cache.root.setBackgroundResource(0);
+		} else {
+			//cache.icon.setImageDrawable(icon.getDrawable(getContext()));
+			icon.setDrawable(cache.icon);
+			cache.lock.setVisibility(icon.isCustom() ? View.GONE : View.VISIBLE);
+			if (icon.getId() == selectedIconId) {
+				//Selected icon
+				cache.root.setBackgroundResource(R.drawable.bg_selector_state_focus);
+			} else {
+				//Unselected icon
+				cache.root.setBackgroundResource(0);
+			}
+		}
+	};
+
+	@Override
+	public int getCount() {
+		//return app.getGraphic().getDiceIconCount();
+		return super.getCount() + 1;
+	}
+
+	@Override
+	public Icon getItem(int position) {
+		Icon retVal = null;
+		if (position >= 0 && position < super.getCount()) {
+			retVal = super.getItem(position);
+		}
+		return retVal;
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ImageView img;
-
-		if (convertView == null) {
-			img = new ImageView(ctx);
-			img.setLayoutParams(layoutParams);
-			img.setScaleType(ImageView.ScaleType.FIT_XY);
-		} else {
-			img = (ImageView)convertView;
-		}
-
-		setImageResource(img, position);
-
-		return img;
+		Icon icon = getItem(position);
+		return icon == null ? ID_ICON_ADDNEW : icon.getId();
 	}
 	
-	private void setImageResource(ImageView img, int position) {
-		img.setImageDrawable(app.getGraphic().getDiceIcon(position));
-		if (position == selected) {
-			img.setBackgroundResource(R.drawable.bg_selector_state_focus);
-		} else {
-			//img.setBackgroundDrawable(null);
-			img.setBackgroundResource(0);
-		}
+	public void setSelectedId(int iconId) {
+		selectedIconId = iconId;
 	}
 	
-	public void setSelected(int position) {
-		selected = position;
+	public int getSelectedId() {
+		return selectedIconId;
 	}
-	
-	public int getSelected() {
-		return selected;
-	}
+
 }

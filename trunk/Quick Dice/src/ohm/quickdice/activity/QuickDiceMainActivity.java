@@ -20,7 +20,6 @@ import ohm.quickdice.adapter.ResultListAdapter;
 import ohm.quickdice.adapter.ResultListAdapter.ItemViews;
 import ohm.quickdice.adapter.VariableAdapter;
 import ohm.quickdice.control.DiceBagManager;
-import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.control.PreferenceManager;
 import ohm.quickdice.control.SerializationManager;
 import ohm.quickdice.control.UndoManager;
@@ -95,7 +94,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	int currentTheme;
 	QuickDiceApp app;
 	Resources res;
-	GraphicManager graphicManager;
+	//GraphicManager graphicManager;
 	PreferenceManager pref;
 	UndoManager undoManager;
 	
@@ -154,17 +153,18 @@ public class QuickDiceMainActivity extends BaseActivity {
 		//Initializations
 		app = QuickDiceApp.getInstance();
 		res = getResources();
-		graphicManager = app.getGraphic();
+		//graphicManager = app.getGraphic();
 		pref = app.getPreferences();
 		undoManager = UndoManager.getInstance();
-		rollDiceToast = new RollDiceToast(this, pref, graphicManager);
 
 		diceBagManager = app.getBagManager();
-		diceBagManager.initBagManager();
+		diceBagManager.init();
 
 		diceBag = diceBagManager.getDiceBagCollection().getCurrent();
 
 		modifierViewList = new ArrayList<View>();
+
+		rollDiceToast = new RollDiceToast(this, pref, diceBagManager);
 
 		if (savedInstanceState != null) {
 			lastResult = null;
@@ -259,6 +259,14 @@ public class QuickDiceMainActivity extends BaseActivity {
 		
 		super.onStop();
 	}
+	
+	@Override
+	protected void onDestroy() {
+		if (rollDiceToast != null) {
+			rollDiceToast.shutdown();
+		}
+		super.onDestroy();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -347,7 +355,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 		switch (requestCode) {
 			case EditBagActivity.ACTIVITY_ADD:
-				if (resultCode == EditBagActivity.RESULT_OK) {
+				if (resultCode == RESULT_OK) {
 					//Add new dice bag
 					//DiceBag newBag = getDiceBagFromIntent(data);
 					DiceBag newBag = EditBagActivity.getDiceBag(data);
@@ -362,7 +370,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				}
 				break;
 			case EditBagActivity.ACTIVITY_EDIT:
-				if (resultCode == EditBagActivity.RESULT_OK) {
+				if (resultCode == RESULT_OK) {
 					//Edit dice bag
 					//DiceBag newBag = getDiceBagFromIntent(data);
 					DiceBag newBag = EditBagActivity.getDiceBag(data);
@@ -376,7 +384,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				}
 				break;
 			case EditDiceActivity.ACTIVITY_ADD:
-				if (requestCode == EditDiceActivity.ACTIVITY_ADD && resultCode == EditDiceActivity.RESULT_OK) {
+				if (resultCode == RESULT_OK) {
 					//Add new die
 					//Dice newExp = getDiceFromIntent(data);
 					Dice newExp = EditDiceActivity.getDice(data);
@@ -390,7 +398,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				}
 				break;
 			case EditDiceActivity.ACTIVITY_EDIT:
-				if (resultCode == EditDiceActivity.RESULT_OK) {
+				if (resultCode == RESULT_OK) {
 					//Edit die
 					//Dice newExp = getDiceFromIntent(data);
 					Dice newExp = EditDiceActivity.getDice(data);
@@ -404,7 +412,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				}
 				break;
 			case EditVariableActivity.ACTIVITY_ADD:
-				if (resultCode == EditVariableActivity.RESULT_OK) {
+				if (resultCode == RESULT_OK) {
 					//Add new Variable
 					Variable newVar = EditVariableActivity.getVariableData(data);
 					if (newVar != null) {
@@ -416,7 +424,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				}
 				break;
 			case EditVariableActivity.ACTIVITY_EDIT:
-				if (resultCode == EditVariableActivity.RESULT_OK) {
+				if (resultCode == RESULT_OK) {
 					//Edit Variable
 					Variable newVar = EditVariableActivity.getVariableData(data);
 					if (newVar != null) {
@@ -536,7 +544,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 		inflater.inflate(R.menu.menu_dice_bag, menu);
 		
 		//Get the dice icon and resize it to fit the menu header icon size.
-		Drawable diceBagIcon = graphicManager.getResizedDiceIcon(
+//		Drawable diceBagIcon = graphicManager.getResizedDiceIcon(
+//				bag.getResourceIndex(), 32, 32);
+		Drawable diceBagIcon = diceBagManager.getIconDrawable(
 				bag.getResourceIndex(), 32, 32);
 		menu.setHeaderIcon(diceBagIcon);
 		menu.setHeaderTitle(bag.getName());
@@ -601,7 +611,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 		//modifier = bonusBag.get(index);
 		modifier = diceBag.getModifiers().get(index);
-		modIcon = graphicManager.getResizedDiceIcon(
+//		modIcon = graphicManager.getResizedDiceIcon(
+//				modifier.getResourceIndex(), 32, 32);
+		modIcon = diceBagManager.getIconDrawable(
 				modifier.getResourceIndex(), 32, 32);
 
 		menu.setHeaderIcon(modIcon);
@@ -711,7 +723,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				bag = (DiceBag)lvDiceBag.getItemAtPosition(info.position);
 				builder = new AlertDialog.Builder(this);
 				builder.setTitle(R.string.msgRemoveDiceBagTitle);
-				builder.setMessage(Helper.getString(res,
+				builder.setMessage(res.getString(
 						R.string.msgRemoveDiceBagNew,
 						bag.getName(),
 						bag.getDice().size(),
@@ -773,7 +785,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				dice = (Dice)gvDice.getItemAtPosition(info.position);
 				builder = new AlertDialog.Builder(this);
 				builder.setTitle(R.string.msgRemoveDiceTitle);
-				builder.setMessage(Helper.getString(res, R.string.msgRemoveDice, dice.getName()));
+				builder.setMessage(res.getString(R.string.msgRemoveDice, dice.getName()));
 				builder.setPositiveButton(
 						R.string.lblYes,
 						new DialogInterface.OnClickListener() {
@@ -910,7 +922,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 				mod = diceBag.getModifiers().get(modifierOpeningMenu);
 				builder = new AlertDialog.Builder(this);
 				builder.setTitle(R.string.msgRemoveModTitle);
-				builder.setMessage(Helper.getString(res, R.string.msgRemoveMod, mod.getName()));
+				builder.setMessage(res.getString(R.string.msgRemoveMod, mod.getName()));
 				builder.setPositiveButton(
 						R.string.lblYes,
 						new DialogInterface.OnClickListener() {
@@ -1252,7 +1264,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 			
 			modIcon = (ImageView)modView.findViewById(R.id.miIcon);
 			modText = (TextView)modView.findViewById(R.id.miValue);
-			modIcon.setImageDrawable(graphicManager.getDiceIcon(modifier.getResourceIndex()));
+			//modIcon.setImageDrawable(graphicManager.getDiceIcon(modifier.getResourceIndex()));
+			//modIcon.setImageDrawable(diceBagManager.getIconDrawable(modifier.getResourceIndex()));
+			diceBagManager.setIconDrawable(modIcon, modifier.getResourceIndex());
 			modText.setText(modifier.getValueString());
 
 			modView.setTag(R.id.key_type, TYPE_MODIFIER);

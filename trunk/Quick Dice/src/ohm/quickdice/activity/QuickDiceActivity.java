@@ -3,6 +3,7 @@ package ohm.quickdice.activity;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.control.PreferenceManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,12 +23,22 @@ public class QuickDiceActivity extends BaseActivity implements Runnable {
 	QuickDiceApp app;
 	PreferenceManager pref;
 	Handler handler;
+	ProgressDialog progressDialog = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.startup_activity);
+		//setContentView(R.layout.startup_activity);
+		
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setMessage(getText(R.string.msgInitApp));
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		progressDialog.setIndeterminate(true);
+		progressDialog.setCancelable(true);
+		progressDialog.setCanceledOnTouchOutside(false);
+		//progressDialog.setOnCancelListener(listener)
+		progressDialog.show();
 
 		app = QuickDiceApp.getInstance();
 		pref = app.getPreferences();
@@ -39,15 +50,21 @@ public class QuickDiceActivity extends BaseActivity implements Runnable {
 	public void run() {
 		
 		//Initialize Bag Manager
-		app.getBagManager().initBagManager();
+		app.getBagManager().init();
 		
 		//Initialize Result List
 		app.getPersistence().preloadResultList();
 
-		//Launch main application
-		Intent i = new Intent(this, QuickDiceMainActivity.class);
-		startActivity(i);
+		if (progressDialog.isShowing()) {
 
+			//Launch main application
+			Intent i = new Intent(this, QuickDiceMainActivity.class);
+			startActivity(i);
+
+			//Close progress dialog
+			progressDialog.dismiss();
+		}
+		
 		//Close self
 		this.finish();
 	}

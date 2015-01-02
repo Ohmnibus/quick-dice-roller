@@ -38,6 +38,7 @@ public class PreferenceManager {
 	public static final String KEY_SHOW_ANIMATION = "KEY_SHOW_ANIMATION";
 	public static final String KEY_ENABLE_SOUND = "KEY_ENABLE_SOUND";
 	public static final String KEY_ENABLE_SPECIAL_SOUND = "KEY_ENABLE_SPECIAL_SOUND";
+	public static final String KEY_ENABLE_TTS = "KEY_ENABLE_TTS";
 	public static final String KEY_MAX_DICE = "KEY_MAX_DICE";
 	public static final String KEY_MAX_DICE_BAGS = "KEY_MAX_DICE_BAGS";
 	public static final String KEY_MAX_MODIFIERS = "KEY_MAX_MODIFIERS";
@@ -63,6 +64,7 @@ public class PreferenceManager {
 	private boolean showAnimation;
 	private boolean soundEnabled;
 	private boolean extSoundEnabled;
+	private boolean speechEnabled;
 	private boolean swapNameResult;
 	private int splitPanelWidth;
 	private int splitPanelHeight;
@@ -104,6 +106,7 @@ public class PreferenceManager {
 			showAnimation = config.getBoolean(KEY_SHOW_ANIMATION, true);
 			soundEnabled = config.getBoolean(KEY_ENABLE_SOUND, true);
 			extSoundEnabled = config.getBoolean(KEY_ENABLE_SPECIAL_SOUND, true);
+			speechEnabled = config.getBoolean(KEY_ENABLE_TTS, false);
 			swapNameResult = config.getBoolean(KEY_SWAP_NAME_RESULT, false);
 			splitPanelWidth = config.getInt(KEY_SPLIT_PANEL_WIDTH, -1);
 			splitPanelHeight = config.getInt(KEY_SPLIT_PANEL_HEIGHT, -1);
@@ -265,6 +268,11 @@ public class PreferenceManager {
 		return extSoundEnabled;
 	}
 	
+	public boolean getSpeechEnabled() {
+		initCache();
+		return speechEnabled;
+	}
+
 	/**
 	 * Tell if the wake-lock (keep screen on) should be enabled.
 	 * @return {@code true} is wake-lock is enabled, {@code false} otherwise.

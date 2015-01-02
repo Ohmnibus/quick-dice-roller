@@ -2,7 +2,6 @@ package ohm.quickdice;
 
 import ohm.dexp.function.*;
 import ohm.quickdice.control.DiceBagManager;
-import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.control.PersistenceManager;
 import ohm.quickdice.control.PreferenceManager;
 import ohm.quickdice.entity.FunctionDescriptor;
@@ -16,7 +15,7 @@ public class QuickDiceApp extends Application {
 
 	private static QuickDiceApp mySelf = null;
 	private PreferenceManager prefs = null;
-	private GraphicManager graphic = null;
+	//private GraphicManager graphic = null;
 	private PersistenceManager persistence = null;
 	private DiceBagManager bagManager = null;
 	
@@ -163,16 +162,16 @@ public class QuickDiceApp extends Application {
 		return prefs;
 	}
 
-	/**
-	 * Get a {@link PersistenceManager} to store and retrieve data to and from
-	 * the device internal memory. 
-	 * @return The default {@link PersistenceManager}.
-	 */
-	public GraphicManager getGraphic() {
-		if (graphic == null)
-			graphic = new GraphicManager(this); //Graphic(getBaseContext())
-		return graphic;
-	}
+//	/**
+//	 * Get a {@link PersistenceManager} to store and retrieve data to and from
+//	 * the device internal memory. 
+//	 * @return The default {@link PersistenceManager}.
+//	 */
+//	public GraphicManager getGraphic() {
+//		if (graphic == null)
+//			graphic = new GraphicManager(this); //Graphic(getBaseContext())
+//		return graphic;
+//	}
 
 	/**
 	 * Get a {@link PersistenceManager} to store and retrieve data to and from
