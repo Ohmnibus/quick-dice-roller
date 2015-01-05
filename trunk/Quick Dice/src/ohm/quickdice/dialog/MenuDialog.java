@@ -121,7 +121,6 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 	@Override
 	public void onItemClick(MenuAdapter parent, View view, int row, int column, long id) {
 		MenuItem selected = parent.getItem(row, column);
-		//selected.set
 		activity.onContextItemSelected(selected);
 		dismiss();
 	}

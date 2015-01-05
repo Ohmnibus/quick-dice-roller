@@ -112,6 +112,11 @@
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Migliorata la funzione "pool"<br />
+&bull; Risolto errore nelle Icone personalizzate<br />
+&bull; Risolto doppio menu per i risultati<br />
+<br />
+Versione 2.0.2b:<br />
 &bull; Icone personalizzate<br />
 &bull; Sintesi vocale<br />
 &bull; Correzioni e miglioramenti minori<br />

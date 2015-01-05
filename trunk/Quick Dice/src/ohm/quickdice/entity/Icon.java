@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.MessageDigest;
 
 import ohm.quickdice.R;
@@ -13,6 +15,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.widget.ImageView;
 
 /**
@@ -250,47 +253,77 @@ public abstract class Icon {
 		}
 		
 		/**
-		 * Create an instance of {@link CustomIcon} given the pat of an image.
+		 * Create an instance of {@link CustomIcon} given the URI of an image.
 		 * @param ctx Context.
-		 * @param rawIconPath Path of the image to use as icon.
+		 * @param rawIconUri URI of the image to use as icon.
 		 * @return New instance of {@link CustomIcon}, or {@code null} if an error occurred.
 		 */
-		protected static CustomIcon createIcon(Context ctx, String rawIconPath) {
+		protected static CustomIcon createIcon(Context ctx, Uri rawIconUri) {
 			CustomIcon retVal = null;
 			
-			//Load scaled image
-			Bitmap image = Helper.getIconFromImage(rawIconPath, ICON_SIZE, ICON_SIZE);
-			
-			//Save as temporary file and compute Md5
+			//Import image locally
 			File tmpIconFile = CustomIcon.getTempFile(ctx);
-			
-			FileOutputStream fos;
-			FileInputStream fis;
-			MessageDigest md5;
+			InputStream fis;
+			OutputStream fos;
 			int byteCount;
-			byte[] buffer = new byte[1024];
+			byte[] buffer = new byte[2048];
+			boolean imported = false;
+			
+			try {
+				fis = ctx.getContentResolver().openInputStream(rawIconUri);
+				try {
+					fos = new FileOutputStream(tmpIconFile);
+					try {
+						while ((byteCount = fis.read(buffer)) > 0) {
+							fos.write(buffer, 0, byteCount);
+						}
+						imported = true;
+					} finally {
+						fos.close();
+					}
+				} finally {
+					fis.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if (! imported) {
+				return null;
+			}
+			
+			//Load scaled image
+			Bitmap image = Helper.getIconFromImage(tmpIconFile.getAbsolutePath(), ICON_SIZE, ICON_SIZE);
+			
+			if (image == null) {
+				return null;
+			}
+			
+			//Save resized image and compute Md5
+			MessageDigest md5;
 			String hash = null;
 
 			try {
 				//Compress & save icon
 				fos = new FileOutputStream(tmpIconFile);
-
-				image.compress(Bitmap.CompressFormat.PNG, 100, fos);
-				
-				fos.close();
+				try {
+					image.compress(Bitmap.CompressFormat.PNG, 100, fos);
+				} finally {
+					fos.close();
+				}
 				
 				//Compute md5
 				md5 = MessageDigest.getInstance("MD5");
 				
 				fis = new FileInputStream(tmpIconFile);
-
-				while ((byteCount = fis.read(buffer)) > 0) {
-					md5.update(buffer, 0, byteCount);
+				try {
+					while ((byteCount = fis.read(buffer)) > 0) {
+						md5.update(buffer, 0, byteCount);
+					}
+					hash = Helper.bytesToHex(md5.digest());
+				} finally {
+					fis.close();
 				}
-
-				fis.close();
-				
-				hash = Helper.bytesToHex(md5.digest());
 			} catch (Exception e) {
 				//Something went wrong.
 				hash = null;
@@ -303,6 +336,7 @@ public abstract class Icon {
 			
 			return retVal;
 		}
+		
 	}
 	
 	/**
@@ -318,11 +352,11 @@ public abstract class Icon {
 	/**
 	 * Create a new instance of Icon representing a custom icon.
 	 * @param ctx Context.
-	 * @param rawIconPath Path of the image to use as icon.
+	 * @param rawIconUri URI of the image to use as icon.
 	 * @return New instance of {@link CustomIcon}, or {@code null} if an error occurred.
 	 */
-	public static Icon newIcon(Context ctx, String rawIconPath) {
-		return CustomIcon.createIcon(ctx, rawIconPath);
+	public static Icon newIcon(Context ctx, Uri rawIconUri) {
+		return CustomIcon.createIcon(ctx, rawIconUri);
 	}
 	
 	/**

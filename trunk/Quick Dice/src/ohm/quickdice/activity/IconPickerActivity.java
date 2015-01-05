@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +17,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Toast;
 
 public class IconPickerActivity extends Activity implements OnClickListener, OnItemClickListener, OnItemLongClickListener {
 
@@ -94,11 +94,13 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		if (id == IconAdapter.ID_ICON_ADDNEW) {
-			//Add new icon
+			//Invoke Picker to add new icon
 			Intent intent = new Intent();
-			intent.setType("image/*");
 			intent.setAction(Intent.ACTION_GET_CONTENT);
-			startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+			intent.setType("image/*");
+			startActivityForResult(
+					Intent.createChooser(intent, getResources().getString(R.string.lblNewIconPicker)),
+					PICK_IMAGE);
 		} else {
 			//Selected an icon
 			IconAdapter myAdapter = (IconAdapter)parent.getAdapter();
@@ -175,28 +177,31 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 		}
 	};
 	
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
 			
-			//Get reference to the image
-			Cursor cursor = getContentResolver().query(
-					data.getData(),
-					new String[] { android.provider.MediaStore.Images.ImageColumns.DATA },
-					null, null, null);
-			cursor.moveToFirst();
-
-			//Link to the image
-			String imageFilePath = cursor.getString(0);
-			cursor.close();
-			
 			//Create icon instance
 			int iconIdx = -1;
-			Icon icon = Icon.newIcon(this, imageFilePath);
+			Icon icon = Icon.newIcon(this, data.getData());
 			if (icon != null) {
 				iconIdx = QuickDiceApp.getInstance().getBagManager().getIconCollection().add(icon);
+			} else {
+				//"Cannot import" message
+				new AlertDialog.Builder(this)
+					.setTitle(this.getTitle())
+					.setMessage(R.string.msgCannotImportIcon)
+					.setPositiveButton(R.string.lblOk, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					})
+					.show();
+				return;
 			}
 			
 			if (iconIdx >= 0) {
@@ -204,10 +209,14 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 				IconAdapter myAdapter = (IconAdapter)gridView.getAdapter();
 				myAdapter.setSelectedId(icon.getId());
 				myAdapter.notifyDataSetChanged();
+			} else {
+				//"Already exists" toast.
+				Toast.makeText(this, R.string.msgIconAlreadyExists, Toast.LENGTH_LONG).show();
+				return;
 			}
 		}
 	}
-	
+
 	private void returnToCaller(boolean confirmed, int iconId) {
 		Intent mIntent = new Intent();
 		mIntent.putExtra(BUNDLE_ICON_ID, iconId);

@@ -29,35 +29,51 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 			throw new ParameterOutOfBound(getFunctionName(this.getClass()), getPoolIndex());
 		}
 		
-
+		boolean isRollAgain;
+		int totalRollNumber = 0;
+		
 		for (int i=1; i<=poolSize; i++) {
-			if (resultString.length() < MAX_TOKEN_STRING_LENGTH && i>1) {
-				resultString += SYM_SEP; //",";
-			}
-			
-			// Roll the value
-			rollRes = getRoll(instance);
-
-			if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-				resultString = resultString + Integer.toString(rollRes);
-			}
-
-			successes = countSuccesses(instance, rollRes);
-			
-			//Place a "!" for every success
-			for (int j = 0; j<successes; j++) {
+			isRollAgain = false;
+			do {
 				if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-					resultString = resultString + SYM_SUCCESS; //"!";
+					if (isRollAgain) {
+						resultString += SYM_EXPLODE; //",";
+					} else if (i>1) {
+						resultString += SYM_SEP; //",";
+					}
 				}
-			}
-			//Place a "*" for every failure
-			for (int j = 0; j>successes; j--) {
+				
+				// Roll the value
+				rollRes = getRoll(instance);
+	
 				if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
-					resultString = resultString + SYM_FAILURE; //"*";
+					resultString = resultString + Integer.toString(rollRes);
 				}
-			}
-			
-			resultValue += successes;
+	
+				successes = countSuccesses(instance, rollRes);
+				
+				//Place a "!" for every success
+				for (int j = 0; j<successes; j++) {
+					if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
+						resultString = resultString + SYM_SUCCESS; //"!";
+					}
+				}
+				//Place a "*" for every failure
+				for (int j = 0; j>successes; j--) {
+					if (resultString.length() < MAX_TOKEN_STRING_LENGTH) {
+						resultString = resultString + SYM_FAILURE; //"*";
+					}
+				}
+				
+				resultValue += successes;
+				
+				totalRollNumber++;
+				if (totalRollNumber > MAX_TOKEN_ITERATIONS) {
+					throw new ParameterOutOfBound(getFunctionName(this.getClass()), getPoolIndex());
+				}
+				
+				isRollAgain = true;
+			} while(rollAgain(instance, rollRes, i));
 		}
 		
 		endSequence(instance);
@@ -71,6 +87,17 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 			//resultString = "[...=" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
 			resultString = SYM_TRUNK_BEGIN + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + SYM_TRUNK_END;
 		}
+	}
+	
+	/**
+	 * Tell if another roll is required.
+	 * @param instance
+	 * @param rollResult
+	 * @param poolRollNumber Number of roll according to pool size (zero based)
+	 * @return {@code true} if another roll is required.
+	 */
+	protected boolean rollAgain(DContext instance, int rollResult, int poolRollNumber) {
+		return false;
 	}
 	
 	/**

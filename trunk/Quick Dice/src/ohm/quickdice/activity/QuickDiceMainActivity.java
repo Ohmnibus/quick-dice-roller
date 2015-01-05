@@ -609,7 +609,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_modifier, menu);
 
-		//modifier = bonusBag.get(index);
 		modifier = diceBag.getModifiers().get(index);
 //		modIcon = graphicManager.getResizedDiceIcon(
 //				modifier.getResourceIndex(), 32, 32);
@@ -1322,9 +1321,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 		gvResults.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				//mMenuInfo = new AdapterContextMenuInfo(view, position, id);
-				//openContextMenu(gvResults);
-				parent.showContextMenuForChild(view);
+				if (checkCoolDown()) {
+					parent.showContextMenuForChild(view);
+				}
 			}
 		});
 	}
@@ -1348,7 +1347,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				//mMenuInfo = null;
-				openContextMenu(lastResHolder);
+				if (checkCoolDown()) {
+					openContextMenu(lastResHolder);
+				}
 			}
 		});
 		lastResHolder.setOnTouchListener(new Behavior.RollResultTouchListener(
@@ -1411,7 +1412,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			//mMenuInfo = new AdapterContextMenuInfo(view, position, id);
 			//openContextMenu(lvVariable);
-			parent.showContextMenuForChild(view);
+			if (checkCoolDown()) {
+				parent.showContextMenuForChild(view);
+			}
 		}
 	};
 	

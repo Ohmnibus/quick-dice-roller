@@ -1,9 +1,7 @@
 package ohm.dexp.function;
 
 import ohm.dexp.DContext;
-import ohm.dexp.TokenBase;
 import ohm.dexp.exception.DException;
-import ohm.dexp.exception.LoopDetected;
 
 public class TokenFunctionExp extends TokenFunctionExplodeBase {
 
