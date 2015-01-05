@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.MenuAdapter;
-import ohm.quickdice.control.GraphicManager;
 import ohm.quickdice.entity.RollResult;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -25,14 +24,12 @@ public class RollDetailDialog extends MenuDialog {
 
 	RollResult[] result = null;
 	RollResult mergedResult = null;
-	//GraphicManager graphicManager;
 	
 	public RollDetailDialog(Activity activity, Menu menu, RollResult[] lastResult, ArrayList<RollResult[]> resultList, int resultIndex) {
 		super(activity, menu);
 		this.lastResult = lastResult;
 		this.resultList = resultList;
 		this.resultIndex = resultIndex;
-		//this.graphicManager = QuickDiceApp.getInstance().getGraphic();
 	}
 	
 	protected RollResult[] getResult() {

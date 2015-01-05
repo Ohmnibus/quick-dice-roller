@@ -20,6 +20,7 @@
 	<string name="lblCheckExpression">Check formula</string>
 	<string name="lblCheckPassed">Die\'s formula is CORRECT.</string>
 	<string name="lblIconPicker">Icon Picker</string>
+	<string name="lblNewIconPicker">Select picture for Icon</string>
 	<string name="lblDiceIconPicker">Dice icon Picker</string>
 	<string name="lblBagIconPicker">Bag icon Picker</string>
 	<string name="lblVariableIconPicker">Named value icon Picker</string>
@@ -114,6 +115,11 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Improved "pool" function<br />
+&bull; Fixed error in Custom Icon<br />
+&bull; Fixed double popup menu in roll results<br />
+<br />
+Version 2.0.2b:<br />
 &bull; Custom icons<br />
 &bull; Speech synthesis<br />
 &bull; Minor fix and improvements<br />
@@ -208,6 +214,8 @@ Thanks!<br />]]></string>
 	<string name="msgRemoveIconUnused">Are you sure to definitively remove this icon?</string>
 	<string name="msgRemoveIconUsed">This icon is currently used %1$d time(s). Are you sure to definitively remove it?</string>
 	<string name="msgRemoveIconSystem">This icon cannot be removed.</string>
+	<string name="msgCannotImportIcon">Sorry, cannot import selected image as a Custom Icon.</string>
+	<string name="msgIconAlreadyExists">The very same Custom Icon already exists.</string>
 	
 	<string name="mnuAddDice">Add die</string>
 	<string name="mnuAddDiceHere">Add die here</string>
@@ -315,41 +323,41 @@ Thanks!<br />]]></string>
 		<item>Value to reach to obtain a success</item>
 	</string-array>
 				
-	<!-- Changed --><string name="fncExpName">Exploding/Collapsing</string>
-	<!-- Changed --><string name="fncExpDesc">Make an exploding/collapsing roll.</string>
-	<!-- Changed --><string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
-	<!-- Changed --><string-array name="fncExpParamNames">
-	<!-- Changed -->	<item>Roll</item>
-	<!-- Changed -->	<item>Upper target</item>
-	<!-- Changed -->	<item>Lower target</item>
-	<!-- Changed -->	<item>Max explosions</item>
-	<!-- Changed -->	<item>Max collapses</item>
-	<!-- Changed --></string-array>
-	<!-- Changed --><string-array name="fncExpParamHints">
-	<!-- Changed -->	<item>The die to roll</item>
-	<!-- Changed -->	<item>Target for explosions</item>
-	<!-- Changed -->	<item>Target for collapses</item>
-	<!-- Changed -->	<item>Max num. of explosions</item>
-	<!-- Changed -->	<item>Max num. of collapses</item>
-	<!-- Changed --></string-array>
+	<string name="fncExpName">Exploding/Collapsing</string>
+	<string name="fncExpDesc">Make an exploding/collapsing roll.</string>
+	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<string-array name="fncExpParamNames">
+		<item>Roll</item>
+		<item>Upper target</item>
+		<item>Lower target</item>
+		<item>Max explosions</item>
+		<item>Max collapses</item>
+	</string-array>
+	<string-array name="fncExpParamHints">
+		<item>The die to roll</item>
+		<item>Target for explosions</item>
+		<item>Target for collapses</item>
+		<item>Max num. of explosions</item>
+		<item>Max num. of collapses</item>
+	</string-array>
 
-	<!-- Changed --><string name="fncExpUpName">Exploding</string>
-	<!-- Changed --><string name="fncExpUpDesc">Make an exploding roll.</string>
-	<!-- Changed --><string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
-	<!-- Changed --><string-array name="fncExpUpParamNames">
-	<!-- Changed -->	<item>First Roll</item>
-	<!-- Changed -->	<item>First Target</item>
-	<!-- Changed -->	<item>Subsequent dice</item>
-	<!-- Changed -->	<item>Subsequent target</item>
-	<!-- Changed -->	<item>Max explosions</item>
-	<!-- Changed --></string-array>
-	<!-- Changed --><string-array name="fncExpUpParamHints">
-	<!-- Changed -->	<item>The first die to roll</item>
-	<!-- Changed -->	<item>Target for first explosions</item>
-	<!-- Changed -->	<item>The subsequent dice to roll</item>
-	<!-- Changed -->	<item>Target for subsequent explosions</item>
-	<!-- Changed -->	<item>Max num. of explosions</item>
-	<!-- Changed --></string-array>
+	<string name="fncExpUpName">Exploding</string>
+	<string name="fncExpUpDesc">Make an exploding roll.</string>
+	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<string-array name="fncExpUpParamNames">
+		<item>First Roll</item>
+		<item>First Target</item>
+		<item>Subsequent dice</item>
+		<item>Subsequent target</item>
+		<item>Max explosions</item>
+	</string-array>
+	<string-array name="fncExpUpParamHints">
+		<item>The first die to roll</item>
+		<item>Target for first explosions</item>
+		<item>The subsequent dice to roll</item>
+		<item>Target for subsequent explosions</item>
+		<item>Max num. of explosions</item>
+	</string-array>
 
 	<!-- Obsolete --><string name="fncExplodeName">Exploding</string>
 	<!-- Obsolete --><string name="fncExplodeDesc">Make an exploding roll using a threshold. Explodes for high values as well as for low values.</string>
@@ -442,11 +450,19 @@ Thanks!<br />]]></string>
 		<item>Roll</item>
 		<item>Pool Size</item>
 		<item>Target</item>
+		<item>Extra target</item>
+		<item>Fail target</item>
+		<item>Explosion target</item>
+		<item>Max explosions</item>
 	</string-array>
 	<string-array name="fncPoolParamHints">
 		<item>Formula to be tested</item>
 		<item>Number of roll to do</item>
-		<item>Value to reach to obtain a success</item>
+		<item>Value to get a success</item>
+		<item>Value to get an extra success</item>
+		<item>Value to lost a success</item>
+		<item>Value for extra roll</item>
+		<item>Max num of extra rolls</item>
 	</string-array>
 
 	<string name="fncRakName">Roll and Keep</string>

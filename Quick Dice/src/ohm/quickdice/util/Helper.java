@@ -242,6 +242,10 @@ public class Helper {
 		
 		Bitmap image = BitmapFactory.decodeFile(imagePath, opts);
 		
+		if (image == null) {
+			return null;
+		}
+		
 		if (image.getWidth() != width || image.getHeight() != height) {
 			//Image need to be resized.
 			int scaledWidth = image.getWidth();
