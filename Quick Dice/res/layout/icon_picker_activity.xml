@@ -3,14 +3,25 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	>
+	
+	<CheckBox
+		android:id="@+id/ipdFilter"
+		
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/lblCustomIconsOnly"
+		/>
 
 	<GridView
 		android:id="@+id/ipdIcons"
 		
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
+		android:layout_below="@+id/ipdFilter"
 		android:layout_above="@+id/buttonContainer"
 		
 		android:columnWidth="72dp"

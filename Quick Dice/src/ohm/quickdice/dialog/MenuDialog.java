@@ -1,11 +1,18 @@
 package ohm.quickdice.dialog;
 
+import java.lang.ref.WeakReference;
+
 import ohm.library.compat.CompatMisc;
+import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.MenuAdapter;
+import ohm.quickdice.entity.Icon;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,6 +57,7 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 //		return retVal;
 //	}
 	
+	@SuppressLint("InflateParams")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		View root = activity.getLayoutInflater().inflate(R.layout.dialog_menu, null);
@@ -129,6 +137,54 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 	public void onDismiss(DialogInterface dialog) {
 		if (dismissListener != null) {
 			dismissListener.onDismiss(dialog);
+		}
+	}
+	
+	public void setIcon(Icon icon) {
+		if (icon != null) {
+//			setIcon(QuickDiceApp.getInstance().getBagManager().getIconDrawable(
+//						icon.getId(), 32, 32));
+			new AsyncResizer(this, icon.getId()).load();
+		}
+	}
+	
+	private static class AsyncResizer extends AsyncTask<Integer, Void, Drawable> {
+		private final WeakReference<AlertDialog> viewReference;
+		private final int iconId;
+
+		public AsyncResizer(AlertDialog alertDialog, int iconId) {
+			// Use a WeakReference to ensure the AlertDialog can be garbage collected
+			this.viewReference = new WeakReference<AlertDialog>(alertDialog);
+			this.iconId = iconId;
+		}
+
+		// Decode image in background.
+		@Override
+		protected Drawable doInBackground(Integer... params) {
+			Drawable retVal = null;
+
+			if (viewReference != null) {
+				retVal = QuickDiceApp.getInstance().getBagManager().getIconDrawable(
+						params[0], 32, 32);
+			}
+			
+			return retVal;
+		}
+
+		// Once complete, see if ImageView is still around and set drawable.
+		@Override
+		protected void onPostExecute(Drawable drawable) {
+			if (isCancelled()) {
+				drawable = null;
+			}
+			if (viewReference != null && drawable != null) {
+				final AlertDialog alertDialog = viewReference.get();
+				alertDialog.setIcon(drawable);
+			}
+		}
+		
+		public void load() {
+			execute(iconId);
 		}
 	}
 }

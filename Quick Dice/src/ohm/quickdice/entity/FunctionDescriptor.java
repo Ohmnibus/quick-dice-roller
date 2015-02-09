@@ -1,9 +1,10 @@
 package ohm.quickdice.entity;
 
+import ohm.quickdice.R;
 import android.content.Context;
 import android.content.res.Resources;
 
-public class FunctionDescriptor {
+public class FunctionDescriptor implements Comparable<FunctionDescriptor> {
 	
 	public class ParamDescriptor {
 		String label;
@@ -112,28 +113,33 @@ public class FunctionDescriptor {
 		}
 		this.parameters[this.parameters.length - 1] = parameter;
 	}
+
+	@Override
+	public int compareTo(FunctionDescriptor another) {
+		return name.compareToIgnoreCase(another.name);
+	}
 	
 	public static FunctionDescriptor initDescriptor(Context context, String token, int resId, int nameId, int descriptionId, int onlineReferenceId, int paramNamesId, int paramHintsId) {
 		FunctionDescriptor retVal;
-    	Resources res;
-    	res = context.getResources();
-    	
+		Resources res;
+		res = context.getResources();
+
 		retVal = new FunctionDescriptor(
 				token,
 				resId,
 				res.getString(nameId),
 				res.getString(descriptionId),
-				res.getString(onlineReferenceId));
-		
+				res.getString(R.string.urlFncRefBase, res.getString(onlineReferenceId))); //res.getString(onlineReferenceId));
+
 		String[] pLabels = res.getStringArray(paramNamesId);
 		String[] pHints = res.getStringArray(paramHintsId);
-		
+
 		for (int i = 0; i < pLabels.length; i++) {
 			retVal.addParameter(retVal.new ParamDescriptor(
 					pLabels[i],
 					pHints[i]));
 		}
-		
+
 		return retVal;
 	}
 }

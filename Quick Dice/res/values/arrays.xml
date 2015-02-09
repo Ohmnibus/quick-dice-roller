@@ -183,31 +183,31 @@
 	</string-array>
 	
 	<integer-array name="default_modifiers">
-	    <item>-3</item>
-	    <item>-2</item>
-	    <item>-1</item>
-	    <item>1</item>
-	    <item>2</item>
-	    <item>3</item>
+		<item>-3</item>
+		<item>-2</item>
+		<item>-1</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
 	</integer-array>
 	
 	<integer-array name="default_dice_icon">
-	    <item>1</item>
-	    <item>2</item>
-	    <item>3</item>
-	    <item>4</item>
-	    <item>5</item>
-	    <item>6</item>
-	    <item>7</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
 	</integer-array>
 
 	<string-array name="default_dice_expr">
-	    <item>1d4</item>
-	    <item>1d6</item>
-	    <item>1d8</item>
-	    <item>1d10</item>
-	    <item>1d12</item>
-	    <item>1d20</item>
-	    <item>1d100</item>
+		<item>1d4</item>
+		<item>1d6</item>
+		<item>1d8</item>
+		<item>1d10</item>
+		<item>1d12</item>
+		<item>1d20</item>
+		<item>1d100</item>
 	</string-array>
 </resources>

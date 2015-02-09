@@ -7,7 +7,6 @@ import ohm.quickdice.R;
 import ohm.quickdice.adapter.MenuAdapter;
 import ohm.quickdice.entity.RollResult;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,7 +57,8 @@ public class RollDetailDialog extends MenuDialog {
 		
 		setTitle(getMergedResult().getName());
 
-		setIcon(getDialogIcon(getMergedResult()));
+		//setIcon(getDialogIcon(getMergedResult()));
+		setIcon(QuickDiceApp.getInstance().getBagManager().getIconCollection().getByID(getMergedResult().getResourceIndex()));
 
 		super.onCreate(savedInstanceState);
 	}
@@ -131,9 +131,9 @@ public class RollDetailDialog extends MenuDialog {
 		return super.onPrepareOptionsMenu(adapter);
 	}
 	
-	protected Drawable getDialogIcon(RollResult res) {
-		//return graphicManager.getResizedDiceIcon(res.getResourceIndex(), 32, 32);
-		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
-				res.getResourceIndex(), 32, 32);
-	}
+//	protected Drawable getDialogIcon(RollResult res) {
+//		//return graphicManager.getResizedDiceIcon(res.getResourceIndex(), 32, 32);
+//		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
+//				res.getResourceIndex(), 32, 32);
+//	}
 }

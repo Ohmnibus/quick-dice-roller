@@ -46,12 +46,6 @@
 			android:defaultValue="1"
 			/>
 
-		<!-- <CheckBoxPreference
-			android:key="KEY_PLAIN_BG"
-			android:title="@string/pref_aspect_plain_bg_title"
-			android:summary="@string/pref_aspect_plain_bg_desc"
-			android:defaultValue="false" /> -->
-		
 		<ohm.library.preference.IntListPreference
 			android:key="KEY_THEME"
 			android:title="@string/pref_aspect_theme_title"
@@ -62,6 +56,21 @@
 			android:defaultValue="1"
 			/>
 		
+		<CheckBoxPreference
+			android:key="KEY_CUSTOM_BACKGROUND"
+			android:title="@string/pref_aspect_custom_bg_flag_title"
+			android:summary="@string/pref_aspect_custom_bg_flag_desc"
+			android:defaultValue="false" />
+		
+		<Preference
+			android:key="KEY_CUSTOM_BACKGROUND_PICK"
+			android:title="@string/pref_aspect_custom_bg_image_title"
+			android:dependency="KEY_CUSTOM_BACKGROUND">
+			<intent
+				android:action="android.intent.action.GET_CONTENT"
+				android:mimeType="image/*" />
+		</Preference>
+
 		<CheckBoxPreference
 			android:key="KEY_CUSTOM_KEYBOARD"
 			android:title="@string/pref_aspect_keyboard_title"

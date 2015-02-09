@@ -25,8 +25,10 @@ import android.widget.ImageView;
  */
 public abstract class Icon {
 
+	/** Resource identifier for the default icon */
 	public static final int DEFAULT_ICON_RES_ID = R.drawable.ic_dxx_gray;
 	//public static final int DEFAULT_COLOR_RES_ID = R.color.default_dice_color;
+	/** Default icon mask color */
 	public static final int DEFAULT_COLOR = Color.argb(0xff, 0x88, 0x88, 0x88);
 	
 	private int id;
@@ -116,6 +118,9 @@ public abstract class Icon {
 				//Rename file
 				File oldPath = new File(iconPath);
 				File newPath = new File(oldPath.getParent(), String.format(ICON_NAME_FMT, getId()));
+				if (newPath.exists()) {
+					newPath.delete();
+				}
 				oldPath.renameTo(newPath);
 				iconPath = newPath.getAbsolutePath();
 			}

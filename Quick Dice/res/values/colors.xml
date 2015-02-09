@@ -26,9 +26,12 @@
 	<color name="classic_handle_solid_color">#000000</color>
 	
 	<color name="clean_main_background">#112233</color>
-	<color name="clean_frame_solid_color">#081122</color>
-	<color name="clean_frame_border_color">#000811</color>
-	<color name="clean_frame_secondary_solid_color">#000811</color>
+	<!-- <color name="clean_frame_solid_color">#081122</color> -->
+	<!-- <color name="clean_frame_border_color">#000811</color> -->
+	<!-- <color name="clean_frame_secondary_solid_color">#000811</color> -->
+	<color name="clean_frame_solid_color">#40000000</color>
+	<color name="clean_frame_border_color">#80000000</color>
+	<color name="clean_frame_secondary_solid_color">#80000000</color>
 	<color name="clean_handle_solid_color">#000000</color>
 	
 	<!-- <color name="light_main_background">?android:attr/colorBackground</color> -->

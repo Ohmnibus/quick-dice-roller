@@ -310,7 +310,12 @@
 	<!-- ************ -->
 	<!-- Other styles -->
 	<!-- ************ -->
-
+	<style name="CustomBackground">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:scaleType">centerCrop</item>
+	</style>
+	
 	<style name="TextBase">
 		<!-- <item name="android:textColor">#ffffff</item> -->
 		<item name="android:textColor">?android:attr/colorForeground</item>
@@ -492,7 +497,7 @@
 	<style name="Builder.Item.Value" parent="Edit.Value">
 		<!-- <item name="style">@style/Edit.Value</item> -->
 	</style>
-
+	
 	<!-- Dice Bag -->
 	<style name="DiceBagHandle">
 		<item name="android:visibility">visible</item>

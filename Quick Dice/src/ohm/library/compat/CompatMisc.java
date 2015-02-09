@@ -1,8 +1,12 @@
 package ohm.library.compat;
 
+import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.speech.tts.TextToSpeech;
+import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 
 /**
@@ -42,7 +46,11 @@ public abstract class CompatMisc {
 	}
 
 	private static CompatMisc createInstance() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			return new CompatMiscLollipop();
+		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			return new CompatMiscKitKat();
+		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			return new CompatMiscJellyBean();
 		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			return new CompatMiscIceCreamSandwich();
@@ -51,7 +59,7 @@ public abstract class CompatMisc {
 		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
 			return new CompatMiscFroyo();
 		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
-			return new CompatMiscEclaire();
+			return new CompatMiscEclair();
 		} else {
 			return new CompatMiscDonut();
 		}
@@ -81,4 +89,306 @@ public abstract class CompatMisc {
 	 * @return Value to be assigned to {@link #LAYOUT_WRAP_CONTENT}
 	 */
 	protected abstract int getLayoutWrapContent();
+	
+	/**
+	 * Speaks the text using the specified queuing strategy.
+	 * @param tts Instance of the TTS engine.
+	 * @param text The string of text to be spoken.
+	 * @param queueMode The queuing strategy to use, {@link TextToSpeech.QUEUE_ADD} or {@link TextToSpeech.QUEUE_FLUSH}.
+	 * @return {@link TextToSpeech.ERROR} or {@link TextToSpeech.SUCCESS} of queuing the speak operation.
+	 */
+	public abstract int speak(TextToSpeech tts, String text, int queueMode);
+	
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.DONUT} (API 4).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.DONUT)
+	private static class CompatMiscDonut extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackgroundDrawable(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.FILL_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+	}
+	
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.ECLAIR} (API 5).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.ECLAIR)
+	private static class CompatMiscEclair extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackgroundDrawable(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.FILL_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+		
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+
+	}
+
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.FROYO} (API 8).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.FROYO)
+	private static class CompatMiscFroyo extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackgroundDrawable(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.MATCH_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+
+	}
+
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.HONEYCOMB} (API 11).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private static class CompatMiscHoneycomb extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackgroundDrawable(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+
+			editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+			editText.setTextIsSelectable(true);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.MATCH_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+
+	}
+
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.ICE_CREAM_SANDWICH} (API 14).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	private static class CompatMiscIceCreamSandwich extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackgroundDrawable(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+
+			editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+			editText.setTextIsSelectable(true);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.MATCH_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+
+	}
+	
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.JELLY_BEAN} (API 16).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	private static class CompatMiscJellyBean extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackground(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+
+			editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+			editText.setTextIsSelectable(true);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.MATCH_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+
+	}
+	
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.KITKAT} (API 19).
+	 * @author Ohmnibus
+	 */
+	@SuppressWarnings("deprecation")
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	private static class CompatMiscKitKat extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackground(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+
+			editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+			editText.setTextIsSelectable(true);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.MATCH_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null);
+		}
+
+	}
+	
+	/**
+	 * Derived class to be used with {@link Build.VERSION_CODES.LOLLIPOP} (API 21).
+	 * @author Ohmnibus
+	 */
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	private static class CompatMiscLollipop extends CompatMisc {
+
+		@Override
+		public void setBackgroundDrawable(View v, Drawable d) {
+			v.setBackground(d);
+		}
+
+		@Override
+		public void setInputTypeNoKeyboard(EditText editText) {
+			editText.setInputType(InputType.TYPE_NULL);
+
+			editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+			editText.setTextIsSelectable(true);
+		}
+		
+		@Override
+		protected int getLayoutMatchParent() {
+			return LayoutParams.MATCH_PARENT;
+		}
+
+		@Override
+		protected int getLayoutWrapContent() {
+			return LayoutParams.WRAP_CONTENT;
+		}
+
+		@Override
+		public int speak(TextToSpeech tts, String text, int queueMode) {
+			return tts.speak(text, queueMode, null, null);
+		}
+
+	}
 }

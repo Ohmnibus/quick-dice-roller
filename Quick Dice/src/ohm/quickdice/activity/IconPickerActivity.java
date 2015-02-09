@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -40,6 +43,7 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 	private int defaultIconId = ICON_UNDEFINED;
 	
 	private GridView gridView;
+	private CheckBox vFilter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,6 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 				title = extras.getString(BUNDLE_TITLE);
 			}
 		}
-
 
 		initViews();
 	}
@@ -81,6 +84,15 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 		gridView.setOnItemClickListener(this);
 		gridView.setOnItemLongClickListener(this);
 
+		vFilter = (CheckBox)findViewById(R.id.ipdFilter);
+		vFilter.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				filterIcons(isChecked);
+			}
+		});
+		vFilter.setChecked(QuickDiceApp.getInstance().getPreferences().getCustomIconsOnly());
+
 		Button btu;
 		btu = (Button) findViewById(R.id.btuBarConfirm);
 		btu.setOnClickListener(this);
@@ -89,6 +101,12 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 		btu = (Button) findViewById(R.id.btuBarCancel);
 		btu.setOnClickListener(this);
 		btu.setText(R.string.lblCancel);
+	}
+	
+	private void filterIcons(boolean customOnly) {
+		IconAdapter adapter = (IconAdapter) gridView.getAdapter();
+		adapter.getFilter().filter(customOnly ? IconAdapter.FILTER_CUSTOM : IconAdapter.FILTER_ALL);
+		QuickDiceApp.getInstance().getPreferences().setCustomIconsOnly(customOnly);
 	}
 	
 	@Override

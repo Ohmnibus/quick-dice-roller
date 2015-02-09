@@ -103,7 +103,6 @@ Vielen Dank!<br />]]></string>
 	<string name="msgMaxModifiersReach">Du kannst keine weiteren Modifikatoren hinzufügen</string>
 	<string name="msgOnlineHelpTitle">Schnell-Referenz</string>
 	<string name="msgOnlineHelp">In die Online-Hilfe gucken</string>
-	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02</string>
 	<string name="msgCannotRead">Kann nicht gelesen Ordner-Inhalte</string>
 	<string name="msgFileNameInvalid">Dateiname \"%1$s\" ist nicht gültig.</string>
 	<string name="msgFileNameExists">Dateiname \"%1$s\" existiert bereits. Sind Sie sicher, dass Sie diese Datei überschreiben?</string>
@@ -141,7 +140,6 @@ Vielen Dank!<br />]]></string>
 	<!-- Functions -->
 	<string name="fncBASHName">BASH!</string>
 	<string name="fncBASHDesc">Wurf nach BASH!-Regeln.</string>
-	<string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
 	<string-array name="fncBASHParamNames">
 		<item>Poolgröße</item>
 		<item>Wurf</item>
@@ -153,7 +151,6 @@ Vielen Dank!<br />]]></string>
 				
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Würfelt nach den Burning Wheel-Regeln.</string>
-	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
 	<string-array name="fncBWheelParamNames">
 		<item>Wurf</item>
 		<item>Poolgröße</item>
@@ -169,7 +166,6 @@ Vielen Dank!<br />]]></string>
 				
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Würfelt nach den Dystopian Wars-Regeln.</string>
-	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
 	<string-array name="fncDWarsParamNames">
 		<item>Wurf</item>
 		<item>Poolgröße</item>
@@ -185,7 +181,6 @@ Vielen Dank!<br />]]></string>
 				
 	<string name="fncHEROName">HERO System</string>
 	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
-	<string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
 	<string-array name="fncHEROParamNames">
 		<item>Poolgröße</item>
 	</string-array>
@@ -195,7 +190,6 @@ Vielen Dank!<br />]]></string>
 				
 	<string name="fncExalName">Exalted</string>
 	<string name="fncExalDesc">Würfelt nach den Exalted-Regeln.</string>
-	<string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
 	<string-array name="fncExalParamNames">
 		<item>Poolgröße</item>
 		<item>Ziel</item>
@@ -207,7 +201,6 @@ Vielen Dank!<br />]]></string>
 				
 	<string name="fncExpName">Explodierender Wurf (einfach)</string>
 	<string name="fncExpDesc">Führt einen explodierenden Wurf durch. Würfel exolodieren für hohe und niedrige Werte.</string>
-	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
 	<string-array name="fncExpParamNames">
 		<item>Würfel</item>
 	</string-array>
@@ -217,7 +210,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncExpUpName">Explodierender Wurf, aufwärts (einfach)</string>
 	<string name="fncExpUpDesc">Führt einen explodierenden Wurf durch. Würfel explodieren für hohe Werte.</string>
-	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
 	<string-array name="fncExpUpParamNames">
 		<item>Würfel</item>
 	</string-array>
@@ -227,7 +219,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncExplodeName">Explodierender Wurf</string>
 	<string name="fncExplodeDesc">Führt einen explodierenden Wurf mit einem Schwellenwert durch. Würfel exolodieren für hohe und niedrige Werte.</string>
-	<string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
 	<string-array name="fncExplodeParamNames">
 		<item>Würfel</item>
 		<item>Schwellenwert</item>
@@ -239,7 +230,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncExplodeUpName">Explodierender Wurf, aufwärts</string>
 	<string name="fncExplodeUpDesc">Führt einen explodierenden Wurf mit einem Schwellenwert durch. Explodiert nur für hohe Werte.</string>
-	<string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
 	<string-array name="fncExplodeUpParamNames">
 		<item>Würfel</item>
 		<item>Schwellenwert</item>
@@ -251,7 +241,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncMaxName">Maximum</string>
 	<string name="fncMaxDesc">Gibt den höchsten erreichten Wert zurück.</string>
-	<string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
 	<string-array name="fncMaxParamNames">
 		<item>Erster Wurf</item>
 		<item>Zweiter Wurf</item>
@@ -263,7 +252,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncMinName">Minimum</string>
 	<string name="fncMinDesc">Gibt den niedrigsten erreichten Wert zurück.</string>
-	<string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
 	<string-array name="fncMinParamNames">
 		<item>Erster Wurf</item>
 		<item>Zweiter Wurf</item>
@@ -275,7 +263,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncRandName">Zufallswert</string>
 	<string name="fncRandDesc">Liefert einen Zufallswert zwischen zwei Grenzen.</string>
-	<string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
 	<string-array name="fncRandParamNames">
 		<item>Erste Grenze</item>
 		<item>Zweite Grenze</item>
@@ -287,7 +274,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncNwodName">Neue WoD</string>
 	<string name="fncNwodDesc">Würfelt nach den Regeln der neuen World Of Darkness.</string>
-	<string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
 	<string-array name="fncNwodParamNames">
 		<item>Poolgröße</item>
 		<item>Ziel</item>
@@ -299,7 +285,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncOwodName">Original WoD</string>
 	<string name="fncOwodDesc">Würfelt nach den the Original-Regeln der World of Darkness.</string>
-	<string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
 	<string-array name="fncOwodParamNames">
 		<item>Poolgröße</item>
 		<item>Ziel</item>
@@ -311,7 +296,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncPoolName">Würfelpool</string>
 	<string name="fncPoolDesc">Gezählt wird die Zahl der Werte größer oder gleich dem Ziel.</string>
-	<string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
 	<string-array name="fncPoolParamNames">
 		<item>Wurf</item>
 		<item>Poolgröße</item>
@@ -325,7 +309,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncRakName">Würfeln und Behalten</string>
 	<string name="fncRakDesc">Führt einen Würfeln-Und-Behalten-test durch.</string>
-	<string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
 	<string-array name="fncRakParamNames">
 		<item>Wurf</item>
 		<item>Poolgröße</item>
@@ -339,7 +322,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncRdnName">Abrunden</string>
 	<string name="fncRdnDesc">Übergebener Wert wird abgerundet.</string>
-	<string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
 	<string-array name="fncRdnParamNames">
 		<item>Wert</item>
 	</string-array>
@@ -349,7 +331,6 @@ Vielen Dank!<br />]]></string>
 
 	<string name="fncRupName">Aufrunden</string>
 	<string name="fncRupDesc">Übergebener Wert wird aufgerundet.</string>
-	<string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
 	<string-array name="fncRupParamNames">
 		<item>Wert</item>
 	</string-array>

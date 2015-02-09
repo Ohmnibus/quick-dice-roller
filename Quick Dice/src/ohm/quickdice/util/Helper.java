@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -62,6 +64,154 @@ import android.widget.Toast;
  *
  */
 public class Helper {
+	
+	/**
+	 * Handle the background image.
+	 * @author Ohmnibus
+	 *
+	 */
+	public static class BackgroundManager {
+		private static final String BACKGROUND_FOLDER = "backgroundDir";
+		private static final String BACKGROUND_TEMP_FILE = "temp_background.jpg";
+		private static final String BACKGROUND_FILE = "background.jpg";
+		/** Size of the bigger edge of the image */
+		private static final int BG_SIZE = 700;
+//		private static final int BG_WIDTH = 600;
+//		private static final int BG_HEIGHT = 800;
+		
+		private Context context;
+		
+		public BackgroundManager(Context context) {
+			this.context = context;
+		}
+		
+		/**
+		 * Set the image at the specified URI as the new background image.
+		 * @param rawImageUri Uri of the image to load.
+		 * @param aspect Aspect ratio of the display.
+		 * @return {@code true} if succeeded, {@code false} otherwise.
+		 */
+		public boolean setBackgroundImage(Uri rawImageUri, float aspect) {
+			return setBackgroundImage(context, rawImageUri, aspect);
+		}
+		
+		/**
+		 * Tell if a background image is available.
+		 * @return
+		 */
+		public boolean exists() {
+			return exists(context);
+		}
+		
+		public static String getBackgroundImagePath(Context ctx) {
+			return getFile(ctx).getAbsolutePath();
+		}
+		
+		public static File getBackgroundImageFile(Context ctx) {
+			return getFile(ctx);
+		}
+		
+		/**
+		 * Tell if a background image is available.
+		 * @param ctx
+		 * @return
+		 */
+		public static boolean exists(Context ctx) {
+			return getFile(ctx).exists();
+		}
+		
+		/**
+		 * Set the image at the specified URI as the new background image.
+		 * @param ctx Context.
+		 * @param rawImageUri Uri of the image to load.
+		 * @param aspect Aspect ratio of the display.
+		 * @return {@code true} if succeeded, {@code false} otherwise.
+		 */
+		public static boolean setBackgroundImage(Context ctx, Uri rawImageUri, float aspect) {
+			File tmpImageFile = getTempFile(ctx);
+			OutputStream fos;
+			boolean pass;
+			
+			//Copy image locally
+			pass = Helper.copyFile(ctx, rawImageUri, tmpImageFile);
+			
+			if (! pass) {
+				return false;
+			}
+			
+			int width; // = BG_WIDTH;
+			int height; // = BG_HEIGHT;
+			if (aspect > 1) {
+				//Horizontal
+				width = BG_SIZE;
+				height = (int) (BG_SIZE / aspect);
+			} else {
+				//Vertical
+				width = (int) (BG_SIZE * aspect);
+				height = BG_SIZE;
+			}
+			
+			//Load scaled image
+			Bitmap image = loadResizedBitmap(tmpImageFile.getAbsolutePath(), width, height, false, false);
+			
+			if (image == null) {
+				return false;
+			}
+			
+			//Save resized image
+			pass = false;
+			try {
+				//Compress & save
+				fos = new FileOutputStream(tmpImageFile);
+				try {
+					image.compress(Bitmap.CompressFormat.JPEG, 95, fos);
+					pass = true;
+				} finally {
+					fos.close();
+				}
+			} catch (Exception e) {
+				//Something went wrong.
+				e.printStackTrace();
+			}
+
+			if (! pass) {
+				return false;
+			}
+
+			//Rename image
+			File imageFile = getFile(ctx);
+			if (imageFile.exists()) {
+				imageFile.delete();
+			}
+			pass = tmpImageFile.renameTo(imageFile);
+
+			return pass;
+		}
+		
+		private static File getDirectory(Context ctx) {
+			return ctx.getDir(BACKGROUND_FOLDER, Context.MODE_PRIVATE);
+		}
+		
+		private static File getTempFile(Context ctx) {
+			File retVal;
+
+			retVal = new File(
+					getDirectory(ctx),
+					BACKGROUND_TEMP_FILE);
+
+			return retVal;
+		}
+		
+		private static File getFile(Context ctx) {
+			File retVal;
+
+			retVal = new File(
+					getDirectory(ctx),
+					BACKGROUND_FILE);
+
+			return retVal;
+		}
+	}
 
 	private Helper() {}
 
@@ -234,6 +384,21 @@ public class Helper {
 	 * @return {@link Bitmap} representing the image at {@code imagePath}.
 	 */
 	public static Bitmap getIconFromImage(String imagePath, int width, int height) {
+		return loadResizedBitmap(imagePath, width, height, true, false);
+	}
+	
+	
+	/**
+	 * Load the image at {@code imagePath} as a {@link Bitmap}, scaling it to
+	 * the specified size and preserving the aspect ratio.
+	 * @param imagePath Path of the image to load.
+	 * @param width Required width of the resulting {@link Bitmap}.
+	 * @param height Required height of the resulting {@link Bitmap}.
+	 * @param fill {@code true} to fill the empty space with transparent color.
+	 * @param crop {@code true} to crop the image, {@code false} to resize without cutting the image.
+	 * @return {@link Bitmap} representing the image at {@code imagePath}.
+	 */
+	public static Bitmap loadResizedBitmap(String imagePath, int width, int height, boolean fill, boolean crop) {
 		Bitmap retVal;
 		
 		BitmapFactory.Options opts = new BitmapFactory.Options();
@@ -248,23 +413,39 @@ public class Helper {
 		
 		if (image.getWidth() != width || image.getHeight() != height) {
 			//Image need to be resized.
-			int scaledWidth = image.getWidth();
-			int scaledHeight = image.getHeight();
-			if (scaledWidth - width > scaledHeight - height) {
-				scaledHeight = (scaledHeight * width) / scaledWidth;
-				scaledWidth = width;
-			} else {
-				scaledWidth = (scaledWidth * height) / scaledHeight;
+//			int scaledWidth = image.getWidth();
+//			int scaledHeight = image.getHeight();
+//			final float factorWidth = scaledWidth / width;
+//			final float factorHeight = scaledHeight / height;
+			//final float factor = (scaledWidth / width) - (scaledHeight / height);
+//			final long factor = (scaledWidth * height) - (scaledHeight * width);
+//			if ((crop && factor > 0) || (factor < 0)) {
+//				scaledHeight = (scaledHeight * width) / scaledWidth;
+//				scaledWidth = width;
+//			} else {
+//				scaledWidth = (scaledWidth * height) / scaledHeight;
+//				scaledHeight = height;
+//			}
+			int scaledWidth = (image.getWidth() * height) / image.getHeight();
+			int scaledHeight; // = (image.getHeight() * width) / image.getWidth();
+			if ((crop && scaledWidth > width) || (!crop && scaledWidth < width)) {
 				scaledHeight = height;
+			} else {
+				scaledWidth = width;
+				scaledHeight = (image.getHeight() * width) / image.getWidth();
 			}
 			//image = Bitmap.createScaledBitmap(image, scaledWidth, scaledHeight, true);
 
-			retVal = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-			retVal.eraseColor(Color.TRANSPARENT);
-			
 			Rect src = new Rect(0, 0, image.getWidth(), image.getHeight());
 			Rect dst = new Rect(0, 0, scaledWidth, scaledHeight);
-			dst.offset((width - scaledWidth) / 2, (height - scaledHeight) / 2);
+
+			if (fill) {
+				retVal = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+				dst.offset((width - scaledWidth) / 2, (height - scaledHeight) / 2);
+			} else {
+				retVal = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
+			}
+			retVal.eraseColor(Color.TRANSPARENT);
 			
 			synchronized (canvas) {
 				if (antiAliasPaint == null) {
@@ -401,15 +582,11 @@ public class Helper {
 	public static boolean copyFile(File src, File dst) {
 		boolean retVal = false;
 		try {
-			FileInputStream inStream = new FileInputStream(src);
+			InputStream inStream = new FileInputStream(src);
 			try {
-				FileOutputStream outStream = new FileOutputStream(dst);
+				OutputStream outStream = new FileOutputStream(dst);
 				try {
-					byte[] buf = new byte[1024];
-					int len;
-					while ((len = inStream.read(buf)) > 0) {
-						outStream.write(buf, 0, len);
-					}
+					copyFile(inStream, outStream);
 					retVal = true;
 				} finally {
 					outStream.close();
@@ -421,6 +598,42 @@ public class Helper {
 			e.printStackTrace();
 		}
 		return retVal;
+	}
+	
+	/**
+	 * Copy a file from an Uri.
+	 * @param ctx Context.
+	 * @param src Source file.
+	 * @param dst Destination file.
+	 * @return {@code true} if the copy succeeded, {@code false} otherwise.
+	 */
+	public static boolean copyFile(Context ctx, Uri srcUri, File dst) {
+		boolean retVal = false;
+		try {
+			InputStream inStream = ctx.getContentResolver().openInputStream(srcUri);
+			try {
+				OutputStream outStream = new FileOutputStream(dst);
+				try {
+					copyFile(inStream, outStream);
+					retVal = true;
+				} finally {
+					outStream.close();
+				}
+			} finally {
+				inStream.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return retVal;
+	}
+	
+	protected static void copyFile(InputStream inStream, OutputStream outStream) throws IOException {
+		byte[] buf = new byte[2048];
+		int len;
+		while ((len = inStream.read(buf)) > 0) {
+			outStream.write(buf, 0, len);
+		}
 	}
 	
 	protected static final char[] hexArray = "0123456789ABCDEF".toCharArray();
@@ -445,11 +658,10 @@ public class Helper {
 	 * Include checks for backward compatibility.
 	 * @param ctx Context.
 	 */
-	@SuppressWarnings("rawtypes")
 	public static void requestBackup(Context ctx) {
 		try {
-			Class managerClass = Class.forName("android.app.backup.BackupManager");
-			Constructor managerConstructor = managerClass.getConstructor(Context.class);
+			Class<?> managerClass = Class.forName("android.app.backup.BackupManager");
+			Constructor<?> managerConstructor = managerClass.getConstructor(Context.class);
 			Object manager = managerConstructor.newInstance(ctx);
 			Method m = managerClass.getMethod("dataChanged");
 			m.invoke(manager);
@@ -548,7 +760,8 @@ public class Helper {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(v.getResources().getString(R.string.msgOnlineHelpURL)));
+				//i.setData(Uri.parse(v.getResources().getString(R.string.msgOnlineHelpURL)));
+				i.setData(Uri.parse(v.getResources().getString(R.string.urlFncList)));
 				v.getContext().startActivity(i);
 			}
 		});

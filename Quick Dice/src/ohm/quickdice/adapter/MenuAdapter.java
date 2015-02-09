@@ -4,13 +4,9 @@ import java.util.ArrayList;
 
 import ohm.quickdice.R;
 import android.app.LauncherActivity.ListItem;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;

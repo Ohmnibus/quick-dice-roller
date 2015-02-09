@@ -1,7 +1,12 @@
+
 v 2.1.0
+- Custom background
 - Custom icons
 - Speech synthesis
+- New function "aeon" to support Aeon IV
+- New function "rolemaster" to support Rolemaster
 - Improved "pool" function
+- New function reference pages
 - Fix: Double popup menu spawning
 - Minor fix and improvements
 

@@ -78,6 +78,7 @@
 	<string name="lblSelectVariable">Select a Named Value</string>
 	<string name="lblSelectFunction">Select a Function</string>
 	<string name="lblSelectVariableNone">This bag doesn\'t contain any named value.</string>
+	<string name="lblCustomIconsOnly">Show custom icons only</string>
 	
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
@@ -115,6 +116,12 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Custom background image<br />
+&bull; New function to support Aeon IV<br />
+&bull; New function to support Rolemaster<br />
+&bull; Minor fix and improvements<br />
+<br />
+Version 2.0.3b:<br />
 &bull; Improved "pool" function<br />
 &bull; Fixed error in Custom Icon<br />
 &bull; Fixed double popup menu in roll results<br />
@@ -128,13 +135,14 @@ Version 2.0.2b:<br />
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
 Copyright (c) 2012-2014 by %3$s<br />
 <br />
-<a href="https://crowdin.com/project/quick-dice-roller">Translations</a>: Stefania M. (ES), Magaolimpia (FR), Henning (DE), Renato Rasta (PT-BR)<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Translations</a>: %4$s<br />
 <br />
 Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
 This is a free app, however if you like it please consider to make a donation.<br />
 <br />
 Thanks!<br />]]></string>
+	<string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Stefania M. (ES)</string>
 
 	<string name="msgLicenses">Licenses</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>
@@ -200,7 +208,6 @@ Thanks!<br />]]></string>
 	<string name="msgMaxVariablesReach">You can\'t add more named values.</string>
 	<string name="msgOnlineHelpTitle">Quick reference</string>
 	<string name="msgOnlineHelp">Check Online Help</string>
-	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02</string>
 	<string name="msgCannotRead">Cannot read folder content (or part of it)</string>
 	<string name="msgFileNameInvalid">File name \"%1$s\" is not valid.</string>
 	<string name="msgFileNameExists">File name \"%1$s\" already exists. Are you sure you want to overwrite this file?</string>
@@ -222,6 +229,7 @@ Thanks!<br />]]></string>
 	<string name="mnuClearAllResults">Clear all results</string>
 	<string name="mnuUndoClearAllResult">Restore all results</string>
 	<string name="mnuSettings">Settings</string>
+	<string name="mnuQuickStart">Quick Start Guide</string>
 	<string name="mnuAbout">About</string>
 	<string name="mnuSuggest">Send suggestion</string>
 	<string name="mnuRemove">Remove die</string>
@@ -259,7 +267,7 @@ Thanks!<br />]]></string>
 	<!-- Functions -->
 	<string name="fncBASHName">BASH!</string>
 	<string name="fncBASHDesc">Makes a check using BASH! rules.</string>
-	<string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
+	<string name="fncBASHURL">bash</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash -->
 	<string-array name="fncBASHParamNames">
 		<item>Pool Size</item>
 		<item>Roll</item>
@@ -271,7 +279,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Makes a check using Burning Wheel rules.</string>
-	<string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
+	<string name="fncBWheelURL">bwheel</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel -->
 	<string-array name="fncBWheelParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
@@ -287,7 +295,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Makes a check using Dystopian Wars rules.</string>
-	<string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
+	<string name="fncDWarsURL">dwars</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars -->
 	<string-array name="fncDWarsParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
@@ -303,7 +311,7 @@ Thanks!<br />]]></string>
 				
 	<string name="fncHEROName">HERO System</string>
 	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
-	<string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
+	<string name="fncHEROURL">hero</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero -->
 	<string-array name="fncHEROParamNames">
 		<item>Pool Size</item>
 	</string-array>
@@ -313,7 +321,7 @@ Thanks!<br />]]></string>
 				
 	<string name="fncExalName">Exalted</string>
 	<string name="fncExalDesc">Makes a check using Exalted rules.</string>
-	<string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
+	<string name="fncExalURL">exal</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal -->
 	<string-array name="fncExalParamNames">
 		<item>Pool Size</item>
 		<item>Target</item>
@@ -325,7 +333,7 @@ Thanks!<br />]]></string>
 				
 	<string name="fncExpName">Exploding/Collapsing</string>
 	<string name="fncExpDesc">Make an exploding/collapsing roll.</string>
-	<string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<string name="fncExpURL">exp</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp -->
 	<string-array name="fncExpParamNames">
 		<item>Roll</item>
 		<item>Upper target</item>
@@ -343,7 +351,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncExpUpName">Exploding</string>
 	<string name="fncExpUpDesc">Make an exploding roll.</string>
-	<string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<string name="fncExpUpURL">expUp</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp -->
 	<string-array name="fncExpUpParamNames">
 		<item>First Roll</item>
 		<item>First Target</item>
@@ -359,33 +367,9 @@ Thanks!<br />]]></string>
 		<item>Max num. of explosions</item>
 	</string-array>
 
-	<!-- Obsolete --><string name="fncExplodeName">Exploding</string>
-	<!-- Obsolete --><string name="fncExplodeDesc">Make an exploding roll using a threshold. Explodes for high values as well as for low values.</string>
-	<!-- Obsolete --><string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
-	<!-- Obsolete --><string-array name="fncExplodeParamNames">
-	<!-- Obsolete -->	<item>Roll</item>
-	<!-- Obsolete -->	<item>Threshold</item>
-	<!-- Obsolete --></string-array>
-	<!-- Obsolete --><string-array name="fncExplodeParamHints">
-	<!-- Obsolete -->	<item>The die to explode</item>
-	<!-- Obsolete -->	<item>Used to tell if the roll explodes</item>
-	<!-- Obsolete --></string-array>
-
-	<!-- Obsolete --><string name="fncExplodeUpName">Exploding Upward</string>
-	<!-- Obsolete --><string name="fncExplodeUpDesc">Make an exploding roll using a threshold. Explode only for high values.</string>
-	<!-- Obsolete --><string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
-	<!-- Obsolete --><string-array name="fncExplodeUpParamNames">
-	<!-- Obsolete -->	<item>Roll</item>
-	<!-- Obsolete -->	<item>Threshold</item>
-	<!-- Obsolete --></string-array>
-	<!-- Obsolete --><string-array name="fncExplodeUpParamHints">
-	<!-- Obsolete -->	<item>The die to explode</item>
-	<!-- Obsolete -->	<item>Used to tell if the roll explodes</item>
-	<!-- Obsolete --></string-array>
-
 	<string name="fncMaxName">Maximum</string>
 	<string name="fncMaxDesc">Return the highest value obtained.</string>
-	<string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
+	<string name="fncMaxURL">max</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max -->
 	<string-array name="fncMaxParamNames">
 		<item>First Roll</item>
 		<item>Second Roll</item>
@@ -397,7 +381,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncMinName">Minimum</string>
 	<string name="fncMinDesc">Return the lowest value obtained.</string>
-	<string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
+	<string name="fncMinURL">min</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min -->
 	<string-array name="fncMinParamNames">
 		<item>First Roll</item>
 		<item>Second Roll</item>
@@ -409,7 +393,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncRandName">Random</string>
 	<string name="fncRandDesc">Return a random value between two boundaries.</string>
-	<string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
+	<string name="fncRandURL">rand</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand -->
 	<string-array name="fncRandParamNames">
 		<item>First boundary</item>
 		<item>Second boundary</item>
@@ -421,7 +405,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncNwodName">New WoD</string>
 	<string name="fncNwodDesc">Makes a check using the New World of Darkness rules.</string>
-	<string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
+	<string name="fncNwodURL">nwod</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod -->
 	<string-array name="fncNwodParamNames">
 		<item>Pool Size</item>
 		<item>Target</item>
@@ -433,7 +417,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncOwodName">Original WoD</string>
 	<string name="fncOwodDesc">Makes a check using the Original World of Darkness rules.</string>
-	<string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
+	<string name="fncOwodURL">owod</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod -->
 	<string-array name="fncOwodParamNames">
 		<item>Pool Size</item>
 		<item>Target</item>
@@ -445,7 +429,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncPoolName">Dice Pool</string>
 	<string name="fncPoolDesc">Number of times that the Roll is evaluated greater or equal to Target.</string>
-	<string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
+	<string name="fncPoolURL">pool</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool -->
 	<string-array name="fncPoolParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
@@ -467,7 +451,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncRakName">Roll and Keep</string>
 	<string name="fncRakDesc">Execute a Roll and Keep test.</string>
-	<string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
+	<string name="fncRakURL">rak</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak -->
 	<string-array name="fncRakParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
@@ -481,7 +465,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncRdnName">Round down</string>
 	<string name="fncRdnDesc">Round down the specified value.</string>
-	<string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
+	<string name="fncRdnURL">rdn</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn -->
 	<string-array name="fncRdnParamNames">
 		<item>Value</item>
 	</string-array>
@@ -491,7 +475,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncRupName">Round up</string>
 	<string name="fncRupDesc">Round up the specified value.</string>
-	<string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
+	<string name="fncRupURL">rup</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup -->
 	<string-array name="fncRupParamNames">
 		<item>Value</item>
 	</string-array>
@@ -501,7 +485,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncAbsName">Absolute</string>
 	<string name="fncAbsDesc">Give the absolute (or modulus) of the specified value.</string>
-	<string name="fncAbsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs</string>
+	<string name="fncAbsURL">abs</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs -->
 	<string-array name="fncAbsParamNames">
 		<item>Value</item>
 	</string-array>
@@ -511,7 +495,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncShRun4Name">Shadowrun 4</string>
 	<string name="fncShRun4Desc">Makes a check using Shadowrun 4 rules.</string>
-	<string name="fncShRun4URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun4</string>
+	<string name="fncShRun4URL">shrun4</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun4 -->
 	<string-array name="fncShRun4ParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
@@ -529,7 +513,7 @@ Thanks!<br />]]></string>
 
 	<string name="fncShRun5Name">Shadowrun 5</string>
 	<string name="fncShRun5Desc">Makes a check using Shadowrun 5 rules.</string>
-	<string name="fncShRun5URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun5</string>
+	<string name="fncShRun5URL">shrun5</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun5 -->
 	<string-array name="fncShRun5ParamNames">
 		<item>Roll</item>
 		<item>Pool Size</item>
@@ -543,6 +527,38 @@ Thanks!<br />]]></string>
 		<item>Value to reach to obtain a success</item>
 		<item>Value to reach to obtain an extra roll</item>
 		<item>Value used to compute Glitches</item>
+	</string-array>
+
+	<string name="fncBranchName">Aeon</string>
+	<string name="fncBranchDesc">Roll can explode to two or more rolls.</string>
+	<string name="fncBranchURL">branch</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#branch -->
+	<string-array name="fncBranchParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Branch Size</item>
+	</string-array>
+	<string-array name="fncBranchParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to explode</item>
+		<item>Roll to do on explosions</item>
+	</string-array>
+
+	<string name="fncRolemasterName">Rolemaster</string>
+	<string name="fncRolemasterDesc">Roll can explode accroding to Rolemaster rules.</string>
+	<string name="fncRolemasterURL">rolemaster</string>
+	<string-array name="fncRolemasterParamNames">
+		<item>Roll</item>
+		<item>Target</item>
+		<item>Fumble</item>
+		<item>Limit</item>
+	</string-array>
+	<string-array name="fncRolemasterParamHints">
+		<item>Formula to be tested</item>
+		<item>Min value to roll again</item>
+		<item>Max value to invert sign</item>
+		<item>Max num of extra rolls</item>
 	</string-array>
 
 	<!-- Errors -->
@@ -649,8 +665,6 @@ Thanks!<br />]]></string>
 	<string name="pref_aspect_mod_desc">Show the quick modifier bar.</string>
 	<string name="pref_aspect_popup_title">Display roll popup</string>
 	<string name="pref_aspect_popup_desc">Display a popup containing the result of the roll.</string>
-	<!-- obsolete --><string name="pref_aspect_plain_bg_title">Use light graphic</string>
-	<!-- obsolete --><string name="pref_aspect_plain_bg_desc">Requires restart of the app. Display a plain background to improve performances.</string>
 	<string name="pref_aspect_theme_title">Theme</string>
 	<string name="pref_aspect_theme_dyn_desc">Use the %1$s theme.</string>
 	<string name="pref_aspect_theme_dlg_title">Apply which theme?</string>
@@ -675,6 +689,9 @@ Thanks!<br />]]></string>
 	<string name="pref_behaviour_wakelock_desc">Keep the screen on while using the app.</string>
 	<string name="pref_aspect_keyboard_title">Use custom keyboard</string>
 	<string name="pref_aspect_keyboard_desc">Use custom keyboard to write formulas.</string>
+	<string name="pref_aspect_custom_bg_flag_title">Use custom background</string>
+	<string name="pref_aspect_custom_bg_flag_desc">Use custom image for background.</string>
+	<string name="pref_aspect_custom_bg_image_title">Change background image</string>
 	
 	<string name="kbd_next">Next</string><!-- Keep this short! Max 4-6 char! -->
 </resources>
