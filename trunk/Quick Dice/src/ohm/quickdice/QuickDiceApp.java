@@ -1,5 +1,8 @@
 package ohm.quickdice;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import ohm.dexp.function.*;
 import ohm.quickdice.control.DiceBagManager;
 import ohm.quickdice.control.PersistenceManager;
@@ -37,62 +40,76 @@ public class QuickDiceApp extends Application {
 	private Thread initFunctions = new Thread(new Runnable(){
 		@Override
 		public void run(){
+			ArrayList<FunctionDescriptor> fnc = new ArrayList<FunctionDescriptor>(32);
+			
 			//Initialize function list
-			addFunction("max", TokenFunctionMax.class, R.drawable.ic_fnc, R.string.fncMaxName, R.string.fncMaxDesc, R.string.fncMaxURL, R.array.fncMaxParamNames, R.array.fncMaxParamHints);
-			addFunction("min", TokenFunctionMin.class, R.drawable.ic_fnc, R.string.fncMinName, R.string.fncMinDesc, R.string.fncMinURL, R.array.fncMinParamNames, R.array.fncMinParamHints);
-			addFunction("rand", TokenFunctionRandom.class, R.drawable.ic_fnc, R.string.fncRandName, R.string.fncRandDesc, R.string.fncRandURL, R.array.fncRandParamNames, R.array.fncRandParamHints);
-			addFunction("exp", TokenFunctionExp.class, R.drawable.ic_fnc, R.string.fncExpName, R.string.fncExpDesc, R.string.fncExpURL, R.array.fncExpParamNames, R.array.fncExpParamHints);
-			addFunction("expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
-//			addFunction("explode", TokenFunctionExplode.class, R.drawable.ic_fnc, R.string.fncExplodeName, R.string.fncExplodeDesc, R.string.fncExplodeURL, R.array.fncExplodeParamNames, R.array.fncExplodeParamHints);
-//			addFunction("explodeup", TokenFunctionExplodeUp.class, R.drawable.ic_fnc, R.string.fncExplodeUpName, R.string.fncExplodeUpDesc, R.string.fncExplodeUpURL, R.array.fncExplodeUpParamNames, R.array.fncExplodeUpParamHints);
-//			addHiddenFunction("expup", TokenFunctionExpUp.class);
+			addFunction(fnc, "max", TokenFunctionMax.class, R.drawable.ic_fnc, R.string.fncMaxName, R.string.fncMaxDesc, R.string.fncMaxURL, R.array.fncMaxParamNames, R.array.fncMaxParamHints);
+			addFunction(fnc, "min", TokenFunctionMin.class, R.drawable.ic_fnc, R.string.fncMinName, R.string.fncMinDesc, R.string.fncMinURL, R.array.fncMinParamNames, R.array.fncMinParamHints);
+			addFunction(fnc, "rand", TokenFunctionRandom.class, R.drawable.ic_fnc, R.string.fncRandName, R.string.fncRandDesc, R.string.fncRandURL, R.array.fncRandParamNames, R.array.fncRandParamHints);
+			addFunction(fnc, "exp", TokenFunctionExp.class, R.drawable.ic_fnc, R.string.fncExpName, R.string.fncExpDesc, R.string.fncExpURL, R.array.fncExpParamNames, R.array.fncExpParamHints);
+			addFunction(fnc, "expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
+
 			addHiddenFunction("explode", TokenFunctionExplode.class);
 			addHiddenFunction("explodeup", TokenFunctionExplodeUp.class);
 
-			addFunction("rak", TokenFunctionRollAndKeep.class, R.drawable.ic_fnc, R.string.fncRakName, R.string.fncRakDesc, R.string.fncRakURL, R.array.fncRakParamNames, R.array.fncRakParamHints);
-			addFunction("pool", TokenFunctionPool.class, R.drawable.ic_fnc, R.string.fncPoolName, R.string.fncPoolDesc, R.string.fncPoolURL, R.array.fncPoolParamNames, R.array.fncPoolParamHints);
-			addFunction("owod", TokenFunctionOWoD.class, R.drawable.ic_fnc, R.string.fncOwodName, R.string.fncOwodDesc, R.string.fncOwodURL, R.array.fncOwodParamNames, R.array.fncOwodParamHints);
-			addFunction("nwod", TokenFunctionNWoD.class, R.drawable.ic_fnc, R.string.fncNwodName, R.string.fncNwodDesc, R.string.fncNwodURL, R.array.fncNwodParamNames, R.array.fncNwodParamHints);
-			addFunction("exal", TokenFunctionExalted.class, R.drawable.ic_fnc, R.string.fncExalName, R.string.fncExalDesc, R.string.fncExalURL, R.array.fncExalParamNames, R.array.fncExalParamHints);
-			addFunction("bwheel", TokenFunctionBWheel.class, R.drawable.ic_fnc, R.string.fncBWheelName, R.string.fncBWheelDesc, R.string.fncBWheelURL, R.array.fncBWheelParamNames, R.array.fncBWheelParamHints);
-			addFunction("dwars", TokenFunctionDWars.class, R.drawable.ic_fnc, R.string.fncDWarsName, R.string.fncDWarsDesc, R.string.fncDWarsURL, R.array.fncDWarsParamNames, R.array.fncDWarsParamHints);
-			addFunction("hero", TokenFunctionHERO.class, R.drawable.ic_fnc, R.string.fncHEROName, R.string.fncHERODesc, R.string.fncHEROURL, R.array.fncHEROParamNames, R.array.fncHEROParamHints);
-			addFunction("bash", TokenFunctionBASH.class, R.drawable.ic_fnc, R.string.fncBASHName, R.string.fncBASHDesc, R.string.fncBASHURL, R.array.fncBASHParamNames, R.array.fncBASHParamHints);
-			addFunction("shrun4", TokenFunctionShRun4.class, R.drawable.ic_fnc, R.string.fncShRun4Name, R.string.fncShRun4Desc, R.string.fncShRun4URL, R.array.fncShRun4ParamNames, R.array.fncShRun4ParamHints);
-			addFunction("shrun5", TokenFunctionShRun5.class, R.drawable.ic_fnc, R.string.fncShRun5Name, R.string.fncShRun5Desc, R.string.fncShRun5URL, R.array.fncShRun5ParamNames, R.array.fncShRun5ParamHints);
+			addFunction(fnc, "rak", TokenFunctionRollAndKeep.class, R.drawable.ic_fnc, R.string.fncRakName, R.string.fncRakDesc, R.string.fncRakURL, R.array.fncRakParamNames, R.array.fncRakParamHints);
+			addFunction(fnc, "pool", TokenFunctionPool.class, R.drawable.ic_fnc, R.string.fncPoolName, R.string.fncPoolDesc, R.string.fncPoolURL, R.array.fncPoolParamNames, R.array.fncPoolParamHints);
+			addFunction(fnc, "owod", TokenFunctionOWoD.class, R.drawable.ic_fnc, R.string.fncOwodName, R.string.fncOwodDesc, R.string.fncOwodURL, R.array.fncOwodParamNames, R.array.fncOwodParamHints);
+			addFunction(fnc, "nwod", TokenFunctionNWoD.class, R.drawable.ic_fnc, R.string.fncNwodName, R.string.fncNwodDesc, R.string.fncNwodURL, R.array.fncNwodParamNames, R.array.fncNwodParamHints);
+			addFunction(fnc, "exal", TokenFunctionExalted.class, R.drawable.ic_fnc, R.string.fncExalName, R.string.fncExalDesc, R.string.fncExalURL, R.array.fncExalParamNames, R.array.fncExalParamHints);
+			addFunction(fnc, "bwheel", TokenFunctionBWheel.class, R.drawable.ic_fnc, R.string.fncBWheelName, R.string.fncBWheelDesc, R.string.fncBWheelURL, R.array.fncBWheelParamNames, R.array.fncBWheelParamHints);
+			addFunction(fnc, "dwars", TokenFunctionDWars.class, R.drawable.ic_fnc, R.string.fncDWarsName, R.string.fncDWarsDesc, R.string.fncDWarsURL, R.array.fncDWarsParamNames, R.array.fncDWarsParamHints);
+			addFunction(fnc, "hero", TokenFunctionHERO.class, R.drawable.ic_fnc, R.string.fncHEROName, R.string.fncHERODesc, R.string.fncHEROURL, R.array.fncHEROParamNames, R.array.fncHEROParamHints);
+			addFunction(fnc, "bash", TokenFunctionBASH.class, R.drawable.ic_fnc, R.string.fncBASHName, R.string.fncBASHDesc, R.string.fncBASHURL, R.array.fncBASHParamNames, R.array.fncBASHParamHints);
+			addFunction(fnc, "shrun4", TokenFunctionShRun4.class, R.drawable.ic_fnc, R.string.fncShRun4Name, R.string.fncShRun4Desc, R.string.fncShRun4URL, R.array.fncShRun4ParamNames, R.array.fncShRun4ParamHints);
+			addFunction(fnc, "shrun5", TokenFunctionShRun5.class, R.drawable.ic_fnc, R.string.fncShRun5Name, R.string.fncShRun5Desc, R.string.fncShRun5URL, R.array.fncShRun5ParamNames, R.array.fncShRun5ParamHints);
+			addFunction(fnc, "aeon", TokenFunctionBranch.class, R.drawable.ic_fnc, R.string.fncBranchName, R.string.fncBranchDesc, R.string.fncBranchURL, R.array.fncBranchParamNames, R.array.fncBranchParamHints);
+			addFunction(fnc, "rolemaster", TokenFunctionRolemaster.class, R.drawable.ic_fnc, R.string.fncRolemasterName, R.string.fncRolemasterDesc, R.string.fncRolemasterURL, R.array.fncRolemasterParamNames, R.array.fncRolemasterParamHints);
 
-			addFunction("rup", TokenFunctionRoundUp.class, R.drawable.ic_fnc, R.string.fncRupName, R.string.fncRupDesc, R.string.fncRupURL, R.array.fncRupParamNames, R.array.fncRupParamHints);
-			addFunction("rdn", TokenFunctionRoundDown.class, R.drawable.ic_fnc, R.string.fncRdnName, R.string.fncRdnDesc, R.string.fncRdnURL, R.array.fncRdnParamNames, R.array.fncRdnParamHints);
-			addFunction("abs", TokenFunctionAbs.class, R.drawable.ic_fnc, R.string.fncAbsName, R.string.fncAbsDesc, R.string.fncAbsURL, R.array.fncAbsParamNames, R.array.fncAbsParamHints);
-			
-			//TODO: Sort "functions" based on names
+			addFunction(fnc, "rup", TokenFunctionRoundUp.class, R.drawable.ic_fnc, R.string.fncRupName, R.string.fncRupDesc, R.string.fncRupURL, R.array.fncRupParamNames, R.array.fncRupParamHints);
+			addFunction(fnc, "rdn", TokenFunctionRoundDown.class, R.drawable.ic_fnc, R.string.fncRdnName, R.string.fncRdnDesc, R.string.fncRdnURL, R.array.fncRdnParamNames, R.array.fncRdnParamHints);
+			addFunction(fnc, "abs", TokenFunctionAbs.class, R.drawable.ic_fnc, R.string.fncAbsName, R.string.fncAbsDesc, R.string.fncAbsURL, R.array.fncAbsParamNames, R.array.fncAbsParamHints);
+
+			//Sort "functions" based on names
+			Collections.sort(fnc);
+			functions = new FunctionDescriptor[fnc.size()];
+			fnc.toArray(functions);
 		}
 	});
 
 	private FunctionDescriptor[] functions = null;
 	
-	private void addFunction(String token, Class<? extends TokenFunction> functionClass, int resId, int nameId, int descriptionId, int onlineReferenceId, int paramNamesId, int paramHintsId) {
-		if (functions == null) {
-			functions = new FunctionDescriptor[1];
-		} else {
-			FunctionDescriptor[] newFnc = new FunctionDescriptor[functions.length + 1];
-			for (int i = 0; i<functions.length; i++){
-				newFnc[i] = functions[i];
-			}
-			functions = newFnc;
-		}
+	private void addFunction(ArrayList<FunctionDescriptor> fnc, String token, Class<? extends TokenFunction> functionClass, int resId, int nameId, int descriptionId, int onlineReferenceId, int paramNamesId, int paramHintsId) {
+//		if (functions == null) {
+//			functions = new FunctionDescriptor[1];
+//		} else {
+//			FunctionDescriptor[] newFnc = new FunctionDescriptor[functions.length + 1];
+//			for (int i = 0; i<functions.length; i++){
+//				newFnc[i] = functions[i];
+//			}
+//			functions = newFnc;
+//		}
 		
 		TokenFunction.addFunction(token, functionClass);
 		
-		functions[functions.length - 1] = FunctionDescriptor.initDescriptor(
-				getBaseContext(), 
+		//Used to get function IDS
+//		try {
+//			TokenFunction manager = functionClass.getConstructor().newInstance();
+//			android.util.Log.i("funcType", token + ": " + manager.getType());
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
+		
+		//functions[functions.length - 1] = FunctionDescriptor.initDescriptor(
+		fnc.add(FunctionDescriptor.initDescriptor(
+				getBaseContext(),
 				token,
 				resId,
-				nameId, 
-				descriptionId, 
+				nameId,
+				descriptionId,
 				onlineReferenceId,
-				paramNamesId, 
-				paramHintsId);
+				paramNamesId,
+				paramHintsId));
 	}
 	
 	private void addHiddenFunction(String token, Class<? extends TokenFunction> functionClass) {

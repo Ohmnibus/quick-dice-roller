@@ -7,7 +7,6 @@ import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.entity.Variable;
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,7 +37,8 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 		
 		setTitle(variable.getName());
 
-		setIcon(getDialogIcon());
+		//setIcon(getDialogIcon());
+		setIcon(QuickDiceApp.getInstance().getBagManager().getIconCollection().getByID(variable.getResourceIndex()));
 
 		super.onCreate(savedInstanceState);
 	}
@@ -93,10 +93,10 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 		return super.onPrepareOptionsMenu(adapter);
 	}
 	
-	protected Drawable getDialogIcon() {
-		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
-				variable.getResourceIndex(), 32, 32);
-	}
+//	protected Drawable getDialogIcon() {
+//		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
+//				variable.getResourceIndex(), 32, 32);
+//	}
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,12 +74,12 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 		paramArray = fncDesc.getParameters();
 		txtParamArray = new EditText[paramArray.length];
 		
-		int baseId = mView.getId();
+		int baseId = -1; //mView.getId();
 
 		for (int i = 0; i < paramArray.length; i++) {
 			param = paramArray[i];
 
-			paramView = inflater.inflate(R.layout.function_builder_item, paramContainer, false);
+			paramView = inflater.inflate(R.layout.function_builder_item, paramContainer, false); //Do not set to true!
 
 			paramLabel = (TextView)paramView.findViewById(R.id.fbiLabel);
 			paramValue = (EditText)paramView.findViewById(R.id.fbiValue);
@@ -94,16 +95,25 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 			
 			txtParamArray[i] = paramValue;
 			//txtParamArray[i].setId(View.generateViewId());
+
+			if (baseId <= 0) {
+				baseId = txtParamArray[i].getId();
+			} else {
+				do {
+					baseId++;
+				} while (mView.findViewById(baseId) != null);
+				txtParamArray[i].setId(baseId);
+			}
 			
-			do {
-				baseId++;
-			} while (mView.findViewById(baseId) != null);
-			
-			txtParamArray[i].setId(baseId);
+			//Hack to update align the menu button
+			RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)paramMenu.getLayoutParams();
+			lp.addRule(RelativeLayout.ALIGN_BOTTOM, baseId);
+			lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 			
 			if (i > 0) {
 				//txtParamArray[i-1].setNextFocusForwardId(txtParamArray[i].getId());
-				txtParamArray[i-1].setNextFocusRightId(txtParamArray[i].getId());
+				//txtParamArray[i-1].setNextFocusRightId(txtParamArray[i].getId());
+				txtParamArray[i-1].setNextFocusRightId(baseId);
 			}
 			txtParamArray[i].setFocusableInTouchMode(true);
 			registerEditText(txtParamArray[i]);

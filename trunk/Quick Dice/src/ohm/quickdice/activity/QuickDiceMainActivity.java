@@ -35,8 +35,10 @@ import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.RollResult;
 import ohm.quickdice.entity.Variable;
+import ohm.quickdice.util.AsyncDrawable;
 import ohm.quickdice.util.Behavior;
 import ohm.quickdice.util.Helper;
+import ohm.quickdice.util.Helper.BackgroundManager;
 import ohm.quickdice.util.RollDiceToast;
 import ohm.quickdice.util.SynchRunnable;
 import android.app.Activity;
@@ -47,6 +49,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -332,6 +335,11 @@ public class QuickDiceMainActivity extends BaseActivity {
 			case R.id.mmImportExport:
 				callImportExport();
 				break;
+			case R.id.mmQuickStart:
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(getString(R.string.urlQuickStart)));
+				startActivity(i);
+				break;
 			case R.id.mmAbout:
 				DialogHelper.ShowAbout(this);
 				break;
@@ -448,36 +456,49 @@ public class QuickDiceMainActivity extends BaseActivity {
 				break;
 			case PrefDiceActivity.ACTIVITY_EDIT_PREF:
 				//Apply new preferences
-	
+				
 				//Request for backup.
 				backedUpData = false;
 	
+				//Reset configuration cache
 				pref.resetCache();
-	
-				//Number of columns
-				gvResults.setNumColumns(pref.getGridResultColumn());
-	
-				//Swap name and results
-				ResultListAdapter.setSwapNameResult(pref.getSwapNameResult());
-	
-				//Pop Up
-				rollDiceToast.refreshConfig();
+
+				//Check if needed a new initialization
+				boolean reInit = false;
+
+				//If custom background was disabled, then we need a new initialization (no more)
+				//reInit = reInit || (customBackground && ! pref.getCustomBackground());
 				
-				//Wake Lock
-				Helper.setWakeLock(this, pref.getWakeLock());
+				//If theme is changed, then we need a new initialization
+				reInit = reInit || (pref.getThemeResId() != currentTheme);
 	
-				//Modifiers bar
-				initModifierList();
-				refreshResultList();
-				refreshLastResult();
-				
-				if (pref.getThemeResId() != currentTheme) {
+				if (reInit) {
 					app.getPersistence().saveResultList(lastResult, resultList);
 					finish();
 					Intent intent = new Intent(this, QuickDiceMainActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
+				} else {
+					//Number of columns
+					gvResults.setNumColumns(pref.getGridResultColumn());
+		
+					//Swap name and results
+					ResultListAdapter.setSwapNameResult(pref.getSwapNameResult());
+		
+					//Pop Up
+					rollDiceToast.refreshConfig();
+					
+					//Wake Lock
+					Helper.setWakeLock(this, pref.getWakeLock());
+		
+					//Modifiers bar
+					initModifierList();
+					refreshResultList();
+					refreshLastResult();
+					
+					//Activate or change Background
+					initBackground();
 				}
 				break;
 		}
@@ -1033,7 +1054,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		setContentView(R.layout.quick_dice_activity);
 
 		actionBar = CompatActionBar.createInstance(this);
-
+		
 		//Initialize SplitView to last known size
 		SplitView sw = (SplitView)findViewById(R.id.mSplitView);
 		if (sw.getOrientation() == SplitView.VERTICAL) {
@@ -1056,6 +1077,9 @@ public class QuickDiceMainActivity extends BaseActivity {
 			}
 		});
 
+		//Custom Background
+		initBackground();
+		
 		//Drawers
 		initDrawers();
 
@@ -1128,6 +1152,25 @@ public class QuickDiceMainActivity extends BaseActivity {
 				return true;
 			}
 			return false;
+		}
+	}
+	
+	private void initBackground() {
+		//Set Custom Background
+//		if (pref.getCustomBackground() && BackgroundManager.exists(this)) {
+//			View v = findViewById(R.id.mRoot);
+//			if (v != null) {
+//				final String path = BackgroundManager.getBackgroundImagePath(this);
+//				AsyncDrawable.setBackgroundDrawable(v, new AsyncDrawable.PathDrawableProvider(path));
+//			}
+//		}
+		ImageView bg = (ImageView) findViewById(R.id.mCutomBackground);
+		if (pref.getCustomBackground() && BackgroundManager.exists(this)) {
+			final String path = BackgroundManager.getBackgroundImagePath(this);
+			AsyncDrawable.setDrawable(bg, new AsyncDrawable.PathDrawableProvider(path));
+			bg.setVisibility(View.VISIBLE);
+		} else {
+			bg.setVisibility(View.GONE);
 		}
 	}
 	

@@ -3,6 +3,7 @@ package ohm.dexp.function;
 import ohm.dexp.DContext;
 import ohm.dexp.Dice;
 import ohm.dexp.exception.DException;
+import ohm.dexp.exception.LoopDetected;
 import ohm.dexp.exception.ParameterOutOfBound;
 
 public abstract class TokenFunctionPoolBase extends TokenFunction {
@@ -69,7 +70,8 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 				
 				totalRollNumber++;
 				if (totalRollNumber > MAX_TOKEN_ITERATIONS) {
-					throw new ParameterOutOfBound(getFunctionName(this.getClass()), getPoolIndex());
+					//throw new ParameterOutOfBound(getFunctionName(this.getClass()), getPoolIndex());
+					throw new LoopDetected(getFunctionName(this.getClass()));
 				}
 				
 				isRollAgain = true;

@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import ohm.library.compat.CompatMisc;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.control.DiceBagManager;
@@ -135,7 +136,7 @@ public class RollDiceToast implements TextToSpeech.OnInitListener {
 	
 	@Override
 	public void onInit(int status) {
-		if (status == TextToSpeech.SUCCESS) {
+		if (status == TextToSpeech.SUCCESS && rollDiceTeller != null) { //Sometimes rollDiceTeller is null...
 			Locale loc = Locale.getDefault();
 			int avail = rollDiceTeller.isLanguageAvailable(loc);
 			if (avail != TextToSpeech.LANG_MISSING_DATA && avail != TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -195,9 +196,6 @@ public class RollDiceToast implements TextToSpeech.OnInitListener {
 	private void performRollPopup(RollResult res) {
 		//Create the references to the roll toast if not exist
 		if (rollDiceToast == null) {
-//			View rollDiceLayout = getLayoutInflater().inflate(
-//					R.layout.dice_roll_toast,
-//					null);
 			View rollDiceLayout = LayoutInflater.from(context).inflate(
 				R.layout.dice_roll_toast,
 				null);
@@ -272,10 +270,14 @@ public class RollDiceToast implements TextToSpeech.OnInitListener {
 	private void performRollSpeech(RollResult res) {
 		if (speechEnabled && speechActive) {
 			String speech = Long.toString(res.getResultValue());
-			rollDiceTeller.speak(
+//			rollDiceTeller.speak(
+//					speech,
+//					TextToSpeech.QUEUE_FLUSH,
+//					null);
+			CompatMisc.getInstance().speak(
+					rollDiceTeller,
 					speech,
-					TextToSpeech.QUEUE_FLUSH,
-					null);
+					TextToSpeech.QUEUE_FLUSH);
 		}
 	}
 	

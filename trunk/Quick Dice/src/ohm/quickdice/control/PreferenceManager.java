@@ -45,10 +45,14 @@ public class PreferenceManager {
 	public static final String KEY_MAX_LINKED_RESULTS = "KEY_MAX_LINKED_RESULTS";
 	public static final String KEY_MAX_LISTED_RESULTS = "KEY_MAX_LISTED_RESULTS";
 	public static final String KEY_SWAP_NAME_RESULT = "KEY_SWAP_NAME_RESULT";
-	public static final String KEY_SPLIT_PANEL_WIDTH = "KEY_SPLIT_PANEL_WIDTH";
-	public static final String KEY_SPLIT_PANEL_HEIGHT = "KEY_SPLIT_PANEL_HEIGHT";
 	public static final String KEY_WAKELOCK = "KEY_WAKELOCK";
 	public static final String KEY_CUSTOM_KEYBOARD = "KEY_CUSTOM_KEYBOARD";
+	public static final String KEY_CUSTOM_BACKGROUND = "KEY_CUSTOM_BACKGROUND";
+	
+	//Remember last values
+	public static final String KEY_SPLIT_PANEL_WIDTH = "KEY_SPLIT_PANEL_WIDTH";
+	public static final String KEY_SPLIT_PANEL_HEIGHT = "KEY_SPLIT_PANEL_HEIGHT";
+	public static final String KEY_CUSTOM_ICONS_ONLY = "KEY_CUSTOM_ICONS_ONLY";
 
 	private boolean initialized = false;
 	private int clipboardUsage;
@@ -59,6 +63,7 @@ public class PreferenceManager {
 	//private boolean plainBackground;
 	private int theme;
 	private int themeResId;
+	private boolean customBackground;
 	private int dialogThemeResId;
 	private boolean showToast;
 	private boolean showAnimation;
@@ -70,6 +75,7 @@ public class PreferenceManager {
 	private int splitPanelHeight;
 	private boolean wakeLock;
 	private boolean customKeyboard;
+	private boolean customIconsOnly;
 	
 	private Context context;
 	private SharedPreferences config;
@@ -102,6 +108,7 @@ public class PreferenceManager {
 				edit.commit();
 			}
 			fillThemeResources(theme);
+			customBackground = config.getBoolean(KEY_CUSTOM_BACKGROUND, false);
 			showToast = config.getBoolean(KEY_SHOW_TOAST, true);
 			showAnimation = config.getBoolean(KEY_SHOW_ANIMATION, true);
 			soundEnabled = config.getBoolean(KEY_ENABLE_SOUND, true);
@@ -112,6 +119,7 @@ public class PreferenceManager {
 			splitPanelHeight = config.getInt(KEY_SPLIT_PANEL_HEIGHT, -1);
 			wakeLock = config.getBoolean(KEY_WAKELOCK, true);
 			customKeyboard = config.getBoolean(KEY_CUSTOM_KEYBOARD, true);
+			customIconsOnly = config.getBoolean(KEY_CUSTOM_ICONS_ONLY, false);
 			initialized = true;
 		}
 	}
@@ -240,6 +248,17 @@ public class PreferenceManager {
 	}
 	
 	/**
+	 * Return the resource ID representing the theme to apply to a dialog.<br />
+	 * This is not the value in the preference file.<br />
+	 * @return The theme resource ID to apply.
+	 * @see #getTheme()
+	 */
+	public boolean getCustomBackground() {
+		initCache();
+		return customBackground;
+	}
+	
+	/**
 	 * Return a boolean telling if the toast showing the roll result is required.
 	 * @return {@code true} if toast is required, {@code false} otherwise.
 	 */
@@ -315,6 +334,19 @@ public class PreferenceManager {
 		splitPanelHeight = height;
 		Editor edit = config.edit();
 		edit.putInt(KEY_SPLIT_PANEL_HEIGHT, splitPanelHeight);
+		edit.commit();
+	}
+
+	public boolean getCustomIconsOnly() {
+		initCache();
+		return customIconsOnly;
+	}
+
+	public void setCustomIconsOnly(boolean value) {
+		initCache();
+		customIconsOnly = value;
+		Editor edit = config.edit();
+		edit.putBoolean(KEY_CUSTOM_ICONS_ONLY, customIconsOnly);
 		edit.commit();
 	}
 

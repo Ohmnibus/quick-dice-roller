@@ -29,13 +29,14 @@ public class DialogHelper {
 			version = "1.0.0";
 		}
 
-		title = String.format(res.getString(R.string.msgAboutTitle),
+		title = res.getString(R.string.msgAboutTitle,
 				res.getString(R.string.app_name));
 
-		body = String.format(res.getString(R.string.msgAboutBody),
+		body = res.getString(R.string.msgAboutBody,
 				res.getString(R.string.app_name),
 				version,
-				res.getString(R.string.app_author));
+				res.getString(R.string.app_author),
+				res.getString(R.string.app_translators));
 
 		MarkupDialog dlg = new MarkupDialog(context, title, body, R.drawable.ic_launcher, null);
 		

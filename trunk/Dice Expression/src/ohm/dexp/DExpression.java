@@ -29,6 +29,7 @@ public class DExpression {
 	private DContext ctx = null;
 	private transient String[] varKeys; //Contain used variable names.
 	private transient Hashtable<String, DVariable> varCache; //Contain used variables and their last value.
+	private transient TokenRoot tokenRoot; //Will contain the root and assure that it has no parent
 	private transient TokenBase root;
 	private transient boolean parsed;
 	private transient boolean evaluatedOnce;
@@ -278,9 +279,16 @@ public class DExpression {
 		try {
 			parse();
 			
-			root.evaluate(ctx);
+			//root.evaluate(ctx);
 			
-			setResult(root);
+			//setResult(root);
+			
+			if (tokenRoot == null)
+				tokenRoot = new TokenRoot(root);
+			
+			tokenRoot.evaluate(ctx);
+			
+			setResult(tokenRoot);
 		} catch (DException ex) {
 			setError(ex);
 			throw ex;
@@ -311,6 +319,7 @@ public class DExpression {
 		}
 
 		varCache.clear();
+		root = null;
 		tLastOp = null;
 		tLastOpP = null;
 		tFunc = null;

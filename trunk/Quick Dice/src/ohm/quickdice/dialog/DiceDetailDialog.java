@@ -8,7 +8,6 @@ import ohm.quickdice.adapter.MenuAdapter;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,7 +33,8 @@ public class DiceDetailDialog extends MenuDialog {
 		
 		setTitle(expression.getName());
 
-		setIcon(getDialogIcon());
+		//setIcon(getDialogIcon());
+		setIcon(QuickDiceApp.getInstance().getBagManager().getIconCollection().getByID(expression.getResourceIndex()));
 
 		super.onCreate(savedInstanceState);
 	}
@@ -93,10 +93,10 @@ public class DiceDetailDialog extends MenuDialog {
 		return super.onPrepareOptionsMenu(adapter);
 	}
 
-	protected Drawable getDialogIcon() {
-//		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
+//	protected Drawable getDialogIcon() {
+////		return QuickDiceApp.getInstance().getGraphic().getResizedDiceIcon(
+////				expression.getResourceIndex(), 32, 32);
+//		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
 //				expression.getResourceIndex(), 32, 32);
-		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
-				expression.getResourceIndex(), 32, 32);
-	}
+//	}
 }

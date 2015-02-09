@@ -19,13 +19,6 @@ public class TokenFunctionExplodeUp extends TokenFunctionExplodeBase {
 		return 23;
 	}
 
-//	@Override
-//	protected void evaluateSelf(DContext instance) throws DException {
-//		getChild(INDEX_TOLERANCE).evaluate(instance);
-//		
-//		evaluateExplode(instance, getChild(INDEX_ROLL), getChild(INDEX_TOLERANCE).getResult(), false);
-//	}
-
 	@Override
 	protected void evaluateSelf(DContext instance) throws DException {
 		TokenBase token;

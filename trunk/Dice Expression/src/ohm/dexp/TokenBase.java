@@ -30,6 +30,12 @@ public abstract class TokenBase {
 	public static final int MAX_TOKEN_ITERATIONS = 500;
 	/** Max iteration number for the expression */
 	public static final int MAX_TOTAL_ITERATIONS = 5000;
+	
+	/** Generation to use to get the root with {@link getParent} */
+	protected static final int ROOT_GENERATION = Integer.MAX_VALUE;
+
+	/** Child contained by this token */
+	private TokenBase parent;
 
 	/** Index of next argument to be assigned (0-based) */
 	private int nextChild;
@@ -38,7 +44,7 @@ public abstract class TokenBase {
 	/** Number of child allowed by this token */
 	private int maxNumChild;
 	/** Child contained by this token */
-	private TokenBase childList[];
+	private TokenBase[] childList;
 
 	protected long resultValue;
 	protected long resultMaxValue;
@@ -136,7 +142,7 @@ public abstract class TokenBase {
 	 * @return Next unassigned argument index ("1" based)
 	 */
 	public int nextChildNum() {
-		return nextChild+1;
+		return nextChild + 1;
 	} 
 	
 	/**
@@ -150,7 +156,8 @@ public abstract class TokenBase {
 		if (index > maxNumChild || index < 1) {
 			throw new IndexOutOfBoundsException("TokenBase.setChild: Out of bound.");
 		}
-		childList[index-1]=child;
+		childList[index-1] = child;
+		childList[index-1].setParent(this); 
 	}
 	
 	/**
@@ -242,6 +249,34 @@ public abstract class TokenBase {
 		}
 	}
 	
+	/**
+	 * Set the parent of this instance.
+	 * @param parent
+	 */
+	protected void setParent(TokenBase parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * Return the ancestor of this instance.<br />
+	 * The parameter {@code generation} tell which ancestor to get: {@code 0} mean 
+	 * the instance itself, {@code 1} is the parent, {@code 2} is the grand parent and so on.<br />
+	 * The function will stop and return the root token if the given {@code generation} is too high
+	 * or if is equal to {@link ROOT_GENERATION}.
+	 * @param generation Generation to get.
+	 * @return Ancestor of the token.
+	 */
+	protected TokenBase getParent(int generation) {
+		TokenBase retVal;
+		int cnt = 0;
+		retVal = this;
+		while (retVal.parent != null && cnt < generation) {
+			retVal = retVal.parent;
+			cnt++;
+		}
+		return retVal;
+	}
+	
 	// ================
 	// Abstract methods
 	// ================
@@ -288,4 +323,50 @@ public abstract class TokenBase {
 	 * @throws DException Thrown if an error occurred during expression tree evaluation.
 	 */
 	abstract protected void evaluateSelf(DContext instance) throws DException;
+}
+
+class TokenRoot extends TokenBase {
+
+	public TokenRoot(TokenBase root) {
+		setChild(root, 1);
+	}
+	
+	@Override
+	protected int initChildNumber() {
+		return 1;
+	}
+
+	@Override
+	public int getType() {
+		return -1;
+	}
+
+	@Override
+	public int getPriority() {
+		return 0;
+	}
+
+	@Override
+	protected void evaluateSelf(DContext instance) throws DException {
+		TokenBase child = getChild(1);
+		child.evaluate(instance);
+		resultValue = child.resultValue;
+		resultMaxValue = child.resultMaxValue;
+		resultMinValue = child.resultMinValue;
+		resultString = child.resultString;
+	}
+	
+	@Override
+	protected void setParent(TokenBase parent) {
+		super.setParent(null); //Root can't got a parent!
+	}
+	
+//	public TokenBase getRoot() {
+//		return getChild(1);
+//	}
+//	
+//	public void setRoot(TokenBase root) {
+//		setChild(root, 1);
+//	}
+
 }

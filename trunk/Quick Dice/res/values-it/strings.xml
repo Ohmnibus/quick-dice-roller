@@ -20,6 +20,7 @@
 	<string name="lblCheckExpression">Controlla formula</string>
 	<string name="lblCheckPassed">La formula del dado è CORRETTA.</string>
 	<string name="lblIconPicker">Scegli un\'Icona</string>
+	<string name="lblNewIconPicker">Scegli l\'immagine per l\'Icona</string>
 	<string name="lblDiceIconPicker">Icona del dado</string>
 	<string name="lblBagIconPicker">Icona della collezione</string>
 	<string name="lblVariableIconPicker">Icona del valore denominato</string>
@@ -77,7 +78,8 @@
 	<string name="lblSelectVariable">Scegli un valore denominato</string>
 	<string name="lblSelectFunction">Scegli una funzione</string>
 	<string name="lblSelectVariableNone">Questa collezione non contiene nessun valore denominato.</string>
-		
+	<string name="lblCustomIconsOnly">Mostra solo icone personalizzate</string>
+
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
 	<string name="lblKb">Kb</string><!-- Short for Kilobyte -->
@@ -91,6 +93,8 @@
 	<string name="lblDone">Fatto</string>
 	
 	<string name="lblUndo">Annulla</string>
+
+	<string name="msgInitApp">Caricamento dati&#8230;</string>
 	
 	<string name="msgRemoveDiceTitle">Elimina dado</string>
 	<string name="msgRemoveDice">Sei sicuro di voler eliminare definitivamente il dado \"%1$s\"?</string>
@@ -112,6 +116,12 @@
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Immagine di sfondo personalizzata<br />
+&bull; Supporto al sistema Aeon IV<br />
+&bull; Supporto al sistema Rolemaster<br />
+&bull; Correzioni e miglioramenti minori<br />
+<br />
+Versione 2.0.3b:<br />
 &bull; Migliorata la funzione "pool"<br />
 &bull; Risolto errore nelle Icone personalizzate<br />
 &bull; Risolto doppio menu per i risultati<br />
@@ -125,13 +135,14 @@ Versione 2.0.2b:<br />
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
 Copyright (c) 2012-2014 by %3$s<br />
 <br />
-<a href="https://crowdin.com/project/quick-dice-roller">Traduzioni</a>: Stefania M. (ES), Magaolimpia (FR), Henning (DE), Renato Rasta (PT-BR)<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Traduzioni</a>: %4$s<br />
 <br />
 Segnala eventuali errori all\'indirizzo <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
 Questa è un\'app gratuita, ma se ti piace perché non offrirmi una birra?<br />
 <br />
 Grazie!<br />]]></string>
+	<!-- <string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Stefania M. (ES)</string> -->
 	
 	<string name="msgLicenses">Licenze</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> è pubblicato da %3$s su <a href="%4$s">%5$s</a>.<br />]]></string>
@@ -164,7 +175,6 @@ Grazie!<br />]]></string>
 	<string name="msgMaxVariablesReach">Non è possibile aggiungere altri valori denominati.</string>
 	<string name="msgOnlineHelpTitle">Riferimento rapido</string>
 	<string name="msgOnlineHelp">Consulta l\'aiuto in linea</string>
-	<string name="msgOnlineHelpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02</string>
 	<string name="msgCannotRead">Impossibile leggere il contenuto della cartella (o comunque una parte)</string>
 	<string name="msgFileNameInvalid">Il nome del documento \"%1$s\" non è valido.</string>
 	<string name="msgFileNameExists">Esiste già un documento chiamato \"%1$s\". Sei sicuro di volerlo sovrasrivere?</string>
@@ -174,12 +184,19 @@ Grazie!<br />]]></string>
 	<string name="msgRemoveVar">Sei sicuro di voler eliminare definitivamente il valore denominato \"%1$s\"?</string>
 	<string name="msgRemoveUsedVar">Il valore denominato \"%1$s\" è utilizzato da \"%2$s\".\nEliminando il valore il dado non potrà più essere usato. Procedere comunque?</string>
 	<string name="msgRemoveMultiUsedVar">Il valore denominato \"%1$s\" è utilizzato da \"%2$s\".\nEliminando il valore i dadi non potranno più essere usati. Procedere comunque?</string>
-
+	<string name="msgRemoveIconTitle">Elimina icona</string>
+	<string name="msgRemoveIconUnused">Eliminare quest\'icona definitivamente?</string>
+	<string name="msgRemoveIconUsed">Quest\'icona è utilizzata %1$d volta(e). Sicuro di volerla eliminare?</string>
+	<string name="msgRemoveIconSystem">Quest\'icona non può essere eliminata.</string>
+	<string name="msgCannotImportIcon">Spiacente, non posso importare l\'immagine selezionata come Icona Personalizzata.</string>
+	<string name="msgIconAlreadyExists">Un\'Icona Personalizzata identica esiste già.</string>
+	
 	<string name="mnuAddDice">Aggiungi dado</string>
 	<string name="mnuAddDiceHere">Aggiungi dado qui</string>
 	<string name="mnuClearAllResults">Elimina tutti i risultati</string>
 	<string name="mnuUndoClearAllResult">Ripristina tutti i risultati</string>
 	<string name="mnuSettings">Impostazioni</string>
+	<string name="mnuQuickStart">Guida Introduttiva</string>
 	<string name="mnuAbout">Info</string>
 	<string name="mnuSuggest">Invia suggerimento</string>
 	<string name="mnuRemove">Elimina dado</string>
@@ -217,7 +234,7 @@ Grazie!<br />]]></string>
 	<!-- Functions -->
 	<string name="fncBASHName">BASH!</string>
 	<string name="fncBASHDesc">Effettua un test con il sistema BASH!</string>
-	<string name="fncBASHURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#bash</string>
+	<!--  -->
 	<string-array name="fncBASHParamNames">
 		<item>Numero di Dadi</item>
 		<item>Dado</item>
@@ -229,7 +246,7 @@ Grazie!<br />]]></string>
 				
 	<string name="fncBWheelName">Burning Wheel</string>
 	<string name="fncBWheelDesc">Effettua un test con il sistema Burning Wheel.</string>
-	<string name="fncBWheelURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
+	<!--  -->
 	<string-array name="fncBWheelParamNames">
 		<item>Dado</item>
 		<item>Numero di Dadi</item>
@@ -245,7 +262,7 @@ Grazie!<br />]]></string>
 				
 	<string name="fncDWarsName">Dystopian Wars</string>
 	<string name="fncDWarsDesc">Effettua un tesr con il sistema Dystopian Wars.</string>
-	<string name="fncDWarsURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
+	<!--  -->
 	<string-array name="fncDWarsParamNames">
 		<item>Dado</item>
 		<item>Numero di Dadi</item>
@@ -261,7 +278,7 @@ Grazie!<br />]]></string>
 				
 	<string name="fncHEROName">HERO</string>
 	<string name="fncHERODesc">Lancia un certo numero di d6 e restituisce il danno totale ed il danno body.</string>
-	<string name="fncHEROURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#hero</string>
+	<!--  -->
 	<string-array name="fncHEROParamNames">
 		<item>Numero di Dadi</item>
 	</string-array>
@@ -271,7 +288,7 @@ Grazie!<br />]]></string>
 				
 	<string name="fncExalName">Exalted</string>
 	<string name="fncExalDesc">Esegue un check usando il sistema di Exalted.</string>
-	<string name="fncExalURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exal</string>
+	<!--  -->
 	<string-array name="fncExalParamNames">
 		<item>Numero di Dadi</item>
 		<item>Difficoltà</item>
@@ -283,7 +300,7 @@ Grazie!<br />]]></string>
 				
 	<string name="fncExpName">Aperto</string>
 	<string name="fncExpDesc">Esegue un tiro aperto. Si rilancia se si raggiungono le soglie specificate.</string>
-	<string name="fncExpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#exp</string>
+	<!--  -->
 	<string-array name="fncExpParamNames">
 		<item>Dado</item>
 		<item>Soglia superiore</item>
@@ -301,7 +318,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncExpUpName">Esplosivo</string>
 	<string name="fncExpUpDesc">Esegue un tiro esplosivo. Si rilancia se si raggiunge il risultato specificato.</string>
-	<string name="fncExpUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
+	<!--  -->
 	<string-array name="fncExpUpParamNames">
 		<item>Primo dado</item>
 		<item>Soglia iniziale</item>
@@ -317,33 +334,9 @@ Grazie!<br />]]></string>
 		<item>Max n° di rilanci</item>
 	</string-array>
 
-	<string name="fncExplodeName">Aperto</string>
-	<string name="fncExplodeDesc">Esegue un tiro aperto considerando una tolleranza. Si rilancia se si ottengono valori alti o bassi.</string>
-	<string name="fncExplodeURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explode</string>
-	<string-array name="fncExplodeParamNames">
-		<item>Dado</item>
-		<item>Tolleranza</item>
-	</string-array>
-	<string-array name="fncExplodeParamHints">
-		<item>Dado da lanciare</item>
-		<item>Probabilità di rilancio</item>
-	</string-array>
-
-	<string name="fncExplodeUpName">Aperto Su</string>
-	<string name="fncExplodeUpDesc">Esegue un tiro aperto considerando una tolleranza. Si rilancia solo se si ottengono valori alti.</string>
-	<string name="fncExplodeUpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
-	<string-array name="fncExplodeUpParamNames">
-		<item>Dado</item>
-		<item>Tolleranza</item>
-	</string-array>
-	<string-array name="fncExplodeUpParamHints">
-		<item>Dado da lanciare</item>
-		<item>Probabilità di rilancio</item>
-	</string-array>
-
 	<string name="fncMaxName">Massimo</string>
 	<string name="fncMaxDesc">Restituisce il più alto tra due valori.</string>
-	<string name="fncMaxURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#max</string>
+	<!--  -->
 	<string-array name="fncMaxParamNames">
 		<item>Primo valore</item>
 		<item>Secondo valore</item>
@@ -355,7 +348,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncMinName">Minimo</string>
 	<string name="fncMinDesc">Restituisce il più basso tra due valori.</string>
-	<string name="fncMinURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#min</string>
+	<!--  -->
 	<string-array name="fncMinParamNames">
 		<item>Primo valore</item>
 		<item>Secondo valore</item>
@@ -367,7 +360,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncRandName">Casuale</string>
 	<string name="fncRandDesc">Restituisce un valore casuale tra i due indicati.</string>
-	<string name="fncRandURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rand</string>
+	<!--  -->
 	<string-array name="fncRandParamNames">
 		<item>Primo valore</item>
 		<item>Secondo valore</item>
@@ -379,7 +372,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncNwodName">Nuovo MdT</string>
 	<string name="fncNwodDesc">Esegue un test secondo le regole del Nuovo Mondo di Tenebra.</string>
-	<string name="fncNwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
+	<!--  -->
 	<string-array name="fncNwodParamNames">
 		<item>Numero di Dadi</item>
 		<item>Difficoltà</item>
@@ -391,7 +384,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncOwodName">Vecchio MdT</string>
 	<string name="fncOwodDesc">Esegue un test secondo le regole del Vecchio Mondo di Tenebra.</string>
-	<string name="fncOwodURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#owod</string>
+	<!--  -->
 	<string-array name="fncOwodParamNames">
 		<item>Numero di Dadi</item>
 		<item>Difficoltà</item>
@@ -403,21 +396,29 @@ Grazie!<br />]]></string>
 
 	<string name="fncPoolName">Riserva di Dadi</string>
 	<string name="fncPoolDesc">Restituisce il numero di volte in cui il lancio è meggiore o uguale alla difficoltà.</string>
-	<string name="fncPoolURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#pool</string>
+	<!--  -->
 	<string-array name="fncPoolParamNames">
 		<item>Dado</item>
 		<item>Numero di lanci</item>
 		<item>Difficoltà</item>
+		<item>Successo extra</item>
+		<item>Errore</item>
+		<item>Esplosione</item>
+		<item>Limite esplosioni</item>
 	</string-array>
 	<string-array name="fncPoolParamHints">
 		<item>Dado da lanciare</item>
 		<item>Numero di lanci da fare</item>
-		<item>Valore minimo da ottenere</item>
+		<item>Min per un successo</item>
+		<item>Min per un successo extra</item>
+		<item>Max per perdere un successo</item>
+		<item>Min per un lancio extra</item>
+		<item>Massimo lanci extra</item>
 	</string-array>
 
 	<string name="fncRakName">Lancia e Tieni</string>
 	<string name="fncRakDesc">Lancia un tot di dadi ma ne tiene solo un sottoinsieme.</string>
-	<string name="fncRakURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rak</string>
+	<!--  -->
 	<string-array name="fncRakParamNames">
 		<item>Dado</item>
 		<item>Numero di lanci</item>
@@ -431,7 +432,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncRdnName">Arrotonda per Difetto</string>
 	<string name="fncRdnDesc">Arrotonda il valore per difetto.</string>
-	<string name="fncRdnURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
+	<!--  -->
 	<string-array name="fncRdnParamNames">
 		<item>Valore</item>
 	</string-array>
@@ -441,7 +442,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncRupName">Arrotonda per Eccesso</string>
 	<string name="fncRupDesc">Arrotonda il valore per eccesso.</string>
-	<string name="fncRupURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#rup</string>
+	<!--  -->
 	<string-array name="fncRupParamNames">
 		<item>Valore</item>
 	</string-array>
@@ -451,7 +452,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncAbsName">Assoluto</string>
 	<string name="fncAbsDesc">Restituisce l\'assoluto (modulo) del valore specificato.</string>
-	<string name="fncAbsURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#abs</string>
+	<!--  -->
 	<string-array name="fncAbsParamNames">
 		<item>Valore</item>
 	</string-array>
@@ -461,7 +462,7 @@ Grazie!<br />]]></string>
 
 	<string name="fncShRun4Name">Shadowrun 4</string>
 	<string name="fncShRun4Desc">Esegue un check secondo le regole di Shadowrun 4.</string>
-	<string name="fncShRun4URL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#shrun4</string>
+	<!--  -->
 	<string-array name="fncShRun4ParamNames">
 		<item>Dado</item>
 		<item>Numero di Dadi</item>
@@ -479,7 +480,7 @@ Grazie!<br />]]></string>
 	
 	<string name="fncShRun5Name">Shadowrun 5</string>
 	<string name="fncShRun5Desc">Esegue un check secondo le regole di Shadowrun 5.</string>
-	<string name="fncShRun5URL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02#shrun5</string>
+	<!--  -->
 	<string-array name="fncShRun5ParamNames">
 		<item>Dado</item>
 		<item>Numero di Dadi</item>
@@ -495,6 +496,38 @@ Grazie!<br />]]></string>
 		<item>Valore usato per calcolare i glitch</item>
 	</string-array>
 
+	<string name="fncBranchName">Aeon</string>
+	<string name="fncBranchDesc">Ogni lancio può esplodere in due o più lanci.</string>
+	<!--  -->
+	<string-array name="fncBranchParamNames">
+		<item>Dado</item>
+		<item>Numero di Dadi</item>
+		<item>Soglia</item>
+		<item>Rilanci</item>
+	</string-array>
+	<string-array name="fncBranchParamHints">
+		<item>Dado da lanciare</item>
+		<item>Numero di dadi da lanciare</item>
+		<item>Min per esplodere</item>
+		<item>Rilanci se esplode</item>
+	</string-array>
+	
+	<string name="fncRolemasterName">Rolemaster</string>
+	<string name="fncRolemasterDesc">Effettua un tiro aperto secondo le regole di Rolemaster.</string>
+	<!-- <string name="fncRolemasterURL">rolemaster</string> -->
+	<string-array name="fncRolemasterParamNames">
+		<item>Dado</item>
+		<item>Soglia</item>
+		<item>Errore</item>
+		<item>Limite</item>
+	</string-array>
+	<string-array name="fncRolemasterParamHints">
+		<item>Dado da lanciare</item>
+		<item>Min per rilanciare</item>
+		<item>Max per invertire</item>
+		<item>Max rilanci</item>
+	</string-array>
+	
 	<!-- Errors -->
 	<string name="err_cannot_update">Impossibile aggiornare le definizioni dei dadi.</string>
 	<string name="err_cannot_read">Impossibile leggere le definizioni dei dadi. Verranno usati quelli predefiniti.</string>
@@ -599,8 +632,6 @@ Grazie!<br />]]></string>
 	<string name="pref_aspect_mod_desc">Mostra la barra per applicare rapidamente modifiche ai lanci.</string>
 	<string name="pref_aspect_popup_title">Sovraimpressione</string>
 	<string name="pref_aspect_popup_desc">Mostra il risultato del lancio in sovraimpressione.</string>
-	<!-- obsolete --><string name="pref_aspect_plain_bg_title">Disabilita sfondo</string>
-	<!-- obsolete --><string name="pref_aspect_plain_bg_desc">Richiede il riavvio. Disabilita l\'immagine di sfondo per migliorare le prestazioni.</string>
 	<string name="pref_aspect_theme_title">Tema</string>
 	<string name="pref_aspect_theme_dyn_desc">Usa il tema %1$s.</string>
 	<string name="pref_aspect_theme_dlg_title">Quale tema applicare?</string>
@@ -616,6 +647,8 @@ Grazie!<br />]]></string>
 	<string name="pref_aspect_sound_desc">Abilita il suono del lancio del dado.</string>
 	<string name="pref_aspect_ext_sound_title">Suoni extra</string>
 	<string name="pref_aspect_ext_sound_desc">Utilizza suoni differenti per evidenziare successi critici e fallimenti catastrofici.</string>
+	<string name="pref_aspect_tts_title">Abilita la sintesi vocale</string>
+	<string name="pref_aspect_tts_desc">Abilita o disabilita la sintesi vocale dell\'ultimo risultato.</string>
 	<string name="pref_aspect_swapdesc_title">Scambia nome e risultato</string>
 	<string name="pref_aspect_swapdesc_desc">Scambia il nome del dado con il suo risultato esteso.</string>
 	<string name="pref_behaviour">Comportamento</string>
@@ -623,6 +656,9 @@ Grazie!<br />]]></string>
 	<string name="pref_behaviour_wakelock_desc">Mantieni lo schermo attivo mentre usi l\'app.</string>
 	<string name="pref_aspect_keyboard_title">Usa la tastiera speciale</string>
 	<string name="pref_aspect_keyboard_desc">Usa la tastiera speciale per la scrittura delle formule.</string>
-	
+	<string name="pref_aspect_custom_bg_flag_title">Usa lo sfondo personalizzato</string>
+	<string name="pref_aspect_custom_bg_flag_desc">Usa un\'immagine personalizzata per lo sfondo.</string>
+	<string name="pref_aspect_custom_bg_image_title">Cambia l\'immagine di sfondo</string>
+		
 	<string name="kbd_next">Avanti</string><!-- Keep this short! Max 4 char! -->
 </resources>

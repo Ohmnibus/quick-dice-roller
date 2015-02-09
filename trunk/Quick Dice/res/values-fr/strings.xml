@@ -135,7 +135,6 @@ Merci!<br />]]></string>
   <string name="msgMaxVariablesReach">Vous ne pouvez pas ajouter d\'autres valeurs nommées.</string>
   <string name="msgOnlineHelpTitle">Référence rapide</string>
   <string name="msgOnlineHelp">Consultez l\'aide en ligne</string>
-  <string name="msgOnlineHelpURL">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02</string>
   <string name="msgCannotRead">C\'est impossible de lire le contenu d\'un répertoire (ou une partie de celui-ci)</string>
   <string name="msgFileNameInvalid">Le nom du fichier \"%1$s\" n\'est pas valide.</string>
   <string name="msgFileNameExists">Le nom du fichier \"%1$s\" existe déjà. Êtes-vous sûr de vouloir écraser ce fichier?</string>
@@ -185,7 +184,6 @@ Merci!<br />]]></string>
   <string name="mnuOpenVariableDrawer">Voir les valeurs nommées</string>
   <string name="fncBASHName">BASH!</string>
   <string name="fncBASHDesc">Il effectue un test en utilisant le système BASH!</string>
-  <string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
   <string-array name="fncBASHParamNames">
     <item>Nombre de dés</item>
     <item>Dé</item>
@@ -196,7 +194,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncBWheelName">Burning Wheel</string>
   <string name="fncBWheelDesc">Il effectue un test en utilisant le système Burning Wheel.</string>
-  <string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
   <string-array name="fncBWheelParamNames">
     <item>Dé</item>
     <item>Nombre de dés</item>
@@ -211,7 +208,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncDWarsName">Dystopian Wars</string>
   <string name="fncDWarsDesc">Il effectue un test en utilisant le système Dystopian Wars.</string>
-  <string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
   <string-array name="fncDWarsParamNames">
     <item>Dé</item>
     <item>Nombre de dés</item>
@@ -226,7 +222,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncHEROName">HERO System</string>
   <string name="fncHERODesc">Il lance un certain nombre de d6 et renvoie le dommage total et le dommage BODY.</string>
-  <string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
   <string-array name="fncHEROParamNames">
     <item>Nombre de dés</item>
   </string-array>
@@ -235,7 +230,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncExalName">Exaltés</string>
   <string name="fncExalDesc">Il effectue un test en utilisant le système Exaltés.</string>
-  <string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
   <string-array name="fncExalParamNames">
     <item>Nombre de dés</item>
     <item>Niveau de difficulté</item>
@@ -246,7 +240,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncExpName">Ouvert</string>
   <string name="fncExpDesc">Effectue un tir ouvert. On rélance si on remplisse les limites spécifiés.</string>
-  <string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
   <string-array name="fncExpParamNames">
     <item>Dé</item>
     <item>Limite supérieur</item>
@@ -263,7 +256,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncExpUpName">Explosif</string>
   <string name="fncExpUpDesc">Effectue un tir explosif. Il relance si on atteigne le résultat spécifié.</string>
-  <string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
   <string-array name="fncExpUpParamNames">
     <item>Premier dé</item>
     <item>Seuil initial</item>
@@ -280,7 +272,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncExplodeName">Ouvert</string>
   <string name="fncExplodeDesc">Il effectue un éclatement compte tenu d\'une tolérance. Il est relancé si vous obtenez des valeurs élevées ou basses.</string>
-  <string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
   <string-array name="fncExplodeParamNames">
     <item>Dé</item>
     <item>Tolérance</item>
@@ -291,7 +282,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncExplodeUpName">Ouvert au dessus</string>
   <string name="fncExplodeUpDesc">Il effectue un éclatement compte tenu d\'une tolérance. Il est relancé seulement si vous obtenez des valeurs élevées ou basses.</string>
-  <string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
   <string-array name="fncExplodeUpParamNames">
     <item>Dé</item>
     <item>Tolérance</item>
@@ -302,7 +292,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncMaxName">Maximum</string>
   <string name="fncMaxDesc">Il retourne la plus grande des deux valeurs.</string>
-  <string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
   <string-array name="fncMaxParamNames">
     <item>La première valeu</item>
     <item>La deuxième valeur</item>
@@ -313,7 +302,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncMinName">Minimum</string>
   <string name="fncMinDesc">Il retourne la plus petite des deux valeurs.</string>
-  <string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
   <string-array name="fncMinParamNames">
     <item>La première valeu</item>
     <item>La deuxième valeur</item>
@@ -324,7 +312,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncRandName">Aléatoire</string>
   <string name="fncRandDesc">Il retourne un nombre aléatoire entre deux valeurs.</string>
-  <string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
   <string-array name="fncRandParamNames">
     <item>La première valeu</item>
     <item>La deuxième valeur</item>
@@ -335,7 +322,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncNwodName">Nouveau MdT</string>
   <string name="fncNwodDesc">Il effectue un test avec les règles du nouveau Monde des Ténèbres.</string>
-  <string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
   <string-array name="fncNwodParamNames">
     <item>Nombre de dés</item>
     <item>Difficulté</item>
@@ -346,7 +332,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncOwodName">Vieux MdT</string>
   <string name="fncOwodDesc">Il effectue un test avec les règles du vieux Monde des Ténèbres</string>
-  <string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
   <string-array name="fncOwodParamNames">
     <item>Nombre de dés</item>
     <item>Difficulté</item>
@@ -357,7 +342,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncPoolName">Réserve de dés</string>
   <string name="fncPoolDesc">Il retourne le nombre de fois où le lancement est meggiore ou égale à la difficulté.</string>
-  <string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
   <string-array name="fncPoolParamNames">
     <item>Dé</item>
     <item>Dé à lancer</item>
@@ -370,7 +354,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncRakName">Lancer et maintener</string>
   <string name="fncRakDesc">Il lance un certain nombre de dés, mais il ne garde qu\'un sous-ensemble.</string>
-  <string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
   <string-array name="fncRakParamNames">
     <item>Dé</item>
     <item>Nombre de lances</item>
@@ -383,7 +366,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncRdnName">Arrondir par défaut</string>
   <string name="fncRdnDesc">Il arrondit la valeur par défaut.</string>
-  <string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
   <string-array name="fncRdnParamNames">
     <item>Valeur</item>
   </string-array>
@@ -392,7 +374,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncRupName">Arrondir par excès</string>
   <string name="fncRupDesc">Il arrondit la valeur par excès</string>
-  <string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
   <string-array name="fncRupParamNames">
     <item>Valeur</item>
   </string-array>
@@ -401,7 +382,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncAbsName">Absolue</string>
   <string name="fncAbsDesc">Il renvoie l\'absolue (module) de la valeur spécifiée.</string>
-  <string name="fncAbsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs</string>
   <string-array name="fncAbsParamNames">
     <item>Valeur</item>
   </string-array>
@@ -410,7 +390,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncShRun4Name">Shadowrun 4</string>
   <string name="fncShRun4Desc">Effectue une vérification selon les règles de Shadowrun 4.</string>
-  <string name="fncShRun4URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun4</string>
   <string-array name="fncShRun4ParamNames">
     <item>Dé</item>
     <item>Nombre de dés</item>
@@ -427,7 +406,6 @@ Merci!<br />]]></string>
   </string-array>
   <string name="fncShRun5Name">Shadowrun 5</string>
   <string name="fncShRun5Desc">Effectue une vérification selon les règles de Shadowrun 5.</string>
-  <string name="fncShRun5URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun5</string>
   <string-array name="fncShRun5ParamNames">
     <item>Dé</item>
     <item>Nombre de dés</item>

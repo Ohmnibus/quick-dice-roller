@@ -19,13 +19,6 @@ public class TokenFunctionExplode extends TokenFunctionExplodeBase {
 		return 22;
 	}
 
-//	@Override
-//	protected void evaluateSelf(DContext instance) throws DException {
-//		getChild(INDEX_TOLERANCE).evaluate(instance);
-//		
-//		evaluateExplode(instance, getChild(INDEX_ROLL), getChild(INDEX_TOLERANCE).getResult(), true);
-//	}
-
 	@Override
 	protected void evaluateSelf(DContext instance) throws DException {
 		TokenBase token;
@@ -35,7 +28,6 @@ public class TokenFunctionExplode extends TokenFunctionExplodeBase {
 		
 		token = getChild(INDEX_TOLERANCE);
 		token.evaluate(instance);
-		//tolerance = token.getRawResult();
 		tolerance = token.getRawResult() - VALUES_PRECISION_FACTOR; //tolerance - 1
 		
 		token = getChild(INDEX_ROLL);

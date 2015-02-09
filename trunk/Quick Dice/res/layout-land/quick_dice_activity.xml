@@ -15,6 +15,11 @@
 		android:layout_height="match_parent"
 		>
 
+		<ImageView style="@style/CustomBackground"
+			android:id="@+id/mCutomBackground"
+			android:visibility="gone"
+			/>
+
 		<ImageView style="?attr/ohmLokLogoEmboss"
 			android:contentDescription="@string/app_name"
 			/>
