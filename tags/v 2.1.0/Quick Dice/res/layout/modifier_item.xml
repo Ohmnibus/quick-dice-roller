@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@android:drawable/list_selector_background" >
+
+	<FrameLayout
+		android:layout_width="52dp"
+		android:layout_height="48dp" >
+
+		<ImageView
+			android:id="@+id/miIcon"
+			android:layout_width="46dp"
+			android:layout_height="46dp"
+			android:layout_gravity="center"
+			android:src="@drawable/ic_mod_bonus"
+			android:contentDescription="@null"
+			/>
+
+		<TextView
+			android:id="@+id/miValue"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:ellipsize="marquee"
+			android:marqueeRepeatLimit="marquee_forever"
+			android:maxWidth="46dp"
+			android:shadowColor="@color/modifier_number_shadow"
+			android:shadowDx="0"
+			android:shadowDy="0"
+			android:shadowRadius="2.0"
+			android:singleLine="true"
+			android:text="@string/lblOk"
+			android:textColor="@color/modifier_number_color"
+			android:textSize="24dp"
+			android:textStyle="bold"
+			/>
+	</FrameLayout>
+
+</FrameLayout>

@@ -1,0 +1,99 @@
+##Title:30##
+Quick Dice Roller
+
+##Description:4000##
+Quick Dice Roller is an app made for the tabletop RPG Geek. It allows to emulate almost all the complex dice rolls required by RPG and board games.
+
+The dice can be added at will and organized in dice bags. Each die is defined by a formula such as <i>2d6+5</i> as well as special functions like <i>rak(1d6,4,3)</i> that allow to emulates the most complex game systems. An handy formulas builder simplifies the process, and allow to access to an online help. Check the list of all supported functions here: http://goo.gl/mZkcQS
+
+Thanks to "named values", as well as keep track of games scores, you can define formulas using variable parameters. You can create, for example, the named value "Level" with label "lvl", then use the formula <i>(lvl)d6</i> to determine the fireball damage. So when your mage level up you don't need to edit the formula: just change the "Level" value!
+
+<b>What you can do with Quick Dice Roller:</b>
+
+★ Roll dice with a touch
+★ Organize dice in dice bags
+★ Use same formulas you're familiar to (<i>xdy+z</i>)
+★ Keep track of scores and use them in formulas
+★ Read or listen the roll result in a clear way
+★ Check the goodness of the rolls made
+★ Apply modifiers on the fly with a touch
+★ Sum a roll to the previous automagically or on demand
+★ Paste last roll result from the clipboard in another app
+★ Keep track of last rolls made
+
+<b>Other features of Quick Dice Roller</b>
+
+○ Simple and intuitive Formulas Builder
+○ Many functions to emulate main systems
+○ Online help
+○ Read aloud the last result
+○ Sound notifications
+○ Highly customizable
+○ Friendly and reliable developer :P
+○ Persistence of data among various installations*
+○ Import and export dice and dice bags definitions**
+
+<b>Some of currently supported systems</b>
+
+☆ 13th Age
+☆ Arcan Myth
+☆ Aeon IV
+☆ BASH!
+☆ Burning Wheel
+☆ Call of Cthulhu
+☆ Deadlands
+☆ Dungeon World
+☆ Dungeons & Dragons (all editions)
+☆ Dungeonslayers
+☆ Dystopian Wars
+☆ Exalted
+☆ Feng Shui
+☆ GURPS
+☆ HERO System
+☆ Legend of the five rings
+☆ Lords of Knowledge
+☆ MERP
+☆ Numenera
+☆ Pathfinder
+☆ Rolemaster
+☆ Savage Worlds
+☆ Shadowrun
+☆ Star Wars
+☆ Traveller
+☆ World of Darkness
+
+...and many more!
+
+Quick Dice Roller is a free and open source application for Android. Everyone can (and is invited to) contribute to its development in one or more of the following ways:
+
+• Join the official community on Google+ → http://goo.gl/atlhS9
+• Become a beta tester for trialling of new features → http://goo.gl/UuJBSO
+• Improve translations or add new ones → http://goo.gl/9ySLIO
+• Check the source code for bug hunting (or for fun) → http://goo.gl/06fEHI
+• Make your friends know about Quick Dice Roller
+
+
+*The availability of data and preferences backup depends on the device's manufacturer, and is only supported on Android 2.2 or later.
+
+**This feature requires reading and writing to external storage.
+
+Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, Open, OSR, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, WhiteWholf
+
+##Recent Changes:500##
+- Custom background
+- Custom icons
+- Speech synthesis
+- New function "aeon" to support Aeon IV
+- New function "rolemaster" to support Rolemaster
+- Improved "pool" function
+- Improved online reference
+- Fix: Double popup menu spawning
+- Minor fix and improvements
+
+##Promo Text:80##
+The flexible, complete and handy dice roller for boardgame & RPG geeks.
+
+## APPIA ##
+
+## Keywords:10 ##
+Dice, Dice Roller, Rpg, Free, WhiteWholf, Vampire, Exalted, D20, D&D

@@ -1,0 +1,90 @@
+##Title:30##
+Schnell würfeln
+
+##Description:4000##
+Schnell würfeln (Quick Dice Roller) ist eine App für Geek, die mit RPG und Tischspielen tätig sind. Sie kann den Wurf des Würfels der meisten Spiel-Systeme simulieren, so viel sie komplex sein mögen.
+
+Die Würfel können beliebig hinzugefügt und in Sammlungen organisiert werden. Jeder Würfel ist durch eine Formel, wie <i>2w6+5</i>, definiert; zudem ist es möglich mit speziellen Funktionen, wie <i>rak(1w6,4,3)</i>,  komplexeste Spiel-Systeme zu emulieren. Ein handlicher Formeln-Generator vereinfacht den Prozess und bietet Zugriff auf eine online-Hilfe. Überprüfen Sie die Liste aller unterstützten Funktionen hier: http://goo.gl/mZkcQS
+
+MIttels "benannte Werte", können Sie Formeln mit variablen Parametern definieren, sowie die Punktzahl des Spieles verfolgen. Sie können zum Beispiel den benannten Wert "Niveau", mit Bezeichnung "niv", erstellen und dann die Formel "(niv)w6" verwenden um die Feuerball-Schaden zu bestimmen. Wenn nun das Niveau ihres Magiers steigt, müssen Sie nicht die Formel ändern sondern können einfach nur den Wert "Niveau" ändern!
+
+<b>Was können Sie mit Schnell würfeln machen:</b>
+
+★ Würfeln mit einem touch
+★ Würfel in Sammlungen organisieren
+★ Gewohnte Formeln verwenden (<i>XwY + Z</i>)
+★ Ergebnisse verfolgen und sie in Formeln verwenden
+★ Dar Roll-Ergebnis ablesen oder verständlich vorlesen lassen
+★ Die Qualität des Wurfes überprüfen
+★ Modifizierer direkt mit einem touch anwenden
+★ Das letzte Würfel-Ergebnis zum Vorherigen automagically oder auf Anfrage addieren
+★ Das letzte Würfel-Ergebnis in einer anderen App einfügen
+★ Den Überblick über die letzten Würfel-Ergebnisse behalten
+
+<b>Weitere Merkmale von Schnell würfeln</b>
+
+○ Einfacher und intuitiver Formeln-Generator
+○ Viele Funktionen von Hauptsystemen emulieren
+○ Online-Hilfe
+○ Das letzte Würfel-Ergebnis vorlesen
+○ Akustische Benachrichtigungen
+○ In hohem Grade anpassbar
+○ Freundlicher und zuverlässiger Entwickler :P
+○ Persistenz von Daten zwischen verschiedenen Installationen*
+○ Import und Export von den Würfel und Definitionen für Würfel-Sammlungen**
+
+<b>Einige der derzeit unterstützten Systeme</b>
+
+☆ 13th Age
+☆ Arcan Myth
+☆ Aeon IV
+☆ BASH!
+☆ Burning Wheel
+☆ Call of Cthulhu
+☆ Deadlands
+☆ Dungeon World
+☆ Verliese und Drachen (alle Ausgaben)
+☆ Dungeonslayers
+☆ Dystopian Wars
+☆ Die Hohen
+☆ Feng Shui
+☆ GURPS
+☆ HERO System
+☆ Legende der fünf Ringe
+☆ Lords of Knowledge
+☆ MERS
+☆ Numenera
+☆ Pathfinder
+☆ Rolemaster
+☆ Wilde Welten
+☆ Shadowrun
+☆ StarWars
+☆ Traveller
+☆ Welt der Dunkelheit
+
+...und viele andere!
+
+Schnell würfeln ist eine freie und Open Source App für Android. Jeder kann, und wird natürlich dazu eingeladen, Entwicklung in einer oder mehreren der folgenden Weisen beizutragen:
+
+• Treten Sie der offiziellen Community auf Google bei + → http://goo.gl/atlhS9
+• Werden Sie Beta-Tester für die Erprobung von neuen Funktionen → http://goo.gl/UuJBSO
+• Übersetzungen verbessern oder neue hinzufügen → http://goo.gl/9ySLIO
+• Überprüfen Sie den Source Code für Fehlersuche (oder zum Spaß) → http://goo.gl/06fEHI
+• Berichte deinen Freunden von Schnell würfeln
+
+
+* Die Verfügbarkeit von Daten und Einstellungen Backup hängt von den Hersteller des Geräts und wird nur auf Android 2.2 oder höher unterstützt.
+
+** Für diese Funktion müssen Sie Lese- und Schreibzugriff auf den externen Speicher haben.
+
+Stichwörter: Brettspiel, D&D, D20, Würfel, Dungeon World, Verliese und Drachen, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, offen, ASR, Pathfinder, Pool, Rollenspiel, Roll and Keep, würfeln, RPG, Tabletop, Vampire, WhiteWholf
+
+##Recent Changes:500##
+
+##Promo Text:80##
+Die flexibel, vollständig und handliche würfeln-Helfer für Brettspiel und RPG.
+
+## APPIA ##
+
+## Keywords:10 ##
+Würfel, würfeln, RPG, kostenlos, WhiteWholf, Vampire, Exalted, D20, D&D

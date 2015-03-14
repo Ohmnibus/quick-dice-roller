@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" >
+
+	<!-- layout_height = desired height + paddingTop -->
+	<ImageView
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+		
+		android:layout_centerHorizontal="true"
+		android:layout_alignTop="@+id/diIcon"
+		
+		android:paddingTop="36dp"
+		android:scaleType="fitXY"
+		/>
+
+	<ImageView style="@style/Dice.Icon"
+		android:id="@+id/diIcon"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+
+		android:layout_centerHorizontal="true"
+		android:layout_alignParentTop="true"
+
+		android:src="@drawable/ic_dxx_gray"
+		android:scaleType="fitXY"
+		/>
+
+	<TextView style="@style/Dice.Label"
+		android:id="@+id/diName"
+
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+
+		android:layout_centerHorizontal="true"
+		android:layout_alignTop="@+id/diIcon"
+
+		android:paddingTop="38dp"
+
+		android:text="@string/lblD"
+		/>
+
+</RelativeLayout>

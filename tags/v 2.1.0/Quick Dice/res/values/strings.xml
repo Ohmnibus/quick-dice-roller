@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">Quick Dice Roller</string>
+	<string name="app_author">Ohmnibus</string><!-- No need to translate -->
+
+	<string name="lblName">Name</string>
+	<string name="hintName">Identifies the die</string>
+	<string name="lblDesc">Description</string>
+	<string name="hintDesc">Optional description for the die</string>
+	<string name="lblIcon">Icon</string>
+	<string name="lblExp">Formula</string>
+	<string name="hintExp">Define the die roll, like 3d6+4</string>
+	<string name="lblRangeValue">Values</string>
+	<string name="lblCannotEvaluate">Cannot evaluate</string>
+	<string name="lblResultText">Extended result</string>
+	<string name="lblResultValue">Numeric Result</string>
+	<string name="lblDiceBuilder">Dice Builder</string>
+	<string name="lblDiceBuilderMsg">Compose a single type dice roll to add to the main formula.</string>
+	<string name="lblCheckExpression">Check formula</string>
+	<string name="lblCheckPassed">Die\'s formula is CORRECT.</string>
+	<string name="lblIconPicker">Icon Picker</string>
+	<string name="lblNewIconPicker">Select picture for Icon</string>
+	<string name="lblDiceIconPicker">Dice icon Picker</string>
+	<string name="lblBagIconPicker">Bag icon Picker</string>
+	<string name="lblVariableIconPicker">Named value icon Picker</string>
+	<string name="lblModifierBuilder">Mod Builder</string>
+	<string name="lblModifierBuilderMessage">Compose a modifier.</string>
+	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier?</string>
+	<string name="lblDuplicateModifier">This modifier already exists.</string>
+	<string name="lblNameBag">Name</string>
+	<string name="hintNameBag">Identifies the bag</string>
+	<string name="lblDescBag">Description</string>
+	<string name="hintDescBag">Optional description for the bag</string>
+	<string name="lblIconBag">Icon</string>
+	<string name="lblMailSubject">[QDR] Suggestion</string>
+	<string name="lblSendMail">Submit suggestion</string>
+	<string name="lblCurrentFolder">Current folder: %1$s</string>
+	<string name="lblItemHiddenFolder">Hidden folder</string>
+	<string name="lblItemFolder">Folder</string>
+	<string name="lblItemFile">%1$s - %2$s %3$s</string>
+	<string name="lblParentFolder">Parent folder</string>
+	<string name="lblSelectFile">Select file</string>
+	<string name="lblSelectFolder">Select folder</string>
+	<string name="lblNewFile">New file</string>
+	<string name="lblImportFromRecent">Import from recent file</string>
+	<string name="lblImportFrom">Import from&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblExportTo">Export to&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblItemMRU">%2$d dice in %1$s bags - %4$s %5$s</string>
+	<string name="lblD">d</string><!-- The carachter used in formulas as in "3d6" -->
+	<string name="lblSelectDice">Select dice</string>
+	<string name="lblSelectDiceDest">Select dice destination</string>
+	<string name="lblLastPositionName">&lt;At the end&gt;</string>
+	<string name="lblLastPositionDesc">&lt;Select this to move at the end&gt;</string>
+	<string name="lblDragToResize">Drag to resize</string>
+	<string name="lblQuality">Result quality</string>
+	<string name="lblResultQualityRange">Result, quality, range</string>
+	<string name="lblRangeFmt">%1$d &#8594; %2$d (%3$d)</string><!-- "&#8594;" correspond to "->" -->
+	<string name="lblNameVar">Name</string>
+	<string name="hintNameVar">Identifies the value</string>
+	<string name="lblDescVar">Description</string>
+	<string name="hintDescVar">Optional description for the value</string>
+	<string name="lblLabelVar">Label</string>
+	<string name="hintLabelVar">Label to use in formulas</string>
+	<string name="lblMinimum">Minimum</string>
+	<string name="lblCurrent">Current</string>
+	<string name="lblMaximum">Maximum</string>
+	<string name="lblMin">Min</string>
+	<string name="lblMax">Max</string>
+	<string name="lblLabelValueVar">Label: Value (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
+	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
+	<string name="lblDiceBags">Dice bags</string>
+	<string name="lblVariables">Named values</string>
+	<string name="lblNumberPicker">Number picker</string>
+	<string name="lblSelectValue">Select a value.</string>
+	<string name="lblSelectMinValue">Select the lower bound for this named value.</string>
+	<string name="lblSelectMaxValue">Select the upper bound for this named value.</string>
+	<string name="lblSelectVariable">Select a Named Value</string>
+	<string name="lblSelectFunction">Select a Function</string>
+	<string name="lblSelectVariableNone">This bag doesn\'t contain any named value.</string>
+	<string name="lblCustomIconsOnly">Show custom icons only</string>
+	
+	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
+	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
+	<string name="lblKb">Kb</string><!-- Short for Kilobyte -->
+	<string name="lblB">b</string><!-- Short for byte -->
+	
+	<string name="lblConfirm">Confirm</string>
+	<string name="lblCancel">Cancel</string>
+	<string name="lblYes">Yes</string>
+	<string name="lblNo">No</string>
+	<string name="lblOk">OK</string>
+	<string name="lblDone">Done</string>
+	
+	<string name="lblUndo">UNDO</string>
+
+	<string name="msgInitApp">Initializing app data&#8230;</string>
+	
+	<string name="msgRemoveDiceTitle">Remove die</string>
+	<string name="msgRemoveDice">Are you sure to definitively remove the die \"%1$s\"?</string>
+	<string name="msgClearResultsTitle">Clear results</string>
+	<string name="msgClearResults">Are you sure to clear all the roll results?</string>
+	<string name="msgLostChange">Leaving now you will lose pending changes. Continue?</string>
+	<string name="msgMissingVar">The die requires some named values that are no longer available: \"%1$s\"\nThe die cannot be rolled until the named values are added to the dice bag. Save anyway?</string>
+
+	<string name="msgRemoveDiceBagTitle">Remove dice bag</string>
+	<string name="msgRemoveDiceBag">Are you sure to definitively remove the dice bag \"%1$s\"? It contains \"%2$d\" dice and \"%3$d\" modifiers. All those items will be lost in time, like tears in rain.</string>
+	<string name="msgRemoveDiceBagNew">Are you sure to definitively remove the dice bag \"%1$s\"? It contains \"%2$d\" dice, \"%3$d\" named values and \"%4$d\" modifiers. All those items will be lost in time, like tears in rain.</string>
+	
+	<string name="msgWhatsNew">What\'s new</string>
+	<string name="msgWhatsNewTitle">What\'s new in version %2$s</string>
+	<string name="msgWhatsNewIntro"><![CDATA[
+<br />
+<b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app or check the <a href="https://crowdin.com/project/quick-dice-roller">Crowdin project</a> to help me to improve translations.<br />
+<br />
+Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
+<br />]]></string>
+	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Custom background image<br />
+&bull; Custom icons<br />
+&bull; Speech synthesis<br />
+&bull; New function to support Aeon IV<br />
+&bull; New function to support Rolemaster<br />
+&bull; Improved "pool" function<br />
+&bull; Fixed double popup menu in roll results<br />
+&bull; Minor fix and improvements<br />
+<br />]]></string>
+	<string name="msgAboutTitle">About %1$s</string>
+	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
+Copyright (c) 2012-2014 by %3$s<br />
+<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Translations</a>: %4$s<br />
+<br />
+Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
+<br />
+This is a free app, however if you like it please consider to make a donation.<br />
+<br />
+Thanks!<br />]]></string>
+	<string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES)</string>
+
+	<string name="msgLicenses">Licenses</string>
+	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>
+	<string-array name="lblLicenseLibURLs"><!-- No need to translate -->
+		<item>http://code.google.com/p/android-wheel/</item>
+		<item>https://github.com/lorensiuswlt/</item>
+		<item>https://github.com/romannurik/Android-SwipeToDismiss/</item>
+		<item>http://nineoldandroids.com/</item>
+		<item>https://code.google.com/p/google-gson/</item>
+		<item>https://source.android.com/source/index.html</item>
+	</string-array>
+	<string-array name="lblLicenseLibNames"><!-- No need to translate -->
+		<item>Android wheel widget</item>
+		<item>QuickAction widget</item>
+		<item>Swipe to Dismiss code</item>
+		<item>Nine Old Androids</item>
+		<item>Google Gson</item>
+		<item>Base64</item>
+	</string-array>
+	<string-array name="lblLicenseLibAuthors"><!-- No need to translate -->
+		<item>Yuri Kanivets</item>
+		<item>Lorensius W. L. T.</item>
+		<item>Roman Nurik</item>
+		<item>Jake Wharton</item>
+		<item>Google</item>
+		<item>Google</item>
+	</string-array>
+	<string-array name="lblLicenseNames">
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
+	</string-array>
+	<string-array name="lblLicenseURLs"><!-- No need to translate -->
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
+	</string-array>
+
+	<string name="lbl_donate_title_small">Small donation</string>
+	<string name="lbl_donate_url_small">https://play.google.com/store/apps/details?id=ohm.donate.small</string>
+	
+	<string name="lbl_donate_title_medium">Medium donation</string>
+	<string name="lbl_donate_url_medium">https://play.google.com/store/apps/details?id=ohm.donate.medium</string>
+	
+	<string name="lbl_donate_title_large">Generous donation</string>
+	<string name="lbl_donate_url_large">https://play.google.com/store/apps/details?id=ohm.donate.large</string>
+
+	<string name="msgRemoveModTitle">Remove modifier</string>
+	<string name="msgRemoveMod">Are you sure to definitively remove the modifier \"%1$s\"?</string>
+	<string name="msgBonusTitle">Bonus %1$+d</string>
+	<string name="msgBonusMessage">Positive modifier of %1$+d</string>
+	<string name="msgMalusTitle">Penalty %1$+d</string>
+	<string name="msgMalusMessage">Negative modifier of %1$+d</string>
+	<string name="msgMaxBagsReach">You can\'t add more dice bags.</string>
+	<string name="msgMaxDiceReach">You can\'t add more dice.</string>
+	<string name="msgMaxModifiersReach">You can\'t add more modifiers.</string>
+	<string name="msgMaxVariablesReach">You can\'t add more named values.</string>
+	<string name="msgOnlineHelpTitle">Quick reference</string>
+	<string name="msgOnlineHelp">Check Online Help</string>
+	<string name="msgCannotRead">Cannot read folder content (or part of it)</string>
+	<string name="msgFileNameInvalid">File name \"%1$s\" is not valid.</string>
+	<string name="msgFileNameExists">File name \"%1$s\" already exists. Are you sure you want to overwrite this file?</string>
+	<string name="msgExported">Dice definitions exported</string>
+	<string name="msgImported">Dice definitions imported</string>
+	<string name="msgConfirmImport">This operation will overwrite all dice definitions. Are you sure you want to proceed?</string>
+	<string name="msgRemoveVar">Are you sure to definitively remove the value named \"%1$s\"?</string>
+	<string name="msgRemoveUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it this dice won\'t work anymore. Continue anyway?</string>
+	<string name="msgRemoveMultiUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it these dice won\'t work anymore. Continue anyway?</string>
+	<string name="msgRemoveIconTitle">Remove icon</string>
+	<string name="msgRemoveIconUnused">Are you sure to definitively remove this icon?</string>
+	<string name="msgRemoveIconUsed">This icon is currently used %1$d time(s). Are you sure to definitively remove it?</string>
+	<string name="msgRemoveIconSystem">This icon cannot be removed.</string>
+	<string name="msgCannotImportIcon">Sorry, cannot import selected image as a Custom Icon.</string>
+	<string name="msgIconAlreadyExists">The very same Custom Icon already exists.</string>
+	
+	<string name="mnuAddDice">Add die</string>
+	<string name="mnuAddDiceHere">Add die here</string>
+	<string name="mnuClearAllResults">Clear all results</string>
+	<string name="mnuUndoClearAllResult">Restore all results</string>
+	<string name="mnuSettings">Settings</string>
+	<string name="mnuQuickStart">Quick Start Guide</string>
+	<string name="mnuAbout">About</string>
+	<string name="mnuSuggest">Send suggestion</string>
+	<string name="mnuRemove">Remove die</string>
+	<string name="mnuEdit">Edit die</string>
+	<string name="mnuRoll">Roll die</string>
+	<string name="mnuSwitchPrev">Switch with previous</string>
+	<string name="mnuSwitchNext">Switch with next</string>
+	<string name="mnuMoveTo">Move to&#8230;</string>
+	<string name="mnuClone">Clone die</string>
+	<string name="mnuDetails">Details</string>
+	<string name="mnuClearResult">Clear result</string>
+	<string name="mnuUndoClearResult">Restore result</string>
+	<string name="mnuSplit">Split results</string>
+	<string name="mnuMerge">Link with next</string>
+	<string name="mnuAddMod">Add modifier</string>
+	<string name="mnuRemoveMod">Remove modifier</string>
+	<string name="mnuApplyMod">Apply modifier</string>
+	<string name="mnuAddModHere">Add modifier here</string>
+	<string name="mnuExit">Exit</string>
+	<string name="mnuAddDiceBag">Add dice bag</string>
+	<string name="mnuSelectDiceBag">Select dice bag</string>
+	<string name="mnuEditDiceBag">Edit dice bag</string>
+	<string name="mnuAddDiceBagHere">Add dice bag here</string>
+	<string name="mnuRemoveDiceBag">Remove dice bag</string>
+	<string name="mnuOpenDiceBagDrawer">Open bag drawer</string>
+	<string name="mnuImportExport">Import / Export</string>
+	<string name="mnuCloneDiceBag">Clone dice bag</string>
+	<string name="mnuAddVariable">Add named value</string>
+	<string name="mnuEditVariable">Edit named value</string>
+	<string name="mnuRemoveVariable">Remove named value</string>
+	<string name="mnuAddVariableHere">Add named value here</string>
+	<string name="mnuMoveVariableTo">Move named value to&#8230;</string>
+	<string name="mnuOpenVariableDrawer">Open named value drawer</string>
+
+	<!-- Functions -->
+	<string name="fncBASHName">BASH!</string>
+	<string name="fncBASHDesc">Makes a check using BASH! rules.</string>
+	<string name="fncBASHURL">bash</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash -->
+	<string-array name="fncBASHParamNames">
+		<item>Pool Size</item>
+		<item>Roll</item>
+	</string-array>
+	<string-array name="fncBASHParamHints">
+		<item>Number of roll to do</item>
+		<item>Die formula to be tested</item>
+	</string-array>
+
+	<string name="fncBWheelName">Burning Wheel</string>
+	<string name="fncBWheelDesc">Makes a check using Burning Wheel rules.</string>
+	<string name="fncBWheelURL">bwheel</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel -->
+	<string-array name="fncBWheelParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
+	</string-array>
+	<string-array name="fncBWheelParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
+	</string-array>
+
+	<string name="fncDWarsName">Dystopian Wars</string>
+	<string name="fncDWarsDesc">Makes a check using Dystopian Wars rules.</string>
+	<string name="fncDWarsURL">dwars</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars -->
+	<string-array name="fncDWarsParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
+	</string-array>
+	<string-array name="fncDWarsParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
+	</string-array>
+				
+	<string name="fncHEROName">HERO System</string>
+	<string name="fncHERODesc">Roll a given number of d6 returning the total damage and the body damage.</string>
+	<string name="fncHEROURL">hero</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero -->
+	<string-array name="fncHEROParamNames">
+		<item>Pool Size</item>
+	</string-array>
+	<string-array name="fncHEROParamHints">
+		<item>Number of d6 to roll</item>
+	</string-array>
+				
+	<string name="fncExalName">Exalted</string>
+	<string name="fncExalDesc">Makes a check using Exalted rules.</string>
+	<string name="fncExalURL">exal</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal -->
+	<string-array name="fncExalParamNames">
+		<item>Pool Size</item>
+		<item>Target</item>
+	</string-array>
+	<string-array name="fncExalParamHints">
+		<item>Number of d10 to roll</item>
+		<item>Value to reach to obtain a success</item>
+	</string-array>
+				
+	<string name="fncExpName">Exploding/Collapsing</string>
+	<string name="fncExpDesc">Make an exploding/collapsing roll.</string>
+	<string name="fncExpURL">exp</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp -->
+	<string-array name="fncExpParamNames">
+		<item>Roll</item>
+		<item>Upper target</item>
+		<item>Lower target</item>
+		<item>Max explosions</item>
+		<item>Max collapses</item>
+	</string-array>
+	<string-array name="fncExpParamHints">
+		<item>The die to roll</item>
+		<item>Target for explosions</item>
+		<item>Target for collapses</item>
+		<item>Max num. of explosions</item>
+		<item>Max num. of collapses</item>
+	</string-array>
+
+	<string name="fncExpUpName">Exploding</string>
+	<string name="fncExpUpDesc">Make an exploding roll.</string>
+	<string name="fncExpUpURL">expUp</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp -->
+	<string-array name="fncExpUpParamNames">
+		<item>First Roll</item>
+		<item>First Target</item>
+		<item>Subsequent dice</item>
+		<item>Subsequent target</item>
+		<item>Max explosions</item>
+	</string-array>
+	<string-array name="fncExpUpParamHints">
+		<item>The first die to roll</item>
+		<item>Target for first explosions</item>
+		<item>The subsequent dice to roll</item>
+		<item>Target for subsequent explosions</item>
+		<item>Max num. of explosions</item>
+	</string-array>
+
+	<string name="fncMaxName">Maximum</string>
+	<string name="fncMaxDesc">Return the highest value obtained.</string>
+	<string name="fncMaxURL">max</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max -->
+	<string-array name="fncMaxParamNames">
+		<item>First Roll</item>
+		<item>Second Roll</item>
+	</string-array>
+	<string-array name="fncMaxParamHints">
+		<item>First formula to test</item>
+		<item>Second formula to test</item>
+	</string-array>
+
+	<string name="fncMinName">Minimum</string>
+	<string name="fncMinDesc">Return the lowest value obtained.</string>
+	<string name="fncMinURL">min</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min -->
+	<string-array name="fncMinParamNames">
+		<item>First Roll</item>
+		<item>Second Roll</item>
+	</string-array>
+	<string-array name="fncMinParamHints">
+		<item>First formula to test</item>
+		<item>Second formula to test</item>
+	</string-array>
+
+	<string name="fncRandName">Random</string>
+	<string name="fncRandDesc">Return a random value between two boundaries.</string>
+	<string name="fncRandURL">rand</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand -->
+	<string-array name="fncRandParamNames">
+		<item>First boundary</item>
+		<item>Second boundary</item>
+	</string-array>
+	<string-array name="fncRandParamHints">
+		<item>First boundary</item>
+		<item>Second boundary</item>
+	</string-array>
+
+	<string name="fncNwodName">New WoD</string>
+	<string name="fncNwodDesc">Makes a check using the New World of Darkness rules.</string>
+	<string name="fncNwodURL">nwod</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod -->
+	<string-array name="fncNwodParamNames">
+		<item>Pool Size</item>
+		<item>Target</item>
+	</string-array>
+	<string-array name="fncNwodParamHints">
+		<item>Number of d10 to roll</item>
+		<item>Value to reach to obtain a success</item>
+	</string-array>
+
+	<string name="fncOwodName">Original WoD</string>
+	<string name="fncOwodDesc">Makes a check using the Original World of Darkness rules.</string>
+	<string name="fncOwodURL">owod</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod -->
+	<string-array name="fncOwodParamNames">
+		<item>Pool Size</item>
+		<item>Target</item>
+	</string-array>
+	<string-array name="fncOwodParamHints">
+		<item>Number of d10 to roll</item>
+		<item>Value to reach to obtain a success</item>
+	</string-array>
+
+	<string name="fncPoolName">Dice Pool</string>
+	<string name="fncPoolDesc">Number of times that the Roll is evaluated greater or equal to Target.</string>
+	<string name="fncPoolURL">pool</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool -->
+	<string-array name="fncPoolParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Extra target</item>
+		<item>Fail target</item>
+		<item>Explosion target</item>
+		<item>Max explosions</item>
+	</string-array>
+	<string-array name="fncPoolParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to get a success</item>
+		<item>Value to get an extra success</item>
+		<item>Value to lost a success</item>
+		<item>Value for extra roll</item>
+		<item>Max num of extra rolls</item>
+	</string-array>
+
+	<string name="fncRakName">Roll and Keep</string>
+	<string name="fncRakDesc">Execute a Roll and Keep test.</string>
+	<string name="fncRakURL">rak</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak -->
+	<string-array name="fncRakParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Keep</item>
+	</string-array>
+	<string-array name="fncRakParamHints">
+		<item>What to roll</item>
+		<item>Roll to do</item>
+		<item>Roll to keep</item>
+	</string-array>
+
+	<string name="fncRdnName">Round down</string>
+	<string name="fncRdnDesc">Round down the specified value.</string>
+	<string name="fncRdnURL">rdn</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn -->
+	<string-array name="fncRdnParamNames">
+		<item>Value</item>
+	</string-array>
+	<string-array name="fncRdnParamHints">
+		<item>What to round down</item>
+	</string-array>
+
+	<string name="fncRupName">Round up</string>
+	<string name="fncRupDesc">Round up the specified value.</string>
+	<string name="fncRupURL">rup</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup -->
+	<string-array name="fncRupParamNames">
+		<item>Value</item>
+	</string-array>
+	<string-array name="fncRupParamHints">
+		<item>What to round up</item>
+	</string-array>
+
+	<string name="fncAbsName">Absolute</string>
+	<string name="fncAbsDesc">Give the absolute (or modulus) of the specified value.</string>
+	<string name="fncAbsURL">abs</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs -->
+	<string-array name="fncAbsParamNames">
+		<item>Value</item>
+	</string-array>
+	<string-array name="fncAbsParamHints">
+		<item>What to make positive</item>
+	</string-array>
+
+	<string name="fncShRun4Name">Shadowrun 4</string>
+	<string name="fncShRun4Desc">Makes a check using Shadowrun 4 rules.</string>
+	<string name="fncShRun4URL">shrun4</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun4 -->
+	<string-array name="fncShRun4ParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
+		<item>Fail target</item>
+	</string-array>
+	<string-array name="fncShRun4ParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
+		<item>Value used to compute Glitches</item>
+	</string-array>
+
+	<string name="fncShRun5Name">Shadowrun 5</string>
+	<string name="fncShRun5Desc">Makes a check using Shadowrun 5 rules.</string>
+	<string name="fncShRun5URL">shrun5</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun5 -->
+	<string-array name="fncShRun5ParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Roll Again</item>
+		<item>Fail target</item>
+	</string-array>
+	<string-array name="fncShRun5ParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to obtain a success</item>
+		<item>Value to reach to obtain an extra roll</item>
+		<item>Value used to compute Glitches</item>
+	</string-array>
+
+	<string name="fncBranchName">Aeon</string>
+	<string name="fncBranchDesc">Roll can explode to two or more rolls.</string>
+	<string name="fncBranchURL">branch</string><!-- http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#branch -->
+	<string-array name="fncBranchParamNames">
+		<item>Roll</item>
+		<item>Pool Size</item>
+		<item>Target</item>
+		<item>Branch Size</item>
+	</string-array>
+	<string-array name="fncBranchParamHints">
+		<item>Formula to be tested</item>
+		<item>Number of roll to do</item>
+		<item>Value to reach to explode</item>
+		<item>Roll to do on explosions</item>
+	</string-array>
+
+	<string name="fncRolemasterName">Rolemaster</string>
+	<string name="fncRolemasterDesc">Roll can explode accroding to Rolemaster rules.</string>
+	<string name="fncRolemasterURL">rolemaster</string>
+	<string-array name="fncRolemasterParamNames">
+		<item>Roll</item>
+		<item>Target</item>
+		<item>Fumble</item>
+		<item>Limit</item>
+	</string-array>
+	<string-array name="fncRolemasterParamHints">
+		<item>Formula to be tested</item>
+		<item>Min value to roll again</item>
+		<item>Max value to invert sign</item>
+		<item>Max num of extra rolls</item>
+	</string-array>
+
+	<!-- Errors -->
+	<string name="err_cannot_update">Cannot update the dice definitions.</string>
+	<string name="err_cannot_read">Cannot read the dice definitions. Using default.</string>
+	<string name="err_name_required">Dice name is required.</string>
+	<string name="err_cannot_read_mod">Cannot read the modifiers definitions. Using default.</string>
+	<string name="err_bag_name_required">Dice bag name is required.</string>
+	<string name="err_no_email_client">There are no email clients installed.</string>
+	<string name="err_cannot_export">Cannot export the dice definitions.</string>
+	<string name="err_cannot_import">Cannot import the dice definitions.</string>
+	<string name="err_storage_not_found">External storage not found.</string>
+	<string name="err_var_name_required">Value\'s name is required.</string>
+	<string name="err_var_label_required">Value\'s label is required and should be 2 to 5 characters long.</string>
+	<string name="err_var_label_invalid_char">Value\'s label should be composed only of alphabetic characters.</string>
+	<string name="err_var_label_exists">Value\'s label should be unique but \"%1$s\" is already used by the Named Value \"%2$s\".</string>
+
+	<!-- Exceptions -->
+	<string name="exc_generic">The formula cannot be evaluated.</string>
+	<string name="exc_generic_parsed">The formula cannot be parsed.</string>
+	<string name="exc_division_by_zero">The dice result lead to a division by zero (and only Chuck Norris can compute it).</string>
+	<string name="exc_loop_detected">The dice result lead to an infinite loop in function \"%1$s\". It take too long to compute.</string>
+	<string name="exc_expected_eos">Expected end of statement at char %1$d.</string>
+	<string name="exc_expected_parameter">Expected parameter at char %1$d.</string>
+	<string name="exc_invalid_character">Invalid character at position %1$d.</string>
+	<string name="exc_missing_operand">Missing operand at char %1$d.</string>
+	<string name="exc_nothing_to_evaluate">The formula is empty.</string>
+	<string name="exc_parameter_out_of_bound">Parameter number %2$d of function \"%1$s\" is too high.</string>
+	<string name="exc_unbalanced_bracket">Unbalanced bracket at char %1$d.</string>
+	<string name="exc_unexpected_error">Unexpected error.</string>
+	<string name="exc_unexpected_parameter">Unexpected parameter at char %1$d.</string>
+	<string name="exc_unknown_function">Unknown function \"%1$s\" at char %2$d.</string>
+	<string name="exc_unknown_variable">Unknown variable \"%1$s\" at char %2$d.</string>
+				
+	<!-- Default dice bag description -->
+	<string name="def_bag_name">Default</string>
+	<string name="def_bag_description">Default dice bag</string>
+
+	<!-- Default dice set description -->
+	<string name="def_die_name">Dice</string>
+	<string name="def_die_desc">Roll a die</string>
+	<string-array name="default_dice_name">
+		<item>d4</item>
+		<item>d6</item>
+		<item>d8</item>
+		<item>d10</item>
+		<item>d12</item>
+		<item>d20</item>
+		<item>d%</item>
+	</string-array>
+	<string-array name="default_dice_desc">
+		<item>Roll a four sided die</item>
+		<item>Roll a six sided die</item>
+		<item>Roll a eight sided die</item>
+		<item>Roll a ten sided die</item>
+		<item>Roll a twelve sided die</item>
+		<item>Roll a twenty sided die</item>
+		<item>Roll a hundred sided die</item>
+	</string-array>
+
+	<!-- Preferences -->
+	<string name="pref_clipboard">Clipboard</string>
+	<string name="pref_clipboard_title">Clipboard Usage</string>
+	<string name="pref_clipboard_desc">Indicates whether and how to store the results to the clipboard.</string>
+	<string name="pref_clipboard_dyn_desc">%1$s.</string>
+	<string name="pref_clipboard_dlg_title">How to use the clipboard?</string>
+	<string-array name="entries_clipboard">
+		<item>Don\'t use clipboard</item>
+		<item>Store numerical result</item>
+		<item>Store extended result</item>
+	</string-array>
+	<string name="pref_link">Link rolls</string>
+	<string name="pref_link_title">Link roll results</string>
+	<string name="pref_link_desc">Link the results of two rolls when executed in rapid succession.</string>
+	<string name="pref_link_auto_title">Automatic link</string>
+	<string name="pref_link_auto_desc">Link the results of two rolls when executed in rapid succession.</string>
+	<string name="pref_link_sens_title">Sensitivity</string>
+	<string name="pref_link_sens_desc">Time within which a roll is linked to the previous.</string>
+	<string name="pref_link_sens_dyn_desc">Link rolls if made within %1$s.</string>
+	<string name="pref_link_sens_dlg_title">Select sensitivity</string>
+	<string-array name="entries_sensitivity">
+		<item>0,5 seconds</item>
+		<item>1 second</item>
+		<item>1,5 seconds</item>
+		<item>2 seconds</item>
+		<item>2,5 seconds</item>
+		<item>3 seconds</item>
+		<item>3,5 seconds</item>
+		<item>4 seconds</item>
+		<item>4,5 seconds</item>
+		<item>5 seconds</item>
+	</string-array>
+	<string name="pref_aspect">Aspect</string>
+	<string name="pref_aspect_col_title">Result columns</string>
+	<string name="pref_aspect_col_desc">The number of columns on which results are displayed.</string>
+	<string name="pref_aspect_col_dyn_desc">Arrange results on %1$s column(s).</string>
+	<string name="pref_aspect_col_dlg_title">Number of columns?</string>
+	<string-array name="entries_columns">
+		<item>One</item>
+		<item>Two</item>
+		<item>Three</item>
+	</string-array>
+	<string name="pref_aspect_mod_title">Show modifiers bar</string>
+	<string name="pref_aspect_mod_desc">Show the quick modifier bar.</string>
+	<string name="pref_aspect_popup_title">Display roll popup</string>
+	<string name="pref_aspect_popup_desc">Display a popup containing the result of the roll.</string>
+	<string name="pref_aspect_theme_title">Theme</string>
+	<string name="pref_aspect_theme_dyn_desc">Use the %1$s theme.</string>
+	<string name="pref_aspect_theme_dlg_title">Apply which theme?</string>
+	<string-array name="entries_themes"><!-- Must be same number of items as "entryvalues_themes" -->
+		<item>Classic</item>
+		<item>Clean</item>
+		<item>Light</item>
+		<item>Dark</item>
+	</string-array>
+	<string name="pref_aspect_anim_title">Animate die</string>
+	<string name="pref_aspect_anim_desc">Display an animated die in the roll popup.</string>
+	<string name="pref_aspect_sound_title">Enable sound</string>
+	<string name="pref_aspect_sound_desc">Enable or disable rolling dice sound.</string>
+	<string name="pref_aspect_ext_sound_title">Extended sound</string>
+	<string name="pref_aspect_ext_sound_desc">Different sound effects for criticals and fumbles.</string>
+	<string name="pref_aspect_tts_title">Enable speech synthesis</string>
+	<string name="pref_aspect_tts_desc">Enable or disable the speech synthesis of the last result.</string>
+	<string name="pref_aspect_swapdesc_title">Swap name and result</string>
+	<string name="pref_aspect_swapdesc_desc">Swap the die name and its extended result.</string>
+	<string name="pref_behaviour">Behaviour</string>
+	<string name="pref_behaviour_wakelock_title">Keep screen on</string>
+	<string name="pref_behaviour_wakelock_desc">Keep the screen on while using the app.</string>
+	<string name="pref_aspect_keyboard_title">Use custom keyboard</string>
+	<string name="pref_aspect_keyboard_desc">Use custom keyboard to write formulas.</string>
+	<string name="pref_aspect_custom_bg_flag_title">Use custom background</string>
+	<string name="pref_aspect_custom_bg_flag_desc">Use custom image for background.</string>
+	<string name="pref_aspect_custom_bg_image_title">Change background image</string>
+	
+	<string name="kbd_next">Next</string><!-- Keep this short! Max 4-6 char! -->
+</resources>
