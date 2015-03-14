@@ -117,18 +117,12 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
 &bull; Custom background image<br />
-&bull; New function to support Aeon IV<br />
-&bull; New function to support Rolemaster<br />
-&bull; Minor fix and improvements<br />
-<br />
-Version 2.0.3b:<br />
-&bull; Improved "pool" function<br />
-&bull; Fixed error in Custom Icon<br />
-&bull; Fixed double popup menu in roll results<br />
-<br />
-Version 2.0.2b:<br />
 &bull; Custom icons<br />
 &bull; Speech synthesis<br />
+&bull; New function to support Aeon IV<br />
+&bull; New function to support Rolemaster<br />
+&bull; Improved "pool" function<br />
+&bull; Fixed double popup menu in roll results<br />
 &bull; Minor fix and improvements<br />
 <br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
@@ -142,7 +136,7 @@ Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><
 This is a free app, however if you like it please consider to make a donation.<br />
 <br />
 Thanks!<br />]]></string>
-	<string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Stefania M. (ES)</string>
+	<string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES)</string>
 
 	<string name="msgLicenses">Licenses</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>

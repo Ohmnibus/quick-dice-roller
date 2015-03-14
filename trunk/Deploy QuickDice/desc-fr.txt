@@ -4,53 +4,58 @@ Lanceur de dés rapide
 ##Description:4000##
 Le "Lanceur de dés rapide" (Quick Dice Roller) est un simulateur de jet de dés crée pour répondre aux besoins des amateurs de jeux de rôle. Il permet d'émuler presque tous les rouleaux de dés complexes requis par le JDR et jeux de société.
 
-Les dés peuvent être ajoutés à volonté, en utilisant les expressions classiques tels que <i>2d6+5</i> ainsi que les fonctions tels que <i>rak(1d6,4,3)</i> qui émulent les systèmes de jeu les plus complexes. Un générateur de formules maniable simplifie le processus et permette d'accéder à une aide en ligne (seulement in italian et en anglais).
+Les dés peuvent être ajoutées à volonté et organisées dans des sacs de dés. Chaque dé est définie par une formule telle que <i>2 d 6 + 5</i>, ainsi que des fonctions spéciales comme <i>rak(1d6,4,3)</i> qui permettent d'émuler des systèmes de jeu les plus complexes. Un générateur de formules maniable simplifie le processus et permette d'accéder à une aide en ligne (seulement in italian et en anglais). Vous pouvez consulter la liste de toutes les fonctions supportées ici: http://goo.gl/TTjb9 (en anglais)
 
-Vous pouvez consulter la liste de toutes les fonctions supportées ici: http://goo.gl/TTjb9 (en anglais)
+Grâce aux "valeurs nommées", ainsi que de garder une trace des scores de jeux, vous pouvez définir des formules à l'aide de paramètres variables. Vous pouvez créer, par exemple, la valeur nommée "Niveau" avec label "niv", puis utiliser la formule "(niv)d6" pour déterminer les dommages de la boule de feu. Ainsi, lorsque votre mage pousse niveau vous n'avez pas besoin de modifier la formule: il suffit de changer la valeur de "Niveau"!
 
-Ne vous inquiétez pas! Vous n'avez pas besoin d'écrire la formule tout les fois! Une fois définie, un dé peut être lancé autant de fois que vous désirez en appuyant simplement sur l'icône correspondante.
+<b>Ce que vous pouvez faire avec Quick Dice Roller :</b>
 
-Les "valeurs nommées", ainsi que de garder trace des scores du jeu, vous permet de définir des formules basées sur eux. Vous pouvez créer, par exemple, la valeur nommée "Level" avec l'étiquette "lvl", puis utiliser la formule "(lvl)d6" pour déterminer les dommages de la boule de feu - de cette façon, vous n'avez pas besoin de modifier la formule chaque fois votre mage passe de niveau: il suffit de changer la valeur de "Level"!
-
-L'application vous permet de créer différentes collections de dés (selon le système de jeu, pour caractère, etc) et vous pouvez passer d'une collection à l'autre très rapidement.
-
-L'application peut être configuré pour concaténer les lancements, en façon que deux lancement consécutifs sont automatiquement regroupés en un seul lancement. Ou, si vous avez besoin de les concaténer souvent, vous pouvez créer un nouvel dé avec la somme des deux (par exemple, <i>1d6+1d8</i>).
-
-Jouez-vous par chat ou par e-mail? L'application vous permet de copier automatiquement le résultat du dernier lancement dans le presse-papiers, afin qu'il peut être partagé avec un simple <i>coller</i>.
-
-Le "Lanceur de des rapides" vous permet d'ajouter des modificateurs même après que le lancement a été effectué, avec un simple pression. Le guerrier a été aveuglé? Pas de problème: une pression sur le dé et une pression au modificateur -4.
-
-<b>Les principales caractéristiques</b>
-
-★ Appliquer facilement les modificateurs
+★ Rouleau du dé avec une touche
 ★ Dés divisés en collections
-★ Utilisez les formules qui vous sont familiers (<i>xdy+z</i>)
-★ Utilisez les valeurs nommées pour garder une trace des partitions et dans les formules
-★ Fonctions pour la simulation des principaux systèmes
-★ Générateur de formules simples et intuitives
-★ Aide en ligne (en anglais)
-★ Large choix de dés et icônes
-★ Possibilité d'agréger les résultats en mode automatique ou manuel
-★ Notification du dernier lancement en superposition
-★ Notifications sonorées
-★ Persistance des données entre les différentes installations*
-★ Importer et exporter les définitions des dés et des collections**
+★ Utiliser les mêmes formules que vous connaissez déjà (<i>xdy + z</i>)
+★ Garder une trace des scores et les utiliser dans les formules
+★ Lire ou écouter le résultat d'une manière claire
+★ Vérifier la bonté des rouleaux fait
+★ Appliquer modificateurs à la volée avec une touche
+★ Somme de rouler au précédent automatiquement ou sur demande
+★ Pâter dernière roll résultat du presse-papiers dans une autre application
+★ Garder une trace des derniers rouleaux faits
+
+<b>Autres caractéristiques du lanceur des dés rapid</b>
+
+○ Générateur de formules simples et intuitives
+○ Fonctions pour la simulation des principaux systèmes
+○ L'aide en ligne
+○ Lire à haute voix le dernier résultat
+ ○ Notifications sonores
+○ Très personnalisable
+○ Développeur amical et fiable  :P
+○ Persistance des données entre les différentes installations*
+○ Importer et exporter les définitions des dés et des collections**
 
 <b>Certains des systèmes pris en charge</b>
 
+☆ 13e Âge
+☆ Arcan Myth
+☆ Aeon IV
+☆ BASH!
 ☆ Burning Wheel
 ☆ L'Appel de Cthulhu
 ☆ Deadlands
 ☆ Dungeon World
 ☆ Donjons et Dragons (toutes les éditions)
 ☆ Dungeonslayers
+☆ Dystopian Wars
 ☆ Exaltés
 ☆ Feng Shui
 ☆ GURPS
 ☆ HERO System
 ☆ Le Livre des cinq anneaux
+☆ Lords of Knowledge
 ☆ JRTM
+☆ Numenera
 ☆ Pathfinder
+☆ Rolemaster
 ☆ Savage Worlds
 ☆ Shadowrun
 ☆ Star Wars
@@ -61,29 +66,29 @@ Le "Lanceur de des rapides" vous permet d'ajouter des modificateurs même après
 
 Le lanceur de dés rapide est une application gratuite et open source pour Android. Tout le monde peut (et il est invité à) contribuer à son développement dans un ou plusieurs des façons suivantes:
 
-• Rejoignez la communauté sur Google+ → http://goo.gl/atlhS9
-• Devenez un bêta-testeur → http://goo.gl/UuJBSO
-• Améliorez les traductions → http://goo.gl/9ySLIO
-• Vérifiez la source code pour la chasse au bug → http://goo.gl/06fEHI
+• Rejoignez la communauté officielle sur Google+ → http://goo.gl/atlhS9
+• Devenez un bêta-testeur pour tester de nouvelles fonctionnalités → http://goo.gl/UuJBSO
+• Améliorez les traductions ou ajoutez en de nouveaux → http://goo.gl/9ySLIO
+• Vérifiez la source code pour la chasse au bug (ou pour l'amusement) → http://goo.gl/06fEHI
 • Introduisez vos amis au Lancer de dés rapide
 
 
-*La sauvegarde de vos données est disponible dans la version 2.2 d'Android, mais pas sur tous les appareils.
+*La sauvegarde de vos données et de vos préférences est disponible dans la version 2.2 d'Android, mais pas sur tous les appareils.
 
 **Il nécessite l'accès en lecture et en écriture à la mémoire du dispositif.
 
 Mots-clés: Dés, Lanceur, Jeté, Dice, dé, Die, Roller, JdR, Jeux, Rôle, RPG, Role, Jeu, Maître, Gratuit, français, WhiteWholf, WW, Vampires, Exaltés, L5A, L5R, D20, Pool, R&K, Explode, Exploding, Open
 
 ##Recent Changes:500##
-- Valeurs nommées utilisables dans les formules
-- Quatre thèmes différents
-- Clavier special pour modifier les formules
-- Garder l'écran
-- Support à Shadowrun 4 et 5
-- Étendues les fonctions « exp » et « expUp »
-- Amélioration de l'issue étendue de nombreuses fonctions
-- Disposition améliorée
-- Corrections mineures et beaucoup d'améliorations
+- Fond personnalisé
+- Icônes personalisées
+- Synthèse vocale
+- Nouvelle fonction « aeon » pour Aeon IV
+- Nouvelle fonction « rolemaster » pour Rolemaster
+- Amélioration de la fonction « pool »
+- Amélioration de la référence en ligne
+- Correctif: Double popup menu
+- Corrections et améliorations mineurs
 
 ##Promo Text:80##
 Le rouleau de dés flexible, complet et pratique pour les jeux de société & les JDR.

@@ -18,6 +18,7 @@
   <string name="lblCheckExpression">Verifique a fórmula</string>
   <string name="lblCheckPassed">A fórmula do dado está CORRETA.</string>
   <string name="lblIconPicker">Escolha a imagem</string>
+  <string name="lblNewIconPicker">Selecione a imagem para ícone</string>
   <string name="lblDiceIconPicker">Escolha a imagem para o dado</string>
   <string name="lblBagIconPicker">Escolha a imagem para a sacola de dados</string>
   <string name="lblVariableIconPicker">Escolha a imagem para a Variável Nomeada</string>
@@ -72,6 +73,7 @@
   <string name="lblSelectVariable">Selecione uma Variável Nomeada</string>
   <string name="lblSelectFunction">Selecione uma função</string>
   <string name="lblSelectVariableNone">Esta sacola não contém qualquer Variável Nomeada.</string>
+  <string name="lblCustomIconsOnly">Mostrar ícones personalizados apenas</string>
   <string name="lblGb">Gb</string>
   <string name="lblMb">Mb</string>
   <string name="lblKb">Kb</string>
@@ -83,6 +85,7 @@
   <string name="lblOk">Ok</string>
   <string name="lblDone">Feito</string>
   <string name="lblUndo">Desfazer</string>
+  <string name="msgInitApp">Inicializando dados do app&#8230;</string>
   <string name="msgRemoveDiceTitle">Remover o dado</string>
   <string name="msgRemoveDice">Você tem certeza que quer remover o dado \"%1$s\" definitivamente?</string>
   <string name="msgClearResultsTitle">Limpar Resultados</string>
@@ -100,22 +103,11 @@
 <br />
 Deseja ficar sempre atualizado? <a href="http://goo.gl/UuJBSO">Torne-se um usuário Beta!</a><br />
 <br />]]></string>
-  <!-- <string name="msgWhatsNewBody"><![CDATA[
-&bull; Variáveis Nomeadas para usar em fórmulas<br />
-&bull; Quatro temas diferentes para o aplicativo<br />
-&bull; Novo teclado para editar as fórmulas<br />
-&bull; Mantem a tela ligada<br />
-&bull; Support to Shadowrun 4ed and 5ed<br />
-&bull; Expandidas as fórmulas "exp" e "expUp"<br />
-&bull; Melhorado o resultado de saída de muitas fórmulas<br />
-&bull; Apresentação melhorada<br />
-&bull; Pequenos reparos e muitos melhoramentos<br />
-<br />]]></string> -->
   <string name="msgAboutTitle">Sobre %1$s</string>
   <string name="msgAboutBody"><![CDATA[%1$s versão %2$s<br />
 Direitos autorais (c) 2012-2014 por %3$s<br />
 <br />
-<a href="https://crowdin.com/project/quick-dice-roller">Traduções</a>: Stefania M. (ES), Magaolimpia (FR), Henning (DE), Renato Rasta (PT-BR)<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Traduções</a>: %4$s<br />
 <br />
 Por favor, informe algum erro para <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
@@ -125,6 +117,7 @@ Obrigado!<br />]]></string>
   <string name="msgLicenses">Licenças</string>
   <string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> é publicado por %3$s sob <a href="%4$s">%5$s</a>.<br />]]></string>
   <string-array name="lblLicenseNames">
+    <item>Licença Apache 2.0</item>
     <item>Licença Apache 2.0</item>
     <item>Licença Apache 2.0</item>
     <item>Licença Apache 2.0</item>
@@ -146,7 +139,6 @@ Obrigado!<br />]]></string>
   <string name="msgMaxVariablesReach">Você não pode adicionar mais nenhuma Variável Nomeada.</string>
   <string name="msgOnlineHelpTitle">Referência rápida</string>
   <string name="msgOnlineHelp">Verifique a ajuda on-line</string>
-  <string name="msgOnlineHelpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02</string>
   <string name="msgCannotRead">Não é possível ler o conteúdo da pasta (ou parte dele)</string>
   <string name="msgFileNameInvalid">O nome do arquivo \"%1$s\" não é válido.</string>
   <string name="msgFileNameExists">O nome para arquivo \"%1$s\" já existe. Tem certeza que quer substituir?</string>
@@ -156,11 +148,18 @@ Obrigado!<br />]]></string>
   <string name="msgRemoveVar">Tens a certeza remover definitivamente a Variável Nomeada \"%1$s\"?</string>
   <string name="msgRemoveUsedVar">A Variável Nomeada \"%1$s\" é usada atualmente por \"%2$s\".\nSe você removê-la este dado já não funcionará. Continuar assim mesmo?</string>
   <string name="msgRemoveMultiUsedVar">A Variável Nomeada \"%1$s\" é usada atualmente por \"%2$s\".\nSe você removê-la este dado já não funcionará. Continuar assim mesmo?</string>
+  <string name="msgRemoveIconTitle">Remover ícone</string>
+  <string name="msgRemoveIconUnused">Tem certeza que quer remover definitivamente este ícone?</string>
+  <string name="msgRemoveIconUsed">Este ícone é atualmente usado %1$d vez(es). Tem certeza que quer removê-lo definitivamente?</string>
+  <string name="msgRemoveIconSystem">Este ícone não pode ser removido.</string>
+  <string name="msgCannotImportIcon">Desculpe-nos, não é possível importar a imagem selecionada como um ícone personalizado.</string>
+  <string name="msgIconAlreadyExists">Esse ícone personalizado já existe.</string>
   <string name="mnuAddDice">Adicionar dado</string>
   <string name="mnuAddDiceHere">Adicionar um dado aqui</string>
   <string name="mnuClearAllResults">Limpar todos os resultados</string>
   <string name="mnuUndoClearAllResult">Recuperar todos os resultados</string>
   <string name="mnuSettings">Preferências</string>
+  <string name="mnuQuickStart">Guia rápido de início</string>
   <string name="mnuAbout">Sobre</string>
   <string name="mnuSuggest">Mandar sugestão</string>
   <string name="mnuRemove">Remover o dado</string>
@@ -196,7 +195,6 @@ Obrigado!<br />]]></string>
   <string name="mnuOpenVariableDrawer">Abrir gaveta de Variáveis Nomeadas</string>
   <string name="fncBASHName">BASH!</string>
   <string name="fncBASHDesc">Faça um teste usando as regras de BASH!.</string>
-  <string name="fncBASHURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string>
   <string-array name="fncBASHParamNames">
     <item>Parada de Dados</item>
     <item>Rolada</item>
@@ -207,7 +205,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncBWheelName">Burning Wheel</string>
   <string name="fncBWheelDesc">Faça um teste usado as regras de Burning Wheel.</string>
-  <string name="fncBWheelURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bwheel</string>
   <string-array name="fncBWheelParamNames">
     <item>Rolada</item>
     <item>Parada de Dados</item>
@@ -222,7 +219,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncDWarsName">Dystopian Wars</string>
   <string name="fncDWarsDesc">Fazer um teste usando as regras de Dystopian Wars.</string>
-  <string name="fncDWarsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#dwars</string>
   <string-array name="fncDWarsParamNames">
     <item>Rolada</item>
     <item>Parada de Dados</item>
@@ -237,7 +233,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncHEROName">HERO System</string>
   <string name="fncHERODesc">Role um determinado número de d6, obtendo o dando total e o dano no \"body\".</string>
-  <string name="fncHEROURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#hero</string>
   <string-array name="fncHEROParamNames">
     <item>Parada de Dados</item>
   </string-array>
@@ -246,7 +241,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncExalName">Exalted</string>
   <string name="fncExalDesc">Faça um teste usando as regras de Exalted.</string>
-  <string name="fncExalURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exal</string>
   <string-array name="fncExalParamNames">
     <item>Parada de Dados</item>
     <item>Alvo</item>
@@ -257,7 +251,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncExpName">Explodir/Colapsar</string>
   <string name="fncExpDesc">Faça uma rolada de de explodir/colapsar.</string>
-  <string name="fncExpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#exp</string>
   <string-array name="fncExpParamNames">
     <item>Rolada</item>
     <item>Alvo máximo</item>
@@ -274,7 +267,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncExpUpName">Explodindo</string>
   <string name="fncExpUpDesc">Faço uma rolagem de explosão.</string>
-  <string name="fncExpUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#expUp</string>
   <string-array name="fncExpUpParamNames">
     <item>Primeira rolagem</item>
     <item>Primeiro alvo</item>
@@ -289,31 +281,8 @@ Obrigado!<br />]]></string>
     <item>Alvo para as explosões subsequentes</item>
     <item>Número máximo de explosões</item>
   </string-array>
-  <string name="fncExplodeName">Explodindo</string>
-  <string name="fncExplodeDesc">Faça uma rolagem de explosão usando um limiar. Explode para valores altos como também para valores baixos.</string>
-  <string name="fncExplodeURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explode</string>
-  <string-array name="fncExplodeParamNames">
-    <item>Rolagem</item>
-    <item>Limiar</item>
-  </string-array>
-  <string-array name="fncExplodeParamHints">
-    <item>O dado para explodir</item>
-    <item>Usado para indicar se a rolagem explodiu</item>
-  </string-array>
-  <string name="fncExplodeUpName">Explodindo para cima</string>
-  <string name="fncExplodeUpDesc">Faça uma rolagem explodindo usando um limiar. Explode somente para valores altos.</string>
-  <string name="fncExplodeUpURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#explodeUp</string>
-  <string-array name="fncExplodeUpParamNames">
-    <item>Rolagem</item>
-    <item>Limiar</item>
-  </string-array>
-  <string-array name="fncExplodeUpParamHints">
-    <item>O dado para explodir</item>
-    <item>Usado para indicar se a rolagem explodiu</item>
-  </string-array>
   <string name="fncMaxName">Máximo</string>
   <string name="fncMaxDesc">Retorna o maior valor obtido.</string>
-  <string name="fncMaxURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#max</string>
   <string-array name="fncMaxParamNames">
     <item>Primeira rolagem</item>
     <item>Segunda rolagem</item>
@@ -324,7 +293,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncMinName">Mínimo</string>
   <string name="fncMinDesc">Retorna o menor valor obtido.</string>
-  <string name="fncMinURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#min</string>
   <string-array name="fncMinParamNames">
     <item>Primeira rolagem</item>
     <item>Segunda rolagem</item>
@@ -335,7 +303,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncRandName">Aleatório</string>
   <string name="fncRandDesc">Retorna um valor aleatório entre dois limites.</string>
-  <string name="fncRandURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rand</string>
   <string-array name="fncRandParamNames">
     <item>Primeiro limite</item>
     <item>Segundo limite</item>
@@ -346,7 +313,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncNwodName">New WoD</string>
   <string name="fncNwodDesc">Faça um teste usando as regras de New World of Darkness.</string>
-  <string name="fncNwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#nwod</string>
   <string-array name="fncNwodParamNames">
     <item>Parada de Dados</item>
     <item>Alvo</item>
@@ -357,7 +323,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncOwodName">WoD original</string>
   <string name="fncOwodDesc">Faz um teste usando as regras do World of Darkness original.</string>
-  <string name="fncOwodURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#owod</string>
   <string-array name="fncOwodParamNames">
     <item>Parada de Dados</item>
     <item>Alvo</item>
@@ -368,20 +333,26 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncPoolName">Parada de dados</string>
   <string name="fncPoolDesc">Número de vezes que o número rolado é maior ou igual ao alvo.</string>
-  <string name="fncPoolURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#pool</string>
   <string-array name="fncPoolParamNames">
     <item>Rolada</item>
     <item>Parada de Dados</item>
     <item>Alvo</item>
+    <item>Alvo extra</item>
+    <item>Não alcançou o alvo</item>
+    <item>Alvo de explosão</item>
+    <item>Máximo de explosões</item>
   </string-array>
   <string-array name="fncPoolParamHints">
     <item>Fórmula a ser testada</item>
     <item>Número de rolagens para fazer</item>
     <item>Valor que deve ser alcançado para obter sucesso</item>
+    <item>Valor para obter um sucesso extra</item>
+    <item>Valor para perder um sucesso</item>
+    <item>Valor para rolagem extra</item>
+    <item>Num máximo de rolagens extras</item>
   </string-array>
   <string name="fncRakName">Rolar e manter</string>
   <string name="fncRakDesc">Executar um teste de Rolar e Manter.</string>
-  <string name="fncRakURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rak</string>
   <string-array name="fncRakParamNames">
     <item>Rolada</item>
     <item>Parada de Dados</item>
@@ -394,7 +365,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncRdnName">Arredondamento para baixo</string>
   <string name="fncRdnDesc">Arredondar para baixo o valor especificado.</string>
-  <string name="fncRdnURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rdn</string>
   <string-array name="fncRdnParamNames">
     <item>Valor</item>
   </string-array>
@@ -403,7 +373,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncRupName">Arredondar para cima</string>
   <string name="fncRupDesc">Arredondar para cima o valor especificado.</string>
-  <string name="fncRupURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#rup</string>
   <string-array name="fncRupParamNames">
     <item>Valor</item>
   </string-array>
@@ -412,7 +381,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncAbsName">Absoluto</string>
   <string name="fncAbsDesc">Fornece o valor absoluto (ou módulo) do valor especificado.</string>
-  <string name="fncAbsURL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#abs</string>
   <string-array name="fncAbsParamNames">
     <item>Valor</item>
   </string-array>
@@ -421,7 +389,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncShRun4Name">Shadowrun 4</string>
   <string name="fncShRun4Desc">Faça um teste usando as regras de Shadowrun 4.</string>
-  <string name="fncShRun4URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun4</string>
   <string-array name="fncShRun4ParamNames">
     <item>Rolada</item>
     <item>Parada de Dados</item>
@@ -438,7 +405,6 @@ Obrigado!<br />]]></string>
   </string-array>
   <string name="fncShRun5Name">Shadowrun 5</string>
   <string name="fncShRun5Desc">Faça um teste usando as regras de Shadowrun 5.</string>
-  <string name="fncShRun5URL">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#shrun5</string>
   <string-array name="fncShRun5ParamNames">
     <item>Rolada</item>
     <item>Parada de Dados</item>
@@ -452,6 +418,34 @@ Obrigado!<br />]]></string>
     <item>Valor que deve ser alcançado para obter sucesso</item>
     <item>Valor que deve ser alcançado para obter um rolagem extra</item>
     <item>Valor usado para calcular Falhas</item>
+  </string-array>
+  <string name="fncBranchName">Aeon</string>
+  <string name="fncBranchDesc">A rolada pode explodir para duas ou mais rolagens.</string>
+  <string-array name="fncBranchParamNames">
+    <item>Rolada</item>
+    <item>Parada de Dados</item>
+    <item>Alvo</item>
+    <item>Dados para rerolar</item>
+  </string-array>
+  <string-array name="fncBranchParamHints">
+    <item>Fórmula a ser testada</item>
+    <item>Número de rolagens para fazer</item>
+    <item>Valor a atingir para explodir</item>
+    <item>Rolada para fazer em explosões</item>
+  </string-array>
+  <string name="fncRolemasterName">Rolemaster</string>
+  <string name="fncRolemasterDesc">Rolada pode explodir de acordo com as regras de Rolemaster.</string>
+  <string-array name="fncRolemasterParamNames">
+    <item>Rolada</item>
+    <item>Alvo</item>
+    <item>Falha crítica</item>
+    <item>Limite</item>
+  </string-array>
+  <string-array name="fncRolemasterParamHints">
+    <item>Fórmula a ser testada</item>
+    <item>Valor mínimo para rolar de novo</item>
+    <item>Valor máximo para inverter o sinal</item>
+    <item>Numero máximo de rolagens extras</item>
   </string-array>
   <string name="err_cannot_update">Não é possível atualizar as definições de dados.</string>
   <string name="err_cannot_read">Não é possível ler as definições dos dados. Usando as definições padrão.</string>
@@ -548,8 +542,6 @@ Obrigado!<br />]]></string>
   <string name="pref_aspect_mod_desc">Mostrar barra de modificadores rápidos.</string>
   <string name="pref_aspect_popup_title">Mostrar popup da rolagem</string>
   <string name="pref_aspect_popup_desc">Mostra um popup com o resultado da rolada.</string>
-  <string name="pref_aspect_plain_bg_title">Usar gráficos leves</string>
-  <string name="pref_aspect_plain_bg_desc">Requer reinicialização do App. Display um fundo liso para melhorar as performances.</string>
   <string name="pref_aspect_theme_title"> Tema</string>
   <string name="pref_aspect_theme_dyn_desc">Use o tema %1$s.</string>
   <string name="pref_aspect_theme_dlg_title">Aplicar qual tema?</string>
@@ -565,6 +557,8 @@ Obrigado!<br />]]></string>
   <string name="pref_aspect_sound_desc">Ative ou desativa o som dos dados rolando.</string>
   <string name="pref_aspect_ext_sound_title">Som extendido</string>
   <string name="pref_aspect_ext_sound_desc">Sons diferentes para acertos e erros críticos.</string>
+  <string name="pref_aspect_tts_title">Permitir a síntese de fala</string>
+  <string name="pref_aspect_tts_desc">Habilitar ou desabilitar a síntese de discurso do último resultado.</string>
   <string name="pref_aspect_swapdesc_title">Trocar nome e resultado</string>
   <string name="pref_aspect_swapdesc_desc">Trocar o nome do dado e seu resultado estendido.</string>
   <string name="pref_behaviour">Comportamento</string>
@@ -572,5 +566,8 @@ Obrigado!<br />]]></string>
   <string name="pref_behaviour_wakelock_desc">Mantenha a tela ligada enquanto estiver usando o app.</string>
   <string name="pref_aspect_keyboard_title">Use o teclado personalizado</string>
   <string name="pref_aspect_keyboard_desc">Use o teclado personalizado para escrever as fórmulas.</string>
+  <string name="pref_aspect_custom_bg_flag_title">Use o plano de fundo personalizado</string>
+  <string name="pref_aspect_custom_bg_flag_desc">Usar imagem personalizada para o plano de fundo.</string>
+  <string name="pref_aspect_custom_bg_image_title">Mudar imagem do plano de fundo</string>
   <string name="kbd_next">Próx</string>
 </resources>
