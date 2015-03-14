@@ -281,26 +281,6 @@ Gracias!<br />]]></string>
     <item>Blanco de explosiones posteriores</item>
     <item>Nº máximo de explosiones</item>
   </string-array>
-  <string name="fncExplodeName">Abierto</string>
-  <string name="fncExplodeDesc">Ejecuta un tiro abierto considerando una tolerancia. Si se lanza de nuevo se obtienen valores altos o bajos.</string>
-  <string-array name="fncExplodeParamNames">
-    <item>Dado</item>
-    <item>Tolerancia</item>
-  </string-array>
-  <string-array name="fncExplodeParamHints">
-    <item>Dado a lanzar</item>
-    <item>Probabilidad de lanzar de nuevo</item>
-  </string-array>
-  <string name="fncExplodeUpName">Abierto Su</string>
-  <string name="fncExplodeUpDesc">Ejecuta un tiro abierto considerando una tolerancia. Si lanza de nuevo solo se si obtienen valores altos.</string>
-  <string-array name="fncExplodeUpParamNames">
-    <item>Dado</item>
-    <item>Tolerancia</item>
-  </string-array>
-  <string-array name="fncExplodeUpParamHints">
-    <item>Dado a lanzar</item>
-    <item>Probabilidad de lanzar de nuevo</item>
-  </string-array>
   <string name="fncMaxName">Máximo</string>
   <string name="fncMaxDesc">Devuelve el más alto de dos valores.</string>
   <string-array name="fncMaxParamNames">
@@ -526,8 +506,6 @@ Gracias!<br />]]></string>
   <string name="pref_aspect_mod_desc">Muestra la barra para aplicar rapidamnete modificas a los lanzamientos.</string>
   <string name="pref_aspect_popup_title">Superposición</string>
   <string name="pref_aspect_popup_desc">Muestra el resultado del lanzamiento en superposición.</string>
-  <string name="pref_aspect_plain_bg_title">Desactivar el fondo</string>
-  <string name="pref_aspect_plain_bg_desc">Requiere reinicio. Desactivar la imagen de fondo para mejorar el rendimiento.</string>
   <string name="pref_aspect_theme_title">Temas</string>
   <string name="pref_aspect_theme_dyn_desc">Utilizar el tema %1$s.</string>
   <string name="pref_aspect_theme_dlg_title">¿Aplicar cual tema?</string>

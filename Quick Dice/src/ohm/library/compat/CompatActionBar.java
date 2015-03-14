@@ -1,9 +1,14 @@
 package ohm.library.compat;
 
+import java.lang.reflect.Field;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
+import android.util.Log;
+import android.view.ViewConfiguration;
 
 public abstract class CompatActionBar {
 	
@@ -24,6 +29,20 @@ public abstract class CompatActionBar {
 	public abstract void setDisplayHomeAsUpEnabled(boolean showHomeAsUp);
 	
 	public abstract void setHomeButtonEnabled(boolean enabled);
+	
+	protected void forceOverflowMenu(Context ctx) {
+		try {
+			ViewConfiguration config = ViewConfiguration.get(ctx);
+			Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception e) {
+			Log.w("forceOverflowMenu", "Cannot force Overflow Menu");
+		}
+	}
 	
 	@TargetApi(Build.VERSION_CODES.ECLAIR)
 	private static class CompatActionBarEclair extends CompatActionBar {
@@ -61,6 +80,7 @@ public abstract class CompatActionBar {
 		
 		public CompatActionBarHoneycomb(Activity activity) {
 			mActionBar = activity.getActionBar();
+			forceOverflowMenu(activity);
 		}
 		
 		@Override
@@ -92,6 +112,7 @@ public abstract class CompatActionBar {
 		
 		public CompatActionBarIceCreamSandwich(Activity activity) {
 			mActionBar = activity.getActionBar();
+			forceOverflowMenu(activity);
 		}
 		
 		@Override

@@ -116,19 +116,13 @@
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; Immagine di sfondo personalizzata<br />
-&bull; Supporto al sistema Aeon IV<br />
-&bull; Supporto al sistema Rolemaster<br />
-&bull; Correzioni e miglioramenti minori<br />
-<br />
-Versione 2.0.3b:<br />
-&bull; Migliorata la funzione "pool"<br />
-&bull; Risolto errore nelle Icone personalizzate<br />
-&bull; Risolto doppio menu per i risultati<br />
-<br />
-Versione 2.0.2b:<br />
+&bull; Sfondo personalizzato<br />
 &bull; Icone personalizzate<br />
 &bull; Sintesi vocale<br />
+&bull; Supporto al sistema Aeon IV<br />
+&bull; Supporto al sistema Rolemaster<br />
+&bull; Migliorata la funzione "pool"<br />
+&bull; Risolto doppio menu per i risultati<br />
 &bull; Correzioni e miglioramenti minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
@@ -142,7 +136,6 @@ Segnala eventuali errori all\'indirizzo <a href="mailto:ohmnibus@gmail.com">ohmn
 Questa è un\'app gratuita, ma se ti piace perché non offrirmi una birra?<br />
 <br />
 Grazie!<br />]]></string>
-	<!-- <string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Stefania M. (ES)</string> -->
 	
 	<string name="msgLicenses">Licenze</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> è pubblicato da %3$s su <a href="%4$s">%5$s</a>.<br />]]></string>
