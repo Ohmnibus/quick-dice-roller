@@ -121,8 +121,9 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 &bull; Speech synthesis<br />
 &bull; New function to support Aeon IV<br />
 &bull; New function to support Rolemaster<br />
-&bull; Improved "pool" function<br />
+&bull; Improved \"pool\" function<br />
 &bull; Fixed double popup menu in roll results<br />
+&bull; Fixed the \"d6+d6\" error<br />
 &bull; Minor fix and improvements<br />
 <br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>

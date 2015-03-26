@@ -121,8 +121,9 @@ Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa u
 &bull; Sintesi vocale<br />
 &bull; Supporto al sistema Aeon IV<br />
 &bull; Supporto al sistema Rolemaster<br />
-&bull; Migliorata la funzione "pool"<br />
+&bull; Migliorata la funzione \"pool\"<br />
 &bull; Risolto doppio menu per i risultati<br />
+&bull; Risolto l\'errore \"d6+d6\"<br />
 &bull; Correzioni e miglioramenti minori<br />
 <br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>

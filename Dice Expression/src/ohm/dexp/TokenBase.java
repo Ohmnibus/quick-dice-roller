@@ -157,7 +157,9 @@ public abstract class TokenBase {
 			throw new IndexOutOfBoundsException("TokenBase.setChild: Out of bound.");
 		}
 		childList[index-1] = child;
-		childList[index-1].setParent(this); 
+		if (childList[index-1] != null) {
+			childList[index-1].setParent(this);
+		}
 	}
 	
 	/**

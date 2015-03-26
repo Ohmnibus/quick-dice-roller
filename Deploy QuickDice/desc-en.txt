@@ -80,6 +80,7 @@ Quick Dice Roller is a free and open source application for Android. Everyone ca
 Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, Open, OSR, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, WhiteWholf
 
 ##Recent Changes:500##
+- Fixed the "d6+d6" error
 - Custom background
 - Custom icons
 - Speech synthesis
