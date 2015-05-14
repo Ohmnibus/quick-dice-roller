@@ -121,7 +121,7 @@ public class VariablePickerDialog extends AlertDialog implements DialogInterface
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		if (onItemSelectedListener != null) {
-			if (which == DialogInterface.BUTTON_POSITIVE) {
+			if (which == DialogInterface.BUTTON_POSITIVE && curItem != null) {
 				onItemSelectedListener.onItemSelected(true, curIndex, curItem);
 			} else {
 				onItemSelectedListener.onItemSelected(false, OnItemSelectedListener.ITEM_UNDEFINED, null);
