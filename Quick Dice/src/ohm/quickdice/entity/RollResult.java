@@ -1,5 +1,6 @@
 package ohm.quickdice.entity;
 
+import ohm.dexp.TokenBase;
 import ohm.quickdice.R;
 
 /**
@@ -7,58 +8,55 @@ import ohm.quickdice.R;
  * @author Ohmnibus
  *
  */
-public class RollResult /* implements Serializable */ {
+public class RollResult {
 	
-	/**
-	 * Serial version UID used for serialization.
-	 */
-	//private static final long serialVersionUID = -8278370559503945512L;
-
 	public static final int DEFAULT_RESULT_ICON = R.drawable.ic_dxx_gray;
+	public static final int VALUES_PRECISION_FACTOR = TokenBase.VALUES_PRECISION_FACTOR;
 	
 	protected String title;
 	protected String description;
 	protected String resultText;
-	protected long resultValue;
-	protected long maxResultValue;
-	protected long minResultValue;
+	protected long rawResultValue;
+	protected long maxRawResultValue;
+	protected long minRawResultValue;
 	protected int resourceIndex;
 	
-//	/**
-//	 * Initialize a {@link RollResult} object from a {@link DResult}.
-//	 * @param dResult
-//	 */
-//	public RollResult(DResult dResult) {
-//		this(
-//				new String(dResult.getExpression().getName()),
-//				new String(dResult.getExpression().getDescription()),
-//				new String(dResult.getResultText()),
-//				dResult.getResult(),
-//				dResult.getMaxResult(),
-//				dResult.getMinResult(),
-//				dResult.getExpression().getResourceIndex());
-//	}
-
+	/**
+	 * Copy constructor.
+	 * @param rollResult
+	 */
+	public RollResult(RollResult rollResult) {
+		this(
+				rollResult.title,
+				rollResult.description,
+				rollResult.resultText,
+				rollResult.rawResultValue,
+				rollResult.maxRawResultValue,
+				rollResult.minRawResultValue,
+				rollResult.resourceIndex
+				);
+	}
+	
 	/**
 	 * Initialize a {@link RollResult} object from given parameters.
 	 * @param title
 	 * @param description
 	 * @param resultText
-	 * @param resultValue
-	 * @param maxResultValue
-	 * @param minResultValue
+	 * @param rawResultValue
+	 * @param maxRawResultValue
+	 * @param minRawResultValue
 	 * @param resourceIndex
 	 */
 	public RollResult(String title, String description, String resultText,
-			long resultValue, long maxResultValue, long minResultValue,
+			long rawResultValue, long maxRawResultValue, long minRawResultValue,
 			int resourceIndex) {
 		super();
 		this.title = title;
 		this.description = description;
 		this.resultText = resultText;
-		this.resultValue = resultValue;
-		this.maxResultValue = maxResultValue;
-		this.minResultValue = minResultValue;
+		this.rawResultValue = rawResultValue;
+		this.maxRawResultValue = maxRawResultValue;
+		this.minRawResultValue = minRawResultValue;
 		this.resourceIndex = resourceIndex;
 	}
 	
@@ -81,22 +79,50 @@ public class RollResult /* implements Serializable */ {
 		return resultText;
 	}
 	/**
+	 * @return the rawResultValue
+	 */
+	public long getRawResultValue() {
+		return rawResultValue;
+	}
+	/**
+	 * @return the resultValue in string format
+	 */
+	public String getResultString() {
+		if (rawResultValue < 0 && rawResultValue > -VALUES_PRECISION_FACTOR) {
+			//Special "-0" case
+			return "-0";
+		}
+		return Long.toString(getResultValue());
+	}
+	/**
 	 * @return the resultValue
 	 */
 	public long getResultValue() {
-		return resultValue;
+		return rawResultValue / VALUES_PRECISION_FACTOR;
+	}
+	/**
+	 * @return the maxRawResultValue
+	 */
+	public long getMaxRawResultValue() {
+		return maxRawResultValue;
 	}
 	/**
 	 * @return the maxResultValue
 	 */
 	public long getMaxResultValue() {
-		return maxResultValue;
+		return maxRawResultValue / VALUES_PRECISION_FACTOR;
+	}
+	/**
+	 * @return the minRawResultValue
+	 */
+	public long getMinRawResultValue() {
+		return minRawResultValue;
 	}
 	/**
 	 * @return the minResultValue
 	 */
 	public long getMinResultValue() {
-		return minResultValue;
+		return minRawResultValue / VALUES_PRECISION_FACTOR;
 	}
 	/**
 	 * @return the resourceIndex
@@ -110,8 +136,8 @@ public class RollResult /* implements Serializable */ {
 		long range;
 		long baseResult;
 
-		range = maxResultValue - minResultValue;
-		baseResult = resultValue - minResultValue;
+		range = getMaxResultValue() - getMinResultValue();
+		baseResult = getResultValue() - getMinResultValue();
 		
 		if (range < 0) {
 			//Negative range. Something went wrong.
@@ -150,7 +176,8 @@ public class RollResult /* implements Serializable */ {
 	 * @return True if the roll is a critical.
 	 */
 	public boolean isCritical() {
-		return (resultValue >= maxResultValue) && (maxResultValue - minResultValue >= 3);
+		//return (resultValue >= maxResultValue) && (maxResultValue - minResultValue >= 3 * VALUES_PRECISION_FACTOR);
+		return (getResultValue() >= getMaxResultValue()) && (getMaxResultValue() - getMinResultValue() >= 3);
 	}
 	
 	/**
@@ -160,7 +187,8 @@ public class RollResult /* implements Serializable */ {
 	 * @return True if the roll is a fumble.
 	 */
 	public boolean isFumble() {
-		return (resultValue <= minResultValue) && (maxResultValue - minResultValue >= 3);
+		//return (resultValue <= minResultValue) && (maxResultValue - minResultValue >= 3 * VALUES_PRECISION_FACTOR);
+		return (getResultValue() <= getMinResultValue()) && (getMaxResultValue() - getMinResultValue() >= 3);
 	}
 	
 	public static RollResult mergeResultList(RollResult[] resList) {
@@ -170,14 +198,15 @@ public class RollResult /* implements Serializable */ {
 		if (resList != null && resList.length > 0) {
 			RollResult res;
 			res = resList[0];
-			retVal = new RollResult(
-					res.getName(), 
-					res.getDescription(), 
-					res.getResultText(), 
-					res.getResultValue(), 
-					res.getMaxResultValue(), 
-					res.getMinResultValue(), 
-					res.getResourceIndex());
+//			retVal = new RollResult(
+//					res.getName(), 
+//					res.getDescription(), 
+//					res.getResultText(), 
+//					res.getResultValue(), 
+//					res.getMaxResultValue(), 
+//					res.getMinResultValue(), 
+//					res.getResourceIndex());
+			retVal = new RollResult(res);
 			
 			for (int i = 1; i < resList.length; i++) {
 				res = resList[i];
@@ -202,9 +231,12 @@ public class RollResult /* implements Serializable */ {
 				} else {
 					retVal.resultText += " + " + tmp;
 				}
-				retVal.resultValue += res.getResultValue();
-				retVal.maxResultValue += res.getMaxResultValue();
-				retVal.minResultValue += res.getMinResultValue();
+//				retVal.resultValue += res.getResultValue();
+//				retVal.maxResultValue += res.getMaxResultValue();
+//				retVal.minResultValue += res.getMinResultValue();
+				retVal.rawResultValue += res.rawResultValue;
+				retVal.maxRawResultValue += res.maxRawResultValue;
+				retVal.minRawResultValue += res.minRawResultValue;
 			}
 		} else { 
 			retVal = null;

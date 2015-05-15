@@ -573,10 +573,13 @@ public class SerializationManager {
 	private static final String FIELD_RL_NAME = "name";
 	private static final String FIELD_RL_DESCRIPTION = "desc";
 	private static final String FIELD_RL_RESOURCE_INDEX = "resIdx";
-	private static final String FIELD_RL_RESULT_NUM = "resNum";
 	private static final String FIELD_RL_RESULT_TXT = "resTxt";
-	private static final String FIELD_RL_RESULT_MAX = "resMax";
-	private static final String FIELD_RL_RESULT_MIN = "resMin";
+	private static final String FIELD_RL_RESULT_NUM_LEGACY = "resNum";
+	private static final String FIELD_RL_RESULT_MAX_LEGACY = "resMax";
+	private static final String FIELD_RL_RESULT_MIN_LEGACY = "resMin";
+	private static final String FIELD_RL_RESULT_NUM = "val";
+	private static final String FIELD_RL_RESULT_MAX = "max";
+	private static final String FIELD_RL_RESULT_MIN = "min";
 
 	private static String serializeResultList(ArrayList<RollResult[]> resultList) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -609,10 +612,13 @@ public class SerializationManager {
 			writer.name(FIELD_RL_NAME).value(r.getName());
 			writer.name(FIELD_RL_DESCRIPTION).value(r.getDescription());
 			writer.name(FIELD_RL_RESOURCE_INDEX).value(r.getResourceIndex());
-			writer.name(FIELD_RL_RESULT_NUM).value(r.getResultValue());
 			writer.name(FIELD_RL_RESULT_TXT).value(r.getResultText());
-			writer.name(FIELD_RL_RESULT_MAX).value(r.getMaxResultValue());
-			writer.name(FIELD_RL_RESULT_MIN).value(r.getMinResultValue());
+			//writer.name(FIELD_RL_RESULT_NUM_LEGACY).value(r.getResultValue());
+			//writer.name(FIELD_RL_RESULT_MAX_LEGACY).value(r.getMaxResultValue());
+			//writer.name(FIELD_RL_RESULT_MIN_LEGACY).value(r.getMinResultValue());
+			writer.name(FIELD_RL_RESULT_NUM).value(r.getRawResultValue());
+			writer.name(FIELD_RL_RESULT_MAX).value(r.getMaxRawResultValue());
+			writer.name(FIELD_RL_RESULT_MIN).value(r.getMinRawResultValue());
 			
 			writer.endObject();
 		}
@@ -679,6 +685,15 @@ public class SerializationManager {
 					desc = reader.nextString();
 				} else if (fieldName.equals(FIELD_RL_RESULT_TXT)) {
 					rest = reader.nextString();
+				} else if (fieldName.equals(FIELD_RL_RESULT_NUM_LEGACY)) {
+					//Legacy value
+					resn = reader.nextLong() * RollResult.VALUES_PRECISION_FACTOR;
+				} else if (fieldName.equals(FIELD_RL_RESULT_MAX_LEGACY)) {
+					//Legacy value
+					rema = reader.nextLong() * RollResult.VALUES_PRECISION_FACTOR;
+				} else if (fieldName.equals(FIELD_RL_RESULT_MIN_LEGACY)) {
+					//Legacy value
+					remi = reader.nextLong() * RollResult.VALUES_PRECISION_FACTOR;
 				} else if (fieldName.equals(FIELD_RL_RESULT_NUM)) {
 					resn = reader.nextLong();
 				} else if (fieldName.equals(FIELD_RL_RESULT_MAX)) {

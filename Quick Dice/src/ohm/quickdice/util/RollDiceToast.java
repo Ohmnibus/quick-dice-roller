@@ -227,7 +227,8 @@ public class RollDiceToast implements TextToSpeech.OnInitListener {
 //			rollDiceText.setText(result);
 //		}
 		//#######################################################
-		rollDiceText.setText(Long.toString(res.getResultValue()));
+		//rollDiceText.setText(Long.toString(res.getResultValue()));
+		rollDiceText.setText(res.getResultString());
 		//#######################################################
 
 		//Create the shape of the dice
@@ -269,7 +270,8 @@ public class RollDiceToast implements TextToSpeech.OnInitListener {
 
 	private void performRollSpeech(RollResult res) {
 		if (speechEnabled && speechActive) {
-			String speech = Long.toString(res.getResultValue());
+			//String speech = Long.toString(res.getResultValue());
+			String speech = res.getResultString();
 //			rollDiceTeller.speak(
 //					speech,
 //					TextToSpeech.QUEUE_FLUSH,

@@ -111,11 +111,9 @@
 	<string name="msgWhatsNewTitle">Novità nella versione %2$s</string>
 	<string name="msgWhatsNewIntro"><![CDATA[
 <br />
-<b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />
-<br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
-	<string name="msgWhatsNewBody"><![CDATA[
+	<!-- <string name="msgWhatsNewBody"><![CDATA[
 &bull; Sfondo personalizzato<br />
 &bull; Icone personalizzate<br />
 &bull; Sintesi vocale<br />
@@ -125,7 +123,10 @@ Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa u
 &bull; Risolto doppio menu per i risultati<br />
 &bull; Risolto l\'errore \"d6+d6\"<br />
 &bull; Correzioni e miglioramenti minori<br />
-<br />]]></string>
+]]></string> -->
+	<string name="msgWhatsNewOutro"><![CDATA[
+<br />
+<b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
 Copyright (c) 2012-2014 by %3$s<br />
@@ -141,6 +142,7 @@ Grazie!<br />]]></string>
 	<string name="msgLicenses">Licenze</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> è pubblicato da %3$s su <a href="%4$s">%5$s</a>.<br />]]></string>
 	<string-array name="lblLicenseNames">
+		<item>Licenza Apache 2.0</item>
 		<item>Licenza Apache 2.0</item>
 		<item>Licenza Apache 2.0</item>
 		<item>Licenza Apache 2.0</item>

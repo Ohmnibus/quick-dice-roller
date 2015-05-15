@@ -1505,12 +1505,12 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 		if (lastResult.length > 0) { //Apply only if a result exist
 			modRes = new RollResult(
-					modifier.getName(), 
-					modifier.getDescription(), 
-					modifier.getValueString(), 
-					modifier.getValue(), 
-					modifier.getValue(), 
-					modifier.getValue(), 
+					modifier.getName(),
+					modifier.getDescription(),
+					modifier.getValueString(),
+					modifier.getValue() * RollResult.VALUES_PRECISION_FACTOR,
+					modifier.getValue() * RollResult.VALUES_PRECISION_FACTOR,
+					modifier.getValue() * RollResult.VALUES_PRECISION_FACTOR,
 					modifier.getResourceIndex());
 
 			addResult(modRes, true);
@@ -1610,7 +1610,8 @@ public class QuickDiceMainActivity extends BaseActivity {
 	private void handleResult(RollResult res) {
 		String resultValue;
 
-		resultValue = Long.toString(res.getResultValue());
+		//resultValue = Long.toString(res.getResultValue());
+		resultValue = res.getResultString();
 
 		switch (pref.getClipboardUsage()) {
 			case PreferenceManager.CLIPBOARD_TYPE_VALUE:
@@ -1696,166 +1697,6 @@ public class QuickDiceMainActivity extends BaseActivity {
 		Toast.makeText(this, Helper.getErrorMessage(this, ex), Toast.LENGTH_SHORT).show();
 	}
 	
-//	protected void performRoll(RollResult res) {
-//
-//		if (pref.getShowToast()) {
-//			performRollPopup(res);
-//		
-//			if (pref.getShowAnimation())
-//				performRollAnimation(res);
-//		}
-//		
-//		if (pref.getSoundEnabled())
-//			performRollSound(res);
-//	}
-	
-//	private void performRollSound(RollResult res) {
-////		if (res.isCritical() && pref.getExtSoundEnabled()) {
-////			if (rollDiceCriticalSound == null) {
-////				rollDiceCriticalSound = MediaPlayer.create(app, R.raw.critical);
-////			}
-////			if (rollDiceCriticalSound != null) {
-////				rollDiceCriticalSound.start();
-////			}
-////		} else if (res.isFumble() && pref.getExtSoundEnabled()) {
-////			if (rollDiceFumbleSound == null) {
-////				rollDiceFumbleSound = MediaPlayer.create(app, R.raw.fumble);
-////			}
-////			if (rollDiceFumbleSound != null) {
-////				rollDiceFumbleSound.start();
-////			}
-////		} else {
-////			if (rollDiceSound == null) {
-////				rollDiceSound = MediaPlayer.create(app, R.raw.roll);
-////			}
-////			if (rollDiceSound != null) {
-////				rollDiceSound.start();
-////			}
-////		}
-//
-//	
-//		if (res.isCritical() && pref.getExtSoundEnabled()) {
-//			if (rollDiceCriticalPlayer == null) {
-//				rollDiceCriticalPlayer = PlayerRunnable.initPlayers(R.raw.critical, ROLL_DICE_PLAYER_COUNT);
-//			}
-//			executor.execute(rollDiceCriticalPlayer[rollDicePlayerIndex]);
-//		} else if (res.isFumble() && pref.getExtSoundEnabled()) {
-//			if (rollDiceFumblePlayer == null) {
-//				rollDiceFumblePlayer = PlayerRunnable.initPlayers(R.raw.fumble, ROLL_DICE_PLAYER_COUNT);
-//			}
-//			executor.execute(rollDiceFumblePlayer[rollDicePlayerIndex]);
-//		} else {
-//			if (rollDicePlayer == null) {
-//				rollDicePlayer = PlayerRunnable.initPlayers(R.raw.roll, ROLL_DICE_PLAYER_COUNT);
-//			}
-//			executor.execute(rollDicePlayer[rollDicePlayerIndex]);
-//		}
-//		rollDicePlayerIndex = (rollDicePlayerIndex + 1) % 3;
-//	}
-	
-//	private static class PlayerRunnable implements Runnable {
-//		
-//		int resId;
-//		MediaPlayer sound = null;
-//		
-//		public static PlayerRunnable[] initPlayers(int resId, int count) {
-//			PlayerRunnable[] retVal;
-//			
-//			retVal = new PlayerRunnable[count];
-//			for (int i = 0; i < count; i++) {
-//				retVal[i] = new PlayerRunnable(resId);
-//			}
-//			
-//			return retVal;
-//		}
-//		
-//		public static void disposePlayers(PlayerRunnable[] players) {
-//			if (players != null) {
-//				for (int i = 0; i < players.length; i++) {
-//					players[i].disposePlayer();
-//				}
-//			}
-//		}
-//		
-//		public PlayerRunnable(int resId) {
-//			this.resId = resId;
-//		}
-//		
-//		public void disposePlayer() {
-//			if (sound != null) {
-//				sound.release();
-//				sound = null;
-//			}
-//		}
-//		
-//		@Override
-//		public void run(){
-//			synchronized (this) {
-//				try {
-//					if (sound == null) {
-//						sound = MediaPlayer.create(QuickDiceApp.getInstance(), resId);
-//					}
-//					if (sound != null) {
-//						sound.start();
-//					}
-//				} catch (Exception ex) {
-//					Log.w(TAG, "PlayerRunnable # " + resId, ex);
-//				}
-//			}
-//		}
-//	};
-	
-//	private void performRollPopup(RollResult res) {
-//		//Create the references to the roll toast if not exist
-//		if (rollDiceToast == null) {
-//			View rollDiceLayout = getLayoutInflater().inflate(
-//					R.layout.dice_roll_toast,
-//					null);
-//
-//			rollDiceView = (View)rollDiceLayout.findViewById(R.id.drtRolling);
-//			rollDiceImage = (ImageView)rollDiceLayout.findViewById(R.id.drtImg);
-//			rollDiceText = (TextView)rollDiceLayout.findViewById(R.id.drtText);
-//
-//			rollDiceToast = new Toast(getApplicationContext());
-//			rollDiceToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-//			rollDiceToast.setDuration(Toast.LENGTH_SHORT);
-//			rollDiceToast.setView(rollDiceLayout);
-//		}
-//		
-//		//#######################################################
-//		//Following block is needed only with rotating animations
-//		//#######################################################
-////		//Check if the result is uniquely composed by 6 or 9 or 0
-////		//and thus require a dot to tell if is upside down.
-////		String result = Long.toString(res.getResultValue());
-////		boolean dot = true;
-////		for (int i = 0; i < result.length() && dot == true; i++) {
-////			dot = result.charAt(i) == '6' || result.charAt(i) == '9' || result.charAt(i) == '0';
-////		}
-////		if (dot) {
-////			rollDiceText.setText(result + ".");
-////		} else {
-////			rollDiceText.setText(result);
-////		}
-//		//#######################################################
-//		rollDiceText.setText(Long.toString(res.getResultValue()));
-//		//#######################################################
-//
-//		//Create the shape of the dice
-//		int resIndex = res.getResourceIndex();
-//
-//		rollDiceImage.setImageDrawable(graphicManager.getDiceIconShape(resIndex, resIndex));
-//
-//		rollDiceToast.show();
-//	}
-	
-//	private void performRollAnimation(RollResult res) {
-//		if (rollDiceAnimation == null) {
-//			rollDiceAnimation = AnimationUtils.loadAnimation(app, R.anim.dice_roll);
-//		}
-//		rollDiceView.startAnimation(rollDiceAnimation);
-//	}
-
 	/**
 	 * Update the content of the last roll result.
 	 */

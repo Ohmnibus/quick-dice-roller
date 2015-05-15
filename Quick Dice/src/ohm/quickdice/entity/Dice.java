@@ -122,9 +122,9 @@ public class Dice {
 			new String(getName()),
 			new String(getDescription()),
 			new String(dResult.getResultText()),
-			dResult.getResult(),
-			dResult.getMaxResult(),
-			dResult.getMinResult(),
+			dResult.getRawResult(),
+			dResult.getMaxRawResult(),
+			dResult.getMinRawResult(),
 			getResourceIndex());
 	}
 

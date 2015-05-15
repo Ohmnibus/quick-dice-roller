@@ -1,6 +1,8 @@
 
 v 2.1.2
+- Output "-0" if result is negative prior to truncation
 - Fixed the FC on Named Value picker
+- Minor fix and improvements
 
 v 2.1.1
 - Fixed the "d6+d6" error

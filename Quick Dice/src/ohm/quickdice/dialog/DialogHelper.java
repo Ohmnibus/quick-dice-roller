@@ -133,7 +133,8 @@ public class DialogHelper {
 //				res.getString(R.string.app_author));
 
 		body = res.getString(R.string.msgWhatsNewIntro) +
-				res.getString(R.string.msgWhatsNewBody);
+				res.getString(R.string.msgWhatsNewBody) +
+				res.getString(R.string.msgWhatsNewOutro);
 		
 		new MarkupDialog(context, title, body, -1, null).show();
 	}

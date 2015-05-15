@@ -125,7 +125,8 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 				itemViews.name.setText(res.getName());
 				itemViews.resultText.setText(res.getResultText());
 			}
-			String result = Long.toString(res.getResultValue());
+			//String result = Long.toString(res.getResultValue());
+			String result = res.getResultString();
 			itemViews.resultValue.setText(result);
 			itemViews.resultValue.setTextSize(TypedValue.COMPLEX_UNIT_DIP, getFontSize(context, result));
 			itemViews.resultIcon.setImageResource(res.getResultIconID());

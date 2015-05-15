@@ -111,21 +111,16 @@
 	<string name="msgWhatsNewTitle">What\'s new in version %2$s</string>
 	<string name="msgWhatsNewIntro"><![CDATA[
 <br />
-<b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app or check the <a href="https://crowdin.com/project/quick-dice-roller">Crowdin project</a> to help me to improve translations.<br />
-<br />
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; Custom background image<br />
-&bull; Custom icons<br />
-&bull; Speech synthesis<br />
-&bull; New function to support Aeon IV<br />
-&bull; New function to support Rolemaster<br />
-&bull; Improved \"pool\" function<br />
-&bull; Fixed double popup menu in roll results<br />
-&bull; Fixed the \"d6+d6\" error<br />
+&bull; Output "-0" for negative values like "-0.5"<br />
+&bull; Fixed the FC on Named Value picker<br />
 &bull; Minor fix and improvements<br />
-<br />]]></string>
+]]></string>
+	<string name="msgWhatsNewOutro"><![CDATA[
+<br />
+<b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app or check the <a href="https://crowdin.com/project/quick-dice-roller">Crowdin project</a> to help me to improve translations.<br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
 Copyright (c) 2012-2014 by %3$s<br />

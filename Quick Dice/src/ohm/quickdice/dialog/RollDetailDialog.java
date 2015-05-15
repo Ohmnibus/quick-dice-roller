@@ -80,7 +80,8 @@ public class RollDetailDialog extends MenuDialog {
 		}
 		//((TextView)view.findViewById(R.id.rdExpression)).setText(res.);
 		((TextView)view.findViewById(R.id.rdResultText)).setText(res.getResultText());
-		((TextView)view.findViewById(R.id.rdResultValue)).setText(Long.toString(res.getResultValue()));
+		//((TextView)view.findViewById(R.id.rdResultValue)).setText(Long.toString(res.getResultValue()));
+		((TextView)view.findViewById(R.id.rdResultValue)).setText(res.getResultString());
 		((ImageView)view.findViewById(R.id.rdResultQuality)).setImageResource(res.getResultIconID());
 //		((TextView)view.findViewById(R.id.rdRange)).setText(
 //				Long.toString(res.getMinResultValue()) + " - " +
