@@ -3,6 +3,7 @@
 
 	<string name="app_name">Quick Dice Roller</string>
 	<string name="app_author">Ohmnibus</string><!-- No need to translate -->
+	<string name="picker_name">QDR File Explorer</string>
 
 	<string name="lblName">Name</string>
 	<string name="hintName">Identifies the die</string>
@@ -46,6 +47,8 @@
 	<string name="lblImportFromRecent">Import from recent file</string>
 	<string name="lblImportFrom">Import from&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblExportTo">Export to&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblImportDiceDef">Import dice definitions</string>
+	<string name="lblExportDiceDef">Export dice definitions</string>
 	<string name="lblItemMRU">%2$d dice in %1$s bags - %4$s %5$s</string>
 	<string name="lblD">d</string><!-- The carachter used in formulas as in "3d6" -->
 	<string name="lblSelectDice">Select dice</string>
@@ -114,7 +117,8 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; Output "-0" for negative values like "-0.5"<br />
+&bull; Import/Export from/to external app<br />
+&bull; Output "-0" if result is negative before truncation<br />
 &bull; Fixed the FC on Named Value picker<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
@@ -199,6 +203,7 @@ Thanks!<br />]]></string>
 	<string name="msgOnlineHelpTitle">Quick reference</string>
 	<string name="msgOnlineHelp">Check Online Help</string>
 	<string name="msgCannotRead">Cannot read folder content (or part of it)</string>
+	<string name="msgFileNotFound">File not found.</string>
 	<string name="msgFileNameInvalid">File name \"%1$s\" is not valid.</string>
 	<string name="msgFileNameExists">File name \"%1$s\" already exists. Are you sure you want to overwrite this file?</string>
 	<string name="msgExported">Dice definitions exported</string>

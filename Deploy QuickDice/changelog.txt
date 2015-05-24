@@ -1,6 +1,7 @@
 
 v 2.1.2
-- Output "-0" if result is negative prior to truncation
+- Import/Export from/to external app
+- Output "-0" if result is negative before truncation
 - Fixed the FC on Named Value picker
 - Minor fix and improvements
 

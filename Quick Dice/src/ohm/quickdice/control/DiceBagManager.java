@@ -15,8 +15,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class DiceBagManager {
 
@@ -67,7 +69,7 @@ public class DiceBagManager {
 	 */
 	public void init(boolean force) {
 		if (! isDataInitialized || force) {
-			loadDiceBagManager();
+			readDiceBagManager();
 			config = PreferenceManager.getDefaultSharedPreferences(context);
 			curDiceBagIndex = config.getInt(KEY_CURRENT_BAG, 0);
 			isDataInitialized = true;
@@ -143,15 +145,6 @@ public class DiceBagManager {
 	public IconCollection getIconCollection() {
 		return iconCollection;
 	}
-	
-//	/**
-//	 * Convenience method do get the drawable of the icon with the given ID.
-//	 * @param iconId Unique identifier of the icon.
-//	 * @return The {@link Drawable} of the icon.
-//	 */
-//	public Drawable getIconDrawable(int iconId) {
-//		return iconCollection.getDrawable(context, iconId);
-//	}
 	
 	/**
 	 * Asynchronously load an icon to the ImageView.
@@ -288,11 +281,21 @@ public class DiceBagManager {
 	 * Load the Dice Bag Manager from the device internal memory to the specified collection.<br />
 	 * If an error occur during the memory access, the default dice bag list is loaded.
 	 */
-	protected void loadDiceBagManager() {
+	protected void readDiceBagManager() {
 		
-		boolean loaded = persistence.loadDiceBagManager(this);
+//		boolean loaded = persistence.loadDiceBagManager(this);
+//		
+//		if (! loaded) {
+//			legacyLoadDiceBagCollection(diceBagCollection);
+//		}
+		int error = persistence.readDiceBagManager(this, persistence.getSystemArchiveUri());
 		
-		if (! loaded) {
+		if (error != PersistenceManager.ERR_NONE) {
+			//Show error message (unless the error is File not found, which will happen on first startup).
+			if (error != PersistenceManager.ERR_FILE_NOT_FOUND) {
+				showErrorMessage(context, R.string.err_cannot_read);
+			}
+			//Load definition using legacy files
 			legacyLoadDiceBagCollection(diceBagCollection);
 		}
 		
@@ -304,21 +307,57 @@ public class DiceBagManager {
 	 * Store the Dice Bag Manager in the device internal memory
 	 */
 	protected void saveDiceBagManager() {
-		persistence.saveDiceBagManager(this);
+		persistence.writeDiceBagManager(this,
+				persistence.getSystemArchiveUri(),
+				R.string.err_cannot_update);
 	}
 	
-	public boolean exportAll(String path) {
-		return persistence.exportDiceBagManager(this, path);
-	}
+//	/**
+//	 * 
+//	 * @param file
+//	 * @return
+//	 * @deprecated use {@code exportAll(Uri)}
+//	 */
+//	public boolean exportAll(java.io.File file) {
+//		return persistence.exportDiceBagManager(this, file);
+//	}
+//
+//	/**
+//	 * 
+//	 * @param path
+//	 * @return
+//	 * @deprecated use {@code exportAll(Uri)}
+//	 */
+//	public boolean exportAll(String path) {
+//		return persistence.exportDiceBagManager(this, path);
+//	}
+//
+//	/**
+//	 * 
+//	 * @param path
+//	 * @return
+//	 * @deprecated use {@code importAll(Uri)}
+//	 */
+//	public boolean importAll(String path) {
+//		return importAll(Uri.fromFile(new File(path)));
+//	}
 
-	public boolean importAll(String path) {
+	public boolean exportAll(Uri resourceUri) {
+		return persistence.writeDiceBagManager(this,
+				resourceUri,
+				R.string.err_cannot_export) == PersistenceManager.ERR_NONE;
+	}
+	
+	public boolean importAll(Uri resourceUri) {
 		boolean retVal = false;
 		
 		CustomIcon.backupIconFiles(context);
 		
 		DiceBagManager newManager = new DiceBagManager(persistence);
-		boolean loaded = persistence.importDiceBagManager(newManager, path);
-		if (loaded) {
+		//boolean loaded = persistence.importDiceBagManager(newManager, resourceUri);
+		int error = persistence.readDiceBagManager(newManager, resourceUri, R.string.err_cannot_import);
+		//if (loaded) {
+		if (error == PersistenceManager.ERR_NONE) {
 			diceBagCollection.clear(); //Help to free resources
 			for (DiceBag diceBag : newManager.getDiceBagCollection()) {
 				diceBagCollection.add(diceBag);
@@ -431,6 +470,17 @@ public class DiceBagManager {
 		
 		if (collection.size() == 0) {
 			initDiceCollection(collection);
+		}
+	}
+	
+	private void showErrorMessage(final Context ctx, final int messageResId) {
+		if (messageResId > 0x00000000) {
+			new android.os.Handler(ctx.getMainLooper()).post(new java.lang.Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(ctx, messageResId, Toast.LENGTH_LONG).show();
+				}
+			});
 		}
 	}
 }

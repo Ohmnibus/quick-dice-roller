@@ -13,11 +13,13 @@ import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.FolderContentAdapter;
 import ohm.quickdice.entity.FolderItem;
+import ohm.quickdice.util.Helper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
@@ -32,45 +34,51 @@ import android.widget.Toast;
 
 public class FilePickerActivity extends Activity {
 
-	//final static String ROOT_FOLDER_NAME = "sdcard";
-	//final static String ROOT_FOLDER = "/" + ROOT_FOLDER_NAME + "/";
-	
-	/**
-	 * Open the activity to select an existing folder.
-	 */
-	public static final int ACTIVITY_SELECT_FOLDER = 0x00F17E01;
-	/**
-	 * Open the activity to select an existing file.
-	 */
-	public static final int ACTIVITY_SELECT_FILE = 0x00F17E02;
-	/**
-	 * Open the activity to select a name for a new file.
-	 */
-	public static final int ACTIVITY_NEW_FILE = 0x00F17E03;
-	/**
-	 * The activity was closed pressing "OK"
-	 */
-	public static final int RESULT_OK = 0x00F17E01;
-	/**
-	 * The activity was closed pressing "Cancel" or the back button
-	 */
-	public static final int RESULT_CANCEL = 0x00F17E02;
-	/**
-	 * Define the bundle content as a type of request ({@code ACTIVITY_SELECT_FOLDER}, {@code ACTIVITY_SELECT_FILE} or {@code ACTIVITY_NEW_FILE}).
-	 */
-	public static final String BUNDLE_REQUEST_TYPE = "RequestType";
-	public static final String BUNDLE_FILTER_EXTENSION_LIST = "FilterExtensionList";
-	public static final String BUNDLE_DEFAULT_FILE_NAME = "DefaultFileName";
-	/**
-	 * Define the title to use for the activity. Used only if {@link BUNDLE_TITLE_ID} is not set.
-	 */
-	public static final String BUNDLE_TITLE = "Title";
-	/**
-	 * Define the resource to use for the title to use for the activity.
-	 */
-	public static final String BUNDLE_TITLE_ID = "TitleId";
+//	/**
+//	 * Open the activity to select an existing folder.
+//	 */
+//	public static final int ACTIVITY_SELECT_FOLDER = 0x00F17E01;
+//	/**
+//	 * Open the activity to select an existing file.
+//	 */
+//	public static final int ACTIVITY_SELECT_FILE = 0x00F17E02;
+//	/**
+//	 * Open the activity to select a name for a new file.
+//	 */
+//	public static final int ACTIVITY_NEW_FILE = 0x00F17E03;
+//	/**
+//	 * Open the activity to send a file to the specified location.
+//	 */
+//	public static final int ACTIVITY_SEND_FILE = 0x00F17E04;
+//	/**
+//	 * The activity was closed pressing "OK"
+//	 */
+//	public static final int RESULT_OK = 0x00F17E01;
+//	/**
+//	 * The activity was closed pressing "Cancel" or the back button
+//	 */
+//	public static final int RESULT_CANCEL = 0x00F17E02;
+//	/**
+//	 * Define the bundle content as a type of request ({@code ACTIVITY_SELECT_FOLDER}, {@code ACTIVITY_SELECT_FILE} or {@code ACTIVITY_NEW_FILE}).
+//	 */
+//	public static final String BUNDLE_REQUEST_TYPE = "RequestType";
+	public static final String EXTRA_FILTER_EXTENSION_LIST = "FilterExtensionList";
+	public static final String EXTRA_USE_FOR_MRU = "UseForMRU";
+	//public static final String BUNDLE_DEFAULT_FILE_NAME = "DefaultFileName";
+//	/**
+//	 * Define the title to use for the activity. Used only if {@link BUNDLE_TITLE_ID} is not set.
+//	 */
+//	public static final String BUNDLE_TITLE = "Title";
+//	/**
+//	 * Define the resource to use for the title to use for the activity.
+//	 */
+	//public static final String BUNDLE_TITLE_ID = "TitleId";
 
-	public static final String BUNDLE_RESULT_PATH = "ResultPath";
+	//public static final String BUNDLE_RESULT_PATH = "ResultPath";
+
+	private static final int ACTION_UNKNOWN = 0x00000000;
+	private static final int ACTION_SEND = 0x00000001;
+	private static final int ACTION_GET_CONTENT = 0x00000002;
 
 	private static final int SIZE_KB = 1024;
 	private static final int SIZE_MB = SIZE_KB * 1024;
@@ -79,7 +87,9 @@ public class FilePickerActivity extends Activity {
 	java.text.DateFormat dateFormat;
 	java.text.DateFormat timeFormat;
 	
-	int requestType;
+	int action = 0;
+	//int requestType;
+	Uri resourceUri = null;
 	String defaultFileName = null;
 	String title = null;
 	FileFilter fileFilter = null;
@@ -129,22 +139,39 @@ public class FilePickerActivity extends Activity {
 
 		setContentView(R.layout.file_picker_activity);
 		
-		requestType = ACTIVITY_SELECT_FILE;
+		//requestType = ACTIVITY_SELECT_FILE;
+		//action = getIntent().getAction();
 		
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			requestType = extras.getInt(BUNDLE_REQUEST_TYPE, ACTIVITY_SELECT_FILE);
-			defaultFileName = extras.getString(BUNDLE_DEFAULT_FILE_NAME);
-			String[] ext = extras.getStringArray(BUNDLE_FILTER_EXTENSION_LIST);
+		Intent intent = getIntent();
+		if (intent != null) {
+			String actionString = intent.getAction();
+			if (actionString == null) {
+				action = ACTION_UNKNOWN;
+			} else if (actionString.equals(Intent.ACTION_SEND)) {
+				action = ACTION_SEND;
+			} else if (actionString.equals(Intent.ACTION_GET_CONTENT)) {
+				action = ACTION_GET_CONTENT;
+			}
+			resourceUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+			if (resourceUri == null) {
+				resourceUri = intent.getData();
+			}
+			if (resourceUri != null) {
+				defaultFileName = resourceUri.getLastPathSegment();
+			}
+			String[] ext = intent.getStringArrayExtra(EXTRA_FILTER_EXTENSION_LIST);
+			//requestType = extras.getInt(BUNDLE_REQUEST_TYPE, ACTIVITY_SELECT_FILE);
+			//defaultFileName = extras.getString(BUNDLE_DEFAULT_FILE_NAME);
+			//String[] ext = extras.getStringArray(BUNDLE_FILTER_EXTENSION_LIST);
 			if (ext != null && ext.length > 0) {
 				fileFilter = new ExtensionFileFilter(ext);
 			}
-			if (extras.containsKey(BUNDLE_TITLE_ID)) {
-				int titleId = extras.getInt(BUNDLE_TITLE_ID);
-				title = getString(titleId);
-			} else {
-				title = extras.getString(BUNDLE_TITLE);
-			}
+//			if (extras.containsKey(BUNDLE_TITLE_ID)) {
+//				int titleId = extras.getInt(BUNDLE_TITLE_ID);
+//				title = getString(titleId);
+//			} else {
+//				title = extras.getString(BUNDLE_TITLE);
+//			}
 		}
 		
 		dateFormat = DateFormat.getMediumDateFormat(this);
@@ -172,21 +199,34 @@ public class FilePickerActivity extends Activity {
 		cancel = (Button) findViewById(R.id.btuBarCancel);
 		cancel.setOnClickListener(confirmCancelClickListener);
 
-		switch (requestType) {
-			case ACTIVITY_SELECT_FILE:
+		switch (action) {
+//			case ACTIVITY_SELECT_FILE:
+//				if (title == null) title = getString(R.string.lblSelectFile);
+//				//Confirm button not needed.
+//				confirm.setVisibility(View.GONE);
+//				//Enable file name input not needed.
+//				txtFileName.setVisibility(View.GONE);
+//				break;
+//			case ACTIVITY_SELECT_FOLDER:
+//				if (title == null) title = getString(R.string.lblSelectFolder);
+//				//Enable file name input not needed.
+//				txtFileName.setVisibility(View.GONE);
+//				break;
+//			case ACTIVITY_NEW_FILE:
+//				if (title == null) title = getString(R.string.lblNewFile);
+//				//Enable file name input
+//				txtFileName.setText(defaultFileName);
+//				txtFileName.setVisibility(View.VISIBLE);
+//				break;
+			case ACTION_GET_CONTENT:
 				if (title == null) title = getString(R.string.lblSelectFile);
 				//Confirm button not needed.
 				confirm.setVisibility(View.GONE);
 				//Enable file name input not needed.
 				txtFileName.setVisibility(View.GONE);
 				break;
-			case ACTIVITY_SELECT_FOLDER:
-				if (title == null) title = getString(R.string.lblSelectFolder);
-				//Enable file name input not needed.
-				txtFileName.setVisibility(View.GONE);
-				break;
-			case ACTIVITY_NEW_FILE:
-				if (title == null) title = getString(R.string.lblNewFile);
+			case ACTION_SEND:
+				if (title == null) title = getString(R.string.lblNewFile); //TODO: Change label
 				//Enable file name input
 				txtFileName.setText(defaultFileName);
 				txtFileName.setVisibility(View.VISIBLE);
@@ -335,9 +375,14 @@ public class FilePickerActivity extends Activity {
 				showFolder(curFolder);
 				break;
 			default:
-				if (requestType == ACTIVITY_SELECT_FILE) {
-					returnToCaller(item.getPath(), RESULT_OK);
-				} else if (requestType == ACTIVITY_NEW_FILE) {
+//				if (requestType == ACTIVITY_SELECT_FILE) {
+//					returnToCaller(item.getPath(), RESULT_OK);
+//				} else if (requestType == ACTIVITY_NEW_FILE) {
+//					txtFileName.setText(item.getName());
+//				}
+				if (action == ACTION_GET_CONTENT) {
+					returnToCaller(new File(item.getPath()), RESULT_OK);
+				} else if (action == ACTION_SEND) {
 					txtFileName.setText(item.getName());
 				}
 				break;
@@ -347,35 +392,49 @@ public class FilePickerActivity extends Activity {
 	private OnClickListener confirmCancelClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			FolderItem item = null;
+//			FolderItem item = null;
 			if (v == confirm) {
-				switch (requestType) {
-					case ACTIVITY_SELECT_FILE:
+//				switch (requestType) {
+//					case ACTIVITY_SELECT_FILE:
+//						//This should not happen
+//						break;
+//					case ACTIVITY_SELECT_FOLDER:
+//						item = getFolderItem(curFolder);
+//						returnToCaller(
+//								item.getPath(),
+//								RESULT_OK);
+//						break;
+//					case ACTIVITY_NEW_FILE:
+//						//Check if overwrite
+//						askOverwrite();
+//						break;
+//				}
+				switch (action) {
+					case ACTION_GET_CONTENT:
 						//This should not happen
 						break;
-					case ACTIVITY_SELECT_FOLDER:
-						item = getFolderItem(curFolder);
-						returnToCaller(
-								item.getPath(),
-								RESULT_OK);
-						break;
-					case ACTIVITY_NEW_FILE:
+					case ACTION_SEND:
 						//Check if overwrite
 						askOverwrite();
 						break;
 				}
 			} else {
-				returnToCaller(null, RESULT_CANCEL);
+				returnToCaller(null, RESULT_CANCELED);
 			}
 		}
 	};
 
-	protected void returnToCaller(String path, int result) {
-		Bundle bundle = new Bundle();
-		bundle.putString(BUNDLE_RESULT_PATH, path);
+	protected void returnToCaller(File file, int result) {
+//		Bundle bundle = new Bundle();
+//		bundle.putString(BUNDLE_RESULT_PATH, path);
+//		Intent mIntent = new Intent();
+//		mIntent.putExtras(bundle);
+//		//mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Intent mIntent = new Intent();
-		mIntent.putExtras(bundle);
-		//mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		if (file != null) {
+			mIntent.setData(Uri.fromFile(file));
+			mIntent.putExtra(EXTRA_USE_FOR_MRU, true);
+		}
 		setResult(result, mIntent);
 		finish();
 	}
@@ -393,7 +452,8 @@ public class FilePickerActivity extends Activity {
 						R.string.lblYes,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
+								//returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
+								sendFile(newFile);
 							}
 						});
 				builder.setNegativeButton(
@@ -405,7 +465,8 @@ public class FilePickerActivity extends Activity {
 						});
 				builder.create().show();
 			} else {
-				returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
+				//returnToCaller(newFile.getAbsolutePath(), RESULT_OK);
+				sendFile(newFile);
 			}
 		} else {
 			Toast.makeText(
@@ -427,6 +488,15 @@ public class FilePickerActivity extends Activity {
 			retVal = false;
 		}
 		return retVal;
+	}
+	
+	private void sendFile(File destFile) {
+		if (Helper.copyFile(this, resourceUri, destFile)) {
+			returnToCaller(destFile, RESULT_OK);
+		} else {
+			Toast.makeText(this, R.string.err_cannot_export, Toast.LENGTH_LONG).show();
+			returnToCaller(destFile, RESULT_CANCELED);
+		}
 	}
 	
 }

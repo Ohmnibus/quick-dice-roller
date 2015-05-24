@@ -54,9 +54,21 @@
 			android:theme="@style/DialogBaseTheme"
 			android:name=".activity.ImportExportActivity" />
 		<activity
+			android:label="@string/picker_name"
+			android:icon="@drawable/ic_fs_folder"
 			android:theme="@style/DialogBaseTheme"
 			android:name=".activity.FilePickerActivity" />
 
+		<provider
+			android:name="android.support.v4.content.FileProvider"
+			android:authorities="ohm.quickdice"
+			android:grantUriPermissions="true"
+			android:exported="false">
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/filepaths" />
+		</provider>
+		
 		<meta-data android:name="com.google.android.backup.api_key"
 			android:value="AEdPqrEAAAAIy0SkS24zT0XdiDBVXYqYRPD5N6MsMguM9h1t-A" />
 	</application>

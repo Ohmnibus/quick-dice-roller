@@ -1,0 +1,7 @@
+<paths>
+	<!-- files-path -->
+	<!-- <files-path name="share" path="test/" /> -->
+	<!-- cache-path -->
+	<cache-path name="share" path="temp/" />
+	<!-- external-path -->
+</paths>
