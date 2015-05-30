@@ -51,10 +51,6 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	 * The activity was closed after exporting dice definitions
 	 */
 	public static final int RESULT_EXPORT = 0x00040002;
-//	/**
-//	 * The activity was closed pressing "Cancel" or the back button
-//	 */
-//	public static final int RESULT_CANCEL = 0x00040003;
 	/**
 	 * Define the bundle content as a type of request ({@code ACTIVITY_IMPORT_EXPORT}).
 	 */
@@ -64,7 +60,10 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	private static final String FILE_EXTENSION = ".qdr.json";
 	private static final String DEFAULT_FILE_NAME = "DiceDef" + FILE_EXTENSION;
 	private static final String KEY_RECENT_FILES = "KEY_RECENT_FILES";
+	private static final String KEY_TARGET_URI = "KEY_TARGET_URI";
 	private static final int MAX_RECENT_FILES = 16;
+	private static final int REQUEST_GET_CONTENT = 0x00000000;
+	private static final int REQUEST_SEND = 0x00000001;
 
 	ListView lstRecentFiles;
 	Button btuImport;
@@ -72,8 +71,7 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	Button btuCancel;
 	SharedPreferences config = null;
 	ArrayList<MostRecentFile> recentFiles;
-	
-	//GraphicManager graphicManager;
+	Uri targetUri = null; //Reference to the sent resource, used to remove permissions
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +84,19 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 
 		recentFiles = loadRecentFiles();
 		
-		//graphicManager = new Graphic(getResources());
-		//graphicManager = QuickDiceApp.getInstance().getGraphic();
-		
 		initViews();
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		outState.putParcelable(KEY_TARGET_URI, targetUri);
+		super.onSaveInstanceState(outState);
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		targetUri = savedInstanceState.getParcelable(KEY_TARGET_URI);
 	}
 
 	private void initViews() {
@@ -105,14 +112,12 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		Drawable drawable;
 		
 		btuImport = (Button)findViewById(R.id.eiImport);
-		//drawable = graphicManager.resizeDrawable(R.drawable.ic_import, 64, 32);
 		drawable = Helper.resizeDrawable(this, R.drawable.ic_import, 64, 32);
 		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 		btuImport.setCompoundDrawables(drawable, null, null, null);
 		btuImport.setOnClickListener(this);
 		
 		btuExport = (Button)findViewById(R.id.eiExport);
-		//drawable = graphicManager.resizeDrawable(R.drawable.ic_export, 64, 32);
 		drawable = Helper.resizeDrawable(this, R.drawable.ic_export, 64, 32);
 		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 		btuExport.setCompoundDrawables(drawable, null, null, null);
@@ -148,26 +153,6 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		}
 	};
 	
-//	/**
-//	 * Open the activity to select an existing folder.
-//	 */
-//	public static final int ACTIVITY_SELECT_FOLDER = 0x00F17E01;
-//	/**
-//	 * Open the activity to select an existing file.
-//	 */
-//	public static final int ACTIVITY_SELECT_FILE = 0x00F17E02;
-//	/**
-//	 * Open the activity to select a name for a new file.
-//	 */
-//	public static final int ACTIVITY_NEW_FILE = 0x00F17E03;
-//	/**
-//	 * Open the activity to send a file to the specified location.
-//	 */
-//	public static final int ACTIVITY_SEND_FILE = 0x00F17E04;
-	
-	private static final int REQUEST_GET_CONTENT = 0x00000000;
-	private static final int REQUEST_SEND = 0x00000001;
-
 	private void onImportClick(View v) {
 //		Bundle bundle = new Bundle();
 //		bundle.putInt(FilePickerActivity.BUNDLE_REQUEST_TYPE, FilePickerActivity.ACTIVITY_SELECT_FILE);
@@ -214,16 +199,18 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 			//2-Create the intent to send the file
 			Intent baseIntent = new Intent();
 			baseIntent.setAction(Intent.ACTION_SEND);
-			//sendIntent.setType("application/json");
+			baseIntent.setType("application/json");
 			//baseIntent.setDataAndType(contentUri, "*/*");
-			baseIntent.setDataAndType(contentUri, "application/json");
+			//baseIntent.setDataAndType(contentUri, "application/json");
+			baseIntent.putExtra(Intent.EXTRA_SUBJECT, contentUri.getLastPathSegment());
 			baseIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
 			baseIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //This is useless
 			
 			//3-Create the extra intent to be added to the intent chooser
 			Intent extraIntent = new Intent(ImportExportActivity.this, FilePickerActivity.class);
 			extraIntent.setAction(baseIntent.getAction());
-			extraIntent.setDataAndType(baseIntent.getData(), baseIntent.getType());
+			extraIntent.setType(baseIntent.getType());
+			//extraIntent.setDataAndType(baseIntent.getData(), baseIntent.getType());
 			extraIntent.putExtra(Intent.EXTRA_STREAM, baseIntent.getParcelableExtra(Intent.EXTRA_STREAM));
 			extraIntent.setFlags(baseIntent.getFlags());
 	
@@ -248,8 +235,10 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 			case REQUEST_SEND:
-				this.revokeUriPermission(targetUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				//TODO: Optionally delete file
+				if (targetUri != null) {
+					this.revokeUriPermission(targetUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					//TODO: Optionally delete file
+				}
 				if (resultCode == RESULT_OK) {
 					if (data.getBooleanExtra(FilePickerActivity.EXTRA_USE_FOR_MRU, false)) {
 						MostRecentFile mru = createRecentFileInstance(data.getData());
@@ -303,8 +292,6 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		
 		return retVal;
 	}
-	
-	Uri targetUri = null;
 	
 	private CompatIntent.OnEvalResolveInfoListener onEvalResolveInfoListener = new OnEvalResolveInfoListener() {
 		@Override
