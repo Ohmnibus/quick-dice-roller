@@ -117,8 +117,9 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; New function \"reroll\"<br />
 &bull; Import/Export from/to external app<br />
-&bull; Output "-0" if result is negative before truncation<br />
+&bull; Output \"-0\" if result is negative before truncation<br />
 &bull; Fixed the FC on Named Value picker<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
@@ -127,7 +128,7 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 <b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app or check the <a href="https://crowdin.com/project/quick-dice-roller">Crowdin project</a> to help me to improve translations.<br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
-Copyright (c) 2012-2014 by %3$s<br />
+Copyright (c) 2012-2015 by %3$s<br />
 <br />
 <a href="https://crowdin.com/project/quick-dice-roller">Translations</a>: %4$s<br />
 <br />
@@ -136,7 +137,7 @@ Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><
 This is a free app, however if you like it please consider to make a donation.<br />
 <br />
 Thanks!<br />]]></string>
-	<string name="app_translators">Henning (DE), Magaolimpia (FR), Mescalito (ES), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES)</string>
+	<string name="app_translators">Henning (DE), leynad_ix (ES), Magaolimpia (FR), masterki (DE), Mescalito (ES), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES)</string>
 
 	<string name="msgLicenses">Licenses</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>
@@ -360,6 +361,20 @@ Thanks!<br />]]></string>
 		<item>The subsequent dice to roll</item>
 		<item>Target for subsequent explosions</item>
 		<item>Max num. of explosions</item>
+	</string-array>
+
+	<string name="fncRerollName">Roll again</string>
+	<string name="fncRerollDesc">Roll again if result is equal or below the boundary.</string>
+	<string name="fncRerollURL">reroll</string>
+	<string-array name="fncRerollParamNames">
+		<item>Roll</item>
+		<item>Boundary</item>
+		<item>Max reroll</item>
+	</string-array>
+	<string-array name="fncRerollParamHints">
+		<item>The dice to roll</item>
+		<item>Lower boundary</item>
+		<item>Max num. of reroll</item>
 	</string-array>
 
 	<string name="fncMaxName">Maximum</string>

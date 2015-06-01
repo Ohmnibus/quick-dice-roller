@@ -48,7 +48,8 @@ public class QuickDiceApp extends Application {
 			addFunction(fnc, "rand", TokenFunctionRandom.class, R.drawable.ic_fnc, R.string.fncRandName, R.string.fncRandDesc, R.string.fncRandURL, R.array.fncRandParamNames, R.array.fncRandParamHints);
 			addFunction(fnc, "exp", TokenFunctionExp.class, R.drawable.ic_fnc, R.string.fncExpName, R.string.fncExpDesc, R.string.fncExpURL, R.array.fncExpParamNames, R.array.fncExpParamHints);
 			addFunction(fnc, "expup", TokenFunctionExpUp.class, R.drawable.ic_fnc, R.string.fncExpUpName, R.string.fncExpUpDesc, R.string.fncExpUpURL, R.array.fncExpUpParamNames, R.array.fncExpUpParamHints);
-
+			addFunction(fnc, "reroll", TokenFunctionReroll.class, R.drawable.ic_fnc, R.string.fncRerollName, R.string.fncRerollDesc, R.string.fncRerollURL, R.array.fncRerollParamNames, R.array.fncRerollParamHints);
+			
 			addHiddenFunction("explode", TokenFunctionExplode.class);
 			addHiddenFunction("explodeup", TokenFunctionExplodeUp.class);
 
@@ -93,12 +94,12 @@ public class QuickDiceApp extends Application {
 		TokenFunction.addFunction(token, functionClass);
 		
 		//Used to get function IDS
-//		try {
-//			TokenFunction manager = functionClass.getConstructor().newInstance();
-//			android.util.Log.i("funcType", token + ": " + manager.getType());
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
+		try {
+			TokenFunction manager = functionClass.getConstructor().newInstance();
+			android.util.Log.i("funcType", token + ": " + manager.getType());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		
 		//functions[functions.length - 1] = FunctionDescriptor.initDescriptor(
 		fnc.add(FunctionDescriptor.initDescriptor(

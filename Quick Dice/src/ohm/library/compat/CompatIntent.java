@@ -78,7 +78,7 @@ public abstract class CompatIntent {
 				//If extra intents were provided, choose the first.
 				chooser = extraList[0];
 			} else {
-				//If extra intents were provided, create a standard chooser.
+				//If extra intents were not provided, create a standard chooser.
 				chooser = Intent.createChooser(target, title);
 			}
 			return chooser;
@@ -119,10 +119,17 @@ public abstract class CompatIntent {
 				}
 			}
 			
-			Intent chooser = Intent.createChooser(chooserOptionList.remove(0), title);
-			chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, chooserOptionList.toArray(new Parcelable[]{}));
+			Intent retVal;
+			if (chooserOptionList.size() == 0) {
+				retVal = Intent.createChooser(target, title);
+			} else if (chooserOptionList.size() == 1) {
+				retVal = chooserOptionList.get(0);
+			} else {
+				retVal = Intent.createChooser(chooserOptionList.remove(0), title);
+				retVal.putExtra(Intent.EXTRA_INITIAL_INTENTS, chooserOptionList.toArray(new Parcelable[]{}));
+			}
 			
-			return chooser;
+			return retVal;
 		}
 		
 	}
