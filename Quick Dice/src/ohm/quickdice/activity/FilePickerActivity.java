@@ -62,8 +62,8 @@ public class FilePickerActivity extends Activity {
 //	 * Define the bundle content as a type of request ({@code ACTIVITY_SELECT_FOLDER}, {@code ACTIVITY_SELECT_FILE} or {@code ACTIVITY_NEW_FILE}).
 //	 */
 //	public static final String BUNDLE_REQUEST_TYPE = "RequestType";
-	public static final String EXTRA_FILTER_EXTENSION_LIST = "FilterExtensionList";
-	public static final String EXTRA_USE_FOR_MRU = "UseForMRU";
+	public static final String EXTRA_FILTER_EXTENSION_LIST = "ohm.quickdice.FilePickerActivity.FilterExtensionList";
+	public static final String EXTRA_USE_FOR_MRU = "ohm.quickdice.FilePickerActivity.UseForMRU";
 	//public static final String BUNDLE_DEFAULT_FILE_NAME = "DefaultFileName";
 //	/**
 //	 * Define the title to use for the activity. Used only if {@link BUNDLE_TITLE_ID} is not set.

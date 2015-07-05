@@ -22,9 +22,11 @@ import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -240,7 +242,15 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 					//TODO: Optionally delete file
 				}
 				if (resultCode == RESULT_OK) {
-					if (data.getBooleanExtra(FilePickerActivity.EXTRA_USE_FOR_MRU, false)) {
+					boolean useForMru = false;
+					try {
+						useForMru = data.getBooleanExtra(FilePickerActivity.EXTRA_USE_FOR_MRU, false);
+					} catch (BadParcelableException ex) {
+						//This is caused by DropBox and I don't know how to prevent it
+						Log.w("ImportExportActivity", "Cannot read " + FilePickerActivity.EXTRA_USE_FOR_MRU, ex);
+						useForMru = false;
+					}
+					if (useForMru) {
 						MostRecentFile mru = createRecentFileInstance(data.getData());
 						updateRecentFileList(mru);
 						saveRecentFiles(recentFiles);

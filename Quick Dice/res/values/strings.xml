@@ -117,6 +117,7 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Fixed error exporting to DropBox<br />
 &bull; New function \"reroll\"<br />
 &bull; Import/Export from/to external app<br />
 &bull; Output \"-0\" if result is negative before truncation<br />
