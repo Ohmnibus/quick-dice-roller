@@ -42,6 +42,13 @@ public interface BaseCollection<T> extends Iterable<T> {
 	public T get(int position);
 	
 	/**
+	 * Searches this collection for the specified object and returns the index of the first occurrence.
+	 * @param item The object to search for.
+	 * @return The index of the first occurrence of the object, or {@code -1} if it was not found.
+	 */
+	public int indexOf(T item);
+	
+	/**
 	 * Get the number of items in the collection.
 	 * @return
 	 */

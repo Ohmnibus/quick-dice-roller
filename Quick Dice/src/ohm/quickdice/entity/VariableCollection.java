@@ -188,6 +188,11 @@ public class VariableCollection implements BaseCollection<Variable> {
 		return variableList.get(position);
 	}
 	
+	@Override
+	public int indexOf(Variable item) {
+		return variableList.indexOf(item);
+	}
+
 	/**
 	 * Return the variable corresponding to given label, or {@code null} id not found.
 	 * @param label Variable's label to search.

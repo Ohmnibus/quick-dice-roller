@@ -1,11 +1,13 @@
 package ohm.quickdice.adapter;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ohm.library.adapter.CachedCollectionAdapter;
-import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.entity.DiceBagCollection;
@@ -37,8 +39,11 @@ public class DiceBagAdapter extends CachedCollectionAdapter<DiceBag> {
 		}
 	}
 
+	DiceBagCollection collection;
+	
 	public DiceBagAdapter(Context context, int resourceId, DiceBagCollection collection) {
 		super(context, resourceId, collection);
+		this.collection = collection;
 	}
 
 	@Override
@@ -52,17 +57,58 @@ public class DiceBagAdapter extends CachedCollectionAdapter<DiceBag> {
 
 		DiceBag diceBag = cache.data;
 
-		QuickDiceApp app = (QuickDiceApp)getContext().getApplicationContext();
-		//cache.diceBagIcon.setImageDrawable(app.getGraphic().getDiceIcon(diceBag.getResourceIndex()));
-		//cache.diceBagIcon.setImageDrawable(app.getBagManager().getIconDrawable(diceBag.getResourceIndex()));
-		app.getBagManager().setIconDrawable(cache.diceBagIcon, diceBag.getResourceIndex());
+		//QuickDiceApp app = (QuickDiceApp)getContext().getApplicationContext();
+		////cache.diceBagIcon.setImageDrawable(app.getGraphic().getDiceIcon(diceBag.getResourceIndex()));
+		////cache.diceBagIcon.setImageDrawable(app.getBagManager().getIconDrawable(diceBag.getResourceIndex()));
+		//app.getBagManager().setIconDrawable(cache.diceBagIcon, diceBag.getResourceIndex());
+		collection.getManager().setIconDrawable(cache.diceBagIcon, diceBag.getResourceIndex());
+		
 		cache.name.setText(diceBag.getName());
 		cache.description.setText(diceBag.getDescription());
 
-		if (cache.position == app.getBagManager().getCurrentIndex()) {
+//		if (cache.position == collection.getCurrentIndex()) {
+//			cache.root.setBackgroundResource(R.drawable.bg_selected_bag);
+//		} else {
+//			cache.root.setBackgroundResource(0);
+//		}
+		setSelection(cache);
+	}
+	
+	protected void setSelection(ItemViewCache cache) {
+		if (cache.position == collection.getCurrentIndex()) {
 			cache.root.setBackgroundResource(R.drawable.bg_selected_bag);
 		} else {
 			cache.root.setBackgroundResource(0);
 		}
+	}
+
+	public static class DiceBagSelectorAdapter extends DiceBagAdapter implements OnItemClickListener {
+		SparseBooleanArray selected;
+		
+		public DiceBagSelectorAdapter(Context context, int resourceId, DiceBagCollection collection) {
+			super(context, resourceId, collection);
+			selected = new SparseBooleanArray(collection.size());
+		}
+	
+		@Override
+		protected void setSelection(ItemViewCache cache) {
+			super.setSelection(cache);
+			if (selected.get(cache.position)) {
+				cache.root.setBackgroundResource(R.drawable.bg_selected_bag);
+			} else {
+				cache.root.setBackgroundResource(0);
+			}
+		}
+		
+		public SparseBooleanArray getSelected() {
+			return selected;
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			selected.put(position, ! selected.get(position));
+			notifyDataSetChanged();
+		}
+		
 	}
 }

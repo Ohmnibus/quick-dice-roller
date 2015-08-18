@@ -13,7 +13,7 @@ import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.FolderContentAdapter;
 import ohm.quickdice.entity.FolderItem;
-import ohm.quickdice.util.Helper;
+import ohm.quickdice.util.Files;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -491,7 +491,7 @@ public class FilePickerActivity extends Activity {
 	}
 	
 	private void sendFile(File destFile) {
-		if (Helper.copyFile(this, resourceUri, destFile)) {
+		if (Files.copyFile(this, resourceUri, destFile)) {
 			returnToCaller(destFile, RESULT_OK);
 		} else {
 			Toast.makeText(this, R.string.err_cannot_export, Toast.LENGTH_LONG).show();

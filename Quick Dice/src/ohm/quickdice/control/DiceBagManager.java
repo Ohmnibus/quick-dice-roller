@@ -1,5 +1,7 @@
 package ohm.quickdice.control;
 
+import java.io.File;
+
 import ohm.quickdice.R;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
@@ -9,7 +11,6 @@ import ohm.quickdice.entity.IconCollection;
 import ohm.quickdice.entity.ModifierCollection;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.Variable;
-import ohm.quickdice.entity.Icon.CustomIcon;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,10 +21,13 @@ import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class DiceBagManager {
+public class DiceBagManager implements IIconManager {
 
 	protected static final String KEY_CURRENT_BAG = "KEY_CURRENT_BAG";
 	protected static final int UNDEFINED_INT = Integer.MIN_VALUE;
+	
+	private static final String ICON_FOLDER = "iconDir";
+	private static final String ICON_BACKUP_FOLDER = "iconBkuDir";
 	
 	protected PersistenceManager persistence;
 	protected Context context;
@@ -32,6 +36,7 @@ public class DiceBagManager {
 	//protected ArrayList<DiceBag> diceBagList = null;
 	private DiceBagCollection diceBagCollection = null;
 	private IconCollection iconCollection = null;
+	private File iconFolder = null;
 	protected int curDiceBagIndex = 0;
 	protected boolean isDataSaved = true;
 	protected boolean isDataInitialized = false;
@@ -128,15 +133,18 @@ public class DiceBagManager {
 		} else {
 			curDiceBagIndex = position;
 		}
-		SharedPreferences.Editor edit;
-		edit = config.edit();
-		edit.putInt(KEY_CURRENT_BAG, curDiceBagIndex);
-		edit.commit();
+		//TODO: Put this to a better place.
+		if (isDataInitialized) {
+			SharedPreferences.Editor edit;
+			edit = config.edit();
+			edit.putInt(KEY_CURRENT_BAG, curDiceBagIndex);
+			edit.commit();
+		}
 	}
 	
-	/* ************ */
-	/* Icon methods */
-	/* ************ */
+	/* *************************** */
+	/* Icon methods (IIconManager) */
+	/* *************************** */
 	
 	/**
 	 * Access to the collection of all the icon resources.
@@ -163,8 +171,19 @@ public class DiceBagManager {
 	 * @param height Desired height in {@code dp}.
 	 * @return Resized {@link Drawable} of the icon.
 	 */
-	public Drawable getIconDrawable(int iconId, int width, int height) {
-		return iconCollection.getDrawable(context, iconId, width, height);
+	public Drawable getIconDrawable(int iconId) {
+		return iconCollection.getDrawable(context, iconId);
+	}
+
+	/**
+	 * Convenience method to get the {@link Drawable} of the icon with the given ID resized to the specified size.<br />
+	 * @param iconId Identifier of the icon.
+	 * @param widthId Reference to the dimension containing the desired width.
+	 * @param heightId Reference to the dimension containing the desired height.
+	 * @return Resized {@link Drawable} of the icon.
+	 */
+	public Drawable getIconDrawable(int iconId, int widthId, int heightId) {
+		return iconCollection.getDrawable(context, iconId, widthId, heightId);
 	}
 
 	/**
@@ -196,12 +215,49 @@ public class DiceBagManager {
 	
 	/**
 	 * Remove all the references of an icon.<br />
-	 * This method is meant to be used upon and icon deletion.
+	 * This method is meant to be used upon an icon deletion.
 	 * @param iconId Identifier of the icon to remove.
 	 */
 	public void resetIconInstances(int iconId) {
 		getIconInstances(iconId, true);
 		setDataChanged();
+	}
+	
+	public File getIconFolder() {
+		if (iconFolder == null) {
+			iconFolder = context.getDir(ICON_FOLDER, Context.MODE_PRIVATE);
+		}
+		return iconFolder;
+	}
+	
+	public boolean setIconFolder(String newIconFolder) {
+		boolean retVal = true;
+		File oldIconFolder = iconFolder;
+		iconFolder = context.getDir(newIconFolder, Context.MODE_PRIVATE);
+		
+		if (iconFolder.equals(oldIconFolder))
+			return true;
+		
+		retVal = iconCollection.folderChanged();
+		
+		return retVal;
+	}
+	
+	public boolean setCacheIconFolder() {
+		boolean retVal = true;
+		File oldIconFolder = iconFolder;
+		iconFolder = context.getCacheDir();
+		
+		if (iconFolder.equals(oldIconFolder))
+			return true;
+		
+		retVal = iconCollection.folderChanged();
+		
+		return retVal;
+	}
+	
+	public boolean setDefaultIconFolder() {
+		return setIconFolder(ICON_FOLDER);
 	}
 	
 	/**
@@ -283,11 +339,6 @@ public class DiceBagManager {
 	 */
 	protected void readDiceBagManager() {
 		
-//		boolean loaded = persistence.loadDiceBagManager(this);
-//		
-//		if (! loaded) {
-//			legacyLoadDiceBagCollection(diceBagCollection);
-//		}
 		int error = persistence.readDiceBagManager(this, persistence.getSystemArchiveUri());
 		
 		if (error != PersistenceManager.ERR_NONE) {
@@ -299,7 +350,8 @@ public class DiceBagManager {
 			legacyLoadDiceBagCollection(diceBagCollection);
 		}
 		
-		CustomIcon.removeTempIconFiles(context);
+		//CustomIcon.removeTempIconFiles(context);
+		//TODO: Clear cache (it is really needed?)
 	}
 	
 	
@@ -312,36 +364,6 @@ public class DiceBagManager {
 				R.string.err_cannot_update);
 	}
 	
-//	/**
-//	 * 
-//	 * @param file
-//	 * @return
-//	 * @deprecated use {@code exportAll(Uri)}
-//	 */
-//	public boolean exportAll(java.io.File file) {
-//		return persistence.exportDiceBagManager(this, file);
-//	}
-//
-//	/**
-//	 * 
-//	 * @param path
-//	 * @return
-//	 * @deprecated use {@code exportAll(Uri)}
-//	 */
-//	public boolean exportAll(String path) {
-//		return persistence.exportDiceBagManager(this, path);
-//	}
-//
-//	/**
-//	 * 
-//	 * @param path
-//	 * @return
-//	 * @deprecated use {@code importAll(Uri)}
-//	 */
-//	public boolean importAll(String path) {
-//		return importAll(Uri.fromFile(new File(path)));
-//	}
-
 	public boolean exportAll(Uri resourceUri) {
 		return persistence.writeDiceBagManager(this,
 				resourceUri,
@@ -351,19 +373,21 @@ public class DiceBagManager {
 	public boolean importAll(Uri resourceUri) {
 		boolean retVal = false;
 		
-		CustomIcon.backupIconFiles(context);
+		//CustomIcon.backupIconFiles(context);
 		
 		DiceBagManager newManager = new DiceBagManager(persistence);
-		//boolean loaded = persistence.importDiceBagManager(newManager, resourceUri);
+		//Change Icon Folder so they are loaded to different path
+		newManager.setIconFolder(ICON_BACKUP_FOLDER);
+		
 		int error = persistence.readDiceBagManager(newManager, resourceUri, R.string.err_cannot_import);
-		//if (loaded) {
+		
 		if (error == PersistenceManager.ERR_NONE) {
 			diceBagCollection.clear(); //Help to free resources
 			for (DiceBag diceBag : newManager.getDiceBagCollection()) {
 				diceBagCollection.add(diceBag);
 			}
 			iconCollection = newManager.getIconCollection();
-			iconCollection.setParent(this);
+			iconCollection.setParent(this); //This will also move the icon files to the right path.
 
 			isDataSaved = false;
 			setCurrentIndex(curDiceBagIndex);
@@ -371,7 +395,7 @@ public class DiceBagManager {
 		} else {
 			//Something went wrong.
 			//Restore icon files.
-			CustomIcon.restoreIconFiles(context);
+			//CustomIcon.restoreIconFiles(context);
 		}
 		return retVal;
 	}

@@ -4,6 +4,7 @@ import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.IconAdapter;
 import ohm.quickdice.entity.Icon;
+import ohm.quickdice.entity.IconCollection;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -139,9 +140,6 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 		returnToCaller(v.getId() == R.id.btuBarConfirm, iconId);
 	}
 	
-	/** Index of the icon to delete */
-	private int iconToDelete = 0;
-	
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 		boolean consumed = false;
@@ -150,10 +148,14 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 			AlertDialog.Builder bld = new AlertDialog.Builder(this);
 			bld.setTitle(R.string.msgRemoveIconTitle);
 			//bld.setIcon(icon.getDrawable(this));
-			bld.setIcon(QuickDiceApp.getInstance().getBagManager().getIconDrawable((int)id, 32, 32));
+			bld.setIcon(QuickDiceApp.getInstance().getBagManager().getIconDrawable(
+					(int)id,
+					R.dimen.header_icon_size,
+					R.dimen.header_icon_size));
 			if (icon.isCustom()) {
 				//Count instances.
-				iconToDelete = position;
+				//iconIdToDelete = icon.getId();
+				deleteIconClickListener.setIconId(icon.getId());
 				int[] instances = QuickDiceApp.getInstance().getBagManager().getIconInstances((int)id);
 				if (instances[0] == 0) {
 					bld.setMessage(R.string.msgRemoveIconUnused);
@@ -175,16 +177,32 @@ public class IconPickerActivity extends Activity implements OnClickListener, OnI
 		return consumed;
 	}
 	
-	DialogInterface.OnClickListener deleteIconClickListener = new DialogInterface.OnClickListener() {
+	interface OnDeleteClickListener extends DialogInterface.OnClickListener {
+		public void setIconId(int iconId);
+	}
+	
+	OnDeleteClickListener deleteIconClickListener = new OnDeleteClickListener() {
+		/** Index of the icon to delete */
+		private int iconIdToDelete = 0;
+		
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			Icon removed = QuickDiceApp.getInstance().getBagManager().getIconCollection().remove(iconToDelete);
+			IconCollection iconCollection = QuickDiceApp.getInstance().getBagManager().getIconCollection();
+			int position = iconCollection.getPositionByID(iconIdToDelete);
+			Icon removed = null;
+			if (position >= 0) {
+				removed = iconCollection.remove(position);
+			}
 			if (removed != null) {
 				removed.recycle(IconPickerActivity.this);
 				((IconAdapter)gridView.getAdapter()).notifyDataSetChanged();
 			}
 			
 			dialog.dismiss();
+		}
+		
+		public void setIconId(int iconId) {
+			iconIdToDelete = iconId;
 		}
 	};
 	

@@ -165,7 +165,9 @@ public class MenuDialog extends AlertDialog implements DialogInterface.OnClickLi
 
 			if (viewReference != null) {
 				retVal = QuickDiceApp.getInstance().getBagManager().getIconDrawable(
-						params[0], 32, 32);
+						params[0],
+						R.dimen.header_icon_size,
+						R.dimen.header_icon_size);
 			}
 			
 			return retVal;

@@ -28,7 +28,7 @@ public class RollModifier {
 			this.description = context.getString(R.string.msgBonusMessage, value);
 			this.value = value;
 			//this.resourceIndex = GraphicManager.INDEX_DICE_ICON_BONUS;
-			this.iconId = IconCollection.ID_ICON_MALUS;
+			this.iconId = IconCollection.ID_ICON_BONUS;
 		}
 	}
 	

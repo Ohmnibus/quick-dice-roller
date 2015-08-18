@@ -10,10 +10,17 @@ import ohm.library.compat.CompatIntent.OnEvalResolveInfoListener;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.MostRecentFilesAdapter;
+import ohm.quickdice.control.DiceBagManager;
 import ohm.quickdice.control.SerializationManager;
+import ohm.quickdice.dialog.DiceBagPickerDialog;
+import ohm.quickdice.dialog.DiceBagPickerDialog.OnItemPickedListener;
+import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.entity.DiceBagCollection;
+import ohm.quickdice.entity.Icon;
+import ohm.quickdice.entity.IconCollection;
 import ohm.quickdice.entity.MostRecentFile;
+import ohm.quickdice.entity.Variable;
 import ohm.quickdice.util.Helper;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,6 +34,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -66,8 +75,10 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	private static final int MAX_RECENT_FILES = 16;
 	private static final int REQUEST_GET_CONTENT = 0x00000000;
 	private static final int REQUEST_SEND = 0x00000001;
+	private static final int REQUEST_MERGE_CONTENT = 0x00000002;
 
 	ListView lstRecentFiles;
+	Button btuMerge;
 	Button btuImport;
 	Button btuExport;
 	Button btuCancel;
@@ -113,15 +124,24 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		
 		Drawable drawable;
 		
+		btuMerge = (Button)findViewById(R.id.eiMerge);
+		//drawable = Helper.resizeDrawable(this, R.drawable.ic_import, 64, 32);
+		//drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		drawable = Helper.boundedDrawable(this, R.drawable.ic_import, R.dimen.import_export_icon_width, R.dimen.import_export_icon_height);
+		btuMerge.setCompoundDrawables(drawable, null, null, null);
+		btuMerge.setOnClickListener(this);
+		
 		btuImport = (Button)findViewById(R.id.eiImport);
-		drawable = Helper.resizeDrawable(this, R.drawable.ic_import, 64, 32);
-		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		//drawable = Helper.resizeDrawable(this, R.drawable.ic_import, 64, 32);
+		//drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		drawable = Helper.boundedDrawable(this, R.drawable.ic_import, R.dimen.import_export_icon_width, R.dimen.import_export_icon_height);
 		btuImport.setCompoundDrawables(drawable, null, null, null);
 		btuImport.setOnClickListener(this);
 		
 		btuExport = (Button)findViewById(R.id.eiExport);
-		drawable = Helper.resizeDrawable(this, R.drawable.ic_export, 64, 32);
-		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		//drawable = Helper.resizeDrawable(this, R.drawable.ic_export, 64, 32);
+		//drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+		drawable = Helper.boundedDrawable(this, R.drawable.ic_export, R.dimen.import_export_icon_width, R.dimen.import_export_icon_height);
 		btuExport.setCompoundDrawables(drawable, null, null, null);
 		btuExport.setOnClickListener(this);
 		
@@ -146,7 +166,9 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	};
 	
 	public void onClick(View v) {
-		if (v.getId() == btuImport.getId()) {
+		if (v.getId() == btuMerge.getId()) {
+			onMergeClick(v);
+		} else if (v.getId() == btuImport.getId()) {
 			onImportClick(v);
 		} else if (v.getId() == btuExport.getId()) {
 			onExportClick(v);
@@ -155,7 +177,21 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		}
 	};
 	
+	private void onMergeClick(View v) {
+		
+		Intent chooser = prepareChooser(R.string.lblMergeDiceDef);
+		
+		startActivityForResult(chooser, REQUEST_MERGE_CONTENT);
+	}
+	
 	private void onImportClick(View v) {
+		
+		Intent chooser = prepareChooser(R.string.lblImportDiceDef);
+		
+		startActivityForResult(chooser, REQUEST_GET_CONTENT);
+	}
+	
+	private Intent prepareChooser(int titleResId) {
 //		Bundle bundle = new Bundle();
 //		bundle.putInt(FilePickerActivity.BUNDLE_REQUEST_TYPE, FilePickerActivity.ACTIVITY_SELECT_FILE);
 //		bundle.putStringArray(FilePickerActivity.BUNDLE_FILTER_EXTENSION_LIST, new String[] {FILE_EXTENSION});
@@ -179,10 +215,11 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		Intent chooser = CompatIntent.createChooser(
 				this,
 				baseIntent,
-				getString(R.string.lblImportDiceDef),
+				getString(titleResId),
 				extraIntent,
 				null);
-		startActivityForResult(chooser, REQUEST_GET_CONTENT);
+		
+		return chooser;
 	}
 	
 	private void onExportClick(View v) {
@@ -264,7 +301,12 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 					confirmImport(data);
 				}
 				break;
-
+			case REQUEST_MERGE_CONTENT:
+				if (resultCode == RESULT_OK) {
+					//File selected. Need to merge.
+					doMerge(data);
+				}
+				break;
 		}
 	};
 	
@@ -318,58 +360,6 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		}
 	};
 	
-//	void startChooserForResult(Intent baseIntent, int requestCode, int titleResId, Intent extraIntent) {
-//		targetUri = baseIntent.getParcelableExtra(Intent.EXTRA_STREAM); //Maybe is better to use "getData()"?
-//		List<ResolveInfo> resInfo = this.getPackageManager().queryIntentActivities(baseIntent, 0);
-//		List<Intent> chooserOptionList = new ArrayList<Intent>();
-//		for (ResolveInfo resolveInfo : resInfo) {
-//			String packageName = resolveInfo.activityInfo.packageName;
-//
-//			//if (!packageName.contains(".google")) { //Filter
-//			Intent chooserOption = new Intent(baseIntent);
-//			chooserOption.setPackage(packageName);
-//			chooserOption.setComponent(new ComponentName(packageName, resolveInfo.activityInfo.name));
-//			
-//			chooserOptionList.add(chooserOption);
-//			
-//			//Grant permission to access the file
-//			if (targetUri != null) {
-//				this.grantUriPermission(packageName, targetUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//			}
-//			//}
-//		}
-//		
-//		chooserOptionList.add(extraIntent);
-//		
-//		Intent chooser = Intent.createChooser(chooserOptionList.remove(0), getString(titleResId));
-//		chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, chooserOptionList.toArray(new Parcelable[]{}));
-//		
-//		startActivityForResult(chooser, requestCode);
-//	}
-	
-	//	private void doExport(String path) {
-//		//Check extension
-//		java.io.File test = new java.io.File(path);
-//		if (! test.getName().endsWith(FILE_EXTENSION)) {
-////			if (! path.endsWith(".")) {
-////				path = path + ".";
-////			}
-//			path = path + FILE_EXTENSION;
-//		}
-//		QuickDiceApp app = QuickDiceApp.getInstance();
-//		if (app.getBagManager().exportAll(path)) {
-//			//Save this entry to list (or bring it to top)
-//			MostRecentFile mru = createRecentFileInstance(path, app);
-//			updateRecentFileList(mru);
-//			saveRecentFiles(recentFiles);
-//		} else {
-//			//This path is no good, remove from list.
-//			removeFromRecentFileList(path);
-//			saveRecentFiles(recentFiles);
-//		}
-//
-//		returnToCaller(RESULT_EXPORT);
-//	}
 	
 	private void confirmImport(Intent data) {
 		if (data != null && data.getData() != null) {
@@ -404,25 +394,177 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		}
 	}
 	
-	private void doImport(Intent importIntent) {
+	private void doImport(Intent data) {
 		QuickDiceApp app = QuickDiceApp.getInstance();
-		if (importIntent == null || importIntent.getData() == null) {
+		if (data == null || data.getData() == null) {
 			//Missing data
 			returnToCaller(RESULT_IMPORT_FAILED);
-		} else if (app.getBagManager().importAll(importIntent.getData())) {
+		} else if (app.getBagManager().importAll(data.getData())) {
 			//Save this entry to list (or bring it to top)
-			if (importIntent.getBooleanExtra(FilePickerActivity.EXTRA_USE_FOR_MRU, false)) {
-				MostRecentFile mru = createRecentFileInstance(importIntent.getData());
+			boolean useForMru = false;
+			try {
+				useForMru = data.getBooleanExtra(FilePickerActivity.EXTRA_USE_FOR_MRU, false);
+			} catch (BadParcelableException ex) {
+				//This is caused by DropBox and I don't know how to prevent it
+				Log.w("ImportExportActivity", "Cannot read " + FilePickerActivity.EXTRA_USE_FOR_MRU, ex);
+				useForMru = false;
+			}
+			if (useForMru) {
+				MostRecentFile mru = createRecentFileInstance(data.getData());
 				updateRecentFileList(mru);
 				saveRecentFiles(recentFiles);
 			}
 			returnToCaller(RESULT_IMPORT);
 		} else {
 			//This path is no good, remove from list.
-			removeFromRecentFileList(importIntent.getData());
+			removeFromRecentFileList(data.getData());
 			saveRecentFiles(recentFiles);
 
 			returnToCaller(RESULT_IMPORT_FAILED);
+		}
+	}
+	
+	private void doMerge(Intent data) {
+		QuickDiceApp app = QuickDiceApp.getInstance();
+		DiceBagManager newData = new DiceBagManager(app.getPersistence());
+		newData.setCacheIconFolder();
+		if (data == null || data.getData() == null) {
+			//Missing data
+			returnToCaller(RESULT_IMPORT_FAILED);
+		} else if (newData.importAll(data.getData())) {
+			DiceBagPickerDialog dlg = new DiceBagPickerDialog(this, newData, new OnItemPickedListener() {
+				@Override
+				public void onItemPicked(boolean confirmed, DiceBagManager data, SparseBooleanArray selected, boolean override) {
+					if (confirmed) {
+						doMerge(data, selected, override);
+						returnToCaller(RESULT_IMPORT);
+					} else {
+						returnToCaller(RESULT_CANCELED);
+					}
+				}
+			});
+			dlg.show();
+		} else {
+			//This path is no good, remove from list.
+			removeFromRecentFileList(data.getData());
+			saveRecentFiles(recentFiles);
+
+			returnToCaller(RESULT_IMPORT_FAILED);
+		}
+	}
+	
+	private void doMerge(DiceBagManager data, SparseBooleanArray selected, boolean override) {
+		QuickDiceApp app = QuickDiceApp.getInstance();
+		DiceBagManager main = app.getBagManager();
+		/** Maps source icon Id (key) to dest icon Id (value) icon id */
+		SparseIntArray iconMapping = new SparseIntArray();
+		for (int i = 0; i < selected.size(); i++) {
+			if (selected.valueAt(i) == false)
+				continue;
+			
+			int iconId;
+			int bagIdx = selected.keyAt(i); //Position of the bag to merge
+			DiceBag diceBag = data.getDiceBagCollection().get(bagIdx);
+			ArrayList<Integer> iconIds = new ArrayList<Integer>();
+			
+			//Get all the custom icons used by this DiceBag
+			iconId = diceBag.getResourceIndex();
+			collectIcon(data, iconIds, iconId);
+//			if (data.getIconCollection().getByID(iconId).isCustom() && iconIds.contains(iconIds) == false) {
+//				iconIds.add(iconId);
+//			}
+			for (Dice dice : diceBag.getDice()) {
+				iconId = dice.getResourceIndex();
+				collectIcon(data, iconIds, iconId);
+//				if (data.getIconCollection().getByID(iconId).isCustom() && iconIds.contains(iconIds) == false) {
+//					iconIds.add(iconId);
+//				}
+			}
+			for (Variable variable : diceBag.getVariables()) {
+				iconId = variable.getResourceIndex();
+				collectIcon(data, iconIds, iconId);
+//				if (data.getIconCollection().getByID(iconId).isCustom() && iconIds.contains(iconIds) == false) {
+//					iconIds.add(iconId);
+//				}
+			}
+			
+			//Move custom icons and create a map from old ID to new ID.
+			for (Integer iid : iconIds) {
+				int id = iid;
+				IconCollection sourceIconList = data.getIconCollection();
+				IconCollection destIconList = main.getIconCollection();
+				int pos = sourceIconList.getPositionByID(id);
+				if (pos == -1)
+					//Already moved (by previous DiceBag)
+					continue;
+				
+				Icon ico = sourceIconList.remove(pos, false);
+				if (ico == null)
+					//Redundant control
+					continue;
+				
+				//int oldId = ico.getId();
+				ico.setId(-1); //Need to reset Id
+				
+				int newId;
+				pos = destIconList.indexOf(ico);
+				if (pos >= 0) {
+					//Main already contains the same icon
+					newId = destIconList.get(pos).getId();
+				} else {
+					//newId = destIconList.add(ico);
+					//newId = ico.getId();
+					pos = destIconList.add(ico);
+					newId = destIconList.get(pos).getId();
+				}
+				//int newId = destIconList.add(ico);
+				//iconMapping.append(oldId, newId);
+				if (id != newId) {
+					iconMapping.append(id, newId);
+				}
+			}
+			
+			//Change icon references
+			if (iconMapping.size() > 0) {
+				iconId = iconMapping.get(diceBag.getResourceIndex(), -1);
+				if (iconId != -1) {
+					diceBag.setResourceIndex(iconId);
+				}
+				for (Dice item : diceBag.getDice()) {
+					iconId = iconMapping.get(item.getResourceIndex(), -1);
+					if (iconId != -1) {
+						item.setResourceIndex(iconId);
+					}
+				}
+				for (Variable item : diceBag.getVariables()) {
+					iconId = iconMapping.get(item.getResourceIndex(), -1);
+					if (iconId != -1) {
+						item.setResourceIndex(iconId);
+					}
+				}
+			}
+			
+			//Copy DiceBag
+			if (override) {
+				//Remove DiceBag with same name
+				//String bagName = diceBag.getName();
+				for (int j=0; j < main.getDiceBagCollection().size(); j++) {
+					if (main.getDiceBagCollection().get(j).getName().equals(diceBag.getName())) {
+						main.getDiceBagCollection().remove(j);
+						break;
+					}
+				}
+				//main.getDiceBagCollection().get(position)
+			}
+			//data.getDiceBagCollection().get(bagIdx);
+			main.getDiceBagCollection().add(diceBag);
+		}
+	}
+	
+	private void collectIcon(DiceBagManager data, ArrayList<Integer> iconIds, int iconId) {
+		Icon icon = data.getIconCollection().getByID(iconId);
+		if (icon != null && icon.isCustom() && iconIds.contains(iconId) == false) {
+			iconIds.add(iconId);
 		}
 	}
 	

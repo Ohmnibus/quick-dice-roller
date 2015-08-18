@@ -160,6 +160,14 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 	}
 	
 	/**
+	 * Get a reference to the {@link DiceBagManager} containing this instance.
+	 * @return
+	 */
+	public DiceBagManager getManager() {
+		return owner;
+	}
+	
+	/**
 	 * Return the index of currently selected collection.
 	 * @return
 	 */
@@ -190,6 +198,11 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 	 */
 	public DiceBag get(int position) {
 		return diceBagList.get(position);
+	}
+	
+	@Override
+	public int indexOf(DiceBag item) {
+		return diceBagList.indexOf(item);
 	}
 	
 	@Override

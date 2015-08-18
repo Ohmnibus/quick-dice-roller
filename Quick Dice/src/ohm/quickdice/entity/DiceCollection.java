@@ -165,6 +165,11 @@ public class DiceCollection implements BaseCollection<Dice> {
 		return diceList.get(position);
 	}
 	
+	@Override
+	public int indexOf(Dice item) {
+		return diceList.indexOf(item);
+	}
+	
 	public int size() {
 		return diceList.size();
 	}

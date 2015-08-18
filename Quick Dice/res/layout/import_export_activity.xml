@@ -23,9 +23,21 @@
 		
 		android:layout_below="@+id/eiImportFromRecentLabel"
 		android:layout_alignParentLeft="true"
-		android:layout_above="@+id/eiImport"
+		android:layout_above="@+id/eiMerge"
 		
 		android:cacheColorHint="#00000000"
+		/>
+	
+	<Button
+		android:id="@+id/eiMerge"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_above="@+id/eiImport"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/lblMergeFrom"
+		android:drawableLeft="@drawable/ic_import"
 		/>
 	
 	<Button

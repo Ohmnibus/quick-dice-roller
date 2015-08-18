@@ -45,8 +45,10 @@
 	<string name="lblSelectFolder">Select folder</string>
 	<string name="lblNewFile">New file</string>
 	<string name="lblImportFromRecent">Import from recent file</string>
+	<string name="lblMergeFrom">Merge from&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblImportFrom">Import from&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblExportTo">Export to&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblMergeDiceDef">Merge dice definitions</string>
 	<string name="lblImportDiceDef">Import dice definitions</string>
 	<string name="lblExportDiceDef">Export dice definitions</string>
 	<string name="lblItemMRU">%2$d dice in %1$s bags - %4$s %5$s</string>
@@ -82,6 +84,8 @@
 	<string name="lblSelectFunction">Select a Function</string>
 	<string name="lblSelectVariableNone">This bag doesn\'t contain any named value.</string>
 	<string name="lblCustomIconsOnly">Show custom icons only</string>
+	<string name="lblSelectBags">Select bags to import</string>
+	<string name="lblReplaceBags">Replace bags with same name</string>
 	
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->

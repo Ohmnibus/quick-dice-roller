@@ -22,6 +22,10 @@
 	<dimen name="divider_padding">4dp</dimen>
 
 	<dimen name="icon_size">48dp</dimen>
+	<dimen name="header_icon_size">32dp</dimen>
+	
+	<dimen name="import_export_icon_width">64dp</dimen>
+	<dimen name="import_export_icon_height">32dp</dimen>
 	
 	<dimen name="undo_bar_corner_radius">24dp</dimen><!-- Net Height (48) / 2 -->
 	<dimen name="undo_bar_total_height">64dp</dimen><!-- Net Height (48) + Padding Top + Padding Bottom -->

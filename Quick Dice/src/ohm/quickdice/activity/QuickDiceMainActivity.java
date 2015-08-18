@@ -14,6 +14,7 @@ import ohm.library.widget.SplitView;
 import ohm.library.widget.SplitView.ResizeListener;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
+import ohm.quickdice.R.dimen;
 import ohm.quickdice.adapter.DiceBagAdapter;
 import ohm.quickdice.adapter.GridExpressionAdapter;
 import ohm.quickdice.adapter.ResultListAdapter;
@@ -568,7 +569,10 @@ public class QuickDiceMainActivity extends BaseActivity {
 //		Drawable diceBagIcon = graphicManager.getResizedDiceIcon(
 //				bag.getResourceIndex(), 32, 32);
 		Drawable diceBagIcon = diceBagManager.getIconDrawable(
-				bag.getResourceIndex(), 32, 32);
+				bag.getResourceIndex(),
+				R.dimen.header_icon_size,
+				R.dimen.header_icon_size);
+		
 		menu.setHeaderIcon(diceBagIcon);
 		menu.setHeaderTitle(bag.getName());
 		
@@ -634,8 +638,10 @@ public class QuickDiceMainActivity extends BaseActivity {
 //		modIcon = graphicManager.getResizedDiceIcon(
 //				modifier.getResourceIndex(), 32, 32);
 		modIcon = diceBagManager.getIconDrawable(
-				modifier.getResourceIndex(), 32, 32);
-
+				modifier.getResourceIndex(),
+				R.dimen.header_icon_size,
+				R.dimen.header_icon_size);
+		
 		menu.setHeaderIcon(modIcon);
 		menu.setHeaderTitle(modifier.getName());
 

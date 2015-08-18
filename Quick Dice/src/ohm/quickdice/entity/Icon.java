@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.security.MessageDigest;
 
 import ohm.quickdice.R;
+import ohm.quickdice.control.IIconManager;
 import ohm.quickdice.util.AsyncDrawable;
 import ohm.quickdice.util.Helper;
 import android.content.Context;
@@ -32,6 +33,7 @@ public abstract class Icon {
 	public static final int DEFAULT_COLOR = Color.argb(0xff, 0x88, 0x88, 0x88);
 	
 	private int id;
+	protected IIconManager parent = null;
 	
 	/**
 	 * Handle a system icon.
@@ -81,6 +83,11 @@ public abstract class Icon {
 		public void recycle(Context ctx) {
 			//NOOP
 		}
+		
+		@Override
+		public void folderChanged() {
+			//NOOP
+		}
 	}
 	
 	/**
@@ -90,8 +97,9 @@ public abstract class Icon {
 	 */
 	public static class CustomIcon extends Icon implements AsyncDrawable.DrawableProvider {
 		
-		private static final String ICON_FOLDER = "iconDir";
-		private static final String ICON_BACKUP_FOLDER = "iconBkuDir";
+		//private static final String ICON_TEMP_FOLDER = "iconTmpDir";
+		//private static final String ICON_FOLDER = "iconDir";
+		//private static final String ICON_BACKUP_FOLDER = "iconBkuDir";
 		private static final String ICON_NAME_PREFIX = "Icon";
 		private static final String ICON_NAME_SUFFIX = ".png";
 		private static final String ICON_NAME_FMT = ICON_NAME_PREFIX + "%05d" + ICON_NAME_SUFFIX;
@@ -103,6 +111,7 @@ public abstract class Icon {
 		
 		private String hash;
 		private String iconPath;
+		private boolean pendingId = false;
 		
 		protected CustomIcon(String hash, String iconPath) {
 			this.hash = hash;
@@ -115,15 +124,17 @@ public abstract class Icon {
 			super.setId(id);
 			if (oldId != id) {
 				//A new ID was assigned to this instance
-				//Rename file
-				File oldPath = new File(iconPath);
-				File newPath = new File(oldPath.getParent(), String.format(ICON_NAME_FMT, getId()));
-				if (newPath.exists()) {
-					newPath.delete();
-				}
-				oldPath.renameTo(newPath);
-				iconPath = newPath.getAbsolutePath();
+//				//Rename file
+//				File oldPath = new File(iconPath);
+//				File newPath = new File(oldPath.getParent(), String.format(ICON_NAME_FMT, getId()));
+//				if (newPath.exists()) {
+//					newPath.delete();
+//				}
+//				oldPath.renameTo(newPath);
+//				iconPath = newPath.getAbsolutePath();
+				pendingId = true;
 			}
+			checkMoveFile();
 		}
 		
 		@Override
@@ -169,6 +180,17 @@ public abstract class Icon {
 			File file = new File(getIconPath());
 			file.delete();
 		}
+		
+		@Override
+		protected void setParent(IIconManager parent) {
+			super.setParent(parent);
+			checkMoveFile();
+		}
+		
+		@Override
+		public void folderChanged() {
+			checkMoveFile();
+		}
 
 		/**
 		 * Get the hash code associated with this icon.
@@ -185,77 +207,113 @@ public abstract class Icon {
 		public String getIconPath() {
 			return iconPath;
 		}
-	
-		/**
-		 * Get a temporary file to store the icon.
-		 * @param ctx Context
-		 * @return Reference to a temporary file.
-		 */
-		public static File getTempFile(Context ctx) {
-			File retVal;
-			try {
-				retVal = File.createTempFile(ICON_TEMP_NAME_PREFIX, ICON_TEMP_NAME_SUFFIX, getDirectory(ctx));
-			} catch (IOException e) {
-				retVal = new File(
-						getDirectory(ctx),
-						ICON_TEMP_NAME_PREFIX + "_exc" + ICON_TEMP_NAME_SUFFIX);
-				e.printStackTrace();
-			}
-			return retVal;
-		}
 		
 		/**
-		 * Get the image folder where all the icons are stored.
-		 * @param ctx
-		 * @return
+		 * Check if the icon file need to be moved/renamed.
 		 */
-		public static File getDirectory(Context ctx) {
-			return ctx.getDir(ICON_FOLDER, Context.MODE_PRIVATE);
-		}
-		
-		/**
-		 * Get the image folder for temporary backup.
-		 * @param ctx
-		 * @return
-		 */
-		public static File getBackupDirectory(Context ctx) {
-			return ctx.getDir(ICON_BACKUP_FOLDER, Context.MODE_PRIVATE);
-		}
-		
-		/**
-		 * Copy all the icon images from their folder to the backup folder.
-		 * @param ctx
-		 */
-		public static void backupIconFiles(Context ctx) {
+		private void checkMoveFile() {
 			
-			Helper.copyFiles(getDirectory(ctx), getBackupDirectory(ctx), true);
-		}
-		
-		/**
-		 * Copy all the icon images from the backup folder to their folder.
-		 * @param ctx
-		 */
-		public static void restoreIconFiles(Context ctx) {
+			if (parent == null)
+				return; //No operation allowed without parent
 			
-			Helper.copyFiles(getBackupDirectory(ctx), getDirectory(ctx), false);
-		}
-		
-		/**
-		 * Remove temporary icon files.
-		 * @param ctx
-		 */
-		public static void removeTempIconFiles(Context ctx) {
-			File folder = getDirectory(ctx);
-			File[] files;
-			files = folder.listFiles();
-			if (files != null) {
-				for (File file : files) {
-					if (file.getName().startsWith(ICON_TEMP_NAME_PREFIX)) {
-						file.delete();
-					}
+//			if (pendingId && parent != null) {
+//				//Rename or move file
+//				
+//				File oldPath = new File(iconPath);
+//				File newPath = new File(parent.getIconDirectory(), String.format(ICON_NAME_FMT, getId()));
+//				if (newPath.exists()) {
+//					newPath.delete();
+//				}
+//				oldPath.renameTo(newPath);
+//				iconPath = newPath.getAbsolutePath();
+//
+//				pendingId = false;
+//			}
+
+			File oldPath = new File(iconPath);
+			File newPath = new File(parent.getIconFolder(), String.format(ICON_NAME_FMT, getId()));
+			if (pendingId || oldPath.equals(newPath) == false) {
+				if (newPath.exists()) {
+					newPath.delete();
 				}
+				oldPath.renameTo(newPath);
+				iconPath = newPath.getAbsolutePath();
+				pendingId = false;
 			}
 		}
+		
+
+//		/**
+//		 * Get a temporary file to store the icon.
+//		 * @param ctx Context
+//		 * @return Reference to a temporary file.
+//		 */
+//		public static File getTempFile(Context ctx) {
+//			File retVal;
+//			try {
+//				retVal = File.createTempFile(ICON_TEMP_NAME_PREFIX, ICON_TEMP_NAME_SUFFIX, getDirectory(ctx));
+//			} catch (IOException e) {
+//				retVal = new File(
+//						getDirectory(ctx),
+//						ICON_TEMP_NAME_PREFIX + "_exc" + ICON_TEMP_NAME_SUFFIX);
+//				e.printStackTrace();
+//			}
+//			return retVal;
+//		}
+		
+//		/**
+//		 * Get the image folder where all the icons are stored.
+//		 * @param ctx
+//		 * @return
+//		 */
+//		public static File getDirectory(Context ctx) {
+//			return ctx.getDir(ICON_FOLDER, Context.MODE_PRIVATE);
+//		}
+//		
+//		/**
+//		 * Get the image folder for temporary backup.
+//		 * @param ctx
+//		 * @return
+//		 */
+//		public static File getBackupDirectory(Context ctx) {
+//			return ctx.getDir(ICON_BACKUP_FOLDER, Context.MODE_PRIVATE);
+//		}
+		
+//		/**
+//		 * Copy all the icon images from their folder to the backup folder.
+//		 * @param ctx
+//		 */
+//		public static void backupIconFiles(Context ctx) {
+//			
+//			Helper.copyFiles(getDirectory(ctx), getBackupDirectory(ctx), true);
+//		}
+//		
+//		/**
+//		 * Copy all the icon images from the backup folder to their folder.
+//		 * @param ctx
+//		 */
+//		public static void restoreIconFiles(Context ctx) {
+//			
+//			Helper.copyFiles(getBackupDirectory(ctx), getDirectory(ctx), false);
+//		}
+//		
+//		/**
+//		 * Remove temporary icon files.
+//		 * @param ctx
+//		 */
+//		public static void removeTempIconFiles(Context ctx) {
+//			File folder = getDirectory(ctx);
+//			File[] files;
+//			files = folder.listFiles();
+//			if (files != null) {
+//				for (File file : files) {
+//					if (file.getName().startsWith(ICON_TEMP_NAME_PREFIX)) {
+//						file.delete();
+//					}
+//				}
+//			}
+//		}
+		
 		
 		/**
 		 * Create an instance of {@link CustomIcon} given the URI of an image.
@@ -342,6 +400,23 @@ public abstract class Icon {
 			return retVal;
 		}
 		
+		/**
+		 * Get a temporary file to store the icon.
+		 * @param ctx Context
+		 * @return Reference to a temporary file.
+		 */
+		public static File getTempFile(Context ctx) {
+			File retVal;
+			//File tempDir = ctx.getDir(ICON_TEMP_FOLDER, Context.MODE_PRIVATE);
+			File tempDir = ctx.getCacheDir();
+			try {
+				retVal = File.createTempFile(ICON_TEMP_NAME_PREFIX, ICON_TEMP_NAME_SUFFIX, tempDir);
+			} catch (IOException e) {
+				retVal = new File(tempDir, ICON_TEMP_NAME_PREFIX + "_exc" + ICON_TEMP_NAME_SUFFIX);
+				e.printStackTrace();
+			}
+			return retVal;
+		}
 	}
 	
 	/**
@@ -391,6 +466,24 @@ public abstract class Icon {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Get the {@link IIconManager} containing this instance, or {@code null} if not assigned.
+	 * @return The {@link IIconManager} containing this instance, or {@code null} if not assigned
+	 */
+	public IIconManager getParent() {
+		return parent;
+	}
+
+	/**
+	 * Assign a parent {@link IIconManager} containing this instance.<br>
+	 * Use {@code null} to reset parenthood.
+	 * @param parent The {@link IIconManager} containing this instance.
+	 */
+	protected void setParent(IIconManager parent) {
+		this.parent = parent;
+	}
+
 
 	/**
 	 * Convenience method to tell if this is a custom or a system icon.
@@ -411,6 +504,11 @@ public abstract class Icon {
 	 */
 	public abstract void setDrawable(ImageView imageView);
 	
+	/**
+	 * Get the color to use as background.
+	 * @param ctx
+	 * @return
+	 */
 	public abstract int getColor(Context ctx);
 	
 	/**
@@ -419,4 +517,9 @@ public abstract class Icon {
 	 * @param ctx
 	 */
 	public abstract void recycle(Context ctx);
+	
+	/**
+	 * Notify the change of the icon folder.
+	 */
+	public abstract void folderChanged();
 }
