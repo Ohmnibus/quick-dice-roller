@@ -49,6 +49,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -426,33 +427,24 @@ public class Helper {
 		Bitmap image = BitmapFactory.decodeFile(imagePath, opts);
 		
 		if (image == null) {
+			if (imagePath != null) {
+				Log.w("Helper", "Cannot decode " + imagePath);
+			} else {
+				Log.w("Helper", "Path is null: Cannot decode");
+			}
 			return null;
 		}
 		
 		if (image.getWidth() != width || image.getHeight() != height) {
 			//Image need to be resized.
-//			int scaledWidth = image.getWidth();
-//			int scaledHeight = image.getHeight();
-//			final float factorWidth = scaledWidth / width;
-//			final float factorHeight = scaledHeight / height;
-			//final float factor = (scaledWidth / width) - (scaledHeight / height);
-//			final long factor = (scaledWidth * height) - (scaledHeight * width);
-//			if ((crop && factor > 0) || (factor < 0)) {
-//				scaledHeight = (scaledHeight * width) / scaledWidth;
-//				scaledWidth = width;
-//			} else {
-//				scaledWidth = (scaledWidth * height) / scaledHeight;
-//				scaledHeight = height;
-//			}
 			int scaledWidth = (image.getWidth() * height) / image.getHeight();
-			int scaledHeight; // = (image.getHeight() * width) / image.getWidth();
+			int scaledHeight;
 			if ((crop && scaledWidth > width) || (!crop && scaledWidth < width)) {
 				scaledHeight = height;
 			} else {
 				scaledWidth = width;
 				scaledHeight = (image.getHeight() * width) / image.getWidth();
 			}
-			//image = Bitmap.createScaledBitmap(image, scaledWidth, scaledHeight, true);
 
 			Rect src = new Rect(0, 0, image.getWidth(), image.getHeight());
 			Rect dst = new Rect(0, 0, scaledWidth, scaledHeight);

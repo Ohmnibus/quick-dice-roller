@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -96,6 +97,8 @@ public abstract class Icon {
 	 *
 	 */
 	public static class CustomIcon extends Icon implements AsyncDrawable.DrawableProvider {
+		
+		private static final String TAG = "CustomIcon";
 		
 		//private static final String ICON_TEMP_FOLDER = "iconTmpDir";
 		//private static final String ICON_FOLDER = "iconDir";
@@ -213,8 +216,10 @@ public abstract class Icon {
 		 */
 		private void checkMoveFile() {
 			
-			if (parent == null)
+			if (parent == null) {
+				Log.i(TAG, "checkMoveFile: Waiting for parent.");
 				return; //No operation allowed without parent
+			}
 			
 //			if (pendingId && parent != null) {
 //				//Rename or move file
@@ -239,6 +244,12 @@ public abstract class Icon {
 				oldPath.renameTo(newPath);
 				iconPath = newPath.getAbsolutePath();
 				pendingId = false;
+				Log.i(TAG, "checkMoveFile: Moved from " + oldPath.getAbsolutePath() + " to " + iconPath);
+			} else {
+				if (pendingId)
+					Log.i(TAG, "checkMoveFile: Same file name:" + iconPath);
+				else
+					Log.i(TAG, "checkMoveFile: No pending request");
 			}
 		}
 		
@@ -395,6 +406,9 @@ public abstract class Icon {
 
 			if (hash != null) {
 				retVal = new CustomIcon(hash, tmpIconFile.getAbsolutePath());
+				Log.i(TAG, "createIcon: Imported from " + rawIconUri.toString() + " to " + retVal.getIconPath());
+			} else {
+				Log.w(TAG, "createIcon: Cannot import from " + rawIconUri.toString());
 			}
 			
 			return retVal;

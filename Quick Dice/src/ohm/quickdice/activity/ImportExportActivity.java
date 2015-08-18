@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import ohm.library.compat.CompatFileProvider;
 import ohm.library.compat.CompatIntent;
 import ohm.library.compat.CompatIntent.OnEvalResolveInfoListener;
 import ohm.quickdice.QuickDiceApp;
@@ -32,7 +33,6 @@ import android.net.Uri;
 import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
@@ -324,7 +324,7 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 	
 	/**
 	 * Store definitions to a temporary file
-	 * and return its Uri computed by FileProvider.
+	 * and return its Uri computed by {@link CompatFileProvider}.
 	 * @return Uri for the temporary file, or {@code null} if an error occurred.
 	 */
 	private Uri prepareTempFile() {
@@ -339,7 +339,7 @@ public class ImportExportActivity extends BaseActivity implements OnClickListene
 		tempFile = new File(tempFile, DEFAULT_FILE_NAME);
 		QuickDiceApp app = QuickDiceApp.getInstance();
 		if (app.getBagManager().exportAll(Uri.fromFile(tempFile))) {
-			retVal = FileProvider.getUriForFile(this, "ohm.quickdice", tempFile);
+			retVal = CompatFileProvider.getUriForFile(this, "ohm.quickdice", tempFile);
 		}
 		
 		return retVal;

@@ -157,13 +157,20 @@ public class DialogHelper {
 		body = "";
 		for (int i = 0; i < licUrls.length; i++) {
 			body = body + res.getString(R.string.lblLicense,
-					libUrls[i],
-					libNames[i],
-					authors[i],
-					licUrls[i],
-					licNames[i]);
+					getItem(libUrls, i),
+					getItem(libNames, i),
+					getItem(authors, i),
+					getItem(licUrls, i),
+					getItem(licNames, i));
 		}
 
 		new MarkupDialog(context, title, body, -1, null).show();
+	}
+	
+	public static String getItem(String[] array, int index) {
+		if (index < array.length) {
+			return array[index];
+		}
+		return "";
 	}
 }

@@ -153,6 +153,7 @@ Thanks!<br />]]></string>
 		<item>http://nineoldandroids.com/</item>
 		<item>https://code.google.com/p/google-gson/</item>
 		<item>https://source.android.com/source/index.html</item>
+		<item>https://github.com/commonsguy/cwac-provider</item>
 	</string-array>
 	<string-array name="lblLicenseLibNames"><!-- No need to translate -->
 		<item>Android wheel widget</item>
@@ -161,6 +162,7 @@ Thanks!<br />]]></string>
 		<item>Nine Old Androids</item>
 		<item>Google Gson</item>
 		<item>Base64</item>
+		<item>LegacyCompatCursorWrapper</item>
 	</string-array>
 	<string-array name="lblLicenseLibAuthors"><!-- No need to translate -->
 		<item>Yuri Kanivets</item>
@@ -169,6 +171,7 @@ Thanks!<br />]]></string>
 		<item>Jake Wharton</item>
 		<item>Google</item>
 		<item>Google</item>
+		<item>CommonsWare, LLC</item>
 	</string-array>
 	<string-array name="lblLicenseNames">
 		<item>Apache 2.0 License</item>
@@ -177,8 +180,10 @@ Thanks!<br />]]></string>
 		<item>Apache 2.0 License</item>
 		<item>Apache 2.0 License</item>
 		<item>Apache 2.0 License</item>
+		<item>Apache 2.0 License</item>
 	</string-array>
 	<string-array name="lblLicenseURLs"><!-- No need to translate -->
+		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
 		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
 		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
 		<item>http://www.apache.org/licenses/LICENSE-2.0</item>
