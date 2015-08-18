@@ -3,7 +3,7 @@
 
 	<string name="app_name">Quick Dice Roller</string>
 	<string name="app_author">Ohmnibus</string><!-- No need to translate -->
-	<string name="picker_name">QDR File Explorer</string>
+	<string name="picker_name">Dice Explorer</string>
 
 	<string name="lblName">Name</string>
 	<string name="hintName">Identifies the die</string>
@@ -44,13 +44,13 @@
 	<string name="lblSelectFile">Select file</string>
 	<string name="lblSelectFolder">Select folder</string>
 	<string name="lblNewFile">New file</string>
-	<string name="lblImportFromRecent">Import from recent file</string>
-	<string name="lblMergeFrom">Merge from&#8230;</string><!-- "&#8230;" correspond to "..." -->
-	<string name="lblImportFrom">Import from&#8230;</string><!-- "&#8230;" correspond to "..." -->
-	<string name="lblExportTo">Export to&#8230;</string><!-- "&#8230;" correspond to "..." -->
-	<string name="lblMergeDiceDef">Merge dice definitions</string>
-	<string name="lblImportDiceDef">Import dice definitions</string>
-	<string name="lblExportDiceDef">Export dice definitions</string>
+	<string name="lblImportFromRecent">Restore from recent file</string>
+	<string name="lblMergeFrom">Import from&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblImportFrom">Restore from&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblExportTo">Save to&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblMergeDiceDef">Import dice definitions</string>
+	<string name="lblImportDiceDef">Restore dice definitions</string>
+	<string name="lblExportDiceDef">Save dice definitions</string>
 	<string name="lblItemMRU">%2$d dice in %1$s bags - %4$s %5$s</string>
 	<string name="lblD">d</string><!-- The carachter used in formulas as in "3d6" -->
 	<string name="lblSelectDice">Select dice</string>
@@ -121,10 +121,11 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; Fixed error exporting to DropBox<br />
 &bull; New function \"reroll\"<br />
+&bull; Select dice bags to import<br />
 &bull; Import/Export from/to external app<br />
 &bull; Output \"-0\" if result is negative before truncation<br />
+&bull; Fixed error exporting to DropBox<br />
 &bull; Fixed the FC on Named Value picker<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
@@ -217,8 +218,8 @@ Thanks!<br />]]></string>
 	<string name="msgFileNotFound">File not found.</string>
 	<string name="msgFileNameInvalid">File name \"%1$s\" is not valid.</string>
 	<string name="msgFileNameExists">File name \"%1$s\" already exists. Are you sure you want to overwrite this file?</string>
-	<string name="msgExported">Dice definitions exported</string>
-	<string name="msgImported">Dice definitions imported</string>
+	<string name="msgExported">Dice definitions saved</string>
+	<string name="msgImported">Dice definitions loaded</string>
 	<string name="msgConfirmImport">This operation will overwrite all dice definitions. Are you sure you want to proceed?</string>
 	<string name="msgRemoveVar">Are you sure to definitively remove the value named \"%1$s\"?</string>
 	<string name="msgRemoveUsedVar">The value named \"%1$s\" is currently used by \"%2$s\".\nIf you remove it this dice won\'t work anymore. Continue anyway?</string>
@@ -588,8 +589,8 @@ Thanks!<br />]]></string>
 	<string name="err_cannot_read_mod">Cannot read the modifiers definitions. Using default.</string>
 	<string name="err_bag_name_required">Dice bag name is required.</string>
 	<string name="err_no_email_client">There are no email clients installed.</string>
-	<string name="err_cannot_export">Cannot export the dice definitions.</string>
-	<string name="err_cannot_import">Cannot import the dice definitions.</string>
+	<string name="err_cannot_export">Cannot save the dice definitions.</string>
+	<string name="err_cannot_import">Cannot read the dice definitions.</string>
 	<string name="err_storage_not_found">External storage not found.</string>
 	<string name="err_var_name_required">Value\'s name is required.</string>
 	<string name="err_var_label_required">Value\'s label is required and should be 2 to 5 characters long.</string>

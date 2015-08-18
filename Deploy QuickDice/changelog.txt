@@ -1,6 +1,7 @@
 
 v 2.1.2
 - New function "reroll"
+- Select dice bags to import
 - Import/Export from/to external app
 - Output "-0" if result is negative before truncation
 - Fixed the FC on Named Value picker

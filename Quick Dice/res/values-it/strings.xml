@@ -3,6 +3,7 @@
 
 	<string name="app_name">TiraDadi Rapido</string>
 	<string name="app_author">Ohmnibus</string>
+	<string name="picker_name">Esploratore di Dadi</string>
 
 	<string name="lblName">Nome</string>
 	<string name="hintName">Identifica il dado</string>
@@ -43,9 +44,13 @@
 	<string name="lblSelectFile">Scegli documento</string>
 	<string name="lblSelectFolder">Scegli cartella</string>
 	<string name="lblNewFile">Nuovo documento</string>
-	<string name="lblImportFromRecent">Importa dai documenti recenti</string>
-	<string name="lblImportFrom">Importa da&#8230;</string><!-- "&#8230;" correspond to "..." -->
-	<string name="lblExportTo">Esporta su&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblImportFromRecent">Ripristina dai documenti recenti</string>
+	<string name="lblMergeFrom">Importa da&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblImportFrom">Ripristina da&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblExportTo">Salva su&#8230;</string><!-- "&#8230;" correspond to "..." -->
+	<string name="lblMergeDiceDef">Importa le definizioni dei dadi</string>
+	<string name="lblImportDiceDef">Ripristina le definizioni dei dadi</string>
+	<string name="lblExportDiceDef">Salva le definizioni dei dadi</string>
 	<string name="lblItemMRU">%2$d dadi in %1$s collezioni - %4$s %5$s</string>
 	<string name="lblD">d</string><!-- The carachter used in expressions as in "3d6" -->
 	<string name="lblSelectDice">Scegli un dado</string>
@@ -79,7 +84,9 @@
 	<string name="lblSelectFunction">Scegli una funzione</string>
 	<string name="lblSelectVariableNone">Questa collezione non contiene nessun valore denominato.</string>
 	<string name="lblCustomIconsOnly">Mostra solo icone personalizzate</string>
-
+	<string name="lblSelectBags">Scegli le collezioni da importare</string>
+	<string name="lblReplaceBags">Sovrascrivi le collezioni con lo stesso nome</string>
+	
 	<string name="lblGb">Gb</string><!-- Short for Gigabyte -->
 	<string name="lblMb">Mb</string><!-- Short for Megabyte -->
 	<string name="lblKb">Kb</string><!-- Short for Kilobyte -->
@@ -129,7 +136,7 @@ Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa u
 <b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
-Copyright (c) 2012-2014 by %3$s<br />
+Copyright (c) 2012-2015 by %3$s<br />
 <br />
 <a href="https://crowdin.com/project/quick-dice-roller">Traduzioni</a>: %4$s<br />
 <br />
@@ -173,10 +180,11 @@ Grazie!<br />]]></string>
 	<string name="msgOnlineHelpTitle">Riferimento rapido</string>
 	<string name="msgOnlineHelp">Consulta l\'aiuto in linea</string>
 	<string name="msgCannotRead">Impossibile leggere il contenuto della cartella (o comunque una parte)</string>
+	<string name="msgFileNotFound">Documento non trovato.</string>
 	<string name="msgFileNameInvalid">Il nome del documento \"%1$s\" non è valido.</string>
 	<string name="msgFileNameExists">Esiste già un documento chiamato \"%1$s\". Sei sicuro di volerlo sovrasrivere?</string>
-	<string name="msgExported">Definizioni dei dadi esportate</string>
-	<string name="msgImported">Definizioni dei dadi importate</string>
+	<string name="msgExported">Definizioni dei dadi salvate</string>
+	<string name="msgImported">Definizioni dei dadi caricate</string>
 	<string name="msgConfirmImport">Questa operazione sovrascriverà tutte le attuali definizioni dei dadi. Sei sicuro di voler continuare?</string>
 	<string name="msgRemoveVar">Sei sicuro di voler eliminare definitivamente il valore denominato \"%1$s\"?</string>
 	<string name="msgRemoveUsedVar">Il valore denominato \"%1$s\" è utilizzato da \"%2$s\".\nEliminando il valore il dado non potrà più essere usato. Procedere comunque?</string>
@@ -328,6 +336,20 @@ Grazie!<br />]]></string>
 		<item>Soglia per effettuare nuovi lanci</item>
 		<item>Dado da rilanciare</item>
 		<item>Soglia per ulteriori rilanci</item>
+		<item>Max n° di rilanci</item>
+	</string-array>
+
+	<string name="fncRerollName">Rilancia</string>
+	<string name="fncRerollDesc">Rilancia se il risultato è pari o minore al limite.</string>
+	<!--  -->
+	<string-array name="fncRerollParamNames">
+		<item>Dado</item>
+		<item>Limite</item>
+		<item>Lanci massimi</item>
+	</string-array>
+	<string-array name="fncRerollParamHints">
+		<item>Il dado da lanciare</item>
+		<item>Limite inferiore</item>
 		<item>Max n° di rilanci</item>
 	</string-array>
 
@@ -532,8 +554,8 @@ Grazie!<br />]]></string>
 	<string name="err_cannot_read_mod">Impossibile leggere le definizioni dei modificatori. Verranno usati quelli predefiniti.</string>
 	<string name="err_bag_name_required">Il nome della collezione è obbligatorio.</string>
 	<string name="err_no_email_client">Non c\'è nessun client di posta elettronica installato.</string>
-	<string name="err_cannot_export">Impossibile esportare le definizioni dei dadi.</string>
-	<string name="err_cannot_import">Impossibile importare le definizioni dei dadi.</string>
+	<string name="err_cannot_export">Impossibile salvare le definizioni dei dadi.</string>
+	<string name="err_cannot_import">Impossibile leggere le definizioni dei dadi.</string>
 	<string name="err_storage_not_found">Memoria esterna non trovata.</string>
 	<string name="err_var_name_required">Il nome del valore è obbligatorio.</string>
 	<string name="err_var_label_required">L\'etichetta del valore denominato è obbligatoria, e deve essere da 2 a 5 caratteri.</string>
