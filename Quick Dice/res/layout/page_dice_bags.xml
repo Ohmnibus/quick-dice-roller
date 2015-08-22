@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+	style="?attr/ohmDiceBagDrawer"
+	android:id="@+id/mDiceBagList"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:layout_marginRight="@dimen/drawer_margin_keep_clean"
+	android:layout_gravity="left"
+	
+	android:choiceMode="singleChoice"
+	/>

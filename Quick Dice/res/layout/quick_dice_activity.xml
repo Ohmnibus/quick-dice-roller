@@ -48,7 +48,18 @@
 			android:contentDescription="@null"
 			/>
 
-		<RelativeLayout style="?attr/ohmLastRollContainer"
+		<include layout="@layout/inc_last_roll"
+			android:id="@+id/mLastRollContainer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			
+			android:layout_marginLeft="@dimen/drawer_margin_for_handle"
+			android:layout_marginRight="@dimen/drawer_margin_for_handle"
+			/>
+		<!-- RelativeLayout style="?attr/ohmLastRollContainer"
 			android:id="@+id/mLastRollContainer"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -107,7 +118,7 @@
 					/>
 	
 			</RelativeLayout>
-		</RelativeLayout>
+		</RelativeLayout -->
 		
 		<ohm.library.widget.SplitView
 			android:id="@+id/mSplitView"
@@ -143,15 +154,6 @@
 				android:numColumns="1"
 				/>
 
-			<!-- <ImageView
-				android:id="@+id/mHandle"
-				
-				android:layout_width="fill_parent"
-				android:layout_height="24dp"
-				
-				android:background="@drawable/ic_handle_hori"
-				android:contentDescription="@string/lblDragToResize"
-				/> -->
 			<ImageView style="?attr/ohmResizeHandleHorizontal"
 				android:id="@+id/mHandle"
 				
@@ -180,8 +182,18 @@
 			android:layout_alignWithParentIfMissing="true"
 			android:layout_above="@+id/mModifierContainer"
 			/> -->
+		<include layout="@layout/inc_modifiers"
+			android:id="@+id/mModifierContainer"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
 			
-		<RelativeLayout style="?attr/ohmModifiersContainer"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentBottom="true"
+			
+			android:layout_marginLeft="@dimen/drawer_margin_for_handle"
+			android:layout_marginRight="@dimen/drawer_margin_for_handle"
+			/>
+		<!-- RelativeLayout style="?attr/ohmModifiersContainer"
 			android:id="@+id/mModifierContainer"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
@@ -219,7 +231,7 @@
 						android:contentDescription="@string/lblName" />
 				 </LinearLayout>
 			</HorizontalScrollView>
-		</RelativeLayout>
+		</RelativeLayout -->
 	</RelativeLayout>
 	
 	<!-- The navigation drawer -->

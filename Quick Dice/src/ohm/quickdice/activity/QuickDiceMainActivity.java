@@ -4,17 +4,20 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.zip.Inflater;
 
 import ohm.dexp.exception.DException;
 import ohm.library.compat.CompatActionBar;
+import ohm.library.compat.CompatActionBar.Tab;
 import ohm.library.compat.CompatClipboard;
 import ohm.library.gesture.SwipeDismissGridViewTouchListener;
 import ohm.library.gesture.SwipeDismissTouchListener;
 import ohm.library.widget.SplitView;
+import ohm.library.widget.SwipeView;
+import ohm.library.widget.TabBar;
 import ohm.library.widget.SplitView.ResizeListener;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
-import ohm.quickdice.R.dimen;
 import ohm.quickdice.adapter.DiceBagAdapter;
 import ohm.quickdice.adapter.GridExpressionAdapter;
 import ohm.quickdice.adapter.ResultListAdapter;
@@ -51,7 +54,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -81,6 +83,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TableLayout;
+import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -119,8 +125,8 @@ public class QuickDiceMainActivity extends BaseActivity {
 	View addDiceBag;
 	View addVariable;
 	
-	DrawerLayout drawer;
-	ActionBarDrawerToggle drawerToggle;
+	//DrawerLayout drawer;
+	//ActionBarDrawerToggle drawerToggle;
 	CompatActionBar actionBar;
 	
 	//Cache for "modifiers"
@@ -219,13 +225,13 @@ public class QuickDiceMainActivity extends BaseActivity {
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		// Sync the toggle state after onRestoreInstanceState has occurred.
-		drawerToggle.syncState();
+		//drawerToggle.syncState();
 	}
 	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		drawerToggle.onConfigurationChanged(newConfig);
+		//drawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
@@ -295,18 +301,18 @@ public class QuickDiceMainActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		boolean retVal;
 
-		if (drawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
+		//if (drawerToggle.onOptionsItemSelected(item)) {
+		//	return true;
+		//}
 
 		retVal = true;
 
 		switch (item.getItemId()) {
 			case R.id.mmOpenDiceBagDrawer:
-				drawer.openDrawer(lvDiceBag);
+				//drawer.openDrawer(lvDiceBag);
 				break;
 			case R.id.mmOpenVariableDrawer:
-				drawer.openDrawer(lvVariable);
+				//drawer.openDrawer(lvVariable);
 				break;
 //			case R.id.mmAddDiceBag:
 //				EditBagActivity.callInsert(this);
@@ -722,7 +728,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 			case R.id.mdbSelect:
 				diceBagManager.setCurrentIndex(index);
 				refreshAllDiceContainers();
-				drawer.closeDrawer(lvDiceBag);
+				//drawer.closeDrawer(lvDiceBag);
 				break;
 			case R.id.mdbEdit:
 				bag = (DiceBag)lvDiceBag.getItemAtPosition(info.position);
@@ -1057,7 +1063,8 @@ public class QuickDiceMainActivity extends BaseActivity {
 	}
 	
 	private void initViews() {
-		setContentView(R.layout.quick_dice_activity);
+		//setContentView(R.layout.quick_dice_activity);
+		setContentView(R.layout.activity_quick_dice);
 
 		actionBar = CompatActionBar.createInstance(this);
 		
@@ -1181,23 +1188,130 @@ public class QuickDiceMainActivity extends BaseActivity {
 	}
 	
 	private void initDrawers() {
-		drawer = (DrawerLayout)findViewById(R.id.mProfileDrawer);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			drawer.setDrawerShadow(R.drawable.drawer_shadow_left, Gravity.LEFT);
-			drawer.setDrawerShadow(R.drawable.drawer_shadow_right, Gravity.RIGHT);
-		} else {
-			drawer.setDrawerShadow(R.drawable.ic_handle_bar_left, Gravity.LEFT);
-			drawer.setDrawerShadow(R.drawable.ic_handle_bar_right, Gravity.RIGHT);
-		}
-
-		drawerToggle = new ActionBarDoubleDrawerToggle(
-				this,
-				drawer,
-				R.drawable.ic_drawer);
-
-		// Set the drawer toggle as the DrawerListener
-		drawer.setDrawerListener(drawerToggle);
+//		drawer = (DrawerLayout)findViewById(R.id.mProfileDrawer);
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//			drawer.setDrawerShadow(R.drawable.drawer_shadow_left, Gravity.LEFT);
+//			drawer.setDrawerShadow(R.drawable.drawer_shadow_right, Gravity.RIGHT);
+//		} else {
+//			drawer.setDrawerShadow(R.drawable.ic_handle_bar_left, Gravity.LEFT);
+//			drawer.setDrawerShadow(R.drawable.ic_handle_bar_right, Gravity.RIGHT);
+//		}
+//
+//		drawerToggle = new ActionBarDoubleDrawerToggle(
+//				this,
+//				drawer,
+//				R.drawable.ic_drawer);
+//
+//		// Set the drawer toggle as the DrawerListener
+//		drawer.setDrawerListener(drawerToggle);
+		
+	//drawer = new DrawerLayout(this);
+	//drawerToggle = new ActionBarDrawerToggle(this, drawer, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
+	//	@Override
+	//	public void syncState() {
+	//		//super.syncState();
+	//	}
+	//	
+	//	@Override
+	//	public void onConfigurationChanged(Configuration newConfig) {
+	//		//super.onConfigurationChanged(newConfig);
+	//	}
+	//	
+	//	@Override
+	//	public boolean onOptionsItemSelected(MenuItem item) {
+	//		//return super.onOptionsItemSelected(item);
+	//		return false;
+	//	}
+	//};
+		
+		//ViewPager
+//		View[] views = new View[] {
+//				findViewById(R.id.mRoot),
+//				findViewById(R.id.mDiceBagList),
+//				findViewById(R.id.mVariableList)
+//		};
+//		ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(views);
+//		ViewPager viewPager = (ViewPager)findViewById(R.id.mProfileDrawer);
+//		viewPager.setAdapter(viewPagerAdapter);
+//		viewPager.removeAllViews();
+		
+//		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+//		TabSpec tab = tabHost.newTabSpec("dice");
+//		tab.setIndicator("Dice");
+//		tab.setContent(R.id.vwFoo);
+//		tabHost.addTab(tab);
+//		tab = tabHost.newTabSpec("bags");
+//		tab.setIndicator("Collections");
+//		tab.setContent(R.id.vwFoo);
+//		tabHost.addTab(tab);
+//		tab = tabHost.newTabSpec("variables");
+//		tab.setIndicator("Named Values");
+//		tabHost.addTab(tab);
+//		tab.setContent(R.id.vwFoo);
+		
+		
+//		final TabBar tabBar = (TabBar) findViewById(android.R.id.tabhost);
+//
+//		tabBar.addTab(getNewTab("Dice"));
+//		tabBar.addTab(getNewTab("Collections"));
+//		tabBar.addTab(getNewTab("Named Values"));
+//		
+//		tabBar.selectTab(0);
+		
+//		final SwipeView sw = (SwipeView) findViewById(R.id.mProfileDrawer);
+//		sw.setOnPageChangedListener(new SwipeView.OnPageChangedListener() {
+//			@Override
+//			public void onPageChanged(int oldPage, int newPage) {
+//				tabBar.selectTab(newPage);
+//			}
+//		});
+		
+//		tabBar.setTabListener(new TabBar.TabListener() {
+//			@Override
+//			public void onTabClicked(int i, View tab) {
+//				//sw.scrollToPage(i);
+//				sw.smoothScrollToPage(i);
+//			}
+//		});
+		
+		final SwipeView sw = (SwipeView) findViewById(R.id.mProfileDrawer);
+		sw.setOnPageChangedListener(new SwipeView.OnPageChangedListener() {
+			@Override
+			public void onPageChanged(int oldPage, int newPage) {
+				actionBar.setSelectedNavigationItem(newPage);
+			}
+		});
+		
+		CompatActionBar.TabListener tabListener = new CompatActionBar.TabListener() {
+			@Override
+			public void onTabSelected(int position, Tab tab) {
+				sw.smoothScrollToPage(position);
+			}
+		};
+		
+		actionBar.setTabEnabled(true);
+		actionBar.addTab(new CompatActionBar.Tab().setText(res.getString(R.string.lblDiceBags)).setTabListener(tabListener));
+		actionBar.addTab(new CompatActionBar.Tab().setText(res.getString(R.string.lblRolls)).setTabListener(tabListener));
+		actionBar.addTab(new CompatActionBar.Tab().setText(res.getString(R.string.lblVariables)).setTabListener(tabListener));
+		
+		//actionBar.setSelectedNavigationItem(1);
+		sw.scrollToPage(1);
 	}
+	
+//	private View getNewTab(String name) {
+//		TextView tab;
+//		
+//		tab = new TextView(this, null, android.R.attr.tabWidgetStyle);
+//		tab.setText(name);
+//		//tab.setBackgroundResource(android.R.drawable.list_selector_background);
+//		//tab.setBackgroundResource(android.R.attr.tabWidgetStyle);
+//		//tab.setBackgroundResource(android.R.drawable.tab_indicator);
+//		
+//		//LayoutInflater inf = LayoutInflater.from(this);
+//		//inf.inflate(android.R.layout., root)
+//		
+//		return tab;
+//	}
 	
 	private void initDiceBagList() {
 		actionBar.setTitle(diceBag.getName());
@@ -1452,7 +1566,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			diceBagManager.setCurrentIndex((int)id);
 			refreshAllDiceContainers();
-			drawer.closeDrawer(lvDiceBag);
+			//drawer.closeDrawer(lvDiceBag);
 		}
 	};
 	

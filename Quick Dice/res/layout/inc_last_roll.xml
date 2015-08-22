@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+	style="?attr/ohmLastRollContainer"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	>
+	
+	<include
+		android:id="@+id/mLastRoll"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_alignParentLeft="true"
+		android:layout_centerVertical="true"
+		android:layout_toLeftOf="@+id/mLinkButton"
+		
+		layout="@layout/roll_item"
+		/>
+
+	<View style="@style/LinkRoll.Divider.Vertical"
+		android:layout_toLeftOf="@+id/mLinkButton"
+		android:layout_centerVertical="true"
+		/>
+	<ImageButton style="@style/LinkRoll.Button"
+		android:id="@+id/mLinkButton"
+		
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+
+		android:contentDescription="@string/pref_link_title"
+		/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:layout_toLeftOf="@+id/mLinkButton"
+		>
+		<Button 
+			android:id="@+id/mUndoDeleteAll"
+
+			android:layout_width="wrap_content"
+			android:layout_height="48dp"
+
+			android:layout_centerInParent="true"
+
+			android:text="@string/mnuUndoClearAllResult"
+
+			android:visibility="gone"
+			/>
+
+	</RelativeLayout>
+</RelativeLayout>

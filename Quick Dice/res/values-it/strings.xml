@@ -44,7 +44,7 @@
 	<string name="lblSelectFile">Scegli documento</string>
 	<string name="lblSelectFolder">Scegli cartella</string>
 	<string name="lblNewFile">Nuovo documento</string>
-	<string name="lblImportFromRecent">Ripristina dai documenti recenti</string>
+	<string name="lblImportFromRecent">Ripristina da un documento recente</string>
 	<string name="lblMergeFrom">Importa da&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblImportFrom">Ripristina da&#8230;</string><!-- "&#8230;" correspond to "..." -->
 	<string name="lblExportTo">Salva su&#8230;</string><!-- "&#8230;" correspond to "..." -->
@@ -75,6 +75,7 @@
 	<string name="lblLabelValueVar">Etichetta: Valore (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblDiceBags">Collezioni</string>
+	<string name="lblRolls">Lanci</string>
 	<string name="lblVariables">Valori denominati</string>
 	<string name="lblNumberPicker">Numero</string>
 	<string name="lblSelectValue">Scegli un valore.</string>

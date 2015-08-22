@@ -65,7 +65,15 @@
 				app:minSize="250dp"
 				>
 				
-				<RelativeLayout style="?attr/ohmLastRollContainer"
+				<include layout="@layout/inc_last_roll"
+					android:id="@+id/mLastRollContainer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					
+					android:layout_alignParentLeft="true"
+					android:layout_alignParentTop="true"
+					/>
+				<!-- RelativeLayout style="?attr/ohmLastRollContainer"
 					android:id="@+id/mLastRollContainer"
 
 					android:layout_width="match_parent"
@@ -121,7 +129,7 @@
 							android:visibility="gone"
 							/>
 					</RelativeLayout>
-				</RelativeLayout>
+				</RelativeLayout -->
 					
 				<GridView style="?attr/ohmRollListContainer"
 					android:id="@+id/mRollList"
@@ -136,7 +144,15 @@
 					android:numColumns="1"
 					/>
 
-				<RelativeLayout style="?attr/ohmModifiersContainer"
+				<include layout="@layout/inc_modifiers"
+					android:id="@+id/mModifierContainer"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					
+					android:layout_alignParentLeft="true"
+					android:layout_alignParentBottom="true"
+					/>
+				<!-- RelativeLayout style="?attr/ohmModifiersContainer"
 					android:id="@+id/mModifierContainer"
 
 					android:layout_width="fill_parent"
@@ -173,18 +189,9 @@
 								android:contentDescription="@string/lblName" />
 						</LinearLayout>
 					</HorizontalScrollView>
-				</RelativeLayout>
+				</RelativeLayout -->
 			</RelativeLayout>
 
-			<!-- <ImageView
-				android:id="@+id/mHandle"
-				
-				android:layout_width="16dp"
-				android:layout_height="fill_parent"
-				
-				android:background="@drawable/ic_handle_vert"
-				android:contentDescription="@string/lblDragToResize"
-				/> -->
 			<ImageView style="?attr/ohmResizeHandleVertical"
 				android:id="@+id/mHandle"
 				

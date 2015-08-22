@@ -341,7 +341,8 @@ public class SwipeDismissGridViewTouchListener implements View.OnTouchListener {
                 //Check swipe direction
                 if ((mDirection == DIRECTION_RTOL && motionEvent.getRawX() > mDownX)
                 		|| (mDirection == DIRECTION_LTOR && motionEvent.getRawX() < mDownX)) {
-                	break;
+                	//break;
+                	return true;
                 }
 
                 mVelocityTracker.addMovement(motionEvent);

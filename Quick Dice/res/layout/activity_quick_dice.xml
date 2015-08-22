@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	>
+	<ohm.library.widget.TabBar style="@android:style/Widget"
+		android:id="@android:id/tabhost"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		
+		android:orientation="horizontal"
+		android:divider="?android:attr/dividerVertical"
+		android:background="#545454"
+		>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			
+			android:text="@string/lblDiceBags"
+			android:background="@drawable/bg_tab_selector"
+			android:gravity="center_vertical"
+			android:textAppearance="@android:style/Widget.TextView.PopupMenu"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="18sp"
+			/>
+		<TextView style="@android:style/TextAppearance.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/lblDiceBags"
+			android:background="@drawable/bg_tab_selector"
+			/>
+	</ohm.library.widget.TabBar>
+	<ohm.library.widget.SwipeView
+		android:id="@+id/mProfileDrawer"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		
+		android:layout_below="@android:id/tabhost"
+		android:layout_alignParentLeft="true"
+		android:layout_alignWithParentIfMissing="true"
+		>
+	
+		<!-- Dice bags list -->
+		<include layout="@layout/page_dice_bags"
+			android:id="@+id/mDiceBagList"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			/>
+		
+		<!-- The main roll area -->
+		<include layout="@layout/page_rolls"
+			android:id="@+id/mRoot"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			/>
+		
+		<!-- Variables list -->
+		<include layout="@layout/page_dice_bags"
+			android:id="@+id/mVariableList"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			/>
+	</ohm.library.widget.SwipeView>
+</RelativeLayout>

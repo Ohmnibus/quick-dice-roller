@@ -75,6 +75,7 @@
 	<string name="lblLabelValueVar">Label: Value (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblDiceBags">Dice bags</string>
+	<string name="lblRolls">Rolls</string>
 	<string name="lblVariables">Named values</string>
 	<string name="lblNumberPicker">Number picker</string>
 	<string name="lblSelectValue">Select a value.</string>
