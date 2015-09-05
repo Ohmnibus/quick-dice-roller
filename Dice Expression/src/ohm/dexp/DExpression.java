@@ -762,9 +762,13 @@ public class DExpression {
 				switch (retVal.type) {
 					case TK_VAL:
 						/* Numbers */
-						if (actCharType==CT_DOT && dotCount > 0) {
-							/* error: double dot */
-							throw new ExpectedEndOfStatement(retVal.begin);
+						if (actCharType==CT_DOT) {
+							if (dotCount > 0) {
+								/* error: double dot */
+								//throw new ExpectedEndOfStatement(retVal.begin);
+								throw new InvalidCharacter(iCnt);
+							}
+							dotCount++;
 						}
 
 						//retVal.value = retVal.value + String.valueOf(actChar);
