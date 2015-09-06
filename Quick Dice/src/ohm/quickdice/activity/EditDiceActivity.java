@@ -8,9 +8,11 @@ import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.control.SerializationManager;
 import ohm.quickdice.dialog.BuilderDialogBase;
-import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
+import ohm.quickdice.dialog.BuilderDialogBase.OnDiceBuiltListener;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
+import ohm.quickdice.util.AsyncDiceTester;
+import ohm.quickdice.util.AsyncDiceTester.OnReadDiceListener;
 import ohm.quickdice.util.CustomKeyboard;
 import ohm.quickdice.util.Helper;
 import android.app.Activity;
@@ -211,7 +213,7 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		cancel = (Button) findViewById(R.id.btuBarCancel);
 		cancel.setOnClickListener(this);
 
-		((ImageButton)findViewById(R.id.btuWizard)).setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
+		((ImageButton)findViewById(R.id.btuWizard)).setOnClickListener(Helper.getExpressionActionsClickListener(diceBuiltListener));
 	}
 	
 	@Override
@@ -275,9 +277,9 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	
-	private BuilderDialogBase.ReadyListener builderReadyListener = new ReadyListener() {
+	private OnDiceBuiltListener diceBuiltListener = new OnDiceBuiltListener() {
 		@Override
-		public void ready(View view, boolean confirmed, int action, String diceExpression) {
+		public void onDiceBuilt(View view, boolean confirmed, int action, String diceExpression) {
 			if (confirmed) {
 				if (action == BuilderDialogBase.ACTION_EDIT) {
 					EditText txt;
@@ -285,25 +287,71 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 					Helper.setTextInsideSelection(txt, diceExpression, true);
 					txt.requestFocus();
 				} else {
-					Dice retExp = readDice();
-					if (retExp != null) {
-						//The expression is valid
-						Toast.makeText(EditDiceActivity.this, R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
-					}			
+//					Dice retExp = readDice();
+//					if (retExp != null) {
+//						//The expression is valid
+//						Toast.makeText(EditDiceActivity.this, R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
+//					}
+					readDice(new OnReadDiceListener() {
+						@Override
+						public void onRead(Dice dice) {
+							Toast.makeText(EditDiceActivity.this, R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
+						}
+						@Override
+						public void onError(Exception ex) {
+							showExpressionError(ex);
+						}
+					});
 				}
 			}
 		}
 	};
 	
 	private void setCurrentIcon() {
-//		ibtIconPicker.setImageDrawable(
-//				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
-//		ibtIconPicker.setImageDrawable(
-//				QuickDiceApp.getInstance().getBagManager().getIconDrawable(currentResIndex));
 		QuickDiceApp.getInstance().getBagManager().setIconDrawable(ibtIconPicker, currentResIndex);
 	}
 	
-	protected Dice readDice() {
+//	protected Dice readDice() {
+//		Dice retVal;
+//		
+//		retVal = new Dice();
+//		
+//		if (expression != null) {
+//			retVal.setID(expression.getID());
+//		} else {
+//			retVal.setID(-1);
+//		}
+//		
+//		retVal.setName(txtName.getText().toString().trim());
+//		
+//		if (retVal.getName().length() == 0) {
+//			txtName.requestFocus();
+//			retVal = null;
+//			Toast.makeText(this, R.string.err_name_required, Toast.LENGTH_LONG).show();
+//		} else {
+//			retVal.setDescription(txtDescription.getText().toString());
+//			
+//			retVal.setResourceIndex(currentResIndex);
+//			
+//			retVal.setExpression(txtExpression.getText().toString());
+//			
+//			try {
+//				//Make a dummy roll to check for error.
+//				final DiceBag currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
+//				retVal.setContext(currentDiceBag);
+//				retVal.getNewResult();
+//			} catch (UnknownVariable e) {
+//				//This issue will be checked later
+//			} catch (DException e) {
+//				retVal = null;
+//				showExpressionError(e);
+//			}
+//		}
+//		
+//		return retVal;
+//	}
+	
+	protected void readDice(OnReadDiceListener listener) {
 		Dice retVal;
 		
 		retVal = new Dice();
@@ -316,37 +364,33 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 		
 		retVal.setName(txtName.getText().toString().trim());
 		
-		if (retVal.getName().length() == 0) {
-			txtName.requestFocus();
-			retVal = null;
-			Toast.makeText(this, R.string.err_name_required, Toast.LENGTH_LONG).show();
-		} else {
-			retVal.setDescription(txtDescription.getText().toString());
-			
-			retVal.setResourceIndex(currentResIndex);
-			
-			retVal.setExpression(txtExpression.getText().toString());
-			
-			try {
-				//Make a dummy roll to check for error.
-				final DiceBag currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
-				retVal.setContext(currentDiceBag);
-				retVal.getNewResult();
-			} catch (UnknownVariable e) {
-				//This issue will be checked later
-			} catch (DException e) {
-				retVal = null;
-				showExpressionError(e);
-			}
-		}
+		retVal.setDescription(txtDescription.getText().toString());
 		
-		return retVal;
+		retVal.setResourceIndex(currentResIndex);
+		
+		retVal.setExpression(txtExpression.getText().toString());
+		
+		//Make a dummy roll to check for error.
+		DiceBag currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
+//		retVal.setContext(currentDiceBag);
+//		retVal.getNewResult();
+		AsyncDiceTester.execute(currentDiceBag, retVal, listener);
+	}
+	
+	protected void showExpressionError(Exception e) {
+		if (e instanceof DException) {
+			showExpressionError((DException)e);
+		} else {
+			txtName.requestFocus();
+			Toast.makeText(this, R.string.err_name_required, Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	protected void showExpressionError(DException e) {
 		EditText txt;
 
-		txt = (EditText) findViewById(R.id.edExpText);
+		//txt = (EditText) findViewById(R.id.edExpText);
+		txt = txtExpression;
 		
 		if (e instanceof DParseException) {
 			DParseException ex = (DParseException) e;
@@ -406,13 +450,26 @@ public class EditDiceActivity extends BaseActivity implements OnClickListener {
 	};
 
 	private void handleConfirmButton() {
+		readDice(new OnReadDiceListener() {
+			@Override
+			public void onRead(Dice dice) {
+				handleConfirmButton(dice);
+			}
+			@Override
+			public void onError(Exception ex) {
+				showExpressionError(ex);
+			}
+		});
+	};
+
+	private void handleConfirmButton(Dice dice) {
 		
-		Dice dice = readDice();
-		if (dice == null) {
-			//The expression is not valid
-			//Do nothing.
-			return;
-		}
+//		Dice dice = readDice();
+//		if (dice == null) {
+//			//The expression is not valid
+//			//Do nothing.
+//			return;
+//		}
 
 		final DiceBag currentDiceBag = QuickDiceApp.getInstance().getBagManager().getCurrent();
 		String[] badLabels = dice.getUnavailableVariables(currentDiceBag);

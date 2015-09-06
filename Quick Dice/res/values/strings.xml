@@ -125,8 +125,8 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 &bull; Select dice bags to import<br />
 &bull; Import/Export from/to external app<br />
 &bull; Output \"-0\" if result is negative before truncation<br />
-&bull; Fixed error exporting to DropBox<br />
 &bull; Fixed the FC on Named Value picker<br />
+&bull; Fixed the FC using decimal separator<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[
@@ -143,7 +143,7 @@ Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><
 This is a free app, however if you like it please consider to make a donation.<br />
 <br />
 Thanks!<br />]]></string>
-	<string name="app_translators">Henning (DE), leynad_ix (ES), Magaolimpia (FR), masterki (DE), Mescalito (ES), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES)</string>
+	<string name="app_translators">Dani Estu (ES), Henning (DE), lorrampi (PT-BR), Magaolimpia (FR), Mazterki (DE), Mescalito (ES), patrik.siljestam (SV-SE), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES), strawbxx (SV-SE)</string>
 
 	<string name="msgLicenses">Licenses</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>
@@ -629,6 +629,7 @@ Thanks!<br />]]></string>
 		<item>d12</item>
 		<item>d20</item>
 		<item>d%</item>
+		<item>4dF</item>
 	</string-array>
 	<string-array name="default_dice_desc">
 		<item>Roll a four sided die</item>
@@ -638,6 +639,7 @@ Thanks!<br />]]></string>
 		<item>Roll a twelve sided die</item>
 		<item>Roll a twenty sided die</item>
 		<item>Roll a hundred sided die</item>
+		<item>Roll four Fudge dice</item>
 	</string-array>
 
 	<!-- Preferences -->

@@ -39,9 +39,6 @@
   <string name="lblSelectFile">Seleccione el archivo</string>
   <string name="lblSelectFolder">Seleccionar carpeta</string>
   <string name="lblNewFile">Archivo nuevo</string>
-  <string name="lblImportFromRecent">Importar de archivos recientes</string>
-  <string name="lblImportFrom">Importar desde...</string>
-  <string name="lblExportTo">Exportar a...</string>
   <string name="lblItemMRU">%2$d dados en %1$s bolsas - %4$s %5$s</string>
   <string name="lblD">d</string>
   <string name="lblSelectDice">Seleccione dados</string>
@@ -94,28 +91,11 @@
   <string name="msgRemoveDiceBagNew">¿Esta seguro de eliminar definitivamente la bolsa de dados \"%1$s\"? Contiene dados \"%2$d\", \"%3$d\" valores con nombre y modificadores de \"%4$d\". Todos esos elementos se perderán en el tiempo, como lágrimas en la lluvia.</string>
   <string name="msgWhatsNew">¿Qué hay de nuevo?</string>
   <string name="msgWhatsNewTitle">Novedades de la versión %2$s</string>
-  <string name="msgWhatsNewIntro"><![CDATA[
-<br />
-<b>Por favor</b> mandame un <a href="mailto:ohmnibus@gmail.com">correo</a>Si tienes alguna sugerencia sobre como mejorar nuestra app o ve a  <a href="https://crowdin.com/project/quick-dice-roller">Crowdin</a> para mejorar nuestras traducciones<br />
-<br />
-Quieres estar al dia? <a href="http://goo.gl/UuJBSO">Se un Beta Tester!</a><br />
-<br />]]></string>
-  <!-- <string name="msgWhatsNewBody"><![CDATA[
-&bull; Valores con nombre usables en formulas<br />
-&bull; 4 Temas diferentes <br />
-&bull; Nuevo teclado para editar formulas<br />
-&bull; Mantener pantalla encendida<br />
-&bull;Soporte a Shadowrun 4ed y 5ed<br />
-&bull; Extendidas las funciones "exp" y "expUp"<br />
-&bull; Mejorada salida para muchas funciones<br />
-&bull; Mejorado solapamiento<br />
-&bull; Arreglos menores y muchisimas mejoras<br />
-<br />]]></string> -->
   <string name="msgAboutTitle">A proposito de %1$s</string>
   <string name="msgAboutBody"><![CDATA[%1$s Version %2$s<br />
 Copyright (c) 2012-2014 por %3$s<br />
 <br />
-<a href="https://crowdin.com/project/quick-dice-roller">Traducciones</a>: Stefania M. (ES), Magaolimpia (FR), Henning (DE)<br />
+<a href="https://crowdin.com/project/quick-dice-roller">Traducciones</a>: %4$s<br />
 <br />
 Por favor, manda los Bugs a <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><br />
 <br />
@@ -125,6 +105,8 @@ Gracias!<br />]]></string>
   <string name="msgLicenses">Licencias</string>
   <string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> es publicado por %3$s en <a href="%4$s">%5$s</a>.<br />]]></string>
   <string-array name="lblLicenseNames">
+    <item>Licencia Apache 2.0</item>
+    <item>Licencia Apache 2.0</item>
     <item>Licencia Apache 2.0</item>
     <item>Licencia Apache 2.0</item>
     <item>Licencia Apache 2.0</item>
@@ -149,8 +131,6 @@ Gracias!<br />]]></string>
   <string name="msgCannotRead">No puede leer el contenido de la carpeta (o parte de ella)</string>
   <string name="msgFileNameInvalid">Nombre de archivo \"%1$s\" no es válido.</string>
   <string name="msgFileNameExists">Nombre de archivo \"%1$s\" ya existe. ¿Está seguro que desea sobrescribir este archivo?</string>
-  <string name="msgExported">Definiciones de dados exportados</string>
-  <string name="msgImported">Definiciones de dados importados</string>
   <string name="msgConfirmImport">Esta operación sobrescribirá todas las definiciones de dados. ¿Estás seguro de que desea continuar?</string>
   <string name="msgRemoveVar">¿Seguro eliminar definitivamente el valor llamado \"%1$s\"?</string>
   <string name="msgRemoveUsedVar">El valor llamado \"%1$s\" actualmente esta siendo usado por \"%2$s\". \nSi eliminas este dado, ya no funcionara. ¿Continuar de todos modos?</string>
@@ -337,11 +317,19 @@ Gracias!<br />]]></string>
     <item>Dado</item>
     <item>Número di lanzamientos</item>
     <item>Dificultad</item>
+    <item>Extra target</item>
+    <item>Fail target</item>
+    <item>Explosion target</item>
+    <item>Max explosions</item>
   </string-array>
   <string-array name="fncPoolParamHints">
     <item>Fórmula para ser probada</item>
     <item>Número de lanzamientos que hacer</item>
     <item>Valor mínimo por obtener</item>
+    <item>Value to get an extra success</item>
+    <item>Value to lost a success</item>
+    <item>Value for extra roll</item>
+    <item>Max num of extra rolls</item>
   </string-array>
   <string name="fncRakName">Lanza y Tieni</string>
   <string name="fncRakDesc">Lanza un montón de dados y mantén solo un subconjunto.</string>
@@ -417,8 +405,6 @@ Gracias!<br />]]></string>
   <string name="err_cannot_read_mod">Imposible leer las definiciones de los modificadores. Serán utilizados los predeterminados.</string>
   <string name="err_bag_name_required">El nombre de la colección es obligatorio.</string>
   <string name="err_no_email_client">No hay ningún cliente de correo electrónico instalado.</string>
-  <string name="err_cannot_export">No es posible exportar las definiciones dados.</string>
-  <string name="err_cannot_import">No es posible importar las definiciones de dados.</string>
   <string name="err_storage_not_found">Almacenamiento externo no encontrado.</string>
   <string name="err_var_name_required">Nombre de valor es necesario.</string>
   <string name="err_var_label_required">Etiqueta de valor es necesaria y debe ser de 2 a 5 caracteres de largo.</string>
@@ -451,6 +437,7 @@ Gracias!<br />]]></string>
     <item>d12</item>
     <item>d20</item>
     <item>d%</item>
+    <item>4dF</item>
   </string-array>
   <string-array name="default_dice_desc">
     <item>Lanza un dado con cuatro caras</item>
@@ -460,6 +447,7 @@ Gracias!<br />]]></string>
     <item>Lanza un dado con doce caras</item>
     <item>Lanza un dado con veinte caras</item>
     <item>Lanza un dado porcentaje</item>
+    <item>Lanza cuatro dados Fudge</item>
   </string-array>
   <string name="pref_clipboard">Notas</string>
   <string name="pref_clipboard_title">Uso de las notas</string>

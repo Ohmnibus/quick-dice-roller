@@ -594,6 +594,7 @@ Grazie!<br />]]></string>
 		<item>d12</item>
 		<item>d20</item>
 		<item>d%</item>
+		<item>4dF</item>
 	</string-array>
 	<string-array name="default_dice_desc">
 		<item>Lancia un dado a quattro facce</item>
@@ -603,6 +604,7 @@ Grazie!<br />]]></string>
 		<item>Lancia un dado a dodici facce</item>
 		<item>Lancia un dado a venti facce</item>
 		<item>Lancia un dado percentuale</item>
+		<item>Lancia quattro dadi Fudge</item>
 	</string-array>
 
 	<!-- Preferences -->

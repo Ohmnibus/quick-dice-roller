@@ -73,6 +73,7 @@
 		
 		<item>@drawable/ic_d2_white</item>
 		<item>@drawable/ic_d3_white</item>
+		<item>@drawable/ic_df_blue</item>
 	</array>
 
 	<array name="diceColors">
@@ -148,6 +149,7 @@
 		
 		<item>#a3a3a3</item>
 		<item>#a3a3a3</item>
+		<item>#18209c</item><!-- Blue -->
 	</array>
 	
 	<string-array name="entryvalues_clipboard">
@@ -199,6 +201,7 @@
 		<item>5</item>
 		<item>6</item>
 		<item>7</item>
+		<item>63</item>
 	</integer-array>
 
 	<string-array name="default_dice_expr">
@@ -209,5 +212,6 @@
 		<item>1d12</item>
 		<item>1d20</item>
 		<item>1d100</item>
+		<item>rak(rand(-1,1),4)</item>
 	</string-array>
 </resources>

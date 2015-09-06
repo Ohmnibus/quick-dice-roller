@@ -83,9 +83,10 @@ Mots-clés: Dés, Lanceur, Jeté, Dice, dé, Die, Roller, JdR, Jeux, Rôle, RPG,
 - Fond personnalisé
 - Icônes personalisées
 - Synthèse vocale
-- Nouvelle fonction "aeon" pour Aeon IV
-- Nouvelle fonction "rolemaster" pour Rolemaster
-- Amélioration de la fonction "pool"
+- Nouvelle fonction « aeon » pour Aeon IV
+- Nouvelle fonction « rolemaster » pour Rolemaster
+- Amélioration de la fonction « pool »
+- Amélioration de la référence en ligne
 - Correctif: Double popup menu
 - Corrections et améliorations mineurs
 

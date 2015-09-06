@@ -6,7 +6,7 @@ import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.adapter.VariableAdapter;
 import ohm.quickdice.control.DiceBagManager;
-import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
+import ohm.quickdice.dialog.BuilderDialogBase.OnDiceBuiltListener;
 import ohm.quickdice.entity.Variable;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -164,17 +164,17 @@ public class VariablePickerDialog extends AlertDialog implements DialogInterface
 	 * invoke the specified {@link ReadyListener} when the dialog is dismissed.
 	 * @param context Context
 	 * @param parent Reference to the container.
-	 * @param readyListener Listener to be invoked when the dialog is dismissed.
+	 * @param diceBuiltListener Listener to be invoked when the dialog is dismissed.
 	 * @return An {@link ActionItem}
 	 */
-	public static ActionItem getActionItem(Context context, PopupMenu parent, ReadyListener readyListener){
+	public static ActionItem getActionItem(Context context, PopupMenu parent, OnDiceBuiltListener diceBuiltListener){
 		ActionItem retVal;
 		
 		if (QuickDiceApp.getInstance().getBagManager().getCurrent().getVariables().size() > 0) {
 			retVal = new ActionItem();
 			retVal.setTitle(context.getResources().getString(R.string.lblVariables));
 			retVal.setIcon(context.getResources().getDrawable(R.drawable.ic_var));
-			retVal.setOnClickListener(new VariablePickerActionItemClickListener(parent, readyListener));
+			retVal.setOnClickListener(new VariablePickerActionItemClickListener(parent, diceBuiltListener));
 		} else {
 			retVal = null;
 		}
@@ -185,12 +185,12 @@ public class VariablePickerDialog extends AlertDialog implements DialogInterface
 	protected static class VariablePickerActionItemClickListener implements View.OnClickListener, OnItemSelectedListener<Variable> {
 		
 		private PopupMenu parent;
-		private ReadyListener readyListener;
+		private OnDiceBuiltListener diceBuiltListener;
 		private View refView;
 		
-		public VariablePickerActionItemClickListener(PopupMenu parent, ReadyListener readyListener) {
+		public VariablePickerActionItemClickListener(PopupMenu parent, OnDiceBuiltListener diceBuiltListener) {
 			this.parent = parent;
-			this.readyListener = readyListener;
+			this.diceBuiltListener = diceBuiltListener;
 		}
 
 		@Override
@@ -206,7 +206,7 @@ public class VariablePickerDialog extends AlertDialog implements DialogInterface
 
 		@Override
 		public void onItemSelected(boolean confirmed, int itemId, Variable item) {
-			readyListener.ready(
+			diceBuiltListener.onDiceBuilt(
 					refView,
 					confirmed,
 					BuilderDialogBase.ACTION_EDIT,

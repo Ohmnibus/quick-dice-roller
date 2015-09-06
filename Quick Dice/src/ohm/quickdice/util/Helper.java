@@ -26,10 +26,10 @@ import ohm.dexp.exception.UnknownVariable;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.dialog.BuilderDialogBase;
+import ohm.quickdice.dialog.BuilderDialogBase.OnDiceBuiltListener;
 import ohm.quickdice.dialog.DiceBuilderDialog;
 import ohm.quickdice.dialog.FunctionBuilderDialog;
 import ohm.quickdice.dialog.VariablePickerDialog;
-import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.entity.FunctionDescriptor;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -587,21 +587,21 @@ public class Helper {
 		}			
 	}
 
-	public static OnClickListener getExpressionActionsClickListener(BuilderDialogBase.ReadyListener builderReadyListener) {
-		return new ExpressionActionsClickListener(builderReadyListener);
+	public static OnClickListener getExpressionActionsClickListener(OnDiceBuiltListener diceBuiltListener) {
+		return new ExpressionActionsClickListener(diceBuiltListener);
 	}
 
 	protected static class ExpressionActionsClickListener implements View.OnClickListener {
 
-		ReadyListener readyListener;
+		OnDiceBuiltListener diceBuiltListener;
 
-		public ExpressionActionsClickListener(ReadyListener readyListener) {
-			this.readyListener = readyListener;
+		public ExpressionActionsClickListener(OnDiceBuiltListener diceBuiltListener) {
+			this.diceBuiltListener = diceBuiltListener;
 		}
 
 		@Override
 		public void onClick(View v) {
-			PopupMenu popupMenu = Helper.getExpressionPopupMenu(v, readyListener);
+			PopupMenu popupMenu = Helper.getExpressionPopupMenu(v, diceBuiltListener);
 			popupMenu.show();
 		}
 	}
@@ -649,10 +649,10 @@ public class Helper {
 	/**
 	 * Get the pop-up menu to be used with expressions.<br />
 	 * @param v View for which the pop-up menu is called.
-	 * @param builderReadyListener Listener to be invoked when the dialog is dismissed.
+	 * @param diceBuiltListener Listener to be invoked when the dialog is dismissed.
 	 * @return A {@link PopupMenu} ready to be shown.
 	 */
-	public static PopupMenu getExpressionPopupMenu(View v, BuilderDialogBase.ReadyListener builderReadyListener) {
+	public static PopupMenu getExpressionPopupMenu(View v, OnDiceBuiltListener diceBuiltListener) {
 		PopupMenu retVal;
 		ActionItem ai;
 
@@ -662,7 +662,7 @@ public class Helper {
 		ai = new ActionItem();
 		ai.setTitle(v.getContext().getResources().getString(R.string.lblCheckExpression));
 		ai.setIcon(v.getContext().getResources().getDrawable(R.drawable.ic_check));
-		ai.setOnClickListener(new CheckActionItemClickListener(retVal, builderReadyListener));
+		ai.setOnClickListener(new CheckActionItemClickListener(retVal, diceBuiltListener));
 		retVal.addActionItem(ai);
 
 		//Help
@@ -685,14 +685,14 @@ public class Helper {
 				DiceBuilderDialog.getActionItem(
 						v.getContext(),
 						retVal,
-						builderReadyListener)
+						diceBuiltListener)
 				);
 
 		//Named Values
 		ai = VariablePickerDialog.getActionItem(
 				v.getContext(),
 				retVal,
-				builderReadyListener);
+				diceBuiltListener);
 		if (ai != null) {
 			retVal.addActionItem(ai);
 		}
@@ -705,7 +705,7 @@ public class Helper {
 					FunctionBuilderDialog.getActionItem(
 							v.getContext(),
 							retVal,
-							builderReadyListener,
+							diceBuiltListener,
 							fnc[i])
 					);
 		}
@@ -716,17 +716,17 @@ public class Helper {
 	protected static class CheckActionItemClickListener implements View.OnClickListener {
 
 		PopupMenu parent;
-		ReadyListener readyListener;
+		OnDiceBuiltListener diceBuiltListener;
 
-		public CheckActionItemClickListener(PopupMenu parent, ReadyListener readyListener) {
+		public CheckActionItemClickListener(PopupMenu parent, OnDiceBuiltListener diceBuiltListener) {
 			this.parent = parent;
-			this.readyListener = readyListener;
+			this.diceBuiltListener = diceBuiltListener;
 		}
 
 		@Override
 		public void onClick(View v) {
 			View refView = parent != null ? parent.getAnchor() : v;
-			readyListener.ready(refView, true, BuilderDialogBase.ACTION_CHECK, null);
+			diceBuiltListener.onDiceBuilt(refView, true, BuilderDialogBase.ACTION_CHECK, null);
 			if (parent != null) {
 				parent.dismiss();
 			}

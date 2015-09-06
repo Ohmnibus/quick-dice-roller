@@ -40,9 +40,6 @@
   <string name="lblSelectFile">Datei auswählen</string>
   <string name="lblSelectFolder">Ordner auswählen</string>
   <string name="lblNewFile">Neue Datei</string>
-  <string name="lblImportFromRecent">Import aus den letzten Datei</string>
-  <string name="lblImportFrom">Importieren aus&#8230;</string>
-  <string name="lblExportTo">Exportieren, um&#8230;</string>
   <string name="lblItemMRU">%2$d Würfel in %1$s Sammlungen - %4$s %5$s</string>
   <string name="lblD">w</string>
   <string name="lblSelectDice">Wählen Sie ein Würfeltyp</string>
@@ -64,13 +61,13 @@
   <string name="lblMin">Min</string>
   <string name="lblMax">Max</string>
   <string name="lblLabelValueVar">Label: Wert (Min → Max)</string>
-  <string name="lblDiceBags">Würfel-Sammlung</string>
+  <string name="lblDiceBags">Würfelbeutel</string>
   <string name="lblVariables">Benannte Werte</string>
   <string name="lblNumberPicker">Anzahl wählen</string>
   <string name="lblSelectValue">Wählen Sie einen Wert.</string>
   <string name="lblSelectMinValue">Wählen Sie die untere Grenze für diesen benannten Wert.</string>
   <string name="lblSelectMaxValue">Wählen Sie die obere Grenze für diesen benannten Wert.</string>
-  <string name="lblSelectVariable">Wählen Sie einen benannten Wert</string>
+  <string name="lblSelectVariable">Wähle einen benannten Wert</string>
   <string name="lblSelectFunction">Wählen Sie eine Funktion</string>
   <string name="lblSelectVariableNone">Diese Sammlung enthält keine benannten Werte.</string>
   <string name="lblCustomIconsOnly">Nur benutzerdefinierten Icons anzeigen</string>
@@ -91,18 +88,12 @@
   <string name="msgClearResultsTitle">Ergebnisse löschen</string>
   <string name="msgClearResults">Möchtest Du wirklich alle Ergebnisse löschen?</string>
   <string name="msgLostChange">Beim Verlassen werden alle Änderungen verworfen. Verlassen?</string>
-  <string name="msgMissingVar">Der Würfel erfordert einige benannte Werte, die nicht mehr zur Verfügung stehen: \"%1$s\" \nDer Würfel kann nicht gewürfelt werden, bis den benannten Wert in die Würfel-Sammlung hinzugefügt wird. Trotzdem speichern?</string>
-  <string name="msgRemoveDiceBagTitle">Sammlung löschen</string>
-  <string name="msgRemoveDiceBag">Bist Du wirklich sicher, daß Du die Sammlung \"%1$s\"? löschen möchtest? Sie enthält \"%2$d\" Würfe und \"%3$d\" Modifikator. Dies alles wird vergehen wie Staub im Wind.</string>
+  <string name="msgMissingVar">Der Würfel erfordert einige benannte Werte, die nicht mehr zur Verfügung stehen: \"%1$s\" \nDer Würfel kann nicht gewürfelt werden, bis der benannten Wert in die Würfel-Sammlung hinzugefügt wird. Trotzdem speichern?</string>
+  <string name="msgRemoveDiceBagTitle">Würfelbeutel löschen</string>
+  <string name="msgRemoveDiceBag">Bist Du wirklich sicher, daß Du die Sammlung \"%1$s\"? löschen möchtest? Sie enthält \"%2$d\" Würfe und \"%3$d\" Modifikator. All diese Elemente werden verloren sein in der Zeit, so wie Tränen im Regen.</string>
   <string name="msgRemoveDiceBagNew">Sind Sie sicher, endgültig die Sammlung \"%1$s\" zu entfernen? Sie enthält \"%2$d\" Würfel, \"%3$d\" bennante Werte und \"%4$d\" Modifizierer. All diese Elemente werden verloren sein in der Zeit, so wie Tränen im Regen.</string>
   <string name="msgWhatsNew">Was gibt\'s Neues</string>
   <string name="msgWhatsNewTitle">Das ist neu in Version %2$s</string>
-  <string name="msgWhatsNewIntro"><![CDATA[
-<br />
-<b>Bitte</b> senden Sie mir eine <a href="mailto:ohmnibus@gmail.com"> E-Mail</a>, wenn Sie einen Vorschlag um die App zu verbessern haben, oder überprüfen Sie das <a href="https://crowdin.com/project/quick-dice-roller">Crowdin Projekt</a>, um mir die Übersetzungen zu verbessern zu helfen. <br />
-<br />
-Willst du auf dem Laufenden bleiben? <a href="http://goo.gl/UuJBSO">Werden Sie Beta-Tester!</a><br />
-<br />]]></string>
   <string name="msgAboutTitle">Über %1$s</string>
   <string name="msgAboutBody"><![CDATA[%1$s Version %2$s<br />
 Copyright (c) 2012-2014 von %3$s<br />
@@ -123,6 +114,7 @@ Danke!<br />]]></string>
     <item>Apache 2.0 Lizenz</item>
     <item>Apache 2.0 Lizenz</item>
     <item>Apache 2.0-Lizenz</item>
+    <item>Apache 2.0 License</item>
   </string-array>
   <string name="lbl_donate_title_small">Kleine Spende</string>
   <string name="lbl_donate_title_medium">Mittlere Spende</string>
@@ -133,7 +125,7 @@ Danke!<br />]]></string>
   <string name="msgBonusMessage">Positiver Modifikator von %1$+d</string>
   <string name="msgMalusTitle">Malus: %1$+d</string>
   <string name="msgMalusMessage">Negativer Modifikator von %1$+d</string>
-  <string name="msgMaxBagsReach">Du kannst keine weiteren Würfelsammlungen hinzufügen.</string>
+  <string name="msgMaxBagsReach">Du kannst keine weiteren Würfelbeutel hinzufügen.</string>
   <string name="msgMaxDiceReach">Du kannst keine weiteren Würfel hinzufügen.</string>
   <string name="msgMaxModifiersReach">Du kannst keine weiteren Modifikatoren hinzufügen</string>
   <string name="msgMaxVariablesReach">Sie können nicht weitere benannte Werte hinzufügen.</string>
@@ -142,12 +134,10 @@ Danke!<br />]]></string>
   <string name="msgCannotRead">Kann nicht gelesen Ordner-Inhalte</string>
   <string name="msgFileNameInvalid">Dateiname \"%1$s\" ist nicht gültig.</string>
   <string name="msgFileNameExists">Dateiname \"%1$s\" existiert bereits. Sind Sie sicher, dass Sie diese Datei überschreiben?</string>
-  <string name="msgExported">Würfel Definitionen exportiert</string>
-  <string name="msgImported">Würfel Definitionen importiert</string>
   <string name="msgConfirmImport">Dieser Vorgang überschreibt alle Würfel Definitionen. Sind Sie sicher, dass Sie fortfahren möchten?</string>
   <string name="msgRemoveVar">Sind Sie sicher, den benannten Wert \"%1$s\" endgültig zu entfernen?</string>
-  <string name="msgRemoveUsedVar">Der benannte Wert \"%1$s\" wird derzeit von \"%2$s\" verwendet.\nWenn Sie ihn entfernen, dieser Würfel wird nicht mehr funktionieren. Trotzdem weitermachen?</string>
-  <string name="msgRemoveMultiUsedVar">Der benannte Wert \"%1$s\" wird derzeit von \"%2$s\" verwendet.\nWenn Sie ihn entfernen, dieser Würfel wird nicht mehr funktionieren. Trotzdem weitermachen?</string>
+  <string name="msgRemoveUsedVar">Der benannte Wert \"%1$s\" wird derzeit von \"%2$s\" verwendet.\nWenn Sie ihn entfernen, wird dieser Würfel nicht mehr funktionieren. Trotzdem weitermachen?</string>
+  <string name="msgRemoveMultiUsedVar">Der benannte Wert \"%1$s\" wird derzeit von \"%2$s\" verwendet.\nWenn Sie ihn entfernen, wird dieser Würfel nicht mehr funktionieren. Trotzdem weitermachen?</string>
   <string name="msgRemoveIconTitle">Icon entfernen</string>
   <string name="msgRemoveIconUnused">Sind Sie sicher dieses Icon endgültig zu entfernen?</string>
   <string name="msgRemoveIconUsed">Dieses Icon ist %1$d Mal verwendet. Sind Sie sicher es endgültig zu entfernen?</string>
@@ -167,7 +157,7 @@ Danke!<br />]]></string>
   <string name="mnuRoll">Würfeln</string>
   <string name="mnuSwitchPrev">Mit Vorgänger tauschen</string>
   <string name="mnuSwitchNext">Mit Nachfolger tauschen</string>
-  <string name="mnuMoveTo">Bewege zu&#8230;</string>
+  <string name="mnuMoveTo">Verschieben zu&#8230;</string>
   <string name="mnuClone">Würfel klonen</string>
   <string name="mnuDetails">Detail</string>
   <string name="mnuClearResult">Resultat löschen</string>
@@ -179,19 +169,19 @@ Danke!<br />]]></string>
   <string name="mnuApplyMod">Modifikator anwenden</string>
   <string name="mnuAddModHere">Modifikator hier hinzufügen</string>
   <string name="mnuExit">Schließen</string>
-  <string name="mnuAddDiceBag">Sammlung hinzufügen</string>
-  <string name="mnuSelectDiceBag">Sammlung auswählen</string>
-  <string name="mnuEditDiceBag">Sammlung editieren</string>
-  <string name="mnuAddDiceBagHere">Sammlung hier hinzufügen</string>
-  <string name="mnuRemoveDiceBag">Sammlung entfernen</string>
-  <string name="mnuOpenDiceBagDrawer">Sammlung zeigen</string>
+  <string name="mnuAddDiceBag">Würfelbeutel hinzufügen</string>
+  <string name="mnuSelectDiceBag">Würfelbeutel auswählen</string>
+  <string name="mnuEditDiceBag">Würfelbeutel bearbeiten</string>
+  <string name="mnuAddDiceBagHere">Würfelbeutel hier hinzufügen</string>
+  <string name="mnuRemoveDiceBag">Würfelbeutel entfernen</string>
+  <string name="mnuOpenDiceBagDrawer">Würfelbeutel zeigen</string>
   <string name="mnuImportExport">Importieren / Exportieren</string>
-  <string name="mnuCloneDiceBag">Würfelsammlung klonen</string>
+  <string name="mnuCloneDiceBag">Würfelbeutel klonen</string>
   <string name="mnuAddVariable">Benannten Wert hinzufügen</string>
   <string name="mnuEditVariable">Benannte Wert bearbeiten</string>
   <string name="mnuRemoveVariable">Entfernen Sie den benannten Wert</string>
-  <string name="mnuAddVariableHere">Einfügen Sie hier den benannten Wert</string>
-  <string name="mnuMoveVariableTo">Bewege den benannten Wert zu&#8230;</string>
+  <string name="mnuAddVariableHere">Neuen benannten Wert hier einfügen</string>
+  <string name="mnuMoveVariableTo">Verschiebe den benannten Wert zu&#8230;</string>
   <string name="mnuOpenVariableDrawer">Benannten Werte zeigen</string>
   <string name="fncBASHName">BASH!</string>
   <string name="fncBASHDesc">Wurf nach BASH!-Regeln.</string>
@@ -453,8 +443,6 @@ Danke!<br />]]></string>
   <string name="err_cannot_read_mod">Kann die Modifikator-Definitionen nicht lesen. Benutze Vorgaben.</string>
   <string name="err_bag_name_required">Die Sammlung braucht einen Namen.</string>
   <string name="err_no_email_client">Kein Email-Client gefunden.</string>
-  <string name="err_cannot_export">Kann nicht exportieren die Würfel Definitionen.</string>
-  <string name="err_cannot_import">Kann nicht importieren die Würfel Definitionen.</string>
   <string name="err_storage_not_found">Externer Speicher nicht gefunden.</string>
   <string name="err_var_name_required">Der Name des Wertes ist erforderlich.</string>
   <string name="err_var_label_required">Das Label des Wertes ist erforderlich und sollte von 2 bis 5 Zeichen lang sein.</string>
@@ -487,6 +475,7 @@ Danke!<br />]]></string>
     <item>w12</item>
     <item>w20</item>
     <item>w%</item>
+    <item>4wF</item>
   </string-array>
   <string-array name="default_dice_desc">
     <item>Würfelt einen vierseitigen Würfel</item>
@@ -496,6 +485,7 @@ Danke!<br />]]></string>
     <item>Würfelt einen zwölfseitigen Würfel</item>
     <item>Würfelt einen zwanzigseitigen Würfel</item>
     <item>Würfelt einen hundertseitigen Würfel</item>
+    <item>Würfelt vier Fudge Würfel</item>
   </string-array>
   <string name="pref_clipboard">Zwischenablage</string>
   <string name="pref_clipboard_title">Zwischenablage benutzen</string>

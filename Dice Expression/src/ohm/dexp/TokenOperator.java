@@ -19,7 +19,7 @@ public abstract class TokenOperator extends TokenBase {
 			return new TokenOperatorMultiply();
 		} else if (name.equals("/")) {
 			return new TokenOperatorDivide();
-		} else if (name.equals("d") || name.equals("w")) { //"w" is for Germans
+		} else if (name.equals("d") || name.equals("w") || name.equals("t")) { //"w" is for Germans, "t" for swedish
 			return new TokenOperatorDice();
 		}
 		return null;

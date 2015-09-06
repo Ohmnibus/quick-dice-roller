@@ -14,7 +14,6 @@ import ohm.library.widget.SplitView;
 import ohm.library.widget.SplitView.ResizeListener;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
-import ohm.quickdice.R.dimen;
 import ohm.quickdice.adapter.DiceBagAdapter;
 import ohm.quickdice.adapter.GridExpressionAdapter;
 import ohm.quickdice.adapter.ResultListAdapter;

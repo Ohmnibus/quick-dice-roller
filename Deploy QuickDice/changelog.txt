@@ -5,6 +5,8 @@ v 2.1.2
 - Import/Export from/to external app
 - Output "-0" if result is negative before truncation
 - Fixed the FC on Named Value picker
+- Fixed the FC using decimal separator
+- Fixed ANR in dice editor
 - Minor fix and improvements
 
 v 2.1.1

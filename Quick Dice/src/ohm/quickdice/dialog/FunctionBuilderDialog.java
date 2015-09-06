@@ -6,10 +6,11 @@ import ohm.dexp.exception.DException;
 import ohm.dexp.exception.DParseException;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
-import ohm.quickdice.dialog.BuilderDialogBase.ReadyListener;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.FunctionDescriptor;
 import ohm.quickdice.entity.FunctionDescriptor.ParamDescriptor;
+import ohm.quickdice.util.AsyncDiceTester;
+import ohm.quickdice.util.AsyncDiceTester.OnReadDiceListener;
 import ohm.quickdice.util.Helper;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,7 +20,6 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -33,8 +33,8 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 	ViewGroup paramContainer;
 	EditText[] txtParamArray;
 
-	public FunctionBuilderDialog(Context context, View view, FunctionDescriptor functionDescriptor, ReadyListener readyListener) {
-		super(context, view, readyListener);
+	public FunctionBuilderDialog(Context context, View view, FunctionDescriptor functionDescriptor, OnDiceBuiltListener diceBuiltListener) {
+		super(context, view, diceBuiltListener);
 
 		this.fncDesc = functionDescriptor;
 	}
@@ -89,7 +89,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 			paramValue.setHint(param.getHint());
 
 			paramMenu.setTag(paramValue);
-			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(builderReadyListener));
+			paramMenu.setOnClickListener(Helper.getExpressionActionsClickListener(diceBuiltListener));
 
 			paramContainer.addView(paramView);
 			
@@ -121,9 +121,9 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 
 		dialog.setView(mView);
 
-		dialog.getWindow().setLayout(
-				WindowManager.LayoutParams.WRAP_CONTENT,
-				WindowManager.LayoutParams.WRAP_CONTENT);
+//		dialog.getWindow().setLayout(
+//				WindowManager.LayoutParams.WRAP_CONTENT,
+//				WindowManager.LayoutParams.WRAP_CONTENT);
 	}
 	
 	@Override
@@ -131,19 +131,67 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 		return BuilderDialogBase.ACTION_EDIT;
 	}
 
+//	@Override
+//	protected boolean checkExpression() {
+//		boolean retVal;
+//
+//		//Check validity of all subexpressions
+//		retVal = true;
+//		for (int i=0; i<txtParamArray.length && retVal; i++){
+//			retVal = checkExpression(txtParamArray[i]);
+//		}
+//
+//		return retVal;
+//	}
+	
 	@Override
-	protected boolean checkExpression() {
-		boolean retVal;
-
-		//Check validity of all subexpressions
-		retVal = true;
-		for (int i=0; i<txtParamArray.length && retVal; i++){
-			retVal = checkExpression(txtParamArray[i]);
-		}
-
-		return retVal;
+	protected void checkExpression(OnExpressionCheckedListener expressionCheckedListener) {
+//		boolean retVal;
+//
+//		//Check validity of all subexpressions
+//		retVal = true;
+//		for (int i=0; i<txtParamArray.length && retVal; i++){
+//			retVal = checkExpression(txtParamArray[i]);
+//		}
+//		readDiceListener.in
+//		this.expressionCheckedListener = expressionCheckedListener;
+		new LoopingOnReadDiceListener(expressionCheckedListener).start();
 	}
-
+	
+	private class LoopingOnReadDiceListener implements OnReadDiceListener {
+		private OnExpressionCheckedListener expressionCheckedListener;
+		private int index;
+		private int testing;
+		
+		public LoopingOnReadDiceListener(OnExpressionCheckedListener expressionCheckedListener) {
+			this.expressionCheckedListener = expressionCheckedListener;
+			this.index = 0;
+			this.testing = 0;
+		}
+		
+		@Override
+		public void onRead(Dice dice) {
+			if (index < txtParamArray.length) {
+				testing = index;
+				checkExpression(txtParamArray[index], this);
+				index++;
+			} else {
+				expressionCheckedListener.onExpressionChecked(true);
+			}
+		}
+		
+		@Override
+		public void onError(Exception ex) {
+			showExpressionError(ex, txtParamArray[testing]);
+			expressionCheckedListener.onExpressionChecked(false);
+		}
+		
+		public void start() {
+			this.index = 0;
+			onRead(null);
+		}
+	}
+	
 	@Override
 	protected String getExpression() {
 		String retVal;
@@ -163,66 +211,91 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 	}
 
 
-	private BuilderDialogBase.ReadyListener builderReadyListener = new ReadyListener() {
+	private OnDiceBuiltListener diceBuiltListener = new OnDiceBuiltListener() {
 		@Override
-		public void ready(View view, boolean confirmed, int action, String diceExpression) {
+		public void onDiceBuilt(View view, boolean confirmed, int action, String diceExpression) {
 			if (confirmed) {
 				if (action == BuilderDialogBase.ACTION_EDIT) {
 					EditText txt;
-//					int selStart;
-//					int selEnd;
-//					String oldDiceExp;
-//					String newDiceExp;
-//
 					txt = (EditText)view.getTag();
-//					selStart = txt.getSelectionStart();
-//					selEnd = txt.getSelectionEnd();
-//					oldDiceExp = txt.getText().toString();
-//
-//					newDiceExp = oldDiceExp.substring(0, selStart) +
-//							diceExpression +
-//							oldDiceExp.substring(selEnd);
-//
-//					txt.setText(newDiceExp);
-//					txt.setSelection(selStart, selStart + diceExpression.length());
 					Helper.setTextInsideSelection(txt, diceExpression, true);
 					txt.requestFocus();
 				} else {
-					if (checkExpression((EditText)view.getTag())) {
-						//The expression is valid
-						Toast.makeText(view.getContext(), R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
-					}
+//					if (checkExpression((EditText)view.getTag())) {
+//						//The expression is valid
+//						Toast.makeText(view.getContext(), R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
+//					}
+					final EditText txt = (EditText)view.getTag();
+					checkExpression((EditText)view.getTag(), new OnReadDiceListener() {
+						@Override
+						public void onRead(Dice dice) {
+							//The expression is valid
+							Toast.makeText(txt.getContext(), R.string.lblCheckPassed, Toast.LENGTH_SHORT).show();
+						}
+						@Override
+						public void onError(Exception ex) {
+							showExpressionError(ex, txt);
+						}
+					});
 				}
 			}
 		}
 	};
+
+//	/**
+//	 * Check the expression contained in the specified {@link EditText}
+//	 * @param txt {@link EditText} containing the expression to test.
+//	 * @return {@code true} id the expression is valid, {@code false} otherwise.
+//	 */
+//	protected boolean checkExpression(EditText txt) {
+//		boolean retVal;
+//		Dice dExp;
+//
+//		retVal = true;
+//
+//		dExp = new Dice();
+//		dExp.setID(-1);
+//		dExp.setName("Test");
+//		dExp.setDescription("");
+//		dExp.setExpression(txt.getText().toString());
+//
+//		try {
+//			//Make a dummy roll to check for error.
+//			dExp.setContext(QuickDiceApp.getInstance().getBagManager().getCurrent());
+//			dExp.getNewResult();
+//		} catch (DException e) {
+//			showExpressionError(e, txt);
+//			retVal = false;
+//		}
+//		return retVal;
+//	}
 
 	/**
 	 * Check the expression contained in the specified {@link EditText}
 	 * @param txt {@link EditText} containing the expression to test.
 	 * @return {@code true} id the expression is valid, {@code false} otherwise.
 	 */
-	protected boolean checkExpression(EditText txt) {
-		boolean retVal;
+	protected void checkExpression(EditText txt, OnReadDiceListener listener) {
 		Dice dExp;
-
-		retVal = true;
 
 		dExp = new Dice();
 		dExp.setID(-1);
-		dExp.setName("");
+		dExp.setName("Test");
 		dExp.setDescription("");
 		dExp.setExpression(txt.getText().toString());
 
-		try {
-			//Make a dummy roll to check for error.
-			dExp.setContext(QuickDiceApp.getInstance().getBagManager().getCurrent());
-			dExp.getNewResult();
-		} catch (DException e) {
-			showExpressionError(e, txt);
-			retVal = false;
+		AsyncDiceTester.execute(
+				QuickDiceApp.getInstance().getBagManager().getCurrent(),
+				dExp,
+				listener);
+	}
+	
+	protected void showExpressionError(Exception e, EditText txt) {
+		if (e instanceof DException) {
+			showExpressionError((DException)e, txt);
+		} else {
+			//Cannot happen
 		}
-		return retVal;
 	}
 
 	protected void showExpressionError(DException e, EditText txt) {
@@ -246,13 +319,13 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 	 * @param functionDescriptor The descriptor of the function for which this {@link ActionItem} is created.
 	 * @return An {@link ActionItem}
 	 */
-	public static ActionItem getActionItem(Context context, PopupMenu parent, ReadyListener readyListener, FunctionDescriptor functionDescriptor) {
+	public static ActionItem getActionItem(Context context, PopupMenu parent, OnDiceBuiltListener diceBuiltListener, FunctionDescriptor functionDescriptor) {
 		ActionItem retVal;
 
 		retVal = new ActionItem();
 		retVal.setTitle(functionDescriptor.getName());
 		retVal.setIcon(context.getResources().getDrawable(functionDescriptor.getResId()));
-		retVal.setOnClickListener(new FunctionBuilderActionItemClickListener(parent, functionDescriptor, readyListener));
+		retVal.setOnClickListener(new FunctionBuilderActionItemClickListener(parent, functionDescriptor, diceBuiltListener));
 
 		return retVal;
 	}
@@ -261,12 +334,12 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 
 		PopupMenu parent;
 		FunctionDescriptor functionDescriptor;
-		ReadyListener readyListener;
+		OnDiceBuiltListener diceBuiltListener;
 
-		public FunctionBuilderActionItemClickListener(PopupMenu parent, FunctionDescriptor functionDescriptor, ReadyListener readyListener) {
+		public FunctionBuilderActionItemClickListener(PopupMenu parent, FunctionDescriptor functionDescriptor, OnDiceBuiltListener diceBuiltListener) {
 			this.parent = parent;
 			this.functionDescriptor = functionDescriptor;
-			this.readyListener = readyListener;
+			this.diceBuiltListener = diceBuiltListener;
 		}
 
 		@Override
@@ -277,7 +350,7 @@ public class FunctionBuilderDialog extends BuilderDialogBase {
 					refView.getContext(),
 					refView,
 					functionDescriptor,
-					readyListener).show(); //.getDialog().show();
+					diceBuiltListener).show(); //.getDialog().show();
 
 			if (parent != null) {
 				parent.dismiss();

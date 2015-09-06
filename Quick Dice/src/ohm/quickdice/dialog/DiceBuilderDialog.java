@@ -16,7 +16,6 @@ import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
@@ -30,8 +29,8 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 	WheelView faceWheel;
 	WheelView modsWheel;
 	
-	public DiceBuilderDialog(Context context, View view, ReadyListener readyListener) {
-		super(context, view, readyListener);
+	public DiceBuilderDialog(Context context, View view, OnDiceBuiltListener diceBuiltListener) {
+		super(context, view, diceBuiltListener);
 	}
 
 	@SuppressLint("InflateParams")
@@ -52,9 +51,9 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		
 		modsWheel.setCurrentItem(50);
 		
-		dialog.getWindow().setLayout(
-				WindowManager.LayoutParams.WRAP_CONTENT,
-				WindowManager.LayoutParams.WRAP_CONTENT);
+//		dialog.getWindow().setLayout(
+//				WindowManager.LayoutParams.WRAP_CONTENT,
+//				WindowManager.LayoutParams.WRAP_CONTENT);
 	}
 
 	@Override
@@ -62,11 +61,16 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		return BuilderDialogBase.ACTION_EDIT;
 	}
 
-	@Override
-	protected boolean checkExpression() {
-		return true;
-	}
+//	@Override
+//	protected boolean checkExpression() {
+//		return true;
+//	}
 
+	@Override
+	protected void checkExpression(OnExpressionCheckedListener expressionCheckedListener) {
+		expressionCheckedListener.onExpressionChecked(true);
+	}
+	
 	@Override
 	protected String getExpression() {
 		String diceExpression;
@@ -75,8 +79,11 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		int faces = ((DiceWheelAdapter)faceWheel.getViewAdapter()).getItemValue(faceWheel.getCurrentItem());
 		int modifier = ((ModifierWheelAdapter)modsWheel.getViewAdapter()).getItemValue(modsWheel.getCurrentItem());
 
+//		diceExpression = Integer.toString(times) +
+//			"d" + Integer.toString(faces);
 		diceExpression = Integer.toString(times) +
-			"d" + Integer.toString(faces);
+				rootView.getContext().getString(R.string.lblD) +
+				Integer.toString(faces);
 		
 		if (modifier > 0) {
 			diceExpression += "+" + Integer.toString(modifier);
@@ -87,43 +94,13 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 		return diceExpression;
 	}
 
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		View mView = getLayoutInflater().inflate(R.layout.dice_builder_dialog, null);
-//		
-//		setView(mView);
-//		
-//		setTitle(R.string.lblDiceBuilder);
-//		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
-//		setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
-//		
-//		super.onCreate(savedInstanceState);
-//
-//		timeWheel = initWheel(R.id.dbDiceRollTimes, 0, new NumericWheelAdapter(getContext(), 1, 10));
-//		faceWheel = initWheel(R.id.dbDiceFaces, 0, new DiceWheelAdapter(getContext()));
-//		modsWheel = initWheel(R.id.dbDiceModifiers, 0, new ModifierWheelAdapter(getContext(), -50, 50));
-//		
-//		modsWheel.setCurrentItem(50);
-//		
-//		getWindow().setLayout(
-//				WindowManager.LayoutParams.WRAP_CONTENT,
-//				WindowManager.LayoutParams.WRAP_CONTENT);
-//	}
-
 	/**
 	 * Initializes wheel
 	 * @param id the wheel widget Id
 	 */
 	private WheelView initWheel(Context context, int id, int label, WheelViewAdapter adapter) {
 		WheelView wheel = getWheel(id);
-		//wheel.setViewAdapter(new NumericWheelAdapter(getContext(), minValue, maxValue));
 		wheel.setViewAdapter(adapter);
-//		if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//			wheel.setVisibleItems(3);
-//		} else {
-//			wheel.setVisibleItems(5);
-//		}
-		//wheel.setLabel(this.getContext().getString(label));
 		wheel.setVisibleItems(getVisibleItems(context));
 		wheel.setCurrentItem(0);
 		
@@ -273,16 +250,16 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 	 * invoke the specified {@link ReadyListener} when the dialog is dismissed.
 	 * @param context Context
 	 * @param parent Reference to the container.
-	 * @param readyListener Listener to be invoked when the dialog is dismissed.
+	 * @param diceBuiltListener Listener to be invoked when the dialog is dismissed.
 	 * @return An {@link ActionItem}
 	 */
-	public static ActionItem getActionItem(Context context, PopupMenu parent, ReadyListener readyListener){
+	public static ActionItem getActionItem(Context context, PopupMenu parent, OnDiceBuiltListener diceBuiltListener){
 		ActionItem retVal;
 		
 		retVal = new ActionItem();
 		retVal.setTitle(context.getResources().getString(R.string.lblDiceBuilder));
 		retVal.setIcon(context.getResources().getDrawable(R.drawable.ic_dice_builder));
-		retVal.setOnClickListener(new DiceBuilderActionItemClickListener(parent, readyListener));
+		retVal.setOnClickListener(new DiceBuilderActionItemClickListener(parent, diceBuiltListener));
 
 		return retVal;
 	}
@@ -290,11 +267,11 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 	protected static class DiceBuilderActionItemClickListener implements View.OnClickListener {
 		
 		PopupMenu parent;
-		ReadyListener readyListener;
+		OnDiceBuiltListener diceBuiltListener;
 		
-		public DiceBuilderActionItemClickListener(PopupMenu parent, ReadyListener readyListener) {
+		public DiceBuilderActionItemClickListener(PopupMenu parent, OnDiceBuiltListener diceBuiltListener) {
 			this.parent = parent;
-			this.readyListener = readyListener;
+			this.diceBuiltListener = diceBuiltListener;
 		}
 
 		@Override
@@ -303,7 +280,7 @@ public class DiceBuilderDialog extends BuilderDialogBase {
 			new DiceBuilderDialog(
 					refView.getContext(), 
 					refView, 
-					readyListener).show(); //.getDialog().show();
+					diceBuiltListener).show();
 			if (parent != null) {
 				parent.dismiss();
 			}

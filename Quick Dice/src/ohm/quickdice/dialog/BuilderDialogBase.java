@@ -4,6 +4,7 @@ import ohm.library.widget.KeyboardView;
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
 import ohm.quickdice.util.CustomKeyboard;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,13 +19,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-public abstract class BuilderDialogBase implements OnClickListener, OnKeyListener {
+interface OnExpressionCheckedListener {
+	/**
+	 * Called when an expression is checked.
+	 * @param check Tell if the expression is valid.
+	 */
+	public void onExpressionChecked(boolean check);
+}
+
+
+public abstract class BuilderDialogBase implements OnClickListener, OnKeyListener, OnExpressionCheckedListener {
 	
 	public static final int ACTION_EDIT = 1; 
 	public static final int ACTION_CHECK = 2; 
 	
-	//private Context context;
-	private ReadyListener readyListener;
+	private OnDiceBuiltListener diceBuiltListener;
 	private View callingView;
 	
 	private boolean initialized = false;
@@ -35,7 +44,7 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 	 * @author Ohmnibus
 	 *
 	 */
-	public interface ReadyListener {
+	public interface OnDiceBuiltListener {
 		/**
 		 * Called when the Builder Dialog is dismissed.
 		 * @param view {@link View} that requested the dialog.
@@ -43,13 +52,13 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 		 * @param action Action performed by the dialog. Can be {@code ACTION_EDIT} or {@code ACTION_CHECK}. 
 		 * @param diceExpression A text used for {@link action}s of type {@code ACTION_EDIT}.
 		 */
-		public void ready(View view, boolean confirmed, int action, String diceExpression);
+		public void onDiceBuilt(View view, boolean confirmed, int action, String diceExpression);
 	}
-
-	protected BuilderDialogBase(Context context, View view, ReadyListener readyListener) {
+	
+	protected BuilderDialogBase(Context context, View view, OnDiceBuiltListener readyListener) {
 		//this.context = context;
 		this.callingView = view;
-		this.readyListener = readyListener;
+		this.diceBuiltListener = readyListener;
 		
 		dialog = new AlertDialog.Builder(context).create();
 	}
@@ -61,20 +70,6 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 			dialog.setButton(AlertDialog.BUTTON_POSITIVE, dialog.getContext().getString(R.string.lblOk), this);
 			dialog.setButton(AlertDialog.BUTTON_NEGATIVE, dialog.getContext().getString(R.string.lblCancel), this);
 
-//			//Hack to avoid automatic dismiss on button click.
-//			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//				@Override
-//				public void onShow(DialogInterface dlg) {
-//					//Hack to avoid automatic dismiss on button click.
-//					//Note that "getButton" will return "null" if called before the Dialog is shown
-//					dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							BuilderDialogBase.this.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
-//						}
-//					});
-//				}
-//			});
 			initialized = true;
 		}
 		return dialog;
@@ -100,17 +95,9 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 			while (view != null) {
 				if (view instanceof LinearLayout) {
 					if (((LinearLayout)view).getOrientation() == LinearLayout.VERTICAL) {
-						//	if (root == null) {
 						root = (ViewGroup) view.getParent();
 						break;
-						//		root.setBackgroundResource(R.drawable.bg_selector_state_selected); //This is to test where I'm putting the kbd
-						//	}
-						//	Log.i("show", view.getClass().toString() + ": Vertical");
-						//} else {
-						//	Log.i("show", view.getClass().toString() + ": Horizontal");
 					}
-					//} else {
-					//	Log.i("show", view.getClass().toString());
 				}
 				view = view.getParent();
 			}
@@ -139,18 +126,37 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
-		boolean pass = true;
-		String returnExpression = null;
+//		boolean pass = true;
+//		String returnExpression = null;
+//		if (which == DialogInterface.BUTTON_POSITIVE) {
+//			//The dialog has been confirmed
+//			pass = checkExpression();
+//			if (pass) {
+//				returnExpression = getExpression();
+//			}
+//		}
+//		if (pass) {
+//			if (readyListener != null) {
+//				readyListener.onDiceBuilt(callingView, which == DialogInterface.BUTTON_POSITIVE, getActionType(), returnExpression);
+//			}
+//			dialog.dismiss();
+//		}
 		if (which == DialogInterface.BUTTON_POSITIVE) {
-			//The dialog has been confirmed
-			pass = checkExpression();
-			if (pass) {
-				returnExpression = getExpression();
+			checkExpression(this);
+		} else {
+			if (diceBuiltListener != null) {
+				diceBuiltListener.onDiceBuilt(callingView, false, getActionType(), null);
 			}
+			dialog.dismiss();
 		}
-		if (pass) {
-			if (readyListener != null) {
-				readyListener.ready(callingView, which == DialogInterface.BUTTON_POSITIVE, getActionType(), returnExpression);
+	}
+	
+	@Override
+	public void onExpressionChecked(boolean check) {
+		if (check) {
+			if (diceBuiltListener != null) {
+				String returnExpression = getExpression();
+				diceBuiltListener.onDiceBuilt(callingView, true, getActionType(), returnExpression);
 			}
 			dialog.dismiss();
 		}
@@ -176,6 +182,7 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 		}
 	}
 	
+	@SuppressLint("InflateParams")
 	private View getKeyboardLayout() {
 		if (keyboardLayout == null) {
 			LayoutInflater inflater = dialog.getLayoutInflater();
@@ -194,7 +201,7 @@ public abstract class BuilderDialogBase implements OnClickListener, OnKeyListene
 	
 	protected abstract int getActionType();
 
-	protected abstract boolean checkExpression();
+	protected abstract void checkExpression(OnExpressionCheckedListener expressionCheckedListener);
 
 	protected abstract String getExpression();
 

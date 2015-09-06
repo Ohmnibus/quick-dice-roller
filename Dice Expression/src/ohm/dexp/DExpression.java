@@ -805,8 +805,8 @@ public class DExpression {
 			iCnt++;
 		}
 		
-		//Check for special case: "d" (or "w") operator
-		if (retVal.value.equals("d") || retVal.value.equals("w")) {
+		//Check for special case: "d" (or "w", "t") operator
+		if (retVal.value.equals("d") || retVal.value.equals("w") || retVal.value.equals("t")) {
 			retVal.type = TK_UOP;
 		}
 		
