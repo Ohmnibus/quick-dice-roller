@@ -414,6 +414,15 @@
 		<item name="android:imeOptions">actionNext|flagNoExtractUi</item><!-- actionNext|flagNoExtractUi|flagForceAscii -->
 	</style>
 	
+	<style name="Edit.CheckBox">
+		<item name="android:paddingRight">10dp</item>
+		<item name="android:paddingTop">10dp</item>
+		<item name="android:paddingBottom">2dp</item>
+		<item name="android:textSize">18sp</item>
+		<!-- <item name="android:textColor">?android:attr/colorForeground</item> -->
+		<item name="android:textColorHint">?android:attr/textColorSecondary</item>
+	</style>
+	
 	<!-- Custom Keyboard -->
 	<style name="Keyboard">
 		<item name="android:layout_width">fill_parent</item>

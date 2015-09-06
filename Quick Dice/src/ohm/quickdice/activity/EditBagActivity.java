@@ -15,6 +15,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -29,14 +32,6 @@ public class EditBagActivity extends BaseActivity {
 	 * Open the activity to add a new dice bag.
 	 */
 	public static final int ACTIVITY_ADD = 0x00030002;
-//	/**
-//	 * The activity was closed pressing "Ok"
-//	 */
-//	public static final int RESULT_OK = 0x00030001;
-//	/**
-//	 * The activity was closed pressing "Cancel" or the back button
-//	 */
-//	public static final int RESULT_CANCEL = 0x00030002;
 	/**
 	 * Define the bundle content as {@link DiceBag}.
 	 */
@@ -59,11 +54,13 @@ public class EditBagActivity extends BaseActivity {
 	protected ImageButton ibtIconPicker;
 	protected EditText txtName;
 	protected EditText txtDescription;
+	protected CheckBox cbFullBag;
 	protected Button confirm;
 	protected Button cancel;
 	protected boolean textChanged;
 	protected int currentResIndex;
 	protected int initialResIndex;
+	protected boolean fullBag;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +70,14 @@ public class EditBagActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		if (savedInstanceState != null) {
-			//bag = SerializationManager.DiceBagSafe(savedInstanceState.getString(KEY_DICEBAG));
-			//position = savedInstanceState.getInt(KEY_POSITION);
 			bag = getDiceBag(savedInstanceState);
 			position = getDiceBagPosition(savedInstanceState);
 			initViews(
 					bag == null,
 					savedInstanceState.getString(KEY_NAME),
 					savedInstanceState.getString(KEY_DESCRIPTION),
-					savedInstanceState.getInt(KEY_RES_INDEX));
+					savedInstanceState.getInt(KEY_RES_INDEX),
+					savedInstanceState.getBoolean(KEY_FULL_BAG));
 			initialResIndex = savedInstanceState.getInt(KEY_INITIAL_RES_INDEX);
 			textChanged = savedInstanceState.getBoolean(KEY_TEXT_CHANGED);
 		} else {
@@ -89,29 +85,22 @@ public class EditBagActivity extends BaseActivity {
 			if (extras != null) {
 				req = extras.getInt(BUNDLE_REQUEST_TYPE);
 				if (req == ACTIVITY_EDIT) {
-					//bag = SerializationManager.DiceBagSafe(extras.getString(BUNDLE_DICE_BAG));
 					bag = getDiceBag(extras);
 				} else {
 					bag = null;
 				}
-//				if (extras.containsKey(BUNDLE_POSITION)) {
-//					position = extras.getInt(BUNDLE_POSITION);
-//				} else {
-//					position = POSITION_UNDEFINED;
-//				}
 				position = getDiceBagPosition(extras);
 			}
 			initViews(bag);
 		}
 	}
 
-	//protected static final String KEY_DICEBAG = "KEY_DICEBAG";
-	//protected static final String KEY_POSITION = "KEY_POSITION";
 	protected static final String KEY_NAME = "KEY_NAME";
 	protected static final String KEY_DESCRIPTION = "KEY_DESCRIPTION";
 	protected static final String KEY_RES_INDEX = "KEY_RES_INDEX";
 	protected static final String KEY_TEXT_CHANGED = "KEY_TEXT_CHANGED";
 	protected static final String KEY_INITIAL_RES_INDEX = "KEY_INITIAL_RES_INDEX";
+	protected static final String KEY_FULL_BAG = "KEY_FULL_BAG";
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onSaveInstanceState(android.os.Bundle)
@@ -126,6 +115,7 @@ public class EditBagActivity extends BaseActivity {
 		outState.putInt(KEY_RES_INDEX, currentResIndex);
 		outState.putBoolean(KEY_TEXT_CHANGED, textChanged);
 		outState.putInt(KEY_INITIAL_RES_INDEX, initialResIndex);
+		outState.putBoolean(KEY_FULL_BAG, fullBag);
 		
 		super.onSaveInstanceState(outState);
 	}
@@ -138,7 +128,8 @@ public class EditBagActivity extends BaseActivity {
 					true, 
 					"", 
 					"", 
-					0);
+					0,
+					true);
 			initialResIndex = 0;
 			textChanged = false;
 		} else {
@@ -146,19 +137,26 @@ public class EditBagActivity extends BaseActivity {
 					false,
 					db.getName(),
 					db.getDescription(),
-					db.getResourceIndex());
+					db.getResourceIndex(),
+					false);
 			initialResIndex = bag.getResourceIndex();
 			textChanged = false;
 		}
 	}
 
-	private void initViews(boolean isNew, String name, String description, int resIndex) {
+	private void initViews(boolean isNew, String name, String description, int resIndex, boolean fullBag) {
 		setContentView(R.layout.edit_bag_activity);
 
+		cbFullBag = (CheckBox)findViewById(R.id.ebFullBag);
+		
 		if (isNew) {
 			setTitle(R.string.mnuAddDiceBag);
+			cbFullBag.setVisibility(View.VISIBLE);
+			setFullBagChecked(fullBag);
+			cbFullBag.setOnCheckedChangeListener(checkedChangeListener);
 		} else {
 			setTitle(R.string.mnuEditDiceBag);
+			cbFullBag.setVisibility(View.GONE);
 		}
 
 		ibtIconPicker = (ImageButton)findViewById(R.id.ebIconPicker);
@@ -177,13 +175,31 @@ public class EditBagActivity extends BaseActivity {
 		textChanged = false;
 
 		setCurrentIcon();
-
+		
 		confirm = (Button) findViewById(R.id.btuBarConfirm);
 		confirm.setOnClickListener(confirmCancelClickListener);
 		cancel = (Button) findViewById(R.id.btuBarCancel);
 		cancel.setOnClickListener(confirmCancelClickListener);
 	}
 
+	protected void setFullBagChecked(boolean isChecked) {
+		fullBag = isChecked;
+		cbFullBag.setChecked(isChecked);
+		if (isChecked) {
+			cbFullBag.setText(getString(R.string.lblFullBag));
+		} else {
+			cbFullBag.setText(getString(R.string.lblSmallBag));
+			
+		}
+	}
+	
+	private OnCheckedChangeListener checkedChangeListener = new OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			setFullBagChecked(isChecked);
+		}
+	};
+	
 	private TextWatcher genericTextWatcher = new TextWatcher() {
 		
 		@Override
@@ -248,10 +264,6 @@ public class EditBagActivity extends BaseActivity {
 	};
 	
 	private void setCurrentIcon() {
-//		ibtIconPicker.setImageDrawable(
-//				QuickDiceApp.getInstance().getGraphic().getDiceIcon(currentResIndex));
-//		ibtIconPicker.setImageDrawable(
-//				QuickDiceApp.getInstance().getBagManager().getIconDrawable(currentResIndex));
 		QuickDiceApp.getInstance().getBagManager().setIconDrawable(ibtIconPicker, currentResIndex);
 	}
 
@@ -267,7 +279,7 @@ public class EditBagActivity extends BaseActivity {
 				retVal = bag;
 			} else {
 				//This should be a call for adding a dice bag.
-				retVal = QuickDiceApp.getInstance().getBagManager().getNewDiceBag();
+				retVal = QuickDiceApp.getInstance().getBagManager().getNewDiceBag(fullBag);
 			}
 			
 			retVal.setName(txtName.getText().toString().trim());

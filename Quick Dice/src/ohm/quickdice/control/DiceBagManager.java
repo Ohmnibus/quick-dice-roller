@@ -315,10 +315,10 @@ public class DiceBagManager implements IIconManager {
 
 	/**
 	 * Initialize a default {@link DiceBag} with standard values.
-	 * @param context Context to use to load default name and description.
+	 * @param extended {@code true} to create a Dice Bag with full collection, {@code false} to add just one dice.
 	 * @return A default instance of {@link DiceBag}.
 	 */
-	public DiceBag getNewDiceBag() {
+	public DiceBag getNewDiceBag(boolean extended) {
 		DiceBag bag;
 		
 		bag = new DiceBag();
@@ -326,7 +326,7 @@ public class DiceBagManager implements IIconManager {
 		bag.setName(context.getString(R.string.def_bag_name));
 		bag.setDescription(context.getString(R.string.def_bag_description));
 		//bag.setDiceList(initDiceList());
-		initDiceCollection(bag.getDice());
+		initDiceCollection(bag.getDice(), extended);
 		//bag.setModifiers(initBonusBag());
 		initModifierCollection(bag.getModifiers());
 
@@ -400,10 +400,12 @@ public class DiceBagManager implements IIconManager {
 		return retVal;
 	}
 
-	/*
+	/**
 	 * Initialize the dice list for the default bag.
+	 * @param collection Dice Bag to populate.
+	 * @param extended {@code true} to fill with all dice, {@code false} to add the d6 only.
 	 */
-	private void initDiceCollection(DiceCollection collection) {
+	private void initDiceCollection(DiceCollection collection, boolean extended) {
 		Dice exp;
 		Resources res;
 		String[] defaultDiceName;
@@ -419,7 +421,18 @@ public class DiceBagManager implements IIconManager {
 
 		collection.clear();
 
-		for (int i = 0; i < defaultDiceExpr.length; i++) {
+		if (extended) {
+			for (int i = 0; i < defaultDiceExpr.length; i++) {
+				exp = new Dice();
+				exp.setID(i);
+				exp.setName(defaultDiceName.length > i ? defaultDiceName[i] : res.getString(R.string.def_die_name));
+				exp.setDescription(defaultDiceDesc.length > i ? defaultDiceDesc[i] : res.getString(R.string.def_die_desc));
+				exp.setResourceIndex(defaultDiceIcon.length > i ? defaultDiceIcon[i] : 0);
+				exp.setExpression(defaultDiceExpr[i]);
+				collection.add(exp);
+			}
+		} else {
+			int i = 1; //The index of the d6 definition
 			exp = new Dice();
 			exp.setID(i);
 			exp.setName(defaultDiceName.length > i ? defaultDiceName[i] : res.getString(R.string.def_die_name));
@@ -493,7 +506,7 @@ public class DiceBagManager implements IIconManager {
 		persistence.loadDiceCollection(collection);
 		
 		if (collection.size() == 0) {
-			initDiceCollection(collection);
+			initDiceCollection(collection, true);
 		}
 	}
 	

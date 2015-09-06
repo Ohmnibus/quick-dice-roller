@@ -33,6 +33,8 @@
 	<string name="hintNameBag">Identifica la collezione</string>
 	<string name="lblDescBag">Descrizione</string>
 	<string name="hintDescBag">Descrizione opzionale della collezione</string>
+	<string name="lblFullBag">Crea con tutti i dadi</string>
+	<string name="lblSmallBag">Crea con solo il d6</string>
 	<string name="lblIconBag">Icona</string>
 	<string name="lblMailSubject">[QDR] Suggerimenti</string>
 	<string name="lblSendMail">Invia suggerimento</string>
@@ -120,17 +122,18 @@
 <br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
-	<!-- <string name="msgWhatsNewBody"><![CDATA[
-&bull; Sfondo personalizzato<br />
-&bull; Icone personalizzate<br />
-&bull; Sintesi vocale<br />
-&bull; Supporto al sistema Aeon IV<br />
-&bull; Supporto al sistema Rolemaster<br />
-&bull; Migliorata la funzione \"pool\"<br />
-&bull; Risolto doppio menu per i risultati<br />
-&bull; Risolto l\'errore \"d6+d6\"<br />
+	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Nuova funzione \"reroll\"<br />
+&bull; Scegli le collezioni da importare<br />
+&bull; Importa/Esporta da/su app esterne<br />
+&bull; Mostra \"-0\" se il risultato non troncato è negativo<br />
+&bull; Aggiunto \"4dF\" alla collezione predefinita<br />
+&bull; Creazione collezioni contenenti un solo dado<br />
+&bull; Risolto FC nel selettore di Valori Denominati<br />
+&bull; Risolto FC nell\'uso del separatore decimale<br />
+&bull; Risolto ANR in modifica dadi<br />
 &bull; Correzioni e miglioramenti minori<br />
-]]></string> -->
+]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[
 <br />
 <b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />]]></string>

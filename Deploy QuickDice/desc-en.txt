@@ -80,15 +80,15 @@ Quick Dice Roller is a free and open source application for Android. Everyone ca
 Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, Open, OSR, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, WhiteWholf
 
 ##Recent Changes:500##
-- Fixed the "d6+d6" error
-- Custom background
-- Custom icons
-- Speech synthesis
-- New function "aeon" to support Aeon IV
-- New function "rolemaster" to support Rolemaster
-- Improved "pool" function
-- Improved online reference
-- Fix: Double popup menu spawning
+- New function "reroll"
+- Select dice bags to import
+- Import/Export from/to external app
+- Output "-0" if result is negative before truncation
+- Added 4dF to the default set
+- Create Dice Bags with just one dice
+- Fixed the FC on Named Value picker
+- Fixed the FC using decimal separator
+- Fixed ANR in dice editor
 - Minor fix and improvements
 
 ##Promo Text:80##

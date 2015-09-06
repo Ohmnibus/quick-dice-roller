@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/ebRoot"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
 	>
 
 	<ScrollView
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
 		
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentTop="true"
 		android:layout_above="@+id/ebButtonContainer"
 		>
 		<RelativeLayout style="@style/Edit.ValueContainer"
-			android:layout_width="fill_parent"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			>
 			
@@ -43,7 +43,7 @@
 		
 			<EditText style="@style/Edit.Value"
 				android:id="@+id/ebNameText"
-				android:layout_width="fill_parent"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				
 				android:layout_below="@+id/ebNameLabel"
@@ -64,13 +64,24 @@
 		
 			<EditText style="@style/Edit.Value"
 				android:id="@+id/ebDescText"
-				android:layout_width="fill_parent"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				
 				android:layout_below="@+id/ebDescLabel"
 				android:layout_alignLeft="@+id/ebDescLabel"
 				
 				android:hint="@string/hintDescBag"
+				/>
+			
+			<CheckBox style="@style/Edit.CheckBox"
+				android:id="@+id/ebFullBag"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/ebDescText"
+				android:layout_alignLeft="@+id/ebDescText"
+				
+				android:hint="@string/lblFullBag"
 				/>
 		</RelativeLayout>
 	</ScrollView>

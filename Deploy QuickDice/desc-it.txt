@@ -81,15 +81,15 @@ Parole chiave: Aperto, Boardgame, D&D, D20, Da tavolo, Dadi, Dado, Dice, Die, Du
 
 
 ##Recent Changes:500##
-- Risolto l'errore "d6+d6"
-- Sfondo personalizzato
-- Icone personalizzate
-- Sintesi vocale
-- Funzione "aeon" per supportare Aeon IV
-- Funzione "rolemaster" per supportare Rolemaster
-- Migliorata la funzione "pool"
-- Riferimento online migliorato
-- Fix: Menù contestuale doppio
+- Nuova funzione "reroll"
+- Scegli le collezioni da importare
+- Importa/Esporta da/su app esterne
+- Mostra "-0" se il risultato non troncato è negativo
+- Aggiunto "4dF" alla collezione predefinita
+- Creazione collezioni contenenti un solo dado
+- Risolto FC nel selettore di Valori Denominati
+- Risolto FC nell'uso del separatore decimale
+- Risolto ANR in modifica dadi
 - Correzioni e miglioramenti minori
 
 ##Promo Text:80##

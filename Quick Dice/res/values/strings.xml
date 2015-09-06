@@ -33,6 +33,8 @@
 	<string name="hintNameBag">Identifies the bag</string>
 	<string name="lblDescBag">Description</string>
 	<string name="hintDescBag">Optional description for the bag</string>
+	<string name="lblFullBag">Create with full dice set</string>
+	<string name="lblSmallBag">Create with d6 only</string>
 	<string name="lblIconBag">Icon</string>
 	<string name="lblMailSubject">[QDR] Suggestion</string>
 	<string name="lblSendMail">Submit suggestion</string>
@@ -125,8 +127,11 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 &bull; Select dice bags to import<br />
 &bull; Import/Export from/to external app<br />
 &bull; Output \"-0\" if result is negative before truncation<br />
+&bull; Added \"4dF\" to the default set<br />
+&bull; Create Dice Bags with just one dice<br />
 &bull; Fixed the FC on Named Value picker<br />
 &bull; Fixed the FC using decimal separator<br />
+&bull; Fixed ANR in dice editor<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[
