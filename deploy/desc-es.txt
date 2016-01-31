@@ -1,0 +1,73 @@
+##Title:30##
+LanzaDados Rápidos
+
+##Description:4000##
+LanzaDados Rápidos (Quick Dice Roller) es una aplicación para el juego de mesa RPG Geek. Permite emular prácticamente todos los tipos de tiradas para los juegos de Rol y/o juegos de mesa. Cada dado es definido por una fórmula, como: <i> 2d6+5</i> así como funciones especiales tal y como:<i>rak(1d6,4,3)</i> que permiten emular los sistemas de juego más complejos. Un constructor de fórmulas útiles simplifica el proceso y permitir acceso a una ayuda en línea. Echa un ojo a la lista de todas las funciones aquí: http://goo.gl/mZkcQS
+
+Gracias a las "variables con nombre", así como seguimento de puntuaciones de juegos, puedes definir formulas usando parámetros con variables. Puedes crear, por ejemplo, una variable nombrada "Nivel" con la etiqueta "lvl", entonces, cuando uses la fórmula "(lvl)d6" para determinar el daño de una bola de fuego. Entonces, cuando tu mago suba de nivel no tendrás que editar la fórmula: solamente cambia el valor de "Nivel"!
+
+<b>Qué puedes hacer con LanzaDados Rápidos:</b>
+
+★ Tira los dados con un toque
+★ Organiza tus dados en bolsas
+★ Vigila la tabla de puntuación y úsala en las fórmulas
+★ Lee o escucha el resultado de la tirada de una forma clara
+★ Date cuenta de la calidad de las tiradas
+★ Aplica modificadores en el vuelo con un toque
+★ Pega el último resultado de la tirada desde el porta papeles en otras Apps
+
+<b>Algunos de los sistemas soportados actualmente</b>
+☆ Arcan Myth
+☆ Aeon IV
+☆ BASH!
+☆ Burning Wheel
+☆ Call of Cthulhu
+☆ Deadlands
+☆ Dungeon World
+☆ Dungeons & Dragons (Todas las ediciones)
+☆ Dungeonslayers
+☆ Dystopian Wars
+☆ Exalted
+☆ Feng Shui
+☆ GURPS
+☆ HERO System
+☆ Legend of the five rings
+☆ Lords of Knowledge
+☆ MERP
+☆ Numenera
+☆ Pathfinder
+☆ Rolemaster
+☆ Savage Worlds
+☆ Shadowrun
+☆ Star Wars
+☆ Traveller
+☆ World of Darkness
+
+.. .y muchos más!
+
+Quick Dice Rolleres una aplicacion de codigo abierto para Android. Todo el mundo puede (y esta invitado a) contribuir a su desarrollo en una o más de las siguientes maneras:
+
+• Unirse a la comunidad oficial en Google + http://goo.gl/atlhS9 →
+• Ser un beta tester para probar nuevas características → http://goo.gl/UuJBSO
+• Mejorar las traducciones o añadir nuevos idiomas → http://goo.gl/9ySLIO
+• Compruebe el  código fuente para revisar bugs (o por diversión) → http://goo.gl/06fEHI
+• HAblale a tus amigos sobre Quick Dice Roller
+
+
+* La disponibilidad de los datos y preferencias de la copia de seguridad  depende del fabricante del dispositivo y sólo se admite en Android 2.2 o posterior.
+
+** Esta característica requiere leer y escribir en almacenamiento externo.
+
+Palabras clave: Boardgame, D & D, D20, dados, Die, Dungeon mundo, mazmorras & Dragons, Dungeonslayers, exaltado, explotando, GURPS, héroe, L5R, Master, Open, OSR, Pathfinder, piscina, juego de rol, juego de rol del rodillo y mantener, rodillos, Rpg, mesa, vampiro, WhiteWholf
+
+Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, Open, OSR, Pathfinder, Pool, Role Game, Role Playing Game, Roll and Keep, Roller, Rpg, Tabletop, Vampire, WhiteWholf
+
+##Recent Changes:500##
+
+##Promo Text:80##
+El lanzador de dados flexible, completo y util para juegos de mesa y Geeks de los juegos RPG.
+
+## APPIA ##
+
+## Keywords:10 ##
+Dado, lanza dados, Rpg, gratis, Lobo, LoboBlanco, Vampiro mascarada, Exalted, D20, D&D, dragones y mazmorras

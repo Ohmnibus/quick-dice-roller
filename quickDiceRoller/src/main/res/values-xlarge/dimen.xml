@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<dimen name="roll_toast_canvas_size">192dp</dimen>
+	<dimen name="roll_toast_icon_size">128dp</dimen>
+	<dimen name="roll_toast_base_font_size">48dp</dimen>
+
+</resources>

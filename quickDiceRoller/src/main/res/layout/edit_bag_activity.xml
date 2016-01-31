@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ebRoot"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:layout_above="@+id/ebButtonContainer"
+		>
+		<RelativeLayout style="@style/Edit.ValueContainer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			>
+			
+			<ImageButton style="@style/Edit.Icon"
+				android:id="@+id/ebIconPicker"
+				
+				android:layout_width="72dp"
+				android:layout_height="72dp"
+				
+				android:layout_alignParentLeft="true"
+				android:layout_alignBottom="@+id/ebNameText"
+				
+				android:scaleType="fitXY"
+				android:src="@drawable/ic_dxx_gray"
+				android:contentDescription="@string/lblIcon" />
+			
+			<TextView style="@style/Edit.Label"
+				android:id="@+id/ebNameLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_toRightOf="@+id/ebIconPicker"
+				android:layout_alignParentTop="true"
+				
+				android:text="@string/lblNameBag" />
+		
+			<EditText style="@style/Edit.Value"
+				android:id="@+id/ebNameText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/ebNameLabel"
+				android:layout_alignLeft="@+id/ebNameLabel"
+				
+				android:hint="@string/hintNameBag"
+				/>
+		
+			<TextView style="@style/Edit.Label"
+				android:id="@+id/ebDescLabel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/ebNameText"
+				android:layout_alignParentLeft="true"
+				
+				android:text="@string/lblDescBag" />
+		
+			<EditText style="@style/Edit.Value"
+				android:id="@+id/ebDescText"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/ebDescLabel"
+				android:layout_alignLeft="@+id/ebDescLabel"
+				
+				android:hint="@string/hintDescBag"
+				/>
+			
+			<CheckBox style="@style/Edit.CheckBox"
+				android:id="@+id/ebFullBag"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				
+				android:layout_below="@+id/ebDescText"
+				android:layout_alignLeft="@+id/ebDescText"
+				
+				android:hint="@string/lblFullBag"
+				/>
+		</RelativeLayout>
+	</ScrollView>
+
+	<include
+		layout="@layout/confirm_cancel_bar"
+		android:id="@+id/ebButtonContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true" />
+</RelativeLayout>

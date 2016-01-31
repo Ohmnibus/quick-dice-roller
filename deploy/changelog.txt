@@ -1,0 +1,140 @@
+v 2.1.2
+- Fixed FC opening Help page on devices without a browser
+- Minor fix and improvements
+
+v 2.1.2
+- New function "reroll"
+- Select dice bags to import
+- Import/Export from/to external app
+- Output "-0" if result is negative before truncation
+- Added 4dF to the default set
+- Create Dice Bags with just one dice
+- Fixed the FC on Named Value picker
+- Fixed the FC using decimal separator
+- Fixed ANR in dice editor
+- Minor fix and improvements
+
+v 2.1.1
+- Fixed the "d6+d6" error
+
+v 2.1.0
+- Custom background
+- Custom icons
+- Speech synthesis
+- New function "aeon" to support Aeon IV
+- New function "rolemaster" to support Rolemaster
+- Improved "pool" function
+- New function reference pages
+- Fix: Double popup menu spawning
+- Minor fix and improvements
+
+v 2.0.1
+- Portuguese (Brazilian) translation
+
+v 2.0.0
+- Named values (= variables)
+- Support to "Shadowrun" system (4 and 5 ed.)
+- Themes (Classic, Clean, Light, Dark)
+- Edit activities styled as dialogs
+- Extended about dialog with licence panel
+- Titles with "add" option on drawers
+- Support to variable length functions
+- Support to number in function names (3 alpha + digit|alpha)
+- Extended the "exp" and "expUp" functions
+- Functions "explode" and "explodeUp" hidden in interface (but still working)
+- Better output for many functions (...)
+- Keep screen on while using the app
+- Special keyboard for entering expressions
+- Dice builder: fix layout in landscape mode on large devices
+- Fix: Glith opening a context menu with single click
+- Fix: Error on expression like "3*-4"
+- Fix: Dice pools with large number of rolls
+- Huge refactoring of data manipulation layer
+- Minor fix and improvements
+
+v 1.4.4
+- Resizable dice area
+- Rich context menu
+- Fixed bug related to results list
+- Minor fix and improvements (splash screen, threads)
+
+v 1.4.3
+- Move dice through dice bags
+- Clone dice and dice bags
+- Swipe to delete a result
+- Restore deleted results
+- Link roll results on demand
+- Function "abs"
+- Fixed "rup" and "rdn" functions
+- Fixed "rak" function
+- Minor fix and improvements
+
+v 1.4.0
+- Import and Export definitions
+- German translation
+- Slightly improved UI
+- Minor fix and improvement
+
+v 1.3.7
+- Fix error with Honeycomb tablets
+
+v 1.3.6
+
+v 1.3.5
+- Support to "Dystopian Wars" system
+- New function "min"
+- New function "rand"
+- Persistence of result list
+- Fixed "bwheel" output
+- New icons
+- Slightly improved UI
+
+v 1.3.4
+- Support to "BASH!" system
+- Fix compatibility error with Android 4.3
+
+v 1.3.3
+- Support to "Burning Wheel" system
+- Support to "HERO" system
+- Can swap dice name and result in result list
+- Increased the max number of dice for each bag
+- French translation
+- Fixed volume control keys
+
+v 1.3.2
+- Added "Send suggestion" menu item
+- Fixed popup duration on multiple roll
+- Fixed minor bugs
+
+v 1.3.1
+- Fixed bug on Exploding rolls
+- Fixed minor bugs
+
+v 1.3.0
+- Changed app name
+- Bigger roll popup on larger display
+- Multiple Dice Bags (profiles)
+- Improved random algorithm
+- Available light graphic for better performances
+- Cloud data backup (where available)
+- (partial) Spanish translation
+- Fix FC on some expressions using the "dx" notation
+- Other minor improvements
+
+v 1.2.1
+- Expression Builder
+- Fixed FC on exit from settings
+
+v 1.2.0
+
+v 1.1.1
+- "Add dice here" option
+- Roll modifiers bar
+- More sound effects
+- Bug fix
+
+v 1.0.1
+- Bug Fix
+
+v 1.0.0
+- First version

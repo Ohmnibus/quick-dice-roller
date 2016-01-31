@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<!-- <string name="urlFncRefBase">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02&amp;Page=Page02#bash</string> -->
-	<string name="urlFncRefBase">http://www.ohmnibus.net/wiki/index.php?n=QdrIt.%1$s</string>
-	<!-- <string name="urlFncList">http://www.ohmnibus.net/page.asp?Area=Software&amp;Item=QuickDice&amp;Page=Page02&amp;Page=Page02</string> -->
-	<string name="urlFncList">http://www.ohmnibus.net/wiki/index.php?n=QdrIt.Functions</string>
-	<string name="urlQuickStart">http://www.ohmnibus.net/wiki/index.php?n=QdrIt.QuickStart</string>
-</resources>

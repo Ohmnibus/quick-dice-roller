@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+
+	android:orientation="vertical"
+
+	android:padding="16dp"
+	>
+
+	<TextView style="@style/Details.Value"
+		android:id="@+id/ddDescription"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:text="@string/lblDesc"
+		/>
+
+	<TextView style="@style/Details.Label"
+		android:id="@+id/ddDescriptionLabel"
+		
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="@string/lblDesc"
+		/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/separator_size"
+		/>
+
+	<TextView style="@style/Details.Value"
+		android:id="@+id/ddExpresson"
+
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="@string/lblExp"
+		/>
+
+	<TextView style="@style/Details.Label"
+		android:id="@+id/ddExpressonLabel"
+		
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="@string/lblExp"
+		/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/separator_size"
+		/>
+
+	<TextView style="@style/Details.Value"
+		android:id="@+id/ddRange"
+
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:text="@string/lblRangeValue"
+		/>
+
+	<TextView style="@style/Details.Label"
+		android:id="@+id/ddRangeLabel"
+		
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		
+		android:text="@string/lblRangeValue"
+		/>
+</LinearLayout>

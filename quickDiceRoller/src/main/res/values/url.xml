@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="MissingTranslation">
+	<!-- <string name="urlFncRefBase">http://www.ohmnibus.net/en/page.asp?Area=Android&amp;Item=QuickDice&amp;Page=Page02#bash</string> -->
+	<string name="urlFncRefBase">http://www.ohmnibus.net/wiki/index.php?n=Qdr.%1$s</string>
+	<string name="urlFncList">http://www.ohmnibus.net/wiki/index.php?n=Qdr.Functions</string>
+	<string name="urlQuickStart">http://www.ohmnibus.net/wiki/index.php?n=Qdr.QuickStart</string>
+</resources>

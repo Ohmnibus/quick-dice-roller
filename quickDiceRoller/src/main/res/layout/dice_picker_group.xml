@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/dsgRoot"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content" >
+	
+	<ImageView
+		android:id="@+id/dsgImage"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		
+		android:layout_alignParentLeft="true"
+		android:layout_centerVertical="true"
+		
+		android:src="@drawable/ic_dxx_gray"
+		android:contentDescription="@string/lblIconBag"
+		/>
+	
+	<ImageView
+		android:id="@+id/dsgIndicator"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		
+		android:layout_marginRight="16dp"
+		
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		
+		android:src="@android:drawable/arrow_down_float"
+		android:contentDescription="@string/lblIconBag"
+		/>
+
+	<TextView style="@style/DiceBagTitle"
+		android:id="@+id/dsgName"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_toRightOf="@+id/dsgImage"
+		android:layout_toLeftOf="@+id/dsgIndicator"
+		android:layout_alignParentTop="true"
+		
+		android:text="@string/lblNameBag"
+		/>
+
+	<TextView style="@style/DiceBagText"
+		android:id="@+id/dsgDescription"
+		
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_toRightOf="@+id/dsgImage"
+		android:layout_toLeftOf="@+id/dsgIndicator"
+		android:layout_below="@+id/dsgName"
+		
+		android:text="@string/lblDescBag"
+		/>
+</RelativeLayout>

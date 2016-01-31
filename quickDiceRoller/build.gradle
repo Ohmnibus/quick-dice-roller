@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "ohm.quickdice"
+        minSdkVersion 4
+        targetSdkVersion 21
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+    }
+}
+
+dependencies {
+    compile project(':wheelWidget')
+    compile project(':diceExpression')
+    compile project(':quickActions')
+    compile project(':nineOldAndroids')
+    compile project(':gsonStream')
+    compile 'com.android.support:support-v4:21.0.3'
+}

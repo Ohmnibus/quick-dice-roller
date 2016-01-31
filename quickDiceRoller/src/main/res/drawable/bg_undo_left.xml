@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle" >
+
+	<solid
+		android:color="@color/undo_bar_bg"
+		/>
+
+	<corners
+		android:bottomLeftRadius="@dimen/undo_bar_corner_radius"
+		android:topLeftRadius="@dimen/undo_bar_corner_radius"
+		/>
+
+</shape>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	>
+	
+	<TextView style="@style/Builder.Item.Label"
+		android:id="@+id/fbiLabel"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		
+		android:text="@string/app_name"
+		/>
+	
+	<EditText style="@style/Builder.Item.Value"
+		android:id="@+id/fbiValue"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_below="@+id/fbiLabel"
+		android:layout_alignLeft="@+id/fbiLabel"
+		android:layout_toLeftOf="@+id/fbiMenu"
+		
+		android:hint="@string/app_name"
+		/>
+	
+	<!-- android:layout_alignBottom="@+id/fbiValue" -->
+	<!-- android:layout_below="@+id/fbiLabel" -->
+	<ImageButton
+		android:id="@+id/fbiMenu"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		
+		android:layout_alignBottom="@+id/fbiValue"
+		android:layout_alignParentRight="true"
+		
+		android:scaleType="centerInside"
+		android:src="@drawable/ic_wizard"
+		android:contentDescription="@string/lblDiceBuilder"
+		/>
+</RelativeLayout>

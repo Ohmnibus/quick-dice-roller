@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="default_dice_expr">
+		<item>1t4</item>
+		<item>1t6</item>
+		<item>1t8</item>
+		<item>1t10</item>
+		<item>1t12</item>
+		<item>1t20</item>
+		<item>1t100</item>
+		<item>rak(rand(-1,1),4)</item>
+	</string-array>
+</resources>

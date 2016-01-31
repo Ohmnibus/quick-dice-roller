@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<RelativeLayout style="@style/Builder.ValueContainer"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" >
+
+		<TextView style="@style/Builder.Label"
+			android:id="@+id/fbFunctionBuilderMessage"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentTop="true"
+			android:text="@string/app_name" />
+		
+		<TextView style="@style/Builder.Label"
+			android:id="@+id/fbFunctionBuilderLink"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_below="@+id/fbFunctionBuilderMessage"
+			android:text="@string/msgOnlineHelp" />
+
+		<LinearLayout
+			android:id="@+id/fbParamList"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_below="@+id/fbFunctionBuilderLink"
+			android:orientation="vertical" >
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:src="@drawable/ic_d100_blue"
+				android:contentDescription="@string/lblName" />
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:src="@drawable/ic_d100_blue"
+				android:contentDescription="@string/lblName" />
+		</LinearLayout>
+	</RelativeLayout>
+</ScrollView>
