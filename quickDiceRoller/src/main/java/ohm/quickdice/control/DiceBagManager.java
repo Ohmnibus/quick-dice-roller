@@ -26,7 +26,7 @@ public class DiceBagManager implements IIconManager {
 	protected static final String KEY_CURRENT_BAG = "KEY_CURRENT_BAG";
 	protected static final int UNDEFINED_INT = Integer.MIN_VALUE;
 	
-	private static final String ICON_FOLDER = "iconDir";
+	public static final String ICON_FOLDER = "iconDir";
 	private static final String ICON_BACKUP_FOLDER = "iconBkuDir";
 	
 	protected PersistenceManager persistence;
@@ -167,8 +167,6 @@ public class DiceBagManager implements IIconManager {
 	/**
 	 * Convenience method to get the {@link Drawable} of the icon with the given ID resized to the specified size.<br />
 	 * @param iconId Identifier of the icon.
-	 * @param width Desired width in {@code dp}.
-	 * @param height Desired height in {@code dp}.
 	 * @return Resized {@link Drawable} of the icon.
 	 */
 	public Drawable getIconDrawable(int iconId) {
@@ -189,7 +187,6 @@ public class DiceBagManager implements IIconManager {
 	/**
 	 * Convenience method to get the mask of the icon with the given ID.<br />
 	 * The color of the mask is the one assigned to the icon.
-	 * @param ctx Context.
 	 * @param iconId Identifier of the icon.
 	 * @return {@link Drawable} representing the mask of the icon.
 	 */
@@ -229,20 +226,31 @@ public class DiceBagManager implements IIconManager {
 		}
 		return iconFolder;
 	}
-	
+
+	/**
+	 * Set the folder where to store the icons for this Dice Bag.
+	 * @param newIconFolder New folder.
+	 * @return {@code true} if the change is made or no change is required,
+	 * {@code false} if something happened.
+	 */
 	public boolean setIconFolder(String newIconFolder) {
-		boolean retVal = true;
+		boolean retVal;
 		File oldIconFolder = iconFolder;
 		iconFolder = context.getDir(newIconFolder, Context.MODE_PRIVATE);
-		
+
 		if (iconFolder.equals(oldIconFolder))
 			return true;
-		
+
 		retVal = iconCollection.folderChanged();
 		
 		return retVal;
 	}
-	
+
+	/**
+	 * Tell the Dice Bag to store the icons in the cache folder.
+	 * @return {@code true} if the change is made or no change is required,
+	 * {@code false} if something happened.
+	 */
 	public boolean setCacheIconFolder() {
 		boolean retVal = true;
 		File oldIconFolder = iconFolder;
@@ -361,12 +369,14 @@ public class DiceBagManager implements IIconManager {
 	protected void saveDiceBagManager() {
 		persistence.writeDiceBagManager(this,
 				persistence.getSystemArchiveUri(),
+				false,
 				R.string.err_cannot_update);
 	}
 	
 	public boolean exportAll(Uri resourceUri) {
 		return persistence.writeDiceBagManager(this,
 				resourceUri,
+				true,
 				R.string.err_cannot_export) == PersistenceManager.ERR_NONE;
 	}
 	
@@ -482,8 +492,7 @@ public class DiceBagManager implements IIconManager {
 	 * Load a bonus bag from the device internal memory.<br />
 	 * It access to the old modifier storage file.<br />
 	 * If an error occur during the memory access, the default bonus bag is loaded.
-	 * @param context Context.
-	 * @return An ArrayList<RollModifier> representing a dice bag.
+	 * @param collection Collection to load data into.
 	 */
 	private void legacyLoadModifierCollection(ModifierCollection collection) {
 
@@ -498,8 +507,7 @@ public class DiceBagManager implements IIconManager {
 	 * Load a dice bag from the device internal memory.<br />
 	 * It access to the old dice storage file.<br />
 	 * If an error occur during the memory access, the default dice bag is loaded.
-	 * @param context Context.
-	 * @return An {@code ArrayList<Dice>} representing a dice bag.
+	 * @param collection Collection to load data into.
 	 */
 	private void legacyLoadDiceCollection(DiceCollection collection) {
 		

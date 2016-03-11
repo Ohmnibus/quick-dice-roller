@@ -214,8 +214,8 @@ public class EditVariableActivity extends BaseActivity
 		setValues();
 		setCurrentIcon();
 
-		((Button) findViewById(R.id.btuBarConfirm)).setOnClickListener(this);
-		((Button) findViewById(R.id.btuBarCancel)).setOnClickListener(this);
+		findViewById(R.id.btuBarConfirm).setOnClickListener(this);
+		findViewById(R.id.btuBarCancel).setOnClickListener(this);
 	}
 	
 	private String getString(Bundle bundle, String key, String defValue) {

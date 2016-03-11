@@ -6,6 +6,9 @@ android {
 
     defaultConfig {
         applicationId "ohm.quickdice"
+        versionCode 42
+        versionName "2.1.2.1"
+
         minSdkVersion 4
         targetSdkVersion 21
     }

@@ -125,15 +125,10 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
-&bull; New function \"reroll\"<br />
-&bull; Select dice bags to import<br />
-&bull; Import/Export from/to external app<br />
-&bull; Output \"-0\" if result is negative before truncation<br />
-&bull; Added \"4dF\" to the default set<br />
-&bull; Create Dice Bags with just one dice<br />
-&bull; Fixed the FC on Named Value picker<br />
-&bull; Fixed the FC using decimal separator<br />
-&bull; Fixed ANR in dice editor<br />
+&bull; Increased max number of bags, dice, variables, modifiers and linked results<br />
+&bull; Fine tuning variable value (+1/-1 buttons)<br />
+&bull; Fixed FC opening Help page on devices without a browser<br />
+&bull; Improved startup speed<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[
@@ -141,7 +136,7 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 <b>Please</b> send me a <a href="mailto:ohmnibus@gmail.com">mail</a> if you have any suggestion on how to improve the app or check the <a href="https://crowdin.com/project/quick-dice-roller">Crowdin project</a> to help me to improve translations.<br />]]></string>
 	<string name="msgAboutTitle">About %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s version %2$s<br />
-Copyright (c) 2012-2015 by %3$s<br />
+Copyright &#169; 2012-2016 by %3$s<br />
 <br />
 <a href="https://crowdin.com/project/quick-dice-roller">Translations</a>: %4$s<br />
 <br />

@@ -1,5 +1,8 @@
-v 2.1.2
+v 2.1.2.x
+- Increased number of bags, dice, variables, modifiers, linked results.
+- Fine tuning variable value
 - Fixed FC opening Help page on devices without a browser
+- Improved startup speed
 - Minor fix and improvements
 
 v 2.1.2

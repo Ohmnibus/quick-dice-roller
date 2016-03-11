@@ -72,61 +72,61 @@ public class PersistenceManager {
 	/** File cannot be read because it's format is invalid */
 	public static final int ERR_INVALID_FORMAT = 0x00000016;
 	
-	/**
-	 * Load the names of all the collections.
-	 * @param collections List to populate.
-	 * @param uri The location of the file to read.
-	 * @return Error code. One of the {@code ERR_*} constant.
-	 */
-	public int readCollections(List<String> collections, Uri uri) {
-		return readCollections(collections, uri, RES_MESSAGE_NONE);
-	}
-	
-	/**
-	 * Load the names of all the collections.
-	 * @param diceBagManager Dice Bag Manager to populate.
-	 * @param uri The location of the file to read.
-	 * @param errorMessageResId The resource ID of the error message to show on error, or {@code RES_MESSAGE_NONE} to disable error output.
-	 * @return Error code. One of the {@code ERR_*} constant.
-	 */
-	public int readCollections(List<String> collections, Uri uri, int errorMessageResId) {
-		int retVal = ERR_NONE;
-		InputStream fis;
-		
-		try {
-			synchronized (dataAccessLock) {
-				
-				fis = context.getContentResolver().openInputStream(uri);
-
-				//TODO: SerializationManager.DiceBagManager(fis, diceBagManager);
-
-				fis.close();
-			}
-			
-			if (collections.size() == 0) {
-				retVal = ERR_EMPTY;
-			}
-			Log.i(TAG, "readCollections: " + retVal);
-		} catch (FileNotFoundException e) {
-			Log.w(TAG, "readCollections", e);
-			retVal = ERR_FILE_NOT_FOUND;
-			showErrorMessage(context, errorMessageResId);
-		} catch (InvalidVersionException e) {
-			Log.w(TAG, "readCollections", e);
-			retVal = ERR_INVALID_VERSION;
-			showErrorMessage(context, errorMessageResId);
-		} catch (IOException e) {
-			Log.e(TAG, "readCollections", e);
-			retVal = ERR_INVALID_FORMAT;
-			showErrorMessage(context, errorMessageResId);
-		} catch (Exception e) {
-			Log.e(TAG, "readCollections", e);
-			retVal = ERR_GENERIC;
-			showErrorMessage(context, errorMessageResId);
-		}
-		
-		return retVal;
-	}
+//	/**
+//	 * Load the names of all the collections.
+//	 * @param collections List to populate.
+//	 * @param uri The location of the file to read.
+//	 * @return Error code. One of the {@code ERR_*} constant.
+//	 */
+//	public int readCollections(List<String> collections, Uri uri) {
+//		return readCollections(collections, uri, RES_MESSAGE_NONE);
+//	}
+//
+//	/**
+//	 * Load the names of all the collections.
+//	 * @param collections Dice Bag name list to populate.
+//	 * @param uri The location of the file to read.
+//	 * @param errorMessageResId The resource ID of the error message to show on error, or {@code RES_MESSAGE_NONE} to disable error output.
+//	 * @return Error code. One of the {@code ERR_*} constant.
+//	 */
+//	public int readCollections(List<String> collections, Uri uri, int errorMessageResId) {
+//		int retVal = ERR_NONE;
+//		InputStream fis;
+//
+//		try {
+//			synchronized (dataAccessLock) {
+//
+//				fis = context.getContentResolver().openInputStream(uri);
+//
+//				//TODO: SerializationManager.DiceBagManager(fis, diceBagManager);
+//
+//				fis.close();
+//			}
+//
+//			if (collections.size() == 0) {
+//				retVal = ERR_EMPTY;
+//			}
+//			Log.i(TAG, "readCollections: " + retVal);
+//		} catch (FileNotFoundException e) {
+//			Log.w(TAG, "readCollections", e);
+//			retVal = ERR_FILE_NOT_FOUND;
+//			showErrorMessage(context, errorMessageResId);
+//		} catch (InvalidVersionException e) {
+//			Log.w(TAG, "readCollections", e);
+//			retVal = ERR_INVALID_VERSION;
+//			showErrorMessage(context, errorMessageResId);
+//		} catch (IOException e) {
+//			Log.e(TAG, "readCollections", e);
+//			retVal = ERR_INVALID_FORMAT;
+//			showErrorMessage(context, errorMessageResId);
+//		} catch (Exception e) {
+//			Log.e(TAG, "readCollections", e);
+//			retVal = ERR_GENERIC;
+//			showErrorMessage(context, errorMessageResId);
+//		}
+//
+//		return retVal;
+//	}
 	
 	/**
 	 * Load the Dice Bag Manager from the device internal memory, if found.
@@ -188,20 +188,24 @@ public class PersistenceManager {
 	 * Store the Dice Bag Manager at the specified Uri.
 	 * @param diceBagManager The Dice Bag Manager to export.
 	 * @param uri The location where to write.
+	 * @param export {@code true} if the serialization is for export purpose, {@code false}
+	 * if the serialization is to store data internally.
 	 * @return Error code. One of the {@code ERR_*} constant.
 	 */
-	protected int writeDiceBagManager(DiceBagManager diceBagManager, Uri uri) {
-		return writeDiceBagManager(diceBagManager, uri, RES_MESSAGE_NONE);
+	protected int writeDiceBagManager(DiceBagManager diceBagManager, Uri uri, boolean export) {
+		return writeDiceBagManager(diceBagManager, uri, export, RES_MESSAGE_NONE);
 	}
 	
 	/**
 	 * Store the Dice Bag Manager at the specified Uri.
 	 * @param diceBagManager The Dice Bag Manager to export.
 	 * @param uri The location where to write.
+	 * @param export {@code true} if the serialization is for export purpose, {@code false}
+	 * if the serialization is to store data internally.
 	 * @param errorMessageResId The resource ID of the error message to show on error, or {@code RES_MESSAGE_NONE} to disable error output.
 	 * @return Error code. One of the {@code ERR_*} constant.
 	 */
-	protected int writeDiceBagManager(DiceBagManager diceBagManager, Uri uri, int errorMessageResId) {
+	protected int writeDiceBagManager(DiceBagManager diceBagManager, Uri uri, boolean export, int errorMessageResId) {
 		int retVal = ERR_NONE;
 		OutputStream fos;
 
@@ -210,7 +214,7 @@ public class PersistenceManager {
 				
 				fos = context.getContentResolver().openOutputStream(uri);
 				
-				SerializationManager.DiceBagManager(fos, diceBagManager);
+				SerializationManager.DiceBagManager(fos, diceBagManager, export);
 				
 				fos.close();
 			}

@@ -17,12 +17,12 @@ public class PreferenceManager {
 	public static final int THEME_LIGHT = 2;
 	public static final int THEME_DARK = 3;
 
-	protected static final int MAX_DICE = 24;
-	protected static final int MAX_VAR = 24;
-	protected static final int MAX_DICE_BAGS = 12;
-	protected static final int MAX_MODIFIERS = 24;
-	protected static final int MAX_LINKED_RESULTS = 8;
-	protected static final int MAX_LISTED_RESULTS = 30;
+	protected static final int MAX_DICE = 32;
+	protected static final int MAX_VAR = 32;
+	protected static final int MAX_DICE_BAGS = 16;
+	protected static final int MAX_MODIFIERS = 32;
+	protected static final int MAX_LINKED_RESULTS = 16;
+	protected static final int MAX_LISTED_RESULTS = 32;
 	protected static final int MAX_UNDO_RESULTS = 10;
 
 	//protected static final String SHARED_PREFERENCES_CONFIG = "SHARED_PREFERENCES_CONFIG";
@@ -39,11 +39,11 @@ public class PreferenceManager {
 	public static final String KEY_ENABLE_SOUND = "KEY_ENABLE_SOUND";
 	public static final String KEY_ENABLE_SPECIAL_SOUND = "KEY_ENABLE_SPECIAL_SOUND";
 	public static final String KEY_ENABLE_TTS = "KEY_ENABLE_TTS";
-	public static final String KEY_MAX_DICE = "KEY_MAX_DICE";
-	public static final String KEY_MAX_DICE_BAGS = "KEY_MAX_DICE_BAGS";
-	public static final String KEY_MAX_MODIFIERS = "KEY_MAX_MODIFIERS";
-	public static final String KEY_MAX_LINKED_RESULTS = "KEY_MAX_LINKED_RESULTS";
-	public static final String KEY_MAX_LISTED_RESULTS = "KEY_MAX_LISTED_RESULTS";
+//	public static final String KEY_MAX_DICE = "KEY_MAX_DICE";
+//	public static final String KEY_MAX_DICE_BAGS = "KEY_MAX_DICE_BAGS";
+//	public static final String KEY_MAX_MODIFIERS = "KEY_MAX_MODIFIERS";
+//	public static final String KEY_MAX_LINKED_RESULTS = "KEY_MAX_LINKED_RESULTS";
+//	public static final String KEY_MAX_LISTED_RESULTS = "KEY_MAX_LISTED_RESULTS";
 	public static final String KEY_SWAP_NAME_RESULT = "KEY_SWAP_NAME_RESULT";
 	public static final String KEY_WAKELOCK = "KEY_WAKELOCK";
 	public static final String KEY_CUSTOM_KEYBOARD = "KEY_CUSTOM_KEYBOARD";
@@ -188,7 +188,8 @@ public class PreferenceManager {
 
 	/**
 	 * Tell if show modifiers bar.
-	 * @return
+	 * @return {@code true} if modifier bad should be shown,
+	 * {@code false} otherwise.
 	 */
 	public boolean getShowModifiers() {
 		initCache();
@@ -204,20 +205,12 @@ public class PreferenceManager {
 		return gridResultColumn;
 	}
 
-//	/**
-//	 * Indicate if the use of plain background is required.
-//	 * @return Boolean indicating if the use of plain background is required.
-//	 */
-//	public boolean getPlainBackground() {
-//		initCache();
-//		return plainBackground;
-//	}
-	
 	/**
 	 * Return the value representing the theme to apply.<br />
 	 * It is not a reference to a theme. Is one of the values
 	 * defined in the constants {@code THEME_*}.
-	 * @return
+	 * @return One of the values defined in the constants {@link #THEME_CLASSIC},
+	 * {@link #THEME_CLEAN} and so on.
 	 * @see #getThemeResId()
 	 */
 	public int getTheme() {
@@ -269,7 +262,7 @@ public class PreferenceManager {
 
 	/**
 	 * Return a boolean telling if the toast animation is required.<br />
-	 * This value is ignored if {@link getShowToast} is {@code false}.
+	 * This value is ignored if {@link #getShowToast} is {@code false}.
 	 * @return {@code true} if animation is required, {@code false} otherwise.
 	 */
 	public boolean getShowAnimation() {

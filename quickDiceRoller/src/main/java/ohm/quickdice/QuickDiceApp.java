@@ -180,17 +180,6 @@ public class QuickDiceApp extends Application {
 		return prefs;
 	}
 
-//	/**
-//	 * Get a {@link PersistenceManager} to store and retrieve data to and from
-//	 * the device internal memory. 
-//	 * @return The default {@link PersistenceManager}.
-//	 */
-//	public GraphicManager getGraphic() {
-//		if (graphic == null)
-//			graphic = new GraphicManager(this); //Graphic(getBaseContext())
-//		return graphic;
-//	}
-
 	/**
 	 * Get a {@link PersistenceManager} to store and retrieve data to and from
 	 * the device internal memory. 
@@ -216,7 +205,7 @@ public class QuickDiceApp extends Application {
 
 	/**
 	 * Tell if a new dice bag can be added.
-	 * @return
+	 * @return {@code true} if a new dice bag can be added
 	 */
 	public boolean canAddDiceBag() {
 		return getBagManager().getDiceBagCollection().size() < getPreferences().getMaxDiceBags();
@@ -224,7 +213,7 @@ public class QuickDiceApp extends Application {
 	
 	/**
 	 * Tell if a new variable can be added to current dice bag.
-	 * @return
+	 * @return {@code true} if a new variable can be added to current dice bag
 	 */
 	public boolean canAddVariable() {
 		return getBagManager().getDiceBagCollection().getCurrent().getVariables().size() < getPreferences().getMaxVariables();
@@ -232,7 +221,7 @@ public class QuickDiceApp extends Application {
 	
 	/**
 	 * Tell if a new dice can be added to current dice bag.
-	 * @return
+	 * @return {@code true} if a new dice can be added to current dice bag
 	 */
 	public boolean canAddDice() {
 		return getBagManager().getDiceBagCollection().getCurrent().getDice().size() < getPreferences().getMaxDice();

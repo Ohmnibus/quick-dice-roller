@@ -52,9 +52,41 @@
 		android:layout_height="@dimen/separator_size"
 		/>
 
-	<SeekBar
-		android:id="@+id/sbValue"
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		/>
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		>
+		<Button
+			android:id="@+id/cmdDecrease"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="-"
+			/>
+
+		<View
+			android:layout_width="@dimen/separator_size"
+			android:layout_height="match_parent"
+			/>
+
+		<SeekBar
+			android:id="@+id/sbValue"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			/>
+
+		<View
+			android:layout_width="@dimen/separator_size"
+			android:layout_height="match_parent"
+			/>
+
+		<Button
+			android:id="@+id/cmdIncrease"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="+"
+			/>
+	</LinearLayout>
 </LinearLayout>

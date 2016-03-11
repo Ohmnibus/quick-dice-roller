@@ -24,7 +24,6 @@ public abstract class CompatMisc {
 	 * parent, minus the parent's padding, if any.<br />
 	 */
 	public final int LAYOUT_MATCH_PARENT = getLayoutMatchParent();
-	//public static final int LAYOUT_MATCH_PARENT = 0xffffffff;
 
 	/**
 	 * Special value for the height or width requested by a View.<br />
@@ -32,8 +31,7 @@ public abstract class CompatMisc {
 	 * to fit its own internal content, taking its own padding into account.
 	 */
 	public final int LAYOUT_WRAP_CONTENT = getLayoutWrapContent();
-	//public static final int LAYOUT_WRAP_CONTENT = LayoutParams.WRAP_CONTENT;
-	
+
 	/**
 	 * Get the instance of the compatibility manager.
 	 * @return Instance of {@link CompatMisc}.

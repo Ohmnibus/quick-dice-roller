@@ -122,7 +122,7 @@
 <br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
-	<string name="msgWhatsNewBody"><![CDATA[
+	<!-- string name="msgWhatsNewBody"><![CDATA[
 &bull; Nuova funzione \"reroll\"<br />
 &bull; Scegli le collezioni da importare<br />
 &bull; Importa/Esporta da/su app esterne<br />
@@ -133,13 +133,13 @@ Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa u
 &bull; Risolto FC nell\'uso del separatore decimale<br />
 &bull; Risolto ANR in modifica dadi<br />
 &bull; Correzioni e miglioramenti minori<br />
-]]></string>
+]]></string -->
 	<string name="msgWhatsNewOutro"><![CDATA[
 <br />
 <b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
-Copyright (c) 2012-2015 by %3$s<br />
+Copyright &#169; 2012-2015 by %3$s<br />
 <br />
 <a href="https://crowdin.com/project/quick-dice-roller">Traduzioni</a>: %4$s<br />
 <br />

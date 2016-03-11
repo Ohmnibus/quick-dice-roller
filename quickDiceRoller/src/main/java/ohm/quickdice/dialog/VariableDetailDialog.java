@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBarChangeListener {
+public class VariableDetailDialog extends MenuDialog
+		implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
 
 	DiceBag diceBag;
 	int varIndex;
@@ -24,6 +26,8 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 	int newVal;
 	TextView lvlValue;
 	SeekBar sbValue;
+	Button cmdIncrease;
+	Button cmdDecrease;
 	
 	public VariableDetailDialog(Activity activity, Menu menu, DiceBag diceBag, int variableIndex) {
 		super(activity, menu);
@@ -54,18 +58,34 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 		} else {
 			((TextView)view.findViewById(R.id.lblDescription)).setText(variable.getDescription());
 		}
-		newVal = variable.getCurVal();
+		//newVal = variable.getCurVal();
 		lvlValue = (TextView)view.findViewById(R.id.lblLabel);
-		refreshValue();
+		//refreshValue();
 		sbValue = (SeekBar)view.findViewById(R.id.sbValue);
 		
 		sbValue.setMax(variable.getMaxVal() - variable.getMinVal());
-		sbValue.setProgress(variable.getCurVal() - variable.getMinVal());
+		//sbValue.setProgress(variable.getCurVal() - variable.getMinVal());
 		sbValue.setOnSeekBarChangeListener(this);
+
+		setValue(variable.getCurVal());
+
+		cmdIncrease = (Button)view.findViewById(R.id.cmdIncrease);
+		cmdIncrease.setOnClickListener(this);
+
+		cmdDecrease = (Button)view.findViewById(R.id.cmdDecrease);
+		cmdDecrease.setOnClickListener(this);
 		
 		return view;
 	}
 	
+	private void setValue(int value) {
+		newVal = value;
+
+		sbValue.setProgress(newVal - variable.getMinVal());
+
+		refreshValue();
+	}
+
 	private void refreshValue() {
 		String lbl;
 		lbl = lvlValue.getContext().getString(R.string.lblLabelValueVarFmt,
@@ -97,6 +117,20 @@ public class VariableDetailDialog extends MenuDialog implements SeekBar.OnSeekBa
 //		return QuickDiceApp.getInstance().getBagManager().getIconDrawable(
 //				variable.getResourceIndex(), 32, 32);
 //	}
+
+
+	@Override
+	public void onClick(View view) {
+		if (view.getId() == R.id.cmdIncrease) {
+			if (newVal < variable.getMaxVal()) {
+				setValue(newVal + 1);
+			}
+		} else if (view.getId() == R.id.cmdDecrease) {
+			if (newVal > variable.getMinVal()) {
+				setValue(newVal - 1);
+			}
+		}
+	}
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -79,10 +79,12 @@ public class SerializationManager {
 	 * Serialize the Dice Bag Manager to the specified stream.
 	 * @param out Stream to write into
 	 * @param diceBagManager Dice Bag Manager to serialize.
+	 * @param export {@code true} if the serialization is for export purpose, {@code false}
+	 * if the serialization is to store data internally.
 	 * @throws IOException Exception Raised if object cannot be serialized.
 	 */
-	public static void DiceBagManager(OutputStream out, DiceBagManager diceBagManager) throws IOException {
-		serializeDiceBagManager(out, diceBagManager);
+	public static void DiceBagManager(OutputStream out, DiceBagManager diceBagManager, boolean export) throws IOException {
+		serializeDiceBagManager(out, diceBagManager, export);
 	}
 	
 	/**
@@ -108,7 +110,7 @@ public class SerializationManager {
 		String retVal = null;
 		if (diceBag != null) {
 			try {
-				return DiceBag(diceBag);
+				retVal = DiceBag(diceBag);
 			} catch (IOException e) {
 				Log.w(TAG, "DiceBagSafe: Cannot serialize", e);
 				retVal = null;
@@ -145,7 +147,7 @@ public class SerializationManager {
 		DiceBag retVal = null;
 		if (diceBag != null) {
 			try {
-				return DiceBag(diceBag);
+				retVal = DiceBag(diceBag);
 			} catch (IOException e) {
 				Log.w(TAG, "DiceBagSafe: Cannot deserialize", e);
 				retVal = null;
@@ -178,14 +180,14 @@ public class SerializationManager {
 	 * Safely serialize a variable to a JSON string.<br />
 	 * If the parameter is {@code null} or an error occur
 	 * this method will return a {@code null} value.
-	 * @param dice Variable to serialize.
+	 * @param variable Variable to serialize.
 	 * @return JSON string containing the variable, or {@code null}.
 	 */
 	public static String VariableSafe(Variable variable) {
 		String retVal = null;
 		if (variable != null) {
 			try {
-				return Variable(variable);
+				retVal = Variable(variable);
 			} catch (IOException e) {
 				Log.w(TAG, "VariableSafe: Cannot serialize", e);
 				retVal = null;
@@ -196,7 +198,7 @@ public class SerializationManager {
 
 	/**
 	 * Serialize a variable to a JSON string.
-	 * @param dice Variable to serialize.
+	 * @param variable Variable to serialize.
 	 * @return JSON string containing the variable.
 	 * @throws IOException Exception Raised if object cannot be serialized.
 	 */
@@ -215,7 +217,7 @@ public class SerializationManager {
 	 * Safely deserialize a variable from a JSON string.<br />
 	 * If the parameter is {@code null} or an error occur
 	 * this method will return a {@code null} value.
-	 * @param dice JSON string containing the variable.
+	 * @param variable JSON string containing the variable.
 	 * @return Deserialized variable, or {@code null}.
 	 */
 	public static Variable VariableSafe(String variable) {
@@ -233,7 +235,7 @@ public class SerializationManager {
 	
 	/**
 	 * Deserialize a variable from a JSON string
-	 * @param dice JSON string containing the variable
+	 * @param variable JSON string containing the variable
 	 * @return Deserialized variable
 	 * @throws IOException Exception Raised if object cannot be deserialized.
 	 */
@@ -263,7 +265,7 @@ public class SerializationManager {
 		String retVal = null;
 		if (dice != null) {
 			try {
-				return Dice(dice);
+				retVal = Dice(dice);
 			} catch (IOException e) {
 				Log.w(TAG, "DiceSafe: Cannot serialize", e);
 				retVal = null;
@@ -300,7 +302,7 @@ public class SerializationManager {
 		Dice retVal = null;
 		if (dice != null) {
 			try {
-				return Dice(dice);
+				retVal = Dice(dice);
 			} catch (IOException e) {
 				Log.w(TAG, "DiceSafe: Cannot deserialize", e);
 				retVal = null;
@@ -330,8 +332,8 @@ public class SerializationManager {
 
 	/**
 	 * Legacy method to load a {@link DiceCollection} from the old file.
-	 * @param stream
-	 * @param collection
+	 * @param stream Stream to read from.
+	 * @param collection Collection to populate.
 	 */
 	public static void DiceCollection(InputStream stream, DiceCollection collection) throws IOException {
 		JsonReader reader = new JsonReader(new InputStreamReader(stream, CHARSET));
@@ -343,8 +345,8 @@ public class SerializationManager {
 	
 	/**
 	 * Legacy method to load a {@link ModifierCollection} from the old file.
-	 * @param stream
-	 * @param collection
+	 * @param stream Stream to read from.
+	 * @param collection Collection to populate.
 	 */
 	public static void ModifierCollection(InputStream stream, ModifierCollection collection) throws IOException {
 		JsonReader reader = new JsonReader(new InputStreamReader(stream, CHARSET));
@@ -518,7 +520,7 @@ public class SerializationManager {
 				while (reader.hasNext()) {
 					retVal.add(deserializeMostRecentFile(reader));
 				}
-				reader.endArray();				
+				reader.endArray();
 			} else {
 				//Unknown element
 				reader.skipValue();
@@ -654,7 +656,7 @@ public class SerializationManager {
 				while (reader.hasNext()) {
 					retVal.add(deserializeResultBlock(reader));
 				}
-				reader.endArray();				
+				reader.endArray();
 			} else {
 				//Unknown element
 				reader.skipValue();
@@ -750,7 +752,7 @@ public class SerializationManager {
 	private static final String FIELD_DICE_BAGS = "diceBags";
 	private static final String FIELD_ICONS = "icons";
 	
-	private static void serializeDiceBagManager(OutputStream out, DiceBagManager diceBagManager) throws IOException {
+	private static void serializeDiceBagManager(OutputStream out, DiceBagManager diceBagManager, boolean full) throws IOException {
 		JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, CHARSET));
 		
 		writer.beginObject();
@@ -758,7 +760,7 @@ public class SerializationManager {
 		writer.name(FIELD_VERSION).value(SERIALIZER_VERSION);
 		
 		serializeDiceBagCollection(writer, diceBagManager.getDiceBagCollection());
-		serializeIconCollection(writer, diceBagManager.getIconCollection());
+		serializeIconCollection(writer, diceBagManager.getIconCollection(), full);
 		
 		writer.endObject();
 		writer.close();
@@ -786,7 +788,7 @@ public class SerializationManager {
 			} else if (fieldName.equals(FIELD_DICE_BAGS)) {
 				deserializeDiceBagCollection(reader, diceBagManager.getDiceBagCollection());
 			} else if (fieldName.equals(FIELD_ICONS)) {
-				deserializeIconCollection(reader, diceBagManager.getIconCollection());
+				deserializeIconCollection(reader, diceBagManager.getIconCollection(), diceBagManager.getIconFolder());
 			} else {
 				//Unknown element
 				reader.skipValue();
@@ -1137,28 +1139,28 @@ public class SerializationManager {
 	private static final String FIELD_ICON_BODY = "body";
 	
 
-	private static void serializeIconCollection(JsonWriter writer, IconCollection iconCollection) throws IOException {
+	private static void serializeIconCollection(JsonWriter writer, IconCollection iconCollection, boolean full) throws IOException {
 		writer.name(FIELD_ICONS);
 		
 		writer.beginArray();
 		
 		for (Icon i : iconCollection) {
-			serializeIcon(writer, i);
+			serializeIcon(writer, i, full);
 		}
 
 		writer.endArray();
 	}
 	
-	private static void deserializeIconCollection(JsonReader reader, IconCollection iconCollection) throws IOException {
+	private static void deserializeIconCollection(JsonReader reader, IconCollection iconCollection, File iconFolder) throws IOException {
 		
 		reader.beginArray();
 		while (reader.hasNext()) {
-			iconCollection.add(deserializeIcon(reader));
+			iconCollection.add(deserializeIcon(reader, iconFolder));
 		}
 		reader.endArray();
 	}
 	
-	private static void serializeIcon(JsonWriter writer, Icon icon) throws IOException {
+	private static void serializeIcon(JsonWriter writer, Icon icon, boolean full) throws IOException {
 		if (icon.isCustom()) {
 			Context ctx = QuickDiceApp.getInstance().getApplicationContext();
 			CustomIcon ico = (CustomIcon)icon;
@@ -1168,34 +1170,36 @@ public class SerializationManager {
 			writer.name(FIELD_ICON_ID).value(ico.getId());
 			writer.name(FIELD_ICON_COLOR).value(ico.getColor(ctx));
 			writer.name(FIELD_ICON_HASH).value(ico.getHash());
-			writer.name(FIELD_ICON_BODY);
-			writer.beginArray();
-			
-			int byteCount = 0;
-			byte[] buffer = new byte[510];
-			String base64 = null;
+			if (full) {
+				writer.name(FIELD_ICON_BODY);
+				writer.beginArray();
+
+				int byteCount;
+				byte[] buffer = new byte[510];
+				String base64;
 //			try {
-			FileInputStream fis = new FileInputStream(ico.getIconPath());
+				FileInputStream fis = new FileInputStream(ico.getIconPath());
 
-			while ((byteCount = fis.read(buffer)) > 0) {
-				base64 = new String(
-						Base64.encode(buffer, 0, byteCount, Base64.NO_WRAP),
-						CHARSET);
-				writer.value(base64);
-			}
+				while ((byteCount = fis.read(buffer)) > 0) {
+					base64 = new String(
+							Base64.encode(buffer, 0, byteCount, Base64.NO_WRAP),
+							CHARSET);
+					writer.value(base64);
+				}
 
-			fis.close();
+				fis.close();
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
-			
-			writer.endArray();
+
+				writer.endArray();
+			}
 			
 			writer.endObject();
 		}
 	}
 	
-	private static Icon deserializeIcon(JsonReader reader) throws IOException {
+	private static Icon deserializeIcon(JsonReader reader, File iconFolder) throws IOException {
 		Icon retVal;
 		String fieldName;
 		int id = -1;
@@ -1209,6 +1213,11 @@ public class SerializationManager {
 			fieldName = reader.nextName();
 			if (fieldName.equals(FIELD_ICON_ID)) {
 				id = reader.nextInt();
+				if (tempFile == null) {
+					//If no body exists, it means the icon file
+					//already exists in its right place.
+					tempFile = CustomIcon.getIconFile(iconFolder, id);
+				}
 			//} else if (fieldName.equals(FIELD_ICON_COLOR)) {
 			//	color = reader.nextInt();
 			} else if (fieldName.equals(FIELD_ICON_HASH)) {

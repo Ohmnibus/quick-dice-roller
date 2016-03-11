@@ -236,8 +236,8 @@ public abstract class Icon {
 //			}
 
 			File oldPath = new File(iconPath);
-			File newPath = new File(parent.getIconFolder(), String.format(ICON_NAME_FMT, getId()));
-			if (pendingId || oldPath.equals(newPath) == false) {
+			File newPath = getIconFile(parent.getIconFolder(), getId()); // new File(parent.getIconFolder(), String.format(ICON_NAME_FMT, getId()));
+			if (/* pendingId ||*/ oldPath.equals(newPath) == false) {
 				if (newPath.exists()) {
 					newPath.delete();
 				}
@@ -254,78 +254,6 @@ public abstract class Icon {
 		}
 		
 
-//		/**
-//		 * Get a temporary file to store the icon.
-//		 * @param ctx Context
-//		 * @return Reference to a temporary file.
-//		 */
-//		public static File getTempFile(Context ctx) {
-//			File retVal;
-//			try {
-//				retVal = File.createTempFile(ICON_TEMP_NAME_PREFIX, ICON_TEMP_NAME_SUFFIX, getDirectory(ctx));
-//			} catch (IOException e) {
-//				retVal = new File(
-//						getDirectory(ctx),
-//						ICON_TEMP_NAME_PREFIX + "_exc" + ICON_TEMP_NAME_SUFFIX);
-//				e.printStackTrace();
-//			}
-//			return retVal;
-//		}
-		
-//		/**
-//		 * Get the image folder where all the icons are stored.
-//		 * @param ctx
-//		 * @return
-//		 */
-//		public static File getDirectory(Context ctx) {
-//			return ctx.getDir(ICON_FOLDER, Context.MODE_PRIVATE);
-//		}
-//		
-//		/**
-//		 * Get the image folder for temporary backup.
-//		 * @param ctx
-//		 * @return
-//		 */
-//		public static File getBackupDirectory(Context ctx) {
-//			return ctx.getDir(ICON_BACKUP_FOLDER, Context.MODE_PRIVATE);
-//		}
-		
-//		/**
-//		 * Copy all the icon images from their folder to the backup folder.
-//		 * @param ctx
-//		 */
-//		public static void backupIconFiles(Context ctx) {
-//			
-//			Helper.copyFiles(getDirectory(ctx), getBackupDirectory(ctx), true);
-//		}
-//		
-//		/**
-//		 * Copy all the icon images from the backup folder to their folder.
-//		 * @param ctx
-//		 */
-//		public static void restoreIconFiles(Context ctx) {
-//			
-//			Helper.copyFiles(getBackupDirectory(ctx), getDirectory(ctx), false);
-//		}
-//		
-//		/**
-//		 * Remove temporary icon files.
-//		 * @param ctx
-//		 */
-//		public static void removeTempIconFiles(Context ctx) {
-//			File folder = getDirectory(ctx);
-//			File[] files;
-//			files = folder.listFiles();
-//			if (files != null) {
-//				for (File file : files) {
-//					if (file.getName().startsWith(ICON_TEMP_NAME_PREFIX)) {
-//						file.delete();
-//					}
-//				}
-//			}
-//		}
-		
-		
 		/**
 		 * Create an instance of {@link CustomIcon} given the URI of an image.
 		 * @param ctx Context.
@@ -430,6 +358,14 @@ public abstract class Icon {
 				e.printStackTrace();
 			}
 			return retVal;
+		}
+
+		public static File getIconFile(Context ctx, String iconFolder, int id) {
+			return getIconFile(ctx.getDir(iconFolder, Context.MODE_PRIVATE), id);
+		}
+
+		public static File getIconFile(File iconFolder, int id) {
+			return new File(iconFolder, String.format(ICON_NAME_FMT, id));
 		}
 	}
 	

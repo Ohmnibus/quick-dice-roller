@@ -1658,7 +1658,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	
 	/**
 	 * Check if roll has to be linked and update the status of the button.
-	 * @return
+	 * @return {@code true} if rolls has to be linked.
 	 */
 	private boolean checkAutoLinkRoll() {
 		boolean retVal = linkRoll;

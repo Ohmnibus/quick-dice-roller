@@ -40,7 +40,6 @@ public interface IIconManager {
 	/**
 	 * Convenience method to get the mask of the icon with the given ID.<br />
 	 * The color of the mask is the one assigned to the icon.
-	 * @param ctx Context.
 	 * @param iconId Identifier of the icon.
 	 * @return {@link Drawable} representing the mask of the icon.
 	 */
