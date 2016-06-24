@@ -37,11 +37,6 @@ public class TokenFunctionPool extends TokenFunctionPoolBase {
 		return 40;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	private TokenBase roll;
 	private int poolSize;
 	private int target;

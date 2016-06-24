@@ -30,13 +30,43 @@ public abstract class TokenBase {
 	public static final int MAX_TOKEN_ITERATIONS = 500;
 	/** Max iteration number for the expression */
 	public static final int MAX_TOTAL_ITERATIONS = 5000;
-	
-	/** Generation to use to get the root with {@link getParent} */
+
+		/* ************************************* */
+	/* Operator precedence and associativity */
+	/* ************************************* */
+	/** Priority for assignment "=" operator */
+	public static final int PRIO_ASSIGNMENT = 0;
+	/** Priority for conditional OR "||" operator */
+	public static final int PRIO_CONDITIONAL_OR = 2;
+	/** Priority for conditional AND "&&" operator */
+	public static final int PRIO_CONDITIONAL_AND = 3;
+	/** Priority for equality "==" and "!=" operators */
+	public static final int PRIO_EQUALITY = 4;
+	/** Priority for comparison ">", "<", ">=", etc operators */
+	public static final int PRIO_COMPARISON = 5;
+	/** Priority for addictive "+" and "-" operators */
+	public static final int PRIO_ADDICTIVE = 6;
+	/** Priority for multiplicative "*" and "/" operators */
+	public static final int PRIO_MULTIPLICATIVE = 7;
+	/** Priority for unary "+" and "-" and "!" operators */
+	public static final int PRIO_UNARY = 8;
+	/** Priority for label assignment ":" operator */
+	public static final int PRIO_LABEL = 9;
+	/** Priority for dice "d" operator */
+	public static final int PRIO_DICE = 10;
+	/** Priority for functions */
+	public static final int PRIO_FUNCTION = 11;
+	/** Priority for values */
+	public static final int PRIO_VALUE = 12;
+
+	/** Generation to use to get the root with {@link #getParent} */
 	protected static final int ROOT_GENERATION = Integer.MAX_VALUE;
 
 	/** Child contained by this token */
 	private TokenBase parent;
 
+	/** Starting position of the token in the expression */
+	protected int position;
 	/** Index of next argument to be assigned (0-based) */
 	private int nextChild;
 	/** Number of child required by this token */
@@ -56,7 +86,8 @@ public abstract class TokenBase {
 	/**
 	 * Initialize the token.
 	 */
-	public TokenBase() {
+	public TokenBase(int position) {
+		this.position = position;
 		nextChild = 0;
 		numChild = initChildNumber();
 		maxNumChild = numChild + initOptionalChildNumber();
@@ -76,6 +107,22 @@ public abstract class TokenBase {
 			format.setMinimumIntegerDigits(1);
 			format.setMaximumIntegerDigits(Integer.MAX_VALUE);
 		}
+	}
+
+	/**
+	 * Tell if the token is right-associative or not.
+	 * @return {@code true} if the token is right-associative.
+	 */
+	public boolean isRightAssociative() {
+		return false;
+	}
+
+	/**
+	 * Return the position of the token inside the formula.
+	 * @return Token position.
+	 */
+	public int getPosition() {
+		return position;
 	}
 
 	/**
@@ -207,7 +254,7 @@ public abstract class TokenBase {
 	 * Return the token tree maximum result value.<br />
 	 * This value is different from standard result only if the expression contains dice. 
 	 * @return The token tree maximum value. This is a fixed point value, same as 
-	 * {@link getRawResult}.
+	 * {@link #getRawResult}.
 	 */
 	public long getMaxResult() {
 		return resultMaxValue;
@@ -217,7 +264,7 @@ public abstract class TokenBase {
 	 * Return the token tree minimum result value.<br />
 	 * This value is different from standard result only if the expression contains dice. 
 	 * @return The token tree minimum value. This is a fixed point value, same as 
-	 * {@link getRawResult}.
+	 * {@link #getRawResult}.
 	 */
 	public long getMinResult() {
 		return resultMinValue;
@@ -241,7 +288,7 @@ public abstract class TokenBase {
 	}
 	
 	/**
-	 * Switch {@link resultMaxValue} and {@link resultMinValue} if their values aren't correct.
+	 * Switch {@link #resultMaxValue} and {@link #resultMinValue} if their values aren't correct.
 	 */
 	protected void reorderMaxMinValues() {
 		if (resultMaxValue < resultMinValue) {
@@ -264,7 +311,7 @@ public abstract class TokenBase {
 	 * The parameter {@code generation} tell which ancestor to get: {@code 0} mean 
 	 * the instance itself, {@code 1} is the parent, {@code 2} is the grand parent and so on.<br />
 	 * The function will stop and return the root token if the given {@code generation} is too high
-	 * or if is equal to {@link ROOT_GENERATION}.
+	 * or if is equal to {@link #ROOT_GENERATION}.
 	 * @param generation Generation to get.
 	 * @return Ancestor of the token.
 	 */
@@ -304,13 +351,10 @@ public abstract class TokenBase {
 	abstract public int getType();
 	
 	/**
-	 * Get the token evaluation priority.
-	 * @return The token evaluation priority. Allowed values are:<br />
-	 * 0 for functions and values;<br />
-	 * 1 for "+" and "-" operators;<br />
-	 * 2 for "*" and "/" operators;<br />
-	 * 3 for "d" operator.<br />
+	 * Get the token evaluation priority.<br>
 	 * Higher priority values must be evaluated first.
+	 * @return The token evaluation priority, such as {@link #PRIO_ASSIGNMENT},
+	 * {@link #PRIO_CONDITIONAL_OR} and so on.
 	 */
 	abstract public int getPriority();
 
@@ -330,6 +374,7 @@ public abstract class TokenBase {
 class TokenRoot extends TokenBase {
 
 	public TokenRoot(TokenBase root) {
+		super(0);
 		setChild(root, 1);
 	}
 	

@@ -24,11 +24,6 @@ public class TokenFunctionHERO extends TokenFunction {
 	}
 
 	@Override
-	public int getPriority() {
-		return 0;
-	}
-
-	@Override
 	protected void evaluateSelf(DContext instance) throws DException {
 		int rollRes;
 		int poolSize;

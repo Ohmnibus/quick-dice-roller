@@ -23,11 +23,6 @@ public class TokenFunctionOWoD extends TokenFunctionPoolBase {
 		return 51;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	private int target;
 	private int oneCount;
 	

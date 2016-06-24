@@ -32,11 +32,6 @@ public class TokenFunctionBranch extends TokenFunctionExplodeBase {
 		return 25;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	private TokenBase tokenRoll;
 	private boolean tokenRollEvaluated;
 	private long target;

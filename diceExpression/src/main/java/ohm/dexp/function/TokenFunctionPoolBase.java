@@ -139,7 +139,7 @@ public abstract class TokenFunctionPoolBase extends TokenFunction {
 
 	/**
 	 * Return the maximum size of the pool.<br />
-	 * This should be equal to {@link getPoolSize()}, but is actually allowed
+	 * This should be equal to {@link #getPoolSize}, but is actually allowed
 	 * to specify a variable pool size.
 	 * @return The maximum pool size.
 	 */

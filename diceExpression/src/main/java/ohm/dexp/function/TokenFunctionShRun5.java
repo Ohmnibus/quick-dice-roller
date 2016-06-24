@@ -29,11 +29,6 @@ public class TokenFunctionShRun5 extends TokenFunction {
 		return 77;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	private TokenBase roll;
 	private int poolSize;
 	private int target;

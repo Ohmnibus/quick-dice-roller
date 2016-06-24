@@ -18,11 +18,6 @@ public class TokenFunctionBWheel extends TokenFunctionShRun5 {
 	}
 
 	@Override
-	public int getPriority() {
-		return 0;
-	}
-	
-	@Override
 	protected boolean emitGlitch() {
 		return false;
 	}

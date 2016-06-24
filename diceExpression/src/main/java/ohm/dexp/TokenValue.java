@@ -5,12 +5,21 @@ import ohm.dexp.exception.UnknownVariable;
 
 public abstract class TokenValue extends TokenBase {
 
-	public static TokenValue InitToken(int value) {
-		return new TokenValueConstant(value * VALUES_PRECISION_FACTOR);
+	protected TokenValue(int position) {
+		super(position);
 	}
 
-	public static TokenValue InitToken(long value) {
-		return new TokenValueConstant(value);
+//	public static TokenValue InitToken(int value) {
+//		return new TokenValueConstant(value * VALUES_PRECISION_FACTOR);
+//	}
+
+	/**
+	 * Initialize a token of type {@link TokenValueConstant}.
+	 * @param value Token value, expressed as fixed point decimal value.
+	 * @return New token instance.
+	 */
+	public static TokenValue InitToken(long value, int position) {
+		return new TokenValueConstant(value, position);
 	}
 
 	/**
@@ -33,6 +42,11 @@ public abstract class TokenValue extends TokenBase {
 		return context == null || !context.checkName(name) ? null : new TokenValueVariable(name, position);
 	}
 
+	/**
+	 * Parse a value and return a long expressed as fixed point value.
+	 * @param str Number to parse
+	 * @return Parsed number as fixed point long.
+	 */
 	public static long ParseRawValue(String str) {
 		long retVal;
 		int iDotPlace = str.indexOf(".");
@@ -59,7 +73,8 @@ public abstract class TokenValue extends TokenBase {
 
 class TokenValueConstant extends TokenValue {
 	
-	public TokenValueConstant(long value) {
+	public TokenValueConstant(long value, int position) {
+		super(position);
 		resultValue = value;
 		resultMinValue = value;
 		resultMaxValue = value;
@@ -77,7 +92,7 @@ class TokenValueConstant extends TokenValue {
 
 	@Override
 	public int getPriority() {
-		return 0;
+		return PRIO_VALUE;
 	}
 
 	@Override
@@ -90,11 +105,12 @@ class TokenValueConstant extends TokenValue {
 class TokenValueVariable extends TokenValue {
 	
 	protected String name;
-	protected int position;
+	//protected int position;
 	
 	public TokenValueVariable(String name, int position) {
+		super(position);
 		this.name = name;
-		this.position = position;
+		//this.position = position;
 	}
 
 	@Override
@@ -109,7 +125,7 @@ class TokenValueVariable extends TokenValue {
 
 	@Override
 	public int getPriority() {
-		return 0;
+		return PRIO_VALUE;
 	}
 
 	@Override
@@ -131,7 +147,7 @@ class TokenValueVariable extends TokenValue {
 			resultMinValue = resultValue;
 			resultMaxValue = resultValue;
 			resultString = "";
-			throw new UnknownVariable(name, position);
+			throw new UnknownVariable(name, getPosition());
 		}
 	}
 }

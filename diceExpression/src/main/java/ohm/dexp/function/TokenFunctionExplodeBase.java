@@ -7,11 +7,6 @@ import ohm.dexp.exception.LoopDetected;
 
 public abstract class TokenFunctionExplodeBase extends TokenFunction {
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	/**
 	 * Evaluate an exploding/collapsing roll.<br />
 	 * The roll explode if it's result is greater or equal to {@code upperTarget}. In this case

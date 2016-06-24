@@ -19,11 +19,6 @@ public class TokenFunctionNWoD extends TokenFunctionPoolBase {
 		return 50;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	private int poolSize;
 	private int target;
 	
