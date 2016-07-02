@@ -1,5 +1,6 @@
 package ohm.dexp;
 
+import java.util.EmptyStackException;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Stack;
@@ -12,6 +13,7 @@ import ohm.dexp.exception.InvalidCharacter;
 import ohm.dexp.exception.MissingOperand;
 import ohm.dexp.exception.NothingToEvaluate;
 import ohm.dexp.exception.UnbalancedBracket;
+import ohm.dexp.exception.UnexpectedError;
 import ohm.dexp.exception.UnexpectedParameter;
 import ohm.dexp.exception.UnknownFunction;
 import ohm.dexp.exception.UnknownVariable;
@@ -301,7 +303,7 @@ public class DExpression {
 	 * @param operandStack Stack
 	 * @param operator Operator
 	 */
-	protected void addNode(Stack<TokenBase> operandStack, TokenBase operator) {
+	protected void addNode(Stack<TokenBase> operandStack, TokenBase operator) throws DException {
 		if (operator instanceof TokenFunction) {
 			TokenFunction fnc = (TokenFunction) operator;
 			int paramNum = fnc.nextChildNum() - 1;
@@ -317,9 +319,18 @@ public class DExpression {
 
 			operandStack.push(fnc);
 		} else if (operator instanceof UnaryOperator && ((UnaryOperator)operator).isUnary()) {
+			if (operandStack.size() < 1) {
+				throw new MissingOperand(operator.getPosition() + 1); //Let's assume the operator is one character
+			}
 			operator.setRightChild(operandStack.pop());
 			operandStack.push(operator);
 		} else {
+			if (operandStack.size() < 2) {
+				//Second operand is missing.
+				//Check on first operand were made
+				//checking token order
+				throw new MissingOperand(operator.getPosition() + 1);
+			}
 			operator.setRightChild(operandStack.pop());
 			operator.setLeftChild(operandStack.pop());
 			operandStack.push(operator);
@@ -407,6 +418,7 @@ public class DExpression {
 				actTokenType = actToken.type;
 				if (! checkTokenOrder(lastTokenType, actTokenType)) {
 					/* Invalid token sequence */
+
 					switch (lastTokenType) {
 						case TK_VAL:
 						case TK_PCL:
@@ -415,9 +427,11 @@ public class DExpression {
 						case TK_OP:
 						case TK_POP:
 						case TK_COM:
+						case TK_NULL:
 							throw new MissingOperand(actToken.begin);
-						default:
-							throw new ExpectedParameter(actToken.begin);
+						default: //TK_NAME
+							//throw new ExpectedParameter(actToken.begin);
+							throw new ExpectedEndOfStatement(actToken.begin);
 					}
 				}
 
@@ -432,9 +446,6 @@ public class DExpression {
 					case TK_OP:
 						/* Add operator to tree */
 						newToken = TokenOperator.InitToken(actToken.value, actToken.begin);
-//						if (actTokenType == TK_UOP && newToken instanceof UnaryOperator) {
-//							((UnaryOperator)newToken).setUnary(true);
-//						}
 
 						//if (actTokenType == TK_UOP && (
 						if (newToken instanceof UnaryOperator && (
@@ -447,8 +458,8 @@ public class DExpression {
 							((UnaryOperator) newToken).setUnary(true);
 						}
 
-						while (! operatorStack.isEmpty() && operatorStack.peek() instanceof TokenOperator) {
-							popToken = operatorStack.peek();
+						while (! operatorStack.isEmpty() && (popToken = operatorStack.peek()) instanceof TokenOperator) {
+							//popToken = operatorStack.peek();
 							if ((!newToken.isRightAssociative() && newToken.getPriority() == popToken.getPriority())
 									|| newToken.getPriority() < popToken.getPriority()) {
 
@@ -471,24 +482,34 @@ public class DExpression {
 							popToken = operatorStack.pop();
 							if (popToken instanceof TokenPar) {
 								//Found the corresponding opening parenthesis
-								if (operatorStack.peek() instanceof TokenFunction) {
+								if (! operatorStack.isEmpty()
+										&& (popToken = operatorStack.peek()) instanceof TokenFunction) {
 									//Parenthesis were enclosing a function parameters
 									if (lastTokenType != TK_POP) {
 										//1 or more parameter defined.
-										//Need to increment parameter count
-										operatorStack.peek().setNextChild(null);
+										//Need to increment parameter count by 1
+										//(overflow already checked)
+										popToken.setNextChild(null);
+									} /* else 0 parameters function */
+									if (popToken.nextChildNum() <= popToken.getChildNumber()) {
+										// Error - too few parameters
+										throw new ExpectedParameter(actToken.begin);
 									}
 									addNode(operandStack, operatorStack.pop());
 									functionStack.pop();
 								}
 								safe = true;
 								break;
-							} else if (popToken instanceof TokenOperator || popToken instanceof TokenFunction) {
+							} /* else if (popToken instanceof TokenOperator || popToken instanceof TokenFunction) {*/
+								//It is an operator or a function
 								addNode(operandStack, popToken);
-							}
+//							} else {
+//								//This should never happen
+//								throw new UnexpectedError();
+//							}
 						}
 						if (! safe) {
-							throw new UnbalancedBracket(actToken.begin); //Impossible due token order check
+							throw new UnbalancedBracket(actToken.begin);
 						}
 
 						//isTerminal = true;
@@ -496,22 +517,33 @@ public class DExpression {
 					case TK_COM:
 						/* Process "," token */
 						safe = false;
-						functionStack.peek().setNextChild(null);
 						while (! operatorStack.isEmpty()) {
 							popToken = operatorStack.peek();
 							if (popToken instanceof TokenPar) {
 								//Found the function's opening parenthesis
 								safe = true;
 								break;
-							} else if (popToken instanceof TokenOperator || popToken instanceof TokenFunction) {
-								operatorStack.pop();
-								addNode(operandStack, popToken);
-							}
+							} /* else if (popToken instanceof TokenOperator || popToken instanceof TokenFunction) {*/
+								//Operator
+								//(function should be already on operandStack)
+								addNode(operandStack, operatorStack.pop());
+//							} else {
+//								//This should never happen
+//								throw new UnexpectedError();
+//							}
 						}
-						if (! safe) {
+						if (! safe || functionStack.isEmpty()) {
 							//throw new UnbalancedBracket(actToken.begin);
 							throw new ExpectedEndOfStatement(actToken.begin);
 						}
+
+						//Increment parameter number
+						popToken = functionStack.peek();
+						if (popToken.nextChildNum() + 1 > popToken.getMaxChildNumber()) {
+							// Error - too much parameters
+							throw new UnexpectedParameter(actToken.begin);
+						}
+						popToken.setNextChild(null);
 
 						break;
 					default:
@@ -560,8 +592,20 @@ public class DExpression {
 		} while (actToken.type!=TK_NULL /* && retVal==DResult.ERR_NONE */);
 
 		while (! operatorStack.isEmpty()) {
+			if (operatorStack.peek() instanceof TokenPar) {
+				throw new UnbalancedBracket(exp.length()+1);
+			}
 			addNode(operandStack, operatorStack.pop());
 		}
+
+		if (operandStack.isEmpty()) {
+			throw new NothingToEvaluate();
+		}
+
+//		if (operandStack.size() > 1) {
+//			//???
+//			throw new NothingToEvaluate();
+//		}
 
 		root = operandStack.pop();
 
@@ -887,9 +931,13 @@ public class DExpression {
 				}
 			}
 
-			//Cannot begin with closed bracket or separator
+			//Cannot begin with
+			//- closed bracket
+			//- separator
+			//- binary operator
 			TokenOrder[TK_NULL][TK_PCL] = false;
 			TokenOrder[TK_NULL][TK_COM] = false;
+			TokenOrder[TK_NULL][TK_OP] = false;
 
 			//After a value:
 			//Unary Operator, Binary Operator, Closed bracket, Separator
@@ -985,8 +1033,8 @@ public class DExpression {
 						break;
 					case CT_DOT:
 						retVal.type=TK_VAL;
-						retVal.value="0";
-						dotCount = 1;
+						//retVal.value="0";
+						//dotCount = 1;
 						break;
 					case CT_UOP:
 						/* If is an operator, token is recognized ('cause are 1 char long) */

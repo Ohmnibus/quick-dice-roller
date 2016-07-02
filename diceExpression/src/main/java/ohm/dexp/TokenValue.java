@@ -63,7 +63,7 @@ public abstract class TokenValue extends TokenBase {
 			while (retVal>VALUES_PRECISION_FACTOR) retVal=retVal/10;
 			
 			/* Add integer value */
-			retVal = retVal + (Long.parseLong(str.substring(0, iDotPlace)) * VALUES_PRECISION_FACTOR);
+			retVal = retVal + (Long.parseLong("0" + str.substring(0, iDotPlace)) * VALUES_PRECISION_FACTOR);
 		} else {
 			retVal = Long.parseLong(str) * VALUES_PRECISION_FACTOR;
 		}
