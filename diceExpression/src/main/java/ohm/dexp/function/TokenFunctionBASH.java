@@ -18,11 +18,6 @@ public class TokenFunctionBASH extends TokenFunction {
 		return 80;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	/**
 	 * BAHS (like) system.<br />
 	 * Uses 2 parameters: initial rolls number and expression.<br />

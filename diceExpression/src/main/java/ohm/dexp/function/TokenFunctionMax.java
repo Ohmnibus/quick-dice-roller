@@ -17,11 +17,6 @@ public class TokenFunctionMax extends TokenFunction {
 	}
 
 	@Override
-	public int getPriority() {
-		return 0;
-	}
-
-	@Override
 	protected void evaluateSelf(DContext instance) throws DException {
 
 		TokenBase lChild = getChild(1);

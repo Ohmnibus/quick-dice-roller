@@ -1,5 +1,6 @@
 package ohm.dexp;
 
+import java.util.EmptyStackException;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Stack;
@@ -12,6 +13,7 @@ import ohm.dexp.exception.InvalidCharacter;
 import ohm.dexp.exception.MissingOperand;
 import ohm.dexp.exception.NothingToEvaluate;
 import ohm.dexp.exception.UnbalancedBracket;
+import ohm.dexp.exception.UnexpectedError;
 import ohm.dexp.exception.UnexpectedParameter;
 import ohm.dexp.exception.UnknownFunction;
 import ohm.dexp.exception.UnknownVariable;
@@ -111,7 +113,7 @@ public class DExpression {
 	/**
 	 * Get the expression maximum result.<br />
 	 * This value is evaluated only one time.
-	 * @return Expression maximum result in "raw" format (like {@link getRawResult}).
+	 * @return Expression maximum result in "raw" format (like {@link DResult#getRawResult}).
 	 * @throws DException Thrown if an error occurred during parse or evaluation.
 	 */
 	public long getMaxResult() throws DException {
@@ -128,7 +130,7 @@ public class DExpression {
 	/**
 	 * Get the expression minimum result.<br />
 	 * This value is evaluated only one time.
-	 * @return Expression minimum result in "raw" format (like {@link getRawResult}).
+	 * @return Expression minimum result in "raw" format (like {@link DResult#getRawResult}).
 	 * @throws DException Thrown if an error occurred during parse or evaluation.
 	 */
 	public long getMinResult() throws DException {
@@ -172,11 +174,11 @@ public class DExpression {
 	
 	/**
 	 * Tell if {@link #resultMinValue} and {@link #resultMaxValue} are valid.
-	 * @return
+	 * @return {@code true} if {@link #resultMinValue} and {@link #resultMaxValue} are valid.
 	 */
 	protected boolean validBounds() {
 		boolean retVal = true;
-		if (evaluatedOnce == false) {
+		if (! evaluatedOnce) {
 			return false;
 		}
 //		if (ctx != null && varCache.size() > 0) { //If exp was not parsed "varCache" has no elements.
@@ -192,7 +194,7 @@ public class DExpression {
 //		}
 		if (ctx != null) {
 			for (String key : varKeys) { //If exp was not parsed "varKeys" has no elements.
-				if (ctx.checkName(key) == false || ! varCache.get(key).equals(ctx.getVariable(key))) {
+				if (! ctx.checkName(key) || ! varCache.get(key).equals(ctx.getVariable(key))) {
 					//Note: if checkName was false we are going to get an UnknownFunction exception.
 					retVal = false;
 					break;
@@ -230,6 +232,7 @@ public class DExpression {
 	protected void reset() {
 		exp = "";
 		root = null;
+		tokenRoot = null;
 		parsed = false;
 		//evaluated = false;
 		evaluatedOnce = false;
@@ -244,6 +247,7 @@ public class DExpression {
 
 	protected void setError(DException ex) {
 		root = null;
+		tokenRoot = null;
 		parsed = true;
 		//evaluated = true;
 		evaluatedOnce = true;
@@ -273,7 +277,6 @@ public class DExpression {
 	
 	/**
 	 * Parse and evaluate current expression.
-	 * @return Error code.
 	 */
 	protected void evaluate() throws DException {
 		try {
@@ -294,12 +297,332 @@ public class DExpression {
 			throw ex;
 		}
 	}
-	
+
+	/**
+	 * Add a node (operator) to the stack after popping it's parameters.
+	 * @param operandStack Stack
+	 * @param operator Operator
+	 */
+	protected void addNode(Stack<TokenBase> operandStack, TokenBase operator) throws DException {
+		if (operator instanceof TokenFunction) {
+			TokenFunction fnc = (TokenFunction) operator;
+			int paramNum = fnc.nextChildNum() - 1;
+			//Set parameters from last to first
+			for (int i = 0; i < paramNum; i++) {
+				TokenBase paramChild = operandStack.pop();
+				fnc.setChild(paramChild, paramNum - i);
+			}
+
+			//TODO: Check
+//			/* Error - too much parameters */
+//			throw new UnexpectedParameter(actToken.begin);
+
+			operandStack.push(fnc);
+		} else if (operator instanceof UnaryOperator && ((UnaryOperator)operator).isUnary()) {
+			if (operandStack.size() < 1) {
+				throw new MissingOperand(operator.getPosition() + 1); //Let's assume the operator is one character
+			}
+			operator.setRightChild(operandStack.pop());
+			operandStack.push(operator);
+		} else {
+			if (operandStack.size() < 2) {
+				//Second operand is missing.
+				//Check on first operand were made
+				//checking token order
+				throw new MissingOperand(operator.getPosition() + 1);
+			}
+			operator.setRightChild(operandStack.pop());
+			operator.setLeftChild(operandStack.pop());
+			operandStack.push(operator);
+		}
+	}
+
+	/**
+	 * Used as placeholder for the "open parenthesis" token
+	 */
+	private class TokenPar extends TokenBase {
+
+		/**
+		 * ctor
+		 * @param position Token position.
+		 */
+		public TokenPar(int position) {
+			super(position);
+		}
+
+		@Override
+		protected int initChildNumber() {
+			return 0;
+		}
+
+		@Override
+		public int getType() {
+			return 0;
+		}
+
+		@Override
+		public int getPriority() {
+			return 0;
+		}
+
+		@Override
+		protected void evaluateSelf(DContext instance) throws DException {
+			//NOOP
+		}
+	}
+
+	protected void parse() throws DException {
+		int iPos;           /* Expression index */
+
+		Stack<TokenBase> functionStack = new Stack<TokenBase>();
+		Stack<TokenBase> operatorStack = new Stack<TokenBase>();
+		Stack<TokenBase> operandStack = new Stack<TokenBase>();
+		TokenBase newToken;
+		TokenBase popToken;
+		boolean safe;
+
+		GetTokenResult actToken;
+		GetTokenResult nextToken;
+		int actTokenType;   /* Current token type (speed up a bit) */
+		int lastTokenType;  /* Last token type */
+
+		if (parsed) {
+			if (error != null) throw error;
+			return; //Already parsed, no action needed.
+		}
+
+		varCache.clear();
+		root = null;
+		lastTokenType = TK_NULL;
+
+		actToken = new GetTokenResult();
+		actToken.end = 1;
+		nextToken = new GetTokenResult();
+		do {
+			iPos = actToken.end;
+
+			if (nextToken.type != TK_NULL) {
+				actToken.value = nextToken.value;
+				actToken.type = nextToken.type;
+				actToken.begin = nextToken.begin;
+				actToken.end = nextToken.end;
+
+				nextToken.reset();
+			} else {
+				getToken(this.exp, iPos, actToken);
+			}
+
+			if (actToken.type != TK_NULL) {
+
+				/* Check token order */
+				actTokenType = actToken.type;
+				if (! checkTokenOrder(lastTokenType, actTokenType)) {
+					/* Invalid token sequence */
+
+					switch (lastTokenType) {
+						case TK_VAL:
+						case TK_PCL:
+							throw new ExpectedEndOfStatement(actToken.begin);
+						case TK_UOP:
+						case TK_OP:
+						case TK_POP:
+						case TK_COM:
+						case TK_NULL:
+							throw new MissingOperand(actToken.begin);
+						default: //TK_NAME
+							//throw new ExpectedParameter(actToken.begin);
+							throw new ExpectedEndOfStatement(actToken.begin);
+					}
+				}
+
+				switch (actTokenType) {
+					case TK_VAL:
+						/* Add Numeric to tree */
+						newToken = TokenValue.InitToken(TokenValue.ParseRawValue(actToken.value), actToken.begin);
+						operandStack.add(newToken);
+						//isTerminal = true;
+						break;
+					case TK_UOP:
+					case TK_OP:
+						/* Add operator to tree */
+						newToken = TokenOperator.InitToken(actToken.value, actToken.begin);
+
+						//if (actTokenType == TK_UOP && (
+						if (newToken instanceof UnaryOperator && (
+								lastTokenType == TK_UOP
+										|| lastTokenType == TK_OP
+										|| lastTokenType == TK_COM
+										|| lastTokenType == TK_POP
+										|| lastTokenType == TK_NULL
+						)) {
+							((UnaryOperator) newToken).setUnary(true);
+						}
+
+						while (! operatorStack.isEmpty() && (popToken = operatorStack.peek()) instanceof TokenOperator) {
+							//popToken = operatorStack.peek();
+							if ((!newToken.isRightAssociative() && newToken.getPriority() == popToken.getPriority())
+									|| newToken.getPriority() < popToken.getPriority()) {
+
+								operatorStack.pop(); //Remove o2 from the stack
+								addNode(operandStack, popToken);
+							} else {
+								break;
+							}
+						}
+						operatorStack.push(newToken);
+						break;
+					case TK_POP:
+						/* Process "(" token */
+						operatorStack.push(new TokenPar(actToken.begin));
+						break;
+					case TK_PCL:
+						/* Process ")" token */
+						safe = false;
+						while (! operatorStack.isEmpty()) {
+							popToken = operatorStack.pop();
+							if (popToken instanceof TokenPar) {
+								//Found the corresponding opening parenthesis
+								if (! operatorStack.isEmpty()
+										&& (popToken = operatorStack.peek()) instanceof TokenFunction) {
+									//Parenthesis were enclosing a function parameters
+									if (lastTokenType != TK_POP) {
+										//1 or more parameter defined.
+										//Need to increment parameter count by 1
+										//(overflow already checked)
+										popToken.setNextChild(null);
+									} /* else 0 parameters function */
+									if (popToken.nextChildNum() <= popToken.getChildNumber()) {
+										// Error - too few parameters
+										throw new ExpectedParameter(actToken.begin);
+									}
+									addNode(operandStack, operatorStack.pop());
+									functionStack.pop();
+								}
+								safe = true;
+								break;
+							} /* else if (popToken instanceof TokenOperator || popToken instanceof TokenFunction) {*/
+								//It is an operator or a function
+								addNode(operandStack, popToken);
+//							} else {
+//								//This should never happen
+//								throw new UnexpectedError();
+//							}
+						}
+						if (! safe) {
+							throw new UnbalancedBracket(actToken.begin);
+						}
+
+						//isTerminal = true;
+						break;
+					case TK_COM:
+						/* Process "," token */
+						safe = false;
+						while (! operatorStack.isEmpty()) {
+							popToken = operatorStack.peek();
+							if (popToken instanceof TokenPar) {
+								//Found the function's opening parenthesis
+								safe = true;
+								break;
+							} /* else if (popToken instanceof TokenOperator || popToken instanceof TokenFunction) {*/
+								//Operator
+								//(function should be already on operandStack)
+								addNode(operandStack, operatorStack.pop());
+//							} else {
+//								//This should never happen
+//								throw new UnexpectedError();
+//							}
+						}
+						if (! safe || functionStack.isEmpty()) {
+							//throw new UnbalancedBracket(actToken.begin);
+							throw new ExpectedEndOfStatement(actToken.begin);
+						}
+
+						//Increment parameter number
+						popToken = functionStack.peek();
+						if (popToken.nextChildNum() + 1 > popToken.getMaxChildNumber()) {
+							// Error - too much parameters
+							throw new UnexpectedParameter(actToken.begin);
+						}
+						popToken.setNextChild(null);
+
+						break;
+					default:
+						/* Add name to tree */
+
+						getToken(this.exp, actToken.end, nextToken);
+
+						if (nextToken.type == TK_POP) {
+							//Next token is an open bracket: this is a function.
+							newToken = TokenFunction.InitToken(actToken.value, actToken.begin);
+							if (newToken == null) {
+								//Error: function is not recognized
+								throw new UnknownFunction(actToken.value, actToken.begin, actToken.end);
+							}
+							operatorStack.add(newToken);
+							functionStack.add(newToken);
+						} else {
+							newToken = TokenValue.InitToken(actToken.value, actToken.begin);
+							varCache.put(actToken.value, new DVariable(0, 0, 0));
+							operandStack.add(newToken);
+							//isTerminal = true;
+						}
+				}
+				lastTokenType=actToken.type;
+//			} else {
+				/* Check if state is valid */
+//				if (!parseStack.isEmpty()) {
+//					/* Stack not empty: unbalanced parenthesis */
+//					//retVal = DResult.ERR_UNBALANCED_PARENTHESYS;
+//					//setError(retVal, exp.length()+1, exp.length()+1);
+//					throw new UnbalancedBracket(exp.length()+1);
+//				}
+//				if (root == null) {
+//					/* Root=null: Empty expression */
+//					//retVal = DResult.ERR_NOTHING_TO_EVALUATE;
+//					//setError(retVal, 0, 0);
+//					throw new NothingToEvaluate();
+//				}
+//				if (!isTerminal) {
+//					/* bTerminal=false: Expected operand */
+//					//retVal = DResult.ERR_MISSING_OPERAND;
+//					//setError(retVal, exp.length()+1, exp.length()+1);
+//					throw new MissingOperand(exp.length()+1);
+//				}
+			}
+		} while (actToken.type!=TK_NULL /* && retVal==DResult.ERR_NONE */);
+
+		while (! operatorStack.isEmpty()) {
+			if (operatorStack.peek() instanceof TokenPar) {
+				throw new UnbalancedBracket(exp.length()+1);
+			}
+			addNode(operandStack, operatorStack.pop());
+		}
+
+		if (operandStack.isEmpty()) {
+			throw new NothingToEvaluate();
+		}
+
+//		if (operandStack.size() > 1) {
+//			//???
+//			throw new NothingToEvaluate();
+//		}
+
+		root = operandStack.pop();
+
+		//Get the array of required variables
+		if (varCache.size() > 0) {
+			varKeys = varCache.keySet().toArray(EMPTY_VAR_KEYS);
+		} else {
+			varKeys = EMPTY_VAR_KEYS;
+		}
+
+		parsed = true;
+	}
+
 	/**
 	 * Parse current expression.
-	 * @return Error code.
 	 */
-	protected void parse() throws DException {
+	protected void parse_old() throws DException {
 		int iPos;           /* Expression index */
 
 		GetTokenResult actToken;
@@ -352,7 +675,7 @@ public class DExpression {
 					switch (actTokenType) {
 						case TK_VAL:
 							/* Add Number to tree */
-							tmpToken = TokenValue.InitToken(TokenValue.ParseRawValue(actToken.value));
+							tmpToken = TokenValue.InitToken(TokenValue.ParseRawValue(actToken.value), actToken.begin);
 							if (tLastOp == null) {
 								root = tmpToken;
 							} else {
@@ -369,7 +692,7 @@ public class DExpression {
 						case TK_UOP:
 						case TK_OP:
 							/* Add operator to tree */
-							tmpToken = TokenOperator.InitToken(actToken.value);
+							tmpToken = TokenOperator.InitToken(actToken.value, actToken.begin);
 							if (tLastOp == null) {
 								if (root == null) {
 									/* Unary operator */
@@ -491,7 +814,7 @@ public class DExpression {
 							
 							if (nextToken.type == TK_POP) {
 								//Next token is an open bracket: this is a function.
-								tFunc = TokenFunction.InitToken(actToken.value);
+								tFunc = TokenFunction.InitToken(actToken.value, actToken.begin);
 								if (tFunc == null) {
 									//Error: function is not recognized
 									throw new UnknownFunction(actToken.value, actToken.begin, actToken.end);
@@ -595,9 +918,9 @@ public class DExpression {
 
 	/**
 	 * Tell if the order of given token types is allowed.
-	 * @param token1
-	 * @param token2
-	 * @return
+	 * @param token1 First token to check.
+	 * @param token2 Second token to check.
+	 * @return {@code true} if the order is allowed, false otherwise.
 	 */
 	private boolean checkTokenOrder(int token1, int token2) {
 		if (TokenOrder == null) {
@@ -608,9 +931,13 @@ public class DExpression {
 				}
 			}
 
-			//Cannot begin with closed bracket or separator
+			//Cannot begin with
+			//- closed bracket
+			//- separator
+			//- binary operator
 			TokenOrder[TK_NULL][TK_PCL] = false;
 			TokenOrder[TK_NULL][TK_COM] = false;
+			TokenOrder[TK_NULL][TK_OP] = false;
 
 			//After a value:
 			//Unary Operator, Binary Operator, Closed bracket, Separator
@@ -680,7 +1007,7 @@ public class DExpression {
 		char actChar, nextChar;			/* Actual and next char */
 		int actCharType, nextCharType;	/* Actual and next char type */
 		int dotCount = 0; /* Used to check double dot in values */
-		StringBuilder myValue = null; /* Used to optimize creation of values and names */
+		//StringBuilder myValue = null; /* Used to optimize creation of values and names */
 		
 		retVal.value = "";
 		retVal.type = TK_NULL;
@@ -706,8 +1033,8 @@ public class DExpression {
 						break;
 					case CT_DOT:
 						retVal.type=TK_VAL;
-						retVal.value="0";
-						dotCount = 1;
+						//retVal.value="0";
+						//dotCount = 1;
 						break;
 					case CT_UOP:
 						/* If is an operator, token is recognized ('cause are 1 char long) */
@@ -772,32 +1099,36 @@ public class DExpression {
 						}
 
 						//retVal.value = retVal.value + String.valueOf(actChar);
-						if (myValue == null) {
-							myValue = new StringBuilder();
-						}
-						myValue.append(actChar);
+//						if (myValue == null) {
+//							myValue = new StringBuilder();
+//						}
+//						myValue.append(actChar);
 						
 						if (nextCharType != CT_DIGIT && nextCharType != CT_DOT) {
 							/* Number recognized */
-							retVal.value = myValue.toString();
+							//retVal.value = myValue.toString();
 							retVal.end = iCnt + 1;
+							retVal.value = exp.substring(retVal.begin - 1, retVal.end - 1);
 						}
 						break;
 					case TK_NAME:
 						/* Functions and variables */
-						if (myValue == null) {
-							myValue = new StringBuilder();
-						}
-						myValue.append(actChar);
+//						if (myValue == null) {
+//							myValue = new StringBuilder();
+//						}
+//						myValue.append(actChar);
 
 						//To prevent that "d6" could be recognized as a name,
 						//they must be of 3 ALPHA followed by any combination of ALPHA or DIGIT
 
 						//if (nextCharType != CT_ALPHA && nextCharType != CT_DIGIT) {
-						if (nextCharType != CT_ALPHA && (myValue.length() < 3 || nextCharType != CT_DIGIT)) {
+						//if (nextCharType != CT_ALPHA && (myValue.length() < 3 || nextCharType != CT_DIGIT)) {
+						int len = (iCnt - retVal.begin) + 1;
+						if (nextCharType != CT_ALPHA && (len < 3 || nextCharType != CT_DIGIT)) {
 							/* Function recognized */
-							retVal.value = myValue.toString();
+							//retVal.value = myValue.toString();
 							retVal.end = iCnt + 1;
+							retVal.value = exp.substring(retVal.begin - 1, retVal.end - 1);
 						}
 				}
 			}
@@ -876,7 +1207,7 @@ public class DExpression {
 	}
 	
 	/**
-	 * Contain the result of a {@link getToken} call.
+	 * Contain the result of a {@link #getToken} call.
 	 * @author Ohmnibus
 	 *
 	 */

@@ -2,31 +2,66 @@ package ohm.dexp;
 
 import ohm.dexp.exception.DException;
 import ohm.dexp.exception.DivisionByZero;
+import ohm.dexp.exception.InvalidCharacter;
 
 public abstract class TokenOperator extends TokenBase {
-	
+
+	/**
+	 * Protected constructor.
+	 * @param position Token position.
+	 */
+	protected TokenOperator(int position) {
+		super(position);
+	}
+
 	/**
 	 * Initialize the right operator token by it's name.
 	 * @param name Name of the operator.
+	 * @param position Token position.
 	 * @return An instance representing the operator, or {@code null} if not found.
 	 */
-	public static TokenOperator InitToken(String name) {
+	public static TokenOperator InitToken(String name, int position) throws InvalidCharacter {
 		if (name.equals("+")) {
-			return new TokenOperatorAdd();
+			return new TokenOperatorAdd(position);
 		} else if (name.equals("-")) {
-			return new TokenOperatorSubtract();
+			return new TokenOperatorSubtract(position);
 		} else if (name.equals("*")) {
-			return new TokenOperatorMultiply();
+			return new TokenOperatorMultiply(position);
 		} else if (name.equals("/")) {
-			return new TokenOperatorDivide();
+			return new TokenOperatorDivide(position);
 		} else if (name.equals("d") || name.equals("w") || name.equals("t")) { //"w" is for Germans, "t" for swedish
-			return new TokenOperatorDice();
+			return new TokenOperatorDice(position);
 		}
-		return null;
+		throw new InvalidCharacter(position);
+		//return null;
 	}
 }
 
-class TokenOperatorAdd extends TokenOperator {
+/**
+ * Interface of operators that can be unary.
+ */
+interface UnaryOperator {
+
+	/**
+	 * Tell if the operator is unary
+	 * @return {@code true} if this is a unary operator,
+	 * {@code false} otherwise.
+	 */
+	boolean isUnary();
+
+	/**
+	 * Set the unariary of the operator
+	 * @param unary {@code true} to set this operator as unary,
+	 * {@code false} otherwise.
+	 */
+	void setUnary(boolean unary);
+}
+
+class TokenOperatorAdd extends TokenOperator implements UnaryOperator {
+
+	protected TokenOperatorAdd(int position) {
+		super(position);
+	}
 
 	@Override
 	public int initChildNumber() {
@@ -40,7 +75,7 @@ class TokenOperatorAdd extends TokenOperator {
 
 	@Override
 	public int getPriority() {
-		return 1;
+		return unary ? PRIO_UNARY : PRIO_ADDICTIVE;
 	}
 
 	@Override
@@ -51,8 +86,9 @@ class TokenOperatorAdd extends TokenOperator {
 		
 		lChild = getLeftChild();
 		rChild = getRightChild();
-		
-		if (lChild != null) {
+
+		//if (lChild != null) {
+		if (! unary) {
 			
 			lChild.evaluate(instance);
 			rChild.evaluate(instance);
@@ -90,9 +126,25 @@ class TokenOperatorAdd extends TokenOperator {
 		
 		//return retVal;
 	}
+
+	private boolean unary = false;
+
+	@Override
+	public boolean isUnary() {
+		return unary;
+	}
+
+	@Override
+	public void setUnary(boolean unary) {
+		this.unary = unary;
+	}
 }
 
-class TokenOperatorSubtract extends TokenOperator {
+class TokenOperatorSubtract extends TokenOperator implements UnaryOperator {
+
+	protected TokenOperatorSubtract(int position) {
+		super(position);
+	}
 
 	@Override
 	protected int initChildNumber() {
@@ -106,7 +158,7 @@ class TokenOperatorSubtract extends TokenOperator {
 
 	@Override
 	public int getPriority() {
-		return 1;
+		return unary ? PRIO_UNARY : PRIO_ADDICTIVE;
 	}
 
 	@Override
@@ -117,7 +169,8 @@ class TokenOperatorSubtract extends TokenOperator {
 		lChild = getLeftChild();
 		rChild = getRightChild();
 
-		if (lChild != null) {
+		//if (lChild != null) {
+		if (! unary) {
 				
 			lChild.evaluate(instance);
 			rChild.evaluate(instance);
@@ -139,9 +192,25 @@ class TokenOperatorSubtract extends TokenOperator {
 			resultString = "-" + rChild.resultString; //This can lead to "--value"
 		}
 	}
+
+	private boolean unary = false;
+
+	@Override
+	public boolean isUnary() {
+		return unary;
+	}
+
+	@Override
+	public void setUnary(boolean unary) {
+		this.unary = unary;
+	}
 }
 
 class TokenOperatorMultiply extends TokenOperator {
+
+	protected TokenOperatorMultiply(int position) {
+		super(position);
+	}
 
 	@Override
 	protected int initChildNumber() {
@@ -155,7 +224,7 @@ class TokenOperatorMultiply extends TokenOperator {
 
 	@Override
 	public int getPriority() {
-		return 2;
+		return PRIO_MULTIPLICATIVE;
 	}
 
 	@Override
@@ -190,6 +259,10 @@ class TokenOperatorMultiply extends TokenOperator {
 
 class TokenOperatorDivide extends TokenOperator {
 
+	protected TokenOperatorDivide(int position) {
+		super(position);
+	}
+
 	@Override
 	protected int initChildNumber() {
 		return 2;
@@ -202,7 +275,7 @@ class TokenOperatorDivide extends TokenOperator {
 
 	@Override
 	public int getPriority() {
-		return 2;
+		return PRIO_MULTIPLICATIVE;
 	}
 
 	@Override
@@ -253,7 +326,11 @@ class TokenOperatorDivide extends TokenOperator {
 	}
 }
 
-class TokenOperatorDice extends TokenOperator {
+class TokenOperatorDice extends TokenOperator implements UnaryOperator {
+
+	protected TokenOperatorDice(int position) {
+		super(position);
+	}
 
 	@Override
 	protected int initChildNumber() {
@@ -267,7 +344,7 @@ class TokenOperatorDice extends TokenOperator {
 
 	@Override
 	public int getPriority() {
-		return 3;
+		return PRIO_DICE;
 	}
 
 	@Override
@@ -279,8 +356,9 @@ class TokenOperatorDice extends TokenOperator {
 		
 		TokenBase lChild = getLeftChild();
 		TokenBase rChild = getRightChild();
-		
-		if (lChild != null) {
+
+		//if (lChild != null) {
+		if (! unary) {
 			lChild.evaluate(instance);
 			lResult = (int)lChild.getResult();
 			lMaxResult = lChild.resultMaxValue;
@@ -288,8 +366,8 @@ class TokenOperatorDice extends TokenOperator {
 		} else {
 			//Unary roll
 			lResult = 1;
-			lMaxResult = 1 * VALUES_PRECISION_FACTOR;
-			lMinResult = 1 * VALUES_PRECISION_FACTOR;
+			lMaxResult = /* 1 * */VALUES_PRECISION_FACTOR;
+			lMinResult = /* 1 * */VALUES_PRECISION_FACTOR;
 		}
 		rChild.evaluate(instance);
 
@@ -312,6 +390,18 @@ class TokenOperatorDice extends TokenOperator {
 		resultMinValue = dice.getTimes() * VALUES_PRECISION_FACTOR;
 		//reorderMaxMinValues(); //Not needed here.
 		resultString = "[" + Long.toString(resultValue / VALUES_PRECISION_FACTOR) + "]";
+	}
+
+	private boolean unary = false;
+
+	@Override
+	public boolean isUnary() {
+		return unary;
+	}
+
+	@Override
+	public void setUnary(boolean unary) {
+		this.unary = unary;
 	}
 }
 

@@ -9,6 +9,10 @@ import ohm.dexp.exception.DException;
 
 public abstract class TokenFunction extends TokenBase {
 
+	protected TokenFunction() {
+		super(0);
+	}
+
 	private static Hashtable<String, Class<? extends TokenFunction>> _allowedFunctions = new Hashtable<String, Class<? extends TokenFunction>>();
 
 	protected static final long UNDEFINED = Long.MIN_VALUE + 1; //+1 so that I can still use Long.MIN_VALUE.
@@ -72,9 +76,10 @@ public abstract class TokenFunction extends TokenBase {
 	/**
 	 * Initialize the right function token by it's name.
 	 * @param token Token of the function.
+	 * @param position Token position.
 	 * @return An instance representing the function, or {@code null} if not found.
 	 */
-	public static TokenFunction InitToken(String token) {
+	public static TokenFunction InitToken(String token, int position) {
 		TokenFunction retVal;
 		Class<? extends TokenFunction> fncClass;
 		
@@ -83,7 +88,8 @@ public abstract class TokenFunction extends TokenBase {
 		
 		if (fncClass != null) {
 			try {
-				retVal = (TokenFunction) fncClass.newInstance();
+				retVal = fncClass.newInstance();
+				retVal.position = position;
 			} catch (IllegalAccessException e) {
 				retVal = null;
 			} catch (InstantiationException e) {
@@ -139,5 +145,10 @@ public abstract class TokenFunction extends TokenBase {
 			retVal = defaultResult;
 		}
 		return retVal;
+	}
+
+	@Override
+	public int getPriority() {
+		return PRIO_FUNCTION;
 	}
 }

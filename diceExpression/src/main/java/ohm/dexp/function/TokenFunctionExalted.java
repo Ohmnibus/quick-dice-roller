@@ -19,11 +19,6 @@ public class TokenFunctionExalted extends TokenFunctionPoolBase {
 		return 52;
 	}
 
-	@Override
-	public int getPriority() {
-		return 0;
-	}
-
 	private int target;
 	private int oneCount;
 

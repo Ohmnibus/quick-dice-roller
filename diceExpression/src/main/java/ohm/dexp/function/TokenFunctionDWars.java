@@ -13,11 +13,6 @@ public class TokenFunctionDWars extends TokenFunctionShRun5 {
 	}
 
 	@Override
-	public int getPriority() {
-		return 0;
-	}
-
-	@Override
 	protected boolean extraSuccessOnRollAgain() {
 		return true;
 	}
