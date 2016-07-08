@@ -1,6 +1,9 @@
 package ohm.dexp;
 
-//import java.util.Random;
+import java.util.Random;
+
+import ohm.dexp.random.XORShiftRandom;
+import ohm.dexp.random.XORoShiRoRandom;
 
 /**
  * Simple class to handle and roll dice.
@@ -13,7 +16,9 @@ public class Dice {
 	private int iFaces;
 	private int iModifier;
 	//private static Random alea = new Random();
-	private static long seed = System.nanoTime();
+	//private static long seed = System.nanoTime();
+	//private static Random alea = new XORShiftRandom();
+	private static Random alea = new XORoShiRoRandom();
 
 	/**
 	 * Initialize a simple dice (1d6)
@@ -172,19 +177,19 @@ public class Dice {
 		return retVal.toString();
 	}
 	
-//	private static int getRandomInt() {
-//		return alea.nextInt();
-//	}
-
-	/**
-	 * Generate a random number using XORShift algorithm.
-	 * @see http://www.javamex.com/tutorials/random_numbers/xorshift.shtml
-	 * @see http://www.javamex.com/tutorials/random_numbers/java_util_random_subclassing.shtml
-	 */
 	private static int getRandomInt() {
-		seed ^= (seed << 21);
-		seed ^= (seed >>> 35);
-		seed ^= (seed << 4);
-		return (int)seed;
+		return alea.nextInt();
 	}
+
+//	/**
+//	 * Generate a random number using XORShift algorithm.
+//	 * @see http://www.javamex.com/tutorials/random_numbers/xorshift.shtml
+//	 * @see http://www.javamex.com/tutorials/random_numbers/java_util_random_subclassing.shtml
+//	 */
+//	private static int getRandomInt() {
+//		seed ^= (seed << 21);
+//		seed ^= (seed >>> 35);
+//		seed ^= (seed << 4);
+//		return (int)seed;
+//	}
 }
