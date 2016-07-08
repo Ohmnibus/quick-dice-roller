@@ -15,7 +15,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    
     dependencies {
         // Required -- JUnit 4 framework
         testCompile 'junit:junit:4.12'

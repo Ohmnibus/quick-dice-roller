@@ -1,3 +1,4 @@
+package ohm.dexp;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -40,10 +41,15 @@ public class DExpressionTest {
 		initFunctions();
 	}
 
+//	@Test
+//	public void testParse() throws Exception {
+//
+//	}
+
 	@Test
-	public void UnaryTest() {
+	public void testParseUnaryOperators() {
 		System.out.println("");
-		System.out.println("UnaryTest");
+		System.out.println("testParseUnaryOperators");
 
 		DContext dCtx = new DContext();
 
@@ -90,9 +96,9 @@ public class DExpressionTest {
 	}
 
 	@Test
-	public void FunctionTest() {
+	public void testParseFunctions() {
 		System.out.println("");
-		System.out.println("FunctionTest");
+		System.out.println("testParseFunctions");
 
 		DContext dCtx = new DContext();
 		dCtx.setValue("rolls", 0, 1, 1);
@@ -116,9 +122,9 @@ public class DExpressionTest {
 	}
 
 	@Test
-	public void PrecedenceTest() {
+	public void testParsePrecedence() {
 		System.out.println("");
-		System.out.println("PrecedenceTest");
+		System.out.println("testParsePrecedence");
 
 		DContext dCtx = new DContext();
 		dCtx.setValue("rolls", 0, 1, 1);
@@ -141,34 +147,10 @@ public class DExpressionTest {
 //		}
 	}
 
-	private void testResult(String formula, DContext dCtx, int fixedValue) {
-		testResult(formula, dCtx, fixedValue, fixedValue);
-	}
-
-	private void testResult(String formula, DContext dCtx, int minValue, int maxValue) {
-		DExpression dExp = new DExpression();
-		dExp.setContext(dCtx);
-		try {
-			dExp.setExpression(formula);
-			DResult res = dExp.getResult();
-
-			printResult(dExp.getExpression(), res);
-
-			assertEquals("Min value differ", minValue, res.getMinResult());
-			if (minValue != maxValue) {
-				assertEquals("Max value differ", maxValue, res.getMaxResult());
-			}
-		} catch (DException e) {
-			e.printStackTrace();
-			Assert.fail("Exception: " + e.getClass().getSimpleName());
-		}
-	}
-
-
 	@Test
-	public void ErrorTest() {
+	public void testParseErrors() {
 		System.out.println("");
-		System.out.println("ErrorTest");
+		System.out.println("testParseErrors");
 
 		DContext dCtx = new DContext();
 		dCtx.setValue("rolls", 0, 1, 1);
@@ -198,6 +180,29 @@ public class DExpressionTest {
 		testException("#", dCtx, InvalidCharacter.class, 1);
 		testException("2+3#", dCtx, InvalidCharacter.class, 4);
 		testException("2+3.3.2", dCtx, InvalidCharacter.class, 6);
+	}
+
+	private void testResult(String formula, DContext dCtx, int fixedValue) {
+		testResult(formula, dCtx, fixedValue, fixedValue);
+	}
+
+	private void testResult(String formula, DContext dCtx, int minValue, int maxValue) {
+		DExpression dExp = new DExpression();
+		dExp.setContext(dCtx);
+		try {
+			dExp.setExpression(formula);
+			DResult res = dExp.getResult();
+
+			printResult(dExp.getExpression(), res);
+
+			assertEquals("Min value differ", minValue, res.getMinResult());
+			if (minValue != maxValue) {
+				assertEquals("Max value differ", maxValue, res.getMaxResult());
+			}
+		} catch (DException e) {
+			e.printStackTrace();
+			Assert.fail("Exception: " + e.getClass().getSimpleName());
+		}
 	}
 
 	private void testException(String formula, DContext dCtx, Class exClass, int errorAt) {
