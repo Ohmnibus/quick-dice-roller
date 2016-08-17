@@ -3,20 +3,21 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 21
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "ohm.quickdice"
-        versionCode 42
-        versionName "2.1.2.1"
+        versionCode 43
+        versionName "2.1.2.2"
 
         minSdkVersion 4
         targetSdkVersion 21
     }
-
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+        debug {
+            signingConfig signingConfigs.Debug
         }
     }
 }
