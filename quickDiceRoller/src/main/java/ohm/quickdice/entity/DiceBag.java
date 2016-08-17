@@ -42,7 +42,7 @@ public class DiceBag {
 		return title;
 	}
 	/**
-	 * @param title the title to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.title = name;
@@ -89,54 +89,4 @@ public class DiceBag {
 			parent.setDataChanged();
 		}
 	}
-
-	/* ***************** */
-	/* Methods to delete */
-	/* ***************** */
-//	protected ArrayList<Dice> diceList;
-//	protected ArrayList<RollModifier> modifiers;
-//	protected ArrayList<Variable> variables;
-//
-//	/**
-//	 * @return the dice list
-//	 */
-//	@Deprecated
-//	public ArrayList<Dice> getDiceList() {
-//		return diceList;
-//	}
-//	/**
-//	 * @param diceList the dice list to set
-//	 */
-//	@Deprecated
-//	public void setDiceList(ArrayList<Dice> diceList) {
-//		this.diceList = diceList;
-//	}
-//	/**
-//	 * @return the modifiers
-//	 */
-//	@Deprecated
-//	public ArrayList<RollModifier> getModifiers() {
-//		return modifiers;
-//	}
-//	/**
-//	 * @param modifiers the modifiers to set
-//	 */
-//	@Deprecated
-//	public void setModifiers(ArrayList<RollModifier> modifiers) {
-//		this.modifiers = modifiers;
-//	}
-//	/**
-//	 * @return the variables
-//	 */
-//	@Deprecated
-//	public ArrayList<Variable> getVariables() {
-//		return variables;
-//	}
-//	/**
-//	 * @param variables the variables to set
-//	 */
-//	@Deprecated
-//	public void setVariables(ArrayList<Variable> variables) {
-//		this.variables = variables;
-//	}
 }

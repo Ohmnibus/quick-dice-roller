@@ -38,6 +38,9 @@
 		<item name="ohmFramedBackground">@drawable/theme_base_bg_framed</item>
 		<item name="ohmFramedBackgroundSelector">@drawable/theme_base_bg_framed_selector</item>
 		<item name="ohmFramedBackgroundSecondary">@drawable/theme_base_bg_framed_secondary</item>
+
+		<item name="ohmAddCircleDrawable">@drawable/ic_add_circle_white</item>
+		<item name="ohmRemoveCircleDrawable">@drawable/ic_remove_circle_white</item>
 	</style>
 
 	<style name="Base">
@@ -278,6 +281,9 @@
 		<item name="ohmFramedBackground">@drawable/theme_light_bg_framed</item>
 		<item name="ohmFramedBackgroundSelector">@drawable/theme_light_bg_framed_selector</item>
 		<item name="ohmFramedBackgroundSecondary">@drawable/theme_light_bg_framed_secondary</item>
+
+		<item name="ohmAddCircleDrawable">@drawable/ic_add_circle_black</item>
+		<item name="ohmRemoveCircleDrawable">@drawable/ic_remove_circle_black</item>
 	</style>
 	
 	<style name="Light">

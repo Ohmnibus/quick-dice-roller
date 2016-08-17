@@ -91,7 +91,7 @@ public class Variable {
 	/**
 	 * Set the label of this variable.<br />
 	 * The label will be used in expressions.
-	 * @param description Label of this variable.
+	 * @param label Label of this variable.
 	 */
 	public void setLabel(String label) {
 		this.label = label;
@@ -192,7 +192,7 @@ public class Variable {
 	
 	/**
 	 * Array of dice that require this variable.
-	 * @return
+	 * @return Array of dice that require this variable.
 	 */
 	public Dice[] requiredBy() {
 		Dice[] retVal = new Dice[0];

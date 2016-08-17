@@ -8,10 +8,13 @@ import ohm.quickdice.entity.Variable;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -26,14 +29,22 @@ public class VariableDetailDialog extends MenuDialog
 	int newVal;
 	TextView lvlValue;
 	SeekBar sbValue;
-	Button cmdIncrease;
-	Button cmdDecrease;
-	
-	public VariableDetailDialog(Activity activity, Menu menu, DiceBag diceBag, int variableIndex) {
+	ImageButton cmdIncrease;
+	ImageButton cmdDecrease;
+	boolean asModifier;
+	SparseBooleanArray hiddenMenuItems;
+
+//	public VariableDetailDialog(Activity activity, Menu menu, DiceBag diceBag, int variableIndex) {
+//		this(activity, menu, diceBag, variableIndex, false);
+//	}
+
+	public VariableDetailDialog(Activity activity, Menu menu, DiceBag diceBag, int variableIndex, boolean treatAsModifier, SparseBooleanArray hiddenMenuItems) {
 		super(activity, menu);
 		this.diceBag = diceBag;
 		this.varIndex = variableIndex;
 		this.variable = diceBag.getVariables().get(varIndex);
+		this.asModifier = treatAsModifier;
+		this.hiddenMenuItems = hiddenMenuItems;
 	}
 	
 	@Override
@@ -53,8 +64,8 @@ public class VariableDetailDialog extends MenuDialog
 		View view = inflater.inflate(R.layout.dialog_variable_detail, parent, false);
 
 		if (variable.getDescription() == null || variable.getDescription().length() == 0) {
-			((TextView)view.findViewById(R.id.lblDescription)).setVisibility(View.GONE);
-			((TextView)view.findViewById(R.id.lblDescriptionLabel)).setVisibility(View.GONE);
+			view.findViewById(R.id.lblDescription).setVisibility(View.GONE);
+			view.findViewById(R.id.lblDescriptionLabel).setVisibility(View.GONE);
 		} else {
 			((TextView)view.findViewById(R.id.lblDescription)).setText(variable.getDescription());
 		}
@@ -69,10 +80,10 @@ public class VariableDetailDialog extends MenuDialog
 
 		setValue(variable.getCurVal());
 
-		cmdIncrease = (Button)view.findViewById(R.id.cmdIncrease);
+		cmdIncrease = (ImageButton)view.findViewById(R.id.cmdIncrease);
 		cmdIncrease.setOnClickListener(this);
 
-		cmdDecrease = (Button)view.findViewById(R.id.cmdDecrease);
+		cmdDecrease = (ImageButton)view.findViewById(R.id.cmdDecrease);
 		cmdDecrease.setOnClickListener(this);
 		
 		return view;
@@ -98,17 +109,31 @@ public class VariableDetailDialog extends MenuDialog
 	
 	@Override
 	protected boolean onPrepareOptionsMenu(MenuAdapter adapter) {
-		
-		if (! QuickDiceApp.getInstance().canAddVariable()) {
-			//Maximum number of allowed variables reached
-			adapter.findItem(R.id.mvAddHere).setEnabled(false);
-			//adapter.findItem(R.id.mdClone).setEnabled(false);
-		}
-		if (varIndex == 0) {
-			adapter.findItem(R.id.mvSwitchPrev).setEnabled(false);
-		}
-		if (varIndex == diceBag.getVariables().size() - 1) {
-			adapter.findItem(R.id.mvSwitchNext).setEnabled(false);
+		if (asModifier) {
+			//menu_modifier.xml
+
+			MenuItem item;
+			int key;
+			for (int i=0; i < hiddenMenuItems.size(); i++) {
+				key = hiddenMenuItems.keyAt(i);
+				item = adapter.findItem(key);
+				if (item != null) {
+					item.setVisible(hiddenMenuItems.get(key));
+				}
+			}
+		} else {
+			//menu_variable.xml
+			if (!QuickDiceApp.getInstance().canAddVariable()) {
+				//Maximum number of allowed variables reached
+				adapter.findItem(R.id.mvAddHere).setEnabled(false);
+				//adapter.findItem(R.id.mdClone).setEnabled(false);
+			}
+			if (varIndex == 0) {
+				adapter.findItem(R.id.mvSwitchPrev).setEnabled(false);
+			}
+			if (varIndex == diceBag.getVariables().size() - 1) {
+				adapter.findItem(R.id.mvSwitchNext).setEnabled(false);
+			}
 		}
 		return super.onPrepareOptionsMenu(adapter);
 	}
@@ -118,6 +143,15 @@ public class VariableDetailDialog extends MenuDialog
 //				variable.getResourceIndex(), 32, 32);
 //	}
 
+
+	@Override
+	public void onItemClick(MenuAdapter parent, View view, int row, int column, long id) {
+		if (asModifier) {
+			//Update variable value because it can be used by menu item.
+			variable.setCurVal(newVal);
+		}
+		super.onItemClick(parent, view, row, column, id);
+	}
 
 	@Override
 	public void onClick(View view) {

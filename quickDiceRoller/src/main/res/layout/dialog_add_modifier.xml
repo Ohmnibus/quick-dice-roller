@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				style="@style/Builder.ValueContainer"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" >
+	<RadioGroup
+		android:id="@+id/rbgMain"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+
+		android:orientation="horizontal">
+		<RadioButton
+			android:id="@+id/rbModifier"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+
+			android:layout_weight="1"
+
+			android:checked="true"
+			android:text="@string/lblModifier"/>
+		<RadioButton
+			android:id="@+id/rbVariable"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+
+			android:layout_weight="1"
+
+			android:text="@string/lblVariable"/>
+	</RadioGroup>
+	<include
+		layout="@layout/dialog_number_picker"
+		android:id="@+id/panelModifiers"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_below="@+id/rbgMain"
+		/>
+	<include
+		layout="@layout/dialog_variable_picker"
+		android:id="@+id/panelVariables"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_below="@+id/rbgMain"
+		android:visibility="gone"
+		/>
+</RelativeLayout>

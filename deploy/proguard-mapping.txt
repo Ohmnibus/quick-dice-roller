@@ -3890,6 +3890,7 @@ ohm.dexp.DExpression -> ohm.a.c:
     void setError(ohm.dexp.exception.DException) -> a
     void setResult(ohm.dexp.TokenBase) -> a
     void evaluate() -> i
+    void addNode(java.util.Stack,ohm.dexp.TokenBase) -> a
     void parse() -> j
     boolean checkTokenOrder(int,int) -> a
     void getToken(java.lang.String,int,ohm.dexp.DExpression$GetTokenResult) -> a
@@ -3903,7 +3904,14 @@ ohm.dexp.DExpression$GetTokenResult -> ohm.a.d:
     ohm.dexp.DExpression this$0 -> e
     void <init>(ohm.dexp.DExpression) -> <init>
     void reset() -> a
-ohm.dexp.DResult -> ohm.a.e:
+ohm.dexp.DExpression$TokenPar -> ohm.a.e:
+    ohm.dexp.DExpression this$0 -> a
+    void <init>(ohm.dexp.DExpression,int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+ohm.dexp.DResult -> ohm.a.f:
     long result -> a
     long maxResult -> b
     long minResult -> c
@@ -3914,11 +3922,11 @@ ohm.dexp.DResult -> ohm.a.e:
     long getMaxRawResult() -> b
     long getMinRawResult() -> c
     java.lang.String getResultText() -> d
-ohm.dexp.Dice -> ohm.a.f:
+ohm.dexp.Dice -> ohm.a.g:
     int iTimes -> a
     int iFaces -> b
     int iModifier -> c
-    long seed -> d
+    java.util.Random alea -> d
     void <init>() -> <init>
     void <init>(int) -> <init>
     void <init>(int,int) -> <init>
@@ -3934,104 +3942,118 @@ ohm.dexp.Dice -> ohm.a.f:
     java.lang.String toString() -> toString
     int getRandomInt() -> d
     void <clinit>() -> <clinit>
-ohm.dexp.TokenBase -> ohm.a.g:
-    int VALUES_PRECISION_FACTOR -> a
-    int VALUES_OUTPUT_PRECISION_FACTOR -> b
-    ohm.dexp.TokenBase parent -> g
-    int nextChild -> h
-    int numChild -> i
-    int maxNumChild -> j
-    ohm.dexp.TokenBase[] childList -> k
-    long resultValue -> c
-    long resultMaxValue -> d
-    long resultMinValue -> e
-    java.lang.String resultString -> f
-    java.text.DecimalFormat format -> l
-    void <init>() -> <init>
-    int getChildNumber() -> a
-    int getMaxChildNumber() -> b
+ohm.dexp.TokenBase -> ohm.a.h:
+    int VALUES_PRECISION_FACTOR -> b
+    int VALUES_OUTPUT_PRECISION_FACTOR -> c
+    ohm.dexp.TokenBase parent -> a
+    int position -> d
+    int nextChild -> i
+    int numChild -> j
+    int maxNumChild -> k
+    ohm.dexp.TokenBase[] childList -> l
+    long resultValue -> e
+    long resultMaxValue -> f
+    long resultMinValue -> g
+    java.lang.String resultString -> h
+    java.text.DecimalFormat format -> m
+    void <init>(int) -> <init>
+    boolean isRightAssociative() -> d
+    int getPosition() -> e
+    int getChildNumber() -> f
+    int getMaxChildNumber() -> g
     void setLeftChild(ohm.dexp.TokenBase) -> a
-    ohm.dexp.TokenBase getLeftChild() -> c
+    ohm.dexp.TokenBase getLeftChild() -> h
     void setRightChild(ohm.dexp.TokenBase) -> b
-    ohm.dexp.TokenBase getRightChild() -> d
+    ohm.dexp.TokenBase getRightChild() -> i
     void setNextChild(ohm.dexp.TokenBase) -> c
-    int nextChildNum() -> e
+    int nextChildNum() -> j
     void setChild(ohm.dexp.TokenBase,int) -> a
     ohm.dexp.TokenBase getChild(int) -> a
-    void evaluate(ohm.dexp.DContext) -> a
-    long getResult() -> f
-    long getRawResult() -> g
-    long getMaxResult() -> h
-    long getMinResult() -> i
-    java.lang.String getResultString() -> j
+    void evaluate(ohm.dexp.DContext) -> b
+    long getResult() -> k
+    long getRawResult() -> l
+    long getMaxResult() -> m
+    long getMinResult() -> n
+    java.lang.String getResultString() -> o
     java.lang.String rawValueToString(long) -> a
-    void reorderMaxMinValues() -> k
+    void reorderMaxMinValues() -> p
     void setParent(ohm.dexp.TokenBase) -> d
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
     void <clinit>() -> <clinit>
-ohm.dexp.TokenOperator -> ohm.a.h:
-    void <init>() -> <init>
-    ohm.dexp.TokenOperator InitToken(java.lang.String) -> a
-ohm.dexp.TokenOperatorAdd -> ohm.a.i:
-    void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
-ohm.dexp.TokenOperatorDice -> ohm.a.j:
-    void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
-ohm.dexp.TokenOperatorDivide -> ohm.a.k:
-    void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
-ohm.dexp.TokenOperatorMultiply -> ohm.a.l:
-    void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
-ohm.dexp.TokenOperatorSubtract -> ohm.a.m:
-    void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
-ohm.dexp.TokenRoot -> ohm.a.n:
+ohm.dexp.TokenOperator -> ohm.a.i:
+    void <init>(int) -> <init>
+    ohm.dexp.TokenOperator InitToken(java.lang.String,int) -> a
+ohm.dexp.TokenOperatorAdd -> ohm.a.j:
+    boolean unary -> a
+    void <init>(int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+    boolean isUnary() -> r
+    void setUnary(boolean) -> a
+ohm.dexp.TokenOperatorDice -> ohm.a.k:
+    boolean unary -> a
+    void <init>(int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+    boolean isUnary() -> r
+    void setUnary(boolean) -> a
+ohm.dexp.TokenOperatorDivide -> ohm.a.l:
+    void <init>(int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+ohm.dexp.TokenOperatorMultiply -> ohm.a.m:
+    void <init>(int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+ohm.dexp.TokenOperatorSubtract -> ohm.a.n:
+    boolean unary -> a
+    void <init>(int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+    boolean isUnary() -> r
+    void setUnary(boolean) -> a
+ohm.dexp.TokenRoot -> ohm.a.o:
     void <init>(ohm.dexp.TokenBase) -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
     void setParent(ohm.dexp.TokenBase) -> d
-ohm.dexp.TokenValue -> ohm.a.o:
-    void <init>() -> <init>
-    ohm.dexp.TokenValue InitToken(long) -> b
+ohm.dexp.TokenValue -> ohm.a.p:
+    void <init>(int) -> <init>
+    ohm.dexp.TokenValue InitToken(long,int) -> a
     ohm.dexp.TokenValue InitToken(java.lang.String,int) -> a
     long ParseRawValue(java.lang.String) -> a
-ohm.dexp.TokenValueConstant -> ohm.a.p:
-    void <init>(long) -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
-ohm.dexp.TokenValueVariable -> ohm.a.q:
-    java.lang.String name -> g
-    int position -> h
+ohm.dexp.TokenValueConstant -> ohm.a.q:
+    void <init>(long,int) -> <init>
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+ohm.dexp.TokenValueVariable -> ohm.a.r:
+    java.lang.String name -> a
     void <init>(java.lang.String,int) -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    int getPriority() -> c
+    void evaluateSelf(ohm.dexp.DContext) -> a
+ohm.dexp.UnaryOperator -> ohm.a.s:
+    boolean isUnary() -> r
+    void setUnary(boolean) -> a
 ohm.dexp.exception.DException -> ohm.a.a.a:
     void <init>() -> <init>
     void <init>(java.lang.String,java.lang.Throwable) -> <init>
@@ -4084,178 +4106,166 @@ ohm.dexp.exception.UnknownVariable -> ohm.a.a.o:
     java.lang.String getName() -> a
     int getPosition() -> b
 ohm.dexp.function.TokenFunction -> ohm.a.b.a:
-    java.util.Hashtable _allowedFunctions -> g
+    java.util.Hashtable _allowedFunctions -> a
     void <init>() -> <init>
-    ohm.dexp.function.TokenFunction InitToken(java.lang.String) -> a
+    ohm.dexp.function.TokenFunction InitToken(java.lang.String,int) -> a
     void addFunction(java.lang.String,java.lang.Class) -> a
     java.lang.String getFunctionName(java.lang.Class) -> a
     long getOptionalChildRawResult(ohm.dexp.DContext,int,long) -> a
+    int getPriority() -> c
     void <clinit>() -> <clinit>
 ohm.dexp.function.TokenFunctionAbs -> ohm.a.b.b:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionBASH -> ohm.a.b.c:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionBWheel -> ohm.a.b.d:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    boolean emitGlitch() -> p
+    int initChildNumber() -> a
+    int getType() -> b
+    boolean emitGlitch() -> r
 ohm.dexp.function.TokenFunctionBranch -> ohm.a.b.e:
-    ohm.dexp.TokenBase tokenRoll -> g
-    boolean tokenRollEvaluated -> h
-    long target -> i
-    int branchNum -> j
-    int totalRollNumber -> k
+    ohm.dexp.TokenBase tokenRoll -> a
+    boolean tokenRollEvaluated -> i
+    long target -> j
+    int branchNum -> k
+    int totalRollNumber -> l
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
     void singleRoll(ohm.dexp.DContext) -> c
 ohm.dexp.function.TokenFunctionDWars -> ohm.a.b.f:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    boolean extraSuccessOnRollAgain() -> q
-    boolean emitGlitch() -> p
+    int initChildNumber() -> a
+    int getType() -> b
+    boolean extraSuccessOnRollAgain() -> s
+    boolean emitGlitch() -> r
 ohm.dexp.function.TokenFunctionExalted -> ohm.a.b.g:
-    int target -> h
-    int oneCount -> i
+    int target -> i
+    int oneCount -> j
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
+    int initChildNumber() -> a
+    int getType() -> b
     void initSequence(ohm.dexp.DContext) -> c
     int getPoolSize(ohm.dexp.DContext) -> d
-    int getPoolIndex() -> p
+    int getPoolIndex() -> r
     int getRoll(ohm.dexp.DContext) -> e
     int countSuccesses(ohm.dexp.DContext,int) -> a
     void endSequence(ohm.dexp.DContext) -> f
     long getMaxPoolSize(ohm.dexp.DContext) -> g
 ohm.dexp.function.TokenFunctionExp -> ohm.a.b.h:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionExpUp -> ohm.a.b.i:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
     void evaluateExplode(ohm.dexp.DContext,ohm.dexp.TokenBase,long,ohm.dexp.TokenBase,long,long) -> a
 ohm.dexp.function.TokenFunctionExplode -> ohm.a.b.j:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionExplodeBase -> ohm.a.b.k:
     void <init>() -> <init>
-    int getPriority() -> o
     void evaluateExplode(ohm.dexp.DContext,ohm.dexp.TokenBase,long,long,long,long) -> a
     void evaluateExplode(ohm.dexp.DContext,ohm.dexp.TokenBase,long,long,long,long,boolean) -> a
     boolean loopLessExplosion(ohm.dexp.DContext,ohm.dexp.TokenBase,long) -> a
     boolean loopLessExplosion(ohm.dexp.DContext,ohm.dexp.TokenBase,long,long) -> a
 ohm.dexp.function.TokenFunctionExplodeUp -> ohm.a.b.l:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionHERO -> ohm.a.b.m:
-    ohm.dexp.Dice standardDice -> g
+    ohm.dexp.Dice standardDice -> a
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
     void <clinit>() -> <clinit>
 ohm.dexp.function.TokenFunctionMax -> ohm.a.b.n:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionMin -> ohm.a.b.o:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionNWoD -> ohm.a.b.p:
-    int poolSize -> h
-    int target -> i
+    int poolSize -> i
+    int target -> j
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
+    int initChildNumber() -> a
+    int getType() -> b
     void initSequence(ohm.dexp.DContext) -> c
     int getPoolSize(ohm.dexp.DContext) -> d
-    int getPoolIndex() -> p
+    int getPoolIndex() -> r
     int getRoll(ohm.dexp.DContext) -> e
     int countSuccesses(ohm.dexp.DContext,int) -> a
     void endSequence(ohm.dexp.DContext) -> f
     long getMaxPoolSize(ohm.dexp.DContext) -> g
 ohm.dexp.function.TokenFunctionOWoD -> ohm.a.b.q:
-    int target -> h
-    int oneCount -> i
+    int target -> i
+    int oneCount -> j
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
+    int initChildNumber() -> a
+    int getType() -> b
     void initSequence(ohm.dexp.DContext) -> c
     int getPoolSize(ohm.dexp.DContext) -> d
-    int getPoolIndex() -> p
+    int getPoolIndex() -> r
     int getRoll(ohm.dexp.DContext) -> e
     int countSuccesses(ohm.dexp.DContext,int) -> a
     void endSequence(ohm.dexp.DContext) -> f
     long getMaxPoolSize(ohm.dexp.DContext) -> g
 ohm.dexp.function.TokenFunctionPool -> ohm.a.b.r:
-    ohm.dexp.TokenBase roll -> h
-    int poolSize -> i
-    int target -> j
-    boolean isDouble -> k
-    int doubleTarget -> l
-    boolean isFail -> m
-    int failTarget -> n
-    boolean isReroll -> o
-    int reRollTarget -> p
-    boolean isRollLimit -> q
-    int maxRollLimit -> r
-    int lastPoolRollNumber -> s
-    int lastPoolRollExplosions -> t
+    ohm.dexp.TokenBase roll -> i
+    int poolSize -> j
+    int target -> k
+    boolean isDouble -> l
+    int doubleTarget -> m
+    boolean isFail -> n
+    int failTarget -> o
+    boolean isReroll -> p
+    int reRollTarget -> q
+    boolean isRollLimit -> r
+    int maxRollLimit -> s
+    int lastPoolRollNumber -> t
+    int lastPoolRollExplosions -> u
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    int getPriority() -> o
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
     void initSequence(ohm.dexp.DContext) -> c
     int getPoolSize(ohm.dexp.DContext) -> d
-    int getPoolIndex() -> p
+    int getPoolIndex() -> r
     int getRoll(ohm.dexp.DContext) -> e
     int countSuccesses(ohm.dexp.DContext,int) -> a
     void endSequence(ohm.dexp.DContext) -> f
     long getMaxPoolSize(ohm.dexp.DContext) -> g
     boolean rollAgain(ohm.dexp.DContext,int,int) -> a
 ohm.dexp.function.TokenFunctionPoolBase -> ohm.a.b.s:
-    ohm.dexp.Dice standardDice -> g
+    ohm.dexp.Dice standardDice -> a
     void <init>() -> <init>
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
     boolean rollAgain(ohm.dexp.DContext,int,int) -> a
     void initSequence(ohm.dexp.DContext) -> c
     int getPoolSize(ohm.dexp.DContext) -> d
-    int getPoolIndex() -> p
+    int getPoolIndex() -> r
     int getRoll(ohm.dexp.DContext) -> e
     int countSuccesses(ohm.dexp.DContext,int) -> a
     void endSequence(ohm.dexp.DContext) -> f
@@ -4263,65 +4273,66 @@ ohm.dexp.function.TokenFunctionPoolBase -> ohm.a.b.s:
     void <clinit>() -> <clinit>
 ohm.dexp.function.TokenFunctionRandom -> ohm.a.b.t:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionReroll -> ohm.a.b.u:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionRolemaster -> ohm.a.b.v:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionRollAndKeep -> ohm.a.b.w:
-    long[] rollValues -> g
-    boolean[] validValues -> h
+    long[] rollValues -> a
+    boolean[] validValues -> i
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int initOptionalChildNumber() -> m
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int initOptionalChildNumber() -> q
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
 ohm.dexp.function.TokenFunctionRoundDown -> ohm.a.b.x:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
     long round(long) -> b
 ohm.dexp.function.TokenFunctionRoundUp -> ohm.a.b.y:
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
-    void evaluateSelf(ohm.dexp.DContext) -> b
+    int initChildNumber() -> a
+    int getType() -> b
+    void evaluateSelf(ohm.dexp.DContext) -> a
     long round(long) -> b
 ohm.dexp.function.TokenFunctionShRun4 -> ohm.a.b.z:
     void <init>() -> <init>
-    int getType() -> n
+    int getType() -> b
     boolean isGlitch(int,int) -> a
 ohm.dexp.function.TokenFunctionShRun5 -> ohm.a.b.aa:
-    ohm.dexp.TokenBase roll -> g
-    int poolSize -> h
-    int target -> i
-    int rollAgain -> j
-    int glitchTarget -> k
+    ohm.dexp.TokenBase roll -> a
+    int poolSize -> i
+    int target -> j
+    int rollAgain -> k
+    int glitchTarget -> l
     void <init>() -> <init>
-    int initChildNumber() -> l
-    int getType() -> n
-    int getPriority() -> o
+    int initChildNumber() -> a
+    int getType() -> b
     void initSequence(ohm.dexp.DContext) -> c
     long getMaxPoolSize(ohm.dexp.DContext) -> d
-    void evaluateSelf(ohm.dexp.DContext) -> b
-    boolean extraSuccessOnRollAgain() -> q
-    boolean emitGlitch() -> p
+    void evaluateSelf(ohm.dexp.DContext) -> a
+    boolean extraSuccessOnRollAgain() -> s
+    boolean emitGlitch() -> r
     boolean isGlitch(int,int) -> a
+ohm.dexp.random.XORoShiRoRandom -> ohm.a.c.a:
+    long[] seeds -> a
+    void <init>() -> <init>
+    void setSeed(long) -> setSeed
+    long splitMix(long) -> a
+    int next(int) -> next
+    long rotl(long,int) -> a
 ohm.library.adapter.CachedArrayAdapter -> ohm.library.a.a:
     android.view.LayoutInflater mInflater -> a
     int mViewId -> b
@@ -4761,6 +4772,7 @@ ohm.quickdice.QuickDiceApp$1 -> ohm.quickdice.a:
 ohm.quickdice.R -> ohm.quickdice.b:
 ohm.quickdice.R$styleable -> ohm.quickdice.c:
     int[] OhmThemeAttrs -> OhmThemeAttrs
+    int OhmThemeAttrs_ohmAddCircleDrawable -> OhmThemeAttrs_ohmAddCircleDrawable
     int OhmThemeAttrs_ohmDialogTheme -> OhmThemeAttrs_ohmDialogTheme
     int OhmThemeAttrs_ohmDiceBagDrawer -> OhmThemeAttrs_ohmDiceBagDrawer
     int OhmThemeAttrs_ohmDiceGridContainer -> OhmThemeAttrs_ohmDiceGridContainer
@@ -4771,6 +4783,7 @@ ohm.quickdice.R$styleable -> ohm.quickdice.c:
     int OhmThemeAttrs_ohmLokLogoEmboss -> OhmThemeAttrs_ohmLokLogoEmboss
     int OhmThemeAttrs_ohmMainAppContainer -> OhmThemeAttrs_ohmMainAppContainer
     int OhmThemeAttrs_ohmModifiersContainer -> OhmThemeAttrs_ohmModifiersContainer
+    int OhmThemeAttrs_ohmRemoveCircleDrawable -> OhmThemeAttrs_ohmRemoveCircleDrawable
     int OhmThemeAttrs_ohmResizeHandleHorizontal -> OhmThemeAttrs_ohmResizeHandleHorizontal
     int OhmThemeAttrs_ohmResizeHandleVertical -> OhmThemeAttrs_ohmResizeHandleVertical
     int OhmThemeAttrs_ohmRollListContainer -> OhmThemeAttrs_ohmRollListContainer
@@ -5205,6 +5218,7 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     int LINK_LEVEL_ON -> P
     java.lang.String KEY_ROLL_LIST -> Q
     java.lang.String TYPE_MODIFIER -> R
+    java.lang.String TYPE_VARIABLE -> S
     long contextMenuCooledDown -> C
     int modifierOpeningMenu -> D
     int targetItem -> E
@@ -5214,9 +5228,9 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     android.view.View$OnClickListener modifierClickListener -> I
     android.view.View$OnClickListener linkSwitchButtonClickListener -> J
     android.content.DialogInterface$OnClickListener cancelDialogClickListener -> K
-    java.util.concurrent.ThreadPoolExecutor executor -> S
-    ohm.quickdice.activity.QuickDiceMainActivity$DoRoll roller -> T
-    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener modifierCreatedListener -> U
+    java.util.concurrent.ThreadPoolExecutor executor -> T
+    ohm.quickdice.activity.QuickDiceMainActivity$DoRoll roller -> U
+    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener modifierCreatedListener -> V
     ohm.quickdice.activity.QuickDiceMainActivity$CenterInParent centerInParentAgent -> L
     ohm.quickdice.activity.QuickDiceMainActivity$ResetLinkSwitch resetLinkSwitchAgent -> M
     android.os.Handler myHandler -> N
@@ -5235,10 +5249,11 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     boolean checkCoolDown() -> a
     void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
     void setupDiceBagMenu(android.view.ContextMenu,int) -> a
-    void setupVariableMenu(android.view.ContextMenu,int) -> b
-    void setupDiceMenu(android.view.ContextMenu,int) -> c
-    void setupModifierMenu(android.view.ContextMenu,int) -> d
-    void setupRollMenu(android.view.ContextMenu,int) -> e
+    void setupVariableMenu(android.view.ContextMenu,int,boolean,android.util.SparseBooleanArray) -> a
+    void setupDiceMenu(android.view.ContextMenu,int) -> b
+    void setupModifierMenu(android.view.ContextMenu,int) -> c
+    android.util.SparseBooleanArray getHiddenModifiersMenuItems(int) -> a
+    void setupRollMenu(android.view.ContextMenu,int) -> d
     boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
     boolean onDiceBagContextItemSelected(android.view.MenuItem,android.widget.AdapterView$AdapterContextMenuInfo) -> a
     boolean onDiceContextItemSelected(android.view.MenuItem,android.widget.AdapterView$AdapterContextMenuInfo) -> b
@@ -5256,7 +5271,7 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     void initLastResultView() -> j
     void introAnimation() -> k
     void refreshLinkSwitchButton() -> l
-    void doModifier(ohm.quickdice.entity.RollModifier) -> a
+    void doModifier(ohm.quickdice.entity.Modifier) -> a
     void doRoll(ohm.quickdice.entity.Dice) -> a
     void handleResult(ohm.quickdice.entity.RollResult) -> a
     boolean checkLinkRoll() -> m
@@ -5274,7 +5289,7 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     void refreshAllDiceContainers() -> u
     void refreshAllDiceContainers(boolean) -> a
     void callPreferences() -> v
-    void clearRollResult(int) -> a
+    void clearRollResult(int) -> b
     void clearRollResult(int[]) -> a
     void invalidateUndo() -> w
     void restoreFromUndoList() -> x
@@ -5282,26 +5297,28 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     void restoreFromUndoAll() -> z
     void callImportExport() -> A
     ohm.quickdice.entity.RollResult[] linkResult(ohm.quickdice.entity.RollResult[],ohm.quickdice.entity.RollResult[]) -> a
-    void callAddModifier(int) -> b
+    void callAddModifier(int) -> c
     void moveDice(int,int,int,int) -> a
     void addModifier(int,int) -> a
-    void resetLinkSwitch(int) -> c
+    void addModifier(java.lang.String,int) -> a
+    void resetLinkSwitch(int) -> d
     void centerInParent(android.view.View) -> a
     void access$000(ohm.quickdice.activity.QuickDiceMainActivity) -> a
     void access$100(ohm.quickdice.activity.QuickDiceMainActivity) -> b
     void access$200(ohm.quickdice.activity.QuickDiceMainActivity) -> c
-    void access$300(ohm.quickdice.activity.QuickDiceMainActivity,int,int,int,int) -> a
-    void access$400(ohm.quickdice.activity.QuickDiceMainActivity) -> d
+    void access$300(ohm.quickdice.activity.QuickDiceMainActivity) -> d
+    void access$400(ohm.quickdice.activity.QuickDiceMainActivity,int,int,int,int) -> a
     void access$500(ohm.quickdice.activity.QuickDiceMainActivity,int[]) -> a
     boolean access$600(ohm.quickdice.activity.QuickDiceMainActivity) -> e
     void access$700(ohm.quickdice.activity.QuickDiceMainActivity,int) -> a
     void access$800(ohm.quickdice.activity.QuickDiceMainActivity) -> f
     void access$900(ohm.quickdice.activity.QuickDiceMainActivity,ohm.quickdice.entity.Dice) -> a
-    void access$1000(ohm.quickdice.activity.QuickDiceMainActivity,ohm.quickdice.entity.RollModifier) -> a
+    void access$1000(ohm.quickdice.activity.QuickDiceMainActivity,ohm.quickdice.entity.Modifier) -> a
     void access$1100(ohm.quickdice.activity.QuickDiceMainActivity) -> g
     void access$1200(ohm.quickdice.activity.QuickDiceMainActivity,ohm.quickdice.entity.RollResult) -> a
     void access$1300(ohm.quickdice.activity.QuickDiceMainActivity,ohm.dexp.exception.DException) -> a
     void access$1400(ohm.quickdice.activity.QuickDiceMainActivity,int,int) -> a
+    void access$1500(ohm.quickdice.activity.QuickDiceMainActivity,java.lang.String,int) -> a
 ohm.quickdice.activity.QuickDiceMainActivity$1 -> ohm.quickdice.activity.af:
     ohm.quickdice.activity.QuickDiceMainActivity this$0 -> a
     void <init>(ohm.quickdice.activity.QuickDiceMainActivity) -> <init>
@@ -5359,7 +5376,7 @@ ohm.quickdice.activity.QuickDiceMainActivity$20 -> ohm.quickdice.activity.ar:
 ohm.quickdice.activity.QuickDiceMainActivity$21 -> ohm.quickdice.activity.as:
     ohm.quickdice.activity.QuickDiceMainActivity this$0 -> a
     void <init>(ohm.quickdice.activity.QuickDiceMainActivity) -> <init>
-    void onCreated(boolean,int,int) -> a
+    void onCreated(boolean,int,int,java.lang.String) -> a
 ohm.quickdice.activity.QuickDiceMainActivity$3 -> ohm.quickdice.activity.at:
     ohm.quickdice.activity.QuickDiceMainActivity this$0 -> a
     void <init>(ohm.quickdice.activity.QuickDiceMainActivity) -> <init>
@@ -5681,7 +5698,7 @@ ohm.quickdice.control.PersistenceManager -> ohm.quickdice.b.d:
     android.net.Uri getSystemArchiveUri() -> b
     int readDiceBagManager(ohm.quickdice.control.DiceBagManager,android.net.Uri) -> a
     int readDiceBagManager(ohm.quickdice.control.DiceBagManager,android.net.Uri,int) -> a
-    int writeDiceBagManager(ohm.quickdice.control.DiceBagManager,android.net.Uri,int) -> b
+    int writeDiceBagManager(ohm.quickdice.control.DiceBagManager,android.net.Uri,boolean,int) -> a
     boolean loadModifierCollection(ohm.quickdice.entity.ModifierCollection) -> a
     boolean loadDiceCollection(ohm.quickdice.entity.DiceCollection) -> a
     void saveResultList(ohm.quickdice.entity.RollResult[],java.util.ArrayList) -> a
@@ -5753,7 +5770,7 @@ ohm.quickdice.control.PreferenceManager -> ohm.quickdice.b.f:
     int getMaxResultList() -> A
     int getMaxResultUndo() -> B
 ohm.quickdice.control.SerializationManager -> ohm.quickdice.b.g:
-    void DiceBagManager(java.io.OutputStream,ohm.quickdice.control.DiceBagManager) -> a
+    void DiceBagManager(java.io.OutputStream,ohm.quickdice.control.DiceBagManager,boolean) -> a
     void DiceBagManager(java.io.InputStream,ohm.quickdice.control.DiceBagManager) -> a
     java.lang.String DiceBagSafe(ohm.quickdice.entity.DiceBag) -> a
     java.lang.String DiceBag(ohm.quickdice.entity.DiceBag) -> b
@@ -5788,7 +5805,7 @@ ohm.quickdice.control.SerializationManager -> ohm.quickdice.b.g:
     void serializeResultBlock(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.RollResult[]) -> a
     java.util.ArrayList deserializeResultList(java.io.InputStream) -> c
     ohm.quickdice.entity.RollResult[] deserializeResultBlock(com.google.gson.stream.JsonReader) -> b
-    void serializeDiceBagManager(java.io.OutputStream,ohm.quickdice.control.DiceBagManager) -> b
+    void serializeDiceBagManager(java.io.OutputStream,ohm.quickdice.control.DiceBagManager,boolean) -> b
     void deserializeDiceBagManager(java.io.InputStream,ohm.quickdice.control.DiceBagManager) -> b
     void serializeDiceBagCollection(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.DiceBagCollection) -> a
     void deserializeDiceBagCollection(com.google.gson.stream.JsonReader,ohm.quickdice.entity.DiceBagCollection) -> a
@@ -5803,13 +5820,13 @@ ohm.quickdice.control.SerializationManager -> ohm.quickdice.b.g:
     void deserializeVariableCollection(com.google.gson.stream.JsonReader,ohm.quickdice.entity.VariableCollection) -> a
     ohm.quickdice.entity.Variable deserializeVariable(com.google.gson.stream.JsonReader) -> e
     void serializeModifierCollection(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.ModifierCollection) -> a
-    void serializeModifier(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.RollModifier) -> a
+    void serializeModifier(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.Modifier) -> a
     void deserializeModifierCollection(com.google.gson.stream.JsonReader,ohm.quickdice.entity.ModifierCollection) -> a
-    ohm.quickdice.entity.RollModifier deserializeModifier(com.google.gson.stream.JsonReader) -> f
-    void serializeIconCollection(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.IconCollection) -> a
-    void deserializeIconCollection(com.google.gson.stream.JsonReader,ohm.quickdice.entity.IconCollection) -> a
-    void serializeIcon(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.Icon) -> a
-    ohm.quickdice.entity.Icon deserializeIcon(com.google.gson.stream.JsonReader) -> g
+    ohm.quickdice.entity.Modifier deserializeModifier(com.google.gson.stream.JsonReader) -> f
+    void serializeIconCollection(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.IconCollection,boolean) -> a
+    void deserializeIconCollection(com.google.gson.stream.JsonReader,ohm.quickdice.entity.IconCollection,java.io.File) -> a
+    void serializeIcon(com.google.gson.stream.JsonWriter,ohm.quickdice.entity.Icon,boolean) -> a
+    ohm.quickdice.entity.Icon deserializeIcon(com.google.gson.stream.JsonReader,java.io.File) -> a
 ohm.quickdice.control.SerializationManager$InvalidVersionException -> ohm.quickdice.b.h:
     void <init>() -> <init>
     void <init>(java.lang.String) -> <init>
@@ -6027,35 +6044,54 @@ ohm.quickdice.dialog.MenuDialog$AsyncResizer -> ohm.quickdice.c.y:
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ohm.quickdice.dialog.ModifierBuilderDialog -> ohm.quickdice.c.z:
-    int position -> a
-    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener onCreatedListener -> b
+    android.view.View panelMod -> a
+    android.view.View panelVar -> b
+    android.widget.RadioGroup radioGroup -> c
+    int curIndex -> d
+    ohm.quickdice.entity.Variable curItem -> e
+    android.widget.ListView listView -> f
+    ohm.quickdice.adapter.VariableAdapter adapter -> g
+    int position -> h
+    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener onCreatedListener -> i
+    android.widget.AdapterView$OnItemClickListener listItemClickListener -> j
     void <init>(android.content.Context,int,ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener) -> <init>
+    void onClick(android.content.DialogInterface,int) -> onClick
+    void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
     void onNumberPicked(boolean,int) -> a
-ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener -> ohm.quickdice.c.aa:
-    void onCreated(boolean,int,int) -> a
-ohm.quickdice.dialog.NumberPickerDialog -> ohm.quickdice.c.ab:
-    java.lang.String title -> c
-    java.lang.String message -> d
-    int defaultValue -> e
-    int digits -> f
-    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener onNumberPickedListener -> g
-    kankan.wheel.widget.WheelView signWheel -> h
-    kankan.wheel.widget.WheelView hundWheel -> i
-    kankan.wheel.widget.WheelView tensWheel -> j
-    kankan.wheel.widget.WheelView unitWheel -> k
+    void onVariablePicked(boolean,java.lang.String) -> a
+    void initHead() -> a
+    void initViews() -> b
+ohm.quickdice.dialog.ModifierBuilderDialog$1 -> ohm.quickdice.c.aa:
+    ohm.quickdice.dialog.ModifierBuilderDialog this$0 -> a
+    void <init>(ohm.quickdice.dialog.ModifierBuilderDialog) -> <init>
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener -> ohm.quickdice.c.ab:
+    void onCreated(boolean,int,int,java.lang.String) -> a
+ohm.quickdice.dialog.NumberPickerDialog -> ohm.quickdice.c.ac:
+    java.lang.String title -> k
+    java.lang.String message -> l
+    int defaultValue -> m
+    int digits -> n
+    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener onNumberPickedListener -> o
+    kankan.wheel.widget.WheelView signWheel -> p
+    kankan.wheel.widget.WheelView hundWheel -> q
+    kankan.wheel.widget.WheelView tensWheel -> r
+    kankan.wheel.widget.WheelView unitWheel -> s
     void <init>(android.content.Context,int,int,int,int,ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener) -> <init>
     void <init>(android.content.Context,java.lang.String,java.lang.String,int,int,ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener) -> <init>
     long pow(long,int) -> a
     boolean isEven(int) -> a
     void onCreate(android.os.Bundle) -> onCreate
+    void initHead() -> a
+    void initViews() -> b
     kankan.wheel.widget.WheelView initWheel(int,int,kankan.wheel.widget.adapters.WheelViewAdapter) -> a
     kankan.wheel.widget.WheelView getWheel(int) -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener -> ohm.quickdice.c.ac:
+ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener -> ohm.quickdice.c.ad:
     void onNumberPicked(boolean,int) -> a
-ohm.quickdice.dialog.OnExpressionCheckedListener -> ohm.quickdice.c.ad:
+ohm.quickdice.dialog.OnExpressionCheckedListener -> ohm.quickdice.c.ae:
     void onExpressionChecked(boolean) -> a
-ohm.quickdice.dialog.RollDetailDialog -> ohm.quickdice.c.ae:
+ohm.quickdice.dialog.RollDetailDialog -> ohm.quickdice.c.af:
     ohm.quickdice.entity.RollResult[] lastResult -> a
     java.util.ArrayList resultList -> b
     int resultIndex -> c
@@ -6067,23 +6103,30 @@ ohm.quickdice.dialog.RollDetailDialog -> ohm.quickdice.c.ae:
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View getHeaderView(android.view.LayoutInflater,android.widget.ListView) -> a
     boolean onPrepareOptionsMenu(ohm.quickdice.adapter.MenuAdapter) -> a
-ohm.quickdice.dialog.VariableDetailDialog -> ohm.quickdice.c.af:
+ohm.quickdice.dialog.VariableDetailDialog -> ohm.quickdice.c.ag:
     ohm.quickdice.entity.DiceBag diceBag -> a
     int varIndex -> b
     ohm.quickdice.entity.Variable variable -> c
     int newVal -> d
     android.widget.TextView lvlValue -> e
     android.widget.SeekBar sbValue -> f
-    void <init>(android.app.Activity,android.view.Menu,ohm.quickdice.entity.DiceBag,int) -> <init>
+    android.widget.ImageButton cmdIncrease -> g
+    android.widget.ImageButton cmdDecrease -> h
+    boolean asModifier -> i
+    android.util.SparseBooleanArray hiddenMenuItems -> j
+    void <init>(android.app.Activity,android.view.Menu,ohm.quickdice.entity.DiceBag,int,boolean,android.util.SparseBooleanArray) -> <init>
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View getHeaderView(android.view.LayoutInflater,android.widget.ListView) -> a
+    void setValue(int) -> a
     void refreshValue() -> a
     boolean onPrepareOptionsMenu(ohm.quickdice.adapter.MenuAdapter) -> a
+    void onItemClick(ohm.quickdice.adapter.MenuAdapter,android.view.View,int,int,long) -> a
+    void onClick(android.view.View) -> onClick
     void onProgressChanged(android.widget.SeekBar,int,boolean) -> onProgressChanged
     void onStartTrackingTouch(android.widget.SeekBar) -> onStartTrackingTouch
     void onStopTrackingTouch(android.widget.SeekBar) -> onStopTrackingTouch
     void onDismiss(android.content.DialogInterface) -> onDismiss
-ohm.quickdice.dialog.VariablePickerDialog -> ohm.quickdice.c.ag:
+ohm.quickdice.dialog.VariablePickerDialog -> ohm.quickdice.c.ah:
     android.content.Context context -> a
     int titleId -> b
     int curIndex -> c
@@ -6100,13 +6143,13 @@ ohm.quickdice.dialog.VariablePickerDialog -> ohm.quickdice.c.ag:
     void initViews() -> a
     void onClick(android.content.DialogInterface,int) -> onClick
     net.londatiga.android.ActionItem getActionItem(android.content.Context,net.londatiga.android.PopupMenu,ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener) -> a
-ohm.quickdice.dialog.VariablePickerDialog$1 -> ohm.quickdice.c.ah:
+ohm.quickdice.dialog.VariablePickerDialog$1 -> ohm.quickdice.c.ai:
     ohm.quickdice.dialog.VariablePickerDialog this$0 -> a
     void <init>(ohm.quickdice.dialog.VariablePickerDialog) -> <init>
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ohm.quickdice.dialog.VariablePickerDialog$OnItemSelectedListener -> ohm.quickdice.c.ai:
+ohm.quickdice.dialog.VariablePickerDialog$OnItemSelectedListener -> ohm.quickdice.c.aj:
     void onItemSelected(boolean,int,java.lang.Object) -> a
-ohm.quickdice.dialog.VariablePickerDialog$VariablePickerActionItemClickListener -> ohm.quickdice.c.aj:
+ohm.quickdice.dialog.VariablePickerDialog$VariablePickerActionItemClickListener -> ohm.quickdice.c.ak:
     net.londatiga.android.PopupMenu parent -> a
     ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener diceBuiltListener -> b
     android.view.View refView -> c
@@ -6276,6 +6319,7 @@ ohm.quickdice.entity.Icon$CustomIcon -> ohm.quickdice.d.j:
     void checkMoveFile() -> f
     ohm.quickdice.entity.Icon$CustomIcon createIcon(android.content.Context,android.net.Uri) -> b
     java.io.File getTempFile(android.content.Context) -> d
+    java.io.File getIconFile(java.io.File,int) -> a
     void <clinit>() -> <clinit>
 ohm.quickdice.entity.Icon$SystemIcon -> ohm.quickdice.d.k:
     int drawableResId -> c
@@ -6320,21 +6364,29 @@ ohm.quickdice.entity.IconCollection -> ohm.quickdice.d.l:
     void loadDrawable(android.widget.ImageView,int) -> a
     java.lang.Object get(int) -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.entity.ModifierCollection -> ohm.quickdice.d.m:
+ohm.quickdice.entity.Modifier -> ohm.quickdice.d.m:
+    java.lang.String getName() -> a
+    java.lang.String getDescription() -> b
+    int getValue() -> c
+    java.lang.String getValueString() -> d
+    int getResourceIndex() -> e
+    void setParent(ohm.quickdice.entity.DiceBag) -> a
+ohm.quickdice.entity.ModifierCollection -> ohm.quickdice.d.n:
     java.util.ArrayList modifierList -> a
     ohm.quickdice.entity.DiceBag owner -> b
     void <init>(ohm.quickdice.entity.DiceBag) -> <init>
-    int add(ohm.quickdice.entity.RollModifier) -> a
-    int add(int,ohm.quickdice.entity.RollModifier) -> a
-    ohm.quickdice.entity.RollModifier remove(int) -> a
+    int add(ohm.quickdice.entity.Modifier) -> a
+    int add(int,ohm.quickdice.entity.Modifier) -> a
+    ohm.quickdice.entity.Modifier remove(int) -> a
     boolean move(int,int) -> a
     boolean move(int,int,int,int) -> a
-    ohm.quickdice.entity.RollModifier get(int) -> b
+    ohm.quickdice.entity.Modifier get(int) -> b
     int size() -> a
     void clear() -> b
     void setChanged() -> c
+    boolean containVariables() -> d
     java.util.Iterator iterator() -> iterator
-ohm.quickdice.entity.MostRecentFile -> ohm.quickdice.d.n:
+ohm.quickdice.entity.MostRecentFile -> ohm.quickdice.d.o:
     java.lang.String name -> a
     int bagsNum -> b
     int diceNum -> c
@@ -6352,7 +6404,7 @@ ohm.quickdice.entity.MostRecentFile -> ohm.quickdice.d.n:
     java.util.Date getLastUsed() -> g
     int compareTo(ohm.quickdice.entity.MostRecentFile) -> a
     int compareTo(java.lang.Object) -> compareTo
-ohm.quickdice.entity.RollModifier -> ohm.quickdice.d.o:
+ohm.quickdice.entity.RollModifier -> ohm.quickdice.d.p:
     java.lang.String title -> a
     java.lang.String description -> b
     int value -> c
@@ -6366,7 +6418,7 @@ ohm.quickdice.entity.RollModifier -> ohm.quickdice.d.o:
     java.lang.String getValueString() -> d
     int getResourceIndex() -> e
     void setParent(ohm.quickdice.entity.DiceBag) -> a
-ohm.quickdice.entity.RollResult -> ohm.quickdice.d.p:
+ohm.quickdice.entity.RollResult -> ohm.quickdice.d.q:
     int VALUES_PRECISION_FACTOR -> a
     java.lang.String title -> b
     java.lang.String description -> c
@@ -6393,7 +6445,24 @@ ohm.quickdice.entity.RollResult -> ohm.quickdice.d.p:
     boolean isFumble() -> n
     ohm.quickdice.entity.RollResult mergeResultList(ohm.quickdice.entity.RollResult[]) -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.entity.Variable -> ohm.quickdice.d.q:
+ohm.quickdice.entity.VarModifier -> ohm.quickdice.d.r:
+    java.lang.String label -> a
+    ohm.quickdice.entity.Variable ref -> b
+    ohm.quickdice.entity.DiceBag parent -> c
+    java.lang.String title -> d
+    java.lang.String description -> e
+    int value -> f
+    int iconId -> g
+    void <init>(java.lang.String) -> <init>
+    java.lang.String getLabel() -> f
+    java.lang.String getName() -> a
+    java.lang.String getDescription() -> b
+    int getValue() -> c
+    java.lang.String getValueString() -> d
+    int getResourceIndex() -> e
+    void setParent(ohm.quickdice.entity.DiceBag) -> a
+    void initCache() -> g
+ohm.quickdice.entity.Variable -> ohm.quickdice.d.s:
     int id -> b
     java.lang.String name -> c
     java.lang.String description -> d
@@ -6425,7 +6494,7 @@ ohm.quickdice.entity.Variable -> ohm.quickdice.d.q:
     int getCurVal() -> i
     void setParent(ohm.quickdice.entity.DiceBag) -> a
     ohm.quickdice.entity.Dice[] requiredBy() -> j
-ohm.quickdice.entity.VariableCollection -> ohm.quickdice.d.r:
+ohm.quickdice.entity.VariableCollection -> ohm.quickdice.d.t:
     java.util.ArrayList variableList -> a
     ohm.quickdice.entity.DiceBag owner -> b
     ohm.dexp.DContext context -> c
@@ -6533,15 +6602,23 @@ ohm.quickdice.util.BackupAgent -> ohm.quickdice.util.BackupAgent:
     void onCreate() -> onCreate
     void onBackup(android.os.ParcelFileDescriptor,android.app.backup.BackupDataOutput,android.os.ParcelFileDescriptor) -> onBackup
     void onRestore(android.app.backup.BackupDataInput,int,android.os.ParcelFileDescriptor) -> onRestore
-ohm.quickdice.util.Base64 -> ohm.quickdice.util.h:
+ohm.quickdice.util.BackupAgent$FolderBackupHelper -> ohm.quickdice.util.h:
+    java.lang.String folder -> b
+    ohm.quickdice.util.BackupAgent this$0 -> a
+    void <init>(ohm.quickdice.util.BackupAgent,android.content.Context,java.lang.String) -> <init>
+    void performBackup(android.os.ParcelFileDescriptor,android.app.backup.BackupDataOutput,android.os.ParcelFileDescriptor) -> performBackup
+    void restoreEntity(android.app.backup.BackupDataInputStream) -> restoreEntity
+    void packFiles(java.lang.String) -> b
+    void unpackFiles(java.lang.String) -> a
+ohm.quickdice.util.Base64 -> ohm.quickdice.util.i:
     byte[] decode(byte[],int) -> a
     byte[] decode(byte[],int,int,int) -> a
     byte[] encode(byte[],int,int,int) -> b
-ohm.quickdice.util.Base64$Coder -> ohm.quickdice.util.i:
+ohm.quickdice.util.Base64$Coder -> ohm.quickdice.util.j:
     byte[] output -> a
     int op -> b
     void <init>() -> <init>
-ohm.quickdice.util.Base64$Decoder -> ohm.quickdice.util.j:
+ohm.quickdice.util.Base64$Decoder -> ohm.quickdice.util.k:
     int[] DECODE -> c
     int[] DECODE_WEBSAFE -> d
     int state -> e
@@ -6550,7 +6627,7 @@ ohm.quickdice.util.Base64$Decoder -> ohm.quickdice.util.j:
     void <init>(int,byte[]) -> <init>
     boolean process(byte[],int,int,boolean) -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.util.Base64$Encoder -> ohm.quickdice.util.k:
+ohm.quickdice.util.Base64$Encoder -> ohm.quickdice.util.l:
     byte[] ENCODE -> g
     byte[] ENCODE_WEBSAFE -> h
     byte[] tail -> i
@@ -6563,26 +6640,26 @@ ohm.quickdice.util.Base64$Encoder -> ohm.quickdice.util.k:
     void <init>(int,byte[]) -> <init>
     boolean process(byte[],int,int,boolean) -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.util.Behavior -> ohm.quickdice.util.l:
+ohm.quickdice.util.Behavior -> ohm.quickdice.util.m:
     android.view.View$OnTouchListener listOnTouchListener -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.util.Behavior$LongPressListener -> ohm.quickdice.util.m:
+ohm.quickdice.util.Behavior$LongPressListener -> ohm.quickdice.util.n:
     ohm.quickdice.util.Behavior$LongPressListener$CompleteLongPress completeLongPress -> a
     android.os.Handler myHandler -> b
     void <init>() -> <init>
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
     void startLongPressAnimation(android.view.View) -> a
     void resetLongPressAnimation(android.view.View) -> b
-ohm.quickdice.util.Behavior$LongPressListener$CompleteLongPress -> ohm.quickdice.util.n:
+ohm.quickdice.util.Behavior$LongPressListener$CompleteLongPress -> ohm.quickdice.util.o:
     android.view.View mView -> a
     ohm.quickdice.util.Behavior$LongPressListener this$0 -> b
     void <init>(ohm.quickdice.util.Behavior$LongPressListener) -> <init>
     void setView(android.view.View) -> a
     void run() -> run
-ohm.quickdice.util.Behavior$RollResultTouchListener -> ohm.quickdice.util.o:
+ohm.quickdice.util.Behavior$RollResultTouchListener -> ohm.quickdice.util.p:
     void <init>(android.view.View,java.lang.Object,ohm.library.gesture.SwipeDismissTouchListener$DismissCallbacks) -> <init>
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-ohm.quickdice.util.CustomKeyboard -> ohm.quickdice.util.p:
+ohm.quickdice.util.CustomKeyboard -> ohm.quickdice.util.q:
     ohm.library.widget.KeyboardView mKeyboardView -> a
     ohm.quickdice.util.CustomKeyboard$Host mHost -> b
     boolean mHapticFeedback -> c
@@ -6604,7 +6681,7 @@ ohm.quickdice.util.CustomKeyboard -> ohm.quickdice.util.p:
     ohm.library.widget.KeyboardView access$400(ohm.quickdice.util.CustomKeyboard) -> c
     boolean access$500(ohm.quickdice.util.CustomKeyboard) -> d
     boolean access$502(ohm.quickdice.util.CustomKeyboard,boolean) -> a
-ohm.quickdice.util.CustomKeyboard$1 -> ohm.quickdice.util.q:
+ohm.quickdice.util.CustomKeyboard$1 -> ohm.quickdice.util.r:
     java.lang.String[] fncNames -> b
     java.lang.String[] fncLabels -> c
     java.lang.String[] curLabels -> d
@@ -6626,41 +6703,41 @@ ohm.quickdice.util.CustomKeyboard$1 -> ohm.quickdice.util.q:
     void swipeUp() -> swipeUp
     android.widget.EditText access$100(ohm.quickdice.util.CustomKeyboard$1) -> a
     java.lang.String[] access$200(ohm.quickdice.util.CustomKeyboard$1) -> b
-ohm.quickdice.util.CustomKeyboard$1$1 -> ohm.quickdice.util.r:
+ohm.quickdice.util.CustomKeyboard$1$1 -> ohm.quickdice.util.s:
     ohm.quickdice.util.CustomKeyboard$1 this$1 -> a
     void <init>(ohm.quickdice.util.CustomKeyboard$1) -> <init>
     void onClick(android.content.DialogInterface,int) -> onClick
-ohm.quickdice.util.CustomKeyboard$1$2 -> ohm.quickdice.util.s:
+ohm.quickdice.util.CustomKeyboard$1$2 -> ohm.quickdice.util.t:
     ohm.quickdice.util.CustomKeyboard$1 this$1 -> a
     void <init>(ohm.quickdice.util.CustomKeyboard$1) -> <init>
     void onClick(android.content.DialogInterface,int) -> onClick
-ohm.quickdice.util.CustomKeyboard$2 -> ohm.quickdice.util.t:
+ohm.quickdice.util.CustomKeyboard$2 -> ohm.quickdice.util.u:
     ohm.quickdice.util.CustomKeyboard this$0 -> a
     void <init>(ohm.quickdice.util.CustomKeyboard) -> <init>
     void onFocusChange(android.view.View,boolean) -> onFocusChange
-ohm.quickdice.util.CustomKeyboard$3 -> ohm.quickdice.util.u:
+ohm.quickdice.util.CustomKeyboard$3 -> ohm.quickdice.util.v:
     ohm.quickdice.util.CustomKeyboard this$0 -> a
     void <init>(ohm.quickdice.util.CustomKeyboard) -> <init>
     void onClick(android.view.View) -> onClick
-ohm.quickdice.util.CustomKeyboard$Host -> ohm.quickdice.util.v:
+ohm.quickdice.util.CustomKeyboard$Host -> ohm.quickdice.util.w:
     android.content.Context getContext() -> a
     android.view.Window getWindow() -> b
-ohm.quickdice.util.CustomKeyboard$HostActivity -> ohm.quickdice.util.w:
+ohm.quickdice.util.CustomKeyboard$HostActivity -> ohm.quickdice.util.x:
     android.app.Activity activity -> b
     ohm.quickdice.util.CustomKeyboard this$0 -> a
     void <init>(ohm.quickdice.util.CustomKeyboard,android.app.Activity) -> <init>
     android.content.Context getContext() -> a
     android.view.Window getWindow() -> b
-ohm.quickdice.util.CustomKeyboard$HostDialog -> ohm.quickdice.util.x:
+ohm.quickdice.util.CustomKeyboard$HostDialog -> ohm.quickdice.util.y:
     android.app.AlertDialog dialog -> b
     ohm.quickdice.util.CustomKeyboard this$0 -> a
     void <init>(ohm.quickdice.util.CustomKeyboard,android.app.AlertDialog) -> <init>
     android.content.Context getContext() -> a
     android.view.Window getWindow() -> b
-ohm.quickdice.util.Files -> ohm.quickdice.util.y:
+ohm.quickdice.util.Files -> ohm.quickdice.util.z:
     boolean copyFile(android.content.Context,android.net.Uri,java.io.File) -> a
     void copyFile(java.io.InputStream,java.io.OutputStream) -> a
-ohm.quickdice.util.Helper -> ohm.quickdice.util.z:
+ohm.quickdice.util.Helper -> ohm.quickdice.util.aa:
     android.graphics.Paint maskPaint -> b
     android.graphics.Paint antiAliasPaint -> c
     android.graphics.Canvas canvas -> d
@@ -6680,28 +6757,29 @@ ohm.quickdice.util.Helper -> ohm.quickdice.util.z:
     android.view.View$OnClickListener getExpressionActionsClickListener(ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener) -> a
     void setWakeLock(android.app.Activity,boolean) -> a
     void setTextInsideSelection(android.widget.EditText,java.lang.String,boolean) -> a
+    boolean checkAndStartActivity(android.content.Context,android.content.Intent,int) -> a
     net.londatiga.android.PopupMenu getExpressionPopupMenu(android.view.View,ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener) -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.util.Helper$1 -> ohm.quickdice.util.aa:
+ohm.quickdice.util.Helper$1 -> ohm.quickdice.util.ab:
     void <init>() -> <init>
     void onClick(android.view.View) -> onClick
-ohm.quickdice.util.Helper$BackgroundManager -> ohm.quickdice.util.ab:
+ohm.quickdice.util.Helper$BackgroundManager -> ohm.quickdice.util.ac:
     java.lang.String getBackgroundImagePath(android.content.Context) -> a
     boolean exists(android.content.Context) -> b
     boolean setBackgroundImage(android.content.Context,android.net.Uri,float) -> a
     java.io.File getDirectory(android.content.Context) -> c
     java.io.File getTempFile(android.content.Context) -> d
     java.io.File getFile(android.content.Context) -> e
-ohm.quickdice.util.Helper$CheckActionItemClickListener -> ohm.quickdice.util.ac:
+ohm.quickdice.util.Helper$CheckActionItemClickListener -> ohm.quickdice.util.ad:
     net.londatiga.android.PopupMenu parent -> a
     ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener diceBuiltListener -> b
     void <init>(net.londatiga.android.PopupMenu,ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener) -> <init>
     void onClick(android.view.View) -> onClick
-ohm.quickdice.util.Helper$ExpressionActionsClickListener -> ohm.quickdice.util.ad:
+ohm.quickdice.util.Helper$ExpressionActionsClickListener -> ohm.quickdice.util.ae:
     ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener diceBuiltListener -> a
     void <init>(ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener) -> <init>
     void onClick(android.view.View) -> onClick
-ohm.quickdice.util.RollDiceToast -> ohm.quickdice.util.ae:
+ohm.quickdice.util.RollDiceToast -> ohm.quickdice.util.af:
     android.content.Context context -> a
     ohm.quickdice.control.PreferenceManager pref -> b
     ohm.quickdice.control.DiceBagManager diceBagManager -> c
@@ -6736,7 +6814,7 @@ ohm.quickdice.util.RollDiceToast -> ohm.quickdice.util.ae:
     void performRollAnimation(ohm.quickdice.entity.RollResult) -> c
     void performRollSound(ohm.quickdice.entity.RollResult) -> d
     void performRollSpeech(ohm.quickdice.entity.RollResult) -> e
-ohm.quickdice.util.RollDiceToast$PlayerRunnable -> ohm.quickdice.util.af:
+ohm.quickdice.util.RollDiceToast$PlayerRunnable -> ohm.quickdice.util.ag:
     int resId -> a
     android.media.MediaPlayer sound -> b
     ohm.quickdice.util.RollDiceToast$PlayerRunnable[] initPlayers(int,int) -> a
@@ -6744,7 +6822,7 @@ ohm.quickdice.util.RollDiceToast$PlayerRunnable -> ohm.quickdice.util.af:
     void <init>(int) -> <init>
     void disposePlayer() -> a
     void run() -> run
-ohm.quickdice.util.SynchRunnable -> ohm.quickdice.util.ag:
+ohm.quickdice.util.SynchRunnable -> ohm.quickdice.util.ah:
     java.util.concurrent.atomic.AtomicBoolean mWorking -> a
     void <init>() -> <init>
     boolean checkAndSetWorkingState() -> b

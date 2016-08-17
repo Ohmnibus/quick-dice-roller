@@ -58,7 +58,7 @@ Thanks to "named values", as well as keep track of games scores, you can define 
 ☆ Rolemaster
 ☆ Savage Worlds
 ☆ Shadowrun
-☆ Star Wars
+☆ Star Wars (<i>D6 Space</i> and <i>d20 System</i> only)
 ☆ Traveller
 ☆ World of Darkness
 

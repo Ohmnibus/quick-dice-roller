@@ -3,33 +3,33 @@ package ohm.quickdice.entity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ModifierCollection implements Iterable<RollModifier> {
+public class ModifierCollection implements Iterable<Modifier> {
 
-	protected ArrayList<RollModifier> modifierList;
+	protected ArrayList<Modifier> modifierList;
 	private DiceBag owner;
 
 	protected ModifierCollection(DiceBag owner) {
 		this.owner = owner;
-		this.modifierList = new ArrayList<RollModifier>();
+		this.modifierList = new ArrayList<Modifier>();
 	}
 
 	/**
-	 * Add a new {@link RollModifier} as the last element.<br />
-	 * @param newModifier {@link RollModifier} to add.
-	 * @return Position at which the {@link RollModifier} is added.
+	 * Add a new {@link Modifier} as the last element.<br />
+	 * @param newModifier {@link Modifier} to add.
+	 * @return Position at which the {@link Modifier} is added.
 	 */
-	public int add(RollModifier newModifier) {
+	public int add(Modifier newModifier) {
 		return add(-1, newModifier);
 	}
 
 	/**
-	 * Add a new {@link RollModifier} at the specified position.<br />
+	 * Add a new {@link Modifier} at the specified position.<br />
 	 * If the position is outside the boundary of the {@link DiceBag}, the dice will be added at the end.
 	 * @param position Position at which the dice will be added
-	 * @param newModifier {@link RollModifier} to add.
-	 * @return Position at which the {@link RollModifier} is added.
+	 * @param newModifier {@link Modifier} to add.
+	 * @return Position at which the {@link Modifier} is added.
 	 */
-	public int add(int position, RollModifier newModifier) {
+	public int add(int position, Modifier newModifier) {
 		int retVal = position;
 		
 		if (position >= 0 && position < modifierList.size()) {
@@ -50,10 +50,10 @@ public class ModifierCollection implements Iterable<RollModifier> {
 	/**
 	 * Remove the modifier at the give position.
 	 * @param position Position of the modifier to remove
-	 * @return The {@link RollModifier} removed, or {@code null} if the change was not made
+	 * @return The {@link Modifier} removed, or {@code null} if the change was not made
 	 */
-	public RollModifier remove(int position) {
-		RollModifier retVal = null;
+	public Modifier remove(int position) {
+		Modifier retVal = null;
 		
 		if (position >= 0 && position < modifierList.size()) {
 			retVal = modifierList.remove(position);
@@ -104,8 +104,8 @@ public class ModifierCollection implements Iterable<RollModifier> {
 			if (collectionFrom != null && collectionTo != null) {
 				if (fromPosition >= 0 && fromPosition < collectionFrom.size()
 						&& toPosition >= 0 && toPosition <= collectionTo.size()) {
-					
-					RollModifier dice = collectionFrom.remove(fromPosition);
+
+					Modifier dice = collectionFrom.remove(fromPosition);
 					collectionTo.add(toPosition, dice);
 					
 					setChanged();
@@ -117,7 +117,7 @@ public class ModifierCollection implements Iterable<RollModifier> {
 		return retVal;
 	}
 	
-	public RollModifier get(int position) {
+	public Modifier get(int position) {
 		return modifierList.get(position);
 	}
 
@@ -126,7 +126,7 @@ public class ModifierCollection implements Iterable<RollModifier> {
 	}
 	
 	public void clear() {
-		for (RollModifier mod : modifierList) {
+		for (Modifier mod : modifierList) {
 			mod.setParent(null);
 		}
 		modifierList.clear();
@@ -136,8 +136,17 @@ public class ModifierCollection implements Iterable<RollModifier> {
 		owner.setChanged();
 	}
 
+	public boolean containVariables() {
+		for (Modifier mod : modifierList) {
+			if (mod instanceof VarModifier) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
-	public Iterator<RollModifier> iterator() {
+	public Iterator<Modifier> iterator() {
 		return modifierList.iterator();
 	}
 }

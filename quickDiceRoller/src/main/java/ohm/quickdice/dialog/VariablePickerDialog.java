@@ -21,7 +21,7 @@ import android.widget.ListView;
 public class VariablePickerDialog extends AlertDialog implements DialogInterface.OnClickListener {
 
 	/**
-	 * Open the activity to select an existing dice.
+	 * Open the activity to select an existing variable.
 	 */
 	public static final int DIALOG_SELECT_VARIABLE = 0x00FA7E0A;
 
@@ -53,7 +53,7 @@ public class VariablePickerDialog extends AlertDialog implements DialogInterface
 		 * @param itemId Index of the selected item, or {@code ITEM_UNDEFINED} if {@code confirm} is {@code false}.
 		 * @param item Selected item, or {@code null} if {@code confirm} is {@code false}.
 		 */
-		public void onItemSelected(boolean confirmed, int itemId, T item);
+		void onItemSelected(boolean confirmed, int itemId, T item);
 	}
 
 	public VariablePickerDialog(Context context, OnItemSelectedListener<Variable> listener) {

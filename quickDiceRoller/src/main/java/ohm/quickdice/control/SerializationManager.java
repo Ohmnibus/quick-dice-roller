@@ -21,10 +21,12 @@ import ohm.quickdice.entity.DiceCollection;
 import ohm.quickdice.entity.Icon;
 import ohm.quickdice.entity.Icon.CustomIcon;
 import ohm.quickdice.entity.IconCollection;
+import ohm.quickdice.entity.Modifier;
 import ohm.quickdice.entity.ModifierCollection;
 import ohm.quickdice.entity.MostRecentFile;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.RollResult;
+import ohm.quickdice.entity.VarModifier;
 import ohm.quickdice.entity.Variable;
 import ohm.quickdice.entity.VariableCollection;
 import ohm.quickdice.util.Base64;
@@ -39,7 +41,7 @@ import com.google.gson.stream.JsonWriter;
 public class SerializationManager {
 	
 	protected static final String TAG = "SerializationManager";
-	protected static final int SERIALIZER_VERSION = 6;
+	protected static final int SERIALIZER_VERSION = 7;
 	protected static final String CHARSET = "UTF-8";
 	
 	/**
@@ -1055,26 +1057,31 @@ public class SerializationManager {
 	private static final String FIELD_BB_DESCRIPTION = "desc";
 	private static final String FIELD_BB_RESOURCE_INDEX = "resIdx";
 	private static final String FIELD_BB_MODIFIER = "mod";
+	private static final String FIELD_BB_LABEL = "lbl";
 	private static final String FIELD_BB_BONUS_BAG = "bonusBag";
 	
 	private static void serializeModifierCollection(JsonWriter writer, ModifierCollection collection) throws IOException {
 		writer.beginObject();
 		writer.name(FIELD_BB_BONUS_BAG);
 		writer.beginArray();
-		for (RollModifier m : collection) {
+		for (Modifier m : collection) {
 			serializeModifier(writer, m);
 		}		
 		writer.endArray();
 		writer.endObject(); //FIELD_BB_BONUS_BAG
 	}
 
-	private static void serializeModifier(JsonWriter writer, RollModifier modifier) throws IOException {
+	private static void serializeModifier(JsonWriter writer, Modifier modifier) throws IOException {
 		writer.beginObject();
-		
-		writer.name(FIELD_BB_NAME).value(modifier.getName());
-		writer.name(FIELD_BB_DESCRIPTION).value(modifier.getDescription());
-		writer.name(FIELD_BB_RESOURCE_INDEX).value(modifier.getResourceIndex());
-		writer.name(FIELD_BB_MODIFIER).value(modifier.getValue());
+
+		if (modifier instanceof VarModifier) {
+			writer.name(FIELD_BB_LABEL).value(((VarModifier) modifier).getLabel());
+		} else {
+			writer.name(FIELD_BB_NAME).value(modifier.getName());
+			writer.name(FIELD_BB_DESCRIPTION).value(modifier.getDescription());
+			writer.name(FIELD_BB_RESOURCE_INDEX).value(modifier.getResourceIndex());
+			writer.name(FIELD_BB_MODIFIER).value(modifier.getValue());
+		}
 		
 		writer.endObject();
 	}
@@ -1101,12 +1108,13 @@ public class SerializationManager {
 		reader.endObject();
 	}
 	
-	private static RollModifier deserializeModifier(JsonReader reader) throws IOException {
+	private static Modifier deserializeModifier(JsonReader reader) throws IOException {
 		String fieldName;
 		String name = null;
 		String desc = null;
 		int value = 0;
 		int resx = 0;
+		String label = null;
 		
 		reader.beginObject();
 		while (reader.hasNext()) {
@@ -1119,18 +1127,26 @@ public class SerializationManager {
 				value = reader.nextInt();
 			} else if (fieldName.equals(FIELD_BB_RESOURCE_INDEX)) {
 				resx = reader.nextInt();
+			} else if (fieldName.equals(FIELD_BB_LABEL)) {
+				label = reader.nextString();
 			} else {
 				//Unknown element
 				reader.skipValue();
 			}
 		}
 		reader.endObject();
-		
-		return new RollModifier(
-				name, 
-				desc, 
-				value, 
-				resx);
+
+		Modifier retVal;
+		if (label != null) {
+			retVal = new VarModifier(label);
+		} else {
+			retVal = new RollModifier(
+					name,
+					desc,
+					value,
+					resx);
+		}
+		return retVal;
 	}
 	
 	private static final String FIELD_ICON_ID = "id";

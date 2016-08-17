@@ -27,6 +27,7 @@
 	<string name="lblDiceIconPicker">Dice icon Picker</string>
 	<string name="lblBagIconPicker">Bag icon Picker</string>
 	<string name="lblVariableIconPicker">Named value icon Picker</string>
+	<string name="lblModifier">Modifier</string>
 	<string name="lblModifierBuilder">Mod Builder</string>
 	<string name="lblModifierBuilderMessage">Compose a modifier.</string>
 	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier?</string>
@@ -79,6 +80,7 @@
 	<string name="lblLabelValueVar">Label: Value (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblDiceBags">Dice bags</string>
+	<string name="lblVariable">Named value</string>
 	<string name="lblVariables">Named values</string>
 	<string name="lblNumberPicker">Number picker</string>
 	<string name="lblSelectValue">Select a value.</string>
@@ -125,10 +127,13 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Named Values can be added to quick modifiers bar for easy access<br />
 &bull; Increased max number of bags, dice, variables, modifiers and linked results<br />
 &bull; Fine tuning variable value (+1/-1 buttons)<br />
 &bull; Fixed FC opening Help page on devices without a browser<br />
+&bull; Fixed computation of some formulas<br />
 &bull; Improved startup speed<br />
+&bull; Improved random number generator<br />
 &bull; Minor fix and improvements<br />
 ]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[

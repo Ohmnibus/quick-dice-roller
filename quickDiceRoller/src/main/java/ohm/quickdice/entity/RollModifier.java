@@ -4,7 +4,7 @@ import ohm.quickdice.R;
 
 import android.content.Context;
 
-public class RollModifier {
+public class RollModifier implements Modifier {
 
 	protected String title;
 	protected String description;
@@ -39,18 +39,22 @@ public class RollModifier {
 		this.iconId = iconId;
 	}
 	
+	@Override
 	public String getName() {
 		return title;
 	}
 	
+	@Override
 	public String getDescription() {
 		return description;
 	}
 	
+	@Override
 	public int getValue() {
 		return value;
 	}
 
+	@Override
 	public String getValueString() {
 		if (value < 0)
 			return Integer.toString(value);
@@ -58,19 +62,23 @@ public class RollModifier {
 			return "+" + Integer.toString(value);
 	}
 	
+	@Override
 	public int getResourceIndex() {
 		//TODO: Rename to getIconID
 		return iconId;
 	}
 	
+	@Override
 	public DiceBag getParent() {
 		return parent;
 	}
 
-	protected void setParent(DiceBag parent) {
+	@Override
+	public void setParent(DiceBag parent) {
 		this.parent = parent;
 	}
 
+	@Override
 	public boolean isChanged() {
 		return parent == null ? false : parent.isChanged();
 	}

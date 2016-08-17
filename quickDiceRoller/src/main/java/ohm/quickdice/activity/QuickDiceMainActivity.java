@@ -32,8 +32,10 @@ import ohm.quickdice.dialog.RollDetailDialog;
 import ohm.quickdice.dialog.VariableDetailDialog;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
+import ohm.quickdice.entity.Modifier;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.RollResult;
+import ohm.quickdice.entity.VarModifier;
 import ohm.quickdice.entity.Variable;
 import ohm.quickdice.util.AsyncDrawable;
 import ohm.quickdice.util.Behavior;
@@ -56,6 +58,8 @@ import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.SparseBooleanArray;
+import android.util.SparseIntArray;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
@@ -141,6 +145,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	private final String KEY_ROLL_LIST = "KEY_ROLL_LIST";
 
 	private final String TYPE_MODIFIER = "TYPE_MODIFIER";
+	private final String TYPE_VARIABLE = "TYPE_VARIABLE";
 
 	/**
 	 * Called when the activity is first created.
@@ -284,6 +289,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 		menu.findItem(R.id.mmUndoClearAllResults).setVisible(undoManager.canUndoAll());
 		menu.findItem(R.id.mmUndoClearResult).setVisible(undoManager.canUndo());
+		menu.findItem(R.id.mmAddDice).setVisible(app.canAddDiceBag());
 		menu.findItem(R.id.mmAddModifier).setVisible(pref.getShowModifiers());
 
 		return retVal;
@@ -537,7 +543,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 			setupDiceBagMenu(menu, index);
 		} else if (v.getId() == lvVariable.getId()) {
 			//Context menu for the variable
-			setupVariableMenu(menu, index);
+			setupVariableMenu(menu, index, false, null);
 		} else if (v.getId() == gvDice.getId()) {
 			//Context menu for the dice bag
 			setupDiceMenu(menu, index);
@@ -547,6 +553,21 @@ public class QuickDiceMainActivity extends BaseActivity {
 		} else if (v.getTag(R.id.key_type) == TYPE_MODIFIER) {
 			//Context menu for a modifier
 			setupModifierMenu(menu, (Integer)v.getTag(R.id.key_value));
+		} else if (v.getTag(R.id.key_type) == TYPE_VARIABLE) {
+			//Context menu for a modifier
+			int vmIndex;
+			VarModifier vm;
+			Variable var = null;
+			vmIndex = (Integer)v.getTag(R.id.key_value);
+			modifierOpeningMenu = vmIndex;
+			SparseBooleanArray hidden = getHiddenModifiersMenuItems(vmIndex);
+			vm = (VarModifier)diceBag.getModifiers().get(vmIndex);
+			if (vm != null) {
+				var = diceBag.getVariables().getByLabel(vm.getLabel());
+			}
+			if (var != null) {
+				setupVariableMenu(menu, var.getID(), true, hidden);
+			}
 		} else {
 			//Context menu for the last result item
 			if (lastResult.length > 0) {
@@ -597,18 +618,27 @@ public class QuickDiceMainActivity extends BaseActivity {
 		}
 	}
 	
-	protected void setupVariableMenu(ContextMenu menu, int index) {
+	protected void setupVariableMenu(ContextMenu menu, int index, boolean treatAsModifier, SparseBooleanArray hiddenMenuItems) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_variable, menu);
+		if (treatAsModifier) {
+			inflater.inflate(R.menu.menu_modifier, menu);
+		} else {
+			inflater.inflate(R.menu.menu_variable, menu);
+		}
 		
 		//VariableDetailDialog dlg = new VariableDetailDialog(this, menu, diceBagManager.getDiceBag(), index);
-		VariableDetailDialog dlg = new VariableDetailDialog(this, menu, diceBag, index);
+		VariableDetailDialog dlg = new VariableDetailDialog(this, menu, diceBag, index, treatAsModifier, hiddenMenuItems);
 		dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dialog) {
 				//A variable value may have been changed
 				//so a refresh is needed.
 				refreshVariablesList();
+				//A variable can be used in modifiers list.
+				//If so, refresh modifier list, too.
+				if (diceBag.getModifiers().containVariables()) {
+					refreshModifierList();
+				}
 			}
 		});
 		dlg.show();
@@ -628,7 +658,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	protected int modifierOpeningMenu;
 	
 	protected void setupModifierMenu(ContextMenu menu, int index) {
-		RollModifier modifier;
+		Modifier modifier;
 		Drawable modIcon;
 		
 		modifierOpeningMenu = index;
@@ -647,26 +677,56 @@ public class QuickDiceMainActivity extends BaseActivity {
 		menu.setHeaderIcon(modIcon);
 		menu.setHeaderTitle(modifier.getName());
 
+//		if (lastResult.length == 0) {
+//			//No rolls to add bonus to
+//			menu.findItem(R.id.moApply).setVisible(false);
+//		}
+//		if (diceBag.getModifiers().size() == 1) {
+//			//Only one element
+//			menu.findItem(R.id.moRemove).setVisible(false);
+//		}
+//		if (diceBag.getModifiers().size() >= pref.getMaxModifiers()) {
+//			//Maximum number of allowed modifiers reached
+//			menu.findItem(R.id.moAddHere).setVisible(false);
+//		}
+//		if (index == 0) {
+//			//First element
+//			menu.findItem(R.id.moSwitchPrev).setVisible(false);
+//		}
+//		if (index == diceBag.getModifiers().size() - 1) {
+//			//Last element
+//			menu.findItem(R.id.moSwitchNext).setVisible(false);
+//		}
+		SparseBooleanArray hidden = getHiddenModifiersMenuItems(index);
+		for (int i = 0; i < hidden.size(); i++) {
+			menu.findItem(hidden.keyAt(i)).setVisible(false);
+		}
+	}
+
+	private SparseBooleanArray getHiddenModifiersMenuItems(int index) {
+		SparseBooleanArray retVal = new SparseBooleanArray();
+
 		if (lastResult.length == 0) {
 			//No rolls to add bonus to
-			menu.findItem(R.id.moApply).setVisible(false);
+			retVal.append(R.id.moApply, false);
 		}
 		if (diceBag.getModifiers().size() == 1) {
 			//Only one element
-			menu.findItem(R.id.moRemove).setVisible(false);
+			retVal.append(R.id.moRemove, false);
 		}
 		if (diceBag.getModifiers().size() >= pref.getMaxModifiers()) {
 			//Maximum number of allowed modifiers reached
-			menu.findItem(R.id.moAddHere).setVisible(false);
+			retVal.append(R.id.moAddHere, false);
 		}
 		if (index == 0) {
 			//First element
-			menu.findItem(R.id.moSwitchPrev).setVisible(false);
+			retVal.append(R.id.moSwitchPrev, false);
 		}
 		if (index == diceBag.getModifiers().size() - 1) {
 			//Last element
-			menu.findItem(R.id.moSwitchNext).setVisible(false);
+			retVal.append(R.id.moSwitchNext, false);
 		}
+		return retVal;
 	}
 
 	protected void setupRollMenu(ContextMenu menu, int index) {
@@ -933,7 +993,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	public boolean onModifierContextItemSelected(MenuItem item, AdapterContextMenuInfo info) {
 		boolean retVal;
 		AlertDialog.Builder builder;
-		RollModifier mod;
+		Modifier mod;
 		
 		retVal = true;
 
@@ -1041,7 +1101,21 @@ public class QuickDiceMainActivity extends BaseActivity {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								dialog.cancel();
-								diceBag.getVariables().remove(targetItem);
+								Variable removed = diceBag.getVariables().remove(targetItem);
+								//Remove from modifier list
+								if (removed != null && removed.getLabel() != null) {
+									boolean modListChanged = false;
+									for (int i = diceBag.getModifiers().size() - 1; i >= 0; i--) {
+										Modifier mod = diceBag.getModifiers().get(i);
+										if (mod instanceof VarModifier && removed.getLabel().equals(((VarModifier) mod).getLabel())) {
+											diceBag.getModifiers().remove(i);
+											modListChanged = true;
+										}
+									}
+									if (modListChanged) {
+										refreshModifierList();
+									}
+								}
 								refreshVariablesList();
 							}
 						});
@@ -1277,7 +1351,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 	
 	private void initModifierList() {
 		LayoutInflater inflater;
-		RollModifier modifier;
+		Modifier modifier;
 		View modView;
 		//Button modButton;
 		TextView modText;
@@ -1319,7 +1393,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 			diceBagManager.setIconDrawable(modIcon, modifier.getResourceIndex());
 			modText.setText(modifier.getValueString());
 
-			modView.setTag(R.id.key_type, TYPE_MODIFIER);
+			modView.setTag(R.id.key_type, modifier instanceof VarModifier ? TYPE_VARIABLE : TYPE_MODIFIER);
 			modView.setTag(R.id.key_value, i);
 			
 			modView.setOnClickListener(modifierClickListener);
@@ -1508,7 +1582,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		}
 	};
 
-	private void doModifier(RollModifier modifier) {
+	private void doModifier(Modifier modifier) {
 		RollResult modRes;
 
 		if (lastResult.length > 0) { //Apply only if a result exist
@@ -1956,11 +2030,17 @@ public class QuickDiceMainActivity extends BaseActivity {
 	
 	private OnCreatedListener modifierCreatedListener = new OnCreatedListener() {
 		@Override
-		public void onCreated(boolean confirmed, int modifier, int position) {
+		public void onCreated(boolean confirmed, int position, int modifier, String label) {
 			if (confirmed) {
-				addModifier(
-						modifier,
-						position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
+				if (label == null) {
+					addModifier(
+							modifier,
+							position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
+				} else {
+					addModifier(
+							label,
+							position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
+				}
 			}
 		}
 	};
@@ -1985,19 +2065,46 @@ public class QuickDiceMainActivity extends BaseActivity {
 			Toast.makeText(this, R.string.lblNeutralModifier, Toast.LENGTH_LONG).show();
 			return;
 		}
-		
-		for (RollModifier mod : diceBag.getModifiers()) {
-			if (mod.getValue() == modifier) {
+
+		for (Modifier mod : diceBag.getModifiers()) {
+			if (mod instanceof RollModifier && mod.getValue() == modifier) {
 				duplicate = true;
 				break;
 			}
 		}
-		
+
 		if (duplicate) {
 			//Duplicate modifier
 			Toast.makeText(this, R.string.lblDuplicateModifier, Toast.LENGTH_LONG).show();
 		} else {
 			newMod = new RollModifier(app, modifier);
+			diceBag.getModifiers().add(position, newMod);
+			refreshModifierList();
+		}
+	}
+
+	private void addModifier(String label, int position) {
+		VarModifier newMod;
+		boolean duplicate = false;
+
+		if (label == null || label.length() == 0) {
+			//Where did it go?
+			return;
+		}
+
+		for (Modifier mod : diceBag.getModifiers()) {
+			if (mod instanceof VarModifier && label.equals(((VarModifier) mod).getLabel())) {
+				duplicate = true;
+				break;
+			}
+		}
+
+		if (duplicate) {
+			//Duplicate modifier
+			//Fix text
+			Toast.makeText(this, R.string.lblDuplicateModifier, Toast.LENGTH_LONG).show();
+		} else {
+			newMod = new VarModifier(label);
 			diceBag.getModifiers().add(position, newMod);
 			refreshModifierList();
 		}

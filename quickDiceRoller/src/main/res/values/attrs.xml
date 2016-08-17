@@ -31,6 +31,9 @@
 		<attr name="ohmFramedBackgroundSelector" format="reference" />
 		<attr name="ohmFramedBackgroundSecondary" format="reference" />
 
+		<attr name="ohmAddCircleDrawable" format="reference" />
+		<attr name="ohmRemoveCircleDrawable" format="reference" />
+
 		<!-- <attr name="ohmFramedSolidColor" format="color" /> -->
 		<!-- <attr name="ohmFramedBorderColor" format="color" /> -->
 	</declare-styleable>

@@ -222,7 +222,6 @@ public class VariableCollection implements BaseCollection<Variable> {
 
 	/**
 	 * Set the identifier of each variable equal to it's index in the dice bag.
-	 * @param variableList
 	 */
 	protected void refreshId() {
 		for (int i = 0; i < variableList.size(); i++) {

@@ -31,7 +31,7 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	WheelView unitWheel;
 
 	public interface OnNumberPickedListener {
-		public void onNumberPicked(boolean confirmed, int value);
+		void onNumberPicked(boolean confirmed, int value);
 	}
 
 	/**
@@ -113,6 +113,14 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		initHead();
+
+		super.onCreate(savedInstanceState);
+
+		initViews();
+	}
+
+	protected void initHead() {
 		View mView = getLayoutInflater().inflate(R.layout.dialog_number_picker, null);
 
 		setView(mView);
@@ -121,9 +129,9 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 		((TextView)mView.findViewById(R.id.lblMessage)).setText(message);
 		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
 		setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
+	}
 
-		super.onCreate(savedInstanceState);
-
+	protected void initViews() {
 		int curSign;
 		int cur100s;
 		int curTens;
