@@ -3,39 +3,46 @@
 				style="@style/Builder.ValueContainer"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent" >
-	<RadioGroup
-		android:id="@+id/rbgMain"
+	<!--<RadioGroup-->
+		<!--android:id="@+id/rbgMain"-->
+		<!--android:layout_width="match_parent"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:layout_alignParentTop="true"-->
+		<!--android:layout_alignParentLeft="true"-->
+
+		<!--android:orientation="horizontal">-->
+		<!--<RadioButton-->
+			<!--android:id="@+id/rbModifier"-->
+			<!--android:layout_width="0dp"-->
+			<!--android:layout_height="wrap_content"-->
+
+			<!--android:layout_weight="1"-->
+
+			<!--android:checked="true"-->
+			<!--android:text="@string/lblModifier"/>-->
+		<!--<RadioButton-->
+			<!--android:id="@+id/rbVariable"-->
+			<!--android:layout_width="0dp"-->
+			<!--android:layout_height="wrap_content"-->
+
+			<!--android:layout_weight="1"-->
+
+			<!--android:text="@string/lblVariable"/>-->
+	<!--</RadioGroup>-->
+	<Spinner
+		android:id="@+id/spnType"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_alignParentLeft="true"
-
-		android:orientation="horizontal">
-		<RadioButton
-			android:id="@+id/rbModifier"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-
-			android:layout_weight="1"
-
-			android:checked="true"
-			android:text="@string/lblModifier"/>
-		<RadioButton
-			android:id="@+id/rbVariable"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-
-			android:layout_weight="1"
-
-			android:text="@string/lblVariable"/>
-	</RadioGroup>
+		/>
 	<include
 		layout="@layout/dialog_number_picker"
 		android:id="@+id/panelModifiers"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 
-		android:layout_below="@+id/rbgMain"
+		android:layout_below="@+id/spnType"
 		/>
 	<include
 		layout="@layout/dialog_variable_picker"
@@ -43,7 +50,14 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 
-		android:layout_below="@+id/rbgMain"
-		android:visibility="gone"
+		android:layout_below="@+id/spnType"
+		/>
+	<include
+		layout="@layout/dialog_number_picker"
+		android:id="@+id/panelPercentage"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_below="@+id/spnType"
 		/>
 </RelativeLayout>

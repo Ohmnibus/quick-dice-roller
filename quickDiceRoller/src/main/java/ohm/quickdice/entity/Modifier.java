@@ -5,6 +5,12 @@ package ohm.quickdice.entity;
  */
 public interface Modifier {
 
+	/**
+	 * Return a value unique for each implementation, for serializing purpose.
+	 * @return Unique for each implementation
+	 */
+	int getTypeID();
+
 	String getName();
 
 	String getDescription();

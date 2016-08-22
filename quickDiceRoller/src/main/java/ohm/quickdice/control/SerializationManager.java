@@ -24,6 +24,7 @@ import ohm.quickdice.entity.IconCollection;
 import ohm.quickdice.entity.Modifier;
 import ohm.quickdice.entity.ModifierCollection;
 import ohm.quickdice.entity.MostRecentFile;
+import ohm.quickdice.entity.PercentModifier;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.RollResult;
 import ohm.quickdice.entity.VarModifier;
@@ -41,7 +42,7 @@ import com.google.gson.stream.JsonWriter;
 public class SerializationManager {
 	
 	protected static final String TAG = "SerializationManager";
-	protected static final int SERIALIZER_VERSION = 7;
+	protected static final int SERIALIZER_VERSION = 8;
 	protected static final String CHARSET = "UTF-8";
 	
 	/**
@@ -1052,7 +1053,8 @@ public class SerializationManager {
 		
 		return retVal;
 	}
-	
+
+	private static final String FIELD_BB_TYPE = "type";
 	private static final String FIELD_BB_NAME = "name";
 	private static final String FIELD_BB_DESCRIPTION = "desc";
 	private static final String FIELD_BB_RESOURCE_INDEX = "resIdx";
@@ -1073,6 +1075,8 @@ public class SerializationManager {
 
 	private static void serializeModifier(JsonWriter writer, Modifier modifier) throws IOException {
 		writer.beginObject();
+
+		writer.name(FIELD_BB_TYPE).value(modifier.getTypeID());
 
 		if (modifier instanceof VarModifier) {
 			writer.name(FIELD_BB_LABEL).value(((VarModifier) modifier).getLabel());
@@ -1109,6 +1113,7 @@ public class SerializationManager {
 	}
 	
 	private static Modifier deserializeModifier(JsonReader reader) throws IOException {
+		int type = RollModifier.TYPE_ID;
 		String fieldName;
 		String name = null;
 		String desc = null;
@@ -1119,7 +1124,9 @@ public class SerializationManager {
 		reader.beginObject();
 		while (reader.hasNext()) {
 			fieldName = reader.nextName();
-			if (fieldName.equals(FIELD_BB_NAME)) {
+			if (fieldName.equals(FIELD_BB_TYPE)) {
+				type = reader.nextInt();
+			} else if (fieldName.equals(FIELD_BB_NAME)) {
 				name = reader.nextString();
 			} else if (fieldName.equals(FIELD_BB_DESCRIPTION)) {
 				desc = reader.nextString();
@@ -1129,6 +1136,7 @@ public class SerializationManager {
 				resx = reader.nextInt();
 			} else if (fieldName.equals(FIELD_BB_LABEL)) {
 				label = reader.nextString();
+				type = VarModifier.TYPE_ID; //This assignment is for backward compatibility
 			} else {
 				//Unknown element
 				reader.skipValue();
@@ -1137,15 +1145,26 @@ public class SerializationManager {
 		reader.endObject();
 
 		Modifier retVal;
-		if (label != null) {
-			retVal = new VarModifier(label);
-		} else {
-			retVal = new RollModifier(
-					name,
-					desc,
-					value,
-					resx);
+
+		switch (type) {
+			case VarModifier.TYPE_ID:
+				retVal = new VarModifier(label);
+				break;
+			case PercentModifier.TYPE_ID:
+				retVal = new PercentModifier(
+						name,
+						desc,
+						value,
+						resx);
+				break;
+			default:
+				retVal = new RollModifier(
+						name,
+						desc,
+						value,
+						resx);
 		}
+
 		return retVal;
 	}
 	

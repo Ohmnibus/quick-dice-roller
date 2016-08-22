@@ -17,6 +17,8 @@ import android.widget.ImageView;
 
 public class IconCollection implements BaseCollection<Icon> {
 
+	public static final int ID_ICON_SUB_PERCENT = -4;
+	public static final int ID_ICON_ADD_PERCENT = -3;
 	public static final int ID_ICON_MALUS = -2;
 	public static final int ID_ICON_BONUS = -1;
 	public static final int ID_ICON_DEFAULT = 0;
@@ -25,7 +27,9 @@ public class IconCollection implements BaseCollection<Icon> {
 	public static final Icon ICON_DEFAULT = Icon.newIcon(Icon.DEFAULT_ICON_RES_ID, COLOR_DEFAULT);
 	public static final Icon ICON_MALUS = Icon.newIcon(R.drawable.ic_mod_malus, COLOR_DEFAULT);
 	public static final Icon ICON_BONUS = Icon.newIcon(R.drawable.ic_mod_bonus, COLOR_DEFAULT);
-	
+	public static final Icon ICON_SUB_PERCENT = Icon.newIcon(R.drawable.ic_mod_percent_sub, COLOR_DEFAULT);
+	public static final Icon ICON_ADD_PERCENT = Icon.newIcon(R.drawable.ic_mod_percent_add, COLOR_DEFAULT);
+
 	private static final int FIRST_CUSTOM_ICON_ID = 1000;
 
 	private ArrayList<Icon> iconList;
@@ -38,6 +42,8 @@ public class IconCollection implements BaseCollection<Icon> {
 		ICON_DEFAULT.setId(ID_ICON_DEFAULT);
 		ICON_BONUS.setId(ID_ICON_BONUS);
 		ICON_MALUS.setId(ID_ICON_MALUS);
+		ICON_ADD_PERCENT.setId(ID_ICON_ADD_PERCENT);
+		ICON_SUB_PERCENT.setId(ID_ICON_SUB_PERCENT);
 	}
 
 	public IconCollection(IIconManager owner, Context ctx) {
@@ -261,17 +267,26 @@ public class IconCollection implements BaseCollection<Icon> {
 //				retVal = iconList.get(iconIds.get(iconId, ID_ICON_DEFAULT)); //Default Icon ID and Index are equal
 //			}
 //		}
-		if (iconId == ID_ICON_BONUS) {
-			retVal = ICON_BONUS;
-		} else if (iconId == ID_ICON_MALUS) {
-			retVal = ICON_MALUS;
-		} else {
-			int iconPos = getPositionByID(iconId);
-			if (iconPos >= 0) {
-				retVal = iconList.get(iconPos);
-			} else {
-				retVal = iconList.get(ID_ICON_DEFAULT);
-			}
+		switch (iconId) {
+			case ID_ICON_BONUS:
+				retVal = ICON_BONUS;
+				break;
+			case ID_ICON_MALUS:
+				retVal = ICON_MALUS;
+				break;
+			case ID_ICON_ADD_PERCENT:
+				retVal = ICON_ADD_PERCENT;
+				break;
+			case ID_ICON_SUB_PERCENT:
+				retVal = ICON_SUB_PERCENT;
+				break;
+			default:
+				int iconPos = getPositionByID(iconId);
+				if (iconPos >= 0) {
+					retVal = iconList.get(iconPos);
+				} else {
+					retVal = iconList.get(ID_ICON_DEFAULT);
+				}
 		}
 
 		return retVal;
@@ -288,12 +303,15 @@ public class IconCollection implements BaseCollection<Icon> {
 			//System icon. ID and Index are the same.
 			retVal = iconId;
 		} else {
-			if (iconId == ID_ICON_BONUS) {
-				retVal = -1;
-			} else if (iconId == ID_ICON_MALUS) {
-				retVal = -1;
-			} else {
-				retVal = iconIds.get(iconId, -1);
+			switch (iconId) {
+				case ID_ICON_BONUS:
+				case ID_ICON_MALUS:
+				case ID_ICON_ADD_PERCENT:
+				case ID_ICON_SUB_PERCENT:
+					retVal = -1;
+					break;
+				default:
+					retVal = iconIds.get(iconId, -1);
 			}
 		}
 

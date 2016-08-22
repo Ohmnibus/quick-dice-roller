@@ -1,5 +1,6 @@
 v 2.1.2.x
 - Named Values can be added to quick modifiers bar for easy access
+- Percentage modifiers
 - Increased number of bags, dice, variables, modifiers, linked results.
 - Fine tuning variable value
 - Fixed FC opening Help page on devices without a browser

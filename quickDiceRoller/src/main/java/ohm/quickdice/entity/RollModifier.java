@@ -6,6 +6,8 @@ import android.content.Context;
 
 public class RollModifier implements Modifier {
 
+	public static final int TYPE_ID = 0;
+
 	protected String title;
 	protected String description;
 	protected int value;
@@ -38,7 +40,12 @@ public class RollModifier implements Modifier {
 		this.value = value;
 		this.iconId = iconId;
 	}
-	
+
+	@Override
+	public int getTypeID() {
+		return TYPE_ID;
+	}
+
 	@Override
 	public String getName() {
 		return title;
@@ -83,9 +90,4 @@ public class RollModifier implements Modifier {
 		return parent == null ? false : parent.isChanged();
 	}
 
-	protected void setChanged() {
-		if (parent != null) {
-			parent.setChanged();
-		}
-	}
 }

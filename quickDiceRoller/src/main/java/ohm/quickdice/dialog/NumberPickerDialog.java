@@ -113,14 +113,14 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		initHead();
+		View root = initHead();
 
 		super.onCreate(savedInstanceState);
 
-		initViews();
+		initViews(root);
 	}
 
-	protected void initHead() {
+	protected View initHead() {
 		View mView = getLayoutInflater().inflate(R.layout.dialog_number_picker, null);
 
 		setView(mView);
@@ -129,9 +129,15 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 		((TextView)mView.findViewById(R.id.lblMessage)).setText(message);
 		setButton(BUTTON_POSITIVE, this.getContext().getString(R.string.lblOk), this);
 		setButton(BUTTON_NEGATIVE, this.getContext().getString(R.string.lblCancel), this);
+
+		return mView;
 	}
 
-	protected void initViews() {
+	protected void initViews(View root) {
+		initViews(root, defaultValue, digits, null);
+	}
+
+	protected void initViews(View root, int defaultValue, int digits, String unit) {
 		int curSign;
 		int cur100s;
 		int curTens;
@@ -149,10 +155,10 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 			curUnits = (-defaultValue) % 10;
 		}
 
-		signWheel = initWheel(R.id.wheelSign, curSign, new ArrayWheelAdapter<String>(getContext(), new String[] {"+", "-"}));
-		hundWheel = initWheel(R.id.wheelHundreds, cur100s, new NumericWheelAdapter(getContext(), 0, 9));
-		tensWheel = initWheel(R.id.wheelTens, curTens, new NumericWheelAdapter(getContext(), 0, 9));
-		unitWheel = initWheel(R.id.wheelUnits, curUnits, new NumericWheelAdapter(getContext(), 0, 9));
+		signWheel = initWheel(root, R.id.wheelSign, curSign, new ArrayWheelAdapter<String>(getContext(), new String[] {"+", "-"}));
+		hundWheel = initWheel(root, R.id.wheelHundreds, cur100s, new NumericWheelAdapter(getContext(), 0, 9));
+		tensWheel = initWheel(root, R.id.wheelTens, curTens, new NumericWheelAdapter(getContext(), 0, 9));
+		unitWheel = initWheel(root, R.id.wheelUnits, curUnits, new NumericWheelAdapter(getContext(), 0, 9));
 
 		if (digits < 3) {
 			hundWheel.setVisibility(View.GONE);
@@ -160,14 +166,22 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 		if (digits < 2) {
 			tensWheel.setVisibility(View.GONE);
 		}
+
+		TextView lblUnit = (TextView) root.findViewById(R.id.lblType);
+		if (unit != null) {
+			lblUnit.setText(unit);
+			lblUnit.setVisibility(View.VISIBLE);
+		} else {
+			lblUnit.setVisibility(View.GONE);
+		}
 	}
 
 	/**
 	 * Initializes wheel
 	 * @param id the wheel widget Id
 	 */
-	private WheelView initWheel(int id, int current, WheelViewAdapter adapter) {
-		WheelView wheel = getWheel(id);
+	protected WheelView initWheel(View root, int id, int current, WheelViewAdapter adapter) {
+		WheelView wheel = getWheel(root, id);
 		wheel.setViewAdapter(adapter);
 		if (this.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			wheel.setVisibleItems(3);
@@ -184,8 +198,8 @@ public class NumberPickerDialog extends AlertDialog implements OnClickListener {
 	 * @param id the wheel Id
 	 * @return the wheel with passed Id
 	 */
-	private WheelView getWheel(int id) {
-		return (WheelView) findViewById(id);
+	private WheelView getWheel(View root, int id) {
+		return (WheelView) root.findViewById(id);
 	}
 
 	@Override

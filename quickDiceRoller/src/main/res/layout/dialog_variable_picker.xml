@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/lvVariables"
-	
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	>
-	<!-- android:choiceMode="singleChoice" -->
-	<!-- android:listSelector="@drawable/bg_list_selector" -->
-	<!-- android:listSelector="@android:drawable/list_selector_background" -->
-</ListView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				style="@style/Builder.ValueContainer"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent" >
+
+	<TextView style="@style/Builder.Label"
+			  android:id="@+id/lblMessage"
+
+			  android:layout_alignParentLeft="true"
+			  android:layout_alignParentTop="true"
+
+			  android:layout_height="wrap_content"
+			  android:layout_width="wrap_content"
+
+			  android:text="@string/app_name"
+		/>
+	<ListView
+		android:id="@+id/lvVariables"
+
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/lblMessage"
+		>
+		<!-- android:choiceMode="singleChoice" -->
+		<!-- android:listSelector="@drawable/bg_list_selector" -->
+		<!-- android:listSelector="@android:drawable/list_selector_background" -->
+	</ListView>
+</RelativeLayout>

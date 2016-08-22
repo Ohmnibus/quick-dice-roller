@@ -20,15 +20,17 @@ public class DContext {
 		public long minVal;
 		public long maxVal;
 		public long curVal;
-		
+
+		public DVariable() {
+			this(0, 0, 0);
+		}
+
 		/**
 		 * Copy constructor.
-		 * @param dVariable
+		 * @param dVariable Instance to copy from.
 		 */
 		public DVariable(DVariable dVariable) {
-			this.minVal = dVariable.minVal;
-			this.maxVal = dVariable.maxVal;
-			this.curVal = dVariable.curVal;
+			this(dVariable.minVal, dVariable.maxVal, dVariable.curVal);
 		}
 		
 		public DVariable(long minVal, long maxVal, long curVal) {
@@ -67,7 +69,8 @@ public class DContext {
 	 * @param curVal Actual value of the variable.
 	 */
 	public void setValue(String name, long minVal, long maxVal, long curVal) {
-		DVariable original = _values.get(name);
+		name = name.toLowerCase();
+		DVariable original = getVariableInternal(name);
 		if (original == null || ! original.equals(minVal, maxVal, curVal)) {
 			_values.put(name, new DVariable(minVal, maxVal, curVal));
 			_changed = true;
@@ -112,11 +115,21 @@ public class DContext {
 	 */
 	public DVariable getVariable(String name) throws IllegalArgumentException {
 		DVariable retVal;
-		retVal = _values.get(name);
+		retVal = getVariableInternal(name);
 		if (retVal == null) {
 			throw new IllegalArgumentException();
 		}
 		return retVal;
+	}
+
+	/**
+	 * Get the values of a variable.
+	 * @param name Name of the variable to read.
+	 * @return Values of the variable.
+	 * @throws IllegalArgumentException Thrown if the variable {@code name} is not defined.
+	 */
+	private DVariable getVariableInternal(String name) {
+		return _values.get(name.toLowerCase());
 	}
 	
 	/**
@@ -125,7 +138,7 @@ public class DContext {
 	 * @return {@code true} id the variable is defined, {@code false} otherwise.
 	 */
 	public boolean checkName(String name) {
-		return _values.containsKey(name);
+		return _values.containsKey(name.toLowerCase());
 	}
 	
 	/**

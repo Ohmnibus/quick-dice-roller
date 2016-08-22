@@ -27,10 +27,13 @@
 	<string name="lblDiceIconPicker">Dice icon Picker</string>
 	<string name="lblBagIconPicker">Bag icon Picker</string>
 	<string name="lblVariableIconPicker">Named value icon Picker</string>
+	<string name="lblPercentage">Percentage modifier</string>
 	<string name="lblModifier">Modifier</string>
 	<string name="lblModifierBuilder">Mod Builder</string>
 	<string name="lblModifierBuilderMessage">Compose a modifier.</string>
-	<string name="lblNeutralModifier">Does it make any sense to create a neutral modifier?</string>
+	<string name="lblVarModifierBuilderMessage">Select a Named Value.</string>
+	<string name="lblPercModifierBuilderMessage">Compose a percentage modifier.</string>
+	<string name="lblNeutralModifier">What\'s the meaning of a neutral modifier?</string>
 	<string name="lblDuplicateModifier">This modifier already exists.</string>
 	<string name="lblNameBag">Name</string>
 	<string name="hintNameBag">Identifies the bag</string>
@@ -107,6 +110,12 @@
 	
 	<string name="lblUndo">UNDO</string>
 
+	<string-array name="mod_type_array">
+		<item>@string/lblModifier</item>
+		<item>@string/lblVariable</item>
+		<item>@string/lblPercentage</item>
+	</string-array>
+
 	<string name="msgInitApp">Initializing app data&#8230;</string>
 	
 	<string name="msgRemoveDiceTitle">Remove die</string>
@@ -128,6 +137,7 @@ Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
 &bull; Named Values can be added to quick modifiers bar for easy access<br />
+&bull; New percentage modifiers<br />
 &bull; Increased max number of bags, dice, variables, modifiers and linked results<br />
 &bull; Fine tuning variable value (+1/-1 buttons)<br />
 &bull; Fixed FC opening Help page on devices without a browser<br />
@@ -150,7 +160,7 @@ Please report bug to <a href="mailto:ohmnibus@gmail.com">ohmnibus@gmail.com</a><
 This is a free app, however if you like it please consider to make a donation.<br />
 <br />
 Thanks!<br />]]></string>
-	<string name="app_translators">Dani Estu (ES), Henning (DE), lorrampi (PT-BR), Magaolimpia (FR), Mazterki (DE), Mescalito (ES), patrik.siljestam (SV-SE), Renato Rasta (PT-BR), Skilgannon (DE), Stefania M. (ES), strawbxx (SV-SE)</string>
+	<string name="app_translators">Dani Estu (ES), Henning (DE), lorrampi (PT-BR), Magaolimpia (FR), Mazterki (DE), Mescalito (ES), patrik.siljestam (SV-SE), Renato Rasta (PT-BR), sic (FR), Skilgannon (DE), Stefania M. (ES), strawbxx (SV-SE)</string>
 
 	<string name="msgLicenses">Licenses</string>
 	<string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> is published by %3$s under <a href="%4$s">%5$s</a>.<br />]]></string>
@@ -215,6 +225,10 @@ Thanks!<br />]]></string>
 	<string name="msgBonusMessage">Positive modifier of %1$+d</string>
 	<string name="msgMalusTitle">Penalty %1$+d</string>
 	<string name="msgMalusMessage">Negative modifier of %1$+d</string>
+	<string name="msgAddPercentTitle">Add %2$d%%</string><!-- &#37; => % -->
+	<string name="msgAddPercentMessage">Increase the result by %2$d%%</string>
+	<string name="msgSubPercentTitle">Subtract %2$d%%</string>
+	<string name="msgSubPercentMessage">Decrease the result by %2$d%%</string>
 	<string name="msgMaxBagsReach">You can\'t add more dice bags.</string>
 	<string name="msgMaxDiceReach">You can\'t add more dice.</string>
 	<string name="msgMaxModifiersReach">You can\'t add more modifiers.</string>
@@ -601,8 +615,8 @@ Thanks!<br />]]></string>
 	<string name="err_cannot_import">Cannot read the dice definitions.</string>
 	<string name="err_storage_not_found">External storage not found.</string>
 	<string name="err_var_name_required">Value\'s name is required.</string>
-	<string name="err_var_label_required">Value\'s label is required and should be 2 to 5 characters long.</string>
-	<string name="err_var_label_invalid_char">Value\'s label should be composed only of alphabetic characters.</string>
+	<string name="err_var_label_required">Value\'s label is required and must be 2 to 5 characters long.</string>
+	<string name="err_var_label_invalid_char">Value\'s label must be of 2 alphabetic characters followed by up to 3 numbers or alphabetic characters.</string>
 	<string name="err_var_label_exists">Value\'s label should be unique but \"%1$s\" is already used by the Named Value \"%2$s\".</string>
 
 	<!-- Exceptions -->

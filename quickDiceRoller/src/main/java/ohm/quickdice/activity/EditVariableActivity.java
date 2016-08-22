@@ -1,6 +1,7 @@
 package ohm.quickdice.activity;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import ohm.quickdice.QuickDiceApp;
 import ohm.quickdice.R;
@@ -53,7 +54,8 @@ public class EditVariableActivity extends BaseActivity
 	public static final String BUNDLE_POSITION = "Pos";
 	
 	public static final int POSITION_UNDEFINED = -1;
-	
+
+	private static Pattern labelPattern = Pattern.compile("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$");
 	protected Variable variable;
 	protected int position;
 	protected int req;
@@ -436,14 +438,14 @@ public class EditVariableActivity extends BaseActivity
 	}
 	
 	private boolean checkLabelChar(String label) {
-		//TODO: Don't allow to enter invalid characters
-		for (int i = 0; i < label.length(); i++) {
-			char c = label.charAt(i);
-			if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
-				return false;
-			}
-		}
-		return true;
+//		for (int i = 0; i < label.length(); i++) {
+//			char c = label.charAt(i);
+//			if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
+//				return false;
+//			}
+//		}
+//		return true;
+		return labelPattern.matcher(label).matches();
 	}
 	
 	private void returnToCaller(Variable retVal, int position, int result) {

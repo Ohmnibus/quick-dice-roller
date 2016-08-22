@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import ohm.dexp.DContext;
 import ohm.dexp.DExpression;
@@ -63,36 +64,39 @@ public class DExpressionTest {
 		testResult("3+(-5)", dCtx, 3+(-5));
 		testResult("max(-3,-5)", dCtx, -3);
 
-//		DExpression dExp = new DExpression();
-//		dExp.setContext(new DContext());
-//		try {
-//			dExp.setExpression("1+2");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			assertEquals(3, dExp.getResult().getResult());
-//
-//			dExp.setExpression("1-2");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			assertEquals(-1, dExp.getResult().getResult());
-//
-//			dExp.setExpression("+5");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			assertEquals(5, dExp.getResult().getResult());
-//
-//			dExp.setExpression("-5");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			assertEquals(-5, dExp.getResult().getResult());
-//
-//			dExp.setExpression("3+(-5)");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			assertEquals(-2, dExp.getResult().getResult());
-//
-//			dExp.setExpression("max(-3,-5)");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			assertEquals(-3, dExp.getResult().getResult());
-//
-//		} catch (DException e) {
-//			e.printStackTrace();
-//		}
+	}
+
+	@Test
+	public void testParseVariables() {
+		System.out.println("");
+		System.out.println("testParseVariables");
+
+		DContext dCtx = new DContext();
+		dCtx.setValue("Test", 0, 2, 1);
+		testResult("Test+0", dCtx, 0, 0);
+		testResult("test+0", dCtx, 0, 0);
+		testResult("tesT+0", dCtx, 0, 0);
+		testException("Tust+0", dCtx, UnknownVariable.class, 1);
+
+		dCtx.setValue("A1", 0, 2, 1);
+		testException("A1+0", dCtx, ExpectedEndOfStatement.class, 2);
+
+		dCtx.setValue("AA1", 0, 2, 1);
+		testResult("AA1+0", dCtx, 0, 0);
+
+		dCtx.setValue("AA1A", 0, 2, 1);
+		testResult("AA1A+0", dCtx, 0, 0);
+
+//		System.out.println("A " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "A"));
+//		System.out.println("A1 " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "A1"));
+//		System.out.println("AA " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AA"));
+//		System.out.println("AA1 " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AA1"));
+//		System.out.println("AA1A " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AA1A"));
+//		System.out.println("1AAA " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "1AAA"));
+//		System.out.println("AAAAA " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AAAAA"));
+//		System.out.println("AAAAAA " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AAAAAA"));
+//		System.out.println("AaaA1 " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AAAA1"));
+//		System.out.println("AB123 " + Pattern.matches("^[a-zA-Z]{2}[a-zA-Z0-9]{0,3}$", "AB123"));
 	}
 
 	@Test
@@ -105,20 +109,6 @@ public class DExpressionTest {
 
 		testResult("3+rak(1d6,5,4)", dCtx, 7, 27);
 
-//		DExpression dExp = new DExpression();
-//		dExp.setContext(dCtx);
-//		try {
-//			dExp.setExpression("3+rak(1d6,5,4)");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//
-////			dExp.setExpression("teSt= 1d6");
-////			printResult(dExp.getExpression(), dExp.getResult());
-////
-////			dExp.setExpression("teSt= 1d6:\"Test\"+6");
-////			printResult(dExp.getExpression(), dExp.getResult());
-//		} catch (DException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	@Test
@@ -132,19 +122,6 @@ public class DExpressionTest {
 		testResult("1d6*2+6+4/2", dCtx, 10, 20);
 		testResult("1+3*2d6", dCtx, 7, 37);
 		testResult("1+1+3*2*3+1+2", dCtx, 1+1+3*2*3+1+2);
-//		DExpression dExp = new DExpression();
-//		dExp.setContext(dCtx);
-//		try {
-//			dExp.setExpression("1d6*2+6+4/2");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			dExp.setExpression("1+3*2d6");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			dExp.setExpression("1+1+3*2*3+1+2");
-//			printResult(dExp.getExpression(), dExp.getResult());
-//			Assert.assertEquals(1+1+3*2*3+1+2, dExp.getResult().getResult());
-//		} catch (DException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	@Test

@@ -81,15 +81,14 @@ Parole chiave: Aperto, Boardgame, D&D, D20, Da tavolo, Dadi, Dado, Dice, Die, Du
 
 
 ##Recent Changes:500##
-- Nuova funzione "reroll"
-- Scegli le collezioni da importare
-- Importa/Esporta da/su app esterne
-- Mostra "-0" se il risultato non troncato è negativo
-- Aggiunto "4dF" alla collezione predefinita
-- Creazione collezioni contenenti un solo dado
-- Risolto FC nel selettore di Valori Denominati
-- Risolto FC nell'uso del separatore decimale
-- Risolto ANR in modifica dadi
+- I Valori Denominati possono essere aggiunti alla barra dei modificatori
+- Modificatori di tipo percentuale
+- Aumentato il numero massimo di collezioni, dadi, valori denominati e modificatori
+- Regolazione precisa dei Valori Denominati (tasti +1/-1)
+- Risolto FC accedendo alle pagine di aiuto da un dispositivo senza browser
+- Corretta la computazione di alcune formule
+- Migliorata la velocità di avvio
+- Migliorato il generatore di numeri casuali
 - Correzioni e miglioramenti minori
 
 ##Promo Text:80##

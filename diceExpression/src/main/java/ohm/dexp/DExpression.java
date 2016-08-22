@@ -418,7 +418,7 @@ public class DExpression {
 				actTokenType = actToken.type;
 				if (! checkTokenOrder(lastTokenType, actTokenType)) {
 					/* Invalid token sequence */
-
+					/* Error depends on last token type */
 					switch (lastTokenType) {
 						case TK_VAL:
 						case TK_PCL:
@@ -562,7 +562,7 @@ public class DExpression {
 							functionStack.add(newToken);
 						} else {
 							newToken = TokenValue.InitToken(actToken.value, actToken.begin);
-							varCache.put(actToken.value, new DVariable(0, 0, 0));
+							varCache.put(actToken.value, new DVariable());
 							operandStack.add(newToken);
 							//isTerminal = true;
 						}
@@ -909,7 +909,7 @@ public class DExpression {
 	/** Pseudo-token: Closed bracket */
 	private static final int TK_PCL = 7;
 	/** Pseudo-token: Parameter separator */
-	private static final int TK_COM = 8; /* Set TOKEN_NUMBER as the last value */
+	private static final int TK_COM = 8; /* Set TOKEN_NUMBER as the last value + 1 */
 
 	
 	private static final int TOKEN_NUMBER = TK_COM + 1;
@@ -1113,18 +1113,14 @@ public class DExpression {
 						break;
 					case TK_NAME:
 						/* Functions and variables */
-//						if (myValue == null) {
-//							myValue = new StringBuilder();
-//						}
-//						myValue.append(actChar);
 
 						//To prevent that "d6" could be recognized as a name,
-						//they must be of 3 ALPHA followed by any combination of ALPHA or DIGIT
+						//they must be of 2 ALPHA followed by any combination of ALPHA or DIGIT
 
 						//if (nextCharType != CT_ALPHA && nextCharType != CT_DIGIT) {
-						//if (nextCharType != CT_ALPHA && (myValue.length() < 3 || nextCharType != CT_DIGIT)) {
+						//if (nextCharType != CT_ALPHA && (myValue.length() < 2 || nextCharType != CT_DIGIT)) {
 						int len = (iCnt - retVal.begin) + 1;
-						if (nextCharType != CT_ALPHA && (len < 3 || nextCharType != CT_DIGIT)) {
+						if (nextCharType != CT_ALPHA && (len < 2 || nextCharType != CT_DIGIT)) {
 							/* Function recognized */
 							//retVal.value = myValue.toString();
 							retVal.end = iCnt + 1;

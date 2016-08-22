@@ -33,6 +33,7 @@ import ohm.quickdice.dialog.VariableDetailDialog;
 import ohm.quickdice.entity.Dice;
 import ohm.quickdice.entity.DiceBag;
 import ohm.quickdice.entity.Modifier;
+import ohm.quickdice.entity.PercentModifier;
 import ohm.quickdice.entity.RollModifier;
 import ohm.quickdice.entity.RollResult;
 import ohm.quickdice.entity.VarModifier;
@@ -60,6 +61,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
@@ -144,8 +146,12 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 	private final String KEY_ROLL_LIST = "KEY_ROLL_LIST";
 
-	private final String TYPE_MODIFIER = "TYPE_MODIFIER";
-	private final String TYPE_VARIABLE = "TYPE_VARIABLE";
+//	private final String TYPE_MODIFIER = "TYPE_MODIFIER";
+//	private final String TYPE_VARIABLE = "TYPE_VARIABLE";
+//	private final String TYPE_PERCENTAGE = "TYPE_PERCENTAGE";
+	private final int TYPE_MODIFIER = RollModifier.TYPE_ID;
+	private final int TYPE_VARIABLE = VarModifier.TYPE_ID;
+	private final int TYPE_PERCENTAGE = PercentModifier.TYPE_ID;
 
 	/**
 	 * Called when the activity is first created.
@@ -537,6 +543,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
 		int index = info == null ? 0 : (int)info.id;
+		//int type = v.getTag(R.id.key_type) == null ? -1 :
 		
 		if (v.getId() == lvDiceBag.getId()) {
 			//Context menu for the dice bags list
@@ -550,10 +557,13 @@ public class QuickDiceMainActivity extends BaseActivity {
 		} else if (v.getId() == gvResults.getId()) {
 			//Context menu for the result list
 			setupRollMenu(menu, index);
-		} else if (v.getTag(R.id.key_type) == TYPE_MODIFIER) {
+		} else if (((Integer)TYPE_MODIFIER).equals(v.getTag(R.id.key_type))) {
 			//Context menu for a modifier
 			setupModifierMenu(menu, (Integer)v.getTag(R.id.key_value));
-		} else if (v.getTag(R.id.key_type) == TYPE_VARIABLE) {
+		} else if (((Integer)TYPE_PERCENTAGE).equals(v.getTag(R.id.key_type))) {
+			//Context menu for a percent modifier
+			setupModifierMenu(menu, (Integer)v.getTag(R.id.key_value));
+		} else if (((Integer)TYPE_VARIABLE).equals(v.getTag(R.id.key_type))) {
 			//Context menu for a modifier
 			int vmIndex;
 			VarModifier vm;
@@ -567,6 +577,8 @@ public class QuickDiceMainActivity extends BaseActivity {
 			}
 			if (var != null) {
 				setupVariableMenu(menu, var.getID(), true, hidden);
+			} else {
+				setupModifierMenu(menu, (Integer)v.getTag(R.id.key_value));
 			}
 		} else {
 			//Context menu for the last result item
@@ -1381,7 +1393,8 @@ public class QuickDiceMainActivity extends BaseActivity {
 		
 		vgModifiers.removeAllViews();
 		modifierViewList.clear();
-		
+
+		String label;
 		for (int i = 0; i < diceBag.getModifiers().size(); i++) {
 			modifier = diceBag.getModifiers().get(i);
 			modView = inflater.inflate(R.layout.modifier_item, vgModifiers, false);
@@ -1391,9 +1404,12 @@ public class QuickDiceMainActivity extends BaseActivity {
 			//modIcon.setImageDrawable(graphicManager.getDiceIcon(modifier.getResourceIndex()));
 			//modIcon.setImageDrawable(diceBagManager.getIconDrawable(modifier.getResourceIndex()));
 			diceBagManager.setIconDrawable(modIcon, modifier.getResourceIndex());
+			label = modifier.getValueString();
 			modText.setText(modifier.getValueString());
+			modText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, ResultListAdapter.getFontSize(app, label));
 
-			modView.setTag(R.id.key_type, modifier instanceof VarModifier ? TYPE_VARIABLE : TYPE_MODIFIER);
+			//modView.setTag(R.id.key_type, modifier instanceof VarModifier ? TYPE_VARIABLE : TYPE_MODIFIER);
+			modView.setTag(R.id.key_type, modifier.getTypeID());
 			modView.setTag(R.id.key_value, i);
 			
 			modView.setOnClickListener(modifierClickListener);
@@ -1586,13 +1602,19 @@ public class QuickDiceMainActivity extends BaseActivity {
 		RollResult modRes;
 
 		if (lastResult.length > 0) { //Apply only if a result exist
+			long value = modifier.getValue();
+			if (modifier instanceof PercentModifier) {
+				//Value is a percentage, and it have to be applyied to current result.
+				RollResult res = RollResult.mergeResultList(lastResult);
+				value = ((res.getRawResultValue() * value) / 100) / RollResult.VALUES_PRECISION_FACTOR;
+			}
 			modRes = new RollResult(
 					modifier.getName(),
 					modifier.getDescription(),
 					modifier.getValueString(),
-					modifier.getValue() * RollResult.VALUES_PRECISION_FACTOR,
-					modifier.getValue() * RollResult.VALUES_PRECISION_FACTOR,
-					modifier.getValue() * RollResult.VALUES_PRECISION_FACTOR,
+					value * RollResult.VALUES_PRECISION_FACTOR,
+					value * RollResult.VALUES_PRECISION_FACTOR,
+					value * RollResult.VALUES_PRECISION_FACTOR,
 					modifier.getResourceIndex());
 
 			addResult(modRes, true);
@@ -2030,16 +2052,23 @@ public class QuickDiceMainActivity extends BaseActivity {
 	
 	private OnCreatedListener modifierCreatedListener = new OnCreatedListener() {
 		@Override
-		public void onCreated(boolean confirmed, int position, int modifier, String label) {
+		public void onCreated(boolean confirmed, int position, int type, int value, String label) {
 			if (confirmed) {
-				if (label == null) {
-					addModifier(
-							modifier,
-							position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
-				} else {
-					addModifier(
-							label,
-							position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
+				switch (type) {
+					case VarModifier.TYPE_ID:
+						addVarModifier(
+								label,
+								position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
+						break;
+					case PercentModifier.TYPE_ID:
+						addPercModifier(
+								value,
+								position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
+						break;
+					default:
+						addRollModifier(
+								value,
+								position == ModifierBuilderDialog.POSITION_UNDEFINED ? -1 : position);
 				}
 			}
 		}
@@ -2056,7 +2085,7 @@ public class QuickDiceMainActivity extends BaseActivity {
 		}
 	}
 	
-	private void addModifier(int modifier, int position) {
+	private void addRollModifier(int modifier, int position) {
 		RollModifier newMod;
 		boolean duplicate = false;
 
@@ -2083,7 +2112,34 @@ public class QuickDiceMainActivity extends BaseActivity {
 		}
 	}
 
-	private void addModifier(String label, int position) {
+	private void addPercModifier(int percent, int position) {
+		PercentModifier newMod;
+		boolean duplicate = false;
+
+		if (percent == 0) {
+			//Neutral modifier
+			Toast.makeText(this, R.string.lblNeutralModifier, Toast.LENGTH_LONG).show();
+			return;
+		}
+
+		for (Modifier mod : diceBag.getModifiers()) {
+			if (mod instanceof PercentModifier && mod.getValue() == percent) {
+				duplicate = true;
+				break;
+			}
+		}
+
+		if (duplicate) {
+			//Duplicate modifier
+			Toast.makeText(this, R.string.lblDuplicateModifier, Toast.LENGTH_LONG).show();
+		} else {
+			newMod = new PercentModifier(app, percent);
+			diceBag.getModifiers().add(position, newMod);
+			refreshModifierList();
+		}
+	}
+
+	private void addVarModifier(String label, int position) {
 		VarModifier newMod;
 		boolean duplicate = false;
 

@@ -25,9 +25,13 @@
 	<string name="lblDiceIconPicker">Icona del dado</string>
 	<string name="lblBagIconPicker">Icona della collezione</string>
 	<string name="lblVariableIconPicker">Icona del valore denominato</string>
+	<string name="lblPercentage">Modificatore percentuale</string>
+	<string name="lblModifier">Modificatore</string>
 	<string name="lblModifierBuilder">Creazione modificatore</string>
 	<string name="lblModifierBuilderMessage">Componi un modificatore.</string>
-	<string name="lblNeutralModifier">Ha qualche senso creare un modificatore neutrale?</string>
+	<string name="lblVarModifierBuilderMessage">Scegli un Valore Denominato.</string>
+	<string name="lblPercModifierBuilderMessage">Componi un modificatore percentuale.</string>
+	<string name="lblNeutralModifier">Qual\'è il senso di un modificatore neutro?</string>
 	<string name="lblDuplicateModifier">Questo modificatore esiste già.</string>
 	<string name="lblNameBag">Nome</string>
 	<string name="hintNameBag">Identifica la collezione</string>
@@ -77,6 +81,7 @@
 	<string name="lblLabelValueVar">Etichetta: Valore (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
 	<string name="lblDiceBags">Collezioni</string>
+	<string name="lblVariable">Valore denominato</string>
 	<string name="lblVariables">Valori denominati</string>
 	<string name="lblNumberPicker">Numero</string>
 	<string name="lblSelectValue">Scegli un valore.</string>
@@ -122,24 +127,23 @@
 <br />
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
-	<!-- string name="msgWhatsNewBody"><![CDATA[
-&bull; Nuova funzione \"reroll\"<br />
-&bull; Scegli le collezioni da importare<br />
-&bull; Importa/Esporta da/su app esterne<br />
-&bull; Mostra \"-0\" se il risultato non troncato è negativo<br />
-&bull; Aggiunto \"4dF\" alla collezione predefinita<br />
-&bull; Creazione collezioni contenenti un solo dado<br />
-&bull; Risolto FC nel selettore di Valori Denominati<br />
-&bull; Risolto FC nell\'uso del separatore decimale<br />
-&bull; Risolto ANR in modifica dadi<br />
+	<string name="msgWhatsNewBody"><![CDATA[
+&bull; I Valori Denominati possono essere aggiunti alla barra dei modificatori<br />
+&bull; Nuovi modificatori di tipo percentuale<br />
+&bull; Aumentato il numero massimo di collezioni, dadi, valori denominati, modificatori e risultati collegati<br />
+&bull; Regolazione precisa dei Valori Denominati (tasti +1/-1)<br />
+&bull; Risolto FC accedendo alle pagine di aiuto da un dispositivo senza browser<br />
+&bull; Corretta la computazione di alcune formule<br />
+&bull; Migliorata la velocità di avvio<br />
+&bull; Migliorato il generatore di numeri casuali<br />
 &bull; Correzioni e miglioramenti minori<br />
-]]></string -->
+]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[
 <br />
 <b>Per favore</b> inviami una <a href="mailto:ohmnibus@gmail.com">mail</a> se hai dei suggerimenti su come migliorare l\'app o vai al <a href="https://crowdin.com/project/quick-dice-roller">progetto Crowdin</a> per aiutarmi a migliorare le traduzioni.<br />]]></string>
 	<string name="msgAboutTitle">A proposito di %1$s</string>
 	<string name="msgAboutBody"><![CDATA[%1$s versione %2$s<br />
-Copyright &#169; 2012-2015 by %3$s<br />
+Copyright &#169; 2012-2016 by %3$s<br />
 <br />
 <a href="https://crowdin.com/project/quick-dice-roller">Traduzioni</a>: %4$s<br />
 <br />
@@ -176,6 +180,10 @@ Grazie!<br />]]></string>
 	<string name="msgBonusMessage">Modificatore positivo di %1$+d</string>
 	<string name="msgMalusTitle">Malus %1$+d</string>
 	<string name="msgMalusMessage">Modificatore negativo di %1$+d</string>
+	<string name="msgAddPercentTitle">Aggiungi %2$d%%</string><!-- &#37; => % -->
+	<string name="msgAddPercentMessage">Aumenta il risultato del %2$d%%</string>
+	<string name="msgSubPercentTitle">Sottrai %2$d%%</string>
+	<string name="msgSubPercentMessage">Riduce il risultato del %2$d%%</string>
 	<string name="msgMaxBagsReach">Non è possibile aggiungere altre collezioni di dadi.</string>
 	<string name="msgMaxDiceReach">Non è possibile aggiungere altri dadi.</string>
 	<string name="msgMaxModifiersReach">Non è possibile aggiungere altri modificatori.</string>
@@ -551,6 +559,7 @@ Grazie!<br />]]></string>
 	</string-array>
 	
 	<!-- Errors -->
+	<string name="err_cannot_show_help">Impossibile accedere all\'help online.</string>
 	<string name="err_cannot_update">Impossibile aggiornare le definizioni dei dadi.</string>
 	<string name="err_cannot_read">Impossibile leggere le definizioni dei dadi. Verranno usati quelli predefiniti.</string>
 	<string name="err_name_required">Il nome del dado è obbligatorio.</string>
@@ -562,7 +571,7 @@ Grazie!<br />]]></string>
 	<string name="err_storage_not_found">Memoria esterna non trovata.</string>
 	<string name="err_var_name_required">Il nome del valore è obbligatorio.</string>
 	<string name="err_var_label_required">L\'etichetta del valore denominato è obbligatoria, e deve essere da 2 a 5 caratteri.</string>
-	<string name="err_var_label_invalid_char">L\'etichetta del valore denominato deve essere composta solo da caratteri alfabetici.</string>
+	<string name="err_var_label_invalid_char">L\'etichetta del valore denominato deve essere di due caratteri alfabetici seguiti da numeri o caratteri alfabetici.</string>
 	<string name="err_var_label_exists">L\'etichetta del valore denominato deve essere univoca e \"%1$s\" è già utilizzata da \"%2$s\".</string>
 
 	<!-- Exceptions -->

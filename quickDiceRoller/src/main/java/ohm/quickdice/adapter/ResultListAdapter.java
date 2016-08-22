@@ -100,7 +100,7 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 	
 	/**
 	 * Tell if the roll result (extended) and description has to be switched.
-	 * @param doSwitch New setting.
+	 * @param doSwap New setting.
 	 */
 	public static void setSwapNameResult(boolean doSwap) {
 		swapResult = doSwap;		
@@ -139,11 +139,11 @@ public class ResultListAdapter extends CachedArrayAdapter<RollResult[]> {
 		}
 	}
 	
-	protected static float getFontSize(Context context, long result) {
+	public static float getFontSize(Context context, long result) {
 		return getFontSize(context, Long.toString(result));
 	}
 	
-	protected static float getFontSize(Context context, String result) {
+	public static float getFontSize(Context context, String result) {
 		float retVal;
 		
 		if (resultFontSizes == null) {

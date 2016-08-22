@@ -9,6 +9,8 @@ import ohm.quickdice.R;
  */
 public class VarModifier implements Modifier {
 
+	public static final int TYPE_ID = 1;
+
 	protected String label;
 	protected Variable ref;
 	protected DiceBag parent;
@@ -26,6 +28,11 @@ public class VarModifier implements Modifier {
 		this.parent = null;
 
 		initCache();
+	}
+
+	@Override
+	public int getTypeID() {
+		return TYPE_ID;
 	}
 
 	public String getLabel() {
