@@ -1603,19 +1603,22 @@ public class QuickDiceMainActivity extends BaseActivity {
 
 		if (lastResult.length > 0) { //Apply only if a result exist
 			long value = modifier.getValue();
+			RollResult res = RollResult.mergeResultList(lastResult);
 			if (modifier instanceof PercentModifier) {
 				//Value is a percentage, and it have to be applyied to current result.
-				RollResult res = RollResult.mergeResultList(lastResult);
-				value = ((res.getRawResultValue() * value) / 100) / RollResult.VALUES_PRECISION_FACTOR;
+				value = ((res.getRawResultValue() * value) / 100);
+			} else {
+				value = value * RollResult.VALUES_PRECISION_FACTOR;
 			}
 			modRes = new RollResult(
 					modifier.getName(),
 					modifier.getDescription(),
 					modifier.getValueString(),
-					value * RollResult.VALUES_PRECISION_FACTOR,
-					value * RollResult.VALUES_PRECISION_FACTOR,
-					value * RollResult.VALUES_PRECISION_FACTOR,
-					modifier.getResourceIndex());
+					value,
+					value,
+					value,
+					res.getResourceIndex() // modifier.getResourceIndex()
+			);
 
 			addResult(modRes, true);
 		}
