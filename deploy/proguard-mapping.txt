@@ -3850,11 +3850,13 @@ ohm.dexp.DContext -> ohm.a.a:
     void setValue(java.lang.String,long,long,long) -> a
     long getValue(java.lang.String) -> a
     ohm.dexp.DContext$DVariable getVariable(java.lang.String) -> b
+    ohm.dexp.DContext$DVariable getVariableInternal(java.lang.String) -> d
     boolean checkName(java.lang.String) -> c
 ohm.dexp.DContext$DVariable -> ohm.a.b:
     long minVal -> a
     long maxVal -> b
     long curVal -> c
+    void <init>() -> <init>
     void <init>(ohm.dexp.DContext$DVariable) -> <init>
     void <init>(long,long,long) -> <init>
     boolean equals(ohm.dexp.DContext$DVariable) -> a
@@ -4945,6 +4947,7 @@ ohm.quickdice.activity.EditDiceActivity$5 -> ohm.quickdice.activity.l:
     void <init>(ohm.quickdice.activity.EditDiceActivity) -> <init>
     void onClick(android.content.DialogInterface,int) -> onClick
 ohm.quickdice.activity.EditVariableActivity -> ohm.quickdice.activity.EditVariableActivity:
+    java.util.regex.Pattern labelPattern -> t
     ohm.quickdice.entity.Variable variable -> a
     int position -> b
     int req -> c
@@ -4964,9 +4967,9 @@ ohm.quickdice.activity.EditVariableActivity -> ohm.quickdice.activity.EditVariab
     boolean valChanged -> q
     int initialResIndex -> r
     java.lang.String initialLabel -> s
-    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener minValuePickedListener -> t
-    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener maxValuePickedListener -> u
-    android.text.TextWatcher genericTextWatcher -> v
+    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener minValuePickedListener -> u
+    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener maxValuePickedListener -> v
+    android.text.TextWatcher genericTextWatcher -> w
     void <init>() -> <init>
     void onCreate(android.os.Bundle) -> onCreate
     void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
@@ -4997,6 +5000,7 @@ ohm.quickdice.activity.EditVariableActivity -> ohm.quickdice.activity.EditVariab
     int getVariablePosition(android.os.Bundle) -> b
     void access$000(ohm.quickdice.activity.EditVariableActivity) -> a
     void access$100(ohm.quickdice.activity.EditVariableActivity,ohm.quickdice.entity.Variable,int,int) -> a
+    void <clinit>() -> <clinit>
 ohm.quickdice.activity.EditVariableActivity$1 -> ohm.quickdice.activity.m:
     ohm.quickdice.activity.EditVariableActivity this$0 -> a
     void <init>(ohm.quickdice.activity.EditVariableActivity) -> <init>
@@ -5217,8 +5221,9 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     int LINK_LEVEL_OFF -> O
     int LINK_LEVEL_ON -> P
     java.lang.String KEY_ROLL_LIST -> Q
-    java.lang.String TYPE_MODIFIER -> R
-    java.lang.String TYPE_VARIABLE -> S
+    int TYPE_MODIFIER -> R
+    int TYPE_VARIABLE -> S
+    int TYPE_PERCENTAGE -> T
     long contextMenuCooledDown -> C
     int modifierOpeningMenu -> D
     int targetItem -> E
@@ -5228,9 +5233,9 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     android.view.View$OnClickListener modifierClickListener -> I
     android.view.View$OnClickListener linkSwitchButtonClickListener -> J
     android.content.DialogInterface$OnClickListener cancelDialogClickListener -> K
-    java.util.concurrent.ThreadPoolExecutor executor -> T
-    ohm.quickdice.activity.QuickDiceMainActivity$DoRoll roller -> U
-    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener modifierCreatedListener -> V
+    java.util.concurrent.ThreadPoolExecutor executor -> U
+    ohm.quickdice.activity.QuickDiceMainActivity$DoRoll roller -> V
+    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener modifierCreatedListener -> W
     ohm.quickdice.activity.QuickDiceMainActivity$CenterInParent centerInParentAgent -> L
     ohm.quickdice.activity.QuickDiceMainActivity$ResetLinkSwitch resetLinkSwitchAgent -> M
     android.os.Handler myHandler -> N
@@ -5299,8 +5304,9 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     ohm.quickdice.entity.RollResult[] linkResult(ohm.quickdice.entity.RollResult[],ohm.quickdice.entity.RollResult[]) -> a
     void callAddModifier(int) -> c
     void moveDice(int,int,int,int) -> a
-    void addModifier(int,int) -> a
-    void addModifier(java.lang.String,int) -> a
+    void addRollModifier(int,int) -> a
+    void addPercModifier(int,int) -> b
+    void addVarModifier(java.lang.String,int) -> a
     void resetLinkSwitch(int) -> d
     void centerInParent(android.view.View) -> a
     void access$000(ohm.quickdice.activity.QuickDiceMainActivity) -> a
@@ -5317,8 +5323,9 @@ ohm.quickdice.activity.QuickDiceMainActivity -> ohm.quickdice.activity.QuickDice
     void access$1100(ohm.quickdice.activity.QuickDiceMainActivity) -> g
     void access$1200(ohm.quickdice.activity.QuickDiceMainActivity,ohm.quickdice.entity.RollResult) -> a
     void access$1300(ohm.quickdice.activity.QuickDiceMainActivity,ohm.dexp.exception.DException) -> a
-    void access$1400(ohm.quickdice.activity.QuickDiceMainActivity,int,int) -> a
-    void access$1500(ohm.quickdice.activity.QuickDiceMainActivity,java.lang.String,int) -> a
+    void access$1400(ohm.quickdice.activity.QuickDiceMainActivity,java.lang.String,int) -> a
+    void access$1500(ohm.quickdice.activity.QuickDiceMainActivity,int,int) -> a
+    void access$1600(ohm.quickdice.activity.QuickDiceMainActivity,int,int) -> b
 ohm.quickdice.activity.QuickDiceMainActivity$1 -> ohm.quickdice.activity.af:
     ohm.quickdice.activity.QuickDiceMainActivity this$0 -> a
     void <init>(ohm.quickdice.activity.QuickDiceMainActivity) -> <init>
@@ -5376,7 +5383,7 @@ ohm.quickdice.activity.QuickDiceMainActivity$20 -> ohm.quickdice.activity.ar:
 ohm.quickdice.activity.QuickDiceMainActivity$21 -> ohm.quickdice.activity.as:
     ohm.quickdice.activity.QuickDiceMainActivity this$0 -> a
     void <init>(ohm.quickdice.activity.QuickDiceMainActivity) -> <init>
-    void onCreated(boolean,int,int,java.lang.String) -> a
+    void onCreated(boolean,int,int,int,java.lang.String) -> a
 ohm.quickdice.activity.QuickDiceMainActivity$3 -> ohm.quickdice.activity.at:
     ohm.quickdice.activity.QuickDiceMainActivity this$0 -> a
     void <init>(ohm.quickdice.activity.QuickDiceMainActivity) -> <init>
@@ -6046,52 +6053,61 @@ ohm.quickdice.dialog.MenuDialog$AsyncResizer -> ohm.quickdice.c.y:
 ohm.quickdice.dialog.ModifierBuilderDialog -> ohm.quickdice.c.z:
     android.view.View panelMod -> a
     android.view.View panelVar -> b
-    android.widget.RadioGroup radioGroup -> c
-    int curIndex -> d
-    ohm.quickdice.entity.Variable curItem -> e
-    android.widget.ListView listView -> f
-    ohm.quickdice.adapter.VariableAdapter adapter -> g
-    int position -> h
-    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener onCreatedListener -> i
-    android.widget.AdapterView$OnItemClickListener listItemClickListener -> j
+    android.view.View panelPer -> c
+    android.widget.Spinner spinner -> d
+    int type -> e
+    int curIndex -> f
+    ohm.quickdice.entity.Variable curItem -> g
+    android.widget.ListView listView -> h
+    ohm.quickdice.adapter.VariableAdapter adapter -> i
+    int position -> j
+    ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener onCreatedListener -> k
+    kankan.wheel.widget.WheelView signPercWheel -> l
+    kankan.wheel.widget.WheelView hundPercWheel -> m
+    kankan.wheel.widget.WheelView tensPercWheel -> n
+    kankan.wheel.widget.WheelView unitPercWheel -> o
     void <init>(android.content.Context,int,ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener) -> <init>
     void onClick(android.content.DialogInterface,int) -> onClick
-    void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
+    void variablePicked(int) -> a
+    void percentagePicked(int) -> b
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
     void onNumberPicked(boolean,int) -> a
     void onVariablePicked(boolean,java.lang.String) -> a
-    void initHead() -> a
-    void initViews() -> b
-ohm.quickdice.dialog.ModifierBuilderDialog$1 -> ohm.quickdice.c.aa:
-    ohm.quickdice.dialog.ModifierBuilderDialog this$0 -> a
-    void <init>(ohm.quickdice.dialog.ModifierBuilderDialog) -> <init>
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener -> ohm.quickdice.c.ab:
-    void onCreated(boolean,int,int,java.lang.String) -> a
-ohm.quickdice.dialog.NumberPickerDialog -> ohm.quickdice.c.ac:
-    java.lang.String title -> k
-    java.lang.String message -> l
-    int defaultValue -> m
-    int digits -> n
-    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener onNumberPickedListener -> o
-    kankan.wheel.widget.WheelView signWheel -> p
-    kankan.wheel.widget.WheelView hundWheel -> q
-    kankan.wheel.widget.WheelView tensWheel -> r
-    kankan.wheel.widget.WheelView unitWheel -> s
+    android.view.View initHead() -> a
+    void initViews(android.view.View) -> a
+    void initVarViews(android.view.View) -> b
+    void initPercViews(android.view.View,int) -> a
+    void setWheelSize(kankan.wheel.widget.WheelView) -> a
+ohm.quickdice.dialog.ModifierBuilderDialog$OnCreatedListener -> ohm.quickdice.c.aa:
+    void onCreated(boolean,int,int,int,java.lang.String) -> a
+ohm.quickdice.dialog.NumberPickerDialog -> ohm.quickdice.c.ab:
+    java.lang.String title -> p
+    java.lang.String message -> q
+    int defaultValue -> r
+    int digits -> s
+    ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener onNumberPickedListener -> t
+    kankan.wheel.widget.WheelView signWheel -> u
+    kankan.wheel.widget.WheelView hundWheel -> v
+    kankan.wheel.widget.WheelView tensWheel -> w
+    kankan.wheel.widget.WheelView unitWheel -> x
     void <init>(android.content.Context,int,int,int,int,ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener) -> <init>
     void <init>(android.content.Context,java.lang.String,java.lang.String,int,int,ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener) -> <init>
     long pow(long,int) -> a
-    boolean isEven(int) -> a
+    boolean isEven(int) -> c
     void onCreate(android.os.Bundle) -> onCreate
-    void initHead() -> a
-    void initViews() -> b
-    kankan.wheel.widget.WheelView initWheel(int,int,kankan.wheel.widget.adapters.WheelViewAdapter) -> a
-    kankan.wheel.widget.WheelView getWheel(int) -> b
+    android.view.View initHead() -> a
+    void initViews(android.view.View) -> a
+    void initViews(android.view.View,int,int,java.lang.String) -> a
+    kankan.wheel.widget.WheelView initWheel(android.view.View,int,int,kankan.wheel.widget.adapters.WheelViewAdapter) -> a
+    kankan.wheel.widget.WheelView getWheel(android.view.View,int) -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener -> ohm.quickdice.c.ad:
+ohm.quickdice.dialog.NumberPickerDialog$OnNumberPickedListener -> ohm.quickdice.c.ac:
     void onNumberPicked(boolean,int) -> a
-ohm.quickdice.dialog.OnExpressionCheckedListener -> ohm.quickdice.c.ae:
+ohm.quickdice.dialog.OnExpressionCheckedListener -> ohm.quickdice.c.ad:
     void onExpressionChecked(boolean) -> a
-ohm.quickdice.dialog.RollDetailDialog -> ohm.quickdice.c.af:
+ohm.quickdice.dialog.RollDetailDialog -> ohm.quickdice.c.ae:
     ohm.quickdice.entity.RollResult[] lastResult -> a
     java.util.ArrayList resultList -> b
     int resultIndex -> c
@@ -6103,7 +6119,7 @@ ohm.quickdice.dialog.RollDetailDialog -> ohm.quickdice.c.af:
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View getHeaderView(android.view.LayoutInflater,android.widget.ListView) -> a
     boolean onPrepareOptionsMenu(ohm.quickdice.adapter.MenuAdapter) -> a
-ohm.quickdice.dialog.VariableDetailDialog -> ohm.quickdice.c.ag:
+ohm.quickdice.dialog.VariableDetailDialog -> ohm.quickdice.c.af:
     ohm.quickdice.entity.DiceBag diceBag -> a
     int varIndex -> b
     ohm.quickdice.entity.Variable variable -> c
@@ -6126,7 +6142,7 @@ ohm.quickdice.dialog.VariableDetailDialog -> ohm.quickdice.c.ag:
     void onStartTrackingTouch(android.widget.SeekBar) -> onStartTrackingTouch
     void onStopTrackingTouch(android.widget.SeekBar) -> onStopTrackingTouch
     void onDismiss(android.content.DialogInterface) -> onDismiss
-ohm.quickdice.dialog.VariablePickerDialog -> ohm.quickdice.c.ah:
+ohm.quickdice.dialog.VariablePickerDialog -> ohm.quickdice.c.ag:
     android.content.Context context -> a
     int titleId -> b
     int curIndex -> c
@@ -6143,13 +6159,13 @@ ohm.quickdice.dialog.VariablePickerDialog -> ohm.quickdice.c.ah:
     void initViews() -> a
     void onClick(android.content.DialogInterface,int) -> onClick
     net.londatiga.android.ActionItem getActionItem(android.content.Context,net.londatiga.android.PopupMenu,ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener) -> a
-ohm.quickdice.dialog.VariablePickerDialog$1 -> ohm.quickdice.c.ai:
+ohm.quickdice.dialog.VariablePickerDialog$1 -> ohm.quickdice.c.ah:
     ohm.quickdice.dialog.VariablePickerDialog this$0 -> a
     void <init>(ohm.quickdice.dialog.VariablePickerDialog) -> <init>
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ohm.quickdice.dialog.VariablePickerDialog$OnItemSelectedListener -> ohm.quickdice.c.aj:
+ohm.quickdice.dialog.VariablePickerDialog$OnItemSelectedListener -> ohm.quickdice.c.ai:
     void onItemSelected(boolean,int,java.lang.Object) -> a
-ohm.quickdice.dialog.VariablePickerDialog$VariablePickerActionItemClickListener -> ohm.quickdice.c.ak:
+ohm.quickdice.dialog.VariablePickerDialog$VariablePickerActionItemClickListener -> ohm.quickdice.c.aj:
     net.londatiga.android.PopupMenu parent -> a
     ohm.quickdice.dialog.BuilderDialogBase$OnDiceBuiltListener diceBuiltListener -> b
     android.view.View refView -> c
@@ -6337,11 +6353,13 @@ ohm.quickdice.entity.IconCollection -> ohm.quickdice.d.l:
     ohm.quickdice.entity.Icon ICON_DEFAULT -> b
     ohm.quickdice.entity.Icon ICON_MALUS -> c
     ohm.quickdice.entity.Icon ICON_BONUS -> d
-    java.util.ArrayList iconList -> e
-    android.util.SparseIntArray iconIds -> f
-    ohm.quickdice.control.IIconManager owner -> g
-    int firstCustomIconPos -> h
-    android.graphics.drawable.Drawable defaultDrawable -> i
+    ohm.quickdice.entity.Icon ICON_SUB_PERCENT -> e
+    ohm.quickdice.entity.Icon ICON_ADD_PERCENT -> f
+    java.util.ArrayList iconList -> g
+    android.util.SparseIntArray iconIds -> h
+    ohm.quickdice.control.IIconManager owner -> i
+    int firstCustomIconPos -> j
+    android.graphics.drawable.Drawable defaultDrawable -> k
     void <init>(ohm.quickdice.control.IIconManager,android.content.Context) -> <init>
     void setParent(ohm.quickdice.control.IIconManager) -> a
     void initSystemIcons(android.content.Context) -> a
@@ -6365,11 +6383,12 @@ ohm.quickdice.entity.IconCollection -> ohm.quickdice.d.l:
     java.lang.Object get(int) -> a
     void <clinit>() -> <clinit>
 ohm.quickdice.entity.Modifier -> ohm.quickdice.d.m:
-    java.lang.String getName() -> a
-    java.lang.String getDescription() -> b
-    int getValue() -> c
-    java.lang.String getValueString() -> d
-    int getResourceIndex() -> e
+    int getTypeID() -> a
+    java.lang.String getName() -> b
+    java.lang.String getDescription() -> c
+    int getValue() -> d
+    java.lang.String getValueString() -> e
+    int getResourceIndex() -> f
     void setParent(ohm.quickdice.entity.DiceBag) -> a
 ohm.quickdice.entity.ModifierCollection -> ohm.quickdice.d.n:
     java.util.ArrayList modifierList -> a
@@ -6404,7 +6423,7 @@ ohm.quickdice.entity.MostRecentFile -> ohm.quickdice.d.o:
     java.util.Date getLastUsed() -> g
     int compareTo(ohm.quickdice.entity.MostRecentFile) -> a
     int compareTo(java.lang.Object) -> compareTo
-ohm.quickdice.entity.RollModifier -> ohm.quickdice.d.p:
+ohm.quickdice.entity.PercentModifier -> ohm.quickdice.d.p:
     java.lang.String title -> a
     java.lang.String description -> b
     int value -> c
@@ -6412,13 +6431,30 @@ ohm.quickdice.entity.RollModifier -> ohm.quickdice.d.p:
     ohm.quickdice.entity.DiceBag parent -> e
     void <init>(android.content.Context,int) -> <init>
     void <init>(java.lang.String,java.lang.String,int,int) -> <init>
-    java.lang.String getName() -> a
-    java.lang.String getDescription() -> b
-    int getValue() -> c
-    java.lang.String getValueString() -> d
-    int getResourceIndex() -> e
+    void initValues(java.lang.String,java.lang.String,int,int) -> a
+    int getTypeID() -> a
+    java.lang.String getName() -> b
+    java.lang.String getDescription() -> c
+    int getValue() -> d
+    java.lang.String getValueString() -> e
+    int getResourceIndex() -> f
     void setParent(ohm.quickdice.entity.DiceBag) -> a
-ohm.quickdice.entity.RollResult -> ohm.quickdice.d.q:
+ohm.quickdice.entity.RollModifier -> ohm.quickdice.d.q:
+    java.lang.String title -> a
+    java.lang.String description -> b
+    int value -> c
+    int iconId -> d
+    ohm.quickdice.entity.DiceBag parent -> e
+    void <init>(android.content.Context,int) -> <init>
+    void <init>(java.lang.String,java.lang.String,int,int) -> <init>
+    int getTypeID() -> a
+    java.lang.String getName() -> b
+    java.lang.String getDescription() -> c
+    int getValue() -> d
+    java.lang.String getValueString() -> e
+    int getResourceIndex() -> f
+    void setParent(ohm.quickdice.entity.DiceBag) -> a
+ohm.quickdice.entity.RollResult -> ohm.quickdice.d.r:
     int VALUES_PRECISION_FACTOR -> a
     java.lang.String title -> b
     java.lang.String description -> c
@@ -6445,7 +6481,7 @@ ohm.quickdice.entity.RollResult -> ohm.quickdice.d.q:
     boolean isFumble() -> n
     ohm.quickdice.entity.RollResult mergeResultList(ohm.quickdice.entity.RollResult[]) -> a
     void <clinit>() -> <clinit>
-ohm.quickdice.entity.VarModifier -> ohm.quickdice.d.r:
+ohm.quickdice.entity.VarModifier -> ohm.quickdice.d.s:
     java.lang.String label -> a
     ohm.quickdice.entity.Variable ref -> b
     ohm.quickdice.entity.DiceBag parent -> c
@@ -6454,15 +6490,16 @@ ohm.quickdice.entity.VarModifier -> ohm.quickdice.d.r:
     int value -> f
     int iconId -> g
     void <init>(java.lang.String) -> <init>
-    java.lang.String getLabel() -> f
-    java.lang.String getName() -> a
-    java.lang.String getDescription() -> b
-    int getValue() -> c
-    java.lang.String getValueString() -> d
-    int getResourceIndex() -> e
+    int getTypeID() -> a
+    java.lang.String getLabel() -> g
+    java.lang.String getName() -> b
+    java.lang.String getDescription() -> c
+    int getValue() -> d
+    java.lang.String getValueString() -> e
+    int getResourceIndex() -> f
     void setParent(ohm.quickdice.entity.DiceBag) -> a
-    void initCache() -> g
-ohm.quickdice.entity.Variable -> ohm.quickdice.d.s:
+    void initCache() -> h
+ohm.quickdice.entity.Variable -> ohm.quickdice.d.t:
     int id -> b
     java.lang.String name -> c
     java.lang.String description -> d
@@ -6494,7 +6531,7 @@ ohm.quickdice.entity.Variable -> ohm.quickdice.d.s:
     int getCurVal() -> i
     void setParent(ohm.quickdice.entity.DiceBag) -> a
     ohm.quickdice.entity.Dice[] requiredBy() -> j
-ohm.quickdice.entity.VariableCollection -> ohm.quickdice.d.t:
+ohm.quickdice.entity.VariableCollection -> ohm.quickdice.d.u:
     java.util.ArrayList variableList -> a
     ohm.quickdice.entity.DiceBag owner -> b
     ohm.dexp.DContext context -> c

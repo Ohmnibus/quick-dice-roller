@@ -114,7 +114,6 @@
   <string name="msgLostChange">En quittant maintenant vous perdrez toutes les modifications non enregistrées. Continuer?</string>
   <string name="msgMissingVar">Le dé nécessite certaines valeurs nommées qui ne sont plus disponibles: \"%1$s\"\nLe dé ne peut être lancé tant que ces valeurs nommées ne seront pas définies dans cette collection. Enregistrer malgré tout?</string>
   <string name="msgRemoveDiceBagTitle">Supprimer la collection</string>
-  <string name="msgRemoveDiceBag">Êtes-vous sûr de vouloir supprimer définitivement la collection \"%1$s\"? Elle contient \"%2$d\" dé(s) et \"%3$d\" modificateur(s). Et toutes ces choses se perdront dans l\'oubli, comme les larmes dans la pluie.</string>
   <string name="msgRemoveDiceBagNew">Êtes-vous sûr de vouloir supprimer définitivement la collection \"%1$s\"? Elle contient \"%2$d\" dés, \"%3$d\" valeurs nommées et \"%4$d\" modificateurs... et toutes ces choses se perdront dans l\'oubli, comme les larmes dans la pluie.</string>
   <string name="msgWhatsNew">Nouveautés</string>
   <string name="msgWhatsNewTitle">Nouveautés dans la version %2$s</string>
@@ -139,16 +138,6 @@ Cette application est gratuite, mais si vous aimez, pourquoi ne pas me payer une
 Merci!<br />]]></string>
   <string name="msgLicenses">Licences</string>
   <string name="lblLicense"><![CDATA[&bull; <a href="%1$s">%2$s</a> est publié par %3$s sur <a href="%4$s">%5$s</a>.<br />]]></string>
-  <string-array name="lblLicenseLibAuthors">
-    <!-- No need to translate -->
-    <item>Yuri Kanivets</item>
-    <item>Lorensius W. L. T.</item>
-    <item>Roman Nurik</item>
-    <item>Jake Wharton</item>
-    <item>Google</item>
-    <item>Google</item>
-    <item>CommonsWare, LLC</item>
-  </string-array>
   <string-array name="lblLicenseNames">
     <item>Licence Apache 2.0</item>
     <item>Licence Apache 2.0</item>
@@ -158,22 +147,9 @@ Merci!<br />]]></string>
     <item>Licence Apache 2.0</item>
     <item>Licence Apache 2.0</item>
   </string-array>
-  <string-array name="lblLicenseURLs">
-    <!-- No need to translate -->
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-    <item>http://www.apache.org/licenses/LICENSE-2.0</item>
-  </string-array>
   <string name="lbl_donate_title_small">Petite donation</string>
-  <string name="lbl_donate_url_small">https://play.google.com/store/apps/details?id=ohm.donate.small</string>
   <string name="lbl_donate_title_medium">Donation moyenne</string>
-  <string name="lbl_donate_url_medium">https://play.google.com/store/apps/details?id=ohm.donate.medium</string>
   <string name="lbl_donate_title_large">Donation généreuse</string>
-  <string name="lbl_donate_url_large">https://play.google.com/store/apps/details?id=ohm.donate.large</string>
   <string name="msgRemoveModTitle">Supprimer le modificateur</string>
   <string name="msgRemoveMod">Êtes-vous sûr de vouloir supprimer définitivement le modificateur \"%1$s\"?</string>
   <string name="msgBonusTitle">Bonus %1$+d</string>
@@ -589,7 +565,6 @@ Merci!<br />]]></string>
   <string name="pref_clipboard">Presse-papiers</string>
   <string name="pref_clipboard_title">Utilisation du presse-papiers</string>
   <string name="pref_clipboard_desc">Indique si et comment stocker les résultats de jeté dansle presse-papiers.</string>
-  <string name="pref_clipboard_dyn_desc">%1$s.</string>
   <string name="pref_clipboard_dlg_title">Comment utiliser les presse-papiers?</string>
   <string-array name="entries_clipboard">
     <item>Ne pas utiliser les presse-papiers</item>

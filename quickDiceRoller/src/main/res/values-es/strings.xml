@@ -99,7 +99,6 @@
   <string name="msgLostChange">Saliendo ahora se perderán todos los cambios no guardados. ¿Continuar?</string>
   <string name="msgMissingVar">El dado requiere algunos valores con nombre que ya no están disponibles: \"%1$s\"\nEl dado no puede ser lanzado hasta que los valores con nombre se agreguen a la bolsa de dados. ¿Salvar aunque sea?</string>
   <string name="msgRemoveDiceBagTitle">Eliminar colección</string>
-  <string name="msgRemoveDiceBag">¿Estás seguro que desea eliminar la colección \"%1$s\"? Contiene \"%2$d\" dados y \"%3$d\" modificadores. Y todo esto se perderán en el tiempo como lágrimas en la lluvia.</string>
   <string name="msgRemoveDiceBagNew">¿Esta seguro de eliminar definitivamente la bolsa de dados \"%1$s\"? Contiene dados \"%2$d\", \"%3$d\" valores con nombre y modificadores de \"%4$d\". Todos esos elementos se perderán en el tiempo, como lágrimas en la lluvia.</string>
   <string name="msgWhatsNew">¿Qué hay de nuevo?</string>
   <string name="msgWhatsNewTitle">Novedades de la versión %2$s</string>
@@ -527,7 +526,6 @@ Gracias!<br />]]></string>
   <string name="pref_clipboard">Notas</string>
   <string name="pref_clipboard_title">Uso de las notas</string>
   <string name="pref_clipboard_desc">Indica si y cómo almacenar los resultados de los lanzamientos en las notas.</string>
-  <string name="pref_clipboard_dyn_desc">%1$s.</string>
   <string name="pref_clipboard_dlg_title">¿Cómo utilizar las notas?</string>
   <string-array name="entries_clipboard">
     <item>No usar las notas</item>

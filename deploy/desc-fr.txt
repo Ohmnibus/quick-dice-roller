@@ -6,7 +6,7 @@ Le "Lanceur de dés rapide" (Quick Dice Roller) est un simulateur de jet de dés
 
 Les dés peuvent être ajoutées à volonté et organisées dans des sacs de dés. Chaque dé est définie par une formule telle que <i>2 d 6 + 5</i>, ainsi que des fonctions spéciales comme <i>rak(1d6,4,3)</i> qui permettent d'émuler des systèmes de jeu les plus complexes. Un générateur de formules maniable simplifie le processus et permette d'accéder à une aide en ligne (seulement in italian et en anglais). Vous pouvez consulter la liste de toutes les fonctions supportées ici: http://goo.gl/TTjb9 (en anglais)
 
-Grâce aux "valeurs nommées", ainsi que de garder une trace des scores de jeux, vous pouvez définir des formules à l'aide de paramètres variables. Vous pouvez créer, par exemple, la valeur nommée "Niveau" avec label "niv", puis utiliser la formule "(niv)d6" pour déterminer les dommages de la boule de feu. Ainsi, lorsque votre mage pousse niveau vous n'avez pas besoin de modifier la formule: il suffit de changer la valeur de "Niveau"!
+Grâce aux "valeurs nommées", ainsi que de garder une trace des scores de jeux, vous pouvez définir des formules à l'aide de paramètres variables. Vous pouvez créer, par exemple, la valeur nommée "Niveau" avec label "niv", puis utiliser la formule <i>(niv)d6</i> pour déterminer les dommages de la boule de feu. Ainsi, lorsque votre mage pousse niveau vous n'avez pas besoin de modifier la formule: il suffit de changer la valeur de "Niveau"!
 
 <b>Ce que vous pouvez faire avec Quick Dice Roller :</b>
 
@@ -58,7 +58,7 @@ Grâce aux "valeurs nommées", ainsi que de garder une trace des scores de jeux,
 ☆ Rolemaster
 ☆ Savage Worlds
 ☆ Shadowrun
-☆ Star Wars (<i>D6 Space</i> and <i>d20 System</i> only)
+☆ Star Wars (<i>D6 Space</i> et <i>d20 System</i> uniquement)
 ☆ Traveller
 ☆ World of Darkness
 

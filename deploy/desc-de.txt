@@ -6,7 +6,7 @@ Schnell würfeln (Quick Dice Roller) ist eine App für Geek, die mit RPG und Tis
 
 Die Würfel können beliebig hinzugefügt und in Sammlungen organisiert werden. Jeder Würfel ist durch eine Formel, wie <i>2w6+5</i>, definiert; zudem ist es möglich mit speziellen Funktionen, wie <i>rak(1w6,4,3)</i>,  komplexeste Spiel-Systeme zu emulieren. Ein handlicher Formeln-Generator vereinfacht den Prozess und bietet Zugriff auf eine online-Hilfe. Überprüfen Sie die Liste aller unterstützten Funktionen hier: http://goo.gl/mZkcQS
 
-MIttels "benannte Werte", können Sie Formeln mit variablen Parametern definieren, sowie die Punktzahl des Spieles verfolgen. Sie können zum Beispiel den benannten Wert "Niveau", mit Bezeichnung "niv", erstellen und dann die Formel "(niv)w6" verwenden um die Feuerball-Schaden zu bestimmen. Wenn nun das Niveau ihres Magiers steigt, müssen Sie nicht die Formel ändern sondern können einfach nur den Wert "Niveau" ändern!
+MIttels "benannte Werte", können Sie Formeln mit variablen Parametern definieren, sowie die Punktzahl des Spieles verfolgen. Sie können zum Beispiel den benannten Wert "Niveau", mit Bezeichnung "niv", erstellen und dann die Formel <i>(niv)w6</i> verwenden um die Feuerball-Schaden zu bestimmen. Wenn nun das Niveau ihres Magiers steigt, müssen Sie nicht die Formel ändern sondern können einfach nur den Wert "Niveau" ändern!
 
 <b>Was können Sie mit Schnell würfeln machen:</b>
 
@@ -58,7 +58,7 @@ MIttels "benannte Werte", können Sie Formeln mit variablen Parametern definiere
 ☆ Rolemaster
 ☆ Wilde Welten
 ☆ Shadowrun
-☆ StarWars
+☆ Star Wars (<i>D6 Space</i> und nur <i>d20 System</i>)
 ☆ Traveller
 ☆ Welt der Dunkelheit
 
@@ -80,6 +80,15 @@ Schnell würfeln ist eine freie und Open Source App für Android. Jeder kann, un
 Stichwörter: Brettspiel, D&D, D20, Würfel, Dungeon World, Verliese und Drachen, Dungeonslayers, Exalted, Exploding, GURPS, HERO, L5R, Master, offen, ASR, Pathfinder, Pool, Rollenspiel, Roll and Keep, würfeln, RPG, Tabletop, Vampire, WhiteWholf
 
 ##Recent Changes:500##
+- Named Values can be added to quick modifiers bar for easy access
+- Percentage modifiers
+- Increased max number of bags, dice, variables, modifiers and linked results
+- Fine tuning variable value (+1/-1 buttons)
+- Fixed FC opening Help page on devices without a browser
+- Fixed computation of some formulas
+- Improved startup speed
+- Improved random number generator
+- Minor fix and improvements
 
 ##Promo Text:80##
 Die flexibel, vollständig und handliche würfeln-Helfer für Brettspiel und RPG.

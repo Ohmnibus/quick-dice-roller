@@ -113,7 +113,6 @@
   <string name="msgLostChange">Se você sair agora, perderá todas as mudanças não confirmadas. Continuar?</string>
   <string name="msgMissingVar">Este dado precisa de algumas Variáveis Nomeadas que não estão mais disponíveis: \"%1$s\"\nO dado não pode ser rolado até a Variável Nomeada ser adicionada para o sacola de dados. Salvar pelo menos?</string>
   <string name="msgRemoveDiceBagTitle">Remova a sacola de dados</string>
-  <string name="msgRemoveDiceBag">Tem certeza que quer remover definitivamente a sacola de dados \"%1$s\"? Contém \"%2$d\" dados e \"%3$d\" modificadores. Todos esses itens serão perdidos no tempo, como lágrimas na chuva.</string>
   <string name="msgRemoveDiceBagNew">Tem certeza que quer remover definitivamente a sacola de dados \"%1$s\"? Contém \"%2$d\" dados, \"%3$d\" Variáveis Nomeadas e \"%4$d\" modificadores. Todos esses itens serão perdidos no tempo, como lágrimas na chuva.</string>
   <string name="msgWhatsNew">Novidades</string>
   <string name="msgWhatsNewTitle">Novidade na versão %2$s</string>
@@ -564,7 +563,6 @@ Obrigado!<br />]]></string>
   <string name="pref_clipboard">Área de transferência</string>
   <string name="pref_clipboard_title">Uso de área de transferência</string>
   <string name="pref_clipboard_desc">Indica se e como armazenar os resultados para a área de transferência.</string>
-  <string name="pref_clipboard_dyn_desc">%1$s.</string>
   <string name="pref_clipboard_dlg_title">Como usar a área de transferência?</string>
   <string-array name="entries_clipboard">
     <item>Não use a área de transferência</item>

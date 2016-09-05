@@ -2,7 +2,7 @@
 <resources>
 
 	<string name="app_name">TiraDadi Rapido</string>
-	<string name="app_author">Ohmnibus</string>
+	<!--<string name="app_author">Ohmnibus</string>-->
 	<string name="picker_name">Esploratore di Dadi</string>
 
 	<string name="lblName">Nome</string>
@@ -45,7 +45,7 @@
 	<string name="lblCurrentFolder">Cartella: %1$s</string>
 	<string name="lblItemHiddenFolder">Cartella nascosta</string>
 	<string name="lblItemFolder">Cartella</string>
-	<string name="lblItemFile">%1$s - %2$s %3$s</string>
+	<!--<string name="lblItemFile">%1$s - %2$s %3$s</string>-->
 	<string name="lblParentFolder">Cartella superiore</string>
 	<string name="lblSelectFile">Scegli documento</string>
 	<string name="lblSelectFolder">Scegli cartella</string>
@@ -66,7 +66,7 @@
 	<string name="lblDragToResize">Trascina per ridimensionare</string>
 	<string name="lblQuality">Qualità del risultato</string>
 	<string name="lblResultQualityRange">Risultato, qualità, intervallo</string>
-	<string name="lblRangeFmt">%1$d &#8594; %2$d (%3$d)</string><!-- "&#8594;" correspond to "->" -->
+	<!--<string name="lblRangeFmt">%1$d &#8594; %2$d (%3$d)</string>&lt;!&ndash; "&#8594;" correspond to "->" &ndash;&gt;-->
 	<string name="lblNameVar">Nome</string>
 	<string name="hintNameVar">Identifica il valore</string>
 	<string name="lblDescVar">Descrizione</string>
@@ -79,7 +79,7 @@
 	<string name="lblMin">Min</string>
 	<string name="lblMax">Max</string>
 	<string name="lblLabelValueVar">Etichetta: Valore (Min &#8594; Max)</string><!-- "&#8594;" correspond to "->" -->
-	<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string><!-- "&#8594;" correspond to "->" -->
+	<!--<string name="lblLabelValueVarFmt">%1$s: %2$s (%3$s &#8594; %4$s)</string>&lt;!&ndash; "&#8594;" correspond to "->" &ndash;&gt;-->
 	<string name="lblDiceBags">Collezioni</string>
 	<string name="lblVariable">Valore denominato</string>
 	<string name="lblVariables">Valori denominati</string>
@@ -118,7 +118,6 @@
 	<string name="msgMissingVar">Il dado richiede alcuni valori denominati non più disponibili: \"%1$s\"\nIl dado non può essere lanciato finché questi valori denominati non saranno definiti in questa collezione. Procedere comunque?</string>
 	
 	<string name="msgRemoveDiceBagTitle">Elimina collezione</string>
-	<string name="msgRemoveDiceBag">Sei sicuro di voler eliminare definitivamente la collezione \"%1$s\"? Contiene \"%2$d\" dadi e \"%3$d\" modificatori. E tutto questo andrà perduto nel tempo come lacrime nella pioggia.</string>
 	<string name="msgRemoveDiceBagNew">Sei sicuro di voler eliminare definitivamente la collezione \"%1$s\"? Contiene \"%2$d\" dadi, \"%3$d\" valori denominati e \"%4$d\" modificatori. E tutto questo andrà perduto nel tempo come lacrime nella pioggia.</string>
 	
 	<string name="msgWhatsNew">Novità</string>
@@ -136,6 +135,7 @@ Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa u
 &bull; Corretta la computazione di alcune formule<br />
 &bull; Migliorata la velocità di avvio<br />
 &bull; Migliorato il generatore di numeri casuali<br />
+&bull; Migliorate traduzioni (en, fr)<br />
 &bull; Correzioni e miglioramenti minori<br />
 ]]></string>
 	<string name="msgWhatsNewOutro"><![CDATA[
@@ -166,13 +166,13 @@ Grazie!<br />]]></string>
 	</string-array>
 	
 	<string name="lbl_donate_title_small">Piccola donazione</string>
-	<string name="lbl_donate_url_small">https://play.google.com/store/apps/details?id=ohm.donate.small</string>
-	
+
+
 	<string name="lbl_donate_title_medium">Media donazione</string>
-	<string name="lbl_donate_url_medium">https://play.google.com/store/apps/details?id=ohm.donate.medium</string>
-	
+
+
 	<string name="lbl_donate_title_large">Donazione generosa</string>
-	<string name="lbl_donate_url_large">https://play.google.com/store/apps/details?id=ohm.donate.large</string>
+
 
 	<string name="msgRemoveModTitle">Elimina modificatore</string>
 	<string name="msgRemoveMod">Sei sicuro di voler eliminare definitivamente il modificatore \"%1$s\"?</string>
@@ -623,7 +623,7 @@ Grazie!<br />]]></string>
 	<string name="pref_clipboard">Appunti</string>
 	<string name="pref_clipboard_title">Utilizzo degli appunti</string>
 	<string name="pref_clipboard_desc">Indica se e come memorizzare i risultati dei lanci negli appunti.</string>
-	<string name="pref_clipboard_dyn_desc">%1$s.</string>
+	<!--<string name="pref_clipboard_dyn_desc">%1$s.</string>-->
 	<string name="pref_clipboard_dlg_title">Come utilizzare gli appunti?</string>
 	<string-array name="entries_clipboard">
 		<item>Non usare gli appunti</item>

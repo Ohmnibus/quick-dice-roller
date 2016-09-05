@@ -6,7 +6,7 @@ Rolagem de Dados Rápida (Quick Dice Roller) é um app feito para aficionados em
 
 Os dados podem ser adicionados a vontade e organizados em sacolas de dados. Cada dado é definido por uma fórmula como  <i>2d6+5</i> bem como funcões especiais como <i>rak(1d6,4,3)</i> que permite simular os complexos sistemas de jogo. Um prático construtor de fórmulas facilita o processo e permite o acesso para uma ajuda on-line. Verifique a lista de todas as funções disponíveis aqui: http://goo.gl/mZkcQS
 
-Graças as "variáveis nomeadas", bem como manter um registro dos resultados dos jogos, você pode definir fórmulas usando parâmetros variáveis. Você pode criar, por exemplo, a variável nomeada "Nível" com a etiqueta "nvl", é usar a fórmula "(nvl)d6" para determinar o dano da bola de fogo. Então, quando o seu mago subir de nível, você não precisa editar a fórmula: basta mudar o valor do "Nível"!
+Graças as "variáveis nomeadas", bem como manter um registro dos resultados dos jogos, você pode definir fórmulas usando parâmetros variáveis. Você pode criar, por exemplo, a variável nomeada "Nível" com a etiqueta "nvl", é usar a fórmula <i>(nvl)d6</i> para determinar o dano da bola de fogo. Então, quando o seu mago subir de nível, você não precisa editar a fórmula: basta mudar o valor do "Nível"!
 
 <b>O que você pode fazer com o Rolagem de Dados Rápida:</b>
 
@@ -58,7 +58,7 @@ Graças as "variáveis nomeadas", bem como manter um registro dos resultados dos
 ☆ Rolemaster
 ☆ Savage Worlds
 ☆ Shadowrun
-☆ Star Wars
+☆ Star Wars (<i>D6 Space</i> e <i>d20 System</i> somente)
 ☆ Traveller
 ☆ World of Darkness
 

@@ -103,7 +103,6 @@
   <string name="msgLostChange">Beim Verlassen werden alle Änderungen verworfen. Verlassen?</string>
   <string name="msgMissingVar">Der Würfel erfordert einige benannte Werte, die nicht mehr zur Verfügung stehen: \"%1$s\" \nDer Würfel kann nicht gewürfelt werden, bis der benannten Wert in die Würfel-Sammlung hinzugefügt wird. Trotzdem speichern?</string>
   <string name="msgRemoveDiceBagTitle">Würfelbeutel löschen</string>
-  <string name="msgRemoveDiceBag">Bist Du wirklich sicher, daß Du die Sammlung \"%1$s\"? löschen möchtest? Sie enthält \"%2$d\" Würfe und \"%3$d\" Modifikator. All diese Elemente werden verloren sein in der Zeit, so wie Tränen im Regen.</string>
   <string name="msgRemoveDiceBagNew">Sind Sie sicher, endgültig die Sammlung \"%1$s\" zu entfernen? Sie enthält \"%2$d\" Würfel, \"%3$d\" bennante Werte und \"%4$d\" Modifizierer. All diese Elemente werden verloren sein in der Zeit, so wie Tränen im Regen.</string>
   <string name="msgWhatsNew">Was gibt\'s Neues</string>
   <string name="msgWhatsNewTitle">Das ist neu in Version %2$s</string>
@@ -547,7 +546,6 @@ Danke!<br />]]></string>
   <string name="pref_clipboard">Zwischenablage</string>
   <string name="pref_clipboard_title">Zwischenablage benutzen</string>
   <string name="pref_clipboard_desc">Gibt an, ob und wie Ergebnisse in die Zwischenablage gelegt werden sollen</string>
-  <string name="pref_clipboard_dyn_desc">%1$s.</string>
   <string name="pref_clipboard_dlg_title">Wie wird die Zwischenablage eingesetzt?</string>
   <string-array name="entries_clipboard">
     <item>Keine Zwischenablage benutzen</item>
