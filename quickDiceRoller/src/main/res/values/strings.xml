@@ -135,6 +135,9 @@
 Want to stay up to date? <a href="http://goo.gl/UuJBSO">Become a beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Fixed some annoying errors (thanks to Lisa for reporting them)<br />
+<br />
+Version 2.1.3<br />
 &bull; Named Values can be added to quick modifiers bar for easy access<br />
 &bull; New percentage modifiers<br />
 &bull; Increased max number of bags, dice, variables, modifiers and linked results<br />

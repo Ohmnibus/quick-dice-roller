@@ -81,6 +81,8 @@ Keywords: Boardgame, D&D, D20, Dice, Die, Dungeon World, Dungeons & Dragons, Dun
 
 
 ##Recent Changes:500##
+- Fixed some annoying errors (thanks to Lisa for reporting them)
+Version 2.1.3
 - Add Named Values to quick modifiers bar for easy access
 - Create percentage modifiers
 - Fine tuning for Named Values (+1/-1 buttons)

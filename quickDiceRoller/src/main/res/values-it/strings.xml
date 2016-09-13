@@ -127,6 +127,9 @@
 Vuoi ricevere gli ultimi aggiornamenti? <a href="http://goo.gl/UuJBSO">Diventa un beta tester!</a><br />
 <br />]]></string>
 	<string name="msgWhatsNewBody"><![CDATA[
+&bull; Risolti fastidiosi errori (grazie a Lisa per la segnalazione)<br />
+<br />
+Versione 2.1.3<br />
 &bull; I Valori Denominati possono essere aggiunti alla barra dei modificatori<br />
 &bull; Nuovi modificatori di tipo percentuale<br />
 &bull; Aumentato il numero massimo di collezioni, dadi, valori denominati, modificatori e risultati collegati<br />

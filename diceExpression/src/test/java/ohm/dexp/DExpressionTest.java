@@ -23,6 +23,7 @@ import ohm.dexp.exception.UnexpectedParameter;
 import ohm.dexp.exception.UnknownFunction;
 import ohm.dexp.exception.UnknownVariable;
 import ohm.dexp.function.TokenFunction;
+import ohm.dexp.function.TokenFunctionExpUp;
 import ohm.dexp.function.TokenFunctionMax;
 import ohm.dexp.function.TokenFunctionRandom;
 import ohm.dexp.function.TokenFunctionRollAndKeep;
@@ -42,10 +43,17 @@ public class DExpressionTest {
 		initFunctions();
 	}
 
-//	@Test
-//	public void testParse() throws Exception {
-//
-//	}
+	@Test
+	public void testParse() {
+		System.out.println("");
+		System.out.println("testParse");
+
+		DContext dCtx = new DContext();
+
+		testResult(" expup(rand(0,5)) + 4 ", dCtx, 4, 9);
+		testResult("expup(rand(0,5)) + expup(rand(0,5))", dCtx, 0, 10);
+		testResult("1d8 + 1d8 + 1d8 + 1d8 + 1d8", dCtx, 5, 40);
+	}
 
 	@Test
 	public void testParseUnaryOperators() {
@@ -151,8 +159,8 @@ public class DExpressionTest {
 		testException("2+rUk", dCtx, UnknownVariable.class, 3);
 		testException("2+5,6", dCtx, ExpectedEndOfStatement.class, 4);
 		testException("2+(5,6)", dCtx, ExpectedEndOfStatement.class, 5);
-		testException("2 5", dCtx, ExpectedEndOfStatement.class, 2);
-		testException("rolls 3", dCtx, ExpectedEndOfStatement.class, 6);
+		testException("2 5", dCtx, ExpectedEndOfStatement.class, 3);
+		testException("rolls 3", dCtx, ExpectedEndOfStatement.class, 7);
 		testException("", dCtx, NothingToEvaluate.class, 0);
 		testException("#", dCtx, InvalidCharacter.class, 1);
 		testException("2+3#", dCtx, InvalidCharacter.class, 4);
@@ -236,6 +244,7 @@ public class DExpressionTest {
 			addFunction("max", TokenFunctionMax.class);
 			addFunction("rand", TokenFunctionRandom.class);
 			addFunction("rak", TokenFunctionRollAndKeep.class);
+			addFunction("expup", TokenFunctionExpUp.class);
 		}
 	}
 

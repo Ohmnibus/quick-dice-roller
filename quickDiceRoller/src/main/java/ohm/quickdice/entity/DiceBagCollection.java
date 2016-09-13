@@ -172,7 +172,13 @@ public class DiceBagCollection implements BaseCollection<DiceBag> {
 	 * @return
 	 */
 	public int getCurrentIndex() {
-		return owner.getCurrentIndex();
+		int position = owner.getCurrentIndex();
+		if (position < 0) {
+			position = 0;
+		} else if (position >= size()) {
+			position = size() - 1;
+		}
+		return position;
 	}
 	
 	/**

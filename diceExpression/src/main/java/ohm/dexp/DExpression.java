@@ -1026,6 +1026,7 @@ public class DExpression {
 
 			/* If searching for new token, guess his type */
 			if (retVal.type==TK_NULL) {
+				retVal.begin = iCnt;
 				switch (actCharType) {
 					case CT_DIGIT:
 						retVal.type=TK_VAL;

@@ -81,15 +81,14 @@ Parole chiave: Aperto, Boardgame, D&D, D20, Da tavolo, Dadi, Dado, Dice, Die, Du
 
 
 ##Recent Changes:500##
+- Risolti fastidiosi errori (grazie a Lisa per la segnalazione)
+Versione 2.1.3
 - Aggiungi i Valori Denominati alla barra dei modificatori
 - Crea modificatori di tipo percentuale
 - Regola con precisione i i Valori Denominati (tasti +1/-1)
 - Aumentato il massimo n. di collezioni, dadi, valori denominati e modificatori
-- Avvio più veloce
 - Migliorato il generatore di numeri casuali
-- Migliorate le traduzioni (en, fr)
 - Risolto FC nelle pagine di aiuto da un dispositivo senza browser
-- Corretta la computazione di alcune formule
 - Correzioni e miglioramenti minori
 
 ##Promo Text:80##
