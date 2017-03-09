@@ -71,6 +71,8 @@ public class QuickDiceApp extends Application {
 			addFunction(fnc, "rdn", TokenFunctionRoundDown.class, R.drawable.ic_fnc, R.string.fncRdnName, R.string.fncRdnDesc, R.string.fncRdnURL, R.array.fncRdnParamNames, R.array.fncRdnParamHints);
 			addFunction(fnc, "abs", TokenFunctionAbs.class, R.drawable.ic_fnc, R.string.fncAbsName, R.string.fncAbsDesc, R.string.fncAbsURL, R.array.fncAbsParamNames, R.array.fncAbsParamHints);
 
+			addHiddenFunction("effe", TokenFunctionEffe.class);
+
 			//Sort "functions" based on names
 			Collections.sort(fnc);
 			functions = new FunctionDescriptor[fnc.size()];

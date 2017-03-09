@@ -5,8 +5,8 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "ohm.quickdice"
-        versionCode 48
-        versionName "2.1.4"
+        versionCode 49
+        versionName "2.1.4.1"
 
         minSdkVersion 4
         targetSdkVersion 21
